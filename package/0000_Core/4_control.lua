@@ -76,7 +76,15 @@ SIControl.Init
 		IconMini = "图标小窗口" ,
 		IconLock = "图标锁定" ,
 		IconUnlock = "图标解锁" ,
-		IconClose = "图标关闭"
+		IconClose = "图标关闭" ,
+		IconAdd = "图标添加" ,
+		-- 纯色图标
+		IconColorSky = "图标纯色天色" ,
+		IconColorCopper = "图标纯色铜色" ,
+		IconColorGrass = "图标纯色草色" ,
+		IconColorDream = "图标纯色梦色" ,
+		IconColorSliver = "图标纯色银色" ,
+		IconColorMeat = "图标纯色肉色"
 	} ,
 	[SICommon.Types.Items.SelectionTool] =
 	{
@@ -259,7 +267,10 @@ SIControl.Init
 		-- 紫图控件样式
 		RequestMap_Frame = "紫图-窗口" ,
 		RequestMap_TabPane = "紫图-分页面板" ,
+		RequestMap_Label = "紫图-标签" ,
+		RequestMap_Text = "紫图-文本条" ,
 		RequestMap_ListButton = "紫图-列表定位按钮" ,
+		RequestMap_ListFlow = "紫图-列表布局" ,
 	}
 }
 
@@ -661,6 +672,14 @@ end )
 			SIRequestMap.CloseFrame( playerIndex )
 			return
 		end
+		if name == SIRequestMap.Names.Add then
+			SIRequestMap.Out_AddTabSettings( playerIndex )
+			return
+		end
+		if name == SIRequestMap.Names.Delete then
+			SIRequestMap.Out_DeleteTabSettings( playerIndex )
+			return
+		end
 		if name:StartsWith( SIRequestMap.Names.ListButtonPrefix ) then
 			SIRequestMap.ListScroll( playerIndex , name )
 			return
@@ -710,6 +729,11 @@ end )
 		SIPermission.FindAddPlayerItemBlack( playerIndex )
 		return
 	end
+	-- 紫图的管理窗口事件
+	if name == SIRequestMap.Names.TabSettingsName then
+		SIRequestMap.Set_TabSettingsName( playerIndex , element )
+		return
+	end
 end )
 .Add( SIEvents.on_gui_checked_state_changed , function( event , functionID )
 	local element = event.element
@@ -732,6 +756,18 @@ end )
 		return
 	end
 	-- 紫图的管理窗口事件
+	if name == SIRequestMap.Names.GreenToBlue_Check then
+		SIRequestMap.Set_GreenToBlue_Check( playerIndex , element )
+		return
+	end
+	if name == SIRequestMap.Names.SetModule_FromInventory then
+		SIRequestMap.Set_SetModule_FromInventory( playerIndex , element )
+		return
+	end
+	if name == SIRequestMap.Names.RemoveModule_ToInventory then
+		SIRequestMap.Set_RemoveModule_ToInventory( playerIndex , element )
+		return
+	end
 	if name:StartsWith( SIRequestMap.Names.EnablePrefix ) then
 		SIRequestMap.EnableFunction( playerIndex , name , element )
 		return

@@ -50,7 +50,15 @@ SIGen
 	IconMini = "图标小窗口" ,
 	IconLock = "图标锁定" ,
 	IconUnlock = "图标解锁" ,
-	IconClose = "图标关闭"
+	IconClose = "图标关闭" ,
+	IconAdd = "图标添加" ,
+	-- 纯色图标
+	IconColorSky = "图标纯色天色" ,
+	IconColorCopper = "图标纯色铜色" ,
+	IconColorGrass = "图标纯色草色" ,
+	IconColorDream = "图标纯色梦色" ,
+	IconColorSliver = "图标纯色银色" ,
+	IconColorMeat = "图标纯色肉色"
 }
 
 -- ------------------------------------------------------------------------------------------------
@@ -2183,6 +2191,18 @@ SIGen
 		horizontal_spacing = 0
 	}
 } )
+.AddStyle( "RequestMap_Label" , "紫图-标签" ,
+{
+	type = "label_style" ,
+	-- 对齐
+	horizontal_align = "left"
+} )
+.AddStyle( "RequestMap_Text" , "紫图-文本条" ,
+{
+	type = "textbox_style" ,
+	-- 体积
+	width = 150
+} )
 .AddStyle( "RequestMap_ListButton" , "紫图-列表定位按钮" ,
 {
 	type = "button_style" ,
@@ -2195,4 +2215,16 @@ SIGen
 	-- 体积
 	width = 16 ,
 	height = 16
+} )
+.AddStyle( "RequestMap_ListFlow" , "紫图-列表布局" ,
+{
+	type = "vertical_flow_style" ,
+	parent = SIConstants_Core.raw.Styles.Common_FlowLeft ,
+	-- 偏移
+	top_padding = 0 ,
+	right_padding = 0 ,
+	bottom_padding = 0 ,
+	left_padding = 30 ,
+	-- 体积
+	minimal_width = 630
 } )
