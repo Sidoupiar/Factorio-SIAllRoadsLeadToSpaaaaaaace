@@ -1,0 +1,34 @@
+本 MOD 立志于非线性游戏进度，正在考虑添加很多奇怪的点子。如果你有好的点子，欢迎提出，我很乐意接纳。
+如你所见，开发还处在比较早期的版本。
+
+##功能介绍：
+* 增加了一系列辅助窗口，包括显示时间、进化因子、击杀统计并可以调整游戏速度等等。
+* 增加了一系列辅助工具，包括粉图、黄图等等。
+* 实验性的权限管理模块。
+* RPG 加点/属性/技能系统。
+* 修改物品堆叠的能力，以及装桶、无尽科技。
+* 世界上会生成遗迹。
+
+##兼容性指导：
+* 由于使用了新的底层结构，因此与我以前开发的所有 MOD 不兼容，它们已经被加入到了不兼容列表中。那些 MOD 中的内容会在后续版本中逐步移动到此 MOD 中。
+* 对于其他的不兼容 MOD 的原因请见更新日志。
+* RPG 加点和属性系统由于可以自由调整属性的实际效果，因此其“加成部分”（加点的右侧列）可能会与其他修改玩家属性的 MOD 不兼容，例如调整属性、更换沙盒模式等或类似效果。如果仍然想使用那个（些） MOD，则可以考虑不使用 RPG 系统的“加成部分”，即不加右侧列。如果是通过科技获得加成的方式则通常不会出现兼容性问题。
+
+##扩展模组：
+* 自定义堆叠设置：[https://mods.factorio.com/mod/SISettingsItemStack](https://mods.factorio.com/mod/SISettingsItemStack)
+
+##其他：
+* 如果你不慎关掉了左上角的面板，也不用慌，打开 ESC 界面，在模组设置中的个人设置页面，有个“显示操作面板”项目，勾选它后回到游戏中即可看到面板。
+
+--------------------------------------------------
+
+##Features :
+* Adds some auxiliary frames, includes "show time", "show evolution", "show kills" , "control game speed", etc.
+* Adds some auxiliary tools, such as Delete Map (pink map), and Ore Map (yellow map).
+* Adds a permission control panel for tests, includes some permission nodes only used in this mod.
+* Adds RPG property/skill system.
+* Modifies items' stack size, and fill barrels, infinite technologies.
+* Ruin buildings will be generated on surfaces.
+
+Only support Chinese Language, English or any other languages are not support.
+You may need some language pack mod if you installed this mod.

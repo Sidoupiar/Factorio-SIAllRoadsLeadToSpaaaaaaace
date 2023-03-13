@@ -1,0 +1,33 @@
+{
+	"name" : "SIAllRoadsLeadToSpaaaaaaace" ,
+	"version" : "0.1.0" ,
+	"factorio_version" : "1.1" ,
+	"title" : "All Roads Lead To Spaaaaaaace" ,
+	"author" : "Sidoupiar" ,
+	"homepage" : "https://steamcommunity.com/id/sidoupiar/" ,
+	"description" : "Adds some function, mode, items and technologies." ,
+	"dependencies" :
+	[
+		"base >= 1.1.76" ,
+
+		"! SICoreFunctionLibrary" ,
+		"! SIBeltExtension" ,
+		"! SICharacterExtension" ,
+		"! SIDefenceExtension" ,
+		"! SIIronU" ,
+		"! StartBonus" ,
+		"! SIExtensionTank" ,
+		"! SIExtensionBarrel" ,
+		"! SIRobotExtension" ,
+		"! SIBarrelExtension" ,
+		"! SITankExtension" ,
+		"! SISummitTech" ,
+
+		"! Gcn" ,
+		"! chinese" ,
+		"! Zh-cnMOD" ,
+		
+		"! RPG" ,
+		"! RPGsystem"
+	]
+}

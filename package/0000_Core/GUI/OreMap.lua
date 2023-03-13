@@ -1,0 +1,436 @@
+SIOreMap =
+{
+	ID = "OreMap" ,
+	Name = "黄图" ,
+	InterfaceID = "SICore-OreMap" ,
+	Names =
+	{
+		Prefix = "SI核心-黄图-" ,
+		Frame = "SI核心-黄图-窗口" ,
+		SortName = "SI核心-黄图-排序名称" ,
+		SortCount = "SI核心-黄图-排序数量" ,
+		Fresh = "SI核心-黄图-刷新" ,
+		Clean = "SI核心-黄图-清空" ,
+		Spawn = "SI核心-黄图-铺设" ,
+		Close = "SI核心-黄图-关闭" ,
+		IconNamePrefix = "SI核心-黄图-矿物" ,
+	} ,
+	Settings =
+	{
+		Name = "OreMap" ,
+		Default =
+		{
+			frame = nil ,
+			frameLocation = nil ,
+			Elements =
+			{
+				asDefault = nil ,
+				totalMode = nil ,
+				count = nil ,
+				list = nil
+			} ,
+			asDefault = false ,
+			totalMode = false ,
+			count = 0 ,
+			selectedOreName = nil ,
+			tiles = nil ,
+			oreData = {}
+		}
+	} ,
+	MaxCount = 4294967295 ,
+	-- ------------------------------------------------------------------------------------------------
+	-- ---------- 窗口函数 ----------------------------------------------------------------------------
+	-- ------------------------------------------------------------------------------------------------
+	OpenFrame = function( playerIndex )
+		local settings = SIGlobal.GetPlayerSettings( SIOreMap.Settings.Name , playerIndex )
+		if settings.frame and settings.frame.valid then
+			SIOreMap.CloseFrame( playerIndex )
+		else
+			local player = game.get_player( playerIndex )
+			-- 显示窗口
+			local frame = SIElements.CreateFrame( player , settings ,
+			{
+				Name         = SIOreMap.Names.Frame ,
+				Close        = SIOreMap.Names.Close ,
+				Style        = SIConstants_Core.raw.Styles.OreMap_Frame ,
+				Title        = { "SICore.黄图-窗口-标题" } ,
+				TitleTooltip = { "SICore.黄图-窗口-标题-提示" , { "item-name.infinity-chest" } , { "SICoreName.物品-黄图" } } ,
+				UseTooltip   = { "SICore.黄图-窗口-使用-提示" , { "item-name.infinity-chest" } , { "SICoreName.物品-黄图" } } ,
+				CloseTooltip = { "SICore.黄图-窗口-关闭-提示" }
+			} )
+			-- 第 1 层
+			local flow1 = frame.add{ type = "flow" , direction = "horizontal" , style = SIConstants_Core.raw.Styles.Common_FlowTop }
+			flow1.add{ type = "label" , caption = { "SICore.黄图-窗口-说明" , { "item-name.infinity-chest" } , { "SICoreName.物品-黄图" } } , style = SIConstants_Core.raw.Styles.OreMap_LabelTop }
+			-- 第 2 层
+			local flow2 = frame.add{ type = "flow" , direction = "vertical" , style = SIConstants_Core.raw.Styles.Common_FlowLeft }
+			flow2.add{ type = "line" , direction = "horizontal" }
+			flow2.add{ type = "label" , caption = { "SICore.黄图-窗口-设置" } , style = SIConstants_Core.raw.Styles.OreMap_LabelTop }
+			-- 第 2.1 层
+			local flow21 = flow2.add{ type = "flow" , direction = "horizontal" , style = SIConstants_Core.raw.Styles.Common_FlowCenterH }
+			settings.Elements.asDefault = flow21.add{ type = "checkbox" , state = settings.asDefault , caption = { "SICore.黄图-窗口-设置-设为默认" } , tooltip = { "SICore.黄图-窗口-设置-设为默认-提示" } , style = SIConstants_Core.raw.Styles.OreMap_Check }
+			flow21.add{ type = "sprite" , sprite = "info" , tooltip = { "SICore.黄图-窗口-设置-设为默认-提示" } }
+			-- 第 2.2 层
+			local flow22 = flow2.add{ type = "flow" , direction = "horizontal" , style = SIConstants_Core.raw.Styles.Common_FlowCenterH }
+			settings.Elements.totalMode = flow22.add{ type = "checkbox" , state = settings.totalMode , caption = { "SICore.黄图-窗口-设置-总量模式" } , tooltip = { "SICore.黄图-窗口-设置-总量模式-提示" } , style = SIConstants_Core.raw.Styles.OreMap_Check }
+			flow22.add{ type = "sprite" , sprite = "info" , tooltip = { "SICore.黄图-窗口-设置-总量模式-提示" } }
+			-- 第 2.3 层
+			local flow23 = flow2.add{ type = "flow" , direction = "horizontal" , style = SIConstants_Core.raw.Styles.Common_FlowCenterH }
+			local flow23Label = flow23.add{ type = "flow" , direction = "horizontal" , style = SIConstants_Core.raw.Styles.OreMap_FlowShort }
+			flow23Label.add{ type = "label" , caption = { "SICore.黄图-窗口-设置-数量" } , tooltip = { "SICore.黄图-窗口-设置-数量-提示" } , style = SIConstants_Core.raw.Styles.OreMap_LabelShort }
+			flow23Label.add{ type = "sprite" , sprite = "info" , tooltip = { "SICore.黄图-窗口-设置-数量-提示" } }
+			settings.Elements.count = flow23.add{ type = "textfield" , text = tostring( settings.count or 0 ) , numeric = true , tooltip = { "SICore.黄图-窗口-设置-数量-提示" } , style = SIConstants_Core.raw.Styles.OreMap_Number }
+			-- 第 3 层
+			local flow3 = frame.add{ type = "flow" , direction = "vertical" , style = SIConstants_Core.raw.Styles.Common_FlowLeft }
+			flow3.add{ type = "line" , direction = "horizontal" }
+			-- 第 3.1 层
+			local flow31 = flow3.add{ type = "flow" , direction = "horizontal" , style = SIConstants_Core.raw.Styles.Common_FlowTop }
+			flow31.add{ type = "button" , name = SIOreMap.Names.Clean , caption = { "SICore.黄图-窗口-去除" } , tooltip = { "SICore.黄图-窗口-去除-提示" } , style = SIConstants_Core.raw.Styles.Common_ButtonGray }
+			flow31.add{ type = "button" , name = SIOreMap.Names.Fresh , caption = { "SICore.黄图-窗口-刷新" } , tooltip = { "SICore.黄图-窗口-刷新-提示" } , style = SIConstants_Core.raw.Styles.Common_ButtonBlue }
+			flow31.add{ type = "button" , name = SIOreMap.Names.SortCount , caption = { "SICore.黄图-窗口-数量排序" } , tooltip = { "SICore.黄图-窗口-数量排序-提示" } , style = SIConstants_Core.raw.Styles.OreMap_ButtonGreen }
+			flow31.add{ type = "button" , name = SIOreMap.Names.SortName , caption = { "SICore.黄图-窗口-名称排序" } , tooltip = { "SICore.黄图-窗口-名称排序-提示" } , style = SIConstants_Core.raw.Styles.OreMap_ButtonGreen }
+			-- 第 4 层
+			local flow4 = frame.add{ type = "flow" , direction = "vertical" , style = SIConstants_Core.raw.Styles.Common_FlowLeft }
+			flow4.add{ type = "line" , direction = "horizontal" }
+			-- 第 4.1 层
+			local flow41 = flow4.add{ type = "flow" , direction = "horizontal" , style = SIConstants_Core.raw.Styles.Common_TitleFlow }
+			flow41.add{ type = "label" , caption = { "SICore.黄图-窗口-标题-选择" } , style = SIConstants_Core.raw.Styles.OreMap_ListTitleIcon }
+			flow41.add{ type = "label" , caption = { "SICore.黄图-窗口-标题-名称" } , style = SIConstants_Core.raw.Styles.OreMap_ListTitleLong }
+			flow41.add{ type = "label" , caption = { "SICore.黄图-窗口-标题-数量" } , style = SIConstants_Core.raw.Styles.OreMap_ListTitleLong }
+			-- 第 5 层
+			settings.Elements.list = frame
+			.add{ type = "scroll-pane" , horizontal_scroll_policy = "never" , vertical_scroll_policy = "auto-and-reserve-space" , style = SIConstants_Core.raw.Styles.Common_ScrollPane }
+			.add{ type = "table" , column_count = 3 , style = SIConstants_Core.raw.Styles.Common_List }
+			if settings.tiles then
+				-- 第 6 层
+				local flow6 = frame.add{ type = "flow" , direction = "vertical" , style = SIConstants_Core.raw.Styles.Common_FlowRight }
+				flow6.add{ type = "line" , direction = "horizontal" }
+				-- 第 6.1 层
+				flow6.add{ type = "label" , caption = { "SICore.黄图-窗口-地板-选择数量" , #settings.tiles } , style = SIConstants_Core.raw.Styles.OreMap_LabelBottom }
+				-- 第 6.2 层
+				local flow61 = flow6.add{ type = "flow" , direction = "horizontal" , style = SIConstants_Core.raw.Styles.Common_FlowTop }
+				flow61.add{ type = "button" , name = SIOreMap.Names.Close , caption = { "SICore.黄图-窗口-取消" } , tooltip = { "SICore.黄图-窗口-取消-提示" } , style = SIConstants_Core.raw.Styles.Common_ButtonRed }
+				flow61.add{ type = "button" , name = SIOreMap.Names.Spawn , caption = { "SICore.黄图-窗口-铺设" } , tooltip = { "SICore.黄图-窗口-铺设-提示" } , style = SIConstants_Core.raw.Styles.Common_ButtonGreen }
+			end
+			-- 根据设置更新控件
+			SIOreMap.FreshList( settings )
+		end
+	end ,
+	CloseFrame = function( playerIndex )
+		local settings = SIGlobal.GetPlayerSettings( SIOreMap.Settings.Name , playerIndex )
+		if settings.frame and settings.frame.valid then
+			SIOreMap.Save( settings )
+			-- 清除临时数据
+			settings.tiles = nil
+			settings.frame.destroy()
+			settings.frame = nil
+			for key , element in pairs( settings.Elements ) do
+				settings.Elements[key] = nil
+			end
+		end
+	end ,
+	MoveFrame = function( playerIndex )
+		local settings = SIGlobal.GetPlayerSettings( SIOreMap.Settings.Name , playerIndex )
+		if settings.frame and settings.frame.valid then
+			SIElements.SaveFrameLocation( settings )
+		end
+	end ,
+	-- ------------------------------------------------------------------------------------------------
+	-- ---------- 功能函数 ----------------------------------------------------------------------------
+	-- ------------------------------------------------------------------------------------------------
+	Save = function( settings )
+		if settings.Elements.asDefault then
+			settings.asDefault = settings.Elements.asDefault.state
+		else
+			settings.asDefault = false
+		end
+		if settings.Elements.totalMode then
+			settings.totalMode = settings.Elements.totalMode.state
+		else
+			settings.totalMode = false
+		end
+		if settings.Elements.count then
+			settings.count = SITools.AsNumberInt( settings.Elements.count.text , 0 , SIOreMap.MaxCount )
+		else
+			settings.count = 0
+		end
+	end ,
+	SortOreDataName = function( playerIndex )
+		local settings = SIGlobal.GetPlayerSettings( SIOreMap.Settings.Name , playerIndex )
+		if settings then
+			local oreList = {}
+			for oreName , oreCount in pairs( settings.oreData ) do
+				table.insert( oreList , { name = oreName , localizedName = oreName } )
+			end
+			table.sort( oreList , function( a , b )
+				return a.localizedName < b.localizedName
+			end )
+			local oreDataNew = {}
+			for index , oreData in pairs( oreList ) do
+				oreDataNew[oreData.name] = settings.oreData[oreData.name]
+			end
+			settings.oreData = oreDataNew
+			SIOreMap.FreshList( settings )
+		end
+	end ,
+	SortOreDataCount = function( playerIndex )
+		local settings = SIGlobal.GetPlayerSettings( SIOreMap.Settings.Name , playerIndex )
+		if settings then
+			local oreList = {}
+			for oreName , oreCount in pairs( settings.oreData ) do
+				table.insert( oreList , { name = oreName , count = oreCount } )
+			end
+			table.sort( oreList , function( a , b )
+				return a.count < b.count
+			end )
+			local oreDataNew = {}
+			for index , oreData in pairs( oreList ) do
+				oreDataNew[oreData.name] = settings.oreData[oreData.name]
+			end
+			settings.oreData = oreDataNew
+			SIOreMap.FreshList( settings )
+		end
+	end ,
+	CleanOreData = function( playerIndex )
+		local settings = SIGlobal.GetPlayerSettings( SIOreMap.Settings.Name , playerIndex )
+		if settings then
+			for oreName , oreCount in pairs( settings.oreData ) do
+				if oreCount == 0 then
+					settings.oreData[oreName] = nil
+				end
+			end
+			SIOreMap.FreshList( settings )
+		end
+	end ,
+	FreshList = function( settings )
+		local list = settings.Elements.list
+		if list then
+			list.clear()
+			if SITable.Size( settings.oreData ) < 1 then
+				local button = list.add{ type = "sprite-button" , sprite = "item/" .. SIConstants_Core.raw.Items.IconEmpty , style = SIConstants_Core.raw.Styles.OreMap_ListIcon }
+				button.enabled = false
+				list.add{ type = "label" , caption = { "SICore.黄图-窗口-矿物-空的" } , style = SIConstants_Core.raw.Styles.OreMap_ListLabelLong }
+				list.add{ type = "label" , caption = { "SICore.黄图-窗口-矿物-无限" } , style = SIConstants_Core.raw.Styles.OreMap_ListLabelLong }
+			else
+				for oreName , oreCount in pairs( settings.oreData ) do
+					if oreName == settings.selectedOreName then
+						local button = list.add{ type = "sprite-button" , sprite = "entity/" .. oreName , tooltip = { "SICore.黄图-窗口-矿物-已选择-提示" } , style = SIConstants_Core.raw.Styles.OreMap_ListIcon }
+						button.enabled = false
+						list.add{ type = "label" , caption = { "SICore.黄图-窗口-矿物-选中" , game.entity_prototypes[oreName].localised_name } , style = SIConstants_Core.raw.Styles.OreMap_ListLabelLong }
+						list.add{ type = "label" , caption = { "SICore.黄图-窗口-矿物-选中" , { "SICore.黄图-窗口-矿物-数量" , oreCount } } , style = SIConstants_Core.raw.Styles.OreMap_ListLabelLong }
+					else
+						list.add{ type = "sprite-button" , name = SIOreMap.Names.IconNamePrefix .. oreName , sprite = "entity/" .. oreName , tooltip = { "SICore.黄图-窗口-矿物-未选择-提示" } , style = SIConstants_Core.raw.Styles.OreMap_ListIcon }
+						list.add{ type = "label" , caption = game.entity_prototypes[oreName].localised_name , style = SIConstants_Core.raw.Styles.OreMap_ListLabelLong }
+						list.add{ type = "label" , caption = { "SICore.黄图-窗口-矿物-数量" , oreCount } , style = SIConstants_Core.raw.Styles.OreMap_ListLabelLong }
+					end
+				end
+			end
+		end
+	end ,
+	SpawnOre = function( settings )
+		local player = game.get_player( settings.playerIndex )
+		if settings.count < 1 then
+			SIPrint.Warning( player , { "SICore.黄图-设置-空-信息" , { settings.asDefault and "SICore.黄图-设置-取消默认" or "SICore.黄图-设置-取消放置" } } )
+			return false
+		end
+		if not settings.selectedOreName then
+			SIPrint.Warning( player , { "SICore.黄图-设置-尚未选择-信息" } )
+			return false
+		end
+		local oreCount = settings.oreData[settings.selectedOreName]
+		local tileCount = #settings.tiles
+		local count = 0
+		if settings.totalMode then
+			if settings.count > oreCount then
+				SIPrint.Warning( player , { "SICore.黄图-设置-数量不足-信息" } )
+				return false
+			end
+			count = math.floor( settings.count/tileCount )
+			if count > SIOreMap.MaxCount then
+				SIPrint.Warning( player , { "SICore.黄图-设置-数量过多-信息" , SIOreMap.MaxCount , { "SICore.黄图-设置-取消放置" } } )
+				return false
+			end
+			settings.oreData[settings.selectedOreName] = oreCount - count * tileCount
+		else
+			count = settings.count
+			local totalCount = count * tileCount
+			if totalCount > oreCount then
+				SIPrint.Warning( player , { "SICore.黄图-设置-数量不足-信息" } )
+				return false
+			end
+			if count > SIOreMap.MaxCount then
+				SIPrint.Warning( player , { "SICore.黄图-设置-数量过多-信息" , SIOreMap.MaxCount , { "SICore.黄图-设置-取消放置" } } )
+				return false
+			end
+			settings.oreData[settings.selectedOreName] = oreCount - totalCount
+		end
+		local surface = player.surface
+		for index , tile in pairs( settings.tiles ) do
+			surface.create_entity{ name = settings.selectedOreName , position = tile.position , amount = count }
+		end
+		if settings.asDefault then
+			settings.tiles = nil
+		end
+		SIPrint.Tip( player , { "SICore.黄图-铺设完毕-信息" } )
+		return true
+	end ,
+	SaveOre = function( playerIndex , entities )
+		local settings = SIGlobal.GetPlayerSettings( SIOreMap.Settings.Name , playerIndex )
+		for index , entity in pairs( entities ) do
+			if entity.type == SICommon.Types.Entities.Resource then
+				local count = settings.oreData[entity.name]
+				if not count then
+					count = 0
+				end
+				count = count + entity.amount
+				settings.oreData[entity.name] = count
+				entity.destroy{ raise_destroy = true }
+			end
+		end
+		if settings.frame and settings.frame.valid then
+			SIOreMap.FreshList( settings )
+		end
+	end ,
+	CreateOre = function( playerIndex )
+		local settings = SIGlobal.GetPlayerSettings( SIOreMap.Settings.Name , playerIndex )
+		SIOreMap.Save( settings )
+		if SIOreMap.SpawnOre( settings ) then
+			SIOreMap.CloseFrame( playerIndex )
+		end
+	end ,
+	CreateOreByMap = function( playerIndex , selectedTiles )
+		local settings = SIGlobal.GetPlayerSettings( SIOreMap.Settings.Name , playerIndex )
+		if settings.asDefault then
+			if settings.count < 1 then
+				settings.asDefault = false
+				game.get_player( playerIndex ).print( { "SICore.黄图-设置-空-信息" , { "SICore.黄图-设置-取消默认" } } , SICommon.Colors.PrintColor.ORANGE )
+			else
+				settings.tiles = selectedTiles
+				if SIOreMap.SpawnOre( settings ) and settings.frame and settings.frame.valid then
+					SIOreMap.FreshList( settings )
+				end
+			end
+		else
+			if settings.frame and settings.frame.valid then
+				SIOreMap.CloseFrame( playerIndex )
+			end
+			settings.tiles = selectedTiles
+			SIOreMap.OpenFrame( playerIndex )
+		end
+	end ,
+	SelectOre = function( playerIndex , oreListItemName )
+		local settings = SIGlobal.GetPlayerSettings( SIOreMap.Settings.Name , playerIndex )
+		settings.selectedOreName = oreListItemName:sub( SIOreMap.Names.IconNamePosition )
+		SIOreMap.FreshList( settings )
+	end ,
+	Fresh = function( playerIndex )
+		local settings = SIGlobal.GetPlayerSettings( SIOreMap.Settings.Name , playerIndex )
+		SIOreMap.FreshList( settings )
+	end ,
+	-- ------------------------------------------------------------------------------------------------
+	-- ------ 接口函数 -- 窗口 ------------------------------------------------------------------------
+	-- ------------------------------------------------------------------------------------------------
+
+	-- ----------------------------------------
+	-- 打开指定玩家的黄图的管理窗口<br>
+	-- ----------------------------------------
+	-- playerIndex = 玩家索引<br>
+	-- ----------------------------------------
+	OpenFrameByPlayerIndex = function( playerIndex )
+		SIOreMap.OpenFrame( playerIndex )
+	end ,
+
+	-- ----------------------------------------
+	-- 关闭指定玩家的黄图的管理窗口<br>
+	-- ----------------------------------------
+	-- playerIndex = 玩家索引<br>
+	-- ----------------------------------------
+	CloseFrameByPlayerIndex = function( playerIndex )
+		SIOreMap.CloseFrame( playerIndex )
+	end ,
+
+	-- ----------------------------------------
+	-- 打开所有玩家的黄图的管理窗口<br>
+	-- ----------------------------------------
+	-- 无参数<br>
+	-- ----------------------------------------
+	OpenFrames = function()
+		for playerIndex , settings in pairs( SIGlobal.GetAllPlayerSettings( SIOreMap.Settings.Name ) ) do
+			SIOreMap.OpenFrame( playerIndex )
+		end
+	end ,
+
+	-- ----------------------------------------
+	-- 关闭所有玩家的黄图的管理窗口<br>
+	-- ----------------------------------------
+	-- 无参数<br>
+	-- ----------------------------------------
+	CloseFrames = function()
+		for playerIndex , settings in pairs( SIGlobal.GetAllPlayerSettings( SIOreMap.Settings.Name ) ) do
+			SIOreMap.CloseFrame( playerIndex )
+		end
+	end ,
+	-- ------------------------------------------------------------------------------------------------
+	-- ---- 接口函数 -- 数据操作 ----------------------------------------------------------------------
+	-- ------------------------------------------------------------------------------------------------
+
+	-- ----------------------------------------
+	-- 向玩家数据内添加矿物<br>
+	-- ----------------------------------------
+	-- playerIndex = 玩家索引<br>
+	-- oreName     = 矿物实体名称<br>
+	-- count       = 添加的数量 , 不能小于 1<br>
+	-- ----------------------------------------
+	AddOre = function( playerIndex , oreName , count )
+		if count > 0 then
+			local settings = SIGlobal.GetPlayerSettings( SIOreMap.Settings.Name , playerIndex )
+			local sourceCount = settings.oreData[oreName]
+			if sourceCount then
+				settings.oreData[oreName] = sourceCount + count
+			else
+				settings.oreData[oreName] = count
+			end
+			if settings.frame and settings.frame.valid then
+				SIOreMap.FreshList( settings )
+			end
+		end
+	end ,
+
+	-- ----------------------------------------
+	-- 从玩家数据中移除矿物<br>
+	-- 数量不足时会直接删除条目<br>
+	-- ----------------------------------------
+	-- playerIndex = 玩家索引<br>
+	-- oreName     = 矿物实体名称<br>
+	-- count       = 移除的数量 , 不能小于 1<br>
+	-- ----------------------------------------
+	RemoveOre = function( playerIndex , oreName , count )
+		if count > 0 then
+			local settings = SIGlobal.GetPlayerSettings( SIOreMap.Settings.Name , playerIndex )
+			local sourceCount = settings.oreData[oreName]
+			if sourceCount then
+				if sourceCount > count then
+					settings.oreData[oreName] = sourceCount - count
+				else
+					settings.oreData[oreName] = nil
+				end
+				if settings.frame and settings.frame.valid then
+					SIOreMap.FreshList( settings )
+				end
+			end
+		end
+	end
+}
+
+SIOreMap.Names.IconNamePosition = #SIOreMap.Names.IconNamePrefix + 1
+SIOreMap.Toolbar =
+{
+	ID = "SI核心-黄图" ,
+	Name = "黄图" ,
+	IconItemName = SIConstants_Core.raw.Items.OreMap ,
+	LocalizedName = { "SICore.黄图-工具栏-按钮" } ,
+	LocalizedDescription = { "SICore.黄图-工具栏-提示" , { "item-name.infinity-chest" } , { "SICoreName.物品-黄图" } } ,
+	ActionRemoteInterfaceID = SIOreMap.InterfaceID ,
+	ActionRemoteFunctionName = "OpenFrameByPlayerIndex" ,
+	Permission = SIPermission.PermissionIDs.OreMap ,
+	Order = "SICore-MapOre"
+}
