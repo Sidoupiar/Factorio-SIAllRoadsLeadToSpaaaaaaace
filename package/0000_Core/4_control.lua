@@ -259,6 +259,7 @@ SIControl.Init
 		-- 紫图控件样式
 		RequestMap_Frame = "紫图-窗口" ,
 		RequestMap_TabPane = "紫图-分页面板" ,
+		RequestMap_ListButton = "紫图-列表定位按钮" ,
 	}
 }
 
@@ -656,6 +657,14 @@ end )
 	end
 	-- 紫图的管理窗口事件
 	if name:StartsWith( SIRequestMap.Names.Prefix ) then
+		if name == SIRequestMap.Names.Close then
+			SIRequestMap.CloseFrame( playerIndex )
+			return
+		end
+		if name:StartsWith( SIRequestMap.Names.ListButtonPrefix ) then
+			SIRequestMap.ListScroll( playerIndex , name )
+			return
+		end
 		return
 	end
 end )
@@ -720,6 +729,11 @@ end )
 	end
 	if name:StartsWith( SIPermission.Names.CheckRadioPrefix ) then
 		SIPermission.SwitchRadio_Check( playerIndex , name )
+		return
+	end
+	-- 紫图的管理窗口事件
+	if name:StartsWith( SIRequestMap.Names.EnablePrefix ) then
+		SIRequestMap.EnableFunction( playerIndex , name , element )
 		return
 	end
 end )

@@ -2183,3 +2183,16 @@ SIGen
 		horizontal_spacing = 0
 	}
 } )
+.AddStyle( "RequestMap_ListButton" , "紫图-列表定位按钮" ,
+{
+	type = "button_style" ,
+	parent = SIConstants_Core.raw.Styles.Common_ButtonGray ,
+	-- 偏移
+	top_padding = -1 ,
+	right_padding = -1 ,
+	bottom_padding = -1 ,
+	left_padding = -1 ,
+	-- 体积
+	width = 16 ,
+	height = 16
+} )

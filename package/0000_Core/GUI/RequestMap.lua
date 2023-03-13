@@ -8,7 +8,9 @@ SIRequestMap =
 		Prefix = "SI核心-紫图-" ,
 		Frame = "SI核心-紫图-窗口" ,
 		Close = "SI核心-紫图-关闭" ,
-		TabPane = "SI核心-紫图-分页面板"
+		TabPane = "SI核心-紫图-分页面板" ,
+		ListButtonPrefix = "SI核心-紫图-列表定位按钮-" ,
+		EnablePrefix = "SI核心-紫图-启用功能-"
 	} ,
 	Settings =
 	{
@@ -19,8 +21,30 @@ SIRequestMap =
 			frameLocation = nil ,
 			tabPane = nil ,
 			page = nil ,
+			scroll = nil ,
 			TabList = {} ,
-			Elements = {} ,
+			ListButtons = {} ,
+			Elements =
+			{
+				-- 请求格子
+				RequestSlot_Enable = nil ,
+				RequestSlot_Flow = nil ,
+				-- 最大格子
+				MaxSlot_Enable = nil ,
+				MaxSlot_Flow = nil ,
+				-- 绿箱向蓝箱供货
+				GreenToBlue_Enable = nil ,
+				GreenToBlue_Flow = nil ,
+				-- 设置插件
+				SetModule_Enable = nil ,
+				SetModule_Flow = nil ,
+				-- 移除插件
+				RemoveModule_Enable = nil ,
+				RemoveModule_Flow = nil ,
+				-- 插入物品
+				InsertItem_Enable = nil ,
+				InsertItem_Flow = nil
+			} ,
 			entities = nil ,
 			tabSettingsIndex = 1 ,
 			defaultIndex1 = 0 ,
@@ -34,12 +58,36 @@ SIRequestMap =
 	DefaultTabSettings =
 	{
 		Name = nil ,
-		EnableRequestSlot = false ,
-		EnableMaxSlot = false ,
-		EnableGreenToBlue = false ,
-		EnableSetModule = false ,
-		EnableRemoveModule = false ,
-		EnableInsertItem = false
+		-- 请求格子
+		RequestSlot =
+		{
+			Enable = false ,
+		} ,
+		-- 最大格子
+		MaxSlot =
+		{
+			Enable = false ,
+		} ,
+		-- 绿箱向蓝箱供货
+		GreenToBlue =
+		{
+			Enable = false ,
+		} ,
+		-- 设置插件
+		SetModule =
+		{
+			Enable = false ,
+		} ,
+		-- 移除插件
+		RemoveModule =
+		{
+			Enable = false ,
+		} ,
+		-- 插入物品
+		InsertItem =
+		{
+			Enable = false ,
+		}
 	} ,
 	-- ------------------------------------------------------------------------------------------------
 	-- ---------- 窗口函数 ----------------------------------------------------------------------------
@@ -53,6 +101,7 @@ SIRequestMap =
 		settings.label = nil
 		settings.tabList = nil
 		settings.TabList = {}
+		settings.ListButtons = {}
 		settings.Elements = {}
 		settings.tabIndex = nil
 		settings.tabSettingsIndex = 1
@@ -116,14 +165,16 @@ SIRequestMap =
 	CloseFrame = function( playerIndex )
 		local settings = SIGlobal.GetPlayerSettings( SIRequestMap.Settings.Name , playerIndex )
 		if settings.frame and settings.frame.valid then
-			SIRequestMap.Save( settings )
+			SIRequestMap.Save( settings , settings.tabSettingsIndex )
 			-- 清除临时数据
 			settings.entities = nil
 			settings.frame.destroy()
 			settings.frame = nil
 			settings.tabPane = nil
 			settings.page = nil
+			settings.scroll = nil
 			settings.TabList = {}
+			settings.ListButtons = {}
 			settings.Elements = {}
 		end
 	end ,
@@ -136,9 +187,6 @@ SIRequestMap =
 	-- ------------------------------------------------------------------------------------------------
 	-- ---------- 功能函数 ----------------------------------------------------------------------------
 	-- ------------------------------------------------------------------------------------------------
-	Save = function( settings )
-		local elements = settings.Elements
-	end ,
 	CreateTabSettings = function( settings )
 		local tabSettingsCount = #settings.TabSettingsList
 		if tabSettingsCount < SIRequestMap.TabSettingsMaxCount then
@@ -164,29 +212,80 @@ SIRequestMap =
 			settings.defaultIndex4 = tabSettingsIndex == settings.defaultIndex4 and 0 or tabSettingsIndex < settings.defaultIndex4 and SITools.AsNumberInt( tabSettingsIndex - 1 , 1 , tabSettingsCount )
 		end
 	end ,
+	Save = function( settings , tabSettingsIndex )
+		local tabSettings = settings.TabSettingsList[tabSettingsIndex]
+		local elements = settings.Elements
+		local default = SIRequestMap.DefaultTabSettings
+		-- 请求格子
+		-- 最大格子
+		-- 绿箱向蓝箱供货
+		-- 设置插件
+		-- 移除插件
+		-- 插入物品
+	end ,
 	CreatePage = function( settings )
 		local page = settings.page
-		local list = page
-		.add{ type = "scroll-pane" , horizontal_scroll_policy = "never" , vertical_scroll_policy = "auto-and-reserve-space" , style = SIConstants_Core.raw.Styles.Common_ScrollPane }
-		.add{ type = "table" , column_count = 1 , style = SIConstants_Core.raw.Styles.Common_List }
-		-- 第 1 层
+		local listButtonFlow = page.add{ type = "flow" , direction = "horizontal" , style = SIConstants_Core.raw.Styles.Common_FlowCenterH }
+		local scroll =  page.add{ type = "scroll-pane" , horizontal_scroll_policy = "never" , vertical_scroll_policy = "auto-and-reserve-space" , style = SIConstants_Core.raw.Styles.Common_ScrollPane }
+		local list = scroll.add{ type = "table" , column_count = 1 , style = SIConstants_Core.raw.Styles.Common_List }
+		settings.scroll = scroll
+		local elements = settings.Elements
+		-- 请求格子
+		-- 最大格子
+		-- 绿箱向蓝箱供货
+		-- 设置插件
+		-- 移除插件
+		-- 插入物品
+		-- 创建滚动定位按钮
+		for key , value in pairs( SIRequestMap.DefaultTabSettings ) do
+			if key ~= "Name" then
+				local button = listButtonFlow.add{ type = "" , name = SIRequestMap.Names.ListButtonPrefix .. key .. "_Enable" , tooltip = { "SICore.紫图-窗口-列表定位按钮-提示" , elements[key .. "_Enable"].caption } , style = SIConstants_Core.raw.Styles.RequestMap_ListButton }
+				settings.ListButtons[key] = button
+			end
+		end
 	end ,
 	FreshPage = function( settings )
 		local tabSettingsIndex = settings.tabSettingsIndex
 		local tabSettings = settings.TabSettingsList[tabSettingsIndex]
 		local elements = settings.Elements
+		-- 请求格子
+		-- 最大格子
+		-- 绿箱向蓝箱供货
+		-- 设置插件
+		-- 移除插件
+		-- 插入物品
 	end ,
 	EffectTabSettings = function( settings , tabSettingsIndex )
 		local tabSettings = settings.TabSettingsList[tabSettingsIndex]
 		local entities = settings.entities
+		-- 请求格子
+		-- 最大格子
+		-- 绿箱向蓝箱供货
+		-- 设置插件
+		-- 移除插件
+		-- 插入物品
 	end ,
 	SwitchTab = function( playerIndex )
 		local settings = SIGlobal.GetPlayerSettings( SIRequestMap.Settings.Name , playerIndex )
 		if settings.frame and settings.frame.valid then
 			local tabSettingsIndex = settings.tabPane.selected_tab_index
-			SIRequestMap.Save( settings )
+			SIRequestMap.Save( settings , settings.tabSettingsIndex )
 			settings.tabSettingsIndex = tabSettingsIndex
 			SIRequestMap.FreshPage( settings )
+		end
+	end ,
+	ListScroll = function( playerIndex , name )
+		local settings = SIGlobal.GetPlayerSettings( SIRequestMap.Settings.Name , playerIndex )
+		if settings.frame and settings.frame.valid then
+			local key = name:sub( SIRequestMap.Names.ListButtonPosition )
+			settings.scroll.scroll_to_element( settings.Elements[key] , "top-third" )
+		end
+	end ,
+	EnableFunction = function( playerIndex , name , element )
+		local settings = SIGlobal.GetPlayerSettings( SIRequestMap.Settings.Name , playerIndex )
+		if settings.frame and settings.frame.valid then
+			local key = name:sub( SIRequestMap.Names.EnablePosition )
+			settings.Elements[key].visible = element.state
 		end
 	end ,
 	EffectSelect1 = function( playerIndex , entities )
@@ -282,6 +381,8 @@ SIRequestMap =
 	end
 }
 
+SIRequestMap.Names.ListButtonPosition = #SIRequestMap.Names.ListButtonPrefix + 1
+SIRequestMap.Names.EnablePosition = #SIRequestMap.Names.EnablePrefix + 1
 SIRequestMap.Toolbar =
 {
 	ID = "SI核心-紫图" ,
