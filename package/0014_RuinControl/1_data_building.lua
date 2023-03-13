@@ -160,7 +160,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Wall , "RuinWall" , "遗迹围墙" 
 	} ,
 	icon_size = 64 ,
 	icon_mipmaps = 4 ,
-    flags = { SICommon.Flags.Entity.PlaceableEnemy } ,
+	flags = { SICommon.Flags.Entity.PlaceableEnemy } ,
 	minable =
 	{
 		mining_time = 6000.0 ,
@@ -170,8 +170,8 @@ CreateRuinBuildings( SICommon.Types.Entities.Wall , "RuinWall" , "遗迹围墙" 
 	corpse = SIConstants_RuinControl.raw.Entities.RuinWallRemnants ,
 	dying_explosion = "wall-explosion" ,
 	map_color = { r = 1.0 , g = 1.0 , b = 1.0 } ,
-	friendly_map_color =  { r = 0.4 , g = 0.4 , b = 1.0 } ,
-	enemy_map_color =  { r = 1.0 , g = 0.4 , b = 0.4 } ,
+	friendly_map_color = { r = 0.4 , g = 0.4 , b = 1.0 } ,
+	enemy_map_color = { r = 1.0 , g = 0.4 , b = 0.4 } ,
 	alert_when_damaged = true ,
 	create_ghost_on_death = false ,
 	hide_resistances = false ,
@@ -666,7 +666,7 @@ CreateRuinBuildings( SICommon.Types.Entities.LandMine , "RuinLandMine" , "遗迹
 	} ,
 	icon_size = 64 ,
 	icon_mipmaps = 4 ,
-    flags = { SICommon.Flags.Entity.PlaceableEnemy , SICommon.Flags.Entity.PlaceableOffGrid , SICommon.Flags.Entity.NotOnMap } ,
+	flags = { SICommon.Flags.Entity.PlaceableEnemy , SICommon.Flags.Entity.PlaceableOffGrid , SICommon.Flags.Entity.NotOnMap } ,
 	minable =
 	{
 		mining_time = 6000.0 ,
@@ -676,8 +676,8 @@ CreateRuinBuildings( SICommon.Types.Entities.LandMine , "RuinLandMine" , "遗迹
 	corpse = SIConstants_RuinControl.raw.Entities.RuinLandMineRemnants ,
 	dying_explosion = "land-mine-explosion" ,
 	map_color = { r = 1.0 , g = 1.0 , b = 1.0 } ,
-	friendly_map_color =  { r = 0.4 , g = 0.4 , b = 1.0 } ,
-	enemy_map_color =  { r = 1.0 , g = 0.4 , b = 0.4 } ,
+	friendly_map_color = { r = 0.4 , g = 0.4 , b = 1.0 } ,
+	enemy_map_color = { r = 1.0 , g = 0.4 , b = 0.4 } ,
 	alert_when_damaged = true ,
 	create_ghost_on_death = false ,
 	hide_resistances = false ,
@@ -872,7 +872,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Turret , "RuinGunTurret" , "遗迹�
 	} ,
 	icon_size = 64 ,
 	icon_mipmaps = 4 ,
-    flags = { SICommon.Flags.Entity.PlaceableEnemy } ,
+	flags = { SICommon.Flags.Entity.PlaceableEnemy } ,
 	minable =
 	{
 		mining_time = 6000.0 ,
@@ -882,8 +882,8 @@ CreateRuinBuildings( SICommon.Types.Entities.Turret , "RuinGunTurret" , "遗迹�
 	corpse = SIConstants_RuinControl.raw.Entities.RuinGunTurretRemnants ,
 	dying_explosion = "gun-turret-explosion" ,
 	map_color = { r = 1.0 , g = 1.0 , b = 1.0 } ,
-	friendly_map_color =  { r = 0.4 , g = 0.4 , b = 1.0 } ,
-	enemy_map_color =  { r = 1.0 , g = 0.4 , b = 0.4 } ,
+	friendly_map_color = { r = 0.4 , g = 0.4 , b = 1.0 } ,
+	enemy_map_color = { r = 1.0 , g = 0.4 , b = 0.4 } ,
 	alert_when_damaged = true ,
 	create_ghost_on_death = false ,
 	hide_resistances = false ,
@@ -1673,7 +1673,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Turret , "RuinLaserTurret" , "遗�
 	} ,
 	icon_size = 64 ,
 	icon_mipmaps = 4 ,
-    flags = { SICommon.Flags.Entity.PlaceableEnemy } ,
+	flags = { SICommon.Flags.Entity.PlaceableEnemy } ,
 	minable =
 	{
 		mining_time = 6000.0 ,
@@ -1683,8 +1683,8 @@ CreateRuinBuildings( SICommon.Types.Entities.Turret , "RuinLaserTurret" , "遗�
 	corpse = SIConstants_RuinControl.raw.Entities.RuinLaserTurretRemnants ,
 	dying_explosion = "laser-turret-explosion" ,
 	map_color = { r = 1.0 , g = 1.0 , b = 1.0 } ,
-	friendly_map_color =  { r = 0.4 , g = 0.4 , b = 1.0 } ,
-	enemy_map_color =  { r = 1.0 , g = 0.4 , b = 0.4 } ,
+	friendly_map_color = { r = 0.4 , g = 0.4 , b = 1.0 } ,
+	enemy_map_color = { r = 1.0 , g = 0.4 , b = 0.4 } ,
 	alert_when_damaged = true ,
 	create_ghost_on_death = false ,
 	hide_resistances = false ,
@@ -2262,7 +2262,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Turret , "RuinFlameTurret" , "遗�
 	} ,
 	icon_size = 64 ,
 	icon_mipmaps = 4 ,
-    flags = { SICommon.Flags.Entity.PlaceableEnemy } ,
+	flags = { SICommon.Flags.Entity.PlaceableEnemy } ,
 	minable =
 	{
 		mining_time = 6000.0 ,
@@ -2272,8 +2272,8 @@ CreateRuinBuildings( SICommon.Types.Entities.Turret , "RuinFlameTurret" , "遗�
 	corpse = SIConstants_RuinControl.raw.Entities.RuinFlameTurretRemnants ,
 	dying_explosion = "medium-explosion" ,
 	map_color = { r = 1.0 , g = 1.0 , b = 1.0 } ,
-	friendly_map_color =  { r = 0.4 , g = 0.4 , b = 1.0 } ,
-	enemy_map_color =  { r = 1.0 , g = 0.4 , b = 0.4 } ,
+	friendly_map_color = { r = 0.4 , g = 0.4 , b = 1.0 } ,
+	enemy_map_color = { r = 1.0 , g = 0.4 , b = 0.4 } ,
 	alert_when_damaged = true ,
 	create_ghost_on_death = false ,
 	hide_resistances = false ,
@@ -2691,7 +2691,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Container , "RuinChest" , "遗迹�
 	} ,
 	icon_size = 64 ,
 	icon_mipmaps = 4 ,
-    flags = { SICommon.Flags.Entity.PlaceableEnemy , SICommon.Flags.Entity.NotOnMap } ,
+	flags = { SICommon.Flags.Entity.PlaceableEnemy , SICommon.Flags.Entity.NotOnMap } ,
 	minable =
 	{
 		mining_time = 6000.0 ,
@@ -2701,8 +2701,8 @@ CreateRuinBuildings( SICommon.Types.Entities.Container , "RuinChest" , "遗迹�
 	corpse = SIConstants_RuinControl.raw.Entities.RuinChestRemnants ,
 	dying_explosion = "wooden-chest-explosion" ,
 	map_color = { r = 1.0 , g = 1.0 , b = 1.0 } ,
-	friendly_map_color =  { r = 0.4 , g = 0.4 , b = 1.0 } ,
-	enemy_map_color =  { r = 1.0 , g = 0.4 , b = 0.4 } ,
+	friendly_map_color = { r = 0.4 , g = 0.4 , b = 1.0 } ,
+	enemy_map_color = { r = 1.0 , g = 0.4 , b = 0.4 } ,
 	alert_when_damaged = false ,
 	create_ghost_on_death = false ,
 	hide_resistances = false ,
@@ -2846,7 +2846,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Machine , "RuinMachine" , "遗迹�
 	} ,
 	icon_size = 64 ,
 	icon_mipmaps = 4 ,
-    flags = { SICommon.Flags.Entity.PlaceableEnemy , SICommon.Flags.Entity.NotOnMap } ,
+	flags = { SICommon.Flags.Entity.PlaceableEnemy , SICommon.Flags.Entity.NotOnMap } ,
 	minable =
 	{
 		mining_time = 6000.0 ,
@@ -2856,8 +2856,8 @@ CreateRuinBuildings( SICommon.Types.Entities.Machine , "RuinMachine" , "遗迹�
 	corpse = SIConstants_RuinControl.raw.Entities.RuinMachineRemnants ,
 	dying_explosion = "assembling-machine-3-explosion" ,
 	map_color = { r = 1.0 , g = 1.0 , b = 1.0 } ,
-	friendly_map_color =  { r = 0.4 , g = 0.4 , b = 1.0 } ,
-	enemy_map_color =  { r = 1.0 , g = 0.4 , b = 0.4 } ,
+	friendly_map_color = { r = 0.4 , g = 0.4 , b = 1.0 } ,
+	enemy_map_color = { r = 1.0 , g = 0.4 , b = 0.4 } ,
 	alert_when_damaged = true ,
 	create_ghost_on_death = false ,
 	hide_resistances = false ,
@@ -3297,7 +3297,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Machine , "RuinMachine" , "遗迹�
 		}
 	} ,
 	working_sound =
-    {
+	{
 		sound =
 		{
 			{
@@ -3308,7 +3308,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Machine , "RuinMachine" , "遗迹�
 		audible_distance_modifier = 0.5 ,
 		fade_in_ticks = 4 ,
 		fade_out_ticks = 20
-    }
+	}
 } )
 
 -- ----------------------------------------
@@ -3356,8 +3356,8 @@ SIGen
 	corpse = SIConstants_RuinControl.raw.Entities.RuinInserterRemnants ,
 	dying_explosion = "inserter-explosion" ,
 	map_color = { r = 1.0 , g = 1.0 , b = 1.0 } ,
-	friendly_map_color =  { r = 0.4 , g = 0.4 , b = 1.0 } ,
-	enemy_map_color =  { r = 1.0 , g = 0.4 , b = 0.4 } ,
+	friendly_map_color = { r = 0.4 , g = 0.4 , b = 1.0 } ,
+	enemy_map_color = { r = 1.0 , g = 0.4 , b = 0.4 } ,
 	alert_when_damaged = false ,
 	create_ghost_on_death = false ,
 	hide_resistances = false ,
@@ -3613,7 +3613,7 @@ SIGen
 	decorative_removal_probability = 1.0 ,
 	pollution_absorption_per_second = 0 ,
 	map_color = { r = 49 , g = 48 , b = 45 } ,
-    scorch_mark_color = { r = 0.37 , g = 0.30 , b = 0.24 , a = 1.00 } ,
+	scorch_mark_color = { r = 0.37 , g = 0.30 , b = 0.24 , a = 1.00 } ,
 	trigger_effect =
 	{
 		{

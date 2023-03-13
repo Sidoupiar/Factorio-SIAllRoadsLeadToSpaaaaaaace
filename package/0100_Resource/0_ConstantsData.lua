@@ -4,7 +4,7 @@ local constantsData =
 	Name = "自然矿产" ,
 	FileList =
 	{
-		[SIInit.StateCodeDefine.Data]    = { "1_data" }
+		[SIInit.StateCodeDefine.Data] = { "1_data" }
 	} ,
 	Autoload =
 	{

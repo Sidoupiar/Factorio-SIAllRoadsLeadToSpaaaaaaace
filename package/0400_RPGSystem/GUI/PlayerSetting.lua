@@ -185,7 +185,7 @@ SIRPGPlayerSetting =
 	SaveSettings = function( playerIndex )
 		local settings = SIGlobal.GetPlayerSettings( SIRPGSystem.Settings.Name , playerIndex )
 		if settings.PlayerSetting.frame and settings.PlayerSetting.frame.valid then
-			SIRPGPlayerSetting.Save( settings  ,false )
+			SIRPGPlayerSetting.Save( settings , false )
 		end
 	end ,
 	BackSettings = function( playerIndex )

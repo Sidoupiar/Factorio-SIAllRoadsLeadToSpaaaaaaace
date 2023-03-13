@@ -461,7 +461,7 @@ SIRPGSystem =
 			if globalSkillData.EffectInterface and globalSkillData.EffectFunctionName then
 				if remote.interfaces[globalSkillData.EffectInterface] and remote.interfaces[globalSkillData.EffectInterface][globalSkillData.EffectFunctionName] then
 					if globalSkillData.IsPassive then
-						local returnData = remote.call( globalSkillData.EffectInterface  , globalSkillData.EffectFunctionName , playerIndex , globalSkillData , playerSkillData , isQuickUse , game.tick )
+						local returnData = remote.call( globalSkillData.EffectInterface , globalSkillData.EffectFunctionName , playerIndex , globalSkillData , playerSkillData , isQuickUse , game.tick )
 						if returnData then
 							playerSkillData.CustomData = returnData.CustomData
 						end
@@ -472,7 +472,7 @@ SIRPGSystem =
 						end
 						if SIRPGSystem.TakeSkillCost( playerIndex , globalSkillData.ID ) then
 							playerSkillData.Cooldown = math.max( globalSkillData.Cooldown , 0 )
-							local returnData = remote.call( globalSkillData.EffectInterface  , globalSkillData.EffectFunctionName , playerIndex , globalSkillData , playerSkillData , isQuickUse , game.tick )
+							local returnData = remote.call( globalSkillData.EffectInterface , globalSkillData.EffectFunctionName , playerIndex , globalSkillData , playerSkillData , isQuickUse , game.tick )
 							if returnData then
 								playerSkillData.Cooldown = math.max( returnData.Cooldown , 0 )
 								playerSkillData.CustomData = returnData.CustomData
@@ -481,7 +481,7 @@ SIRPGSystem =
 							SIPrint.Warning( playerIndex , { "SIRPGSystem.技能提示-条件不足" , globalSkillData.Name } )
 						end
 					else
-						local returnData = remote.call( globalSkillData.EffectInterface  , globalSkillData.EffectFunctionName , playerIndex , globalSkillData , playerSkillData , isQuickUse , game.tick )
+						local returnData = remote.call( globalSkillData.EffectInterface , globalSkillData.EffectFunctionName , playerIndex , globalSkillData , playerSkillData , isQuickUse , game.tick )
 						if returnData then
 							playerSkillData.Cooldown = math.max( returnData.Cooldown , 0 )
 							playerSkillData.CustomData = returnData.CustomData

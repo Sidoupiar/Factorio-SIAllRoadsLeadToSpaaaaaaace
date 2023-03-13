@@ -93,7 +93,7 @@ SIGen
 {
 	type = "frame_style" ,
 	-- 偏移
-	top_padding  = 4 ,
+	top_padding = 4 ,
 	right_padding = 8 ,
 	bottom_padding = 8 ,
 	left_padding = 8 ,
@@ -1109,7 +1109,7 @@ SIGen
 	-- 体积
 	width = 60
 } )
-.AddStyle( "Mainbar_Setting_DropDown"  , "主面板设置管理-下拉列表" ,
+.AddStyle( "Mainbar_Setting_DropDown" , "主面板设置管理-下拉列表" ,
 {
 	type = "dropdown_style" ,
 	parent = SIConstants_Core.raw.Styles.Common_DropDown ,

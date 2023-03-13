@@ -399,7 +399,7 @@ SIMainbarSetting =
 	SaveSettings = function( playerIndex )
 		local settings = SIGlobal.GetPlayerSettings( SIMainData.Settings.Name , playerIndex )
 		if settings.Setting.frame and settings.Setting.frame.valid then
-			SIMainbarSetting.Save( settings  ,false )
+			SIMainbarSetting.Save( settings , false )
 		end
 	end ,
 	BackSettings = function( playerIndex )

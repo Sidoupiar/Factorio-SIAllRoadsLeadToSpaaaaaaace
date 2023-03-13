@@ -89,6 +89,15 @@ SIRequestMap =
 			Enable = false ,
 		}
 	} ,
+	ListButtonIcon =
+	{
+		RequestSlot = SIConstants_Core.raw.Items.IconStar ,
+		MaxSlot = SIConstants_Core.raw.Items.IconStar ,
+		GreenToBlue = SIConstants_Core.raw.Items.IconStar ,
+		SetModule = SIConstants_Core.raw.Items.IconStar ,
+		RemoveModule = SIConstants_Core.raw.Items.IconStar ,
+		InsertItem = SIConstants_Core.raw.Items.IconStar
+	} ,
 	-- ------------------------------------------------------------------------------------------------
 	-- ---------- 窗口函数 ----------------------------------------------------------------------------
 	-- ------------------------------------------------------------------------------------------------
@@ -165,8 +174,6 @@ SIRequestMap =
 	CloseFrame = function( playerIndex )
 		local settings = SIGlobal.GetPlayerSettings( SIRequestMap.Settings.Name , playerIndex )
 		if settings.frame and settings.frame.valid then
-			SIRequestMap.Save( settings , settings.tabSettingsIndex )
-			-- 清除临时数据
 			settings.entities = nil
 			settings.frame.destroy()
 			settings.frame = nil
@@ -212,21 +219,10 @@ SIRequestMap =
 			settings.defaultIndex4 = tabSettingsIndex == settings.defaultIndex4 and 0 or tabSettingsIndex < settings.defaultIndex4 and SITools.AsNumberInt( tabSettingsIndex - 1 , 1 , tabSettingsCount )
 		end
 	end ,
-	Save = function( settings , tabSettingsIndex )
-		local tabSettings = settings.TabSettingsList[tabSettingsIndex]
-		local elements = settings.Elements
-		local default = SIRequestMap.DefaultTabSettings
-		-- 请求格子
-		-- 最大格子
-		-- 绿箱向蓝箱供货
-		-- 设置插件
-		-- 移除插件
-		-- 插入物品
-	end ,
 	CreatePage = function( settings )
 		local page = settings.page
 		local listButtonFlow = page.add{ type = "flow" , direction = "horizontal" , style = SIConstants_Core.raw.Styles.Common_FlowCenterH }
-		local scroll =  page.add{ type = "scroll-pane" , horizontal_scroll_policy = "never" , vertical_scroll_policy = "auto-and-reserve-space" , style = SIConstants_Core.raw.Styles.Common_ScrollPane }
+		local scroll = page.add{ type = "scroll-pane" , horizontal_scroll_policy = "never" , vertical_scroll_policy = "auto-and-reserve-space" , style = SIConstants_Core.raw.Styles.Common_ScrollPane }
 		local list = scroll.add{ type = "table" , column_count = 1 , style = SIConstants_Core.raw.Styles.Common_List }
 		settings.scroll = scroll
 		local elements = settings.Elements
@@ -239,7 +235,7 @@ SIRequestMap =
 		-- 创建滚动定位按钮
 		for key , value in pairs( SIRequestMap.DefaultTabSettings ) do
 			if key ~= "Name" then
-				local button = listButtonFlow.add{ type = "" , name = SIRequestMap.Names.ListButtonPrefix .. key .. "_Enable" , tooltip = { "SICore.紫图-窗口-列表定位按钮-提示" , elements[key .. "_Enable"].caption } , style = SIConstants_Core.raw.Styles.RequestMap_ListButton }
+				local button = listButtonFlow.add{ type = "sprite-button" , name = SIRequestMap.Names.ListButtonPrefix .. key .. "_Enable" , sprite = "item/" .. SIRequestMap.ListButtonIcon[key] , tooltip = { "SICore.紫图-窗口-列表定位按钮-提示" , elements[key .. "_Enable"].caption } , style = SIConstants_Core.raw.Styles.RequestMap_ListButton }
 				settings.ListButtons[key] = button
 			end
 		end
@@ -269,7 +265,6 @@ SIRequestMap =
 		local settings = SIGlobal.GetPlayerSettings( SIRequestMap.Settings.Name , playerIndex )
 		if settings.frame and settings.frame.valid then
 			local tabSettingsIndex = settings.tabPane.selected_tab_index
-			SIRequestMap.Save( settings , settings.tabSettingsIndex )
 			settings.tabSettingsIndex = tabSettingsIndex
 			SIRequestMap.FreshPage( settings )
 		end
@@ -286,6 +281,11 @@ SIRequestMap =
 		if settings.frame and settings.frame.valid then
 			local key = name:sub( SIRequestMap.Names.EnablePosition )
 			settings.Elements[key].visible = element.state
+			-- 保存功能的启用状态
+			key = key:sub( 1 , key:find( "_" ) )
+			local tabSettingsIndex = settings.tabSettingsIndex
+			local tabSettings = settings.TabSettingsList[tabSettingsIndex]
+			tabSettings[key].Enable = element.state
 		end
 	end ,
 	EffectSelect1 = function( playerIndex , entities )

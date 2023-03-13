@@ -537,7 +537,7 @@ SIMainbar =
 		if toolbarButtonData and toolbarButtonData.ActionRemoteInterfaceID and toolbarButtonData.ActionRemoteFunctionName then
 			if remote.interfaces[toolbarButtonData.ActionRemoteInterfaceID] and remote.interfaces[toolbarButtonData.ActionRemoteInterfaceID][toolbarButtonData.ActionRemoteFunctionName] then
 				if not toolbarButtonData.Permission or SIPermission.HasPermission( toolbarButtonData.Permission , playerIndex ) then
-					remote.call( toolbarButtonData.ActionRemoteInterfaceID  , toolbarButtonData.ActionRemoteFunctionName , playerIndex , toolbarButtonData.ID , gameTick )
+					remote.call( toolbarButtonData.ActionRemoteInterfaceID , toolbarButtonData.ActionRemoteFunctionName , playerIndex , toolbarButtonData.ID , gameTick )
 				else
 					SIPrint.Alert( playerIndex , SIPermission.GetPermissionMessage( toolbarButtonData.Permission ) )
 				end

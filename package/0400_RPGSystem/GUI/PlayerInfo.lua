@@ -201,7 +201,7 @@ SIRPGPlayerInfo =
 		local info = settings.PlayerInfo
 		local value = settings.Value
 		local max = value.Max[valueBarID]
-		local current =  value.Current[valueBarID]
+		local current = value.Current[valueBarID]
 		info.ValueTextLeft[valueBarID].caption = { current == max and SIRPGPlayerInfo.ValueBarShowFull[valueBarID] or SIRPGPlayerInfo.ValueBarShow[valueBarID] , current }
 		info.ValueTextCenter[valueBarID].caption = { "SIRPGSystem.玩家信息-窗口-数值-分隔符" }
 		info.ValueTextRight[valueBarID].caption = { SIRPGPlayerInfo.ValueBarShowFull[valueBarID] , max }

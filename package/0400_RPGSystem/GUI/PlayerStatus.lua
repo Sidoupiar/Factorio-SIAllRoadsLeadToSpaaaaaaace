@@ -353,7 +353,7 @@ SIRPGPlayerStatus =
 		local max = value.Max[valueID]
 		-- 更新控件
 		if SIRPGSystem.ValueBarRegen[valueID] then
-			local current =  value.Current[valueID]
+			local current = value.Current[valueID]
 			status.ValueTextLeft[valueID].caption = { "SIRPGSystem.玩家属性-窗口-数值-进度条-左" , current }
 			status.ValueTextCenter[valueID].caption = { "SIRPGSystem.玩家属性-窗口-数值-进度条-分隔符" }
 			status.ValueTextRight[valueID].caption = { "SIRPGSystem.玩家属性-窗口-数值-进度条-右" , max }

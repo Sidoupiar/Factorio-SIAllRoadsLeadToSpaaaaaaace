@@ -493,8 +493,8 @@ SIGen
 	corpse = "small-scorchmark" ,
 	dying_explosion = "medium-explosion" ,
 	map_color = { r = 1.00 , g = 1.00 , b = 1.00 } ,
-	friendly_map_color =  { r = 0.40 , g = 0.40 , b = 1.00 } ,
-	enemy_map_color =  { r = 1.00 , g = 0.40 , b = 0.40 } ,
+	friendly_map_color = { r = 0.40 , g = 0.40 , b = 1.00 } ,
+	enemy_map_color = { r = 1.00 , g = 0.40 , b = 0.40 } ,
 	alert_when_damaged = true ,
 	create_ghost_on_death = true ,
 	hide_resistances = true ,
@@ -707,7 +707,7 @@ SIGen
 		}
 	} ,
 	working_sound =
-    {
+	{
 		sound =
 		{
 			{
@@ -718,7 +718,7 @@ SIGen
 		audible_distance_modifier = 0.5 ,
 		fade_in_ticks = 4 ,
 		fade_out_ticks = 20
-    }
+	}
 }
 .AutoIcon()
 .SetSize( 2 , 2 )
@@ -815,8 +815,8 @@ SIGen
 	corpse = "small-scorchmark" ,
 	dying_explosion = "medium-explosion" ,
 	map_color = { r = 1.00 , g = 1.00 , b = 1.00 } ,
-	friendly_map_color =  { r = 0.40 , g = 0.40 , b = 1.00 } ,
-	enemy_map_color =  { r = 1.00 , g = 0.40 , b = 0.40 } ,
+	friendly_map_color = { r = 0.40 , g = 0.40 , b = 1.00 } ,
+	enemy_map_color = { r = 1.00 , g = 0.40 , b = 0.40 } ,
 	alert_when_damaged = true ,
 	create_ghost_on_death = true ,
 	hide_resistances = true ,
@@ -1029,7 +1029,7 @@ SIGen
 		}
 	} ,
 	working_sound =
-    {
+	{
 		sound =
 		{
 			{
@@ -1040,7 +1040,7 @@ SIGen
 		audible_distance_modifier = 0.5 ,
 		fade_in_ticks = 4 ,
 		fade_out_ticks = 20
-    }
+	}
 }
 .AutoIcon()
 .SetSize( 2 , 2 )

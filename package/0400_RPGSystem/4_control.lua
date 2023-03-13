@@ -765,7 +765,7 @@ end )
 	local playerIndex = event.player_index
 	local player = game.get_player( playerIndex )
 	-- 玩家生存经验
-	if  entity.type ~= SICommon.Types.Entities.ItemEntity then
+	if entity.type ~= SICommon.Types.Entities.ItemEntity then
 		SIRPGSystem.CreateCraftMiningExp( player , entity )
 	end
 end )
