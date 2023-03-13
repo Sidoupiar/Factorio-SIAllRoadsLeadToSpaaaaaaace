@@ -269,6 +269,7 @@ SIControl.Init
 		RequestMap_TabPane = "紫图-分页面板" ,
 		RequestMap_Label = "紫图-标签" ,
 		RequestMap_Text = "紫图-文本条" ,
+		RequestMap_EmptyFlow = "紫图-空布局" ,
 		RequestMap_ListButton = "紫图-列表定位按钮" ,
 		RequestMap_ListFlow = "紫图-列表布局" ,
 	}

@@ -278,6 +278,7 @@ SIRequestMap =
 		local nameFlow = page.add{ type = "flow" , direction = "horizontal" , style = SIConstants_Core.raw.Styles.Common_FlowCenterH }
 		nameFlow.add{ type = "label" , caption = { "SICore.紫图-窗口-名称" } , tooltip = { "SICore.紫图-窗口-名称-提示" } , style = SIConstants_Core.raw.Styles.RequestMap_Label }
 		elements.TabSettingsName = nameFlow.add{ type = "textfield" , name = SIRequestMap.Names.TabSettingsName , text = nil , tooltip = { "SICore.紫图-窗口-名称-提示" } , style = SIConstants_Core.raw.Styles.RequestMap_Text }
+		nameFlow.add{ type = "flow" , direction = "vertical" , style = SIConstants_Core.raw.Styles.RequestMap_EmptyFlow }
 		nameFlow.add{ type = "button" , name = SIRequestMap.Names.Delete , caption = { "SICore.紫图-窗口-删除" } , tooltip = { "SICore.紫图-窗口-删除-提示" } , style = SIConstants_Core.raw.Styles.Common_ButtonRed }
 		-- ----------------------------------------
 		-- 设置列表按钮
@@ -365,29 +366,35 @@ SIRequestMap =
 		-- 请求格子
 		-- ----------------------------------------
 		elements.RequestSlot_Enable.state = tabSettings.RequestSlot.Enable
+		elements.RequestSlot_Flow.visible = tabSettings.RequestSlot.Enable
 		-- ----------------------------------------
 		-- 最大格子
 		-- ----------------------------------------
 		elements.MaxSlot_Enable.state = tabSettings.MaxSlot.Enable
+		elements.MaxSlot_Flow.visible = tabSettings.MaxSlot.Enable
 		-- ----------------------------------------
 		-- 绿箱向蓝箱供货
 		-- ----------------------------------------
 		elements.GreenToBlue_Enable.state = tabSettings.GreenToBlue.Enable
+		elements.GreenToBlue_Flow.visible = tabSettings.GreenToBlue.Enable
 		elements.GreenToBlue_Check.state = tabSettings.GreenToBlue.Check
 		-- ----------------------------------------
 		-- 设置插件
 		-- ----------------------------------------
 		elements.SetModule_Enable.state = tabSettings.SetModule.Enable
+		elements.SetModule_Flow.visible = tabSettings.SetModule.Enable
 		elements.SetModule_FromInventory.state = tabSettings.SetModule.FromInventory
 		-- ----------------------------------------
 		-- 移除插件
 		-- ----------------------------------------
 		elements.RemoveModule_Enable.state = tabSettings.RemoveModule.Enable
+		elements.RemoveModule_Flow.visible = tabSettings.RemoveModule.Enable
 		elements.RemoveModule_ToInventory.state = tabSettings.RemoveModule.ToInventory
 		-- ----------------------------------------
 		-- 插入物品
 		-- ----------------------------------------
 		elements.InsertItem_Enable.state = tabSettings.InsertItem.Enable
+		elements.InsertItem_Flow.visible = tabSettings.InsertItem.Enable
 	end ,
 	EffectTabSettings = function( settings , tabSettingsIndex )
 		local tabSettings = settings.TabSettingsList[tabSettingsIndex]

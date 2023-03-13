@@ -2194,6 +2194,8 @@ SIGen
 .AddStyle( "RequestMap_Label" , "紫图-标签" ,
 {
 	type = "label_style" ,
+	-- 体积
+	width = 150 ,
 	-- 对齐
 	horizontal_align = "left"
 } )
@@ -2202,6 +2204,13 @@ SIGen
 	type = "textbox_style" ,
 	-- 体积
 	width = 150
+} )
+.AddStyle( "RequestMap_EmptyFlow" , "紫图-空布局" ,
+{
+	type = "vertical_flow_style" ,
+	parent = SIConstants_Core.raw.Styles.Common_FlowLeft ,
+	-- 体积
+	width = 380
 } )
 .AddStyle( "RequestMap_ListButton" , "紫图-列表定位按钮" ,
 {
