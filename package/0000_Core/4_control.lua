@@ -272,6 +272,7 @@ SIControl.Init
 		RequestMap_EmptyFlow = "紫图-空布局" ,
 		RequestMap_ListButton = "紫图-列表定位按钮" ,
 		RequestMap_ListFlow = "紫图-列表布局" ,
+		RequestMap_SubList = "紫图-子列表" ,
 	}
 }
 

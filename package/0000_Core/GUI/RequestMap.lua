@@ -298,7 +298,7 @@ SIRequestMap =
 		elements.RequestSlot_Flow = RequestSlot_Flow
 		elements.RequestSlot_List = RequestSlot_Flow
 		.add{ type = "scroll-pane" , horizontal_scroll_policy = "never" , vertical_scroll_policy = "auto-and-reserve-space" , style = SIConstants_Core.raw.Styles.Common_ScrollPane }
-		.add{ type = "table" , column_count = 2 , style = SIConstants_Core.raw.Styles.Common_List }
+		.add{ type = "table" , column_count = 2 , style = SIConstants_Core.raw.Styles.RequestMap_SubList }
 		-- ----------------------------------------
 		-- 最大格子
 		-- ----------------------------------------
@@ -307,7 +307,7 @@ SIRequestMap =
 		elements.MaxSlot_Flow = MaxSlot_Flow
 		elements.MaxSlot_List = MaxSlot_Flow
 		.add{ type = "scroll-pane" , horizontal_scroll_policy = "never" , vertical_scroll_policy = "auto-and-reserve-space" , style = SIConstants_Core.raw.Styles.Common_ScrollPane }
-		.add{ type = "table" , column_count = 2 , style = SIConstants_Core.raw.Styles.Common_List }
+		.add{ type = "table" , column_count = 2 , style = SIConstants_Core.raw.Styles.RequestMap_SubList }
 		-- ----------------------------------------
 		-- 绿箱向蓝箱供货
 		-- ----------------------------------------
@@ -324,7 +324,7 @@ SIRequestMap =
 		elements.SetModule_FromInventory = SetModule_Flow.add{ type = "checkbox" , name = SIRequestMap.Names.SetModule_FromInventory , state = false , caption = { "SICore.紫图-窗口-设置插件-从背包填充" } , tooltip = { "SICore.紫图-窗口-设置插件-从背包填充-提示" } , style = SIConstants_Core.raw.Styles.Common_CheckBox }
 		elements.SetModule_List = SetModule_Flow
 		.add{ type = "scroll-pane" , horizontal_scroll_policy = "never" , vertical_scroll_policy = "auto-and-reserve-space" , style = SIConstants_Core.raw.Styles.Common_ScrollPane }
-		.add{ type = "table" , column_count = 2 , style = SIConstants_Core.raw.Styles.Common_List }
+		.add{ type = "table" , column_count = 2 , style = SIConstants_Core.raw.Styles.RequestMap_SubList }
 		-- ----------------------------------------
 		-- 移除插件
 		-- ----------------------------------------
@@ -334,7 +334,7 @@ SIRequestMap =
 		elements.RemoveModule_ToInventory = RemoveModule_Flow.add{ type = "checkbox" , name = SIRequestMap.Names.RemoveModule_ToInventory , state = false , caption = { "SICore.紫图-窗口-移除插件-进入背包" } , tooltip = { "SICore.紫图-窗口-移除插件-进入背包-提示" } , style = SIConstants_Core.raw.Styles.Common_CheckBox }
 		elements.RemoveModule_List = RemoveModule_Flow
 		.add{ type = "scroll-pane" , horizontal_scroll_policy = "never" , vertical_scroll_policy = "auto-and-reserve-space" , style = SIConstants_Core.raw.Styles.Common_ScrollPane }
-		.add{ type = "table" , column_count = 2 , style = SIConstants_Core.raw.Styles.Common_List }
+		.add{ type = "table" , column_count = 2 , style = SIConstants_Core.raw.Styles.RequestMap_SubList }
 		-- ----------------------------------------
 		-- 插入物品
 		-- ----------------------------------------
@@ -343,7 +343,7 @@ SIRequestMap =
 		elements.InsertItem_Flow = InsertItem_Flow
 		elements.InsertItem_List = InsertItem_Flow
 		.add{ type = "scroll-pane" , horizontal_scroll_policy = "never" , vertical_scroll_policy = "auto-and-reserve-space" , style = SIConstants_Core.raw.Styles.Common_ScrollPane }
-		.add{ type = "table" , column_count = 2 , style = SIConstants_Core.raw.Styles.Common_List }
+		.add{ type = "table" , column_count = 2 , style = SIConstants_Core.raw.Styles.RequestMap_SubList }
 		-- ----------------------------------------
 		-- 创建滚动定位按钮
 		-- ----------------------------------------

@@ -2237,3 +2237,10 @@ SIGen
 	-- 体积
 	minimal_width = 630
 } )
+.AddStyle( "RequestMap_SubList" , "紫图-子列表" ,
+{
+	type = "table_style" ,
+	parent = SIConstants_Core.raw.Styles.Common_List ,
+	-- 元素间距
+	horizontal_spacing = 10
+} )
