@@ -199,9 +199,8 @@ SIRequestMap =
 			settings.tabPane = tabPane
 			settings.page = tabPane.add{ type = "flow" , direction = "vertical" , style = SIConstants_Core.raw.Styles.Common_FlowLeft }
 			-- 根据设置更新控件
-			SIRequestMap.CreateTab( settings )
 			SIRequestMap.CreatePage( settings )
-			SIRequestMap.FreshPage( settings )
+			SIRequestMap.CreateTab( settings )
 		end
 	end ,
 	CloseFrame = function( playerIndex )
@@ -268,6 +267,7 @@ SIRequestMap =
 			table.insert( settings.TabList , tab )
 		end
 		settings.tabPane.selected_tab_index = settings.tabSettingsIndex
+		SIRequestMap.FreshPage( settings )
 	end ,
 	CreatePage = function( settings )
 		local page = settings.page
@@ -367,11 +367,13 @@ SIRequestMap =
 		-- ----------------------------------------
 		elements.RequestSlot_Enable.state = tabSettings.RequestSlot.Enable
 		elements.RequestSlot_Flow.visible = tabSettings.RequestSlot.Enable
+		SIRequestMap.FreshPage_RequestSlot( tabSettings , elements )
 		-- ----------------------------------------
 		-- 最大格子
 		-- ----------------------------------------
 		elements.MaxSlot_Enable.state = tabSettings.MaxSlot.Enable
 		elements.MaxSlot_Flow.visible = tabSettings.MaxSlot.Enable
+		SIRequestMap.FreshPage_MaxSlot( tabSettings , elements )
 		-- ----------------------------------------
 		-- 绿箱向蓝箱供货
 		-- ----------------------------------------
@@ -384,39 +386,60 @@ SIRequestMap =
 		elements.SetModule_Enable.state = tabSettings.SetModule.Enable
 		elements.SetModule_Flow.visible = tabSettings.SetModule.Enable
 		elements.SetModule_FromInventory.state = tabSettings.SetModule.FromInventory
+		SIRequestMap.FreshPage_SetModule( tabSettings , elements )
 		-- ----------------------------------------
 		-- 移除插件
 		-- ----------------------------------------
 		elements.RemoveModule_Enable.state = tabSettings.RemoveModule.Enable
 		elements.RemoveModule_Flow.visible = tabSettings.RemoveModule.Enable
 		elements.RemoveModule_ToInventory.state = tabSettings.RemoveModule.ToInventory
+		SIRequestMap.FreshPage_RemoveModule( tabSettings , elements )
 		-- ----------------------------------------
 		-- 插入物品
 		-- ----------------------------------------
 		elements.InsertItem_Enable.state = tabSettings.InsertItem.Enable
 		elements.InsertItem_Flow.visible = tabSettings.InsertItem.Enable
+		SIRequestMap.FreshPage_InsertItem( tabSettings , elements )
 	end ,
-	EffectTabSettings = function( settings , tabSettingsIndex )
-		local tabSettings = settings.TabSettingsList[tabSettingsIndex]
-		local entities = settings.entities
-		-- ----------------------------------------
-		-- 请求格子
-		-- ----------------------------------------
-		-- ----------------------------------------
-		-- 最大格子
-		-- ----------------------------------------
-		-- ----------------------------------------
-		-- 绿箱向蓝箱供货
-		-- ----------------------------------------
-		-- ----------------------------------------
-		-- 设置插件
-		-- ----------------------------------------
-		-- ----------------------------------------
-		-- 移除插件
-		-- ----------------------------------------
-		-- ----------------------------------------
-		-- 插入物品
-		-- ----------------------------------------
+	FreshPage_RequestSlot = function( tabSettings , elements )
+		-- 清空列表
+		elements.RequestSlot_List.clear()
+		-- 重建列表
+		for entityName , requestItemList in pairs( tabSettings.RequestSlot.List ) do
+			
+		end
+	end ,
+	FreshPage_MaxSlot = function( tabSettings , elements )
+		-- 清空列表
+		elements.MaxSlot_List.clear()
+		-- 重建列表
+		for entityName , slotCount in pairs( tabSettings.MaxSlot.List ) do
+			
+		end
+	end ,
+	FreshPage_SetModule = function( tabSettings , elements )
+		-- 清空列表
+		elements.SetModule_List.clear()
+		-- 重建列表
+		for entityName , moduleList in pairs( tabSettings.SetModule.List ) do
+			
+		end
+	end ,
+	FreshPage_RemoveModule = function( tabSettings , elements )
+		-- 清空列表
+		elements.RemoveModule_List.clear()
+		-- 重建列表
+		for entityName , moduleList in pairs( tabSettings.RemoveModule.List ) do
+			
+		end
+	end ,
+	FreshPage_InsertItem = function( tabSettings , elements )
+		-- 清空列表
+		elements.InsertItem_List.clear()
+		-- 重建列表
+		for entityName , itemList in pairs( tabSettings.InsertItem.List ) do
+			
+		end
 	end ,
 	Out_AddTabSettings = function( playerIndex )
 		local settings = SIGlobal.GetPlayerSettings( SIRequestMap.Settings.Name , playerIndex )
@@ -498,6 +521,28 @@ SIRequestMap =
 			local tabSettings = settings.TabSettingsList[tabSettingsIndex]
 			tabSettings.RemoveModule.ToInventory = element.state
 		end
+	end ,
+	EffectTabSettings = function( settings , tabSettingsIndex )
+		local tabSettings = settings.TabSettingsList[tabSettingsIndex]
+		local entities = settings.entities
+		-- ----------------------------------------
+		-- 请求格子
+		-- ----------------------------------------
+		-- ----------------------------------------
+		-- 最大格子
+		-- ----------------------------------------
+		-- ----------------------------------------
+		-- 绿箱向蓝箱供货
+		-- ----------------------------------------
+		-- ----------------------------------------
+		-- 设置插件
+		-- ----------------------------------------
+		-- ----------------------------------------
+		-- 移除插件
+		-- ----------------------------------------
+		-- ----------------------------------------
+		-- 插入物品
+		-- ----------------------------------------
 	end ,
 	EffectSelect1 = function( playerIndex , entities )
 		local settings = SIGlobal.GetPlayerSettings( SIRequestMap.Settings.Name , playerIndex )
