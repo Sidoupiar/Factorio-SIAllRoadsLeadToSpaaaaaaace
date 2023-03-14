@@ -12,7 +12,7 @@ SIRequestMap =
 		Delete = "SI核心-紫图-删除" ,
 		TabPane = "SI核心-紫图-分页面板" ,
 		TabSettingsName = "SI核心-紫图-设置名称" ,
-		Default = "SI核心-紫图-默认选择" ,
+		DefaultIndex = "SI核心-紫图-默认选择" ,
 		GreenToBlue_Check = "SI核心-紫图-绿箱向蓝箱供货-勾选" ,
 		SetModule_FromInventory = "SI核心-紫图-设置插件-从背包填充" ,
 		RemoveModule_ToInventory = "SI核心-紫图-移除插件-进入背包" ,
@@ -34,7 +34,7 @@ SIRequestMap =
 			Elements =
 			{
 				TabSettingsName = nil ,
-				Default = nil ,
+				DefaultIndex = nil ,
 				-- 请求格子
 				RequestSlot_Enable = nil ,
 				RequestSlot_Flow = nil ,
@@ -285,12 +285,12 @@ SIRequestMap =
 		-- ----------------------------------------
 		-- 默认选择
 		-- ----------------------------------------
-		local defaultFlow = page.add{ type = "flow" , direction = "horizontal" , style = SIConstants_Core.raw.Styles.Common_FlowCenterH }
-		nameFlow.add{ type = "label" , caption = { "SICore.紫图-窗口-默认选择" } , tooltip = { "SICore.紫图-窗口-默认选择-提示" } , style = SIConstants_Core.raw.Styles.RequestMap_Label }
-		elements.Default = defaultFlow.add
+		local defaultIndexFlow = page.add{ type = "flow" , direction = "horizontal" , style = SIConstants_Core.raw.Styles.Common_FlowCenterH }
+		defaultIndexFlow.add{ type = "label" , caption = { "SICore.紫图-窗口-默认选择" } , tooltip = { "SICore.紫图-窗口-默认选择-提示" } , style = SIConstants_Core.raw.Styles.RequestMap_Label }
+		elements.DefaultIndex = defaultIndexFlow.add
 		{
 			type = "drop-down" ,
-			name = SIRequestMap.Names.Default ,
+			name = SIRequestMap.Names.DefaultIndex ,
 			caption = { "SICore.紫图-窗口-默认选择" } ,
 			tooltip = { "SICore.紫图-窗口-默认选择-提示" } ,
 			items = SIRequestMap.DefaultIndexText ,
@@ -383,15 +383,15 @@ SIRequestMap =
 		-- 默认选择
 		-- ----------------------------------------
 		if settings.defaultIndex1 == tabSettingsIndex then
-			elements.Default.select_index = 2
+			elements.DefaultIndex.selected_index = 2
 		elseif settings.defaultIndex2 == tabSettingsIndex then
-			elements.Default.select_index = 3
+			elements.DefaultIndex.selected_index = 3
 		elseif settings.defaultIndex3 == tabSettingsIndex then
-			elements.Default.select_index = 4
+			elements.DefaultIndex.selected_index = 4
 		elseif settings.defaultIndex4 == tabSettingsIndex then
-			elements.Default.select_index = 5
+			elements.DefaultIndex.selected_index = 5
 		else
-			elements.Default.select_index = 1
+			elements.DefaultIndex.selected_index = 1
 		end
 		-- ----------------------------------------
 		-- 请求格子
@@ -534,6 +534,40 @@ SIRequestMap =
 			-- 保存 [设置名称] 复选框的值
 			local tabSettings = settings.TabSettingsList[tabSettingsIndex]
 			tabSettings.Name = element.text
+		end
+	end ,
+	Set_DefaultIndex = function( playerIndex , element )
+		local settings = SIGlobal.GetPlayerSettings( SIRequestMap.Settings.Name , playerIndex )
+		if settings.frame and settings.frame.valid then
+			local selectedIndex = element.selected_index
+			if not selectedIndex then
+				element.selected_index = 1
+				selectedIndex = 1
+			end
+			local tabSettingsIndex = settings.tabSettingsIndex
+			-- 清除原有默认选择值
+			if settings.defaultIndex1 == tabSettingsIndex then
+				settings.defaultIndex1 = 0
+			end
+			if settings.defaultIndex2 == tabSettingsIndex then
+				settings.defaultIndex2 = 0
+			end
+			if settings.defaultIndex3 == tabSettingsIndex then
+				settings.defaultIndex3 = 0
+			end
+			if settings.defaultIndex4 == tabSettingsIndex then
+				settings.defaultIndex4 = 0
+			end
+			-- 设置新的默认选择值
+			if selectedIndex == 2 then
+				settings.defaultIndex1 = tabSettingsIndex
+			elseif selectedIndex == 3 then
+				settings.defaultIndex2 = tabSettingsIndex
+			elseif selectedIndex == 4 then
+				settings.defaultIndex3 = tabSettingsIndex
+			elseif selectedIndex == 5 then
+				settings.defaultIndex4 = tabSettingsIndex
+			end
 		end
 	end ,
 	Set_GreenToBlue_Check = function( playerIndex , element )

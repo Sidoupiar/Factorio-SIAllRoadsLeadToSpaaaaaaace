@@ -789,6 +789,11 @@ end )
 		SIFinder.SelectElementType( playerIndex , element.selected_index )
 		return
 	end
+
+	if name == SIRequestMap.Names.Default then
+		SIRequestMap.Set_DefaultIndex( playerIndex , element )
+		return
+	end
 end )
 .Add( SIEvents.on_gui_elem_changed , function( event , functionID )
 	local element = event.element
