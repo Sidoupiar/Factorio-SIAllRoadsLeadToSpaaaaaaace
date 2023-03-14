@@ -1491,8 +1491,8 @@ SIGen
 	{
 		type = "horizontal_flow_style" ,
 		-- 偏移
-		left_padding = 12 ,
 		right_padding = 12 ,
+		left_padding = 12 ,
 		-- 元素间距
 		horizontal_spacing = 0
 	}
@@ -2185,8 +2185,8 @@ SIGen
 	{
 		type = "horizontal_flow_style" ,
 		-- 偏移
-		left_padding = 12 ,
 		right_padding = 12 ,
+		left_padding = 12 ,
 		-- 元素间距
 		horizontal_spacing = 0
 	}
@@ -2194,8 +2194,10 @@ SIGen
 .AddStyle( "RequestMap_Label" , "紫图-标签" ,
 {
 	type = "label_style" ,
+	-- 偏移
+	left_padding = 12 ,
 	-- 体积
-	width = 150 ,
+	width = 120 ,
 	-- 对齐
 	horizontal_align = "left"
 } )
@@ -2203,21 +2205,21 @@ SIGen
 {
 	type = "textbox_style" ,
 	-- 体积
-	width = 200
+	width = 250
 } )
 .AddStyle( "RequestMap_EmptyFlow" , "紫图-空布局" ,
 {
 	type = "vertical_flow_style" ,
 	parent = SIConstants_Core.raw.Styles.Common_FlowLeft ,
 	-- 体积
-	width = 330
+	width = 170
 } )
 .AddStyle( "RequestMap_DropDown" , "紫图-下拉列表" ,
 {
 	type = "dropdown_style" ,
 	parent = SIConstants_Core.raw.Styles.Common_DropDown ,
 	-- 体积
-	width = 200 ,
+	width = 250 ,
 	height = 28
 } )
 .AddStyle( "RequestMap_ListButton" , "紫图-列表定位按钮" ,
@@ -2256,6 +2258,8 @@ SIGen
 {
 	type = "table_style" ,
 	parent = SIConstants_Core.raw.Styles.Common_List ,
+	-- 体积
+	minimal_height = 10 ,
 	-- 元素间距
 	horizontal_spacing = 10
 } )

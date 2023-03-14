@@ -263,9 +263,13 @@ SIRequestMap =
 		settings.TabList = {}
 		-- 增加新的分页
 		for index , tabSettings in pairs( settings.TabSettingsList ) do
+			-- 添加控件集合
+			table.insert( settings.Elements , {} )
+			-- 创建分页
 			local tab = tabPane.add{ type = "tab" , caption = { "SICore.紫图-窗口-分页标题" , tabSettings.Name } , tooltip = { "SICore.紫图-窗口-分页标题-提示" , SIRequestMap.TabSettingsMaxCount } }
 			local page = SIRequestMap.CreatePage( settings , index )
 			tabPane.add_tab( tab , page )
+			-- 保存信息
 			table.insert( settings.TabList , tab )
 			table.insert( settings.PageList , page )
 		end
