@@ -27,40 +27,42 @@ SIRequestMap =
 			frame = nil ,
 			frameLocation = nil ,
 			tabPane = nil ,
-			page = nil ,
 			scroll = nil ,
 			TabList = {} ,
+			PageList = {} ,
 			ListButtons = {} ,
 			Elements =
 			{
-				TabSettingsName = nil ,
-				DefaultIndex = nil ,
-				-- 请求格子
-				RequestSlot_Enable = nil ,
-				RequestSlot_Flow = nil ,
-				RequestSlot_List = nil ,
-				-- 最大格子
-				MaxSlot_Enable = nil ,
-				MaxSlot_Flow = nil ,
-				MaxSlot_List = nil ,
-				-- 绿箱向蓝箱供货
-				GreenToBlue_Enable = nil ,
-				GreenToBlue_Flow = nil ,
-				GreenToBlue_Check = nil ,
-				-- 设置插件
-				SetModule_Enable = nil ,
-				SetModule_Flow = nil ,
-				SetModule_FromInventory = nil ,
-				SetModule_List = nil ,
-				-- 移除插件
-				RemoveModule_Enable = nil ,
-				RemoveModule_Flow = nil ,
-				RemoveModule_ToInventory = nil ,
-				RemoveModule_List = nil ,
-				-- 插入物品
-				InsertItem_Enable = nil ,
-				InsertItem_Flow = nil ,
-				InsertItem_List = nil
+				-- {
+				-- 	TabSettingsName = nil ,
+				-- 	DefaultIndex = nil ,
+				-- 	-- 请求格子
+				-- 	RequestSlot_Enable = nil ,
+				-- 	RequestSlot_Flow = nil ,
+				-- 	RequestSlot_List = nil ,
+				-- 	-- 最大格子
+				-- 	MaxSlot_Enable = nil ,
+				-- 	MaxSlot_Flow = nil ,
+				-- 	MaxSlot_List = nil ,
+				-- 	-- 绿箱向蓝箱供货
+				-- 	GreenToBlue_Enable = nil ,
+				-- 	GreenToBlue_Flow = nil ,
+				-- 	GreenToBlue_Check = nil ,
+				-- 	-- 设置插件
+				-- 	SetModule_Enable = nil ,
+				-- 	SetModule_Flow = nil ,
+				-- 	SetModule_FromInventory = nil ,
+				-- 	SetModule_List = nil ,
+				-- 	-- 移除插件
+				-- 	RemoveModule_Enable = nil ,
+				-- 	RemoveModule_Flow = nil ,
+				-- 	RemoveModule_ToInventory = nil ,
+				-- 	RemoveModule_List = nil ,
+				-- 	-- 插入物品
+				-- 	InsertItem_Enable = nil ,
+				-- 	InsertItem_Flow = nil ,
+				-- 	InsertItem_List = nil
+				-- }
 			} ,
 			entities = nil ,
 			tabSettingsIndex = 1 ,
@@ -143,6 +145,7 @@ SIRequestMap =
 		settings.label = nil
 		settings.tabList = nil
 		settings.TabList = {}
+		settings.PageList = {}
 		settings.ListButtons = {}
 		settings.Elements = {}
 		settings.tabIndex = nil
@@ -197,11 +200,8 @@ SIRequestMap =
 			end
 			settings.tabSettingsIndex = SITools.AsNumberInt( settings.tabSettingsIndex , 1 , tabSettingsCount )
 			-- 第 1 层
-			local tabPane = frame.add{ type = "tabbed-pane" , name = SIRequestMap.Names.TabPane , style = SIConstants_Core.raw.Styles.RequestMap_TabPane }
-			settings.tabPane = tabPane
-			settings.page = tabPane.add{ type = "flow" , direction = "vertical" , style = SIConstants_Core.raw.Styles.Common_FlowLeft }
+			settings.tabPane = frame.add{ type = "tabbed-pane" , name = SIRequestMap.Names.TabPane , style = SIConstants_Core.raw.Styles.RequestMap_TabPane }
 			-- 根据设置更新控件
-			SIRequestMap.CreatePage( settings )
 			SIRequestMap.CreateTab( settings )
 		end
 	end ,
@@ -212,9 +212,9 @@ SIRequestMap =
 			settings.frame.destroy()
 			settings.frame = nil
 			settings.tabPane = nil
-			settings.page = nil
 			settings.scroll = nil
 			settings.TabList = {}
+			settings.PageList = {}
 			settings.ListButtons = {}
 			settings.Elements = {}
 		end
@@ -255,7 +255,6 @@ SIRequestMap =
 	end ,
 	CreateTab = function( settings )
 		local tabPane = settings.tabPane
-		local page = settings.page
 		-- 清除已有分页
 		for index , tab in pairs( settings.TabList ) do
 			tabPane.remove_tab( tab )
@@ -265,15 +264,20 @@ SIRequestMap =
 		-- 增加新的分页
 		for index , tabSettings in pairs( settings.TabSettingsList ) do
 			local tab = tabPane.add{ type = "tab" , caption = { "SICore.紫图-窗口-分页标题" , tabSettings.Name } , tooltip = { "SICore.紫图-窗口-分页标题-提示" , SIRequestMap.TabSettingsMaxCount } }
+			local page = SIRequestMap.CreatePage( settings , index )
 			tabPane.add_tab( tab , page )
 			table.insert( settings.TabList , tab )
+			table.insert( settings.PageList , page )
 		end
 		settings.tabPane.selected_tab_index = settings.tabSettingsIndex
 		SIRequestMap.FreshPage( settings )
 	end ,
-	CreatePage = function( settings )
-		local page = settings.page
-		local elements = settings.Elements
+	-- ----------------------------------------
+	-- 这是一个内部函数 , 请勿外部调用<br>
+	-- ----------------------------------------
+	CreatePage = function( settings , tabSettingsIndex )
+		local page = settings.tabPane.add{ type = "flow" , direction = "vertical" , style = SIConstants_Core.raw.Styles.Common_FlowLeft }
+		local elements = settings.Elements[tabSettingsIndex]
 		-- ----------------------------------------
 		-- 设置名称
 		-- ----------------------------------------
@@ -310,57 +314,47 @@ SIRequestMap =
 		-- ----------------------------------------
 		-- 请求格子
 		-- ----------------------------------------
-		elements.RequestSlot_Enable = list.add{ type = "checkbox" , name = SIRequestMap.Names.EnablePrefix .. "RequestSlot_Flow" , state = false , caption = { "SICore.紫图-窗口-请求格子-启用" } , tooltip = { "SICore.紫图-窗口-请求格子-启用-提示" } , style = SIConstants_Core.raw.Styles.Common_CheckBox }
+		elements.RequestSlot_Enable = list.add{ type = "checkbox" , name = SIRequestMap.Names.EnablePrefix .. "RequestSlot_Flow" , state = false , caption = { "SICore.紫图-窗口-请求格子-启用" } , tooltip = { "SICore.紫图-窗口-请求格子-启用-提示" } , style = SIConstants_Core.raw.Styles.RequestMap_ListCheck }
 		local RequestSlot_Flow = list.add{ type = "flow" , direction = "vertical" , style = SIConstants_Core.raw.Styles.RequestMap_ListFlow }
 		elements.RequestSlot_Flow = RequestSlot_Flow
-		elements.RequestSlot_List = RequestSlot_Flow
-		.add{ type = "scroll-pane" , horizontal_scroll_policy = "never" , vertical_scroll_policy = "auto-and-reserve-space" , style = SIConstants_Core.raw.Styles.Common_ScrollPane }
-		.add{ type = "table" , column_count = 2 , style = SIConstants_Core.raw.Styles.RequestMap_SubList }
+		elements.RequestSlot_List = RequestSlot_Flow.add{ type = "table" , column_count = 2 , style = SIConstants_Core.raw.Styles.RequestMap_SubList }
 		-- ----------------------------------------
 		-- 最大格子
 		-- ----------------------------------------
-		elements.MaxSlot_Enable = list.add{ type = "checkbox" , name = SIRequestMap.Names.EnablePrefix .. "MaxSlot_Flow" , state = false , caption = { "SICore.紫图-窗口-最大格子-启用" } , tooltip = { "SICore.紫图-窗口-最大格子-启用-提示" } , style = SIConstants_Core.raw.Styles.Common_CheckBox }
+		elements.MaxSlot_Enable = list.add{ type = "checkbox" , name = SIRequestMap.Names.EnablePrefix .. "MaxSlot_Flow" , state = false , caption = { "SICore.紫图-窗口-最大格子-启用" } , tooltip = { "SICore.紫图-窗口-最大格子-启用-提示" } , style = SIConstants_Core.raw.Styles.RequestMap_ListCheck }
 		local MaxSlot_Flow = list.add{ type = "flow" , direction = "vertical" , style = SIConstants_Core.raw.Styles.RequestMap_ListFlow }
 		elements.MaxSlot_Flow = MaxSlot_Flow
-		elements.MaxSlot_List = MaxSlot_Flow
-		.add{ type = "scroll-pane" , horizontal_scroll_policy = "never" , vertical_scroll_policy = "auto-and-reserve-space" , style = SIConstants_Core.raw.Styles.Common_ScrollPane }
-		.add{ type = "table" , column_count = 2 , style = SIConstants_Core.raw.Styles.RequestMap_SubList }
+		elements.MaxSlot_List = MaxSlot_Flow.add{ type = "table" , column_count = 2 , style = SIConstants_Core.raw.Styles.RequestMap_SubList }
 		-- ----------------------------------------
 		-- 绿箱向蓝箱供货
 		-- ----------------------------------------
-		elements.GreenToBlue_Enable = list.add{ type = "checkbox" , name = SIRequestMap.Names.EnablePrefix .. "GreenToBlue_Flow" , state = false , caption = { "SICore.紫图-窗口-绿箱向蓝箱供货-启用" } , tooltip = { "SICore.紫图-窗口-绿箱向蓝箱供货-启用-提示" } , style = SIConstants_Core.raw.Styles.Common_CheckBox }
+		elements.GreenToBlue_Enable = list.add{ type = "checkbox" , name = SIRequestMap.Names.EnablePrefix .. "GreenToBlue_Flow" , state = false , caption = { "SICore.紫图-窗口-绿箱向蓝箱供货-启用" } , tooltip = { "SICore.紫图-窗口-绿箱向蓝箱供货-启用-提示" } , style = SIConstants_Core.raw.Styles.RequestMap_ListCheck }
 		local GreenToBlue_Flow = list.add{ type = "flow" , direction = "vertical" , style = SIConstants_Core.raw.Styles.RequestMap_ListFlow }
 		elements.GreenToBlue_Flow = GreenToBlue_Flow
 		elements.GreenToBlue_Check = GreenToBlue_Flow.add{ type = "checkbox" , name = SIRequestMap.Names.GreenToBlue_Check , state = false , caption = { "SICore.紫图-窗口-绿箱向蓝箱供货-勾选" } , tooltip = { "SICore.紫图-窗口-绿箱向蓝箱供货-勾选-提示" } , style = SIConstants_Core.raw.Styles.Common_CheckBox }
 		-- ----------------------------------------
 		-- 设置插件
 		-- ----------------------------------------
-		elements.SetModule_Enable = list.add{ type = "checkbox" , name = SIRequestMap.Names.EnablePrefix .. "SetModule_Flow" , state = false , caption = { "SICore.紫图-窗口-设置插件-启用" } , tooltip = { "SICore.紫图-窗口-设置插件-启用-提示" } , style = SIConstants_Core.raw.Styles.Common_CheckBox }
+		elements.SetModule_Enable = list.add{ type = "checkbox" , name = SIRequestMap.Names.EnablePrefix .. "SetModule_Flow" , state = false , caption = { "SICore.紫图-窗口-设置插件-启用" } , tooltip = { "SICore.紫图-窗口-设置插件-启用-提示" } , style = SIConstants_Core.raw.Styles.RequestMap_ListCheck }
 		local SetModule_Flow = list.add{ type = "flow" , direction = "vertical" , style = SIConstants_Core.raw.Styles.RequestMap_ListFlow }
 		elements.SetModule_Flow = SetModule_Flow
 		elements.SetModule_FromInventory = SetModule_Flow.add{ type = "checkbox" , name = SIRequestMap.Names.SetModule_FromInventory , state = false , caption = { "SICore.紫图-窗口-设置插件-从背包填充" } , tooltip = { "SICore.紫图-窗口-设置插件-从背包填充-提示" } , style = SIConstants_Core.raw.Styles.Common_CheckBox }
-		elements.SetModule_List = SetModule_Flow
-		.add{ type = "scroll-pane" , horizontal_scroll_policy = "never" , vertical_scroll_policy = "auto-and-reserve-space" , style = SIConstants_Core.raw.Styles.Common_ScrollPane }
-		.add{ type = "table" , column_count = 2 , style = SIConstants_Core.raw.Styles.RequestMap_SubList }
+		elements.SetModule_List = SetModule_Flow.add{ type = "table" , column_count = 2 , style = SIConstants_Core.raw.Styles.RequestMap_SubList }
 		-- ----------------------------------------
 		-- 移除插件
 		-- ----------------------------------------
-		elements.RemoveModule_Enable = list.add{ type = "checkbox" , name = SIRequestMap.Names.EnablePrefix .. "RemoveModule_Flow" , state = false , caption = { "SICore.紫图-窗口-移除插件-启用" } , tooltip = { "SICore.紫图-窗口-移除插件-启用-提示" } , style = SIConstants_Core.raw.Styles.Common_CheckBox }
+		elements.RemoveModule_Enable = list.add{ type = "checkbox" , name = SIRequestMap.Names.EnablePrefix .. "RemoveModule_Flow" , state = false , caption = { "SICore.紫图-窗口-移除插件-启用" } , tooltip = { "SICore.紫图-窗口-移除插件-启用-提示" } , style = SIConstants_Core.raw.Styles.RequestMap_ListCheck }
 		local RemoveModule_Flow = list.add{ type = "flow" , direction = "vertical" , style = SIConstants_Core.raw.Styles.RequestMap_ListFlow }
 		elements.RemoveModule_Flow = RemoveModule_Flow
 		elements.RemoveModule_ToInventory = RemoveModule_Flow.add{ type = "checkbox" , name = SIRequestMap.Names.RemoveModule_ToInventory , state = false , caption = { "SICore.紫图-窗口-移除插件-进入背包" } , tooltip = { "SICore.紫图-窗口-移除插件-进入背包-提示" } , style = SIConstants_Core.raw.Styles.Common_CheckBox }
-		elements.RemoveModule_List = RemoveModule_Flow
-		.add{ type = "scroll-pane" , horizontal_scroll_policy = "never" , vertical_scroll_policy = "auto-and-reserve-space" , style = SIConstants_Core.raw.Styles.Common_ScrollPane }
-		.add{ type = "table" , column_count = 2 , style = SIConstants_Core.raw.Styles.RequestMap_SubList }
+		elements.RemoveModule_List = RemoveModule_Flow.add{ type = "table" , column_count = 2 , style = SIConstants_Core.raw.Styles.RequestMap_SubList }
 		-- ----------------------------------------
 		-- 插入物品
 		-- ----------------------------------------
-		elements.InsertItem_Enable = list.add{ type = "checkbox" , name = SIRequestMap.Names.EnablePrefix .. "InsertItem_Flow" , state = false , caption = { "SICore.紫图-窗口-插入物品-启用" } , tooltip = { "SICore.紫图-窗口-插入物品-启用-提示" } , style = SIConstants_Core.raw.Styles.Common_CheckBox }
+		elements.InsertItem_Enable = list.add{ type = "checkbox" , name = SIRequestMap.Names.EnablePrefix .. "InsertItem_Flow" , state = false , caption = { "SICore.紫图-窗口-插入物品-启用" } , tooltip = { "SICore.紫图-窗口-插入物品-启用-提示" } , style = SIConstants_Core.raw.Styles.RequestMap_ListCheck }
 		local InsertItem_Flow = list.add{ type = "flow" , direction = "vertical" , style = SIConstants_Core.raw.Styles.RequestMap_ListFlow }
 		elements.InsertItem_Flow = InsertItem_Flow
-		elements.InsertItem_List = InsertItem_Flow
-		.add{ type = "scroll-pane" , horizontal_scroll_policy = "never" , vertical_scroll_policy = "auto-and-reserve-space" , style = SIConstants_Core.raw.Styles.Common_ScrollPane }
-		.add{ type = "table" , column_count = 3 , style = SIConstants_Core.raw.Styles.RequestMap_SubList }
+		elements.InsertItem_List = InsertItem_Flow.add{ type = "table" , column_count = 3 , style = SIConstants_Core.raw.Styles.RequestMap_SubList }
 		-- ----------------------------------------
 		-- 创建滚动定位按钮
 		-- ----------------------------------------
@@ -370,11 +364,13 @@ SIRequestMap =
 				settings.ListButtons[key] = button
 			end
 		end
+		-- 返回分页
+		return page
 	end ,
 	FreshPage = function( settings )
 		local tabSettingsIndex = settings.tabSettingsIndex
 		local tabSettings = settings.TabSettingsList[tabSettingsIndex]
-		local elements = settings.Elements
+		local elements = settings.Elements[tabSettingsIndex]
 		-- ----------------------------------------
 		-- 设置名称
 		-- ----------------------------------------
@@ -507,21 +503,22 @@ SIRequestMap =
 	ListScroll = function( playerIndex , name )
 		local settings = SIGlobal.GetPlayerSettings( SIRequestMap.Settings.Name , playerIndex )
 		if settings.frame and settings.frame.valid then
+			local tabSettingsIndex = settings.tabSettingsIndex
 			local key = name:sub( SIRequestMap.Names.ListButtonPosition )
-			settings.scroll.scroll_to_element( settings.Elements[key] , "top-third" )
+			settings.scroll.scroll_to_element( settings.Elements[tabSettingsIndex][key] , "top-third" )
 		end
 	end ,
 	EnableFunction = function( playerIndex , name , element )
 		local settings = SIGlobal.GetPlayerSettings( SIRequestMap.Settings.Name , playerIndex )
 		if settings.frame and settings.frame.valid then
+			local tabSettingsIndex = settings.tabSettingsIndex
 			local key = name:sub( SIRequestMap.Names.EnablePosition )
-			local flow = settings.Elements[key]
+			local flow = settings.Elements[tabSettingsIndex][key]
 			if flow then
 				flow.visible = element.state
 			end
 			-- 保存功能的启用状态
-			key = key:sub( 1 , key:find( "_" ) )
-			local tabSettingsIndex = settings.tabSettingsIndex
+			key = key:sub( 1 , key:find( "_" ) - 1 )
 			local tabSettings = settings.TabSettingsList[tabSettingsIndex]
 			tabSettings[key].Enable = element.state
 		end

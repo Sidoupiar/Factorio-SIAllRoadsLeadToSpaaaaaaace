@@ -2233,6 +2233,13 @@ SIGen
 	width = 16 ,
 	height = 16
 } )
+.AddStyle( "RequestMap_ListCheck" , "紫图-列表复选" ,
+{
+	type = "checkbox_style" ,
+	parent = SIConstants_Core.raw.Styles.Common_CheckBox ,
+	-- 体积
+	width = 630 ,
+} )
 .AddStyle( "RequestMap_ListFlow" , "紫图-列表布局" ,
 {
 	type = "vertical_flow_style" ,
