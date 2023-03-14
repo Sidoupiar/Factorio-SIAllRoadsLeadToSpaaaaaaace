@@ -280,6 +280,7 @@ SIControl.Init
 		RequestMap_ListCheck = "紫图-列表复选" ,
 		RequestMap_ListFlow = "紫图-列表布局" ,
 		RequestMap_SubList = "紫图-子列表" ,
+		RequestMap_SelectList = "紫图-选择列表" ,
 		RequestMap_Chooser = "紫图-选择"
 	}
 }
@@ -809,25 +810,40 @@ end )
 	local name = element.name
 	local playerIndex = event.player_index
 	-- 权限管理窗口事件
-	if name == SIPermission.Names.GlobalItemFindWhite then
-		SIPermission.AddGlobalItemWhite( playerIndex , element.elem_value , element , true )
-		return
-	end
-	if name == SIPermission.Names.GlobalItemFindBlack then
-		SIPermission.AddGlobalItemBlack( playerIndex , element.elem_value , element , true )
-		return
-	end
-	if name == SIPermission.Names.PlayerItemFindWhite then
-		SIPermission.AddPlayerItemWhite( playerIndex , element.elem_value , element , true )
-		return
-	end
-	if name == SIPermission.Names.PlayerItemFindBlack then
-		SIPermission.AddPlayerItemBlack( playerIndex , element.elem_value , element , true )
+	if name:StartsWith( SIPermission.Names.Prefix ) then
+		if name == SIPermission.Names.GlobalItemFindWhite then
+			SIPermission.AddGlobalItemWhite( playerIndex , element.elem_value , element , true )
+			return
+		end
+		if name == SIPermission.Names.GlobalItemFindBlack then
+			SIPermission.AddGlobalItemBlack( playerIndex , element.elem_value , element , true )
+			return
+		end
+		if name == SIPermission.Names.PlayerItemFindWhite then
+			SIPermission.AddPlayerItemWhite( playerIndex , element.elem_value , element , true )
+			return
+		end
+		if name == SIPermission.Names.PlayerItemFindBlack then
+			SIPermission.AddPlayerItemBlack( playerIndex , element.elem_value , element , true )
+			return
+		end
 		return
 	end
 	-- 信息查询窗口事件
 	if name:StartsWith( SIFinder.Names.ChooserPrefix ) then
 		SIFinder.FreshFrame( playerIndex , element.elem_value )
+		return
+	end
+
+	if name:StartsWith( SIRequestMap.Names.Prefix ) then
+		if name:StartsWith( SIRequestMap.Names.RequestSlot_Entity_Prefix ) then
+			SIRequestMap.Set_RequestSlot_Entity( playerIndex , name , element )
+			return
+		end
+		if name:StartsWith( SIRequestMap.Names.RequestSlot_Item_Prefix ) then
+			SIRequestMap.Set_RequestSlot_Item( playerIndex , name , element )
+			return
+		end
 		return
 	end
 end )

@@ -1094,7 +1094,7 @@ function SIGen.AutoIconItem( iconItemDataList )
 		end )
 		.New( SICommon.Types.Entities.SimpleOwner , itemID , alias ,
 		{
-			flags = { SICommon.Flags.Entity.PlaceablePlayer , SICommon.Flags.Entity.PlayerCreation , SICommon.Flags.Entity.HideAltInfo } ,
+			flags = { SICommon.Flags.Entity.PlaceablePlayer , SICommon.Flags.Entity.PlayerCreation , SICommon.Flags.Entity.HideAltInfo , SICommon.Flags.Entity.Hidden } ,
 			minable =
 			{
 				mining_time = 1.0 ,

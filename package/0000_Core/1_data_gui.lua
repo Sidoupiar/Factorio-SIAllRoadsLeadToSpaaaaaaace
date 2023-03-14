@@ -2212,7 +2212,7 @@ SIGen
 	type = "vertical_flow_style" ,
 	parent = SIConstants_Core.raw.Styles.Common_FlowLeft ,
 	-- 体积
-	width = 170
+	width = 300
 } )
 .AddStyle( "RequestMap_DropDown" , "紫图-下拉列表" ,
 {
@@ -2248,7 +2248,7 @@ SIGen
 	type = "checkbox_style" ,
 	parent = SIConstants_Core.raw.Styles.Common_CheckBox ,
 	-- 体积
-	width = 630 ,
+	width = 758 ,
 } )
 .AddStyle( "RequestMap_ListFlow" , "紫图-列表布局" ,
 {
@@ -2260,16 +2260,29 @@ SIGen
 	bottom_padding = 0 ,
 	left_padding = 30 ,
 	-- 体积
-	minimal_width = 630
+	minimal_width = 758
 } )
 .AddStyle( "RequestMap_SubList" , "紫图-子列表" ,
 {
 	type = "table_style" ,
 	parent = SIConstants_Core.raw.Styles.Common_List ,
 	-- 体积
+	minimal_width = 10 ,
 	minimal_height = 10 ,
 	-- 元素间距
 	horizontal_spacing = 10
+} )
+.AddStyle( "RequestMap_SelectList" , "紫图-选择列表" ,
+{
+	type = "table_style" ,
+	parent = SIConstants_Core.raw.Styles.Common_List ,
+	-- 体积
+	minimal_width = 10 ,
+	minimal_height = 10 ,
+	-- 元素间距
+	cell_spacing = 0 ,
+	horizontal_spacing = 2 ,
+	vertical_spacing = 2
 } )
 .AddStyle( "RequestMap_Chooser" , "紫图-选择" ,
 {

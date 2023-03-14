@@ -19,6 +19,7 @@ SIRequestMap =
 		ListButtonPrefix = "SI核心-紫图-列表定位按钮-" ,
 		EnablePrefix = "SI核心-紫图-启用功能-" ,
 		RequestSlot_Entity_Prefix = "SI核心-紫图-请求格子-实体-" ,
+		RequestSlot_Item_Prefix = "SI核心-紫图-请求格子-物品-"
 	} ,
 	Settings =
 	{
@@ -134,17 +135,19 @@ SIRequestMap =
 		[4] = { "SICore.紫图-窗口-选择-3" } ,
 		[5] = { "SICore.紫图-窗口-选择-4" }
 	} ,
-	RequestSlotFilters =
+	RequestSlot_Entity_Filters =
 	{
 		{
 			filter = "type" ,
 			type =
 			{
 				SICommon.Types.Entities.ContainerLogic ,
+				SICommon.Types.Entities.Inserter ,
+				SICommon.Types.Entities.BeltLoader ,
+				SICommon.Types.Entities.BeltLoaderSmall ,
 				SICommon.Types.Entities.Car ,
 				SICommon.Types.Entities.SpiderVehicle ,
-				SICommon.Types.Entities.WagonCargo ,
-				SICommon.Types.Entities.Inserter
+				SICommon.Types.Entities.WagonCargo
 			} ,
 			mode = "or"
 		} ,
@@ -159,6 +162,16 @@ SIRequestMap =
 			mode = "or"
 		}
 	} ,
+	RequestSlot_ItemSlotMax = 200 ,
+	RequestSlot_Item_Filters =
+	{
+		{
+			filter = "flag" ,
+			flag = SICommon.Flags.Item.Hidden ,
+			mode = "or" ,
+			invert = true
+		}
+	} ,
 	-- ------------------------------------------------------------------------------------------------
 	-- ---------- 窗口函数 ----------------------------------------------------------------------------
 	-- ------------------------------------------------------------------------------------------------
@@ -168,28 +181,16 @@ SIRequestMap =
 
 
 
-		settings.label = nil
-		settings.tabList = nil
-		settings.TabList = {}
-		settings.PageList = {}
-		settings.ListButtons = {}
-		settings.Elements = {}
-		settings.tabIndex = nil
-		settings.tabSettingsIndex = 1
-		settings.settingList = nil
-		if not settings.TabSettingsList then
-			settings.TabSettingsList = {}
-		end
-		local newTabSettingsList = {}
-		for index , tabSettings in pairs( settings.TabSettingsList ) do
-			local newTabSettings = SIUtils.table.deepcopy( SIRequestMap.DefaultTabSettings )
-			for key , value in pairs( newTabSettings ) do
-				if tabSettings[key] then
-					newTabSettings[key] = tabSettings[key]
-				end
-			end
-		end
-		settings.TabSettingsList = newTabSettingsList
+		-- local newTabSettingsList = {}
+		-- for index , tabSettings in pairs( settings.TabSettingsList ) do
+		-- 	local newTabSettings = SIUtils.table.deepcopy( SIRequestMap.DefaultTabSettings )
+		-- 	for key , value in pairs( newTabSettings ) do
+		-- 		if tabSettings[key] then
+		-- 			newTabSettings[key] = tabSettings[key]
+		-- 		end
+		-- 	end
+		-- end
+		-- settings.TabSettingsList = newTabSettingsList
 
 
 
@@ -357,7 +358,7 @@ SIRequestMap =
 		elements.RequestSlot_Enable = list.add{ type = "checkbox" , name = SIRequestMap.Names.EnablePrefix .. "RequestSlot_Flow" , state = false , caption = { "SICore.紫图-窗口-请求格子-启用" } , tooltip = { "SICore.紫图-窗口-请求格子-启用-提示" } , style = SIConstants_Core.raw.Styles.RequestMap_ListCheck }
 		local RequestSlot_Flow = list.add{ type = "flow" , direction = "vertical" , style = SIConstants_Core.raw.Styles.RequestMap_ListFlow }
 		elements.RequestSlot_Flow = RequestSlot_Flow
-		elements.RequestSlot_List = RequestSlot_Flow.add{ type = "table" , column_count = 2 , style = SIConstants_Core.raw.Styles.RequestMap_SubList }
+		elements.RequestSlot_List = RequestSlot_Flow.add{ type = "table" , column_count = 3 , style = SIConstants_Core.raw.Styles.RequestMap_SubList }
 		-- ----------------------------------------
 		-- 最大格子
 		-- ----------------------------------------
@@ -434,13 +435,13 @@ SIRequestMap =
 		-- ----------------------------------------
 		elements.RequestSlot_Enable.state = tabSettings.RequestSlot.Enable
 		elements.RequestSlot_Flow.visible = tabSettings.RequestSlot.Enable
-		SIRequestMap.FreshPage_RequestSlot( tabSettings , elements )
+		SIRequestMap.FreshPage_RequestSlot( settings , tabSettings , elements )
 		-- ----------------------------------------
 		-- 最大格子
 		-- ----------------------------------------
 		elements.MaxSlot_Enable.state = tabSettings.MaxSlot.Enable
 		elements.MaxSlot_Flow.visible = tabSettings.MaxSlot.Enable
-		SIRequestMap.FreshPage_MaxSlot( tabSettings , elements )
+		SIRequestMap.FreshPage_MaxSlot( settings , tabSettings , elements )
 		-- ----------------------------------------
 		-- 绿箱向蓝箱供货
 		-- ----------------------------------------
@@ -453,22 +454,22 @@ SIRequestMap =
 		elements.SetModule_Enable.state = tabSettings.SetModule.Enable
 		elements.SetModule_Flow.visible = tabSettings.SetModule.Enable
 		elements.SetModule_FromInventory.state = tabSettings.SetModule.FromInventory
-		SIRequestMap.FreshPage_SetModule( tabSettings , elements )
+		SIRequestMap.FreshPage_SetModule( settings , tabSettings , elements )
 		-- ----------------------------------------
 		-- 移除插件
 		-- ----------------------------------------
 		elements.RemoveModule_Enable.state = tabSettings.RemoveModule.Enable
 		elements.RemoveModule_Flow.visible = tabSettings.RemoveModule.Enable
 		elements.RemoveModule_ToInventory.state = tabSettings.RemoveModule.ToInventory
-		SIRequestMap.FreshPage_RemoveModule( tabSettings , elements )
+		SIRequestMap.FreshPage_RemoveModule( settings , tabSettings , elements )
 		-- ----------------------------------------
 		-- 插入物品
 		-- ----------------------------------------
 		elements.InsertItem_Enable.state = tabSettings.InsertItem.Enable
 		elements.InsertItem_Flow.visible = tabSettings.InsertItem.Enable
-		SIRequestMap.FreshPage_InsertItem( tabSettings , elements )
+		SIRequestMap.FreshPage_InsertItem( settings , tabSettings , elements )
 	end ,
-	FreshPage_RequestSlot = function( tabSettings , elements )
+	FreshPage_RequestSlot = function( settings , tabSettings , elements )
 		-- 清空列表
 		local list = elements.RequestSlot_List
 		list.clear()
@@ -478,42 +479,81 @@ SIRequestMap =
 			local entityPrototype = game.entity_prototypes[entityName]
 			local entity = nil
 			local tooltip = nil
-			local maxSlot = 1
+			local maxSlot = 0
 			if entityPrototype then
 				entity = entityPrototype.name
 				tooltip = { "SICore.紫图-窗口-请求格子-实体-提示" , entityPrototype.localised_name }
+				local type = entityPrototype.type
+				if type == SICommon.Types.Entities.ContainerLogic or type == SICommon.Types.Entities.Inserter or type == SICommon.Types.Entities.BeltLoader or type == SICommon.Types.Entities.BeltLoaderSmall then
+					maxSlot = entityPrototype.filter_count
+				elseif type == SICommon.Types.Entities.Car then
+					maxSlot = entityPrototype.get_inventory_size( defines.inventory.car_trunk )
+				elseif type == SICommon.Types.Entities.SpiderVehicle then
+					maxSlot = entityPrototype.get_inventory_size( defines.inventory.spider_trunk )
+				elseif type == SICommon.Types.Entities.WagonCargo then
+					maxSlot = entityPrototype.get_inventory_size( defines.inventory.cargo_wagon )
+				else
+					maxSlot = 0
+				end
+				if maxSlot > SIRequestMap.RequestSlot_ItemSlotMax then
+					SIPrint.Warning( settings.playerIndex , { "SICore.紫图-提示-请求格子-格子太多" , entityPrototype.localised_name , SIRequestMap.RequestSlot_ItemSlotMax } )
+					maxSlot = SIRequestMap.RequestSlot_ItemSlotMax
+				end
 			else
 				entityName = SIConstants_Core.raw.Entities.IconEmpty
 				tooltip = { "SICore.紫图-窗口-请求格子-实体-空-提示" }
-				maxSlot = #requestItemList
+				maxSlot = SITable.Size( requestItemList )
 			end
 			list.add
 			{
 				type = "choose-elem-button" ,
-				name = SIRequestMap.Names.RequestSlot_Entity_Prefix .. index ,
+				name = SIRequestMap.Names.RequestSlot_Entity_Prefix .. entityName ,
 				tooltip = tooltip ,
 				elem_type = "entity" ,
 				entity = entity ,
-				elem_filters = SIRequestMap.RequestSlotFilters ,
+				elem_filters = SIRequestMap.RequestSlot_Entity_Filters ,
 				style = SIConstants_Core.raw.Styles.RequestMap_Chooser
 			}
+			local selectList1 = list.add{ type = "table" , column_count = 10 , style = SIConstants_Core.raw.Styles.RequestMap_SelectList }
+			local selectList2 = list.add{ type = "table" , column_count = 10 , style = SIConstants_Core.raw.Styles.RequestMap_SelectList }
 			for slotIndex = 1 , maxSlot , 1 do
-				
+				local selectList = math.fmod( math.floor( slotIndex / 10 ) , 2 ) == 0 and selectList1 or selectList2
+				local item = requestItemList[slotIndex]
+				if item then
+					local itemPrototype = game.item_prototypes[item]
+					if itemPrototype then
+						tooltip = { "SICore.紫图-窗口-请求格子-物品-提示" , itemPrototype.localised_name }
+					else
+						tooltip = { "SICore.紫图-窗口-请求格子-物品-空-提示" }
+					end
+				else
+					tooltip = { "SICore.紫图-窗口-请求格子-物品-选择-提示" }
+				end
+				selectList.add
+				{
+					type = "choose-elem-button" ,
+					name = SIRequestMap.Names.RequestSlot_Item_Prefix .. slotIndex .. "_" .. entityName ,
+					tooltip = tooltip ,
+					elem_type = "item" ,
+					entity = item ,
+					elem_filters = SIRequestMap.RequestSlot_Item_Filters ,
+					style = SIConstants_Core.raw.Styles.RequestMap_Chooser
+				}
 			end
 			index = index + 1
 		end
 		list.add
 		{
 			type = "choose-elem-button" ,
-			name = SIRequestMap.Names.RequestSlot_Entity_Prefix .. index ,
+			name = SIRequestMap.Names.RequestSlot_Entity_Prefix ,
 			tooltip = { "SICore.紫图-窗口-请求格子-实体-选择-提示" } ,
 			elem_type = "entity" ,
 			entity = nil ,
-			elem_filters = SIRequestMap.RequestSlotFilters ,
+			elem_filters = SIRequestMap.RequestSlot_Entity_Filters ,
 			style = SIConstants_Core.raw.Styles.RequestMap_Chooser
 		}
 	end ,
-	FreshPage_MaxSlot = function( tabSettings , elements )
+	FreshPage_MaxSlot = function( settings , tabSettings , elements )
 		-- 清空列表
 		local list = elements.MaxSlot_List
 		list.clear()
@@ -522,7 +562,7 @@ SIRequestMap =
 			
 		end
 	end ,
-	FreshPage_SetModule = function( tabSettings , elements )
+	FreshPage_SetModule = function( settings , tabSettings , elements )
 		-- 清空列表
 		local list = elements.SetModule_List
 		list.clear()
@@ -531,7 +571,7 @@ SIRequestMap =
 			
 		end
 	end ,
-	FreshPage_RemoveModule = function( tabSettings , elements )
+	FreshPage_RemoveModule = function( settings , tabSettings , elements )
 		-- 清空列表
 		local list = elements.RemoveModule_List
 		list.clear()
@@ -540,7 +580,7 @@ SIRequestMap =
 			
 		end
 	end ,
-	FreshPage_InsertItem = function( tabSettings , elements )
+	FreshPage_InsertItem = function( settings , tabSettings , elements )
 		-- 清空列表
 		local list = elements.InsertItem_List
 		list.clear()
@@ -635,6 +675,64 @@ SIRequestMap =
 				settings.defaultIndex3 = tabSettingsIndex
 			elseif selectedIndex == 5 then
 				settings.defaultIndex4 = tabSettingsIndex
+			end
+		end
+	end ,
+	Set_RequestSlot_Entity = function( playerIndex , name , element )
+		local settings = SIGlobal.GetPlayerSettings( SIRequestMap.Settings.Name , playerIndex )
+		if settings.frame and settings.frame.valid then
+			-- 保存 [请求格子-实体] 选择的实体
+			local selectEntityName = element.elem_value
+			local tabSettingsIndex = settings.tabSettingsIndex
+			local tabSettings = settings.TabSettingsList[tabSettingsIndex]
+			local requestList = tabSettings.RequestSlot.List
+			local entityName = name:sub( SIRequestMap.Names.RequestSlot_Entity_Position )
+			if requestList[entityName] then
+				if entityName == selectEntityName then
+					return
+				else
+					if selectEntityName == nil then
+						requestList[entityName] = nil
+					else
+						local newRequestList = {}
+						for innerEntityName , requestItemList in pairs( requestList ) do
+							if entityName == innerEntityName then
+								newRequestList[selectEntityName] = {}
+							else
+								newRequestList[innerEntityName] = requestItemList
+							end
+						end
+						tabSettings.RequestSlot.List = newRequestList
+					end
+				end
+			else
+				if selectEntityName == nil then
+					return
+				end
+				if requestList[selectEntityName] then
+					SIPrint.Warning( playerIndex , { "SICore.紫图-提示-请求格子-已存在" , game.entity_prototypes[selectEntityName].localised_name } )
+					element.elem_value = nil
+					return
+				end
+				requestList[selectEntityName] = {}
+			end
+			SIRequestMap.FreshPage_RequestSlot( settings , settings.Elements[tabSettingsIndex] )
+		end
+	end ,
+	Set_RequestSlot_Item = function( playerIndex , name , element )
+		local settings = SIGlobal.GetPlayerSettings( SIRequestMap.Settings.Name , playerIndex )
+		if settings.frame and settings.frame.valid then
+			-- 保存 [请求格子-物品] 选择的物品
+			local selectItemName = element.elem_value
+			local key = name:sub( SIRequestMap.Names.RequestSlot_Entity_Position )
+			local location = key:find( "_" )
+			local slotIndex = tonumber( key:sub( 1 , location - 1 ) )
+			if slotIndex and slotIndex > 0 and slotIndex < SIRequestMap.RequestSlot_ItemSlotMax then
+				local entityName = key:sub( location + 1 )
+				local tabSettingsIndex = settings.tabSettingsIndex
+				local tabSettings = settings.TabSettingsList[tabSettingsIndex]
+				local requestList = tabSettings.RequestSlot.List
+				requestList[entityName][slotIndex] = selectItemName
 			end
 		end
 	end ,
@@ -783,6 +881,7 @@ SIRequestMap =
 SIRequestMap.Names.ListButtonPosition = #SIRequestMap.Names.ListButtonPrefix + 1
 SIRequestMap.Names.EnablePosition = #SIRequestMap.Names.EnablePrefix + 1
 SIRequestMap.Names.RequestSlot_Entity_Position = #SIRequestMap.Names.RequestSlot_Entity_Prefix + 1
+SIRequestMap.Names.RequestSlot_Item_Position = #SIRequestMap.Names.RequestSlot_Item_Prefix + 1
 
 SIRequestMap.Toolbar =
 {
