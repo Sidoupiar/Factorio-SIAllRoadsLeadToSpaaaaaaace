@@ -834,7 +834,7 @@ end )
 		SIFinder.FreshFrame( playerIndex , element.elem_value )
 		return
 	end
-
+	-- 紫图的管理窗口事件
 	if name:StartsWith( SIRequestMap.Names.Prefix ) then
 		if name:StartsWith( SIRequestMap.Names.RequestSlot_Entity_Prefix ) then
 			SIRequestMap.Set_RequestSlot_Entity( playerIndex , name , element )

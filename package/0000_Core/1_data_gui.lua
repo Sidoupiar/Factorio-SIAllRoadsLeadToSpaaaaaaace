@@ -2270,7 +2270,8 @@ SIGen
 	minimal_width = 10 ,
 	minimal_height = 10 ,
 	-- 元素间距
-	horizontal_spacing = 10
+	horizontal_spacing = 10 ,
+	vertical_spacing = 5
 } )
 .AddStyle( "RequestMap_SelectList" , "紫图-选择列表" ,
 {

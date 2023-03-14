@@ -101,14 +101,14 @@ SIRequestMap =
 		SetModule =
 		{
 			Enable = false ,
-			FromInventory = true ,
+			FromInventory = false ,
 			List = {} -- 键为选择的设备实体 , 值为插件物品名称列表
 		} ,
 		-- 移除插件
 		RemoveModule =
 		{
 			Enable = false ,
-			ToInventory = true ,
+			ToInventory = false ,
 			List = {} -- 键为选择的设备实体 , 值为插件物品名称列表
 		} ,
 		-- 插入物品
@@ -149,17 +149,17 @@ SIRequestMap =
 				SICommon.Types.Entities.SpiderVehicle ,
 				SICommon.Types.Entities.WagonCargo
 			} ,
-			mode = "or"
+			mode = SICommon.Flags.Condition.OR
 		} ,
 		{
 			filter = "hidden" ,
-			mode = "and" ,
+			mode = SICommon.Flags.Condition.AND ,
 			invert = true
 		} ,
 		{
 			filter = "name" ,
 			name = SIConstants_Core.raw.Entities.IconEmpty ,
-			mode = "or"
+			mode = SICommon.Flags.Condition.OR
 		}
 	} ,
 	RequestSlot_ItemSlotMax = 200 ,
@@ -168,7 +168,7 @@ SIRequestMap =
 		{
 			filter = "flag" ,
 			flag = SICommon.Flags.Item.Hidden ,
-			mode = "or" ,
+			mode = SICommon.Flags.Condition.OR ,
 			invert = true
 		}
 	} ,
@@ -310,6 +310,7 @@ SIRequestMap =
 			table.insert( settings.TabList , tab )
 			table.insert( settings.PageList , page )
 		end
+		settings.tabSettingsIndex = 1 -- 不知道为什么设置当前标签页就不好使 , 为了避免 bug 就先强制第 1 页了
 		settings.tabPane.selected_tab_index = settings.tabSettingsIndex
 		SIRequestMap.FreshPage( settings )
 	end ,
@@ -355,28 +356,28 @@ SIRequestMap =
 		-- ----------------------------------------
 		-- 请求格子
 		-- ----------------------------------------
-		elements.RequestSlot_Enable = list.add{ type = "checkbox" , name = SIRequestMap.Names.EnablePrefix .. "RequestSlot_Flow" , state = false , caption = { "SICore.紫图-窗口-请求格子-启用" } , tooltip = { "SICore.紫图-窗口-请求格子-启用-提示" } , style = SIConstants_Core.raw.Styles.RequestMap_ListCheck }
+		elements.RequestSlot_Enable = list.add{ type = "checkbox" , name = SIRequestMap.Names.EnablePrefix .. "RequestSlot_Flow" , state = false , caption = { "SICore.紫图-窗口-请求格子-启用" , { "SICore.紫图-窗口-启用-未设置" } } , tooltip = { "SICore.紫图-窗口-请求格子-启用-提示" } , style = SIConstants_Core.raw.Styles.RequestMap_ListCheck }
 		local RequestSlot_Flow = list.add{ type = "flow" , direction = "vertical" , style = SIConstants_Core.raw.Styles.RequestMap_ListFlow }
 		elements.RequestSlot_Flow = RequestSlot_Flow
 		elements.RequestSlot_List = RequestSlot_Flow.add{ type = "table" , column_count = 3 , style = SIConstants_Core.raw.Styles.RequestMap_SubList }
 		-- ----------------------------------------
 		-- 最大格子
 		-- ----------------------------------------
-		elements.MaxSlot_Enable = list.add{ type = "checkbox" , name = SIRequestMap.Names.EnablePrefix .. "MaxSlot_Flow" , state = false , caption = { "SICore.紫图-窗口-最大格子-启用" } , tooltip = { "SICore.紫图-窗口-最大格子-启用-提示" } , style = SIConstants_Core.raw.Styles.RequestMap_ListCheck }
+		elements.MaxSlot_Enable = list.add{ type = "checkbox" , name = SIRequestMap.Names.EnablePrefix .. "MaxSlot_Flow" , state = false , caption = { "SICore.紫图-窗口-最大格子-启用" , { "SICore.紫图-窗口-启用-未设置" } } , tooltip = { "SICore.紫图-窗口-最大格子-启用-提示" } , style = SIConstants_Core.raw.Styles.RequestMap_ListCheck }
 		local MaxSlot_Flow = list.add{ type = "flow" , direction = "vertical" , style = SIConstants_Core.raw.Styles.RequestMap_ListFlow }
 		elements.MaxSlot_Flow = MaxSlot_Flow
 		elements.MaxSlot_List = MaxSlot_Flow.add{ type = "table" , column_count = 2 , style = SIConstants_Core.raw.Styles.RequestMap_SubList }
 		-- ----------------------------------------
 		-- 绿箱向蓝箱供货
 		-- ----------------------------------------
-		elements.GreenToBlue_Enable = list.add{ type = "checkbox" , name = SIRequestMap.Names.EnablePrefix .. "GreenToBlue_Flow" , state = false , caption = { "SICore.紫图-窗口-绿箱向蓝箱供货-启用" } , tooltip = { "SICore.紫图-窗口-绿箱向蓝箱供货-启用-提示" } , style = SIConstants_Core.raw.Styles.RequestMap_ListCheck }
+		elements.GreenToBlue_Enable = list.add{ type = "checkbox" , name = SIRequestMap.Names.EnablePrefix .. "GreenToBlue_Flow" , state = false , caption = { "SICore.紫图-窗口-绿箱向蓝箱供货-启用" , { "SICore.紫图-窗口-启用-未设置" } } , tooltip = { "SICore.紫图-窗口-绿箱向蓝箱供货-启用-提示" } , style = SIConstants_Core.raw.Styles.RequestMap_ListCheck }
 		local GreenToBlue_Flow = list.add{ type = "flow" , direction = "vertical" , style = SIConstants_Core.raw.Styles.RequestMap_ListFlow }
 		elements.GreenToBlue_Flow = GreenToBlue_Flow
 		elements.GreenToBlue_Check = GreenToBlue_Flow.add{ type = "checkbox" , name = SIRequestMap.Names.GreenToBlue_Check , state = false , caption = { "SICore.紫图-窗口-绿箱向蓝箱供货-勾选" } , tooltip = { "SICore.紫图-窗口-绿箱向蓝箱供货-勾选-提示" } , style = SIConstants_Core.raw.Styles.Common_CheckBox }
 		-- ----------------------------------------
 		-- 设置插件
 		-- ----------------------------------------
-		elements.SetModule_Enable = list.add{ type = "checkbox" , name = SIRequestMap.Names.EnablePrefix .. "SetModule_Flow" , state = false , caption = { "SICore.紫图-窗口-设置插件-启用" } , tooltip = { "SICore.紫图-窗口-设置插件-启用-提示" } , style = SIConstants_Core.raw.Styles.RequestMap_ListCheck }
+		elements.SetModule_Enable = list.add{ type = "checkbox" , name = SIRequestMap.Names.EnablePrefix .. "SetModule_Flow" , state = false , caption = { "SICore.紫图-窗口-设置插件-启用" , { "SICore.紫图-窗口-启用-未设置" } } , tooltip = { "SICore.紫图-窗口-设置插件-启用-提示" } , style = SIConstants_Core.raw.Styles.RequestMap_ListCheck }
 		local SetModule_Flow = list.add{ type = "flow" , direction = "vertical" , style = SIConstants_Core.raw.Styles.RequestMap_ListFlow }
 		elements.SetModule_Flow = SetModule_Flow
 		elements.SetModule_FromInventory = SetModule_Flow.add{ type = "checkbox" , name = SIRequestMap.Names.SetModule_FromInventory , state = false , caption = { "SICore.紫图-窗口-设置插件-从背包填充" } , tooltip = { "SICore.紫图-窗口-设置插件-从背包填充-提示" } , style = SIConstants_Core.raw.Styles.Common_CheckBox }
@@ -384,7 +385,7 @@ SIRequestMap =
 		-- ----------------------------------------
 		-- 移除插件
 		-- ----------------------------------------
-		elements.RemoveModule_Enable = list.add{ type = "checkbox" , name = SIRequestMap.Names.EnablePrefix .. "RemoveModule_Flow" , state = false , caption = { "SICore.紫图-窗口-移除插件-启用" } , tooltip = { "SICore.紫图-窗口-移除插件-启用-提示" } , style = SIConstants_Core.raw.Styles.RequestMap_ListCheck }
+		elements.RemoveModule_Enable = list.add{ type = "checkbox" , name = SIRequestMap.Names.EnablePrefix .. "RemoveModule_Flow" , state = false , caption = { "SICore.紫图-窗口-移除插件-启用" , { "SICore.紫图-窗口-启用-未设置" } } , tooltip = { "SICore.紫图-窗口-移除插件-启用-提示" } , style = SIConstants_Core.raw.Styles.RequestMap_ListCheck }
 		local RemoveModule_Flow = list.add{ type = "flow" , direction = "vertical" , style = SIConstants_Core.raw.Styles.RequestMap_ListFlow }
 		elements.RemoveModule_Flow = RemoveModule_Flow
 		elements.RemoveModule_ToInventory = RemoveModule_Flow.add{ type = "checkbox" , name = SIRequestMap.Names.RemoveModule_ToInventory , state = false , caption = { "SICore.紫图-窗口-移除插件-进入背包" } , tooltip = { "SICore.紫图-窗口-移除插件-进入背包-提示" } , style = SIConstants_Core.raw.Styles.Common_CheckBox }
@@ -392,7 +393,7 @@ SIRequestMap =
 		-- ----------------------------------------
 		-- 插入物品
 		-- ----------------------------------------
-		elements.InsertItem_Enable = list.add{ type = "checkbox" , name = SIRequestMap.Names.EnablePrefix .. "InsertItem_Flow" , state = false , caption = { "SICore.紫图-窗口-插入物品-启用" } , tooltip = { "SICore.紫图-窗口-插入物品-启用-提示" } , style = SIConstants_Core.raw.Styles.RequestMap_ListCheck }
+		elements.InsertItem_Enable = list.add{ type = "checkbox" , name = SIRequestMap.Names.EnablePrefix .. "InsertItem_Flow" , state = false , caption = { "SICore.紫图-窗口-插入物品-启用" , { "SICore.紫图-窗口-启用-未设置" } } , tooltip = { "SICore.紫图-窗口-插入物品-启用-提示" } , style = SIConstants_Core.raw.Styles.RequestMap_ListCheck }
 		local InsertItem_Flow = list.add{ type = "flow" , direction = "vertical" , style = SIConstants_Core.raw.Styles.RequestMap_ListFlow }
 		elements.InsertItem_Flow = InsertItem_Flow
 		elements.InsertItem_List = InsertItem_Flow.add{ type = "table" , column_count = 3 , style = SIConstants_Core.raw.Styles.RequestMap_SubList }
@@ -448,6 +449,7 @@ SIRequestMap =
 		elements.GreenToBlue_Enable.state = tabSettings.GreenToBlue.Enable
 		elements.GreenToBlue_Flow.visible = tabSettings.GreenToBlue.Enable
 		elements.GreenToBlue_Check.state = tabSettings.GreenToBlue.Check
+		SIRequestMap.FreshPage_GreenToBlue( settings , tabSettings , elements )
 		-- ----------------------------------------
 		-- 设置插件
 		-- ----------------------------------------
@@ -470,6 +472,8 @@ SIRequestMap =
 		SIRequestMap.FreshPage_InsertItem( settings , tabSettings , elements )
 	end ,
 	FreshPage_RequestSlot = function( settings , tabSettings , elements )
+		-- 更新说明
+		elements.RequestSlot_Enable.caption = { "SICore.紫图-窗口-请求格子-启用" , { SITable.Size( tabSettings.RequestSlot.List ) > 0 and "SICore.紫图-窗口-启用-已设置" or "SICore.紫图-窗口-启用-未设置" } }
 		-- 清空列表
 		local list = elements.RequestSlot_List
 		list.clear()
@@ -484,14 +488,23 @@ SIRequestMap =
 				entity = entityPrototype.name
 				tooltip = { "SICore.紫图-窗口-请求格子-实体-提示" , entityPrototype.localised_name }
 				local type = entityPrototype.type
-				if type == SICommon.Types.Entities.ContainerLogic or type == SICommon.Types.Entities.Inserter or type == SICommon.Types.Entities.BeltLoader or type == SICommon.Types.Entities.BeltLoaderSmall then
-					maxSlot = entityPrototype.filter_count
+				if type == SICommon.Types.Entities.ContainerLogic then
+					local logisticMode = entityPrototype.logistic_mode
+					if logisticMode == SICommon.Flags.LogisticMode.Requester or logisticMode == SICommon.Flags.LogisticMode.Buffer then
+						maxSlot = entityPrototype.filter_count or SITable.Size( requestItemList ) + 1
+					elseif logisticMode == SICommon.Flags.LogisticMode.Storage then
+						maxSlot = 1
+					else
+						maxSlot = 0
+					end
+				elseif type == SICommon.Types.Entities.Inserter or type == SICommon.Types.Entities.BeltLoader or type == SICommon.Types.Entities.BeltLoaderSmall then
+					maxSlot = entityPrototype.filter_count or SITable.Size( requestItemList ) + 1
 				elseif type == SICommon.Types.Entities.Car then
-					maxSlot = entityPrototype.get_inventory_size( defines.inventory.car_trunk )
+					maxSlot = entityPrototype.get_inventory_size( defines.inventory.car_trunk ) or 0
 				elseif type == SICommon.Types.Entities.SpiderVehicle then
-					maxSlot = entityPrototype.get_inventory_size( defines.inventory.spider_trunk )
+					maxSlot = entityPrototype.get_inventory_size( defines.inventory.spider_trunk ) or 0
 				elseif type == SICommon.Types.Entities.WagonCargo then
-					maxSlot = entityPrototype.get_inventory_size( defines.inventory.cargo_wagon )
+					maxSlot = entityPrototype.get_inventory_size( defines.inventory.cargo_wagon ) or 0
 				else
 					maxSlot = 0
 				end
@@ -535,7 +548,7 @@ SIRequestMap =
 					name = SIRequestMap.Names.RequestSlot_Item_Prefix .. slotIndex .. "_" .. entityName ,
 					tooltip = tooltip ,
 					elem_type = "item" ,
-					entity = item ,
+					item = item ,
 					elem_filters = SIRequestMap.RequestSlot_Item_Filters ,
 					style = SIConstants_Core.raw.Styles.RequestMap_Chooser
 				}
@@ -554,6 +567,8 @@ SIRequestMap =
 		}
 	end ,
 	FreshPage_MaxSlot = function( settings , tabSettings , elements )
+		-- 更新说明
+		elements.MaxSlot_Enable.caption = { "SICore.紫图-窗口-最大格子-启用" , { SITable.Size( tabSettings.MaxSlot.List ) > 0 and "SICore.紫图-窗口-启用-已设置" or "SICore.紫图-窗口-启用-未设置" } }
 		-- 清空列表
 		local list = elements.MaxSlot_List
 		list.clear()
@@ -562,7 +577,13 @@ SIRequestMap =
 			
 		end
 	end ,
+	FreshPage_GreenToBlue = function( settings , tabSettings , elements )
+		-- 更新说明
+		elements.GreenToBlue_Enable.caption = { "SICore.紫图-窗口-绿箱向蓝箱供货-启用" , { tabSettings.GreenToBlue.Check and "SICore.紫图-窗口-启用-未设置" or "SICore.紫图-窗口-启用-已设置" } }
+	end ,
 	FreshPage_SetModule = function( settings , tabSettings , elements )
+		-- 更新说明
+		SIRequestMap.FreshPage_SetModule_Enable( settings , tabSettings , elements )
 		-- 清空列表
 		local list = elements.SetModule_List
 		list.clear()
@@ -571,7 +592,13 @@ SIRequestMap =
 			
 		end
 	end ,
+	FreshPage_SetModule_Enable = function( settings , tabSettings , elements )
+		-- 更新说明
+		elements.SetModule_Enable.caption = { "SICore.紫图-窗口-设置插件-启用" , { ( tabSettings.SetModule.FromInventory or SITable.Size( tabSettings.SetModule.List ) > 0 ) and "SICore.紫图-窗口-启用-已设置" or "SICore.紫图-窗口-启用-未设置" } }
+	end ,
 	FreshPage_RemoveModule = function( settings , tabSettings , elements )
+		-- 更新说明
+		SIRequestMap.FreshPage_RemoveModule_Enable( settings , tabSettings , elements )
 		-- 清空列表
 		local list = elements.RemoveModule_List
 		list.clear()
@@ -580,7 +607,13 @@ SIRequestMap =
 			
 		end
 	end ,
+	FreshPage_RemoveModule_Enable = function( settings , tabSettings , elements )
+		-- 更新说明
+		elements.RemoveModule_Enable.caption = { "SICore.紫图-窗口-移除插件-启用" , { ( tabSettings.RemoveModule.ToInventory or SITable.Size( tabSettings.RemoveModule.List ) > 0 ) and "SICore.紫图-窗口-启用-已设置" or "SICore.紫图-窗口-启用-未设置" } }
+	end ,
 	FreshPage_InsertItem = function( settings , tabSettings , elements )
+		-- 更新说明
+		elements.InsertItem_Enable.caption = { "SICore.紫图-窗口-插入物品-启用" , { SITable.Size( tabSettings.InsertItem.List ) > 0 and "SICore.紫图-窗口-启用-已设置" or "SICore.紫图-窗口-启用-未设置" } }
 		-- 清空列表
 		local list = elements.InsertItem_List
 		list.clear()
@@ -606,8 +639,8 @@ SIRequestMap =
 	SwitchTab = function( playerIndex )
 		local settings = SIGlobal.GetPlayerSettings( SIRequestMap.Settings.Name , playerIndex )
 		if settings.frame and settings.frame.valid then
-			local tabSettingsIndex = settings.tabPane.selected_tab_index
-			settings.tabSettingsIndex = tabSettingsIndex
+			local tabSettingsIndex = settings.tabPane.selected_tab_index or 1
+			settings.tabSettingsIndex = SITools.AsNumber( tabSettingsIndex , 1 , #settings.TabList )
 			SIRequestMap.FreshPage( settings )
 		end
 	end ,
@@ -716,7 +749,7 @@ SIRequestMap =
 				end
 				requestList[selectEntityName] = {}
 			end
-			SIRequestMap.FreshPage_RequestSlot( settings , settings.Elements[tabSettingsIndex] )
+			SIRequestMap.FreshPage_RequestSlot( settings , tabSettings , settings.Elements[tabSettingsIndex] )
 		end
 	end ,
 	Set_RequestSlot_Item = function( playerIndex , name , element )
@@ -724,7 +757,7 @@ SIRequestMap =
 		if settings.frame and settings.frame.valid then
 			-- 保存 [请求格子-物品] 选择的物品
 			local selectItemName = element.elem_value
-			local key = name:sub( SIRequestMap.Names.RequestSlot_Entity_Position )
+			local key = name:sub( SIRequestMap.Names.RequestSlot_Item_Position )
 			local location = key:find( "_" )
 			local slotIndex = tonumber( key:sub( 1 , location - 1 ) )
 			if slotIndex and slotIndex > 0 and slotIndex < SIRequestMap.RequestSlot_ItemSlotMax then
@@ -733,6 +766,16 @@ SIRequestMap =
 				local tabSettings = settings.TabSettingsList[tabSettingsIndex]
 				local requestList = tabSettings.RequestSlot.List
 				requestList[entityName][slotIndex] = selectItemName
+				-- 如果是无限格子的 物流箱子 / 爪子 / 装卸机 等实体 , 则追加更新 UI , 因为要考虑是否新增一个选择物品的格子
+				local entityPrototype = game.entity_prototypes[entityName]
+				if entityPrototype then
+					local type = entityPrototype.type
+					if type == SICommon.Types.Entities.ContainerLogic or type == SICommon.Types.Entities.Inserter or type == SICommon.Types.Entities.BeltLoader or type == SICommon.Types.Entities.BeltLoaderSmall then
+						if not entityPrototype.filter_count then
+							SIRequestMap.FreshPage_RequestSlot( settings , tabSettings , settings.Elements[tabSettingsIndex] )
+						end
+					end
+				end
 			end
 		end
 	end ,
@@ -743,6 +786,7 @@ SIRequestMap =
 			local tabSettingsIndex = settings.tabSettingsIndex
 			local tabSettings = settings.TabSettingsList[tabSettingsIndex]
 			tabSettings.GreenToBlue.Check = element.state
+			SIRequestMap.FreshPage_GreenToBlue( settings , tabSettings , settings.Elements[tabSettingsIndex] )
 		end
 	end ,
 	Set_SetModule_FromInventory = function( playerIndex , element )
@@ -752,6 +796,7 @@ SIRequestMap =
 			local tabSettingsIndex = settings.tabSettingsIndex
 			local tabSettings = settings.TabSettingsList[tabSettingsIndex]
 			tabSettings.SetModule.FromInventory = element.state
+			SIRequestMap.FreshPage_SetModule_Enable( settings , tabSettings , settings.Elements[tabSettingsIndex] )
 		end
 	end ,
 	Set_RemoveModule_ToInventory = function( playerIndex , element )
@@ -761,6 +806,7 @@ SIRequestMap =
 			local tabSettingsIndex = settings.tabSettingsIndex
 			local tabSettings = settings.TabSettingsList[tabSettingsIndex]
 			tabSettings.RemoveModule.ToInventory = element.state
+			SIRequestMap.FreshPage_RemoveModule_Enable( settings , tabSettings , settings.Elements[tabSettingsIndex] )
 		end
 	end ,
 	EffectTabSettings = function( settings , tabSettingsIndex )

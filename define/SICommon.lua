@@ -284,6 +284,15 @@ SICommon =
 			OR  = "or" ,
 			NOT = "not"
 		} ,
+		LogisticMode =
+		{
+			None = "none" ,
+			Requester = "requester" ,
+			ActiveProvider = "active-provider" ,
+			PassiveProvider = "passive-provider" ,
+			Buffer = "buffer" ,
+			Storage = "storage"
+		} ,
 		FluidBoxProductionType =
 		{
 			None = "none" ,
