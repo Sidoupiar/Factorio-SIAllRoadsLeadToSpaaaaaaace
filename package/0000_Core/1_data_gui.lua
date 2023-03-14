@@ -2222,15 +2222,23 @@ SIGen
 	width = 250 ,
 	height = 28
 } )
+.AddStyle( "RequestMap_ListButtonFlow" , "紫图-列表定位按钮布局" ,
+{
+	type = "horizontal_flow_style" ,
+	parent = SIConstants_Core.raw.Styles.Common_FlowCenterH ,
+	-- 偏移
+	top_padding = 2 ,
+	bottom_padding = 4
+} )
 .AddStyle( "RequestMap_ListButton" , "紫图-列表定位按钮" ,
 {
 	type = "button_style" ,
-	parent = SIConstants_Core.raw.Styles.Common_ButtonGray ,
+	parent = SIConstants_Core.raw.Styles.Common_ButtonTitle ,
 	-- 偏移
-	top_padding = -1 ,
-	right_padding = -1 ,
-	bottom_padding = -1 ,
-	left_padding = -1 ,
+	top_padding = -2 ,
+	right_padding = -2 ,
+	bottom_padding = -2 ,
+	left_padding = -2 ,
 	-- 体积
 	width = 16 ,
 	height = 16
@@ -2273,6 +2281,6 @@ SIGen
 	bottom_padding = 0 ,
 	left_padding = 0 ,
 	-- 体积
-	width = 24 ,
-	height = 24
+	width = 32 ,
+	height = 32
 } )

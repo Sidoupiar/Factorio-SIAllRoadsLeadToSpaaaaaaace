@@ -86,6 +86,10 @@ SIControl.Init
 		IconColorSliver = "图标纯色银色" ,
 		IconColorMeat = "图标纯色肉色"
 	} ,
+	[SICommon.Types.Entities.SimpleOwner] =
+	{
+		IconEmpty = "图标空的"
+	} ,
 	[SICommon.Types.Items.SelectionTool] =
 	{
 		DeleteMap  = "粉图" ,
@@ -271,6 +275,7 @@ SIControl.Init
 		RequestMap_Text = "紫图-文本条" ,
 		RequestMap_EmptyFlow = "紫图-空布局" ,
 		RequestMap_DropDown = "紫图-下拉列表" ,
+		RequestMap_ListButtonFlow = "紫图-列表定位按钮布局" ,
 		RequestMap_ListButton = "紫图-列表定位按钮" ,
 		RequestMap_ListCheck = "紫图-列表复选" ,
 		RequestMap_ListFlow = "紫图-列表布局" ,
@@ -790,8 +795,8 @@ end )
 		SIFinder.SelectElementType( playerIndex , element.selected_index )
 		return
 	end
-
-	if name == SIRequestMap.Names.Default then
+	-- 紫图的管理窗口事件
+	if name == SIRequestMap.Names.DefaultIndex then
 		SIRequestMap.Set_DefaultIndex( playerIndex , element )
 		return
 	end

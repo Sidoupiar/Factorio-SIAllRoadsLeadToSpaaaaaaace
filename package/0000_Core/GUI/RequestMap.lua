@@ -17,7 +17,8 @@ SIRequestMap =
 		SetModule_FromInventory = "SI核心-紫图-设置插件-从背包填充" ,
 		RemoveModule_ToInventory = "SI核心-紫图-移除插件-进入背包" ,
 		ListButtonPrefix = "SI核心-紫图-列表定位按钮-" ,
-		EnablePrefix = "SI核心-紫图-启用功能-"
+		EnablePrefix = "SI核心-紫图-启用功能-" ,
+		RequestSlot_Entity_Prefix = "SI核心-紫图-请求格子-实体-" ,
 	} ,
 	Settings =
 	{
@@ -133,6 +134,31 @@ SIRequestMap =
 		[4] = { "SICore.紫图-窗口-选择-3" } ,
 		[5] = { "SICore.紫图-窗口-选择-4" }
 	} ,
+	RequestSlotFilters =
+	{
+		{
+			filter = "type" ,
+			type =
+			{
+				SICommon.Types.Entities.ContainerLogic ,
+				SICommon.Types.Entities.Car ,
+				SICommon.Types.Entities.SpiderVehicle ,
+				SICommon.Types.Entities.WagonCargo ,
+				SICommon.Types.Entities.Inserter
+			} ,
+			mode = "or"
+		} ,
+		{
+			filter = "hidden" ,
+			mode = "and" ,
+			invert = true
+		} ,
+		{
+			filter = "name" ,
+			name = SIConstants_Core.raw.Entities.IconEmpty ,
+			mode = "or"
+		}
+	} ,
 	-- ------------------------------------------------------------------------------------------------
 	-- ---------- 窗口函数 ----------------------------------------------------------------------------
 	-- ------------------------------------------------------------------------------------------------
@@ -247,10 +273,17 @@ SIRequestMap =
 				tabSettingsCount = #settings.TabSettingsList
 			end
 			settings.tabSettingsIndex = SITools.AsNumberInt( tabSettingsIndex , 1 , tabSettingsCount )
-			settings.defaultIndex1 = tabSettingsIndex == settings.defaultIndex1 and 0 or tabSettingsIndex < settings.defaultIndex1 and SITools.AsNumberInt( tabSettingsIndex - 1 , 1 , tabSettingsCount )
-			settings.defaultIndex2 = tabSettingsIndex == settings.defaultIndex2 and 0 or tabSettingsIndex < settings.defaultIndex2 and SITools.AsNumberInt( tabSettingsIndex - 1 , 1 , tabSettingsCount )
-			settings.defaultIndex3 = tabSettingsIndex == settings.defaultIndex3 and 0 or tabSettingsIndex < settings.defaultIndex3 and SITools.AsNumberInt( tabSettingsIndex - 1 , 1 , tabSettingsCount )
-			settings.defaultIndex4 = tabSettingsIndex == settings.defaultIndex4 and 0 or tabSettingsIndex < settings.defaultIndex4 and SITools.AsNumberInt( tabSettingsIndex - 1 , 1 , tabSettingsCount )
+			settings.defaultIndex1 = tabSettingsIndex == settings.defaultIndex1 and 0 or tabSettingsIndex < settings.defaultIndex1 and SITools.AsNumberInt( settings.defaultIndex1 - 1 , 1 , tabSettingsCount ) or settings.defaultIndex1
+			settings.defaultIndex2 = tabSettingsIndex == settings.defaultIndex2 and 0 or tabSettingsIndex < settings.defaultIndex2 and SITools.AsNumberInt( settings.defaultIndex2 - 1 , 1 , tabSettingsCount ) or settings.defaultIndex2
+			settings.defaultIndex3 = tabSettingsIndex == settings.defaultIndex3 and 0 or tabSettingsIndex < settings.defaultIndex3 and SITools.AsNumberInt( settings.defaultIndex3 - 1 , 1 , tabSettingsCount ) or settings.defaultIndex3
+			settings.defaultIndex4 = tabSettingsIndex == settings.defaultIndex4 and 0 or tabSettingsIndex < settings.defaultIndex4 and SITools.AsNumberInt( settings.defaultIndex4 - 1 , 1 , tabSettingsCount ) or settings.defaultIndex4
+		else
+			SIRequestMap.CreateTabSettings( settings )
+			settings.tabSettingsIndex = 1
+			settings.defaultIndex1 = 0
+			settings.defaultIndex2 = 0
+			settings.defaultIndex3 = 0
+			settings.defaultIndex4 = 0
 		end
 	end ,
 	CreateTab = function( settings )
@@ -259,6 +292,9 @@ SIRequestMap =
 		for index , tab in pairs( settings.TabList ) do
 			tabPane.remove_tab( tab )
 			tab.destroy()
+		end
+		for index , page in pairs( settings.PageList ) do
+			page.destroy()
 		end
 		settings.TabList = {}
 		-- 增加新的分页
@@ -308,7 +344,7 @@ SIRequestMap =
 		-- ----------------------------------------
 		-- 设置列表按钮
 		-- ----------------------------------------
-		local listButtonFlow = page.add{ type = "flow" , direction = "horizontal" , style = SIConstants_Core.raw.Styles.Common_FlowCenterH }
+		local listButtonFlow = page.add{ type = "flow" , direction = "horizontal" , style = SIConstants_Core.raw.Styles.RequestMap_ListButtonFlow }
 		-- ----------------------------------------
 		-- 设置列表
 		-- ----------------------------------------
@@ -437,14 +473,45 @@ SIRequestMap =
 		local list = elements.RequestSlot_List
 		list.clear()
 		-- 重建列表
+		local index = 1
 		for entityName , requestItemList in pairs( tabSettings.RequestSlot.List ) do
 			local entityPrototype = game.entity_prototypes[entityName]
+			local entity = nil
+			local tooltip = nil
+			local maxSlot = 1
 			if entityPrototype then
+				entity = entityPrototype.name
+				tooltip = { "SICore.紫图-窗口-请求格子-实体-提示" , entityPrototype.localised_name }
 			else
-				local select = list.add{ type = "choose-elem-button" , tooltip = { "SICore.紫图-窗口-请求格子-实体-空" } , elem_type = "item" , style = SIConstants_Core.raw.Styles.RequestMap_Chooser }
-				select.enabled = false
+				entityName = SIConstants_Core.raw.Entities.IconEmpty
+				tooltip = { "SICore.紫图-窗口-请求格子-实体-空-提示" }
+				maxSlot = #requestItemList
 			end
+			list.add
+			{
+				type = "choose-elem-button" ,
+				name = SIRequestMap.Names.RequestSlot_Entity_Prefix .. index ,
+				tooltip = tooltip ,
+				elem_type = "entity" ,
+				entity = entity ,
+				elem_filters = SIRequestMap.RequestSlotFilters ,
+				style = SIConstants_Core.raw.Styles.RequestMap_Chooser
+			}
+			for slotIndex = 1 , maxSlot , 1 do
+				
+			end
+			index = index + 1
 		end
+		list.add
+		{
+			type = "choose-elem-button" ,
+			name = SIRequestMap.Names.RequestSlot_Entity_Prefix .. index ,
+			tooltip = { "SICore.紫图-窗口-请求格子-实体-选择-提示" } ,
+			elem_type = "entity" ,
+			entity = nil ,
+			elem_filters = SIRequestMap.RequestSlotFilters ,
+			style = SIConstants_Core.raw.Styles.RequestMap_Chooser
+		}
 	end ,
 	FreshPage_MaxSlot = function( tabSettings , elements )
 		-- 清空列表
@@ -715,6 +782,8 @@ SIRequestMap =
 
 SIRequestMap.Names.ListButtonPosition = #SIRequestMap.Names.ListButtonPrefix + 1
 SIRequestMap.Names.EnablePosition = #SIRequestMap.Names.EnablePrefix + 1
+SIRequestMap.Names.RequestSlot_Entity_Position = #SIRequestMap.Names.RequestSlot_Entity_Prefix + 1
+
 SIRequestMap.Toolbar =
 {
 	ID = "SI核心-紫图" ,
