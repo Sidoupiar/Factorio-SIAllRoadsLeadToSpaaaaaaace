@@ -270,9 +270,11 @@ SIControl.Init
 		RequestMap_Label = "紫图-标签" ,
 		RequestMap_Text = "紫图-文本条" ,
 		RequestMap_EmptyFlow = "紫图-空布局" ,
+		RequestMap_DropDown = "紫图-下拉列表" ,
 		RequestMap_ListButton = "紫图-列表定位按钮" ,
 		RequestMap_ListFlow = "紫图-列表布局" ,
 		RequestMap_SubList = "紫图-子列表" ,
+		RequestMap_Chooser = "紫图-选择"
 	}
 }
 

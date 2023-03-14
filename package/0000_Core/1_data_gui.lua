@@ -2203,14 +2203,22 @@ SIGen
 {
 	type = "textbox_style" ,
 	-- 体积
-	width = 150
+	width = 200
 } )
 .AddStyle( "RequestMap_EmptyFlow" , "紫图-空布局" ,
 {
 	type = "vertical_flow_style" ,
 	parent = SIConstants_Core.raw.Styles.Common_FlowLeft ,
 	-- 体积
-	width = 380
+	width = 330
+} )
+.AddStyle( "RequestMap_DropDown" , "紫图-下拉列表" ,
+{
+	type = "dropdown_style" ,
+	parent = SIConstants_Core.raw.Styles.Common_DropDown ,
+	-- 体积
+	width = 200 ,
+	height = 28
 } )
 .AddStyle( "RequestMap_ListButton" , "紫图-列表定位按钮" ,
 {
@@ -2243,4 +2251,17 @@ SIGen
 	parent = SIConstants_Core.raw.Styles.Common_List ,
 	-- 元素间距
 	horizontal_spacing = 10
+} )
+.AddStyle( "RequestMap_Chooser" , "紫图-选择" ,
+{
+	type = "button_style" ,
+	parent = SIConstants_Core.raw.Styles.Common_ButtonTitle ,
+	-- 偏移
+	top_padding = 0 ,
+	right_padding = 0 ,
+	bottom_padding = 0 ,
+	left_padding = 0 ,
+	-- 体积
+	width = 24 ,
+	height = 24
 } )

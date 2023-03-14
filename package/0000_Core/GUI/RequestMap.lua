@@ -12,6 +12,7 @@ SIRequestMap =
 		Delete = "SI核心-紫图-删除" ,
 		TabPane = "SI核心-紫图-分页面板" ,
 		TabSettingsName = "SI核心-紫图-设置名称" ,
+		Default = "SI核心-紫图-默认选择" ,
 		GreenToBlue_Check = "SI核心-紫图-绿箱向蓝箱供货-勾选" ,
 		SetModule_FromInventory = "SI核心-紫图-设置插件-从背包填充" ,
 		RemoveModule_ToInventory = "SI核心-紫图-移除插件-进入背包" ,
@@ -33,6 +34,7 @@ SIRequestMap =
 			Elements =
 			{
 				TabSettingsName = nil ,
+				Default = nil ,
 				-- 请求格子
 				RequestSlot_Enable = nil ,
 				RequestSlot_Flow = nil ,
@@ -281,6 +283,21 @@ SIRequestMap =
 		nameFlow.add{ type = "flow" , direction = "vertical" , style = SIConstants_Core.raw.Styles.RequestMap_EmptyFlow }
 		nameFlow.add{ type = "button" , name = SIRequestMap.Names.Delete , caption = { "SICore.紫图-窗口-删除" } , tooltip = { "SICore.紫图-窗口-删除-提示" } , style = SIConstants_Core.raw.Styles.Common_ButtonRed }
 		-- ----------------------------------------
+		-- 默认选择
+		-- ----------------------------------------
+		local defaultFlow = page.add{ type = "flow" , direction = "horizontal" , style = SIConstants_Core.raw.Styles.Common_FlowCenterH }
+		nameFlow.add{ type = "label" , caption = { "SICore.紫图-窗口-默认选择" } , tooltip = { "SICore.紫图-窗口-默认选择-提示" } , style = SIConstants_Core.raw.Styles.RequestMap_Label }
+		elements.Default = defaultFlow.add
+		{
+			type = "drop-down" ,
+			name = SIRequestMap.Names.Default ,
+			caption = { "SICore.紫图-窗口-默认选择" } ,
+			tooltip = { "SICore.紫图-窗口-默认选择-提示" } ,
+			items = SIRequestMap.DefaultIndexText ,
+			selected_index = 1 ,
+			style = SIConstants_Core.raw.Styles.RequestMap_DropDown
+		}
+		-- ----------------------------------------
 		-- 设置列表按钮
 		-- ----------------------------------------
 		local listButtonFlow = page.add{ type = "flow" , direction = "horizontal" , style = SIConstants_Core.raw.Styles.Common_FlowCenterH }
@@ -343,7 +360,7 @@ SIRequestMap =
 		elements.InsertItem_Flow = InsertItem_Flow
 		elements.InsertItem_List = InsertItem_Flow
 		.add{ type = "scroll-pane" , horizontal_scroll_policy = "never" , vertical_scroll_policy = "auto-and-reserve-space" , style = SIConstants_Core.raw.Styles.Common_ScrollPane }
-		.add{ type = "table" , column_count = 2 , style = SIConstants_Core.raw.Styles.RequestMap_SubList }
+		.add{ type = "table" , column_count = 3 , style = SIConstants_Core.raw.Styles.RequestMap_SubList }
 		-- ----------------------------------------
 		-- 创建滚动定位按钮
 		-- ----------------------------------------
@@ -362,6 +379,20 @@ SIRequestMap =
 		-- 设置名称
 		-- ----------------------------------------
 		elements.TabSettingsName.text = tabSettings.Name
+		-- ----------------------------------------
+		-- 默认选择
+		-- ----------------------------------------
+		if settings.defaultIndex1 == tabSettingsIndex then
+			elements.Default.select_index = 2
+		elseif settings.defaultIndex2 == tabSettingsIndex then
+			elements.Default.select_index = 3
+		elseif settings.defaultIndex3 == tabSettingsIndex then
+			elements.Default.select_index = 4
+		elseif settings.defaultIndex4 == tabSettingsIndex then
+			elements.Default.select_index = 5
+		else
+			elements.Default.select_index = 1
+		end
 		-- ----------------------------------------
 		-- 请求格子
 		-- ----------------------------------------
@@ -403,15 +434,22 @@ SIRequestMap =
 	end ,
 	FreshPage_RequestSlot = function( tabSettings , elements )
 		-- 清空列表
-		elements.RequestSlot_List.clear()
+		local list = elements.RequestSlot_List
+		list.clear()
 		-- 重建列表
 		for entityName , requestItemList in pairs( tabSettings.RequestSlot.List ) do
-			
+			local entityPrototype = game.entity_prototypes[entityName]
+			if entityPrototype then
+			else
+				local select = list.add{ type = "choose-elem-button" , tooltip = { "SICore.紫图-窗口-请求格子-实体-空" } , elem_type = "item" , style = SIConstants_Core.raw.Styles.RequestMap_Chooser }
+				select.enabled = false
+			end
 		end
 	end ,
 	FreshPage_MaxSlot = function( tabSettings , elements )
 		-- 清空列表
-		elements.MaxSlot_List.clear()
+		local list = elements.MaxSlot_List
+		list.clear()
 		-- 重建列表
 		for entityName , slotCount in pairs( tabSettings.MaxSlot.List ) do
 			
@@ -419,7 +457,8 @@ SIRequestMap =
 	end ,
 	FreshPage_SetModule = function( tabSettings , elements )
 		-- 清空列表
-		elements.SetModule_List.clear()
+		local list = elements.SetModule_List
+		list.clear()
 		-- 重建列表
 		for entityName , moduleList in pairs( tabSettings.SetModule.List ) do
 			
@@ -427,7 +466,8 @@ SIRequestMap =
 	end ,
 	FreshPage_RemoveModule = function( tabSettings , elements )
 		-- 清空列表
-		elements.RemoveModule_List.clear()
+		local list = elements.RemoveModule_List
+		list.clear()
 		-- 重建列表
 		for entityName , moduleList in pairs( tabSettings.RemoveModule.List ) do
 			
@@ -435,7 +475,8 @@ SIRequestMap =
 	end ,
 	FreshPage_InsertItem = function( tabSettings , elements )
 		-- 清空列表
-		elements.InsertItem_List.clear()
+		local list = elements.InsertItem_List
+		list.clear()
 		-- 重建列表
 		for entityName , itemList in pairs( tabSettings.InsertItem.List ) do
 			
