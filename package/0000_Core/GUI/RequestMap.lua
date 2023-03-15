@@ -19,7 +19,9 @@ SIRequestMap =
 		ListButtonPrefix = "SI核心-紫图-列表定位按钮-" ,
 		EnablePrefix = "SI核心-紫图-启用功能-" ,
 		RequestSlot_Entity_Prefix = "SI核心-紫图-请求格子-实体-" ,
-		RequestSlot_Item_Prefix = "SI核心-紫图-请求格子-物品-"
+		RequestSlot_Item_Prefix = "SI核心-紫图-请求格子-物品-" ,
+		MaxSlot_Entity_Prefix = "SI核心-紫图-最大格子-实体-" ,
+		MaxSlot_Count_Prefix = "SI核心-紫图-最大格子-数量-"
 	} ,
 	Settings =
 	{
@@ -485,7 +487,7 @@ SIRequestMap =
 			local tooltip = nil
 			local maxSlot = 0
 			if entityPrototype then
-				entity = entityPrototype.name
+				entity = entityName
 				tooltip = { "SICore.紫图-窗口-请求格子-实体-提示" , entityPrototype.localised_name }
 				local type = entityPrototype.type
 				if type == SICommon.Types.Entities.ContainerLogic then
@@ -509,7 +511,7 @@ SIRequestMap =
 					maxSlot = 0
 				end
 				if maxSlot > SIRequestMap.RequestSlot_ItemSlotMax then
-					SIPrint.Warning( settings.playerIndex , { "SICore.紫图-提示-请求格子-格子太多" , entityPrototype.localised_name , SIRequestMap.RequestSlot_ItemSlotMax } )
+					SIPrint.Warning( settings.playerIndex , { "SICore.紫图-提示-请求格子-格子太多" , entityName , entityPrototype.localised_name , SIRequestMap.RequestSlot_ItemSlotMax } )
 					maxSlot = SIRequestMap.RequestSlot_ItemSlotMax
 				end
 			else
@@ -525,7 +527,7 @@ SIRequestMap =
 				elem_type = "entity" ,
 				entity = entity ,
 				elem_filters = SIRequestMap.RequestSlot_Entity_Filters ,
-				style = SIConstants_Core.raw.Styles.RequestMap_Chooser
+				style = SIConstants_Core.raw.Styles.RequestMap_ListChooser
 			}
 			local selectList1 = list.add{ type = "table" , column_count = 10 , style = SIConstants_Core.raw.Styles.RequestMap_SelectList }
 			local selectList2 = list.add{ type = "table" , column_count = 10 , style = SIConstants_Core.raw.Styles.RequestMap_SelectList }
@@ -550,7 +552,7 @@ SIRequestMap =
 					elem_type = "item" ,
 					item = item ,
 					elem_filters = SIRequestMap.RequestSlot_Item_Filters ,
-					style = SIConstants_Core.raw.Styles.RequestMap_Chooser
+					style = SIConstants_Core.raw.Styles.RequestMap_ListChooser
 				}
 			end
 			index = index + 1
@@ -563,7 +565,7 @@ SIRequestMap =
 			elem_type = "entity" ,
 			entity = nil ,
 			elem_filters = SIRequestMap.RequestSlot_Entity_Filters ,
-			style = SIConstants_Core.raw.Styles.RequestMap_Chooser
+			style = SIConstants_Core.raw.Styles.RequestMap_ListChooser
 		}
 	end ,
 	FreshPage_MaxSlot = function( settings , tabSettings , elements )
@@ -743,7 +745,7 @@ SIRequestMap =
 					return
 				end
 				if requestList[selectEntityName] then
-					SIPrint.Warning( playerIndex , { "SICore.紫图-提示-请求格子-已存在" , game.entity_prototypes[selectEntityName].localised_name } )
+					SIPrint.Warning( playerIndex , { "SICore.紫图-提示-请求格子-已存在" , selectEntityName , game.entity_prototypes[selectEntityName].localised_name } )
 					element.elem_value = nil
 					return
 				end
@@ -778,6 +780,49 @@ SIRequestMap =
 				end
 			end
 		end
+	end ,
+	Set_MaxSlot_Entity = function( playerIndex , name , element )
+		local settings = SIGlobal.GetPlayerSettings( SIRequestMap.Settings.Name , playerIndex )
+		if settings.frame and settings.frame.valid then
+			-- 保存 [请求格子-实体] 选择的实体
+			local selectEntityName = element.elem_value
+			local tabSettingsIndex = settings.tabSettingsIndex
+			local tabSettings = settings.TabSettingsList[tabSettingsIndex]
+			local countList = tabSettings.MaxSlot.List
+			local entityName = name:sub( SIRequestMap.Names.MaxSlot_Entity_Position )
+			if countList[entityName] then
+				if entityName == selectEntityName then
+					return
+				else
+					if selectEntityName == nil then
+						countList[entityName] = nil
+					else
+						local newCountList = {}
+						for innerEntityName , requestItemList in pairs( countList ) do
+							if entityName == innerEntityName then
+								newCountList[selectEntityName] = {}
+							else
+								newCountList[innerEntityName] = requestItemList
+							end
+						end
+						tabSettings.MaxSlot.List = newCountList
+					end
+				end
+			else
+				if selectEntityName == nil then
+					return
+				end
+				if countList[selectEntityName] then
+					SIPrint.Warning( playerIndex , { "SICore.紫图-提示-最大格子-已存在" , selectEntityName , game.entity_prototypes[selectEntityName].localised_name } )
+					element.elem_value = nil
+					return
+				end
+				countList[selectEntityName] = {}
+			end
+			SIRequestMap.FreshPage_MaxSlot( settings , tabSettings , settings.Elements[tabSettingsIndex] )
+		end
+	end ,
+	Set_MaxSlot_Count = function( playerIndex , name , element )
 	end ,
 	Set_GreenToBlue_Check = function( playerIndex , element )
 		local settings = SIGlobal.GetPlayerSettings( SIRequestMap.Settings.Name , playerIndex )
@@ -928,6 +973,8 @@ SIRequestMap.Names.ListButtonPosition = #SIRequestMap.Names.ListButtonPrefix + 1
 SIRequestMap.Names.EnablePosition = #SIRequestMap.Names.EnablePrefix + 1
 SIRequestMap.Names.RequestSlot_Entity_Position = #SIRequestMap.Names.RequestSlot_Entity_Prefix + 1
 SIRequestMap.Names.RequestSlot_Item_Position = #SIRequestMap.Names.RequestSlot_Item_Prefix + 1
+SIRequestMap.Names.MaxSlot_Entity_Position = #SIRequestMap.Names.MaxSlot_Entity_Prefix + 1
+SIRequestMap.Names.MaxSlot_Count_Position = #SIRequestMap.Names.MaxSlot_Count_Prefix + 1
 
 SIRequestMap.Toolbar =
 {

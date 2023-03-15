@@ -2285,7 +2285,7 @@ SIGen
 	horizontal_spacing = 2 ,
 	vertical_spacing = 2
 } )
-.AddStyle( "RequestMap_Chooser" , "紫图-选择" ,
+.AddStyle( "RequestMap_ListChooser" , "紫图-列表选择" ,
 {
 	type = "button_style" ,
 	parent = SIConstants_Core.raw.Styles.Common_ButtonTitle ,
@@ -2297,4 +2297,18 @@ SIGen
 	-- 体积
 	width = 32 ,
 	height = 32
+} )
+.AddStyle( "RequestMap_ListLabel" , "紫图-列表标签" ,
+{
+	type = "label_style" ,
+	-- 体积
+	minimal_width = 10 ,
+	-- 对齐
+	horizontal_align = "left"
+} )
+.AddStyle( "RequestMap_ListText" , "紫图-列表文本条" ,
+{
+	type = "textbox_style" ,
+	-- 体积
+	width = 150
 } )
