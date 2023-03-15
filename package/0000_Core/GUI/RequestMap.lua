@@ -949,8 +949,11 @@ SIRequestMap =
 		local list = elements.InsertItem_List
 		list.clear()
 		-- 重建列表
-		for entityName , itemList in pairs( tabSettings.InsertItem.List ) do
-			
+		for entityName , itemDataList in pairs( tabSettings.InsertItem.List ) do
+			local entityPrototype = game.entity_prototypes[entityName]
+			if entityPrototype then
+			else
+			end
 		end
 	end ,
 	Out_AddTabSettings = function( playerIndex )
