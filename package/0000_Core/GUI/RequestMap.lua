@@ -16,6 +16,7 @@ SIRequestMap =
 		GreenToBlue_Check = "SI核心-紫图-绿箱向蓝箱供货-勾选" ,
 		SetModule_FromInventory = "SI核心-紫图-设置插件-从背包填充" ,
 		RemoveModule_ToInventory = "SI核心-紫图-移除插件-进入背包" ,
+		RemoveModule_Invert = "SI核心-紫图-移除插件-条件反转" ,
 		ListButtonPrefix = "SI核心-紫图-列表定位按钮-" ,
 		EnablePrefix = "SI核心-紫图-启用功能-" ,
 		RequestSlot_Entity_Prefix = "SI核心-紫图-请求格子-实体-" ,
@@ -65,6 +66,7 @@ SIRequestMap =
 				-- 	RemoveModule_Enable = nil ,
 				-- 	RemoveModule_Flow = nil ,
 				-- 	RemoveModule_ToInventory = nil ,
+				--	RemoveModule_Invert = nil ,
 				-- 	RemoveModule_List = nil ,
 				-- 	-- 插入物品
 				-- 	InsertItem_Enable = nil ,
@@ -115,6 +117,7 @@ SIRequestMap =
 		{
 			Enable = false ,
 			ToInventory = false ,
+			Invert = false ,
 			List = {} -- 键为选择的设备实体 , 值为插件物品名称列表
 		} ,
 		-- 插入物品
@@ -515,6 +518,7 @@ SIRequestMap =
 		local RemoveModule_Flow = list.add{ type = "flow" , direction = "vertical" , style = SIConstants_Core.raw.Styles.RequestMap_ListPanelFlow }
 		elements.RemoveModule_Flow = RemoveModule_Flow
 		elements.RemoveModule_ToInventory = RemoveModule_Flow.add{ type = "checkbox" , name = SIRequestMap.Names.RemoveModule_ToInventory , state = false , caption = { "SICore.紫图-窗口-移除插件-进入背包" } , tooltip = { "SICore.紫图-窗口-移除插件-进入背包-提示" } , style = SIConstants_Core.raw.Styles.Common_CheckBox }
+		elements.RemoveModule_Invert = RemoveModule_Flow.add{ type = "checkbox" , name = SIRequestMap.Names.RemoveModule_Invert , state = false , caption = { "SICore.紫图-窗口-移除插件-条件反转" } , tooltip = { "SICore.紫图-窗口-移除插件-条件反转-提示" } , style = SIConstants_Core.raw.Styles.Common_CheckBox }
 		elements.RemoveModule_List = RemoveModule_Flow.add{ type = "table" , column_count = 2 , style = SIConstants_Core.raw.Styles.RequestMap_SubList }
 		-- ----------------------------------------
 		-- 插入物品
@@ -589,6 +593,7 @@ SIRequestMap =
 		elements.RemoveModule_Enable.state = tabSettings.RemoveModule.Enable
 		elements.RemoveModule_Flow.visible = tabSettings.RemoveModule.Enable
 		elements.RemoveModule_ToInventory.state = tabSettings.RemoveModule.ToInventory
+		elements.RemoveModule_Invert.state = tabSettings.RemoveModule.Invert
 		SIRequestMap.FreshPage_RemoveModule( settings , tabSettings , elements )
 		-- ----------------------------------------
 		-- 插入物品
@@ -935,7 +940,7 @@ SIRequestMap =
 	end ,
 	FreshPage_RemoveModule_Enable = function( settings , tabSettings , elements )
 		-- 更新说明
-		elements.RemoveModule_Enable.caption = { "SICore.紫图-窗口-移除插件-启用" , { ( tabSettings.RemoveModule.ToInventory or SITable.Size( tabSettings.RemoveModule.List ) > 0 ) and "SICore.紫图-窗口-启用-已设置" or "SICore.紫图-窗口-启用-未设置" } }
+		elements.RemoveModule_Enable.caption = { "SICore.紫图-窗口-移除插件-启用" , { ( tabSettings.RemoveModule.ToInventory or tabSettings.RemoveModule.Invert or SITable.Size( tabSettings.RemoveModule.List ) > 0 ) and "SICore.紫图-窗口-启用-已设置" or "SICore.紫图-窗口-启用-未设置" } }
 	end ,
 	FreshPage_InsertItem = function( settings , tabSettings , elements )
 		-- 更新说明
@@ -1244,6 +1249,16 @@ SIRequestMap =
 			local tabSettingsIndex = settings.tabSettingsIndex
 			local tabSettings = settings.TabSettingsList[tabSettingsIndex]
 			tabSettings.RemoveModule.ToInventory = element.state
+			SIRequestMap.FreshPage_RemoveModule_Enable( settings , tabSettings , settings.Elements[tabSettingsIndex] )
+		end
+	end ,
+	Set_RemoveModule_Invert = function( playerIndex , element )
+		local settings = SIGlobal.GetPlayerSettings( SIRequestMap.Settings.Name , playerIndex )
+		if settings.frame and settings.frame.valid then
+			-- 保存 [移除插件-条件反转] 复选框的值
+			local tabSettingsIndex = settings.tabSettingsIndex
+			local tabSettings = settings.TabSettingsList[tabSettingsIndex]
+			tabSettings.RemoveModule.Invert = element.state
 			SIRequestMap.FreshPage_RemoveModule_Enable( settings , tabSettings , settings.Elements[tabSettingsIndex] )
 		end
 	end ,

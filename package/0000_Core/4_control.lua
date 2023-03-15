@@ -786,6 +786,10 @@ end )
 		SIRequestMap.Set_RemoveModule_ToInventory( playerIndex , element )
 		return
 	end
+	if name == SIRequestMap.Names.RemoveModule_Invert then
+		SIRequestMap.Set_RemoveModule_Invert( playerIndex , element )
+		return
+	end
 	if name:StartsWith( SIRequestMap.Names.EnablePrefix ) then
 		SIRequestMap.EnableFunction( playerIndex , name , element )
 		return
