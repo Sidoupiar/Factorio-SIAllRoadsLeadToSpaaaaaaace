@@ -2250,7 +2250,7 @@ SIGen
 	-- 体积
 	width = 758 ,
 } )
-.AddStyle( "RequestMap_ListFlow" , "紫图-列表布局" ,
+.AddStyle( "RequestMap_ListPanelFlow" , "紫图-列表面板布局" ,
 {
 	type = "vertical_flow_style" ,
 	parent = SIConstants_Core.raw.Styles.Common_FlowLeft ,
@@ -2298,6 +2298,13 @@ SIGen
 	width = 32 ,
 	height = 32
 } )
+.AddStyle( "RequestMap_ListFlow" , "紫图-列表布局" ,
+{
+	type = "horizontal_flow_style" ,
+	parent = SIConstants_Core.raw.Styles.Common_FlowCenterH ,
+	-- 元素间距
+	horizontal_spacing = 6
+} )
 .AddStyle( "RequestMap_ListLabel" , "紫图-列表标签" ,
 {
 	type = "label_style" ,
@@ -2310,5 +2317,5 @@ SIGen
 {
 	type = "textbox_style" ,
 	-- 体积
-	width = 150
+	width = 120
 } )

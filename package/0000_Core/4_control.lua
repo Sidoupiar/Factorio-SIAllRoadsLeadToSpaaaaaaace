@@ -278,10 +278,11 @@ SIControl.Init
 		RequestMap_ListButtonFlow = "紫图-列表定位按钮布局" ,
 		RequestMap_ListButton = "紫图-列表定位按钮" ,
 		RequestMap_ListCheck = "紫图-列表复选" ,
-		RequestMap_ListFlow = "紫图-列表布局" ,
+		RequestMap_ListPanelFlow = "紫图-列表面板布局" ,
 		RequestMap_SubList = "紫图-子列表" ,
 		RequestMap_SelectList = "紫图-选择列表" ,
 		RequestMap_ListChooser = "紫图-列表选择" ,
+		RequestMap_ListFlow = "紫图-列表布局" ,
 		RequestMap_ListLabel = "紫图-列表标签" ,
 		RequestMap_ListText = "紫图-列表文本条"
 	}
@@ -295,7 +296,7 @@ SINeed( "Tool/SIFunctions" )
 SINeed( "Tool/SIElements" )
 
 -- ----------------------------------------
--- 初始化<br>
+-- 初始化
 -- ----------------------------------------
 SINeed( "System/MainData" )
 SINeed( "GUI/Mainbar" )
@@ -317,7 +318,7 @@ SIGlobal.CreateSettings( SIRequestMap.Settings )
 -- ------------------------------------------------------------------------------------------------
 
 -- ----------------------------------------
--- 事件<br>
+-- 事件
 -- ----------------------------------------
 SIEventBus
 .Init( function( functionID )
@@ -747,6 +748,10 @@ end )
 		SIRequestMap.Set_TabSettingsName( playerIndex , element )
 		return
 	end
+	if name:StartsWith( SIRequestMap.Names.MaxSlot_Count_Prefix ) then
+		SIRequestMap.Set_MaxSlot_Count( playerIndex , name , element )
+		return
+	end
 end )
 .Add( SIEvents.on_gui_checked_state_changed , function( event , functionID )
 	local element = event.element
@@ -846,6 +851,10 @@ end )
 			SIRequestMap.Set_RequestSlot_Item( playerIndex , name , element )
 			return
 		end
+		if name:StartsWith( SIRequestMap.Names.MaxSlot_Entity_Prefix ) then
+			SIRequestMap.Set_MaxSlot_Entity( playerIndex , name , element )
+			return
+		end
 		return
 	end
 end )
@@ -911,7 +920,7 @@ end )
 -- ------------------------------------------------------------------------------------------------
 
 -- ----------------------------------------
--- 事件<br>
+-- 事件
 -- ----------------------------------------
 SIEventBus
 .Add( SIEvents.on_entity_died , function( event , functionID )
@@ -960,7 +969,7 @@ end )
 -- ------------------------------------------------------------------------------------------------
 
 -- ----------------------------------------
--- 事件<br>
+-- 事件
 -- ----------------------------------------
 SIEventBus
 .Add( SIEvents.on_script_trigger_effect , function( event , functionID )
@@ -977,7 +986,7 @@ end )
 -- ------------------------------------------------------------------------------------------------
 
 -- ----------------------------------------
--- 事件<br>
+-- 事件
 -- ----------------------------------------
 SIEventBus
 .Add( SIEvents.on_player_selected_area , function( event , functionID )
@@ -1165,6 +1174,6 @@ end )
 -- ------------------------------------------------------------------------------------------------
 
 -- ----------------------------------------
--- 接口注册<br>
+-- 接口注册
 -- ----------------------------------------
 SINeed( "RemoteInterface" )

@@ -137,6 +137,7 @@ SIRequestMap =
 		[4] = { "SICore.紫图-窗口-选择-3" } ,
 		[5] = { "SICore.紫图-窗口-选择-4" }
 	} ,
+	RequestSlot_ItemSlotMax = 200 ,
 	RequestSlot_Entity_Filters =
 	{
 		{
@@ -164,7 +165,6 @@ SIRequestMap =
 			mode = SICommon.Flags.Condition.OR
 		}
 	} ,
-	RequestSlot_ItemSlotMax = 200 ,
 	RequestSlot_Item_Filters =
 	{
 		{
@@ -172,6 +172,31 @@ SIRequestMap =
 			flag = SICommon.Flags.Item.Hidden ,
 			mode = SICommon.Flags.Condition.OR ,
 			invert = true
+		}
+	} ,
+	MaxSlot_Entity_Filters =
+	{
+		{
+			filter = "type" ,
+			type =
+			{
+				SICommon.Types.Entities.Container ,
+				SICommon.Types.Entities.ContainerLogic ,
+				SICommon.Types.Entities.Car ,
+				SICommon.Types.Entities.SpiderVehicle ,
+				SICommon.Types.Entities.WagonCargo
+			} ,
+			mode = SICommon.Flags.Condition.OR
+		} ,
+		{
+			filter = "hidden" ,
+			mode = SICommon.Flags.Condition.AND ,
+			invert = true
+		} ,
+		{
+			filter = "name" ,
+			name = SIConstants_Core.raw.Entities.IconEmpty ,
+			mode = SICommon.Flags.Condition.OR
 		}
 	} ,
 	-- ------------------------------------------------------------------------------------------------
@@ -359,28 +384,28 @@ SIRequestMap =
 		-- 请求格子
 		-- ----------------------------------------
 		elements.RequestSlot_Enable = list.add{ type = "checkbox" , name = SIRequestMap.Names.EnablePrefix .. "RequestSlot_Flow" , state = false , caption = { "SICore.紫图-窗口-请求格子-启用" , { "SICore.紫图-窗口-启用-未设置" } } , tooltip = { "SICore.紫图-窗口-请求格子-启用-提示" } , style = SIConstants_Core.raw.Styles.RequestMap_ListCheck }
-		local RequestSlot_Flow = list.add{ type = "flow" , direction = "vertical" , style = SIConstants_Core.raw.Styles.RequestMap_ListFlow }
+		local RequestSlot_Flow = list.add{ type = "flow" , direction = "vertical" , style = SIConstants_Core.raw.Styles.RequestMap_ListPanelFlow }
 		elements.RequestSlot_Flow = RequestSlot_Flow
 		elements.RequestSlot_List = RequestSlot_Flow.add{ type = "table" , column_count = 3 , style = SIConstants_Core.raw.Styles.RequestMap_SubList }
 		-- ----------------------------------------
 		-- 最大格子
 		-- ----------------------------------------
 		elements.MaxSlot_Enable = list.add{ type = "checkbox" , name = SIRequestMap.Names.EnablePrefix .. "MaxSlot_Flow" , state = false , caption = { "SICore.紫图-窗口-最大格子-启用" , { "SICore.紫图-窗口-启用-未设置" } } , tooltip = { "SICore.紫图-窗口-最大格子-启用-提示" } , style = SIConstants_Core.raw.Styles.RequestMap_ListCheck }
-		local MaxSlot_Flow = list.add{ type = "flow" , direction = "vertical" , style = SIConstants_Core.raw.Styles.RequestMap_ListFlow }
+		local MaxSlot_Flow = list.add{ type = "flow" , direction = "vertical" , style = SIConstants_Core.raw.Styles.RequestMap_ListPanelFlow }
 		elements.MaxSlot_Flow = MaxSlot_Flow
 		elements.MaxSlot_List = MaxSlot_Flow.add{ type = "table" , column_count = 2 , style = SIConstants_Core.raw.Styles.RequestMap_SubList }
 		-- ----------------------------------------
 		-- 绿箱向蓝箱供货
 		-- ----------------------------------------
 		elements.GreenToBlue_Enable = list.add{ type = "checkbox" , name = SIRequestMap.Names.EnablePrefix .. "GreenToBlue_Flow" , state = false , caption = { "SICore.紫图-窗口-绿箱向蓝箱供货-启用" , { "SICore.紫图-窗口-启用-未设置" } } , tooltip = { "SICore.紫图-窗口-绿箱向蓝箱供货-启用-提示" } , style = SIConstants_Core.raw.Styles.RequestMap_ListCheck }
-		local GreenToBlue_Flow = list.add{ type = "flow" , direction = "vertical" , style = SIConstants_Core.raw.Styles.RequestMap_ListFlow }
+		local GreenToBlue_Flow = list.add{ type = "flow" , direction = "vertical" , style = SIConstants_Core.raw.Styles.RequestMap_ListPanelFlow }
 		elements.GreenToBlue_Flow = GreenToBlue_Flow
 		elements.GreenToBlue_Check = GreenToBlue_Flow.add{ type = "checkbox" , name = SIRequestMap.Names.GreenToBlue_Check , state = false , caption = { "SICore.紫图-窗口-绿箱向蓝箱供货-勾选" } , tooltip = { "SICore.紫图-窗口-绿箱向蓝箱供货-勾选-提示" } , style = SIConstants_Core.raw.Styles.Common_CheckBox }
 		-- ----------------------------------------
 		-- 设置插件
 		-- ----------------------------------------
 		elements.SetModule_Enable = list.add{ type = "checkbox" , name = SIRequestMap.Names.EnablePrefix .. "SetModule_Flow" , state = false , caption = { "SICore.紫图-窗口-设置插件-启用" , { "SICore.紫图-窗口-启用-未设置" } } , tooltip = { "SICore.紫图-窗口-设置插件-启用-提示" } , style = SIConstants_Core.raw.Styles.RequestMap_ListCheck }
-		local SetModule_Flow = list.add{ type = "flow" , direction = "vertical" , style = SIConstants_Core.raw.Styles.RequestMap_ListFlow }
+		local SetModule_Flow = list.add{ type = "flow" , direction = "vertical" , style = SIConstants_Core.raw.Styles.RequestMap_ListPanelFlow }
 		elements.SetModule_Flow = SetModule_Flow
 		elements.SetModule_FromInventory = SetModule_Flow.add{ type = "checkbox" , name = SIRequestMap.Names.SetModule_FromInventory , state = false , caption = { "SICore.紫图-窗口-设置插件-从背包填充" } , tooltip = { "SICore.紫图-窗口-设置插件-从背包填充-提示" } , style = SIConstants_Core.raw.Styles.Common_CheckBox }
 		elements.SetModule_List = SetModule_Flow.add{ type = "table" , column_count = 2 , style = SIConstants_Core.raw.Styles.RequestMap_SubList }
@@ -388,7 +413,7 @@ SIRequestMap =
 		-- 移除插件
 		-- ----------------------------------------
 		elements.RemoveModule_Enable = list.add{ type = "checkbox" , name = SIRequestMap.Names.EnablePrefix .. "RemoveModule_Flow" , state = false , caption = { "SICore.紫图-窗口-移除插件-启用" , { "SICore.紫图-窗口-启用-未设置" } } , tooltip = { "SICore.紫图-窗口-移除插件-启用-提示" } , style = SIConstants_Core.raw.Styles.RequestMap_ListCheck }
-		local RemoveModule_Flow = list.add{ type = "flow" , direction = "vertical" , style = SIConstants_Core.raw.Styles.RequestMap_ListFlow }
+		local RemoveModule_Flow = list.add{ type = "flow" , direction = "vertical" , style = SIConstants_Core.raw.Styles.RequestMap_ListPanelFlow }
 		elements.RemoveModule_Flow = RemoveModule_Flow
 		elements.RemoveModule_ToInventory = RemoveModule_Flow.add{ type = "checkbox" , name = SIRequestMap.Names.RemoveModule_ToInventory , state = false , caption = { "SICore.紫图-窗口-移除插件-进入背包" } , tooltip = { "SICore.紫图-窗口-移除插件-进入背包-提示" } , style = SIConstants_Core.raw.Styles.Common_CheckBox }
 		elements.RemoveModule_List = RemoveModule_Flow.add{ type = "table" , column_count = 2 , style = SIConstants_Core.raw.Styles.RequestMap_SubList }
@@ -396,7 +421,7 @@ SIRequestMap =
 		-- 插入物品
 		-- ----------------------------------------
 		elements.InsertItem_Enable = list.add{ type = "checkbox" , name = SIRequestMap.Names.EnablePrefix .. "InsertItem_Flow" , state = false , caption = { "SICore.紫图-窗口-插入物品-启用" , { "SICore.紫图-窗口-启用-未设置" } } , tooltip = { "SICore.紫图-窗口-插入物品-启用-提示" } , style = SIConstants_Core.raw.Styles.RequestMap_ListCheck }
-		local InsertItem_Flow = list.add{ type = "flow" , direction = "vertical" , style = SIConstants_Core.raw.Styles.RequestMap_ListFlow }
+		local InsertItem_Flow = list.add{ type = "flow" , direction = "vertical" , style = SIConstants_Core.raw.Styles.RequestMap_ListPanelFlow }
 		elements.InsertItem_Flow = InsertItem_Flow
 		elements.InsertItem_List = InsertItem_Flow.add{ type = "table" , column_count = 3 , style = SIConstants_Core.raw.Styles.RequestMap_SubList }
 		-- ----------------------------------------
@@ -575,8 +600,45 @@ SIRequestMap =
 		local list = elements.MaxSlot_List
 		list.clear()
 		-- 重建列表
-		for entityName , slotCount in pairs( tabSettings.MaxSlot.List ) do
-			
+		for entityName , count in pairs( tabSettings.MaxSlot.List ) do
+			local entityPrototype = game.entity_prototypes[entityName]
+			local entity = nil
+			local tooltip = nil
+			local maxCount = 0
+			if entityPrototype then
+				entity = entityName
+				tooltip = { "SICore.紫图-窗口-最大格子-实体-提示" , entityPrototype.localised_name }
+				local type = entityPrototype.type
+				if type == SICommon.Types.Entities.Container or type == SICommon.Types.Entities.ContainerLogic then
+					maxCount = entityPrototype.get_inventory_size( defines.inventory.chest ) or 0
+				elseif type == SICommon.Types.Entities.Car then
+					maxCount = entityPrototype.get_inventory_size( defines.inventory.car_trunk ) or 0
+				elseif type == SICommon.Types.Entities.SpiderVehicle then
+					maxCount = entityPrototype.get_inventory_size( defines.inventory.spider_trunk ) or 0
+				elseif type == SICommon.Types.Entities.WagonCargo then
+					maxCount = entityPrototype.get_inventory_size( defines.inventory.cargo_wagon ) or 0
+				else
+					maxCount = 0
+				end
+			else
+				entityName = SIConstants_Core.raw.Entities.IconEmpty
+				tooltip = { "SICore.紫图-窗口-最大格子-实体-空-提示" }
+				maxCount = 0
+			end
+			list.add
+			{
+				type = "choose-elem-button" ,
+				name = SIRequestMap.Names.MaxSlot_Entity_Prefix .. entityName ,
+				tooltip = tooltip ,
+				elem_type = "entity" ,
+				entity = entity ,
+				elem_filters = SIRequestMap.MaxSlot_Entity_Filters ,
+				style = SIConstants_Core.raw.Styles.RequestMap_ListChooser
+			}
+			local flow = list.add{ type = "flow" , direction = "horizontal" , style = SIConstants_Core.raw.Styles.RequestMap_ListFlow }
+			flow.add{ type = "label" , caption = { "SICore.紫图-窗口-最大格子-数量前缀" , maxCount } , tooltip = { "SICore.紫图-窗口-最大格子-数量-提示" } , style = SIConstants_Core.raw.Styles.RequestMap_ListLabel }
+			flow.add{ type = "textfield" , name = SIRequestMap.Names.MaxSlot_Count_Prefix .. entityName , text = tostring( count ) , numeric = true , tooltip = { "SICore.紫图-窗口-最大格子-数量-提示" } , style = SIConstants_Core.raw.Styles.RequestMap_ListText }
+			flow.add{ type = "label" , caption = { "SICore.紫图-窗口-最大格子-数量后缀" } , tooltip = { "SICore.紫图-窗口-最大格子-数量-提示" } , style = SIConstants_Core.raw.Styles.RequestMap_ListLabel }
 		end
 	end ,
 	FreshPage_GreenToBlue = function( settings , tabSettings , elements )
@@ -823,6 +885,17 @@ SIRequestMap =
 		end
 	end ,
 	Set_MaxSlot_Count = function( playerIndex , name , element )
+		local settings = SIGlobal.GetPlayerSettings( SIRequestMap.Settings.Name , playerIndex )
+		if settings.frame and settings.frame.valid then
+			-- 保存 [请求格子-物品] 选择的物品
+			local count = math.floor( tonumber( element.text ) or 0 )
+			element.text = tostring( count )
+			local tabSettingsIndex = settings.tabSettingsIndex
+			local tabSettings = settings.TabSettingsList[tabSettingsIndex]
+			local countList = tabSettings.MaxSlot.List
+			local entityName = name:sub( SIRequestMap.Names.MaxSlot_Count_Position )
+			countList[entityName] = count
+		end
 	end ,
 	Set_GreenToBlue_Check = function( playerIndex , element )
 		local settings = SIGlobal.GetPlayerSettings( SIRequestMap.Settings.Name , playerIndex )
