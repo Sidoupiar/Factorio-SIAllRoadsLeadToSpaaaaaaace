@@ -21,7 +21,11 @@ SIRequestMap =
 		RequestSlot_Entity_Prefix = "SI核心-紫图-请求格子-实体-" ,
 		RequestSlot_Item_Prefix = "SI核心-紫图-请求格子-物品-" ,
 		MaxSlot_Entity_Prefix = "SI核心-紫图-最大格子-实体-" ,
-		MaxSlot_Count_Prefix = "SI核心-紫图-最大格子-数量-"
+		MaxSlot_Count_Prefix = "SI核心-紫图-最大格子-数量-" ,
+		SetModule_Entity_Prefix = "SI核心-紫图-设置插件-实体-" ,
+		SetModule_Item_Prefix = "SI核心-紫图-设置插件-物品-" ,
+		RemoveModule_Entity_Prefix = "SI核心-紫图-移除插件-实体-" ,
+		RemoveModule_Item_Prefix = "SI核心-紫图-移除插件-物品-"
 	} ,
 	Settings =
 	{
@@ -172,6 +176,11 @@ SIRequestMap =
 			flag = SICommon.Flags.Item.Hidden ,
 			mode = SICommon.Flags.Condition.OR ,
 			invert = true
+		} ,
+		{
+			filter = "name" ,
+			name = SIConstants_Core.raw.Items.IconEmpty ,
+			mode = SICommon.Flags.Condition.OR
 		}
 	} ,
 	MaxSlot_Entity_Filters =
@@ -196,6 +205,96 @@ SIRequestMap =
 		{
 			filter = "name" ,
 			name = SIConstants_Core.raw.Entities.IconEmpty ,
+			mode = SICommon.Flags.Condition.OR
+		}
+	} ,
+	SetModule_Entity_Filters =
+	{
+		{
+			filter = "type" ,
+			type =
+			{
+				SICommon.Types.Entities.Machine ,
+				SICommon.Types.Entities.Furnace ,
+				SICommon.Types.Entities.Lab ,
+				SICommon.Types.Entities.Mining ,
+				SICommon.Types.Entities.RocketSilo ,
+				SICommon.Types.Entities.Beacon
+			} ,
+			mode = SICommon.Flags.Condition.OR
+		} ,
+		{
+			filter = "hidden" ,
+			mode = SICommon.Flags.Condition.AND ,
+			invert = true
+		} ,
+		{
+			filter = "name" ,
+			name = SIConstants_Core.raw.Entities.IconEmpty ,
+			mode = SICommon.Flags.Condition.OR
+		}
+	} ,
+	SetModule_Item_Filters =
+	{
+		{
+			filter = "type" ,
+			type = SICommon.Types.Items.Module ,
+			mode = SICommon.Flags.Condition.OR
+		} ,
+		{
+			filter = "flag" ,
+			flag = SICommon.Flags.Item.Hidden ,
+			mode = SICommon.Flags.Condition.AND ,
+			invert = true
+		} ,
+		{
+			filter = "name" ,
+			name = SIConstants_Core.raw.Items.IconEmpty ,
+			mode = SICommon.Flags.Condition.OR
+		}
+	} ,
+	RemoveModule_Entity_Filters =
+	{
+		{
+			filter = "type" ,
+			type =
+			{
+				SICommon.Types.Entities.Machine ,
+				SICommon.Types.Entities.Furnace ,
+				SICommon.Types.Entities.Lab ,
+				SICommon.Types.Entities.Mining ,
+				SICommon.Types.Entities.RocketSilo ,
+				SICommon.Types.Entities.Beacon
+			} ,
+			mode = SICommon.Flags.Condition.OR
+		} ,
+		{
+			filter = "hidden" ,
+			mode = SICommon.Flags.Condition.AND ,
+			invert = true
+		} ,
+		{
+			filter = "name" ,
+			name = SIConstants_Core.raw.Entities.IconEmpty ,
+			mode = SICommon.Flags.Condition.OR
+		}
+	} ,
+	RemoveModule_Item_Filters =
+	{
+		{
+			filter = "type" ,
+			type = SICommon.Types.Items.Module ,
+			mode = SICommon.Flags.Condition.OR
+		} ,
+		{
+			filter = "flag" ,
+			flag = SICommon.Flags.Item.Hidden ,
+			mode = SICommon.Flags.Condition.AND ,
+			invert = true
+		} ,
+		{
+			filter = "name" ,
+			name = SIConstants_Core.raw.Items.IconEmpty ,
 			mode = SICommon.Flags.Condition.OR
 		}
 	} ,
@@ -505,7 +604,6 @@ SIRequestMap =
 		local list = elements.RequestSlot_List
 		list.clear()
 		-- 重建列表
-		local index = 1
 		for entityName , requestItemList in pairs( tabSettings.RequestSlot.List ) do
 			local entityPrototype = game.entity_prototypes[entityName]
 			local entity = nil
@@ -542,7 +640,9 @@ SIRequestMap =
 			else
 				entityName = SIConstants_Core.raw.Entities.IconEmpty
 				tooltip = { "SICore.紫图-窗口-请求格子-实体-空-提示" }
-				maxSlot = SITable.Size( requestItemList )
+				for key , value in pairs( requestItemList ) do
+					maxSlot = math.max( maxSlot , key )
+				end
 			end
 			list.add
 			{
@@ -564,6 +664,7 @@ SIRequestMap =
 					if itemPrototype then
 						tooltip = { "SICore.紫图-窗口-请求格子-物品-提示" , itemPrototype.localised_name }
 					else
+						item = SIConstants_Core.raw.Items.IconEmpty
 						tooltip = { "SICore.紫图-窗口-请求格子-物品-空-提示" }
 					end
 				else
@@ -580,7 +681,6 @@ SIRequestMap =
 					style = SIConstants_Core.raw.Styles.RequestMap_ListChooser
 				}
 			end
-			index = index + 1
 		end
 		list.add
 		{
@@ -640,6 +740,16 @@ SIRequestMap =
 			flow.add{ type = "textfield" , name = SIRequestMap.Names.MaxSlot_Count_Prefix .. entityName , text = tostring( count ) , numeric = true , tooltip = { "SICore.紫图-窗口-最大格子-数量-提示" } , style = SIConstants_Core.raw.Styles.RequestMap_ListText }
 			flow.add{ type = "label" , caption = { "SICore.紫图-窗口-最大格子-数量后缀" } , tooltip = { "SICore.紫图-窗口-最大格子-数量-提示" } , style = SIConstants_Core.raw.Styles.RequestMap_ListLabel }
 		end
+		list.add
+		{
+			type = "choose-elem-button" ,
+			name = SIRequestMap.Names.MaxSlot_Entity_Prefix ,
+			tooltip = { "SICore.紫图-窗口-最大格子-实体-选择" } ,
+			elem_type = "entity" ,
+			entity = nil ,
+			elem_filters = SIRequestMap.MaxSlot_Entity_Filters ,
+			style = SIConstants_Core.raw.Styles.RequestMap_ListChooser
+		}
 	end ,
 	FreshPage_GreenToBlue = function( settings , tabSettings , elements )
 		-- 更新说明
@@ -653,8 +763,84 @@ SIRequestMap =
 		list.clear()
 		-- 重建列表
 		for entityName , moduleList in pairs( tabSettings.SetModule.List ) do
-			
+			local entityPrototype = game.entity_prototypes[entityName]
+			local entity = nil
+			local tooltip = nil
+			local maxSlot = 0
+			if entityPrototype then
+				entity = entityName
+				tooltip = { "SICore.紫图-窗口-设置插件-实体-提示" , entityPrototype.localised_name }
+				local type = entityPrototype.type
+				if type == SICommon.Types.Entities.Machine then
+					maxSlot = entityPrototype.get_inventory_size( defines.inventory.assembling_machine_modules ) or 0
+				elseif type == SICommon.Types.Entities.Furnace then
+					maxSlot = entityPrototype.get_inventory_size( defines.inventory.furnace_modules ) or 0
+				elseif type == SICommon.Types.Entities.Lab then
+					maxSlot = entityPrototype.get_inventory_size( defines.inventory.lab_modules ) or 0
+				elseif type == SICommon.Types.Entities.Mining then
+					maxSlot = entityPrototype.get_inventory_size( defines.inventory.mining_drill_modules ) or 0
+				elseif type == SICommon.Types.Entities.RocketSilo then
+					maxSlot = entityPrototype.get_inventory_size( defines.inventory.rocket_silo_modules ) or 0
+				elseif type == SICommon.Types.Entities.Beacon then
+					maxSlot = entityPrototype.get_inventory_size( defines.inventory.beacon_modules ) or 0
+				else
+					maxSlot = 0
+				end
+			else
+				entityName = SIConstants_Core.raw.Entities.IconEmpty
+				tooltip = { "SICore.紫图-窗口-设置插件-实体-空-提示" }
+				for key , value in pairs( moduleList ) do
+					maxSlot = math.max( maxSlot , key )
+				end
+			end
+			list.add
+			{
+				type = "choose-elem-button" ,
+				name = SIRequestMap.Names.SetModule_Entity_Prefix .. entityName ,
+				tooltip = tooltip ,
+				elem_type = "entity" ,
+				entity = entity ,
+				elem_filters = SIRequestMap.SetModule_Entity_Filters ,
+				style = SIConstants_Core.raw.Styles.RequestMap_ListChooser
+			}
+			local selectList1 = list.add{ type = "table" , column_count = 10 , style = SIConstants_Core.raw.Styles.RequestMap_SelectList }
+			local selectList2 = list.add{ type = "table" , column_count = 10 , style = SIConstants_Core.raw.Styles.RequestMap_SelectList }
+			for slotIndex = 1 , maxSlot , 1 do
+				local selectList = math.fmod( math.floor( slotIndex / 10 ) , 2 ) == 0 and selectList1 or selectList2
+				local item = moduleList[slotIndex]
+				if item then
+					local itemPrototype = game.item_prototypes[item]
+					if itemPrototype then
+						tooltip = { "SICore.紫图-窗口-设置插件-物品-提示" , itemPrototype.localised_name }
+					else
+						item = SIConstants_Core.raw.Items.IconEmpty
+						tooltip = { "SICore.紫图-窗口-设置插件-物品-空-提示" }
+					end
+				else
+					tooltip = { "SICore.紫图-窗口-设置插件-物品-选择-提示" }
+				end
+				selectList.add
+				{
+					type = "choose-elem-button" ,
+					name = SIRequestMap.Names.SetModule_Item_Prefix .. slotIndex .. "_" .. entityName ,
+					tooltip = tooltip ,
+					elem_type = "item" ,
+					item = item ,
+					elem_filters = SIRequestMap.SetModule_Item_Filters ,
+					style = SIConstants_Core.raw.Styles.RequestMap_ListChooser
+				}
+			end
 		end
+		list.add
+		{
+			type = "choose-elem-button" ,
+			name = SIRequestMap.Names.SetModule_Entity_Prefix ,
+			tooltip = { "SICore.紫图-窗口-设置插件-实体-选择-提示" } ,
+			elem_type = "entity" ,
+			entity = nil ,
+			elem_filters = SIRequestMap.SetModule_Entity_Filters ,
+			style = SIConstants_Core.raw.Styles.RequestMap_ListChooser
+		}
 	end ,
 	FreshPage_SetModule_Enable = function( settings , tabSettings , elements )
 		-- 更新说明
@@ -668,8 +854,84 @@ SIRequestMap =
 		list.clear()
 		-- 重建列表
 		for entityName , moduleList in pairs( tabSettings.RemoveModule.List ) do
-			
+			local entityPrototype = game.entity_prototypes[entityName]
+			local entity = nil
+			local tooltip = nil
+			local maxSlot = 0
+			if entityPrototype then
+				entity = entityName
+				tooltip = { "SICore.紫图-窗口-移除插件-实体-提示" , entityPrototype.localised_name }
+				local type = entityPrototype.type
+				if type == SICommon.Types.Entities.Machine then
+					maxSlot = entityPrototype.get_inventory_size( defines.inventory.assembling_machine_modules ) or 0
+				elseif type == SICommon.Types.Entities.Furnace then
+					maxSlot = entityPrototype.get_inventory_size( defines.inventory.furnace_modules ) or 0
+				elseif type == SICommon.Types.Entities.Lab then
+					maxSlot = entityPrototype.get_inventory_size( defines.inventory.lab_modules ) or 0
+				elseif type == SICommon.Types.Entities.Mining then
+					maxSlot = entityPrototype.get_inventory_size( defines.inventory.mining_drill_modules ) or 0
+				elseif type == SICommon.Types.Entities.RocketSilo then
+					maxSlot = entityPrototype.get_inventory_size( defines.inventory.rocket_silo_modules ) or 0
+				elseif type == SICommon.Types.Entities.Beacon then
+					maxSlot = entityPrototype.get_inventory_size( defines.inventory.beacon_modules ) or 0
+				else
+					maxSlot = 0
+				end
+			else
+				entityName = SIConstants_Core.raw.Entities.IconEmpty
+				tooltip = { "SICore.紫图-窗口-移除插件-实体-空-提示" }
+				for key , value in pairs( moduleList ) do
+					maxSlot = math.max( maxSlot , key )
+				end
+			end
+			list.add
+			{
+				type = "choose-elem-button" ,
+				name = SIRequestMap.Names.RemoveModule_Entity_Prefix .. entityName ,
+				tooltip = tooltip ,
+				elem_type = "entity" ,
+				entity = entity ,
+				elem_filters = SIRequestMap.RemoveModule_Entity_Filters ,
+				style = SIConstants_Core.raw.Styles.RequestMap_ListChooser
+			}
+			local selectList1 = list.add{ type = "table" , column_count = 10 , style = SIConstants_Core.raw.Styles.RequestMap_SelectList }
+			local selectList2 = list.add{ type = "table" , column_count = 10 , style = SIConstants_Core.raw.Styles.RequestMap_SelectList }
+			for slotIndex = 1 , maxSlot , 1 do
+				local selectList = math.fmod( math.floor( slotIndex / 10 ) , 2 ) == 0 and selectList1 or selectList2
+				local item = moduleList[slotIndex]
+				if item then
+					local itemPrototype = game.item_prototypes[item]
+					if itemPrototype then
+						tooltip = { "SICore.紫图-窗口-移除插件-物品-提示" , itemPrototype.localised_name }
+					else
+						item = SIConstants_Core.raw.Items.IconEmpty
+						tooltip = { "SICore.紫图-窗口-移除插件-物品-空-提示" }
+					end
+				else
+					tooltip = { "SICore.紫图-窗口-移除插件-物品-选择-提示" }
+				end
+				selectList.add
+				{
+					type = "choose-elem-button" ,
+					name = SIRequestMap.Names.RemoveModule_Item_Prefix .. slotIndex .. "_" .. entityName ,
+					tooltip = tooltip ,
+					elem_type = "item" ,
+					item = item ,
+					elem_filters = SIRequestMap.RemoveModule_Item_Filters ,
+					style = SIConstants_Core.raw.Styles.RequestMap_ListChooser
+				}
+			end
 		end
+		list.add
+		{
+			type = "choose-elem-button" ,
+			name = SIRequestMap.Names.RemoveModule_Entity_Prefix ,
+			tooltip = { "SICore.紫图-窗口-移除插件-实体-选择-提示" } ,
+			elem_type = "entity" ,
+			entity = nil ,
+			elem_filters = SIRequestMap.RemoveModule_Entity_Filters ,
+			style = SIConstants_Core.raw.Styles.RequestMap_ListChooser
+		}
 	end ,
 	FreshPage_RemoveModule_Enable = function( settings , tabSettings , elements )
 		-- 更新说明
@@ -846,7 +1108,7 @@ SIRequestMap =
 	Set_MaxSlot_Entity = function( playerIndex , name , element )
 		local settings = SIGlobal.GetPlayerSettings( SIRequestMap.Settings.Name , playerIndex )
 		if settings.frame and settings.frame.valid then
-			-- 保存 [请求格子-实体] 选择的实体
+			-- 保存 [最大格子-实体] 选择的实体
 			local selectEntityName = element.elem_value
 			local tabSettingsIndex = settings.tabSettingsIndex
 			local tabSettings = settings.TabSettingsList[tabSettingsIndex]
@@ -887,7 +1149,7 @@ SIRequestMap =
 	Set_MaxSlot_Count = function( playerIndex , name , element )
 		local settings = SIGlobal.GetPlayerSettings( SIRequestMap.Settings.Name , playerIndex )
 		if settings.frame and settings.frame.valid then
-			-- 保存 [请求格子-物品] 选择的物品
+			-- 保存 [最大格子-物品] 选择的物品
 			local count = math.floor( tonumber( element.text ) or 0 )
 			element.text = tostring( count )
 			local tabSettingsIndex = settings.tabSettingsIndex
@@ -917,6 +1179,64 @@ SIRequestMap =
 			SIRequestMap.FreshPage_SetModule_Enable( settings , tabSettings , settings.Elements[tabSettingsIndex] )
 		end
 	end ,
+	Set_SetModule_Entity = function( playerIndex , name , element )
+		local settings = SIGlobal.GetPlayerSettings( SIRequestMap.Settings.Name , playerIndex )
+		if settings.frame and settings.frame.valid then
+			-- 保存 [设置插件-实体] 选择的实体
+			local selectEntityName = element.elem_value
+			local tabSettingsIndex = settings.tabSettingsIndex
+			local tabSettings = settings.TabSettingsList[tabSettingsIndex]
+			local moduleList = tabSettings.SetModule.List
+			local entityName = name:sub( SIRequestMap.Names.SetModule_Entity_Position )
+			if moduleList[entityName] then
+				if entityName == selectEntityName then
+					return
+				else
+					if selectEntityName == nil then
+						moduleList[entityName] = nil
+					else
+						local newModuleList = {}
+						for innerEntityName , requestItemList in pairs( moduleList ) do
+							if entityName == innerEntityName then
+								newModuleList[selectEntityName] = {}
+							else
+								newModuleList[innerEntityName] = requestItemList
+							end
+						end
+						tabSettings.SetModule.List = newModuleList
+					end
+				end
+			else
+				if selectEntityName == nil then
+					return
+				end
+				if moduleList[selectEntityName] then
+					SIPrint.Warning( playerIndex , { "SICore.紫图-提示-设置插件-已存在" , selectEntityName , game.entity_prototypes[selectEntityName].localised_name } )
+					element.elem_value = nil
+					return
+				end
+				moduleList[selectEntityName] = {}
+			end
+			SIRequestMap.FreshPage_SetModule( settings , tabSettings , settings.Elements[tabSettingsIndex] )
+		end
+	end ,
+	Set_SetModule_Item = function( playerIndex , name , element )
+		local settings = SIGlobal.GetPlayerSettings( SIRequestMap.Settings.Name , playerIndex )
+		if settings.frame and settings.frame.valid then
+			-- 保存 [设置插件-物品] 选择的物品
+			local selectItemName = element.elem_value
+			local key = name:sub( SIRequestMap.Names.SetModule_Item_Position )
+			local location = key:find( "_" )
+			local slotIndex = tonumber( key:sub( 1 , location - 1 ) )
+			if slotIndex and slotIndex > 0 then
+				local entityName = key:sub( location + 1 )
+				local tabSettingsIndex = settings.tabSettingsIndex
+				local tabSettings = settings.TabSettingsList[tabSettingsIndex]
+				local moduleList = tabSettings.SetModule.List
+				moduleList[entityName][slotIndex] = selectItemName
+			end
+		end
+	end ,
 	Set_RemoveModule_ToInventory = function( playerIndex , element )
 		local settings = SIGlobal.GetPlayerSettings( SIRequestMap.Settings.Name , playerIndex )
 		if settings.frame and settings.frame.valid then
@@ -925,6 +1245,64 @@ SIRequestMap =
 			local tabSettings = settings.TabSettingsList[tabSettingsIndex]
 			tabSettings.RemoveModule.ToInventory = element.state
 			SIRequestMap.FreshPage_RemoveModule_Enable( settings , tabSettings , settings.Elements[tabSettingsIndex] )
+		end
+	end ,
+	Set_RemoveModule_Entity = function( playerIndex , name , element )
+		local settings = SIGlobal.GetPlayerSettings( SIRequestMap.Settings.Name , playerIndex )
+		if settings.frame and settings.frame.valid then
+			-- 保存 [移除插件-实体] 选择的实体
+			local selectEntityName = element.elem_value
+			local tabSettingsIndex = settings.tabSettingsIndex
+			local tabSettings = settings.TabSettingsList[tabSettingsIndex]
+			local moduleList = tabSettings.RemoveModule.List
+			local entityName = name:sub( SIRequestMap.Names.RemoveModule_Entity_Position )
+			if moduleList[entityName] then
+				if entityName == selectEntityName then
+					return
+				else
+					if selectEntityName == nil then
+						moduleList[entityName] = nil
+					else
+						local newModuleList = {}
+						for innerEntityName , requestItemList in pairs( moduleList ) do
+							if entityName == innerEntityName then
+								newModuleList[selectEntityName] = {}
+							else
+								newModuleList[innerEntityName] = requestItemList
+							end
+						end
+						tabSettings.RemoveModule.List = newModuleList
+					end
+				end
+			else
+				if selectEntityName == nil then
+					return
+				end
+				if moduleList[selectEntityName] then
+					SIPrint.Warning( playerIndex , { "SICore.紫图-提示-移除插件-已存在" , selectEntityName , game.entity_prototypes[selectEntityName].localised_name } )
+					element.elem_value = nil
+					return
+				end
+				moduleList[selectEntityName] = {}
+			end
+			SIRequestMap.FreshPage_RemoveModule( settings , tabSettings , settings.Elements[tabSettingsIndex] )
+		end
+	end ,
+	Set_RemoveModule_Item = function( playerIndex , name , element )
+		local settings = SIGlobal.GetPlayerSettings( SIRequestMap.Settings.Name , playerIndex )
+		if settings.frame and settings.frame.valid then
+			-- 保存 [移除插件-物品] 选择的物品
+			local selectItemName = element.elem_value
+			local key = name:sub( SIRequestMap.Names.RemoveModule_Item_Position )
+			local location = key:find( "_" )
+			local slotIndex = tonumber( key:sub( 1 , location - 1 ) )
+			if slotIndex and slotIndex > 0 then
+				local entityName = key:sub( location + 1 )
+				local tabSettingsIndex = settings.tabSettingsIndex
+				local tabSettings = settings.TabSettingsList[tabSettingsIndex]
+				local moduleList = tabSettings.RemoveModule.List
+				moduleList[entityName][slotIndex] = selectItemName
+			end
 		end
 	end ,
 	EffectTabSettings = function( settings , tabSettingsIndex )
@@ -1048,6 +1426,10 @@ SIRequestMap.Names.RequestSlot_Entity_Position = #SIRequestMap.Names.RequestSlot
 SIRequestMap.Names.RequestSlot_Item_Position = #SIRequestMap.Names.RequestSlot_Item_Prefix + 1
 SIRequestMap.Names.MaxSlot_Entity_Position = #SIRequestMap.Names.MaxSlot_Entity_Prefix + 1
 SIRequestMap.Names.MaxSlot_Count_Position = #SIRequestMap.Names.MaxSlot_Count_Prefix + 1
+SIRequestMap.Names.SetModule_Entity_Position = #SIRequestMap.Names.SetModule_Entity_Prefix + 1
+SIRequestMap.Names.SetModule_Item_Position = #SIRequestMap.Names.SetModule_Item_Prefix + 1
+SIRequestMap.Names.RemoveModule_Entity_Position = #SIRequestMap.Names.RemoveModule_Entity_Prefix + 1
+SIRequestMap.Names.RemoveModule_Item_Position = #SIRequestMap.Names.RemoveModule_Item_Prefix + 1
 
 SIRequestMap.Toolbar =
 {

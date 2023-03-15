@@ -855,6 +855,22 @@ end )
 			SIRequestMap.Set_MaxSlot_Entity( playerIndex , name , element )
 			return
 		end
+		if name:StartsWith( SIRequestMap.Names.SetModule_Entity_Prefix ) then
+			SIRequestMap.Set_SetModule_Entity( playerIndex , name , element )
+			return
+		end
+		if name:StartsWith( SIRequestMap.Names.SetModule_Item_Prefix ) then
+			SIRequestMap.Set_SetModule_Item( playerIndex , name , element )
+			return
+		end
+		if name:StartsWith( SIRequestMap.Names.RemoveModule_Entity_Prefix ) then
+			SIRequestMap.Set_RemoveModule_Entity( playerIndex , name , element )
+			return
+		end
+		if name:StartsWith( SIRequestMap.Names.RemoveModule_Item_Prefix ) then
+			SIRequestMap.Set_RemoveModule_Item( playerIndex , name , element )
+			return
+		end
 		return
 	end
 end )
