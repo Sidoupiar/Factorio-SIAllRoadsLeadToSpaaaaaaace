@@ -1224,16 +1224,30 @@ SIRequestMap =
 					elem_filters = SIRequestMap.InsertAmmo_Entity_Filters ,
 					style = SIConstants_Core.raw.Styles.RequestMap_ListChooser
 				}
+				local type = entityPrototype.type
+				local maxAmmoSize = 0
+				if type == SICommon.Types.Entities.TurretAmmo then
+					maxAmmoSize = entityPrototype.get_inventory_size( defines.inventory.turret_ammo )
+				elseif type == SICommon.Types.Entities.TurretArtillery then
+					maxAmmoSize = entityPrototype.get_inventory_size( defines.inventory.artillery_turret_ammo )
+				elseif type == SICommon.Types.Entities.Car then
+					maxAmmoSize = entityPrototype.get_inventory_size( defines.inventory.car_ammo )
+				elseif type == SICommon.Types.Entities.SpiderVehicle then
+					maxAmmoSize = entityPrototype.get_inventory_size( defines.inventory.spider_ammo )
+				elseif type == SICommon.Types.Entities.WagonArtillery then
+					maxAmmoSize = entityPrototype.get_inventory_size( defines.inventory.artillery_wagon_ammo )
+				end
 				for itemDataIndex = 1 , maxAmmoSize , 1 do
 					local itemData = itemDataList[itemDataIndex]
 					if not itemData then
 						itemData = {}
 						itemDataList[itemDataIndex] = itemData
 					end
+					local weapon = entityPrototype.indexed_guns[itemDataIndex]
 					local weaponChooser = list.add
 					{
 						type = "choose-elem-button" ,
-						tooltip = weaponTooltip ,
+						tooltip = { "SICore.紫图-窗口-插入弹药-武器-提示" , weapon.localised_name } ,
 						elem_type = "item" ,
 						item = weapon ,
 						style = SIConstants_Core.raw.Styles.RequestMap_ListChooser
@@ -1291,7 +1305,7 @@ SIRequestMap =
 					local weaponChooser = list.add
 					{
 						type = "choose-elem-button" ,
-						tooltip = { "SICore.紫图-窗口-插入弹药-武器-空-提示" } ,
+						tooltip = { "SICore.紫图-窗口-插入弹药-武器-空-提示" , entityName } ,
 						elem_type = "item" ,
 						item = SIConstants_Core.raw.Items.IconEmpty ,
 						style = SIConstants_Core.raw.Styles.RequestMap_ListChooser
@@ -1548,7 +1562,7 @@ SIRequestMap =
 	Set_MaxSlot_Count = function( playerIndex , name , element )
 		local settings = SIGlobal.GetPlayerSettings( SIRequestMap.Settings.Name , playerIndex )
 		if settings.frame and settings.frame.valid then
-			-- 保存 [最大格子-物品] 选择的物品
+			-- 保存 [最大格子-数量] 填写的数量
 			local count = math.floor( tonumber( element.text ) or 0 )
 			element.text = tostring( count )
 			local tabSettingsIndex = settings.tabSettingsIndex
@@ -1711,6 +1725,194 @@ SIRequestMap =
 				local tabSettings = settings.TabSettingsList[tabSettingsIndex]
 				local moduleList = tabSettings.RemoveModule.List
 				moduleList[entityName][slotIndex] = selectItemName
+			end
+		end
+	end ,
+	Set_InsertFuel_Entity = function( playerIndex , name , element )
+		local settings = SIGlobal.GetPlayerSettings( SIRequestMap.Settings.Name , playerIndex )
+		if settings.frame and settings.frame.valid then
+			-- 保存 [插入燃料-实体] 选择的实体
+			local selectEntityName = element.elem_value
+			local tabSettingsIndex = settings.tabSettingsIndex
+			local tabSettings = settings.TabSettingsList[tabSettingsIndex]
+			local itemDataList = tabSettings.InsertFuel.List
+			local entityName = name:sub( SIRequestMap.Names.InsertFuel_Entity_Position )
+			if itemDataList[entityName] then
+				if entityName == selectEntityName then
+					return
+				else
+					if selectEntityName == nil then
+						itemDataList[entityName] = nil
+					else
+						local newItemDataList = {}
+						for innerEntityName , requestItemList in pairs( itemDataList ) do
+							if entityName == innerEntityName then
+								newItemDataList[selectEntityName] = {}
+							else
+								newItemDataList[innerEntityName] = requestItemList
+							end
+						end
+						tabSettings.InsertFuel.List = newItemDataList
+					end
+				end
+			else
+				if selectEntityName == nil then
+					return
+				end
+				if itemDataList[selectEntityName] then
+					SIPrint.Warning( playerIndex , { "SICore.紫图-提示-插入燃料-已存在" , selectEntityName , game.entity_prototypes[selectEntityName].localised_name } )
+					element.elem_value = nil
+					return
+				end
+				itemDataList[selectEntityName] = {}
+			end
+			SIRequestMap.FreshPage_InsertFuel( settings , tabSettings , settings.Elements[tabSettingsIndex] )
+		end
+	end ,
+	Set_InsertFuel_Item = function( playerIndex , name , element )
+		local settings = SIGlobal.GetPlayerSettings( SIRequestMap.Settings.Name , playerIndex )
+		if settings.frame and settings.frame.valid then
+			-- 保存 [插入燃料-物品] 选择的物品
+			local selectItemName = element.elem_value
+			local key = name:sub( SIRequestMap.Names.InsertFuel_Item_Position )
+			local location = key:find( "_" )
+			local itemDataIndex = tonumber( key:sub( 1 , location - 1 ) )
+			if itemDataIndex and itemDataIndex > 0 then
+				local entityName = key:sub( location + 1 )
+				local tabSettingsIndex = settings.tabSettingsIndex
+				local tabSettings = settings.TabSettingsList[tabSettingsIndex]
+				local itemDataList = tabSettings.InsertFuel.List
+				itemDataList[entityName][itemDataIndex].Item = selectItemName
+			end
+		end
+	end ,
+	Set_InsertFuel_Count = function( playerIndex , name , element )
+		local settings = SIGlobal.GetPlayerSettings( SIRequestMap.Settings.Name , playerIndex )
+		if settings.frame and settings.frame.valid then
+			-- 保存 [插入燃料-数量] 填写的数量
+			local count = math.floor( tonumber( element.text ) or 0 )
+			element.text = tostring( count )
+			local key = name:sub( SIRequestMap.Names.InsertFuel_Count_Position )
+			local location = key:find( "_" )
+			local itemDataIndex = tonumber( key:sub( 1 , location - 1 ) )
+			if itemDataIndex and itemDataIndex > 0 then
+				local entityName = key:sub( location + 1 )
+				local tabSettingsIndex = settings.tabSettingsIndex
+				local tabSettings = settings.TabSettingsList[tabSettingsIndex]
+				local itemDataList = tabSettings.InsertFuel.List
+				itemDataList[entityName][itemDataIndex].Count = count
+			end
+		end
+	end ,
+	Set_InsertFuel_Mode = function( playerIndex , name , element )
+		local settings = SIGlobal.GetPlayerSettings( SIRequestMap.Settings.Name , playerIndex )
+		if settings.frame and settings.frame.valid then
+			-- 保存 [插入燃料-模式] 选择的模式
+			local selectedIndex = element.selected_index or 1
+			element.selected_index = selectedIndex
+			local key = name:sub( SIRequestMap.Names.InsertFuel_Mode_Position )
+			local location = key:find( "_" )
+			local itemDataIndex = tonumber( key:sub( 1 , location - 1 ) )
+			if itemDataIndex and itemDataIndex > 0 then
+				local entityName = key:sub( location + 1 )
+				local tabSettingsIndex = settings.tabSettingsIndex
+				local tabSettings = settings.TabSettingsList[tabSettingsIndex]
+				local itemDataList = tabSettings.InsertFuel.List
+				itemDataList[entityName][itemDataIndex].Mode = selectedIndex
+			end
+		end
+	end ,
+	Set_InsertAmmo_Entity = function( playerIndex , name , element )
+		local settings = SIGlobal.GetPlayerSettings( SIRequestMap.Settings.Name , playerIndex )
+		if settings.frame and settings.frame.valid then
+			-- 保存 [插入弹药-实体] 选择的实体
+			local selectEntityName = element.elem_value
+			local tabSettingsIndex = settings.tabSettingsIndex
+			local tabSettings = settings.TabSettingsList[tabSettingsIndex]
+			local itemDataList = tabSettings.InsertAmmo.List
+			local entityName = name:sub( SIRequestMap.Names.InsertAmmo_Entity_Position )
+			if itemDataList[entityName] then
+				if entityName == selectEntityName then
+					return
+				else
+					if selectEntityName == nil then
+						itemDataList[entityName] = nil
+					else
+						local newItemDataList = {}
+						for innerEntityName , requestItemList in pairs( itemDataList ) do
+							if entityName == innerEntityName then
+								newItemDataList[selectEntityName] = {}
+							else
+								newItemDataList[innerEntityName] = requestItemList
+							end
+						end
+						tabSettings.InsertAmmo.List = newItemDataList
+					end
+				end
+			else
+				if selectEntityName == nil then
+					return
+				end
+				if itemDataList[selectEntityName] then
+					SIPrint.Warning( playerIndex , { "SICore.紫图-提示-插入弹药-已存在" , selectEntityName , game.entity_prototypes[selectEntityName].localised_name } )
+					element.elem_value = nil
+					return
+				end
+				itemDataList[selectEntityName] = {}
+			end
+			SIRequestMap.FreshPage_InsertAmmo( settings , tabSettings , settings.Elements[tabSettingsIndex] )
+		end
+	end ,
+	Set_InsertAmmo_Item = function( playerIndex , name , element )
+		local settings = SIGlobal.GetPlayerSettings( SIRequestMap.Settings.Name , playerIndex )
+		if settings.frame and settings.frame.valid then
+			-- 保存 [插入弹药-物品] 选择的物品
+			local selectItemName = element.elem_value
+			local key = name:sub( SIRequestMap.Names.InsertAmmo_Item_Position )
+			local location = key:find( "_" )
+			local itemDataIndex = tonumber( key:sub( 1 , location - 1 ) )
+			if itemDataIndex and itemDataIndex > 0 then
+				local entityName = key:sub( location + 1 )
+				local tabSettingsIndex = settings.tabSettingsIndex
+				local tabSettings = settings.TabSettingsList[tabSettingsIndex]
+				local itemDataList = tabSettings.InsertAmmo.List
+				itemDataList[entityName][itemDataIndex].Item = selectItemName
+			end
+		end
+	end ,
+	Set_InsertAmmo_Count = function( playerIndex , name , element )
+		local settings = SIGlobal.GetPlayerSettings( SIRequestMap.Settings.Name , playerIndex )
+		if settings.frame and settings.frame.valid then
+			-- 保存 [插入弹药-数量] 填写的数量
+			local count = math.floor( tonumber( element.text ) or 0 )
+			element.text = tostring( count )
+			local key = name:sub( SIRequestMap.Names.InsertAmmo_Count_Position )
+			local location = key:find( "_" )
+			local itemDataIndex = tonumber( key:sub( 1 , location - 1 ) )
+			if itemDataIndex and itemDataIndex > 0 then
+				local entityName = key:sub( location + 1 )
+				local tabSettingsIndex = settings.tabSettingsIndex
+				local tabSettings = settings.TabSettingsList[tabSettingsIndex]
+				local itemDataList = tabSettings.InsertAmmo.List
+				itemDataList[entityName][itemDataIndex].Count = count
+			end
+		end
+	end ,
+	Set_InsertAmmo_Mode = function( playerIndex , name , element )
+		local settings = SIGlobal.GetPlayerSettings( SIRequestMap.Settings.Name , playerIndex )
+		if settings.frame and settings.frame.valid then
+			-- 保存 [插入弹药-模式] 选择的模式
+			local selectedIndex = element.selected_index or 1
+			element.selected_index = selectedIndex
+			local key = name:sub( SIRequestMap.Names.InsertAmmo_Mode_Position )
+			local location = key:find( "_" )
+			local itemDataIndex = tonumber( key:sub( 1 , location - 1 ) )
+			if itemDataIndex and itemDataIndex > 0 then
+				local entityName = key:sub( location + 1 )
+				local tabSettingsIndex = settings.tabSettingsIndex
+				local tabSettings = settings.TabSettingsList[tabSettingsIndex]
+				local itemDataList = tabSettings.InsertAmmo.List
+				itemDataList[entityName][itemDataIndex].Mode = selectedIndex
 			end
 		end
 	end ,

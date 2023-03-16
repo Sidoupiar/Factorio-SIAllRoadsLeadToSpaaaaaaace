@@ -754,6 +754,14 @@ end )
 		SIRequestMap.Set_MaxSlot_Count( playerIndex , name , element )
 		return
 	end
+	if name:StartsWith( SIRequestMap.Names.InsertFuel_Count_Prefix ) then
+		SIRequestMap.Set_InsertFuel_Count( playerIndex , name , element )
+		return
+	end
+	if name:StartsWith( SIRequestMap.Names.InsertAmmo_Count_Prefix ) then
+		SIRequestMap.Set_InsertAmmo_Count( playerIndex , name , element )
+		return
+	end
 end )
 .Add( SIEvents.on_gui_checked_state_changed , function( event , functionID )
 	local element = event.element
@@ -812,6 +820,14 @@ end )
 	-- 紫图的管理窗口事件
 	if name == SIRequestMap.Names.DefaultIndex then
 		SIRequestMap.Set_DefaultIndex( playerIndex , element )
+		return
+	end
+	if name:StartsWith( SIRequestMap.Names.InsertFuel_Mode_Prefix ) then
+		SIRequestMap.Set_InsertFuel_Mode( playerIndex , name , element )
+		return
+	end
+	if name:StartsWith( SIRequestMap.Names.InsertAmmo_Mode_Prefix ) then
+		SIRequestMap.Set_InsertAmmo_Mode( playerIndex , name , element )
 		return
 	end
 end )
@@ -875,6 +891,22 @@ end )
 		end
 		if name:StartsWith( SIRequestMap.Names.RemoveModule_Item_Prefix ) then
 			SIRequestMap.Set_RemoveModule_Item( playerIndex , name , element )
+			return
+		end
+		if name:StartsWith( SIRequestMap.Names.InsertFuel_Entity_Prefix ) then
+			SIRequestMap.Set_InsertFuel_Entity( playerIndex , name , element )
+			return
+		end
+		if name:StartsWith( SIRequestMap.Names.InsertFuel_Item_Prefix ) then
+			SIRequestMap.Set_InsertFuel_Item( playerIndex , name , element )
+			return
+		end
+		if name:StartsWith( SIRequestMap.Names.InsertAmmo_Entity_Prefix ) then
+			SIRequestMap.Set_InsertAmmo_Entity( playerIndex , name , element )
+			return
+		end
+		if name:StartsWith( SIRequestMap.Names.InsertAmmo_Item_Prefix ) then
+			SIRequestMap.Set_InsertAmmo_Item( playerIndex , name , element )
 			return
 		end
 		return
