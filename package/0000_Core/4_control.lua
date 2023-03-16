@@ -285,7 +285,8 @@ SIControl.Init
 		RequestMap_ListChooser = "紫图-列表选择" ,
 		RequestMap_ListFlow = "紫图-列表布局" ,
 		RequestMap_ListLabel = "紫图-列表标签" ,
-		RequestMap_ListText = "紫图-列表文本条"
+		RequestMap_ListText = "紫图-列表文本条" ,
+		RequestMap_ListDropDown = "紫图-列表下拉列表"
 	}
 }
 

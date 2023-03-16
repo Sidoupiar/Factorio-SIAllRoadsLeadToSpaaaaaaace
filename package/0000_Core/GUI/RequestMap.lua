@@ -163,6 +163,11 @@ SIRequestMap =
 		[4] = { "SICore.紫图-窗口-选择-3" } ,
 		[5] = { "SICore.紫图-窗口-选择-4" }
 	} ,
+	CountModeText =
+	{
+		[1] = { "SICore.紫图-窗口-计数-整体计数" } ,
+		[2] = { "SICore.紫图-窗口-计数-独立计数" }
+	} ,
 	RequestSlot_ItemSlotMax = 200 ,
 	RequestSlot_Entity_Filters =
 	{
@@ -653,14 +658,14 @@ SIRequestMap =
 		elements.InsertFuel_Enable = list.add{ type = "checkbox" , name = SIRequestMap.Names.EnablePrefix .. "InsertFuel_Flow" , state = false , caption = { "SICore.紫图-窗口-插入燃料-启用" , { "SICore.紫图-窗口-启用-未设置" } } , tooltip = { "SICore.紫图-窗口-插入燃料-启用-提示" } , style = SIConstants_Core.raw.Styles.RequestMap_ListCheck }
 		local InsertFuel_Flow = list.add{ type = "flow" , direction = "vertical" , style = SIConstants_Core.raw.Styles.RequestMap_ListPanelFlow }
 		elements.InsertFuel_Flow = InsertFuel_Flow
-		elements.InsertFuel_List = InsertFuel_Flow.add{ type = "table" , column_count = 5 , style = SIConstants_Core.raw.Styles.RequestMap_SubList }
+		elements.InsertFuel_List = InsertFuel_Flow.add{ type = "table" , column_count = 6 , style = SIConstants_Core.raw.Styles.RequestMap_SubList }
 		-- ----------------------------------------
 		-- 插入弹药
 		-- ----------------------------------------
 		elements.InsertAmmo_Enable = list.add{ type = "checkbox" , name = SIRequestMap.Names.EnablePrefix .. "InsertAmmo_Flow" , state = false , caption = { "SICore.紫图-窗口-插入弹药-启用" , { "SICore.紫图-窗口-启用-未设置" } } , tooltip = { "SICore.紫图-窗口-插入弹药-启用-提示" } , style = SIConstants_Core.raw.Styles.RequestMap_ListCheck }
 		local InsertAmmo_Flow = list.add{ type = "flow" , direction = "vertical" , style = SIConstants_Core.raw.Styles.RequestMap_ListPanelFlow }
 		elements.InsertAmmo_Flow = InsertAmmo_Flow
-		elements.InsertAmmo_List = InsertAmmo_Flow.add{ type = "table" , column_count = 5 , style = SIConstants_Core.raw.Styles.RequestMap_SubList }
+		elements.InsertAmmo_List = InsertAmmo_Flow.add{ type = "table" , column_count = 6 , style = SIConstants_Core.raw.Styles.RequestMap_SubList }
 		-- ----------------------------------------
 		-- 创建滚动定位按钮
 		-- ----------------------------------------
@@ -1137,6 +1142,19 @@ SIRequestMap =
 						item = item ,
 						elem_filters = fuelFilter ,
 						style = SIConstants_Core.raw.Styles.RequestMap_ListChooser
+					}
+					list.add{ type = "label" , caption = { "SICore.紫图-窗口-插入燃料-数量" } , tooltip = { "SICore.紫图-窗口-插入燃料-数量-提示" } , style = SIConstants_Core.raw.Styles.RequestMap_ListLabel }
+					list.add{ type = "textfield" , name = SIRequestMap.Names.InsertFuel_Count_Prefix .. itemDataIndex .. "_" .. entityName , text = tostring( itemData.Count or 1 ) , numeric = true , tooltip = { "SICore.紫图-窗口-插入燃料-数量-提示" } , style = SIConstants_Core.raw.Styles.RequestMap_ListText }
+					list.add{ type = "label" , caption = { "SICore.紫图-窗口-插入燃料-模式" } , tooltip = { "SICore.紫图-窗口-插入燃料-模式-提示" } , style = SIConstants_Core.raw.Styles.RequestMap_ListLabel }
+					list.add
+					{
+						type = "drop-down" ,
+						name = SIRequestMap.Names.InsertFuel_Mode_Prefix .. itemDataIndex .. "_" .. entityName ,
+						caption = { "SICore.紫图-窗口-插入燃料-模式" } ,
+						tooltip = { "SICore.紫图-窗口-插入燃料-模式-提示" } ,
+						items = SIRequestMap.CountModeText ,
+						selected_index = itemData.Mode or 1 ,
+						style = SIConstants_Core.raw.Styles.RequestMap_ListDropDown
 					}
 				end
 			end

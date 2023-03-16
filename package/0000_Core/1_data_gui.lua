@@ -2320,3 +2320,11 @@ SIGen
 	-- 体积
 	width = 120
 } )
+.AddStyle( "RequestMap_ListDropDown" , "紫图-列表下拉列表" ,
+{
+	type = "dropdown_style" ,
+	parent = SIConstants_Core.raw.Styles.Common_DropDown ,
+	-- 体积
+	width = 120 ,
+	height = 28
+} )
