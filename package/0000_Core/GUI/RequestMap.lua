@@ -27,10 +27,10 @@ SIRequestMap =
 		SetModule_Item_Prefix = "SI核心-紫图-设置插件-物品-" ,
 		RemoveModule_Entity_Prefix = "SI核心-紫图-移除插件-实体-" ,
 		RemoveModule_Item_Prefix = "SI核心-紫图-移除插件-物品-" ,
-		InsertItem_Entity_Prefix = "SI核心-紫图-插入物品-实体-" ,
-		InsertItem_Item_Prefix = "SI核心-紫图-插入物品-物品-" ,
-		InsertItem_Count_Prefix = "SI核心-紫图-插入物品-数量-" ,
-		InsertItem_Mode_Prefix = "SI核心-紫图-插入物品-模式-"
+		InsertFuel_Entity_Prefix = "SI核心-紫图-插入燃料-实体-" ,
+		InsertFuel_Item_Prefix = "SI核心-紫图-插入燃料-物品-" ,
+		InsertFuel_Count_Prefix = "SI核心-紫图-插入燃料-数量-" ,
+		InsertFuel_Mode_Prefix = "SI核心-紫图-插入燃料-模式-"
 	} ,
 	Settings =
 	{
@@ -72,10 +72,10 @@ SIRequestMap =
 				-- 	RemoveModule_ToInventory = nil ,
 				--	RemoveModule_Invert = nil ,
 				-- 	RemoveModule_List = nil ,
-				-- 	-- 插入物品
-				-- 	InsertItem_Enable = nil ,
-				-- 	InsertItem_Flow = nil ,
-				-- 	InsertItem_List = nil
+				-- 	-- 插入燃料
+				-- 	InsertFuel_Enable = nil ,
+				-- 	InsertFuel_Flow = nil ,
+				-- 	InsertFuel_List = nil
 				-- }
 			} ,
 			entities = nil ,
@@ -124,8 +124,8 @@ SIRequestMap =
 			Invert = false ,
 			List = {} -- 键为选择的设备实体 , 值为插件物品名称列表
 		} ,
-		-- 插入物品
-		InsertItem =
+		-- 插入燃料
+		InsertFuel =
 		{
 			Enable = false ,
 			List = {} -- 键为选择的设备实体 , 值为物品名称列表 , 列表每一项都是一个配置 , 决定数量和插入方式
@@ -138,7 +138,7 @@ SIRequestMap =
 		GreenToBlue  = SIConstants_Core.raw.Items.IconColorGrass ,
 		SetModule    = SIConstants_Core.raw.Items.IconColorDream ,
 		RemoveModule = SIConstants_Core.raw.Items.IconColorSliver ,
-		InsertItem   = SIConstants_Core.raw.Items.IconColorMeat
+		InsertFuel   = SIConstants_Core.raw.Items.IconColorMeat
 	} ,
 	DefaultIndexText =
 	{
@@ -305,7 +305,7 @@ SIRequestMap =
 			mode = SICommon.Flags.Condition.OR
 		}
 	} ,
-	InsertItem_Entity_Filters =
+	InsertFuel_Entity_Filters =
 	{
 		{
 			filter = "type" ,
@@ -340,7 +340,7 @@ SIRequestMap =
 			mode = SICommon.Flags.Condition.OR
 		}
 	} ,
-	InsertItem_ItemFuel_Filters =
+	InsertFuel_ItemFuel_Filters =
 	{
 		{
 			filter = "fuel" ,
@@ -359,7 +359,7 @@ SIRequestMap =
 			mode = SICommon.Flags.Condition.OR
 		}
 	} ,
-	InsertItem_ItemAmmo_Filters =
+	InsertAmmo_ItemAmmo_Filters =
 	{
 		{
 			filter = "type" ,
@@ -598,12 +598,12 @@ SIRequestMap =
 		elements.RemoveModule_Invert = RemoveModule_Flow.add{ type = "checkbox" , name = SIRequestMap.Names.RemoveModule_Invert , state = false , caption = { "SICore.紫图-窗口-移除插件-条件反转" } , tooltip = { "SICore.紫图-窗口-移除插件-条件反转-提示" } , style = SIConstants_Core.raw.Styles.Common_CheckBox }
 		elements.RemoveModule_List = RemoveModule_Flow.add{ type = "table" , column_count = 2 , style = SIConstants_Core.raw.Styles.RequestMap_SubList }
 		-- ----------------------------------------
-		-- 插入物品
+		-- 插入燃料
 		-- ----------------------------------------
-		elements.InsertItem_Enable = list.add{ type = "checkbox" , name = SIRequestMap.Names.EnablePrefix .. "InsertItem_Flow" , state = false , caption = { "SICore.紫图-窗口-插入物品-启用" , { "SICore.紫图-窗口-启用-未设置" } } , tooltip = { "SICore.紫图-窗口-插入物品-启用-提示" } , style = SIConstants_Core.raw.Styles.RequestMap_ListCheck }
-		local InsertItem_Flow = list.add{ type = "flow" , direction = "vertical" , style = SIConstants_Core.raw.Styles.RequestMap_ListPanelFlow }
-		elements.InsertItem_Flow = InsertItem_Flow
-		elements.InsertItem_List = InsertItem_Flow.add{ type = "table" , column_count = 5 , style = SIConstants_Core.raw.Styles.RequestMap_SubList }
+		elements.InsertFuel_Enable = list.add{ type = "checkbox" , name = SIRequestMap.Names.EnablePrefix .. "InsertFuel_Flow" , state = false , caption = { "SICore.紫图-窗口-插入燃料-启用" , { "SICore.紫图-窗口-启用-未设置" } } , tooltip = { "SICore.紫图-窗口-插入燃料-启用-提示" } , style = SIConstants_Core.raw.Styles.RequestMap_ListCheck }
+		local InsertFuel_Flow = list.add{ type = "flow" , direction = "vertical" , style = SIConstants_Core.raw.Styles.RequestMap_ListPanelFlow }
+		elements.InsertFuel_Flow = InsertFuel_Flow
+		elements.InsertFuel_List = InsertFuel_Flow.add{ type = "table" , column_count = 5 , style = SIConstants_Core.raw.Styles.RequestMap_SubList }
 		-- ----------------------------------------
 		-- 创建滚动定位按钮
 		-- ----------------------------------------
@@ -673,11 +673,11 @@ SIRequestMap =
 		elements.RemoveModule_Invert.state = tabSettings.RemoveModule.Invert
 		SIRequestMap.FreshPage_RemoveModule( settings , tabSettings , elements )
 		-- ----------------------------------------
-		-- 插入物品
+		-- 插入燃料
 		-- ----------------------------------------
-		elements.InsertItem_Enable.state = tabSettings.InsertItem.Enable
-		elements.InsertItem_Flow.visible = tabSettings.InsertItem.Enable
-		SIRequestMap.FreshPage_InsertItem( settings , tabSettings , elements )
+		elements.InsertFuel_Enable.state = tabSettings.InsertFuel.Enable
+		elements.InsertFuel_Flow.visible = tabSettings.InsertFuel.Enable
+		SIRequestMap.FreshPage_InsertFuel( settings , tabSettings , elements )
 	end ,
 	FreshPage_RequestSlot = function( settings , tabSettings , elements )
 		-- 更新说明
@@ -1019,35 +1019,35 @@ SIRequestMap =
 		-- 更新说明
 		elements.RemoveModule_Enable.caption = { "SICore.紫图-窗口-移除插件-启用" , { ( tabSettings.RemoveModule.ToInventory or tabSettings.RemoveModule.Invert or SITable.Size( tabSettings.RemoveModule.List ) > 0 ) and "SICore.紫图-窗口-启用-已设置" or "SICore.紫图-窗口-启用-未设置" } }
 	end ,
-	FreshPage_InsertItem = function( settings , tabSettings , elements )
+	FreshPage_InsertFuel = function( settings , tabSettings , elements )
 		-- 更新说明
-		elements.InsertItem_Enable.caption = { "SICore.紫图-窗口-插入物品-启用" , { SITable.Size( tabSettings.InsertItem.List ) > 0 and "SICore.紫图-窗口-启用-已设置" or "SICore.紫图-窗口-启用-未设置" } }
+		elements.InsertFuel_Enable.caption = { "SICore.紫图-窗口-插入燃料-启用" , { SITable.Size( tabSettings.InsertFuel.List ) > 0 and "SICore.紫图-窗口-启用-已设置" or "SICore.紫图-窗口-启用-未设置" } }
 		-- 清空列表
-		local list = elements.InsertItem_List
+		local list = elements.InsertFuel_List
 		list.clear()
 		-- 重建列表
-		for entityName , itemDataList in pairs( tabSettings.InsertItem.List ) do
+		for entityName , itemDataList in pairs( tabSettings.InsertFuel.List ) do
 			local entityPrototype = game.entity_prototypes[entityName]
 			if entityPrototype then
 				list.add
 				{
 					type = "choose-elem-button" ,
-					name = SIRequestMap.Names.InsertItem_Entity_Prefix .. entityName ,
-					tooltip = { "SICore.紫图-窗口-插入物品-实体-提示" , entityPrototype.localised_name } ,
+					name = SIRequestMap.Names.InsertFuel_Entity_Prefix .. entityName ,
+					tooltip = { "SICore.紫图-窗口-插入燃料-实体-提示" , entityPrototype.localised_name } ,
 					elem_type = "entity" ,
 					entity = entityName ,
-					elem_filters = SIRequestMap.InsertItem_Entity_Filters ,
+					elem_filters = SIRequestMap.InsertFuel_Entity_Filters ,
 					style = SIConstants_Core.raw.Styles.RequestMap_ListChooser
 				}
 			else
 				list.add
 				{
 					type = "choose-elem-button" ,
-					name = SIRequestMap.Names.InsertItem_Entity_Prefix .. entityName ,
-					tooltip = { "SICore.紫图-窗口-插入物品-实体-空-提示" , entityName } ,
+					name = SIRequestMap.Names.InsertFuel_Entity_Prefix .. entityName ,
+					tooltip = { "SICore.紫图-窗口-插入燃料-实体-空-提示" , entityName } ,
 					elem_type = "entity" ,
 					entity = SIConstants_Core.raw.Entities.IconEmpty ,
-					elem_filters = SIRequestMap.InsertItem_Entity_Filters ,
+					elem_filters = SIRequestMap.InsertFuel_Entity_Filters ,
 					style = SIConstants_Core.raw.Styles.RequestMap_ListChooser
 				}
 			end
@@ -1055,11 +1055,11 @@ SIRequestMap =
 		list.add
 		{
 			type = "choose-elem-button" ,
-			name = SIRequestMap.Names.InsertItem_Entity_Prefix ,
-			tooltip = { "SICore.紫图-窗口-插入物品-实体-选择-提示" } ,
+			name = SIRequestMap.Names.InsertFuel_Entity_Prefix ,
+			tooltip = { "SICore.紫图-窗口-插入燃料-实体-选择-提示" } ,
 			elem_type = "entity" ,
 			entity = nil ,
-			elem_filters = SIRequestMap.InsertItem_Entity_Filters ,
+			elem_filters = SIRequestMap.InsertFuel_Entity_Filters ,
 			style = SIConstants_Core.raw.Styles.RequestMap_ListChooser
 		}
 	end ,
@@ -1449,7 +1449,7 @@ SIRequestMap =
 		-- 移除插件
 		-- ----------------------------------------
 		-- ----------------------------------------
-		-- 插入物品
+		-- 插入燃料
 		-- ----------------------------------------
 	end ,
 	EffectSelect1 = function( playerIndex , entities )
@@ -1555,10 +1555,10 @@ SIRequestMap.Names.SetModule_Entity_Position = #SIRequestMap.Names.SetModule_Ent
 SIRequestMap.Names.SetModule_Item_Position = #SIRequestMap.Names.SetModule_Item_Prefix + 1
 SIRequestMap.Names.RemoveModule_Entity_Position = #SIRequestMap.Names.RemoveModule_Entity_Prefix + 1
 SIRequestMap.Names.RemoveModule_Item_Position = #SIRequestMap.Names.RemoveModule_Item_Prefix + 1
-SIRequestMap.Names.InsertItem_Entity_Position = #SIRequestMap.Names.InsertItem_Entity_Prefix + 1
-SIRequestMap.Names.InsertItem_Item_Position = #SIRequestMap.Names.InsertItem_Item_Prefix + 1
-SIRequestMap.Names.InsertItem_Count_Position = #SIRequestMap.Names.InsertItem_Count_Prefix + 1
-SIRequestMap.Names.InsertItem_Mode_Position = #SIRequestMap.Names.InsertItem_Mode_Prefix + 1
+SIRequestMap.Names.InsertFuel_Entity_Position = #SIRequestMap.Names.InsertFuel_Entity_Prefix + 1
+SIRequestMap.Names.InsertFuel_Item_Position = #SIRequestMap.Names.InsertFuel_Item_Prefix + 1
+SIRequestMap.Names.InsertFuel_Count_Position = #SIRequestMap.Names.InsertFuel_Count_Prefix + 1
+SIRequestMap.Names.InsertFuel_Mode_Position = #SIRequestMap.Names.InsertFuel_Mode_Prefix + 1
 
 SIRequestMap.Toolbar =
 {
