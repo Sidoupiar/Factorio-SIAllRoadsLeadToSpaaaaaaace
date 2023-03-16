@@ -1106,6 +1106,53 @@ SIRequestMap =
 					elem_filters = SIRequestMap.InsertFuel_Entity_Filters ,
 					style = SIConstants_Core.raw.Styles.RequestMap_ListChooser
 				}
+				if entityPrototype.burner_prototype then
+					local fuelFilter = SIUtils.table.deepcopy( SIRequestMap.InsertFuel_Item_Filters )
+					fuelFilter[1]["fuel-category"] = entityPrototype.burner_prototype.fuel_categories
+					for itemDataIndex = 1 , entityPrototype.burner_prototype.fuel_inventory_size , 1 do
+						local itemData = itemDataList[itemDataIndex]
+						if not itemData then
+							itemData = {}
+							itemDataList[itemDataIndex] = itemData
+						end
+						local itemTooltip = nil
+						local item = itemData.Item
+						if item then
+							local itemPrototype = game.item_prototypes[item]
+							if itemPrototype then
+								itemTooltip = { "SICore.紫图-窗口-插入燃料-物品-提示" , itemPrototype.localised_name }
+							else
+								itemTooltip = { "SICore.紫图-窗口-插入燃料-物品-空-提示" , item }
+								item = SIConstants_Core.raw.Items.IconEmpty
+							end
+						else
+							itemTooltip = { "SICore.紫图-窗口-插入燃料-物品-选择-提示" }
+						end
+						list.add
+						{
+							type = "choose-elem-button" ,
+							name = SIRequestMap.Names.InsertFuel_Item_Prefix .. itemDataIndex .. "_" .. entityName ,
+							tooltip = itemTooltip ,
+							elem_type = "item" ,
+							item = item ,
+							elem_filters = fuelFilter ,
+							style = SIConstants_Core.raw.Styles.RequestMap_ListChooser
+						}
+						list.add{ type = "label" , caption = { "SICore.紫图-窗口-插入燃料-数量" } , tooltip = { "SICore.紫图-窗口-插入燃料-数量-提示" } , style = SIConstants_Core.raw.Styles.RequestMap_ListLabel }
+						list.add{ type = "textfield" , name = SIRequestMap.Names.InsertFuel_Count_Prefix .. itemDataIndex .. "_" .. entityName , text = tostring( itemData.Count or 1 ) , numeric = true , tooltip = { "SICore.紫图-窗口-插入燃料-数量-提示" } , style = SIConstants_Core.raw.Styles.RequestMap_ListText }
+						list.add{ type = "label" , caption = { "SICore.紫图-窗口-插入燃料-模式" } , tooltip = { "SICore.紫图-窗口-插入燃料-模式-提示" } , style = SIConstants_Core.raw.Styles.RequestMap_ListLabel }
+						list.add
+						{
+							type = "drop-down" ,
+							name = SIRequestMap.Names.InsertFuel_Mode_Prefix .. itemDataIndex .. "_" .. entityName ,
+							caption = { "SICore.紫图-窗口-插入燃料-模式" } ,
+							tooltip = { "SICore.紫图-窗口-插入燃料-模式-提示" } ,
+							items = SIRequestMap.CountModeText ,
+							selected_index = itemData.Mode or 1 ,
+							style = SIConstants_Core.raw.Styles.RequestMap_ListDropDown
+						}
+					end
+				end
 			else
 				list.add
 				{
