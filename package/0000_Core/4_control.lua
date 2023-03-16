@@ -84,7 +84,8 @@ SIControl.Init
 		IconColorGrass = "图标纯色草色" ,
 		IconColorDream = "图标纯色梦色" ,
 		IconColorSliver = "图标纯色银色" ,
-		IconColorMeat = "图标纯色肉色"
+		IconColorMeat = "图标纯色肉色" ,
+		IconColorRose = "图标纯色瑰色"
 	} ,
 	[SICommon.Types.Entities.SimpleOwner] =
 	{
