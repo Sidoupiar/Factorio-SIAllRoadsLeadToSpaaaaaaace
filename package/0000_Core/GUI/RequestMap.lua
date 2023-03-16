@@ -340,12 +340,9 @@ SIRequestMap =
 				SICommon.Types.Entities.Boiler ,
 				SICommon.Types.Entities.BurnerGenerator ,
 				SICommon.Types.Entities.Reactor ,
-				SICommon.Types.Entities.TurretAmmo ,
-				SICommon.Types.Entities.TurretArtillery ,
 				SICommon.Types.Entities.Car ,
 				SICommon.Types.Entities.SpiderVehicle ,
-				SICommon.Types.Entities.WagonLocomotive ,
-				SICommon.Types.Entities.WagonArtillery
+				SICommon.Types.Entities.WagonLocomotive
 			} ,
 			mode = SICommon.Flags.Condition.OR
 		} ,
@@ -385,20 +382,10 @@ SIRequestMap =
 			filter = "type" ,
 			type =
 			{
-				SICommon.Types.Entities.Machine ,
-				SICommon.Types.Entities.Furnace ,
-				SICommon.Types.Entities.Lab ,
-				SICommon.Types.Entities.Mining ,
-				SICommon.Types.Entities.Beacon ,
-				SICommon.Types.Entities.Inserter ,
-				SICommon.Types.Entities.Boiler ,
-				SICommon.Types.Entities.BurnerGenerator ,
-				SICommon.Types.Entities.Reactor ,
 				SICommon.Types.Entities.TurretAmmo ,
 				SICommon.Types.Entities.TurretArtillery ,
 				SICommon.Types.Entities.Car ,
 				SICommon.Types.Entities.SpiderVehicle ,
-				SICommon.Types.Entities.WagonLocomotive ,
 				SICommon.Types.Entities.WagonArtillery
 			} ,
 			mode = SICommon.Flags.Condition.OR
@@ -665,7 +652,7 @@ SIRequestMap =
 		elements.InsertAmmo_Enable = list.add{ type = "checkbox" , name = SIRequestMap.Names.EnablePrefix .. "InsertAmmo_Flow" , state = false , caption = { "SICore.紫图-窗口-插入弹药-启用" , { "SICore.紫图-窗口-启用-未设置" } } , tooltip = { "SICore.紫图-窗口-插入弹药-启用-提示" } , style = SIConstants_Core.raw.Styles.RequestMap_ListCheck }
 		local InsertAmmo_Flow = list.add{ type = "flow" , direction = "vertical" , style = SIConstants_Core.raw.Styles.RequestMap_ListPanelFlow }
 		elements.InsertAmmo_Flow = InsertAmmo_Flow
-		elements.InsertAmmo_List = InsertAmmo_Flow.add{ type = "table" , column_count = 6 , style = SIConstants_Core.raw.Styles.RequestMap_SubList }
+		elements.InsertAmmo_List = InsertAmmo_Flow.add{ type = "table" , column_count = 7 , style = SIConstants_Core.raw.Styles.RequestMap_SubList }
 		-- ----------------------------------------
 		-- 创建滚动定位按钮
 		-- ----------------------------------------
@@ -1237,6 +1224,58 @@ SIRequestMap =
 					elem_filters = SIRequestMap.InsertAmmo_Entity_Filters ,
 					style = SIConstants_Core.raw.Styles.RequestMap_ListChooser
 				}
+				for itemDataIndex = 1 , maxAmmoSize , 1 do
+					local itemData = itemDataList[itemDataIndex]
+					if not itemData then
+						itemData = {}
+						itemDataList[itemDataIndex] = itemData
+					end
+					local weaponChooser = list.add
+					{
+						type = "choose-elem-button" ,
+						tooltip = weaponTooltip ,
+						elem_type = "item" ,
+						item = weapon ,
+						style = SIConstants_Core.raw.Styles.RequestMap_ListChooser
+					}
+					weaponChooser.enabled = false
+					local itemTooltip = nil
+					local item = itemData.Item
+					if item then
+						local itemPrototype = game.item_prototypes[item]
+						if itemPrototype then
+							itemTooltip = { "SICore.紫图-窗口-插入弹药-物品-提示" , itemPrototype.localised_name }
+						else
+							itemTooltip = { "SICore.紫图-窗口-插入弹药-物品-空-提示" , item }
+							item = SIConstants_Core.raw.Items.IconEmpty
+						end
+					else
+						itemTooltip = { "SICore.紫图-窗口-插入弹药-物品-选择-提示" }
+					end
+					list.add
+					{
+						type = "choose-elem-button" ,
+						name = SIRequestMap.Names.InsertAmmo_Item_Prefix .. itemDataIndex .. "_" .. entityName ,
+						tooltip = itemTooltip ,
+						elem_type = "item" ,
+						item = item ,
+						elem_filters = SIRequestMap.InsertAmmo_Item_Filters ,
+						style = SIConstants_Core.raw.Styles.RequestMap_ListChooser
+					}
+					list.add{ type = "label" , caption = { "SICore.紫图-窗口-插入弹药-数量" } , tooltip = { "SICore.紫图-窗口-插入弹药-数量-提示" } , style = SIConstants_Core.raw.Styles.RequestMap_ListLabel }
+					list.add{ type = "textfield" , name = SIRequestMap.Names.InsertAmmo_Count_Prefix .. itemDataIndex .. "_" .. entityName , text = tostring( itemData.Count or 1 ) , numeric = true , tooltip = { "SICore.紫图-窗口-插入弹药-数量-提示" } , style = SIConstants_Core.raw.Styles.RequestMap_ListText }
+					list.add{ type = "label" , caption = { "SICore.紫图-窗口-插入弹药-模式" } , tooltip = { "SICore.紫图-窗口-插入弹药-模式-提示" } , style = SIConstants_Core.raw.Styles.RequestMap_ListLabel }
+					list.add
+					{
+						type = "drop-down" ,
+						name = SIRequestMap.Names.InsertAmmo_Mode_Prefix .. itemDataIndex .. "_" .. entityName ,
+						caption = { "SICore.紫图-窗口-插入弹药-模式" } ,
+						tooltip = { "SICore.紫图-窗口-插入弹药-模式-提示" } ,
+						items = SIRequestMap.CountModeText ,
+						selected_index = itemData.Mode or 1 ,
+						style = SIConstants_Core.raw.Styles.RequestMap_ListDropDown
+					}
+				end
 			else
 				list.add
 				{
@@ -1248,6 +1287,53 @@ SIRequestMap =
 					elem_filters = SIRequestMap.InsertAmmo_Entity_Filters ,
 					style = SIConstants_Core.raw.Styles.RequestMap_ListChooser
 				}
+				for itemDataIndex , itemData in pairs( itemDataList ) do
+					local weaponChooser = list.add
+					{
+						type = "choose-elem-button" ,
+						tooltip = { "SICore.紫图-窗口-插入弹药-武器-空-提示" } ,
+						elem_type = "item" ,
+						item = SIConstants_Core.raw.Items.IconEmpty ,
+						style = SIConstants_Core.raw.Styles.RequestMap_ListChooser
+					}
+					weaponChooser.enabled = false
+					local itemTooltip = nil
+					local item = itemData.Item
+					if item then
+						local itemPrototype = game.item_prototypes[item]
+						if itemPrototype then
+							itemTooltip = { "SICore.紫图-窗口-插入弹药-物品-提示" , itemPrototype.localised_name }
+						else
+							itemTooltip = { "SICore.紫图-窗口-插入弹药-物品-空-提示" , item }
+							item = SIConstants_Core.raw.Items.IconEmpty
+						end
+					else
+						itemTooltip = { "SICore.紫图-窗口-插入弹药-物品-选择-提示" }
+					end
+					list.add
+					{
+						type = "choose-elem-button" ,
+						name = SIRequestMap.Names.InsertAmmo_Item_Prefix .. itemDataIndex .. "_" .. entityName ,
+						tooltip = itemTooltip ,
+						elem_type = "item" ,
+						item = item ,
+						elem_filters = SIRequestMap.InsertAmmo_Item_Filters ,
+						style = SIConstants_Core.raw.Styles.RequestMap_ListChooser
+					}
+					list.add{ type = "label" , caption = { "SICore.紫图-窗口-插入弹药-数量" } , tooltip = { "SICore.紫图-窗口-插入弹药-数量-提示" } , style = SIConstants_Core.raw.Styles.RequestMap_ListLabel }
+					list.add{ type = "textfield" , name = SIRequestMap.Names.InsertAmmo_Count_Prefix .. itemDataIndex .. "_" .. entityName , text = tostring( itemData.Count or 1 ) , numeric = true , tooltip = { "SICore.紫图-窗口-插入弹药-数量-提示" } , style = SIConstants_Core.raw.Styles.RequestMap_ListText }
+					list.add{ type = "label" , caption = { "SICore.紫图-窗口-插入弹药-模式" } , tooltip = { "SICore.紫图-窗口-插入弹药-模式-提示" } , style = SIConstants_Core.raw.Styles.RequestMap_ListLabel }
+					list.add
+					{
+						type = "drop-down" ,
+						name = SIRequestMap.Names.InsertAmmo_Mode_Prefix .. itemDataIndex .. "_" .. entityName ,
+						caption = { "SICore.紫图-窗口-插入弹药-模式" } ,
+						tooltip = { "SICore.紫图-窗口-插入弹药-模式-提示" } ,
+						items = SIRequestMap.CountModeText ,
+						selected_index = itemData.Mode or 1 ,
+						style = SIConstants_Core.raw.Styles.RequestMap_ListDropDown
+					}
+				end
 			end
 		end
 		list.add
