@@ -366,17 +366,17 @@ SIRequestMap =
 
 
 
-		settings.scroll = nil
-		local newTabSettingsList = {}
-		for index , tabSettings in pairs( settings.TabSettingsList ) do
-			local newTabSettings = SIUtils.table.deepcopy( SIRequestMap.DefaultTabSettings )
-			for key , value in pairs( newTabSettings ) do
-				if tabSettings[key] then
-					newTabSettings[key] = tabSettings[key]
-				end
-			end
-		end
-		settings.TabSettingsList = newTabSettingsList
+		-- local newTabSettingsList = {}
+		-- for index , tabSettings in pairs( settings.TabSettingsList ) do
+		-- 	local newTabSettings = SIUtils.table.deepcopy( SIRequestMap.DefaultTabSettings )
+		-- 	for key , value in pairs( newTabSettings ) do
+		-- 		if tabSettings[key] then
+		-- 			newTabSettings[key] = tabSettings[key]
+		-- 		end
+		-- 	end
+		--	table.insert( newTabSettingsList , newTabSettings )
+		-- end
+		-- settings.TabSettingsList = newTabSettingsList
 
 
 
