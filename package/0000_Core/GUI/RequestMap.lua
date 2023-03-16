@@ -44,7 +44,6 @@ SIRequestMap =
 			frame = nil ,
 			frameLocation = nil ,
 			tabPane = nil ,
-			scroll = nil ,
 			TabList = {} ,
 			PageList = {} ,
 			ListButtons = {} ,
@@ -53,6 +52,7 @@ SIRequestMap =
 				-- {
 				-- 	TabSettingsName = nil ,
 				-- 	DefaultIndex = nil ,
+				--	Scroll = nil ,
 				-- 	-- 请求格子
 				-- 	RequestSlot_Enable = nil ,
 				-- 	RequestSlot_Flow = nil ,
@@ -196,20 +196,7 @@ SIRequestMap =
 			mode = SICommon.Flags.Condition.OR
 		}
 	} ,
-	RequestSlot_Item_Filters =
-	{
-		{
-			filter = "flag" ,
-			flag = SICommon.Flags.Item.Hidden ,
-			mode = SICommon.Flags.Condition.OR ,
-			invert = true
-		} ,
-		{
-			filter = "name" ,
-			name = SIConstants_Core.raw.Items.IconEmpty ,
-			mode = SICommon.Flags.Condition.OR
-		}
-	} ,
+	RequestSlot_Item_Filters = {} , -- 暂时不需要设置筛选器
 	MaxSlot_Entity_Filters =
 	{
 		{
@@ -267,17 +254,6 @@ SIRequestMap =
 			filter = "type" ,
 			type = SICommon.Types.Items.Module ,
 			mode = SICommon.Flags.Condition.OR
-		} ,
-		{
-			filter = "flag" ,
-			flag = SICommon.Flags.Item.Hidden ,
-			mode = SICommon.Flags.Condition.AND ,
-			invert = true
-		} ,
-		{
-			filter = "name" ,
-			name = SIConstants_Core.raw.Items.IconEmpty ,
-			mode = SICommon.Flags.Condition.OR
 		}
 	} ,
 	RemoveModule_Entity_Filters =
@@ -311,17 +287,6 @@ SIRequestMap =
 		{
 			filter = "type" ,
 			type = SICommon.Types.Items.Module ,
-			mode = SICommon.Flags.Condition.OR
-		} ,
-		{
-			filter = "flag" ,
-			flag = SICommon.Flags.Item.Hidden ,
-			mode = SICommon.Flags.Condition.AND ,
-			invert = true
-		} ,
-		{
-			filter = "name" ,
-			name = SIConstants_Core.raw.Items.IconEmpty ,
 			mode = SICommon.Flags.Condition.OR
 		}
 	} ,
@@ -357,25 +322,7 @@ SIRequestMap =
 			mode = SICommon.Flags.Condition.OR
 		}
 	} ,
-	InsertFuel_Item_Filters =
-	{
-		{
-			filter = "fuel" ,
-			["fuel-category"] = nil ,
-			mode = SICommon.Flags.Condition.OR
-		} ,
-		{
-			filter = "flag" ,
-			flag = SICommon.Flags.Item.Hidden ,
-			mode = SICommon.Flags.Condition.AND ,
-			invert = true
-		} ,
-		{
-			filter = "name" ,
-			name = SIConstants_Core.raw.Items.IconEmpty ,
-			mode = SICommon.Flags.Condition.OR
-		}
-	} ,
+	InsertFuel_Item_Filters = {} , -- 暂时不需要设置筛选器
 	InsertAmmo_Entity_Filters =
 	{
 		{
@@ -407,19 +354,9 @@ SIRequestMap =
 			filter = "type" ,
 			type = SICommon.Types.Items.Ammo ,
 			mode = SICommon.Flags.Condition.OR
-		} ,
-		{
-			filter = "flag" ,
-			flag = SICommon.Flags.Item.Hidden ,
-			mode = SICommon.Flags.Condition.AND ,
-			invert = true
-		} ,
-		{
-			filter = "name" ,
-			name = SIConstants_Core.raw.Items.IconEmpty ,
-			mode = SICommon.Flags.Condition.OR
 		}
 	} ,
+	InsertAmmo_ItemNamed_Filters = {} , -- 暂时不需要设置筛选器
 	-- ------------------------------------------------------------------------------------------------
 	-- ---------- 窗口函数 ----------------------------------------------------------------------------
 	-- ------------------------------------------------------------------------------------------------
@@ -429,6 +366,7 @@ SIRequestMap =
 
 
 
+		settings.scroll = nil
 		local newTabSettingsList = {}
 		for index , tabSettings in pairs( settings.TabSettingsList ) do
 			local newTabSettings = SIUtils.table.deepcopy( SIRequestMap.DefaultTabSettings )
@@ -487,7 +425,6 @@ SIRequestMap =
 			settings.frame.destroy()
 			settings.frame = nil
 			settings.tabPane = nil
-			settings.scroll = nil
 			settings.TabList = {}
 			settings.PageList = {}
 			settings.ListButtons = {}
@@ -600,7 +537,7 @@ SIRequestMap =
 		-- ----------------------------------------
 		local scroll = page.add{ type = "scroll-pane" , horizontal_scroll_policy = "never" , vertical_scroll_policy = "auto-and-reserve-space" , style = SIConstants_Core.raw.Styles.Common_ScrollPane }
 		local list = scroll.add{ type = "table" , column_count = 1 , style = SIConstants_Core.raw.Styles.Common_List }
-		settings.scroll = scroll
+		elements.Scroll = scroll
 		-- ----------------------------------------
 		-- 请求格子
 		-- ----------------------------------------
@@ -629,7 +566,7 @@ SIRequestMap =
 		local SetModule_Flow = list.add{ type = "flow" , direction = "vertical" , style = SIConstants_Core.raw.Styles.RequestMap_ListPanelFlow }
 		elements.SetModule_Flow = SetModule_Flow
 		elements.SetModule_FromInventory = SetModule_Flow.add{ type = "checkbox" , name = SIRequestMap.Names.SetModule_FromInventory , state = false , caption = { "SICore.紫图-窗口-设置插件-从背包填充" } , tooltip = { "SICore.紫图-窗口-设置插件-从背包填充-提示" } , style = SIConstants_Core.raw.Styles.Common_CheckBox }
-		elements.SetModule_List = SetModule_Flow.add{ type = "table" , column_count = 2 , style = SIConstants_Core.raw.Styles.RequestMap_SubList }
+		elements.SetModule_List = SetModule_Flow.add{ type = "table" , column_count = 3 , style = SIConstants_Core.raw.Styles.RequestMap_SubList }
 		-- ----------------------------------------
 		-- 移除插件
 		-- ----------------------------------------
@@ -638,27 +575,27 @@ SIRequestMap =
 		elements.RemoveModule_Flow = RemoveModule_Flow
 		elements.RemoveModule_ToInventory = RemoveModule_Flow.add{ type = "checkbox" , name = SIRequestMap.Names.RemoveModule_ToInventory , state = false , caption = { "SICore.紫图-窗口-移除插件-进入背包" } , tooltip = { "SICore.紫图-窗口-移除插件-进入背包-提示" } , style = SIConstants_Core.raw.Styles.Common_CheckBox }
 		elements.RemoveModule_Invert = RemoveModule_Flow.add{ type = "checkbox" , name = SIRequestMap.Names.RemoveModule_Invert , state = false , caption = { "SICore.紫图-窗口-移除插件-条件反转" } , tooltip = { "SICore.紫图-窗口-移除插件-条件反转-提示" } , style = SIConstants_Core.raw.Styles.Common_CheckBox }
-		elements.RemoveModule_List = RemoveModule_Flow.add{ type = "table" , column_count = 2 , style = SIConstants_Core.raw.Styles.RequestMap_SubList }
+		elements.RemoveModule_List = RemoveModule_Flow.add{ type = "table" , column_count = 3 , style = SIConstants_Core.raw.Styles.RequestMap_SubList }
 		-- ----------------------------------------
 		-- 插入燃料
 		-- ----------------------------------------
 		elements.InsertFuel_Enable = list.add{ type = "checkbox" , name = SIRequestMap.Names.EnablePrefix .. "InsertFuel_Flow" , state = false , caption = { "SICore.紫图-窗口-插入燃料-启用" , { "SICore.紫图-窗口-启用-未设置" } } , tooltip = { "SICore.紫图-窗口-插入燃料-启用-提示" } , style = SIConstants_Core.raw.Styles.RequestMap_ListCheck }
 		local InsertFuel_Flow = list.add{ type = "flow" , direction = "vertical" , style = SIConstants_Core.raw.Styles.RequestMap_ListPanelFlow }
 		elements.InsertFuel_Flow = InsertFuel_Flow
-		elements.InsertFuel_List = InsertFuel_Flow.add{ type = "table" , column_count = 6 , style = SIConstants_Core.raw.Styles.RequestMap_SubList }
+		elements.InsertFuel_List = InsertFuel_Flow.add{ type = "table" , column_count = 2 , style = SIConstants_Core.raw.Styles.RequestMap_SubList }
 		-- ----------------------------------------
 		-- 插入弹药
 		-- ----------------------------------------
 		elements.InsertAmmo_Enable = list.add{ type = "checkbox" , name = SIRequestMap.Names.EnablePrefix .. "InsertAmmo_Flow" , state = false , caption = { "SICore.紫图-窗口-插入弹药-启用" , { "SICore.紫图-窗口-启用-未设置" } } , tooltip = { "SICore.紫图-窗口-插入弹药-启用-提示" } , style = SIConstants_Core.raw.Styles.RequestMap_ListCheck }
 		local InsertAmmo_Flow = list.add{ type = "flow" , direction = "vertical" , style = SIConstants_Core.raw.Styles.RequestMap_ListPanelFlow }
 		elements.InsertAmmo_Flow = InsertAmmo_Flow
-		elements.InsertAmmo_List = InsertAmmo_Flow.add{ type = "table" , column_count = 7 , style = SIConstants_Core.raw.Styles.RequestMap_SubList }
+		elements.InsertAmmo_List = InsertAmmo_Flow.add{ type = "table" , column_count = 2 , style = SIConstants_Core.raw.Styles.RequestMap_SubList }
 		-- ----------------------------------------
 		-- 创建滚动定位按钮
 		-- ----------------------------------------
 		for key , value in pairs( SIRequestMap.DefaultTabSettings ) do
 			if key ~= "Name" then
-				local button = listButtonFlow.add{ type = "sprite-button" , name = SIRequestMap.Names.ListButtonPrefix .. key .. "_Enable" , sprite = "item/" .. SIRequestMap.ListButtonIcon[key] , tooltip = { "SICore.紫图-窗口-列表定位按钮-提示" , elements[key .. "_Enable"].caption } , style = SIConstants_Core.raw.Styles.RequestMap_ListButton }
+				local button = listButtonFlow.add{ type = "sprite-button" , name = SIRequestMap.Names.ListButtonPrefix .. key .. "_Enable" , sprite = "item/" .. SIRequestMap.ListButtonIcon[key] , tooltip = { "SICore.紫图-窗口-列表定位按钮-提示" , { elements[key .. "_Enable"].caption[1] , "" } } , style = SIConstants_Core.raw.Styles.RequestMap_ListButton }
 				settings.ListButtons[key] = button
 			end
 		end
@@ -880,7 +817,7 @@ SIRequestMap =
 		{
 			type = "choose-elem-button" ,
 			name = SIRequestMap.Names.MaxSlot_Entity_Prefix ,
-			tooltip = { "SICore.紫图-窗口-最大格子-实体-选择" } ,
+			tooltip = { "SICore.紫图-窗口-最大格子-实体-选择-提示" } ,
 			elem_type = "entity" ,
 			entity = nil ,
 			elem_filters = SIRequestMap.MaxSlot_Entity_Filters ,
@@ -1093,9 +1030,17 @@ SIRequestMap =
 					elem_filters = SIRequestMap.InsertFuel_Entity_Filters ,
 					style = SIConstants_Core.raw.Styles.RequestMap_ListChooser
 				}
+				local subList = list.add{ type = "table" , column_count = 7 , style = SIConstants_Core.raw.Styles.RequestMap_SelectList }
 				if entityPrototype.burner_prototype then
 					local fuelFilter = SIUtils.table.deepcopy( SIRequestMap.InsertFuel_Item_Filters )
-					fuelFilter[1]["fuel-category"] = entityPrototype.burner_prototype.fuel_categories
+					for categoryName , value in pairs( entityPrototype.burner_prototype.fuel_categories ) do
+						table.insert( fuelFilter ,
+						{
+							filter = "fuel-category" ,
+							["fuel-category"] = categoryName ,
+							mode = SICommon.Flags.Condition.OR
+						} )
+					end
 					for itemDataIndex = 1 , entityPrototype.burner_prototype.fuel_inventory_size , 1 do
 						local itemData = itemDataList[itemDataIndex]
 						if not itemData then
@@ -1115,7 +1060,7 @@ SIRequestMap =
 						else
 							itemTooltip = { "SICore.紫图-窗口-插入燃料-物品-选择-提示" }
 						end
-						list.add
+						subList.add
 						{
 							type = "choose-elem-button" ,
 							name = SIRequestMap.Names.InsertFuel_Item_Prefix .. itemDataIndex .. "_" .. entityName ,
@@ -1125,10 +1070,12 @@ SIRequestMap =
 							elem_filters = fuelFilter ,
 							style = SIConstants_Core.raw.Styles.RequestMap_ListChooser
 						}
-						list.add{ type = "label" , caption = { "SICore.紫图-窗口-插入燃料-数量" } , tooltip = { "SICore.紫图-窗口-插入燃料-数量-提示" } , style = SIConstants_Core.raw.Styles.RequestMap_ListLabel }
-						list.add{ type = "textfield" , name = SIRequestMap.Names.InsertFuel_Count_Prefix .. itemDataIndex .. "_" .. entityName , text = tostring( itemData.Count or 1 ) , numeric = true , tooltip = { "SICore.紫图-窗口-插入燃料-数量-提示" } , style = SIConstants_Core.raw.Styles.RequestMap_ListText }
-						list.add{ type = "label" , caption = { "SICore.紫图-窗口-插入燃料-模式" } , tooltip = { "SICore.紫图-窗口-插入燃料-模式-提示" } , style = SIConstants_Core.raw.Styles.RequestMap_ListLabel }
-						list.add
+						subList.add{ type = "flow" , direction = "horizontal" , style = SIConstants_Core.raw.Styles.RequestMap_ListEmptyFlow }
+						subList.add{ type = "label" , caption = { "SICore.紫图-窗口-插入燃料-数量" } , tooltip = { "SICore.紫图-窗口-插入燃料-数量-提示" } , style = SIConstants_Core.raw.Styles.RequestMap_ListLabel }
+						subList.add{ type = "textfield" , name = SIRequestMap.Names.InsertFuel_Count_Prefix .. itemDataIndex .. "_" .. entityName , text = tostring( itemData.Count or 1 ) , numeric = true , tooltip = { "SICore.紫图-窗口-插入燃料-数量-提示" } , style = SIConstants_Core.raw.Styles.RequestMap_ListText }
+						subList.add{ type = "flow" , direction = "horizontal" , style = SIConstants_Core.raw.Styles.RequestMap_ListEmptyFlow }
+						subList.add{ type = "label" , caption = { "SICore.紫图-窗口-插入燃料-模式" } , tooltip = { "SICore.紫图-窗口-插入燃料-模式-提示" } , style = SIConstants_Core.raw.Styles.RequestMap_ListLabel }
+						subList.add
 						{
 							type = "drop-down" ,
 							name = SIRequestMap.Names.InsertFuel_Mode_Prefix .. itemDataIndex .. "_" .. entityName ,
@@ -1151,8 +1098,14 @@ SIRequestMap =
 					elem_filters = SIRequestMap.InsertFuel_Entity_Filters ,
 					style = SIConstants_Core.raw.Styles.RequestMap_ListChooser
 				}
+				local subList = list.add{ type = "table" , column_count = 7 , style = SIConstants_Core.raw.Styles.RequestMap_SelectList }
 				local fuelFilter = SIUtils.table.deepcopy( SIRequestMap.InsertFuel_Item_Filters )
-				fuelFilter[1]["fuel-category"] = "chemical"
+				table.insert( fuelFilter ,
+				{
+					filter = "fuel-category" ,
+					["fuel-category"] = "chemical" ,
+					mode = SICommon.Flags.Condition.OR
+				} )
 				for itemDataIndex , itemData in pairs( itemDataList ) do
 					local itemTooltip = nil
 					local item = itemData.Item
@@ -1167,7 +1120,7 @@ SIRequestMap =
 					else
 						itemTooltip = { "SICore.紫图-窗口-插入燃料-物品-选择-提示" }
 					end
-					list.add
+					subList.add
 					{
 						type = "choose-elem-button" ,
 						name = SIRequestMap.Names.InsertFuel_Item_Prefix .. itemDataIndex .. "_" .. entityName ,
@@ -1177,10 +1130,12 @@ SIRequestMap =
 						elem_filters = fuelFilter ,
 						style = SIConstants_Core.raw.Styles.RequestMap_ListChooser
 					}
-					list.add{ type = "label" , caption = { "SICore.紫图-窗口-插入燃料-数量" } , tooltip = { "SICore.紫图-窗口-插入燃料-数量-提示" } , style = SIConstants_Core.raw.Styles.RequestMap_ListLabel }
-					list.add{ type = "textfield" , name = SIRequestMap.Names.InsertFuel_Count_Prefix .. itemDataIndex .. "_" .. entityName , text = tostring( itemData.Count or 1 ) , numeric = true , tooltip = { "SICore.紫图-窗口-插入燃料-数量-提示" } , style = SIConstants_Core.raw.Styles.RequestMap_ListText }
-					list.add{ type = "label" , caption = { "SICore.紫图-窗口-插入燃料-模式" } , tooltip = { "SICore.紫图-窗口-插入燃料-模式-提示" } , style = SIConstants_Core.raw.Styles.RequestMap_ListLabel }
-					list.add
+					subList.add{ type = "flow" , direction = "horizontal" , style = SIConstants_Core.raw.Styles.RequestMap_ListEmptyFlow }
+					subList.add{ type = "label" , caption = { "SICore.紫图-窗口-插入燃料-数量" } , tooltip = { "SICore.紫图-窗口-插入燃料-数量-提示" } , style = SIConstants_Core.raw.Styles.RequestMap_ListLabel }
+					subList.add{ type = "textfield" , name = SIRequestMap.Names.InsertFuel_Count_Prefix .. itemDataIndex .. "_" .. entityName , text = tostring( itemData.Count or 1 ) , numeric = true , tooltip = { "SICore.紫图-窗口-插入燃料-数量-提示" } , style = SIConstants_Core.raw.Styles.RequestMap_ListText }
+					subList.add{ type = "flow" , direction = "horizontal" , style = SIConstants_Core.raw.Styles.RequestMap_ListEmptyFlow }
+					subList.add{ type = "label" , caption = { "SICore.紫图-窗口-插入燃料-模式" } , tooltip = { "SICore.紫图-窗口-插入燃料-模式-提示" } , style = SIConstants_Core.raw.Styles.RequestMap_ListLabel }
+					subList.add
 					{
 						type = "drop-down" ,
 						name = SIRequestMap.Names.InsertFuel_Mode_Prefix .. itemDataIndex .. "_" .. entityName ,
@@ -1237,17 +1192,41 @@ SIRequestMap =
 				elseif type == SICommon.Types.Entities.WagonArtillery then
 					maxAmmoSize = entityPrototype.get_inventory_size( defines.inventory.artillery_wagon_ammo )
 				end
+				local subList = list.add{ type = "table" , column_count = 8 , style = SIConstants_Core.raw.Styles.RequestMap_SelectList }
 				for itemDataIndex = 1 , maxAmmoSize , 1 do
 					local itemData = itemDataList[itemDataIndex]
 					if not itemData then
 						itemData = {}
 						itemDataList[itemDataIndex] = itemData
 					end
-					local weapon = entityPrototype.indexed_guns[itemDataIndex]
-					local weaponChooser = list.add
+					local ammoCategories = nil
+					local weaponTooltip = nil
+					local weapon = nil
+					if type == SICommon.Types.Entities.TurretAmmo then
+						ammoCategories = entityPrototype.attack_parameters.ammo_categories or {}
+						if entityPrototype.attack_parameters.ammo_type and entityPrototype.attack_parameters.ammo_type.category then
+							table.insert( ammoCategories , entityPrototype.attack_parameters.ammo_type.category )
+						end
+						weaponTooltip = { "SICore.紫图-窗口-插入弹药-武器-提示" , entityPrototype.localised_name }
+						weapon = game.item_prototypes[entityName] and entityName or SIConstants_Core.raw.Items.IconEmpty
+					else
+						local weaponPrototype = entityPrototype.indexed_guns[itemDataIndex]
+						ammoCategories = weaponPrototype.attack_parameters.ammo_categories or {}
+						if weaponPrototype.attack_parameters.ammo_type and weaponPrototype.attack_parameters.ammo_type.category then
+							table.insert( ammoCategories , weaponPrototype.attack_parameters.ammo_type.category )
+						end
+						if not weaponPrototype.name then
+							weaponTooltip = { "SICore.紫图-窗口-插入弹药-武器-提示" , entityPrototype.localised_name }
+							weapon = SIConstants_Core.raw.Items.IconEmpty
+						else
+							weaponTooltip = { "SICore.紫图-窗口-插入弹药-武器-提示" , weaponPrototype.localised_name }
+							weapon = weaponPrototype.name
+						end
+					end
+					local weaponChooser = subList.add
 					{
 						type = "choose-elem-button" ,
-						tooltip = { "SICore.紫图-窗口-插入弹药-武器-提示" , weapon.localised_name } ,
+						tooltip = weaponTooltip ,
 						elem_type = "item" ,
 						item = weapon ,
 						style = SIConstants_Core.raw.Styles.RequestMap_ListChooser
@@ -1266,20 +1245,33 @@ SIRequestMap =
 					else
 						itemTooltip = { "SICore.紫图-窗口-插入弹药-物品-选择-提示" }
 					end
-					list.add
+					local filter = SIUtils.table.deepcopy( SIRequestMap.InsertAmmo_ItemNamed_Filters )
+					for ammoName , ammoPrototype in pairs( game.get_filtered_item_prototypes( SIRequestMap.InsertAmmo_Item_Filters ) ) do
+						if SITable.Has( ammoCategories , ammoPrototype.get_ammo_type( "default" ).category ) then
+							table.insert( filter ,
+							{
+								filter = "name" ,
+								name = ammoName ,
+								mode = SICommon.Flags.Condition.OR
+							} )
+						end
+					end
+					subList.add
 					{
 						type = "choose-elem-button" ,
 						name = SIRequestMap.Names.InsertAmmo_Item_Prefix .. itemDataIndex .. "_" .. entityName ,
 						tooltip = itemTooltip ,
 						elem_type = "item" ,
 						item = item ,
-						elem_filters = SIRequestMap.InsertAmmo_Item_Filters ,
+						elem_filters = filter ,
 						style = SIConstants_Core.raw.Styles.RequestMap_ListChooser
 					}
-					list.add{ type = "label" , caption = { "SICore.紫图-窗口-插入弹药-数量" } , tooltip = { "SICore.紫图-窗口-插入弹药-数量-提示" } , style = SIConstants_Core.raw.Styles.RequestMap_ListLabel }
-					list.add{ type = "textfield" , name = SIRequestMap.Names.InsertAmmo_Count_Prefix .. itemDataIndex .. "_" .. entityName , text = tostring( itemData.Count or 1 ) , numeric = true , tooltip = { "SICore.紫图-窗口-插入弹药-数量-提示" } , style = SIConstants_Core.raw.Styles.RequestMap_ListText }
-					list.add{ type = "label" , caption = { "SICore.紫图-窗口-插入弹药-模式" } , tooltip = { "SICore.紫图-窗口-插入弹药-模式-提示" } , style = SIConstants_Core.raw.Styles.RequestMap_ListLabel }
-					list.add
+					subList.add{ type = "flow" , direction = "horizontal" , style = SIConstants_Core.raw.Styles.RequestMap_ListEmptyFlow }
+					subList.add{ type = "label" , caption = { "SICore.紫图-窗口-插入弹药-数量" } , tooltip = { "SICore.紫图-窗口-插入弹药-数量-提示" } , style = SIConstants_Core.raw.Styles.RequestMap_ListLabel }
+					subList.add{ type = "textfield" , name = SIRequestMap.Names.InsertAmmo_Count_Prefix .. itemDataIndex .. "_" .. entityName , text = tostring( itemData.Count or 1 ) , numeric = true , tooltip = { "SICore.紫图-窗口-插入弹药-数量-提示" } , style = SIConstants_Core.raw.Styles.RequestMap_ListText }
+					subList.add{ type = "flow" , direction = "horizontal" , style = SIConstants_Core.raw.Styles.RequestMap_ListEmptyFlow }
+					subList.add{ type = "label" , caption = { "SICore.紫图-窗口-插入弹药-模式" } , tooltip = { "SICore.紫图-窗口-插入弹药-模式-提示" } , style = SIConstants_Core.raw.Styles.RequestMap_ListLabel }
+					subList.add
 					{
 						type = "drop-down" ,
 						name = SIRequestMap.Names.InsertAmmo_Mode_Prefix .. itemDataIndex .. "_" .. entityName ,
@@ -1301,8 +1293,9 @@ SIRequestMap =
 					elem_filters = SIRequestMap.InsertAmmo_Entity_Filters ,
 					style = SIConstants_Core.raw.Styles.RequestMap_ListChooser
 				}
+				local subList = list.add{ type = "table" , column_count = 8 , style = SIConstants_Core.raw.Styles.RequestMap_SelectList }
 				for itemDataIndex , itemData in pairs( itemDataList ) do
-					local weaponChooser = list.add
+					local weaponChooser = subList.add
 					{
 						type = "choose-elem-button" ,
 						tooltip = { "SICore.紫图-窗口-插入弹药-武器-空-提示" , entityName } ,
@@ -1324,7 +1317,7 @@ SIRequestMap =
 					else
 						itemTooltip = { "SICore.紫图-窗口-插入弹药-物品-选择-提示" }
 					end
-					list.add
+					subList.add
 					{
 						type = "choose-elem-button" ,
 						name = SIRequestMap.Names.InsertAmmo_Item_Prefix .. itemDataIndex .. "_" .. entityName ,
@@ -1334,10 +1327,12 @@ SIRequestMap =
 						elem_filters = SIRequestMap.InsertAmmo_Item_Filters ,
 						style = SIConstants_Core.raw.Styles.RequestMap_ListChooser
 					}
-					list.add{ type = "label" , caption = { "SICore.紫图-窗口-插入弹药-数量" } , tooltip = { "SICore.紫图-窗口-插入弹药-数量-提示" } , style = SIConstants_Core.raw.Styles.RequestMap_ListLabel }
-					list.add{ type = "textfield" , name = SIRequestMap.Names.InsertAmmo_Count_Prefix .. itemDataIndex .. "_" .. entityName , text = tostring( itemData.Count or 1 ) , numeric = true , tooltip = { "SICore.紫图-窗口-插入弹药-数量-提示" } , style = SIConstants_Core.raw.Styles.RequestMap_ListText }
-					list.add{ type = "label" , caption = { "SICore.紫图-窗口-插入弹药-模式" } , tooltip = { "SICore.紫图-窗口-插入弹药-模式-提示" } , style = SIConstants_Core.raw.Styles.RequestMap_ListLabel }
-					list.add
+					subList.add{ type = "flow" , direction = "horizontal" , style = SIConstants_Core.raw.Styles.RequestMap_ListEmptyFlow }
+					subList.add{ type = "label" , caption = { "SICore.紫图-窗口-插入弹药-数量" } , tooltip = { "SICore.紫图-窗口-插入弹药-数量-提示" } , style = SIConstants_Core.raw.Styles.RequestMap_ListLabel }
+					subList.add{ type = "textfield" , name = SIRequestMap.Names.InsertAmmo_Count_Prefix .. itemDataIndex .. "_" .. entityName , text = tostring( itemData.Count or 1 ) , numeric = true , tooltip = { "SICore.紫图-窗口-插入弹药-数量-提示" } , style = SIConstants_Core.raw.Styles.RequestMap_ListText }
+					subList.add{ type = "flow" , direction = "horizontal" , style = SIConstants_Core.raw.Styles.RequestMap_ListEmptyFlow }
+					subList.add{ type = "label" , caption = { "SICore.紫图-窗口-插入弹药-模式" } , tooltip = { "SICore.紫图-窗口-插入弹药-模式-提示" } , style = SIConstants_Core.raw.Styles.RequestMap_ListLabel }
+					subList.add
 					{
 						type = "drop-down" ,
 						name = SIRequestMap.Names.InsertAmmo_Mode_Prefix .. itemDataIndex .. "_" .. entityName ,
@@ -1388,7 +1383,7 @@ SIRequestMap =
 		if settings.frame and settings.frame.valid then
 			local tabSettingsIndex = settings.tabSettingsIndex
 			local key = name:sub( SIRequestMap.Names.ListButtonPosition )
-			settings.scroll.scroll_to_element( settings.Elements[tabSettingsIndex][key] , "top-third" )
+			settings.Elements[tabSettingsIndex].Scroll.scroll_to_element( settings.Elements[tabSettingsIndex][key] , "top-third" )
 		end
 	end ,
 	EnableFunction = function( playerIndex , name , element )
@@ -1494,8 +1489,9 @@ SIRequestMap =
 	Set_RequestSlot_Item = function( playerIndex , name , element )
 		local settings = SIGlobal.GetPlayerSettings( SIRequestMap.Settings.Name , playerIndex )
 		if settings.frame and settings.frame.valid then
-			-- 保存 [请求格子-物品] 选择的物品
 			local selectItemName = element.elem_value
+			element.tooltip = selectItemName and { "SICore.紫图-窗口-请求格子-物品-提示" , game.item_prototypes[selectItemName].localised_name } or { "SICore.紫图-窗口-请求格子-物品-选择-提示" }
+			-- 保存 [请求格子-物品] 选择的物品
 			local key = name:sub( SIRequestMap.Names.RequestSlot_Item_Position )
 			local location = key:find( "_" )
 			local slotIndex = tonumber( key:sub( 1 , location - 1 ) )
@@ -1537,7 +1533,7 @@ SIRequestMap =
 						local newCountList = {}
 						for innerEntityName , requestItemList in pairs( countList ) do
 							if entityName == innerEntityName then
-								newCountList[selectEntityName] = {}
+								newCountList[selectEntityName] = 0
 							else
 								newCountList[innerEntityName] = requestItemList
 							end
@@ -1554,7 +1550,7 @@ SIRequestMap =
 					element.elem_value = nil
 					return
 				end
-				countList[selectEntityName] = {}
+				countList[selectEntityName] = 0
 			end
 			SIRequestMap.FreshPage_MaxSlot( settings , tabSettings , settings.Elements[tabSettingsIndex] )
 		end
@@ -1562,9 +1558,9 @@ SIRequestMap =
 	Set_MaxSlot_Count = function( playerIndex , name , element )
 		local settings = SIGlobal.GetPlayerSettings( SIRequestMap.Settings.Name , playerIndex )
 		if settings.frame and settings.frame.valid then
-			-- 保存 [最大格子-数量] 填写的数量
 			local count = math.floor( tonumber( element.text ) or 0 )
 			element.text = tostring( count )
+			-- 保存 [最大格子-数量] 填写的数量
 			local tabSettingsIndex = settings.tabSettingsIndex
 			local tabSettings = settings.TabSettingsList[tabSettingsIndex]
 			local countList = tabSettings.MaxSlot.List
@@ -1636,8 +1632,9 @@ SIRequestMap =
 	Set_SetModule_Item = function( playerIndex , name , element )
 		local settings = SIGlobal.GetPlayerSettings( SIRequestMap.Settings.Name , playerIndex )
 		if settings.frame and settings.frame.valid then
-			-- 保存 [设置插件-物品] 选择的物品
 			local selectItemName = element.elem_value
+			element.tooltip = selectItemName and { "SICore.紫图-窗口-设置插件-物品-提示" , game.item_prototypes[selectItemName].localised_name } or { "SICore.紫图-窗口-设置插件-物品-选择-提示" }
+			-- 保存 [设置插件-物品] 选择的物品
 			local key = name:sub( SIRequestMap.Names.SetModule_Item_Position )
 			local location = key:find( "_" )
 			local slotIndex = tonumber( key:sub( 1 , location - 1 ) )
@@ -1714,8 +1711,9 @@ SIRequestMap =
 	Set_RemoveModule_Item = function( playerIndex , name , element )
 		local settings = SIGlobal.GetPlayerSettings( SIRequestMap.Settings.Name , playerIndex )
 		if settings.frame and settings.frame.valid then
-			-- 保存 [移除插件-物品] 选择的物品
 			local selectItemName = element.elem_value
+			element.tooltip = selectItemName and { "SICore.紫图-窗口-移除插件-物品-提示" , game.item_prototypes[selectItemName].localised_name } or { "SICore.紫图-窗口-移除插件-物品-选择-提示" }
+			-- 保存 [移除插件-物品] 选择的物品
 			local key = name:sub( SIRequestMap.Names.RemoveModule_Item_Position )
 			local location = key:find( "_" )
 			local slotIndex = tonumber( key:sub( 1 , location - 1 ) )
@@ -1772,8 +1770,9 @@ SIRequestMap =
 	Set_InsertFuel_Item = function( playerIndex , name , element )
 		local settings = SIGlobal.GetPlayerSettings( SIRequestMap.Settings.Name , playerIndex )
 		if settings.frame and settings.frame.valid then
-			-- 保存 [插入燃料-物品] 选择的物品
 			local selectItemName = element.elem_value
+			element.tooltip = selectItemName and { "SICore.紫图-窗口-插入燃料-物品-提示" , game.item_prototypes[selectItemName].localised_name } or { "SICore.紫图-窗口-插入燃料-物品-选择-提示" }
+			-- 保存 [插入燃料-物品] 选择的物品
 			local key = name:sub( SIRequestMap.Names.InsertFuel_Item_Position )
 			local location = key:find( "_" )
 			local itemDataIndex = tonumber( key:sub( 1 , location - 1 ) )
@@ -1789,9 +1788,9 @@ SIRequestMap =
 	Set_InsertFuel_Count = function( playerIndex , name , element )
 		local settings = SIGlobal.GetPlayerSettings( SIRequestMap.Settings.Name , playerIndex )
 		if settings.frame and settings.frame.valid then
-			-- 保存 [插入燃料-数量] 填写的数量
 			local count = math.floor( tonumber( element.text ) or 0 )
 			element.text = tostring( count )
+			-- 保存 [插入燃料-数量] 填写的数量
 			local key = name:sub( SIRequestMap.Names.InsertFuel_Count_Position )
 			local location = key:find( "_" )
 			local itemDataIndex = tonumber( key:sub( 1 , location - 1 ) )
@@ -1807,9 +1806,9 @@ SIRequestMap =
 	Set_InsertFuel_Mode = function( playerIndex , name , element )
 		local settings = SIGlobal.GetPlayerSettings( SIRequestMap.Settings.Name , playerIndex )
 		if settings.frame and settings.frame.valid then
-			-- 保存 [插入燃料-模式] 选择的模式
 			local selectedIndex = element.selected_index or 1
 			element.selected_index = selectedIndex
+			-- 保存 [插入燃料-模式] 选择的模式
 			local key = name:sub( SIRequestMap.Names.InsertFuel_Mode_Position )
 			local location = key:find( "_" )
 			local itemDataIndex = tonumber( key:sub( 1 , location - 1 ) )
@@ -1866,8 +1865,9 @@ SIRequestMap =
 	Set_InsertAmmo_Item = function( playerIndex , name , element )
 		local settings = SIGlobal.GetPlayerSettings( SIRequestMap.Settings.Name , playerIndex )
 		if settings.frame and settings.frame.valid then
-			-- 保存 [插入弹药-物品] 选择的物品
 			local selectItemName = element.elem_value
+			element.tooltip = selectItemName and { "SICore.紫图-窗口-插入弹药-物品-提示" , game.item_prototypes[selectItemName].localised_name } or { "SICore.紫图-窗口-插入弹药-物品-选择-提示" }
+			-- 保存 [插入弹药-物品] 选择的物品
 			local key = name:sub( SIRequestMap.Names.InsertAmmo_Item_Position )
 			local location = key:find( "_" )
 			local itemDataIndex = tonumber( key:sub( 1 , location - 1 ) )
@@ -1883,9 +1883,9 @@ SIRequestMap =
 	Set_InsertAmmo_Count = function( playerIndex , name , element )
 		local settings = SIGlobal.GetPlayerSettings( SIRequestMap.Settings.Name , playerIndex )
 		if settings.frame and settings.frame.valid then
-			-- 保存 [插入弹药-数量] 填写的数量
 			local count = math.floor( tonumber( element.text ) or 0 )
 			element.text = tostring( count )
+			-- 保存 [插入弹药-数量] 填写的数量
 			local key = name:sub( SIRequestMap.Names.InsertAmmo_Count_Position )
 			local location = key:find( "_" )
 			local itemDataIndex = tonumber( key:sub( 1 , location - 1 ) )
@@ -1901,9 +1901,9 @@ SIRequestMap =
 	Set_InsertAmmo_Mode = function( playerIndex , name , element )
 		local settings = SIGlobal.GetPlayerSettings( SIRequestMap.Settings.Name , playerIndex )
 		if settings.frame and settings.frame.valid then
-			-- 保存 [插入弹药-模式] 选择的模式
 			local selectedIndex = element.selected_index or 1
 			element.selected_index = selectedIndex
+			-- 保存 [插入弹药-模式] 选择的模式
 			local key = name:sub( SIRequestMap.Names.InsertAmmo_Mode_Position )
 			local location = key:find( "_" )
 			local itemDataIndex = tonumber( key:sub( 1 , location - 1 ) )

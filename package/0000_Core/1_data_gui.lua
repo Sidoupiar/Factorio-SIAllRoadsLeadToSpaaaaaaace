@@ -2328,3 +2328,10 @@ SIGen
 	width = 120 ,
 	height = 28
 } )
+.AddStyle( "RequestMap_ListEmptyFlow" , "紫图-列表占位布局" ,
+{
+	type = "horizontal_flow_style" ,
+	parent = SIConstants_Core.raw.Styles.Common_FlowCenterH ,
+	-- 体积
+	minimal_width = 10
+} )
