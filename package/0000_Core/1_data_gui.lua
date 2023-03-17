@@ -2244,6 +2244,13 @@ SIGen
 	width = 16 ,
 	height = 16
 } )
+.AddStyle( "RequestMap_BlankFlow" , "紫图-空白区" ,
+{
+	type = "vertical_flow_style" ,
+	parent = SIConstants_Core.raw.Styles.Common_FlowLeft ,
+	-- 体积
+	minimal_height = 200
+} )
 .AddStyle( "RequestMap_ListCheck" , "紫图-列表复选" ,
 {
 	type = "checkbox_style" ,

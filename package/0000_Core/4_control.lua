@@ -278,6 +278,7 @@ SIControl.Init
 		RequestMap_DropDown = "紫图-下拉列表" ,
 		RequestMap_ListButtonFlow = "紫图-列表定位按钮布局" ,
 		RequestMap_ListButton = "紫图-列表定位按钮" ,
+		RequestMap_BlankFlow = "紫图-空白区" ,
 		RequestMap_ListCheck = "紫图-列表复选" ,
 		RequestMap_ListPanelFlow = "紫图-列表面板布局" ,
 		RequestMap_SubList = "紫图-子列表" ,
@@ -723,6 +724,27 @@ end )
 		return
 	end
 end )
+.Add( SIEvents.on_gui_text_changed , function( event , functionID )
+	local element = event.element
+	if not element.valid then
+		return
+	end
+	local name = element.name
+	local playerIndex = event.player_index
+	-- 紫图的管理窗口事件
+	if name:StartsWith( SIRequestMap.Names.MaxSlot_Count_Prefix ) then
+		SIRequestMap.Set_MaxSlot_Count( playerIndex , name , element )
+		return
+	end
+	if name:StartsWith( SIRequestMap.Names.InsertFuel_Count_Prefix ) then
+		SIRequestMap.Set_InsertFuel_Count( playerIndex , name , element )
+		return
+	end
+	if name:StartsWith( SIRequestMap.Names.InsertAmmo_Count_Prefix ) then
+		SIRequestMap.Set_InsertAmmo_Count( playerIndex , name , element )
+		return
+	end
+end )
 .Add( SIEvents.on_gui_confirmed , function( event , functionID )
 	local element = event.element
 	if not element.valid then
@@ -755,18 +777,6 @@ end )
 	-- 紫图的管理窗口事件
 	if name == SIRequestMap.Names.TabSettingsName then
 		SIRequestMap.Set_TabSettingsName( playerIndex , element )
-		return
-	end
-	if name:StartsWith( SIRequestMap.Names.MaxSlot_Count_Prefix ) then
-		SIRequestMap.Set_MaxSlot_Count( playerIndex , name , element )
-		return
-	end
-	if name:StartsWith( SIRequestMap.Names.InsertFuel_Count_Prefix ) then
-		SIRequestMap.Set_InsertFuel_Count( playerIndex , name , element )
-		return
-	end
-	if name:StartsWith( SIRequestMap.Names.InsertAmmo_Count_Prefix ) then
-		SIRequestMap.Set_InsertAmmo_Count( playerIndex , name , element )
 		return
 	end
 end )

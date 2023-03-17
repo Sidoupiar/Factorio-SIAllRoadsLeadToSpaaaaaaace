@@ -559,6 +559,10 @@ SIRequestMap =
 		elements.InsertAmmo_Flow = InsertAmmo_Flow
 		elements.InsertAmmo_List = InsertAmmo_Flow.add{ type = "table" , column_count = 2 , style = SIConstants_Core.raw.Styles.RequestMap_SubList }
 		-- ----------------------------------------
+		-- 插入空白区
+		-- ----------------------------------------
+		list.add{ type = "flow" , direction = "vertical" , style = SIConstants_Core.raw.Styles.RequestMap_BlankFlow }
+		-- ----------------------------------------
 		-- 创建滚动定位按钮
 		-- ----------------------------------------
 		for key , value in pairs( SIRequestMap.DefaultTabSettings ) do
@@ -1413,10 +1417,12 @@ SIRequestMap =
 						if inventory and inventory.supports_filters() then
 							for slotIndex = 1 , #inventory , 1 do
 								local itemName = requestItemList[slotIndex]
-								if not itemName or game.item_prototypes[itemName] then
+								if itemName and game.item_prototypes[itemName] then
 									if inventory.can_set_filter( slotIndex , itemName ) then
 										inventory.set_filter( slotIndex , itemName )
 									end
+								else
+									inventory.set_filter( slotIndex , nil )
 								end
 							end
 						end
@@ -1425,10 +1431,12 @@ SIRequestMap =
 						if inventory and inventory.supports_filters() then
 							for slotIndex = 1 , #inventory , 1 do
 								local itemName = requestItemList[slotIndex]
-								if not itemName or game.item_prototypes[itemName] then
+								if itemName and game.item_prototypes[itemName] then
 									if inventory.can_set_filter( slotIndex , itemName ) then
 										inventory.set_filter( slotIndex , itemName )
 									end
+								else
+									inventory.set_filter( slotIndex , nil )
 								end
 							end
 						end
@@ -1437,10 +1445,12 @@ SIRequestMap =
 						if inventory and inventory.supports_filters() then
 							for slotIndex = 1 , #inventory , 1 do
 								local itemName = requestItemList[slotIndex]
-								if not itemName or game.item_prototypes[itemName] then
+								if itemName and game.item_prototypes[itemName] then
 									if inventory.can_set_filter( slotIndex , itemName ) then
 										inventory.set_filter( slotIndex , itemName )
 									end
+								else
+									inventory.set_filter( slotIndex , nil )
 								end
 							end
 						end
@@ -1453,25 +1463,38 @@ SIRequestMap =
 			if tabSettings.MaxSlot.Enable then
 				local maxSlotCount = tabSettings.MaxSlot.List[entityName]
 				if maxSlotCount then
+					maxSlotCount = maxSlotCount + 1 -- 因为实际是设置到此格子 , 而保存的值是空余这么多格子 , 所以此处的值要 + 1
 					if type == SICommon.Types.Entities.Container or type == SICommon.Types.Entities.ContainerLogic then
 						local inventory = entity.get_inventory( defines.inventory.chest )
 						if inventory and inventory.supports_bar() then
-							inventory.set_bar( maxSlotCount < 1 and nil or maxSlotCount )
+							local inventorySize = #inventory
+							if maxSlotCount < inventorySize then
+								inventory.set_bar( maxSlotCount < 1 and nil or maxSlotCount )
+							end
 						end
 					elseif type == SICommon.Types.Entities.Car then
 						local inventory = entity.get_inventory( defines.inventory.car_trunk )
 						if inventory and inventory.supports_bar() then
-							inventory.set_bar( maxSlotCount < 1 and nil or maxSlotCount )
+							local inventorySize = #inventory
+							if maxSlotCount < inventorySize then
+								inventory.set_bar( maxSlotCount < 1 and nil or maxSlotCount )
+							end
 						end
 					elseif type == SICommon.Types.Entities.SpiderVehicle then
 						local inventory = entity.get_inventory( defines.inventory.spider_trunk )
 						if inventory and inventory.supports_bar() then
-							inventory.set_bar( maxSlotCount < 1 and nil or maxSlotCount )
+							local inventorySize = #inventory
+							if maxSlotCount < inventorySize then
+								inventory.set_bar( maxSlotCount < 1 and nil or maxSlotCount )
+							end
 						end
 					elseif type == SICommon.Types.Entities.WagonCargo then
 						local inventory = entity.get_inventory( defines.inventory.cargo_wagon )
 						if inventory and inventory.supports_bar() then
-							inventory.set_bar( maxSlotCount < 1 and nil or maxSlotCount )
+							local inventorySize = #inventory
+							if maxSlotCount < inventorySize then
+								inventory.set_bar( maxSlotCount < 1 and nil or maxSlotCount )
+							end
 						end
 					end
 				end
