@@ -77,6 +77,53 @@ SIRPGPlayerSetting =
 		end
 	end ,
 	-- ------------------------------------------------------------------------------------------------
+	-- ---------- 控件函数 ----------------------------------------------------------------------------
+	-- ------------------------------------------------------------------------------------------------
+	FreshList = function( settings )
+		local list = settings.PlayerSetting.list
+		if list then
+			list.clear()
+			local elements = settings.PlayerSetting.Elements
+			local base = settings.PlayerSetting.Base
+			-- 第 1 层 , 显示悬浮文字提示
+			local flow1_Label = list.add{ type = "flow" , direction = "horizontal" , style = SIConstants_RPGSystem.raw.Styles.PlayerSetting_ListTitleFlow }
+			flow1_Label.add{ type = "label" , caption = { "SIRPGSystem.玩家设置-窗口-设置-显示悬浮文字提示" } , tooltip = { "SIRPGSystem.玩家设置-窗口-设置-显示悬浮文字提示-提示" } , style = SIConstants_RPGSystem.raw.Styles.PlayerSetting_ListLabel }
+			flow1_Label.add{ type = "sprite" , sprite = "info" , tooltip = { "SIRPGSystem.玩家设置-窗口-设置-显示悬浮文字提示-提示" } }
+			elements.itemFlyingText = list.add{ type = "checkbox" , state = base.showFlyingText , tooltip = { "SIRPGSystem.玩家设置-窗口-设置-显示悬浮文字提示-提示" } , style = SIConstants_RPGSystem.raw.Styles.PlayerSetting_ListCheck }
+			list.add{ type = "label" , style = SIConstants_RPGSystem.raw.Styles.PlayerSetting_ListPlace }
+			-- 第 2 层 , 玩家技能迷你每行显示的技能数量
+			local flow2_Label = list.add{ type = "flow" , direction = "horizontal" , style = SIConstants_RPGSystem.raw.Styles.PlayerSetting_ListTitleFlow }
+			flow2_Label.add{ type = "label" , caption = { "SIRPGSystem.玩家设置-窗口-设置-玩家技能迷你每行显示的技能数量" } , tooltip = { "SIRPGSystem.玩家设置-窗口-设置-玩家技能迷你每行显示的技能数量-提示" } , style = SIConstants_RPGSystem.raw.Styles.PlayerSetting_ListLabel }
+			flow2_Label.add{ type = "sprite" , sprite = "info" , tooltip = { "SIRPGSystem.玩家设置-窗口-设置-玩家技能迷你每行显示的技能数量-提示" } }
+			local skillColumnCount = settings.PlayerSetting.Base.skillColumnCount or SIRPGSystem.Settings.DefaultPlayer.PlayerSetting.Base.skillColumnCount
+			local flow2_flow = list.add{ type = "flow" , direction = "horizontal" , style = SIConstants_RPGSystem.raw.Styles.PlayerSetting_ListItemFlow }
+			elements.itemSkillColumnCount = flow2_flow.add
+			{
+				type = "slider" ,
+				name = SIRPGPlayerSetting.Names.SkillColumnCount ,
+				value = skillColumnCount ,
+				value_step = 1 ,
+				minimum_value = SIRPGPlayerSkillMini.ListColumnMin ,
+				maximum_value = SIRPGPlayerSkillMini.ListColumnMax ,
+				discrete_slider = false ,
+				discrete_values = true ,
+				tooltip = { "SIRPGSystem.玩家设置-窗口-设置-玩家技能迷你每行显示的技能数量-提示" } ,
+				style = SIConstants_RPGSystem.raw.Styles.PlayerSetting_Slider
+			}
+			elements.itemSkillColumnCountText = flow2_flow.add
+			{
+				type = "textfield" ,
+				name = SIRPGPlayerSetting.Names.SkillColumnCountText ,
+				text = tostring( skillColumnCount ) ,
+				numeric = true ,
+				tooltip = { "SIRPGSystem.玩家设置-窗口-设置-玩家技能迷你每行显示的技能数量-提示" } ,
+				style = SIConstants_RPGSystem.raw.Styles.PlayerSetting_Number
+			}
+			list.add{ type = "label" , style = SIConstants_RPGSystem.raw.Styles.PlayerSetting_ListPlace }
+			-- 根据设置更新控件
+		end
+	end ,
+	-- ------------------------------------------------------------------------------------------------
 	-- ---------- 功能函数 ----------------------------------------------------------------------------
 	-- ------------------------------------------------------------------------------------------------
 	Save = function( settings , isClosing )
@@ -138,50 +185,9 @@ SIRPGPlayerSetting =
 			elements.itemSkillColumnCountText.text = tostring( default.skillColumnCount )
 		end
 	end ,
-	FreshList = function( settings )
-		local list = settings.PlayerSetting.list
-		if list then
-			list.clear()
-			local elements = settings.PlayerSetting.Elements
-			local base = settings.PlayerSetting.Base
-			-- 第 1 层 , 显示悬浮文字提示
-			local flow1_Label = list.add{ type = "flow" , direction = "horizontal" , style = SIConstants_RPGSystem.raw.Styles.PlayerSetting_ListTitleFlow }
-			flow1_Label.add{ type = "label" , caption = { "SIRPGSystem.玩家设置-窗口-设置-显示悬浮文字提示" } , tooltip = { "SIRPGSystem.玩家设置-窗口-设置-显示悬浮文字提示-提示" } , style = SIConstants_RPGSystem.raw.Styles.PlayerSetting_ListLabel }
-			flow1_Label.add{ type = "sprite" , sprite = "info" , tooltip = { "SIRPGSystem.玩家设置-窗口-设置-显示悬浮文字提示-提示" } }
-			elements.itemFlyingText = list.add{ type = "checkbox" , state = base.showFlyingText , tooltip = { "SIRPGSystem.玩家设置-窗口-设置-显示悬浮文字提示-提示" } , style = SIConstants_RPGSystem.raw.Styles.PlayerSetting_ListCheck }
-			list.add{ type = "label" , style = SIConstants_RPGSystem.raw.Styles.PlayerSetting_ListPlace }
-			-- 第 2 层 , 玩家技能迷你每行显示的技能数量
-			local flow2_Label = list.add{ type = "flow" , direction = "horizontal" , style = SIConstants_RPGSystem.raw.Styles.PlayerSetting_ListTitleFlow }
-			flow2_Label.add{ type = "label" , caption = { "SIRPGSystem.玩家设置-窗口-设置-玩家技能迷你每行显示的技能数量" } , tooltip = { "SIRPGSystem.玩家设置-窗口-设置-玩家技能迷你每行显示的技能数量-提示" } , style = SIConstants_RPGSystem.raw.Styles.PlayerSetting_ListLabel }
-			flow2_Label.add{ type = "sprite" , sprite = "info" , tooltip = { "SIRPGSystem.玩家设置-窗口-设置-玩家技能迷你每行显示的技能数量-提示" } }
-			local skillColumnCount = settings.PlayerSetting.Base.skillColumnCount or SIRPGSystem.Settings.DefaultPlayer.PlayerSetting.Base.skillColumnCount
-			local flow2_flow = list.add{ type = "flow" , direction = "horizontal" , style = SIConstants_RPGSystem.raw.Styles.PlayerSetting_ListItemFlow }
-			elements.itemSkillColumnCount = flow2_flow.add
-			{
-				type = "slider" ,
-				name = SIRPGPlayerSetting.Names.SkillColumnCount ,
-				value = skillColumnCount ,
-				value_step = 1 ,
-				minimum_value = SIRPGPlayerSkillMini.ListColumnMin ,
-				maximum_value = SIRPGPlayerSkillMini.ListColumnMax ,
-				discrete_slider = false ,
-				discrete_values = true ,
-				tooltip = { "SIRPGSystem.玩家设置-窗口-设置-玩家技能迷你每行显示的技能数量-提示" } ,
-				style = SIConstants_RPGSystem.raw.Styles.PlayerSetting_Slider
-			}
-			elements.itemSkillColumnCountText = flow2_flow.add
-			{
-				type = "textfield" ,
-				name = SIRPGPlayerSetting.Names.SkillColumnCountText ,
-				text = tostring( skillColumnCount ) ,
-				numeric = true ,
-				tooltip = { "SIRPGSystem.玩家设置-窗口-设置-玩家技能迷你每行显示的技能数量-提示" } ,
-				style = SIConstants_RPGSystem.raw.Styles.PlayerSetting_Number
-			}
-			list.add{ type = "label" , style = SIConstants_RPGSystem.raw.Styles.PlayerSetting_ListPlace }
-			-- 根据设置更新控件
-		end
-	end ,
+	-- ------------------------------------------------------------------------------------------------
+	-- ---------- 事件函数 ----------------------------------------------------------------------------
+	-- ------------------------------------------------------------------------------------------------
 	SaveSettings = function( playerIndex )
 		local settings = SIGlobal.GetPlayerSettings( SIRPGSystem.Settings.Name , playerIndex )
 		if settings.PlayerSetting.frame and settings.PlayerSetting.frame.valid then

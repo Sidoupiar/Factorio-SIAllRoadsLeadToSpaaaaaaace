@@ -78,74 +78,8 @@ SIMainbarNote =
 		end
 	end ,
 	-- ------------------------------------------------------------------------------------------------
-	-- ---------- 功能函数 ----------------------------------------------------------------------------
+	-- ---------- 控件函数 ----------------------------------------------------------------------------
 	-- ------------------------------------------------------------------------------------------------
-	Save = function( settings )
-		local elements = settings.Note.Elements
-		if not elements.title or elements.title.text:len() < 1 then
-			SIPrint.Warning( settings.playerIndex , { "SICore.主面板便签管理-设置-标题-空" } )
-			return
-		end
-		if not elements.order or elements.order.text:len() < 1 then
-			SIPrint.Warning( settings.playerIndex , { "SICore.主面板便签管理-设置-排序-空" } )
-			return
-		end
-		local ID = elements.id.caption
-		local noteData = nil
-		if ID:len() > 0 then
-			noteData = SITable.GetWithID( settings.Note.NoteList , ID )
-			if not noteData then
-				SIPrint.Warning( settings.playerIndex , { "SICore.主面板便签管理-设置-便签无效" } )
-				return
-			end
-		else
-			if #settings.Note.NoteList > SIMainbarNote.NoteCountMax then
-				SIPrint.Warning( settings.playerIndex , { "SICore.主面板便签管理-设置-便签过多" } )
-				return
-			end
-			settings.Note.NoteOrder = settings.Note.NoteOrder + 1
-			noteData =
-			{
-				ID = tostring( settings.Note.NoteOrder ) ,
-				order = "" ,
-				isKey = false
-			}
-			table.insert( settings.Note.NoteList , noteData )
-		end
-		local orderOld = noteData.order
-		local isKeyOld = noteData.isKey
-		noteData.title = elements.title.text
-		noteData.content = elements.content.text
-		noteData.order = elements.order.text
-		noteData.isKey = elements.isKey.state
-		if orderOld ~= noteData.order then
-			table.sort( settings.Note.NoteList , function( a , b )
-				return a.order > b.order
-			end )
-		end
-		if noteData.isKey then
-			if not isKeyOld then
-				local keyIndex = 0
-				for index , otherNoteData in pairs( settings.Note.NoteList ) do
-					if noteData.ID == otherNoteData.ID then
-						keyIndex = index
-					else
-						otherNoteData.isKey = false
-					end
-				end
-				settings.Note.KeyNoteIndex = keyIndex
-			end
-		else
-			if isKeyOld then
-				settings.Note.KeyNoteIndex = nil
-			end
-		end
-		SIMainbarNote.FreshList( settings )
-		SIMainbarNote.ShowEdit( settings , noteData.ID )
-		if settings.Setting.Base.showKeyNote then
-			SIMainbar.FreshPanel_KeyNote( settings )
-		end
-	end ,
 	ShowEdit = function( settings , noteID , defaultNoteData )
 		-- 读取数据
 		local noteData = nil
@@ -247,6 +181,78 @@ SIMainbarNote =
 		local button2 = list.add{ type = "sprite-button" , sprite = "item/" .. SIConstants_Core.raw.Items.IconClose , tooltip = { "SICore.主面板便签管理-窗口-列表便签-删除-提示" } , style = SIConstants_Core.raw.Styles.Mainbar_Note_ListNoteDelete }
 		button2.enabled = false
 	end ,
+	-- ------------------------------------------------------------------------------------------------
+	-- ---------- 功能函数 ----------------------------------------------------------------------------
+	-- ------------------------------------------------------------------------------------------------
+	Save = function( settings )
+		local elements = settings.Note.Elements
+		if not elements.title or elements.title.text:len() < 1 then
+			SIPrint.Warning( settings.playerIndex , { "SICore.主面板便签管理-设置-标题-空" } )
+			return
+		end
+		if not elements.order or elements.order.text:len() < 1 then
+			SIPrint.Warning( settings.playerIndex , { "SICore.主面板便签管理-设置-排序-空" } )
+			return
+		end
+		local ID = elements.id.caption
+		local noteData = nil
+		if ID:len() > 0 then
+			noteData = SITable.GetWithID( settings.Note.NoteList , ID )
+			if not noteData then
+				SIPrint.Warning( settings.playerIndex , { "SICore.主面板便签管理-设置-便签无效" } )
+				return
+			end
+		else
+			if #settings.Note.NoteList > SIMainbarNote.NoteCountMax then
+				SIPrint.Warning( settings.playerIndex , { "SICore.主面板便签管理-设置-便签过多" } )
+				return
+			end
+			settings.Note.NoteOrder = settings.Note.NoteOrder + 1
+			noteData =
+			{
+				ID = tostring( settings.Note.NoteOrder ) ,
+				order = "" ,
+				isKey = false
+			}
+			table.insert( settings.Note.NoteList , noteData )
+		end
+		local orderOld = noteData.order
+		local isKeyOld = noteData.isKey
+		noteData.title = elements.title.text
+		noteData.content = elements.content.text
+		noteData.order = elements.order.text
+		noteData.isKey = elements.isKey.state
+		if orderOld ~= noteData.order then
+			table.sort( settings.Note.NoteList , function( a , b )
+				return a.order > b.order
+			end )
+		end
+		if noteData.isKey then
+			if not isKeyOld then
+				local keyIndex = 0
+				for index , otherNoteData in pairs( settings.Note.NoteList ) do
+					if noteData.ID == otherNoteData.ID then
+						keyIndex = index
+					else
+						otherNoteData.isKey = false
+					end
+				end
+				settings.Note.KeyNoteIndex = keyIndex
+			end
+		else
+			if isKeyOld then
+				settings.Note.KeyNoteIndex = nil
+			end
+		end
+		SIMainbarNote.FreshList( settings )
+		SIMainbarNote.ShowEdit( settings , noteData.ID )
+		if settings.Setting.Base.showKeyNote then
+			SIMainbar.FreshPanel_KeyNote( settings )
+		end
+	end ,
+	-- ------------------------------------------------------------------------------------------------
+	-- ---------- 事件函数 ----------------------------------------------------------------------------
+	-- ------------------------------------------------------------------------------------------------
 	ShowEditView = function( playerIndex , name )
 		local settings = SIGlobal.GetPlayerSettings( SIMainData.Settings.Name , playerIndex )
 		if settings.Note.frame and settings.Note.frame.valid then

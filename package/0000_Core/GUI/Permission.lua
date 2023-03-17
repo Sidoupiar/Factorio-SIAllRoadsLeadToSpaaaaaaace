@@ -140,357 +140,8 @@ SIPermission =
 		end
 	end ,
 	-- ------------------------------------------------------------------------------------------------
-	-- ---------- 功能函数 ----------------------------------------------------------------------------
+	-- ---------- 控件函数 ----------------------------------------------------------------------------
 	-- ------------------------------------------------------------------------------------------------
-	GetBasePermissionGroup = function()
-		local globalSettings = SIGlobal.GetGlobalSettings( SIPermission.Settings.Name )
-		if not globalSettings.BasePermissionGroup then
-			local globalPermissionGroups = game.permissions
-			local basePermissionGroup = globalPermissionGroups.get_group( SIPermission.BasePermissionGroupName )
-			if not basePermissionGroup then
-				basePermissionGroup = globalPermissionGroups.create_group( SIPermission.BasePermissionGroupName )
-				for basePermissionID , inputActionName in pairs( SIPermission.BasePermissionIDs ) do
-					basePermissionGroup.set_allows_action( inputActionName , globalSettings.DefaultPermissions[basePermissionID] == SIPermission.PermissionCode.TRUE )
-				end
-			end
-			globalSettings.BasePermissionGroup = basePermissionGroup
-		end
-		return globalSettings.BasePermissionGroup
-	end ,
-	AddPlayerToBasePremissionGroup = function( playerIndex )
-		local playerSettings = SIGlobal.GetPlayerSettings( SIPermission.Settings.Name , playerIndex )
-		if not playerSettings.PermissionGroup then
-			playerSettings.PermissionGroup = SIPermission.GetBasePermissionGroup()
-			playerSettings.PermissionGroup.add_player( game.get_player( playerIndex ) )
-		end
-	end ,
-	CheckPlayerInventory = function( playerIndex )
-		local settings = SIGlobal.GetPlayerSettings( SIPermission.Settings.Name , playerIndex )
-		local globalSettings = SIGlobal.GetGlobalSettings( SIPermission.Settings.Name )
-		local outWhite = settings.Permissions[SIPermission.PermissionIDs.OutWhite] or globalSettings.DefaultPermissions[SIPermission.PermissionIDs.OutWhite]
-		local outBlack = settings.Permissions[SIPermission.PermissionIDs.OutBlack] or globalSettings.DefaultPermissions[SIPermission.PermissionIDs.OutBlack]
-		local player = game.get_player( playerIndex )
-		if outWhite == SIPermission.PermissionCode.FALSE then
-			local whiteList = settings.Lists.ItemWhiteList or globalSettings.DefaultLists.ItemWhiteList
-			if #whiteList > 0 then
-				local inventory = player.get_main_inventory()
-				for itemName , count in pairs( inventory.get_contents() ) do
-					if count > 0 and not SITable.Has( whiteList , itemName ) then
-						inventory.remove{ name = itemName , count = count }
-					end
-				end
-			end
-		end
-		if outBlack == SIPermission.PermissionCode.FALSE then
-			local blackList = settings.Lists.ItemBlackList or globalSettings.DefaultLists.ItemBlackList
-			if #blackList > 0 then
-				local inventory = player.get_main_inventory()
-				for index , itemName in pairs( blackList ) do
-					local count = inventory.get_item_count( itemName )
-					if count > 0 then
-						inventory.remove{ name = itemName , count = count }
-					end
-				end
-			end
-		end
-	end ,
-	-- ----------------------------------------
-	-- 这是一个内部函数 , 请勿外部调用<br>
-	-- ----------------------------------------
-	FirePermissionChange = function( playerIndex , permissionID )
-		local data =
-		{
-			name = SIPermission.EventID ,
-			tick = game.tick ,
-			player_index = playerIndex ,
-			permission_id = permissionID
-		}
-		script.raise_event( SIPermission.EventID , data )
-	end ,
-	-- ----------------------------------------
-	-- 这是一个内部函数 , 请勿外部调用<br>
-	-- ----------------------------------------
-	UpdatePlayerPermissionGroup = function( settings , globalSettings )
-		local newGroupFlag = false
-		for basePermissionID , inputActionName in pairs( SIPermission.BasePermissionIDs ) do
-			local permissionCode = settings.Permissions[basePermissionID]
-			if permissionCode then
-				newGroupFlag = true
-				break
-			end
-		end
-		local playerPermissionGroup = settings.PermissionGroup
-		local playerIndex = settings.playerIndex
-		if newGroupFlag then
-			if not playerPermissionGroup or playerPermissionGroup.name == SIPermission.BasePermissionGroupName then
-				settings.PermissionGroup = game.permissions.create_group( SIPermission.PlayerPermissionGroupPrefix .. playerIndex )
-				playerPermissionGroup = settings.PermissionGroup
-				playerPermissionGroup.add_player( game.get_player( playerIndex ) )
-				globalSettings.PermissionGroupList[playerIndex] = playerPermissionGroup
-			end
-			for basePermissionID , inputActionName in pairs( SIPermission.BasePermissionIDs ) do
-				local permissionCode = settings.Permissions[basePermissionID] or globalSettings.DefaultPermissions[basePermissionID]
-				local allow = permissionCode == SIPermission.PermissionCode.TRUE
-				if playerPermissionGroup.allows_action( inputActionName ) ~= allow then
-					playerPermissionGroup.set_allows_action( inputActionName , allow )
-				end
-			end
-		else
-			if not playerPermissionGroup then
-				settings.PermissionGroup = SIPermission.GetBasePermissionGroup()
-				settings.PermissionGroup.add_player( game.get_player( playerIndex ) )
-			elseif playerPermissionGroup.name ~= SIPermission.BasePermissionGroupName then
-				globalSettings.PermissionGroupList[playerIndex] = nil
-				local player = game.get_player( playerIndex )
-				playerPermissionGroup.remove_player( player )
-				playerPermissionGroup.destroy()
-				settings.PermissionGroup = SIPermission.GetBasePermissionGroup()
-				settings.PermissionGroup.add_player( player )
-			end
-		end
-	end ,
-	Save_Global = function( settings )
-		SIPermission.ChangingPermissionGroup = true
-		local playerGlobalSettings = settings.data.global.current
-		-- 填充数据
-		for index , itemName in pairs( playerGlobalSettings.AddingLists.ItemWhiteList ) do
-			table.insert( playerGlobalSettings.DefaultLists.ItemWhiteList , itemName )
-		end
-		for index , itemName in pairs( playerGlobalSettings.AddingLists.ItemBlackList ) do
-			table.insert( playerGlobalSettings.DefaultLists.ItemBlackList , itemName )
-		end
-		playerGlobalSettings.AddingLists.ItemWhiteList = {}
-		playerGlobalSettings.AddingLists.ItemBlackList = {}
-		-- 同步数据 和 更新基础权限组
-		local basePermissionGroup = SIPermission.GetBasePermissionGroup()
-		local globalSettings = SIGlobal.GetGlobalSettings( SIPermission.Settings.Name )
-		local playerSettingsList = SIGlobal.GetAllPlayerSettings( SIPermission.Settings.Name )
-		globalSettings.DefaultLists.ItemWhiteList = SIUtils.table.deepcopy( playerGlobalSettings.DefaultLists.ItemWhiteList )
-		globalSettings.DefaultLists.ItemBlackList = SIUtils.table.deepcopy( playerGlobalSettings.DefaultLists.ItemBlackList )
-		for permissionID , permissionCode in pairs( globalSettings.DefaultPermissions ) do
-			local inputActionName = SIPermission.BasePermissionIDs[permissionID]
-			local radioList = settings.data.global.radios[permissionID]
-			if radioList then
-				local oldPermissionCode = globalSettings.DefaultPermissions[permissionID]
-				local newPermissionCode = nil
-				local radioValue = SIElements.GetRadioValue( radioList )
-				if radioValue == SIPermission.PermissionElementCode.TRUE then
-					newPermissionCode = SIPermission.PermissionCode.TRUE
-				else
-					newPermissionCode = SIPermission.PermissionCode.FALSE
-				end
-				playerGlobalSettings.DefaultPermissions[permissionID] = newPermissionCode
-				globalSettings.DefaultPermissions[permissionID] = newPermissionCode
-				if inputActionName then
-					local allow = newPermissionCode == SIPermission.PermissionCode.TRUE
-					if basePermissionGroup.allows_action( inputActionName ) ~= allow then
-						basePermissionGroup.set_allows_action( inputActionName , allow )
-					end
-				end
-				-- 触发事件
-				if oldPermissionCode ~= newPermissionCode then
-					for playerIndex , currentOtherPlayerSettings in pairs( playerSettingsList ) do
-						if not currentOtherPlayerSettings.Permissions[permissionID] then
-							SIPermission.FirePermissionChange( playerIndex , permissionID )
-						end
-					end
-				end
-			end
-			local textList = settings.data.global.texts[permissionID]
-			if textList then
-				local permissionNameLocal = textList.nameLocal.state
-				local permissionName = permissionNameLocal and { textList.name.text } or textList.name.text
-				playerGlobalSettings.DefaultNames[permissionID] = permissionName
-				globalSettings.DefaultNames[permissionID] = permissionName
-				if not inputActionName then
-					local permissionMessageLocal = textList.messageLocal.state
-					local permissionMessage = permissionMessageLocal and { textList.message.text } or textList.message.text
-					playerGlobalSettings.DefaultMessages[permissionID] = permissionMessage
-					globalSettings.DefaultMessages[permissionID] = permissionMessage
-				end
-			end
-		end
-		-- 刷新所有玩家的控件 和 更新玩家的权限组
-		for playerIndex , currentOtherPlayerSettings in pairs( playerSettingsList ) do
-			SIPermission.UpdatePlayerPermissionGroup( currentOtherPlayerSettings , globalSettings )
-			if currentOtherPlayerSettings.frame and currentOtherPlayerSettings.frame.valid then
-				SIPermission.FreshList( currentOtherPlayerSettings )
-			end
-		end
-		SIPermission.ChangingPermissionGroup = false
-	end ,
-	Save_Player = function( settings )
-		SIPermission.ChangingPermissionGroup = true
-		local otherPlayerSettings = settings.data.player.current
-		if otherPlayerSettings then
-			-- 填充数据
-			for index , itemName in pairs( otherPlayerSettings.AddingLists.ItemWhiteList ) do
-				table.insert( otherPlayerSettings.Lists.ItemWhiteList , itemName )
-			end
-			for index , itemName in pairs( otherPlayerSettings.AddingLists.ItemBlackList ) do
-				table.insert( otherPlayerSettings.Lists.ItemBlackList , itemName )
-			end
-			otherPlayerSettings.AddingLists.ItemWhiteList = {}
-			otherPlayerSettings.AddingLists.ItemBlackList = {}
-			-- 同步数据
-			local currentOtherPlayerSettings = SIGlobal.GetPlayerSettings( SIPermission.Settings.Name , settings.data.player.playerIndex )
-			if #otherPlayerSettings.Lists.ItemWhiteList < 1 then
-				currentOtherPlayerSettings.Lists.ItemWhiteList = nil
-			else
-				currentOtherPlayerSettings.Lists.ItemWhiteList = SIUtils.table.deepcopy( otherPlayerSettings.Lists.ItemWhiteList )
-			end
-			if #otherPlayerSettings.Lists.ItemBlackList < 1 then
-				currentOtherPlayerSettings.Lists.ItemBlackList = nil
-			else
-				currentOtherPlayerSettings.Lists.ItemBlackList = SIUtils.table.deepcopy( otherPlayerSettings.Lists.ItemBlackList )
-			end
-			local globalSettings = SIGlobal.GetGlobalSettings( SIPermission.Settings.Name )
-			for permissionID , permissionCode in pairs( globalSettings.DefaultPermissions ) do
-				local radioList = settings.data.player.radios[permissionID]
-				if radioList then
-					local oldPermissionCode = currentOtherPlayerSettings.Permissions[permissionID]
-					local newPermissionCode = nil
-					local radioValue = SIElements.GetRadioValue( radioList )
-					if radioValue == SIPermission.PermissionElementCode.TRUE then
-						newPermissionCode = SIPermission.PermissionCode.TRUE
-					elseif radioValue == SIPermission.PermissionElementCode.FALSE then
-						newPermissionCode = SIPermission.PermissionCode.FALSE
-					end
-					otherPlayerSettings.Permissions[permissionID] = newPermissionCode
-					currentOtherPlayerSettings.Permissions[permissionID] = newPermissionCode
-					-- 触发事件
-					if oldPermissionCode ~= newPermissionCode then
-						SIPermission.FirePermissionChange( settings.data.player.playerIndex , permissionID )
-					end
-				end
-			end
-			-- 刷新对应玩家的控件 和 更新玩家的权限组
-			SIPermission.UpdatePlayerPermissionGroup( currentOtherPlayerSettings , globalSettings )
-			if currentOtherPlayerSettings.frame and currentOtherPlayerSettings.frame.valid then
-				SIPermission.FreshList( currentOtherPlayerSettings )
-			end
-		end
-		SIPermission.ChangingPermissionGroup = false
-	end ,
-	Save_Check = function( settings )
-		SIPermission.ChangingPermissionGroup = true
-		local current = settings.data.check.current
-		if current then
-			local globalSettings = SIGlobal.GetGlobalSettings( SIPermission.Settings.Name )
-			-- 填充数据 和 同步数据
-			local permissionID = settings.data.check.permissionID
-			for playerIndex , permissionCode in pairs( current.Players ) do
-				local radioList = settings.data.check.radios[tostring( playerIndex )]
-				if radioList then
-					local currentOtherPlayerSettings = SIGlobal.GetPlayerSettings( SIPermission.Settings.Name , playerIndex )
-					local oldPermissionCode = currentOtherPlayerSettings.Permissions[permissionID]
-					local newPermissionCode = nil
-					local radioValue = SIElements.GetRadioValue( radioList )
-					if radioValue == SIPermission.PermissionElementCode.TRUE then
-						newPermissionCode = SIPermission.PermissionCode.TRUE
-					elseif radioValue == SIPermission.PermissionElementCode.FALSE then
-						newPermissionCode = SIPermission.PermissionCode.FALSE
-					end
-					current.Players[playerIndex] = { code = newPermissionCode }
-					currentOtherPlayerSettings.Permissions[permissionID] = newPermissionCode
-					-- 触发事件
-					if oldPermissionCode ~= newPermissionCode then
-						SIPermission.FirePermissionChange( playerIndex , permissionID )
-					end
-					-- 刷新对应玩家的控件 和 更新玩家的权限组
-					SIPermission.UpdatePlayerPermissionGroup( currentOtherPlayerSettings , globalSettings )
-					if currentOtherPlayerSettings.frame and currentOtherPlayerSettings.frame.valid then
-						SIPermission.FreshList( currentOtherPlayerSettings )
-					end
-				end
-			end
-		end
-		SIPermission.ChangingPermissionGroup = false
-	end ,
-	Back_Global = function( settings )
-		local current = SIUtils.table.deepcopy( settings.data.global.back )
-		current.AddingLists =
-		{
-			ItemWhiteList = {} , -- 物品白名单 , 临时列表 , 关闭窗口时消失
-			ItemBlackList = {}   -- 物品黑名单 , 临时列表 , 关闭窗口时消失
-		}
-		settings.data.global.current = current
-		SIPermission.FreshList( settings )
-	end ,
-	Back_Player = function( settings )
-		local current = settings.data.player.current
-		if current then
-			local back = SIUtils.table.deepcopy( settings.data.player.back )
-			current.Permissions = back.Permissions
-			current.Lists = back.Lists
-			current.AddingLists =
-			{
-				ItemWhiteList = {} , -- 物品白名单 , 临时列表 , 关闭窗口时消失
-				ItemBlackList = {}   -- 物品黑名单 , 临时列表 , 关闭窗口时消失
-			}
-			local globalSettings = SIGlobal.GetGlobalSettings( SIPermission.Settings.Name )
-			local isMaster = SIPermission.HasPermission( SIPermission.PermissionIDs.Master , settings.playerIndex )
-			SIPermission.FreshListPlayer( settings , globalSettings , isMaster )
-		end
-	end ,
-	Back_Check = function( settings )
-		local current = settings.data.check.current
-		if current then
-			local back = SIUtils.table.deepcopy( settings.data.check.back )
-			current.Players = back.Players
-			SIPermission.FreshListCheck( settings )
-		end
-	end ,
-	Reset_Global = function( settings )
-		local current = SIUtils.table.deepcopy( SIPermission.Settings.DefaultGlobal )
-		current.AddingLists =
-		{
-			ItemWhiteList = {} , -- 物品白名单 , 临时列表 , 关闭窗口时消失
-			ItemBlackList = {}   -- 物品黑名单 , 临时列表 , 关闭窗口时消失
-		}
-		settings.data.global.current = current
-		-- 去除由于版本更新新增的全局权限项目 , 这部分会在后续的接口中补充
-		local globalSettings = SIGlobal.GetGlobalSettings( SIPermission.Settings.Name )
-		local currentPermissions = SIUtils.table.deepcopy( current.DefaultPermissions )
-		for permissionID , permissionCode in pairs( current.DefaultPermissions ) do
-			if not globalSettings.DefaultPermissions[permissionID] then
-				currentPermissions[permissionID] = nil
-			end
-		end
-		current.DefaultPermissions = currentPermissions
-		-- 根据设置更新控件
-		SIPermission.FreshList( settings )
-	end ,
-	Clear_Player = function( settings )
-		local current = settings.data.player.current
-		if current then
-			local default = SIUtils.table.deepcopy( SIPermission.Settings.DefaultPlayer )
-			current.Permissions = default.Permissions
-			current.Lists = default.Lists
-			current.AddingLists =
-			{
-				ItemWhiteList = {} , -- 物品白名单 , 临时列表 , 关闭窗口时消失
-				ItemBlackList = {}   -- 物品黑名单 , 临时列表 , 关闭窗口时消失
-			}
-			if not current.Lists.ItemWhiteList then
-				current.Lists.ItemWhiteList = {}
-			end
-			if not current.Lists.ItemBlackList then
-				current.Lists.ItemBlackList = {}
-			end
-			SIPermission.FreshList( settings )
-		end
-	end ,
-	Clear_Check = function( settings )
-		local current = settings.data.check.current
-		if current then
-			current.Players = {}
-			for playerIndex , otherPlayerSettings in pairs( SIGlobal.GetAllPlayerSettings( SIPermission.Settings.Name ) ) do
-				current.Players[playerIndex] = {}
-			end
-			SIPermission.FreshListCheck( settings )
-		end
-	end ,
 	FreshList = function( settings )
 		local globalSettings = SIGlobal.GetGlobalSettings( SIPermission.Settings.Name )
 		local isAdmin = SIPermission.IsAdmin( settings.playerIndex )
@@ -930,6 +581,361 @@ SIPermission =
 				.add{ type = "flow" , direction = "vertical" , style = SIConstants_Core.raw.Styles.Permission_Player_ListFlow }
 				.add{ type = "radiobutton" , name = SIPermission.Names.CheckRadioPrefix .. SIPermission.PermissionElementCode.FALSE .. playerIndex , state = permissionCode == SIPermission.PermissionCode.FALSE , tooltip = { "SICore.权限管理-窗口-查询-列表-权限禁用-提示" } , style = SIConstants_Core.raw.Styles.Common_RadioRed }
 			}
+		end
+	end ,
+	-- ------------------------------------------------------------------------------------------------
+	-- ---------- 功能函数 ----------------------------------------------------------------------------
+	-- ------------------------------------------------------------------------------------------------
+	GetBasePermissionGroup = function()
+		local globalSettings = SIGlobal.GetGlobalSettings( SIPermission.Settings.Name )
+		if not globalSettings.BasePermissionGroup then
+			local globalPermissionGroups = game.permissions
+			local basePermissionGroup = globalPermissionGroups.get_group( SIPermission.BasePermissionGroupName )
+			if not basePermissionGroup then
+				basePermissionGroup = globalPermissionGroups.create_group( SIPermission.BasePermissionGroupName )
+				for basePermissionID , inputActionName in pairs( SIPermission.BasePermissionIDs ) do
+					basePermissionGroup.set_allows_action( inputActionName , globalSettings.DefaultPermissions[basePermissionID] == SIPermission.PermissionCode.TRUE )
+				end
+			end
+			globalSettings.BasePermissionGroup = basePermissionGroup
+		end
+		return globalSettings.BasePermissionGroup
+	end ,
+	-- ----------------------------------------
+	-- 这是一个内部函数 , 请勿外部调用<br>
+	-- ----------------------------------------
+	FirePermissionChange = function( playerIndex , permissionID )
+		local data =
+		{
+			name = SIPermission.EventID ,
+			tick = game.tick ,
+			player_index = playerIndex ,
+			permission_id = permissionID
+		}
+		script.raise_event( SIPermission.EventID , data )
+	end ,
+	-- ----------------------------------------
+	-- 这是一个内部函数 , 请勿外部调用<br>
+	-- ----------------------------------------
+	UpdatePlayerPermissionGroup = function( settings , globalSettings )
+		local newGroupFlag = false
+		for basePermissionID , inputActionName in pairs( SIPermission.BasePermissionIDs ) do
+			local permissionCode = settings.Permissions[basePermissionID]
+			if permissionCode then
+				newGroupFlag = true
+				break
+			end
+		end
+		local playerPermissionGroup = settings.PermissionGroup
+		local playerIndex = settings.playerIndex
+		if newGroupFlag then
+			if not playerPermissionGroup or playerPermissionGroup.name == SIPermission.BasePermissionGroupName then
+				settings.PermissionGroup = game.permissions.create_group( SIPermission.PlayerPermissionGroupPrefix .. playerIndex )
+				playerPermissionGroup = settings.PermissionGroup
+				playerPermissionGroup.add_player( game.get_player( playerIndex ) )
+				globalSettings.PermissionGroupList[playerIndex] = playerPermissionGroup
+			end
+			for basePermissionID , inputActionName in pairs( SIPermission.BasePermissionIDs ) do
+				local permissionCode = settings.Permissions[basePermissionID] or globalSettings.DefaultPermissions[basePermissionID]
+				local allow = permissionCode == SIPermission.PermissionCode.TRUE
+				if playerPermissionGroup.allows_action( inputActionName ) ~= allow then
+					playerPermissionGroup.set_allows_action( inputActionName , allow )
+				end
+			end
+		else
+			if not playerPermissionGroup then
+				settings.PermissionGroup = SIPermission.GetBasePermissionGroup()
+				settings.PermissionGroup.add_player( game.get_player( playerIndex ) )
+			elseif playerPermissionGroup.name ~= SIPermission.BasePermissionGroupName then
+				globalSettings.PermissionGroupList[playerIndex] = nil
+				local player = game.get_player( playerIndex )
+				playerPermissionGroup.remove_player( player )
+				playerPermissionGroup.destroy()
+				settings.PermissionGroup = SIPermission.GetBasePermissionGroup()
+				settings.PermissionGroup.add_player( player )
+			end
+		end
+	end ,
+	Save_Global = function( settings )
+		SIPermission.ChangingPermissionGroup = true
+		local playerGlobalSettings = settings.data.global.current
+		-- 填充数据
+		for index , itemName in pairs( playerGlobalSettings.AddingLists.ItemWhiteList ) do
+			table.insert( playerGlobalSettings.DefaultLists.ItemWhiteList , itemName )
+		end
+		for index , itemName in pairs( playerGlobalSettings.AddingLists.ItemBlackList ) do
+			table.insert( playerGlobalSettings.DefaultLists.ItemBlackList , itemName )
+		end
+		playerGlobalSettings.AddingLists.ItemWhiteList = {}
+		playerGlobalSettings.AddingLists.ItemBlackList = {}
+		-- 同步数据 和 更新基础权限组
+		local basePermissionGroup = SIPermission.GetBasePermissionGroup()
+		local globalSettings = SIGlobal.GetGlobalSettings( SIPermission.Settings.Name )
+		local playerSettingsList = SIGlobal.GetAllPlayerSettings( SIPermission.Settings.Name )
+		globalSettings.DefaultLists.ItemWhiteList = SIUtils.table.deepcopy( playerGlobalSettings.DefaultLists.ItemWhiteList )
+		globalSettings.DefaultLists.ItemBlackList = SIUtils.table.deepcopy( playerGlobalSettings.DefaultLists.ItemBlackList )
+		for permissionID , permissionCode in pairs( globalSettings.DefaultPermissions ) do
+			local inputActionName = SIPermission.BasePermissionIDs[permissionID]
+			local radioList = settings.data.global.radios[permissionID]
+			if radioList then
+				local oldPermissionCode = globalSettings.DefaultPermissions[permissionID]
+				local newPermissionCode = nil
+				local radioValue = SIElements.GetRadioValue( radioList )
+				if radioValue == SIPermission.PermissionElementCode.TRUE then
+					newPermissionCode = SIPermission.PermissionCode.TRUE
+				else
+					newPermissionCode = SIPermission.PermissionCode.FALSE
+				end
+				playerGlobalSettings.DefaultPermissions[permissionID] = newPermissionCode
+				globalSettings.DefaultPermissions[permissionID] = newPermissionCode
+				if inputActionName then
+					local allow = newPermissionCode == SIPermission.PermissionCode.TRUE
+					if basePermissionGroup.allows_action( inputActionName ) ~= allow then
+						basePermissionGroup.set_allows_action( inputActionName , allow )
+					end
+				end
+				-- 触发事件
+				if oldPermissionCode ~= newPermissionCode then
+					for playerIndex , currentOtherPlayerSettings in pairs( playerSettingsList ) do
+						if not currentOtherPlayerSettings.Permissions[permissionID] then
+							SIPermission.FirePermissionChange( playerIndex , permissionID )
+						end
+					end
+				end
+			end
+			local textList = settings.data.global.texts[permissionID]
+			if textList then
+				local permissionNameLocal = textList.nameLocal.state
+				local permissionName = permissionNameLocal and { textList.name.text } or textList.name.text
+				playerGlobalSettings.DefaultNames[permissionID] = permissionName
+				globalSettings.DefaultNames[permissionID] = permissionName
+				if not inputActionName then
+					local permissionMessageLocal = textList.messageLocal.state
+					local permissionMessage = permissionMessageLocal and { textList.message.text } or textList.message.text
+					playerGlobalSettings.DefaultMessages[permissionID] = permissionMessage
+					globalSettings.DefaultMessages[permissionID] = permissionMessage
+				end
+			end
+		end
+		-- 刷新所有玩家的控件 和 更新玩家的权限组
+		for playerIndex , currentOtherPlayerSettings in pairs( playerSettingsList ) do
+			SIPermission.UpdatePlayerPermissionGroup( currentOtherPlayerSettings , globalSettings )
+			if currentOtherPlayerSettings.frame and currentOtherPlayerSettings.frame.valid then
+				SIPermission.FreshList( currentOtherPlayerSettings )
+			end
+		end
+		SIPermission.ChangingPermissionGroup = false
+	end ,
+	Save_Player = function( settings )
+		SIPermission.ChangingPermissionGroup = true
+		local otherPlayerSettings = settings.data.player.current
+		if otherPlayerSettings then
+			-- 填充数据
+			for index , itemName in pairs( otherPlayerSettings.AddingLists.ItemWhiteList ) do
+				table.insert( otherPlayerSettings.Lists.ItemWhiteList , itemName )
+			end
+			for index , itemName in pairs( otherPlayerSettings.AddingLists.ItemBlackList ) do
+				table.insert( otherPlayerSettings.Lists.ItemBlackList , itemName )
+			end
+			otherPlayerSettings.AddingLists.ItemWhiteList = {}
+			otherPlayerSettings.AddingLists.ItemBlackList = {}
+			-- 同步数据
+			local currentOtherPlayerSettings = SIGlobal.GetPlayerSettings( SIPermission.Settings.Name , settings.data.player.playerIndex )
+			if #otherPlayerSettings.Lists.ItemWhiteList < 1 then
+				currentOtherPlayerSettings.Lists.ItemWhiteList = nil
+			else
+				currentOtherPlayerSettings.Lists.ItemWhiteList = SIUtils.table.deepcopy( otherPlayerSettings.Lists.ItemWhiteList )
+			end
+			if #otherPlayerSettings.Lists.ItemBlackList < 1 then
+				currentOtherPlayerSettings.Lists.ItemBlackList = nil
+			else
+				currentOtherPlayerSettings.Lists.ItemBlackList = SIUtils.table.deepcopy( otherPlayerSettings.Lists.ItemBlackList )
+			end
+			local globalSettings = SIGlobal.GetGlobalSettings( SIPermission.Settings.Name )
+			for permissionID , permissionCode in pairs( globalSettings.DefaultPermissions ) do
+				local radioList = settings.data.player.radios[permissionID]
+				if radioList then
+					local oldPermissionCode = currentOtherPlayerSettings.Permissions[permissionID]
+					local newPermissionCode = nil
+					local radioValue = SIElements.GetRadioValue( radioList )
+					if radioValue == SIPermission.PermissionElementCode.TRUE then
+						newPermissionCode = SIPermission.PermissionCode.TRUE
+					elseif radioValue == SIPermission.PermissionElementCode.FALSE then
+						newPermissionCode = SIPermission.PermissionCode.FALSE
+					end
+					otherPlayerSettings.Permissions[permissionID] = newPermissionCode
+					currentOtherPlayerSettings.Permissions[permissionID] = newPermissionCode
+					-- 触发事件
+					if oldPermissionCode ~= newPermissionCode then
+						SIPermission.FirePermissionChange( settings.data.player.playerIndex , permissionID )
+					end
+				end
+			end
+			-- 刷新对应玩家的控件 和 更新玩家的权限组
+			SIPermission.UpdatePlayerPermissionGroup( currentOtherPlayerSettings , globalSettings )
+			if currentOtherPlayerSettings.frame and currentOtherPlayerSettings.frame.valid then
+				SIPermission.FreshList( currentOtherPlayerSettings )
+			end
+		end
+		SIPermission.ChangingPermissionGroup = false
+	end ,
+	Save_Check = function( settings )
+		SIPermission.ChangingPermissionGroup = true
+		local current = settings.data.check.current
+		if current then
+			local globalSettings = SIGlobal.GetGlobalSettings( SIPermission.Settings.Name )
+			-- 填充数据 和 同步数据
+			local permissionID = settings.data.check.permissionID
+			for playerIndex , permissionCode in pairs( current.Players ) do
+				local radioList = settings.data.check.radios[tostring( playerIndex )]
+				if radioList then
+					local currentOtherPlayerSettings = SIGlobal.GetPlayerSettings( SIPermission.Settings.Name , playerIndex )
+					local oldPermissionCode = currentOtherPlayerSettings.Permissions[permissionID]
+					local newPermissionCode = nil
+					local radioValue = SIElements.GetRadioValue( radioList )
+					if radioValue == SIPermission.PermissionElementCode.TRUE then
+						newPermissionCode = SIPermission.PermissionCode.TRUE
+					elseif radioValue == SIPermission.PermissionElementCode.FALSE then
+						newPermissionCode = SIPermission.PermissionCode.FALSE
+					end
+					current.Players[playerIndex] = { code = newPermissionCode }
+					currentOtherPlayerSettings.Permissions[permissionID] = newPermissionCode
+					-- 触发事件
+					if oldPermissionCode ~= newPermissionCode then
+						SIPermission.FirePermissionChange( playerIndex , permissionID )
+					end
+					-- 刷新对应玩家的控件 和 更新玩家的权限组
+					SIPermission.UpdatePlayerPermissionGroup( currentOtherPlayerSettings , globalSettings )
+					if currentOtherPlayerSettings.frame and currentOtherPlayerSettings.frame.valid then
+						SIPermission.FreshList( currentOtherPlayerSettings )
+					end
+				end
+			end
+		end
+		SIPermission.ChangingPermissionGroup = false
+	end ,
+	Back_Global = function( settings )
+		local current = SIUtils.table.deepcopy( settings.data.global.back )
+		current.AddingLists =
+		{
+			ItemWhiteList = {} , -- 物品白名单 , 临时列表 , 关闭窗口时消失
+			ItemBlackList = {}   -- 物品黑名单 , 临时列表 , 关闭窗口时消失
+		}
+		settings.data.global.current = current
+		SIPermission.FreshList( settings )
+	end ,
+	Back_Player = function( settings )
+		local current = settings.data.player.current
+		if current then
+			local back = SIUtils.table.deepcopy( settings.data.player.back )
+			current.Permissions = back.Permissions
+			current.Lists = back.Lists
+			current.AddingLists =
+			{
+				ItemWhiteList = {} , -- 物品白名单 , 临时列表 , 关闭窗口时消失
+				ItemBlackList = {}   -- 物品黑名单 , 临时列表 , 关闭窗口时消失
+			}
+			local globalSettings = SIGlobal.GetGlobalSettings( SIPermission.Settings.Name )
+			local isMaster = SIPermission.HasPermission( SIPermission.PermissionIDs.Master , settings.playerIndex )
+			SIPermission.FreshListPlayer( settings , globalSettings , isMaster )
+		end
+	end ,
+	Back_Check = function( settings )
+		local current = settings.data.check.current
+		if current then
+			local back = SIUtils.table.deepcopy( settings.data.check.back )
+			current.Players = back.Players
+			SIPermission.FreshListCheck( settings )
+		end
+	end ,
+	Reset_Global = function( settings )
+		local current = SIUtils.table.deepcopy( SIPermission.Settings.DefaultGlobal )
+		current.AddingLists =
+		{
+			ItemWhiteList = {} , -- 物品白名单 , 临时列表 , 关闭窗口时消失
+			ItemBlackList = {}   -- 物品黑名单 , 临时列表 , 关闭窗口时消失
+		}
+		settings.data.global.current = current
+		-- 去除由于版本更新新增的全局权限项目 , 这部分会在后续的接口中补充
+		local globalSettings = SIGlobal.GetGlobalSettings( SIPermission.Settings.Name )
+		local currentPermissions = SIUtils.table.deepcopy( current.DefaultPermissions )
+		for permissionID , permissionCode in pairs( current.DefaultPermissions ) do
+			if not globalSettings.DefaultPermissions[permissionID] then
+				currentPermissions[permissionID] = nil
+			end
+		end
+		current.DefaultPermissions = currentPermissions
+		-- 根据设置更新控件
+		SIPermission.FreshList( settings )
+	end ,
+	Clear_Player = function( settings )
+		local current = settings.data.player.current
+		if current then
+			local default = SIUtils.table.deepcopy( SIPermission.Settings.DefaultPlayer )
+			current.Permissions = default.Permissions
+			current.Lists = default.Lists
+			current.AddingLists =
+			{
+				ItemWhiteList = {} , -- 物品白名单 , 临时列表 , 关闭窗口时消失
+				ItemBlackList = {}   -- 物品黑名单 , 临时列表 , 关闭窗口时消失
+			}
+			if not current.Lists.ItemWhiteList then
+				current.Lists.ItemWhiteList = {}
+			end
+			if not current.Lists.ItemBlackList then
+				current.Lists.ItemBlackList = {}
+			end
+			SIPermission.FreshList( settings )
+		end
+	end ,
+	Clear_Check = function( settings )
+		local current = settings.data.check.current
+		if current then
+			current.Players = {}
+			for playerIndex , otherPlayerSettings in pairs( SIGlobal.GetAllPlayerSettings( SIPermission.Settings.Name ) ) do
+				current.Players[playerIndex] = {}
+			end
+			SIPermission.FreshListCheck( settings )
+		end
+	end ,
+	-- ------------------------------------------------------------------------------------------------
+	-- ---------- 事件函数 ----------------------------------------------------------------------------
+	-- ------------------------------------------------------------------------------------------------
+	AddPlayerToBasePremissionGroup = function( playerIndex )
+		local playerSettings = SIGlobal.GetPlayerSettings( SIPermission.Settings.Name , playerIndex )
+		if not playerSettings.PermissionGroup then
+			playerSettings.PermissionGroup = SIPermission.GetBasePermissionGroup()
+			playerSettings.PermissionGroup.add_player( game.get_player( playerIndex ) )
+		end
+	end ,
+	CheckPlayerInventory = function( playerIndex )
+		local settings = SIGlobal.GetPlayerSettings( SIPermission.Settings.Name , playerIndex )
+		local globalSettings = SIGlobal.GetGlobalSettings( SIPermission.Settings.Name )
+		local outWhite = settings.Permissions[SIPermission.PermissionIDs.OutWhite] or globalSettings.DefaultPermissions[SIPermission.PermissionIDs.OutWhite]
+		local outBlack = settings.Permissions[SIPermission.PermissionIDs.OutBlack] or globalSettings.DefaultPermissions[SIPermission.PermissionIDs.OutBlack]
+		local player = game.get_player( playerIndex )
+		if outWhite == SIPermission.PermissionCode.FALSE then
+			local whiteList = settings.Lists.ItemWhiteList or globalSettings.DefaultLists.ItemWhiteList
+			if #whiteList > 0 then
+				local inventory = player.get_main_inventory()
+				for itemName , count in pairs( inventory.get_contents() ) do
+					if count > 0 and not SITable.Has( whiteList , itemName ) then
+						inventory.remove{ name = itemName , count = count }
+					end
+				end
+			end
+		end
+		if outBlack == SIPermission.PermissionCode.FALSE then
+			local blackList = settings.Lists.ItemBlackList or globalSettings.DefaultLists.ItemBlackList
+			if #blackList > 0 then
+				local inventory = player.get_main_inventory()
+				for index , itemName in pairs( blackList ) do
+					local count = inventory.get_item_count( itemName )
+					if count > 0 then
+						inventory.remove{ name = itemName , count = count }
+					end
+				end
+			end
 		end
 	end ,
 	SelectPlayer = function( playerIndex , name )

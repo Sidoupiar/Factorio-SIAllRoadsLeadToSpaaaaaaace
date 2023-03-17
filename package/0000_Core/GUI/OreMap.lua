@@ -135,72 +135,8 @@ SIOreMap =
 		end
 	end ,
 	-- ------------------------------------------------------------------------------------------------
-	-- ---------- 功能函数 ----------------------------------------------------------------------------
+	-- ---------- 控件函数 ----------------------------------------------------------------------------
 	-- ------------------------------------------------------------------------------------------------
-	Save = function( settings )
-		if settings.Elements.asDefault then
-			settings.asDefault = settings.Elements.asDefault.state
-		else
-			settings.asDefault = false
-		end
-		if settings.Elements.totalMode then
-			settings.totalMode = settings.Elements.totalMode.state
-		else
-			settings.totalMode = false
-		end
-		if settings.Elements.count then
-			settings.count = SITools.AsNumberInt( settings.Elements.count.text , 0 , SIOreMap.MaxCount )
-		else
-			settings.count = 0
-		end
-	end ,
-	SortOreDataName = function( playerIndex )
-		local settings = SIGlobal.GetPlayerSettings( SIOreMap.Settings.Name , playerIndex )
-		if settings then
-			local oreList = {}
-			for oreName , oreCount in pairs( settings.oreData ) do
-				table.insert( oreList , { name = oreName , localizedName = oreName } )
-			end
-			table.sort( oreList , function( a , b )
-				return a.localizedName < b.localizedName
-			end )
-			local oreDataNew = {}
-			for index , oreData in pairs( oreList ) do
-				oreDataNew[oreData.name] = settings.oreData[oreData.name]
-			end
-			settings.oreData = oreDataNew
-			SIOreMap.FreshList( settings )
-		end
-	end ,
-	SortOreDataCount = function( playerIndex )
-		local settings = SIGlobal.GetPlayerSettings( SIOreMap.Settings.Name , playerIndex )
-		if settings then
-			local oreList = {}
-			for oreName , oreCount in pairs( settings.oreData ) do
-				table.insert( oreList , { name = oreName , count = oreCount } )
-			end
-			table.sort( oreList , function( a , b )
-				return a.count < b.count
-			end )
-			local oreDataNew = {}
-			for index , oreData in pairs( oreList ) do
-				oreDataNew[oreData.name] = settings.oreData[oreData.name]
-			end
-			settings.oreData = oreDataNew
-			SIOreMap.FreshList( settings )
-		end
-	end ,
-	CleanOreData = function( playerIndex )
-		local settings = SIGlobal.GetPlayerSettings( SIOreMap.Settings.Name , playerIndex )
-		if settings then
-			for oreName , oreCount in pairs( settings.oreData ) do
-				if oreCount == 0 then
-					settings.oreData[oreName] = nil
-				end
-			end
-			SIOreMap.FreshList( settings )
-		end
-	end ,
 	FreshList = function( settings )
 		local list = settings.Elements.list
 		if list then
@@ -224,6 +160,26 @@ SIOreMap =
 					end
 				end
 			end
+		end
+	end ,
+	-- ------------------------------------------------------------------------------------------------
+	-- ---------- 功能函数 ----------------------------------------------------------------------------
+	-- ------------------------------------------------------------------------------------------------
+	Save = function( settings )
+		if settings.Elements.asDefault then
+			settings.asDefault = settings.Elements.asDefault.state
+		else
+			settings.asDefault = false
+		end
+		if settings.Elements.totalMode then
+			settings.totalMode = settings.Elements.totalMode.state
+		else
+			settings.totalMode = false
+		end
+		if settings.Elements.count then
+			settings.count = SITools.AsNumberInt( settings.Elements.count.text , 0 , SIOreMap.MaxCount )
+		else
+			settings.count = 0
 		end
 	end ,
 	SpawnOre = function( settings )
@@ -273,6 +229,65 @@ SIOreMap =
 		SIPrint.Tip( player , { "SICore.黄图-铺设完毕-信息" } )
 		return true
 	end ,
+	-- ------------------------------------------------------------------------------------------------
+	-- ---------- 事件函数 ----------------------------------------------------------------------------
+	-- ------------------------------------------------------------------------------------------------
+	SortOreDataName = function( playerIndex )
+		local settings = SIGlobal.GetPlayerSettings( SIOreMap.Settings.Name , playerIndex )
+		if settings then
+			local oreList = {}
+			for oreName , oreCount in pairs( settings.oreData ) do
+				table.insert( oreList , { name = oreName , localizedName = oreName } )
+			end
+			table.sort( oreList , function( a , b )
+				return a.localizedName < b.localizedName
+			end )
+			local oreDataNew = {}
+			for index , oreData in pairs( oreList ) do
+				oreDataNew[oreData.name] = settings.oreData[oreData.name]
+			end
+			settings.oreData = oreDataNew
+			SIOreMap.FreshList( settings )
+		end
+	end ,
+	SortOreDataCount = function( playerIndex )
+		local settings = SIGlobal.GetPlayerSettings( SIOreMap.Settings.Name , playerIndex )
+		if settings then
+			local oreList = {}
+			for oreName , oreCount in pairs( settings.oreData ) do
+				table.insert( oreList , { name = oreName , count = oreCount } )
+			end
+			table.sort( oreList , function( a , b )
+				return a.count < b.count
+			end )
+			local oreDataNew = {}
+			for index , oreData in pairs( oreList ) do
+				oreDataNew[oreData.name] = settings.oreData[oreData.name]
+			end
+			settings.oreData = oreDataNew
+			SIOreMap.FreshList( settings )
+		end
+	end ,
+	CleanOreData = function( playerIndex )
+		local settings = SIGlobal.GetPlayerSettings( SIOreMap.Settings.Name , playerIndex )
+		if settings then
+			for oreName , oreCount in pairs( settings.oreData ) do
+				if oreCount == 0 then
+					settings.oreData[oreName] = nil
+				end
+			end
+			SIOreMap.FreshList( settings )
+		end
+	end ,
+	Fresh = function( playerIndex )
+		local settings = SIGlobal.GetPlayerSettings( SIOreMap.Settings.Name , playerIndex )
+		SIOreMap.FreshList( settings )
+	end ,
+	SelectOre = function( playerIndex , oreListItemName )
+		local settings = SIGlobal.GetPlayerSettings( SIOreMap.Settings.Name , playerIndex )
+		settings.selectedOreName = oreListItemName:sub( SIOreMap.Names.IconNamePosition )
+		SIOreMap.FreshList( settings )
+	end ,
 	SaveOre = function( playerIndex , entities )
 		local settings = SIGlobal.GetPlayerSettings( SIOreMap.Settings.Name , playerIndex )
 		for index , entity in pairs( entities ) do
@@ -316,15 +331,6 @@ SIOreMap =
 			settings.tiles = selectedTiles
 			SIOreMap.OpenFrame( playerIndex )
 		end
-	end ,
-	SelectOre = function( playerIndex , oreListItemName )
-		local settings = SIGlobal.GetPlayerSettings( SIOreMap.Settings.Name , playerIndex )
-		settings.selectedOreName = oreListItemName:sub( SIOreMap.Names.IconNamePosition )
-		SIOreMap.FreshList( settings )
-	end ,
-	Fresh = function( playerIndex )
-		local settings = SIGlobal.GetPlayerSettings( SIOreMap.Settings.Name , playerIndex )
-		SIOreMap.FreshList( settings )
 	end ,
 	-- ------------------------------------------------------------------------------------------------
 	-- ------ 接口函数 -- 窗口 ------------------------------------------------------------------------

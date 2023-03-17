@@ -81,6 +81,136 @@ SIMainbarSetting =
 		end
 	end ,
 	-- ------------------------------------------------------------------------------------------------
+	-- ---------- 控件函数 ----------------------------------------------------------------------------
+	-- ------------------------------------------------------------------------------------------------
+	FreshList = function( settings )
+		local list = settings.Setting.list
+		if list then
+			list.clear()
+			local elements = settings.Setting.Elements
+			local base = settings.Setting.Base
+			-- 第 1 层 , 主面板
+			local flow1_Label = list.add{ type = "flow" , direction = "horizontal" , style = SIConstants_Core.raw.Styles.Mainbar_Setting_ListTitleFlow }
+			flow1_Label.add{ type = "label" , caption = { "SICore.主面板设置管理-窗口-设置-主面板" } , tooltip = { "SICore.主面板设置管理-窗口-设置-主面板-提示" } , style = SIConstants_Core.raw.Styles.Mainbar_Setting_ListLabel }
+			flow1_Label.add{ type = "sprite" , sprite = "info" , tooltip = { "SICore.主面板设置管理-窗口-设置-主面板-提示" } }
+			elements.itemMainbar = list.add{ type = "checkbox" , state = SISettings.PerUser.SICore.ShowMainbar( settings.playerIndex ) , tooltip = { "SICore.主面板设置管理-窗口-设置-主面板-提示" } , style = SIConstants_Core.raw.Styles.Mainbar_Setting_ListCheck }
+			list.add{ type = "label" , style = SIConstants_Core.raw.Styles.Mainbar_Setting_ListPlace }
+			-- 第 2 层 , 工具栏
+			local flow2_Label = list.add{ type = "flow" , direction = "horizontal" , style = SIConstants_Core.raw.Styles.Mainbar_Setting_ListTitleFlow }
+			flow2_Label.add{ type = "label" , caption = { "SICore.主面板设置管理-窗口-设置-工具栏" } , tooltip = { "SICore.主面板设置管理-窗口-设置-工具栏-提示" } , style = SIConstants_Core.raw.Styles.Mainbar_Setting_ListLabel }
+			flow2_Label.add{ type = "sprite" , sprite = "info" , tooltip = { "SICore.主面板设置管理-窗口-设置-工具栏-提示" } }
+			elements.itemToolbar = list.add{ type = "checkbox" , state = base.showToolbar , tooltip = { "SICore.主面板设置管理-窗口-设置-工具栏-提示" } , style = SIConstants_Core.raw.Styles.Mainbar_Setting_ListCheck }
+			list.add{ type = "label" , style = SIConstants_Core.raw.Styles.Mainbar_Setting_ListPlace }
+			-- 第 3 层 , 工具栏按钮每行数量
+			local flow3_Label = list.add{ type = "flow" , direction = "horizontal" , style = SIConstants_Core.raw.Styles.Mainbar_Setting_ListTitleFlow }
+			flow3_Label.add{ type = "label" , caption = { "SICore.主面板设置管理-窗口-设置-工具栏按钮每行数量" } , tooltip = { "SICore.主面板设置管理-窗口-设置-工具栏按钮每行数量-提示" } , style = SIConstants_Core.raw.Styles.Mainbar_Setting_ListLabel }
+			flow3_Label.add{ type = "sprite" , sprite = "info" , tooltip = { "SICore.主面板设置管理-窗口-设置-工具栏按钮每行数量-提示" } }
+			local toolbarColumn = settings.Setting.Base.toolbarColumnCount or SIMainData.Settings.DefaultPlayer.Setting.Base.toolbarColumnCount
+			local flow3_flow = list.add{ type = "flow" , direction = "horizontal" , style = SIConstants_Core.raw.Styles.Mainbar_Setting_ListItemFlow }
+			elements.itemToolbarColumn = flow3_flow.add
+			{
+				type = "slider" ,
+				name = SIMainbarSetting.Names.ToolbarColumn ,
+				value = toolbarColumn ,
+				value_step = 1 ,
+				minimum_value = SIMainbar.ToolbarColumnMin ,
+				maximum_value = SIMainbar.ToolbarColumnMax ,
+				discrete_slider = false ,
+				discrete_values = true ,
+				tooltip = { "SICore.主面板设置管理-窗口-设置-工具栏按钮每行数量-提示" } ,
+				style = SIConstants_Core.raw.Styles.Mainbar_Setting_Slider
+			}
+			-- SIPrint.Print( SITable.TableToString( elements.itemToolbarColumn.children ) )
+			elements.itemToolbarColumnText = flow3_flow.add
+			{
+				type = "textfield" ,
+				name = SIMainbarSetting.Names.ToolbarColumnText ,
+				text = tostring( toolbarColumn ) ,
+				numeric = true ,
+				tooltip = { "SICore.主面板设置管理-窗口-设置-工具栏按钮每行数量文本-提示" } ,
+				style = SIConstants_Core.raw.Styles.Mainbar_Setting_Number
+			}
+			list.add{ type = "label" , style = SIConstants_Core.raw.Styles.Mainbar_Setting_ListPlace }
+			-- 第 4 层 , 游戏速度
+			local flow4_Label = list.add{ type = "flow" , direction = "horizontal" , style = SIConstants_Core.raw.Styles.Mainbar_Setting_ListTitleFlow }
+			flow4_Label.add{ type = "label" , caption = { "SICore.主面板设置管理-窗口-设置-游戏速度" } , tooltip = { "SICore.主面板设置管理-窗口-设置-游戏速度-提示" } , style = SIConstants_Core.raw.Styles.Mainbar_Setting_ListLabel }
+			flow4_Label.add{ type = "sprite" , sprite = "info" , tooltip = { "SICore.主面板设置管理-窗口-设置-游戏速度-提示" } }
+			elements.itemGameSpeed = list.add{ type = "checkbox" , state = base.showGameSpeed , tooltip = { "SICore.主面板设置管理-窗口-设置-游戏速度-提示" } , style = SIConstants_Core.raw.Styles.Mainbar_Setting_ListCheck }
+			list.add{ type = "label" , style = SIConstants_Core.raw.Styles.Mainbar_Setting_ListPlace }
+			-- 第 5 层 , 游戏时间
+			local flow5_Label = list.add{ type = "flow" , direction = "horizontal" , style = SIConstants_Core.raw.Styles.Mainbar_Setting_ListTitleFlow }
+			flow5_Label.add{ type = "label" , caption = { "SICore.主面板设置管理-窗口-设置-游戏时间" } , tooltip = { "SICore.主面板设置管理-窗口-设置-游戏时间-提示" } , style = SIConstants_Core.raw.Styles.Mainbar_Setting_ListLabel }
+			flow5_Label.add{ type = "sprite" , sprite = "info" , tooltip = { "SICore.主面板设置管理-窗口-设置-游戏时间-提示" } }
+			elements.itemGameTime = list.add{ type = "checkbox" , state = base.showGameTime , tooltip = { "SICore.主面板设置管理-窗口-设置-游戏时间-提示" } , style = SIConstants_Core.raw.Styles.Mainbar_Setting_ListCheck }
+			list.add{ type = "label" , style = SIConstants_Core.raw.Styles.Mainbar_Setting_ListPlace }
+			-- 第 6 层 , 击杀数量
+			local flow6_Label = list.add{ type = "flow" , direction = "horizontal" , style = SIConstants_Core.raw.Styles.Mainbar_Setting_ListTitleFlow }
+			flow6_Label.add{ type = "label" , caption = { "SICore.主面板设置管理-窗口-设置-击杀数量" } , tooltip = { "SICore.主面板设置管理-窗口-设置-击杀数量-提示" } , style = SIConstants_Core.raw.Styles.Mainbar_Setting_ListLabel }
+			flow6_Label.add{ type = "sprite" , sprite = "info" , tooltip = { "SICore.主面板设置管理-窗口-设置-击杀数量-提示" } }
+			elements.itemKillCount = list.add{ type = "checkbox" , state = base.showKillCount , tooltip = { "SICore.主面板设置管理-窗口-设置-击杀数量-提示" } , style = SIConstants_Core.raw.Styles.Mainbar_Setting_ListCheck }
+			list.add{ type = "label" , style = SIConstants_Core.raw.Styles.Mainbar_Setting_ListPlace }
+			-- 第 7 层 , 进化因子
+			local flow7_Label = list.add{ type = "flow" , direction = "horizontal" , style = SIConstants_Core.raw.Styles.Mainbar_Setting_ListTitleFlow }
+			flow7_Label.add{ type = "label" , caption = { "SICore.主面板设置管理-窗口-设置-进化因子" } , tooltip = { "SICore.主面板设置管理-窗口-设置-进化因子-提示" } , style = SIConstants_Core.raw.Styles.Mainbar_Setting_ListLabel }
+			flow7_Label.add{ type = "sprite" , sprite = "info" , tooltip = { "SICore.主面板设置管理-窗口-设置-进化因子-提示" } }
+			elements.itemEvolution = list.add{ type = "checkbox" , state = base.showEvolution , tooltip = { "SICore.主面板设置管理-窗口-设置-进化因子-提示" } , style = SIConstants_Core.raw.Styles.Mainbar_Setting_ListCheck }
+			list.add{ type = "label" , style = SIConstants_Core.raw.Styles.Mainbar_Setting_ListPlace }
+			-- 第 8 层 , 最新消息
+			local flow8_Label = list.add{ type = "flow" , direction = "horizontal" , style = SIConstants_Core.raw.Styles.Mainbar_Setting_ListTitleFlow }
+			flow8_Label.add{ type = "label" , caption = { "SICore.主面板设置管理-窗口-设置-最新消息" } , tooltip = { "SICore.主面板设置管理-窗口-设置-最新消息-提示" } , style = SIConstants_Core.raw.Styles.Mainbar_Setting_ListLabel }
+			flow8_Label.add{ type = "sprite" , sprite = "info" , tooltip = { "SICore.主面板设置管理-窗口-设置-最新消息-提示" } }
+			elements.itemNewMessage = list.add{ type = "checkbox" , state = base.showNewMessage , tooltip = { "SICore.主面板设置管理-窗口-设置-最新消息-提示" } , style = SIConstants_Core.raw.Styles.Mainbar_Setting_ListCheck }
+			list.add{ type = "label" , style = SIConstants_Core.raw.Styles.Mainbar_Setting_ListPlace }
+			-- 第 9 层 , 重点便签
+			local flow9_Label = list.add{ type = "flow" , direction = "horizontal" , style = SIConstants_Core.raw.Styles.Mainbar_Setting_ListTitleFlow }
+			flow9_Label.add{ type = "label" , caption = { "SICore.主面板设置管理-窗口-设置-重点便签" } , tooltip = { "SICore.主面板设置管理-窗口-设置-重点便签-提示" } , style = SIConstants_Core.raw.Styles.Mainbar_Setting_ListLabel }
+			flow9_Label.add{ type = "sprite" , sprite = "info" , tooltip = { "SICore.主面板设置管理-窗口-设置-重点便签-提示" } }
+			elements.itemKeyNote = list.add{ type = "checkbox" , state = base.showKeyNote , tooltip = { "SICore.主面板设置管理-窗口-设置-重点便签-提示" } , style = SIConstants_Core.raw.Styles.Mainbar_Setting_ListCheck }
+			list.add{ type = "label" , style = SIConstants_Core.raw.Styles.Mainbar_Setting_ListPlace }
+			-- 第 10 层 , 从游戏设置读取
+			local loadFromUserTooltip = { "SICore.主面板设置管理-窗口-设置-从游戏设置读取-提示" , game.mod_setting_prototypes[SIConstants_Core.raw.Settings.ShowMainbar].localised_name , { "gui-menu.settings" } , { "gui-menu.other" } , { "gui-other-settings.use-mod-settings-per-save" } }
+			local flow10_Label = list.add{ type = "flow" , direction = "horizontal" , style = SIConstants_Core.raw.Styles.Mainbar_Setting_ListTitleFlow }
+			flow10_Label.add{ type = "label" , caption = { "SICore.主面板设置管理-窗口-设置-从游戏设置读取" } , tooltip = loadFromUserTooltip , style = SIConstants_Core.raw.Styles.Mainbar_Setting_ListLabel }
+			flow10_Label.add{ type = "sprite" , sprite = "info" , tooltip = loadFromUserTooltip }
+			elements.itemLoadFromUser = list.add{ type = "checkbox" , state = base.loadFromUserSettings , tooltip = loadFromUserTooltip , style = SIConstants_Core.raw.Styles.Mainbar_Setting_ListCheck }
+			list.add{ type = "label" , style = SIConstants_Core.raw.Styles.Mainbar_Setting_ListPlace }
+			-- 第 11 层 , 工具栏常用按钮 1
+			local flow11_Label = list.add{ type = "flow" , direction = "horizontal" , style = SIConstants_Core.raw.Styles.Mainbar_Setting_ListTitleFlow }
+			flow11_Label.add{ type = "label" , caption = { "SICore.主面板设置管理-窗口-设置-工具栏常用按钮1" } , tooltip = { "SICore.主面板设置管理-窗口-设置-工具栏常用按钮1-提示" } , style = SIConstants_Core.raw.Styles.Mainbar_Setting_ListLabel }
+			flow11_Label.add{ type = "sprite" , sprite = "info" , tooltip = { "SICore.主面板设置管理-窗口-设置-工具栏常用按钮1-提示" } }
+			elements.itemCommonToolbar1 = list.add{ type = "drop-down" , caption = { "SICore.主面板设置管理-窗口-设置-工具栏常用按钮-无" } , tooltip = { "SICore.主面板设置管理-窗口-设置-工具栏常用按钮1-提示" } , style = SIConstants_Core.raw.Styles.Mainbar_Setting_DropDown }
+			list.add{ type = "label" , style = SIConstants_Core.raw.Styles.Mainbar_Setting_ListPlace }
+			-- 第 12 层 , 工具栏常用按钮 2
+			local flow12_Label = list.add{ type = "flow" , direction = "horizontal" , style = SIConstants_Core.raw.Styles.Mainbar_Setting_ListTitleFlow }
+			flow12_Label.add{ type = "label" , caption = { "SICore.主面板设置管理-窗口-设置-工具栏常用按钮2" } , tooltip = { "SICore.主面板设置管理-窗口-设置-工具栏常用按钮2-提示" } , style = SIConstants_Core.raw.Styles.Mainbar_Setting_ListLabel }
+			flow12_Label.add{ type = "sprite" , sprite = "info" , tooltip = { "SICore.主面板设置管理-窗口-设置-工具栏常用按钮2-提示" } }
+			elements.itemCommonToolbar2 = list.add{ type = "drop-down" , caption = { "SICore.主面板设置管理-窗口-设置-工具栏常用按钮-无" } , tooltip = { "SICore.主面板设置管理-窗口-设置-工具栏常用按钮2-提示" } , style = SIConstants_Core.raw.Styles.Mainbar_Setting_DropDown }
+			list.add{ type = "label" , style = SIConstants_Core.raw.Styles.Mainbar_Setting_ListPlace }
+			-- 根据设置更新控件
+			SIMainbarSetting.FreshDropDown( settings )
+		end
+	end ,
+	FreshDropDown = function( settings )
+		local elements = settings.Setting.Elements
+		local base = settings.Setting.Base
+		if elements.itemCommonToolbar1 then
+			elements.itemCommonToolbar1.items = SIMainbar.ToolbarButtonDropDownList
+			local selectedIndex = ( base.commonToolbar1 or 0 ) + 1
+			if selectedIndex > #SIMainbar.ToolbarButtonDropDownList then
+				selectedIndex = 1
+			end
+			elements.itemCommonToolbar1.selected_index = selectedIndex
+		end
+		if elements.itemCommonToolbar2 then
+			elements.itemCommonToolbar2.items = SIMainbar.ToolbarButtonDropDownList
+			local selectedIndex = ( base.commonToolbar2 or 0 ) + 1
+			if selectedIndex > #SIMainbar.ToolbarButtonDropDownList then
+				selectedIndex = 1
+			end
+			elements.itemCommonToolbar2.selected_index = selectedIndex
+		end
+	end ,
+	-- ------------------------------------------------------------------------------------------------
 	-- ---------- 功能函数 ----------------------------------------------------------------------------
 	-- ------------------------------------------------------------------------------------------------
 	Save = function( settings , isClosing )
@@ -269,133 +399,9 @@ SIMainbarSetting =
 			elements.itemCommonToolbar2.selected_index = ( default.commonToolbar2 or 0 ) + 1
 		end
 	end ,
-	FreshList = function( settings )
-		local list = settings.Setting.list
-		if list then
-			list.clear()
-			local elements = settings.Setting.Elements
-			local base = settings.Setting.Base
-			-- 第 1 层 , 主面板
-			local flow1_Label = list.add{ type = "flow" , direction = "horizontal" , style = SIConstants_Core.raw.Styles.Mainbar_Setting_ListTitleFlow }
-			flow1_Label.add{ type = "label" , caption = { "SICore.主面板设置管理-窗口-设置-主面板" } , tooltip = { "SICore.主面板设置管理-窗口-设置-主面板-提示" } , style = SIConstants_Core.raw.Styles.Mainbar_Setting_ListLabel }
-			flow1_Label.add{ type = "sprite" , sprite = "info" , tooltip = { "SICore.主面板设置管理-窗口-设置-主面板-提示" } }
-			elements.itemMainbar = list.add{ type = "checkbox" , state = SISettings.PerUser.SICore.ShowMainbar( settings.playerIndex ) , tooltip = { "SICore.主面板设置管理-窗口-设置-主面板-提示" } , style = SIConstants_Core.raw.Styles.Mainbar_Setting_ListCheck }
-			list.add{ type = "label" , style = SIConstants_Core.raw.Styles.Mainbar_Setting_ListPlace }
-			-- 第 2 层 , 工具栏
-			local flow2_Label = list.add{ type = "flow" , direction = "horizontal" , style = SIConstants_Core.raw.Styles.Mainbar_Setting_ListTitleFlow }
-			flow2_Label.add{ type = "label" , caption = { "SICore.主面板设置管理-窗口-设置-工具栏" } , tooltip = { "SICore.主面板设置管理-窗口-设置-工具栏-提示" } , style = SIConstants_Core.raw.Styles.Mainbar_Setting_ListLabel }
-			flow2_Label.add{ type = "sprite" , sprite = "info" , tooltip = { "SICore.主面板设置管理-窗口-设置-工具栏-提示" } }
-			elements.itemToolbar = list.add{ type = "checkbox" , state = base.showToolbar , tooltip = { "SICore.主面板设置管理-窗口-设置-工具栏-提示" } , style = SIConstants_Core.raw.Styles.Mainbar_Setting_ListCheck }
-			list.add{ type = "label" , style = SIConstants_Core.raw.Styles.Mainbar_Setting_ListPlace }
-			-- 第 3 层 , 工具栏按钮每行数量
-			local flow3_Label = list.add{ type = "flow" , direction = "horizontal" , style = SIConstants_Core.raw.Styles.Mainbar_Setting_ListTitleFlow }
-			flow3_Label.add{ type = "label" , caption = { "SICore.主面板设置管理-窗口-设置-工具栏按钮每行数量" } , tooltip = { "SICore.主面板设置管理-窗口-设置-工具栏按钮每行数量-提示" } , style = SIConstants_Core.raw.Styles.Mainbar_Setting_ListLabel }
-			flow3_Label.add{ type = "sprite" , sprite = "info" , tooltip = { "SICore.主面板设置管理-窗口-设置-工具栏按钮每行数量-提示" } }
-			local toolbarColumn = settings.Setting.Base.toolbarColumnCount or SIMainData.Settings.DefaultPlayer.Setting.Base.toolbarColumnCount
-			local flow3_flow = list.add{ type = "flow" , direction = "horizontal" , style = SIConstants_Core.raw.Styles.Mainbar_Setting_ListItemFlow }
-			elements.itemToolbarColumn = flow3_flow.add
-			{
-				type = "slider" ,
-				name = SIMainbarSetting.Names.ToolbarColumn ,
-				value = toolbarColumn ,
-				value_step = 1 ,
-				minimum_value = SIMainbar.ToolbarColumnMin ,
-				maximum_value = SIMainbar.ToolbarColumnMax ,
-				discrete_slider = false ,
-				discrete_values = true ,
-				tooltip = { "SICore.主面板设置管理-窗口-设置-工具栏按钮每行数量-提示" } ,
-				style = SIConstants_Core.raw.Styles.Mainbar_Setting_Slider
-			}
-			-- SIPrint.Print( SITable.TableToString( elements.itemToolbarColumn.children ) )
-			elements.itemToolbarColumnText = flow3_flow.add
-			{
-				type = "textfield" ,
-				name = SIMainbarSetting.Names.ToolbarColumnText ,
-				text = tostring( toolbarColumn ) ,
-				numeric = true ,
-				tooltip = { "SICore.主面板设置管理-窗口-设置-工具栏按钮每行数量文本-提示" } ,
-				style = SIConstants_Core.raw.Styles.Mainbar_Setting_Number
-			}
-			list.add{ type = "label" , style = SIConstants_Core.raw.Styles.Mainbar_Setting_ListPlace }
-			-- 第 4 层 , 游戏速度
-			local flow4_Label = list.add{ type = "flow" , direction = "horizontal" , style = SIConstants_Core.raw.Styles.Mainbar_Setting_ListTitleFlow }
-			flow4_Label.add{ type = "label" , caption = { "SICore.主面板设置管理-窗口-设置-游戏速度" } , tooltip = { "SICore.主面板设置管理-窗口-设置-游戏速度-提示" } , style = SIConstants_Core.raw.Styles.Mainbar_Setting_ListLabel }
-			flow4_Label.add{ type = "sprite" , sprite = "info" , tooltip = { "SICore.主面板设置管理-窗口-设置-游戏速度-提示" } }
-			elements.itemGameSpeed = list.add{ type = "checkbox" , state = base.showGameSpeed , tooltip = { "SICore.主面板设置管理-窗口-设置-游戏速度-提示" } , style = SIConstants_Core.raw.Styles.Mainbar_Setting_ListCheck }
-			list.add{ type = "label" , style = SIConstants_Core.raw.Styles.Mainbar_Setting_ListPlace }
-			-- 第 5 层 , 游戏时间
-			local flow5_Label = list.add{ type = "flow" , direction = "horizontal" , style = SIConstants_Core.raw.Styles.Mainbar_Setting_ListTitleFlow }
-			flow5_Label.add{ type = "label" , caption = { "SICore.主面板设置管理-窗口-设置-游戏时间" } , tooltip = { "SICore.主面板设置管理-窗口-设置-游戏时间-提示" } , style = SIConstants_Core.raw.Styles.Mainbar_Setting_ListLabel }
-			flow5_Label.add{ type = "sprite" , sprite = "info" , tooltip = { "SICore.主面板设置管理-窗口-设置-游戏时间-提示" } }
-			elements.itemGameTime = list.add{ type = "checkbox" , state = base.showGameTime , tooltip = { "SICore.主面板设置管理-窗口-设置-游戏时间-提示" } , style = SIConstants_Core.raw.Styles.Mainbar_Setting_ListCheck }
-			list.add{ type = "label" , style = SIConstants_Core.raw.Styles.Mainbar_Setting_ListPlace }
-			-- 第 6 层 , 击杀数量
-			local flow6_Label = list.add{ type = "flow" , direction = "horizontal" , style = SIConstants_Core.raw.Styles.Mainbar_Setting_ListTitleFlow }
-			flow6_Label.add{ type = "label" , caption = { "SICore.主面板设置管理-窗口-设置-击杀数量" } , tooltip = { "SICore.主面板设置管理-窗口-设置-击杀数量-提示" } , style = SIConstants_Core.raw.Styles.Mainbar_Setting_ListLabel }
-			flow6_Label.add{ type = "sprite" , sprite = "info" , tooltip = { "SICore.主面板设置管理-窗口-设置-击杀数量-提示" } }
-			elements.itemKillCount = list.add{ type = "checkbox" , state = base.showKillCount , tooltip = { "SICore.主面板设置管理-窗口-设置-击杀数量-提示" } , style = SIConstants_Core.raw.Styles.Mainbar_Setting_ListCheck }
-			list.add{ type = "label" , style = SIConstants_Core.raw.Styles.Mainbar_Setting_ListPlace }
-			-- 第 7 层 , 进化因子
-			local flow7_Label = list.add{ type = "flow" , direction = "horizontal" , style = SIConstants_Core.raw.Styles.Mainbar_Setting_ListTitleFlow }
-			flow7_Label.add{ type = "label" , caption = { "SICore.主面板设置管理-窗口-设置-进化因子" } , tooltip = { "SICore.主面板设置管理-窗口-设置-进化因子-提示" } , style = SIConstants_Core.raw.Styles.Mainbar_Setting_ListLabel }
-			flow7_Label.add{ type = "sprite" , sprite = "info" , tooltip = { "SICore.主面板设置管理-窗口-设置-进化因子-提示" } }
-			elements.itemEvolution = list.add{ type = "checkbox" , state = base.showEvolution , tooltip = { "SICore.主面板设置管理-窗口-设置-进化因子-提示" } , style = SIConstants_Core.raw.Styles.Mainbar_Setting_ListCheck }
-			list.add{ type = "label" , style = SIConstants_Core.raw.Styles.Mainbar_Setting_ListPlace }
-			-- 第 8 层 , 最新消息
-			local flow8_Label = list.add{ type = "flow" , direction = "horizontal" , style = SIConstants_Core.raw.Styles.Mainbar_Setting_ListTitleFlow }
-			flow8_Label.add{ type = "label" , caption = { "SICore.主面板设置管理-窗口-设置-最新消息" } , tooltip = { "SICore.主面板设置管理-窗口-设置-最新消息-提示" } , style = SIConstants_Core.raw.Styles.Mainbar_Setting_ListLabel }
-			flow8_Label.add{ type = "sprite" , sprite = "info" , tooltip = { "SICore.主面板设置管理-窗口-设置-最新消息-提示" } }
-			elements.itemNewMessage = list.add{ type = "checkbox" , state = base.showNewMessage , tooltip = { "SICore.主面板设置管理-窗口-设置-最新消息-提示" } , style = SIConstants_Core.raw.Styles.Mainbar_Setting_ListCheck }
-			list.add{ type = "label" , style = SIConstants_Core.raw.Styles.Mainbar_Setting_ListPlace }
-			-- 第 9 层 , 重点便签
-			local flow9_Label = list.add{ type = "flow" , direction = "horizontal" , style = SIConstants_Core.raw.Styles.Mainbar_Setting_ListTitleFlow }
-			flow9_Label.add{ type = "label" , caption = { "SICore.主面板设置管理-窗口-设置-重点便签" } , tooltip = { "SICore.主面板设置管理-窗口-设置-重点便签-提示" } , style = SIConstants_Core.raw.Styles.Mainbar_Setting_ListLabel }
-			flow9_Label.add{ type = "sprite" , sprite = "info" , tooltip = { "SICore.主面板设置管理-窗口-设置-重点便签-提示" } }
-			elements.itemKeyNote = list.add{ type = "checkbox" , state = base.showKeyNote , tooltip = { "SICore.主面板设置管理-窗口-设置-重点便签-提示" } , style = SIConstants_Core.raw.Styles.Mainbar_Setting_ListCheck }
-			list.add{ type = "label" , style = SIConstants_Core.raw.Styles.Mainbar_Setting_ListPlace }
-			-- 第 10 层 , 从游戏设置读取
-			local loadFromUserTooltip = { "SICore.主面板设置管理-窗口-设置-从游戏设置读取-提示" , game.mod_setting_prototypes[SIConstants_Core.raw.Settings.ShowMainbar].localised_name , { "gui-menu.settings" } , { "gui-menu.other" } , { "gui-other-settings.use-mod-settings-per-save" } }
-			local flow10_Label = list.add{ type = "flow" , direction = "horizontal" , style = SIConstants_Core.raw.Styles.Mainbar_Setting_ListTitleFlow }
-			flow10_Label.add{ type = "label" , caption = { "SICore.主面板设置管理-窗口-设置-从游戏设置读取" } , tooltip = loadFromUserTooltip , style = SIConstants_Core.raw.Styles.Mainbar_Setting_ListLabel }
-			flow10_Label.add{ type = "sprite" , sprite = "info" , tooltip = loadFromUserTooltip }
-			elements.itemLoadFromUser = list.add{ type = "checkbox" , state = base.loadFromUserSettings , tooltip = loadFromUserTooltip , style = SIConstants_Core.raw.Styles.Mainbar_Setting_ListCheck }
-			list.add{ type = "label" , style = SIConstants_Core.raw.Styles.Mainbar_Setting_ListPlace }
-			-- 第 11 层 , 工具栏常用按钮 1
-			local flow11_Label = list.add{ type = "flow" , direction = "horizontal" , style = SIConstants_Core.raw.Styles.Mainbar_Setting_ListTitleFlow }
-			flow11_Label.add{ type = "label" , caption = { "SICore.主面板设置管理-窗口-设置-工具栏常用按钮1" } , tooltip = { "SICore.主面板设置管理-窗口-设置-工具栏常用按钮1-提示" } , style = SIConstants_Core.raw.Styles.Mainbar_Setting_ListLabel }
-			flow11_Label.add{ type = "sprite" , sprite = "info" , tooltip = { "SICore.主面板设置管理-窗口-设置-工具栏常用按钮1-提示" } }
-			elements.itemCommonToolbar1 = list.add{ type = "drop-down" , caption = { "SICore.主面板设置管理-窗口-设置-工具栏常用按钮-无" } , tooltip = { "SICore.主面板设置管理-窗口-设置-工具栏常用按钮1-提示" } , style = SIConstants_Core.raw.Styles.Mainbar_Setting_DropDown }
-			list.add{ type = "label" , style = SIConstants_Core.raw.Styles.Mainbar_Setting_ListPlace }
-			-- 第 12 层 , 工具栏常用按钮 2
-			local flow12_Label = list.add{ type = "flow" , direction = "horizontal" , style = SIConstants_Core.raw.Styles.Mainbar_Setting_ListTitleFlow }
-			flow12_Label.add{ type = "label" , caption = { "SICore.主面板设置管理-窗口-设置-工具栏常用按钮2" } , tooltip = { "SICore.主面板设置管理-窗口-设置-工具栏常用按钮2-提示" } , style = SIConstants_Core.raw.Styles.Mainbar_Setting_ListLabel }
-			flow12_Label.add{ type = "sprite" , sprite = "info" , tooltip = { "SICore.主面板设置管理-窗口-设置-工具栏常用按钮2-提示" } }
-			elements.itemCommonToolbar2 = list.add{ type = "drop-down" , caption = { "SICore.主面板设置管理-窗口-设置-工具栏常用按钮-无" } , tooltip = { "SICore.主面板设置管理-窗口-设置-工具栏常用按钮2-提示" } , style = SIConstants_Core.raw.Styles.Mainbar_Setting_DropDown }
-			list.add{ type = "label" , style = SIConstants_Core.raw.Styles.Mainbar_Setting_ListPlace }
-			-- 根据设置更新控件
-			SIMainbarSetting.FreshDropDown( settings )
-		end
-	end ,
-	FreshDropDown = function( settings )
-		local elements = settings.Setting.Elements
-		local base = settings.Setting.Base
-		if elements.itemCommonToolbar1 then
-			elements.itemCommonToolbar1.items = SIMainbar.ToolbarButtonDropDownList
-			local selectedIndex = ( base.commonToolbar1 or 0 ) + 1
-			if selectedIndex > #SIMainbar.ToolbarButtonDropDownList then
-				selectedIndex = 1
-			end
-			elements.itemCommonToolbar1.selected_index = selectedIndex
-		end
-		if elements.itemCommonToolbar2 then
-			elements.itemCommonToolbar2.items = SIMainbar.ToolbarButtonDropDownList
-			local selectedIndex = ( base.commonToolbar2 or 0 ) + 1
-			if selectedIndex > #SIMainbar.ToolbarButtonDropDownList then
-				selectedIndex = 1
-			end
-			elements.itemCommonToolbar2.selected_index = selectedIndex
-		end
-	end ,
+	-- ------------------------------------------------------------------------------------------------
+	-- ---------- 事件函数 ----------------------------------------------------------------------------
+	-- ------------------------------------------------------------------------------------------------
 	SaveSettings = function( playerIndex )
 		local settings = SIGlobal.GetPlayerSettings( SIMainData.Settings.Name , playerIndex )
 		if settings.Setting.frame and settings.Setting.frame.valid then
