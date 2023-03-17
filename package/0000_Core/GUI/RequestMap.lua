@@ -1917,26 +1917,134 @@ SIRequestMap =
 		end
 	end ,
 	EffectTabSettings = function( settings , tabSettingsIndex )
+		local player = game.get_player( settings.playerIndex )
+		local inventory = player.get_main_inventory()
 		local tabSettings = settings.TabSettingsList[tabSettingsIndex]
-		local entities = settings.entities
-		-- ----------------------------------------
-		-- 请求格子
-		-- ----------------------------------------
-		-- ----------------------------------------
-		-- 最大格子
-		-- ----------------------------------------
-		-- ----------------------------------------
-		-- 绿箱向蓝箱供货
-		-- ----------------------------------------
-		-- ----------------------------------------
-		-- 设置插件
-		-- ----------------------------------------
-		-- ----------------------------------------
-		-- 移除插件
-		-- ----------------------------------------
-		-- ----------------------------------------
-		-- 插入燃料
-		-- ----------------------------------------
+		local greenToBlue = tabSettings.GreenToBlue.Check
+		local fromInventory = tabSettings.SetModule.FromInventory
+		local toInventory = tabSettings.RemoveModule.ToInventory
+		local invert = tabSettings.RemoveModule.Invert
+		for index , entity in pairs( settings.entities ) do
+			local entityName = entity.name
+			local entityPrototype = entity.prototype
+			local type = entityPrototype.type
+			-- ----------------------------------------
+			-- 请求格子
+			-- ----------------------------------------
+			local requestItemList = tabSettings.RequestSlot.List[entityName]
+			if requestItemList then
+				if type == SICommon.Types.Entities.ContainerLogic then
+					local logisticMode = entityPrototype.logistic_mode
+					if logisticMode == SICommon.Flags.LogisticMode.Requester or logisticMode == SICommon.Flags.LogisticMode.Buffer then
+						local maxSlot = 0
+						for key , value in pairs( requestItemList ) do
+							maxSlot = math.max( maxSlot , key )
+						end
+						for slotIndex = 1 , maxSlot , 1 do
+							entity.set_filter( slotIndex , requestItemList[slotIndex] )
+						end
+					elseif logisticMode == SICommon.Flags.LogisticMode.Storage then
+						entity.set_filter( 1 , requestItemList[1] )
+					end
+				elseif type == SICommon.Types.Entities.Inserter or type == SICommon.Types.Entities.BeltLoader or type == SICommon.Types.Entities.BeltLoaderSmall then
+					local maxSlot = 0
+					for key , value in pairs( requestItemList ) do
+						maxSlot = math.max( maxSlot , key )
+					end
+					for slotIndex = 1 , maxSlot , 1 do
+						entity.set_filter( slotIndex , requestItemList[slotIndex] )
+					end
+				elseif type == SICommon.Types.Entities.Car then
+					local inventory = entity.get_inventory( defines.inventory.car_trunk )
+					if inventory and inventory.supports_filters() then
+						for slotIndex = 1 , #inventory , 1 do
+							local item = requestItemList[slotIndex]
+							if inventory.can_set_filter( slotIndex , item ) then
+								inventory.set_filter( slotIndex , item )
+							end
+						end
+					end
+				elseif type == SICommon.Types.Entities.SpiderVehicle then
+					local inventory = entity.get_inventory( defines.inventory.spider_trunk )
+					if inventory and inventory.supports_filters() then
+						for slotIndex = 1 , #inventory , 1 do
+							local item = requestItemList[slotIndex]
+							if inventory.can_set_filter( slotIndex , item ) then
+								inventory.set_filter( slotIndex , item )
+							end
+						end
+					end
+				elseif type == SICommon.Types.Entities.WagonCargo then
+					local inventory = entity.get_inventory( defines.inventory.cargo_wagon )
+					if inventory and inventory.supports_filters() then
+						for slotIndex = 1 , #inventory , 1 do
+							local item = requestItemList[slotIndex]
+							if inventory.can_set_filter( slotIndex , item ) then
+								inventory.set_filter( slotIndex , item )
+							end
+						end
+					end
+				end
+			end
+			-- ----------------------------------------
+			-- 最大格子
+			-- ----------------------------------------
+			local maxSlotCount = tabSettings.MaxSlot.List[entityName]
+			if maxSlotCount then
+				if type == SICommon.Types.Entities.Container or type == SICommon.Types.Entities.ContainerLogic then
+					local inventory = entity.get_inventory( defines.inventory.chest )
+					if inventory and inventory.supports_bar() then
+						inventory.set_bar( maxSlotCount < 1 and nil or maxSlotCount )
+					end
+				elseif type == SICommon.Types.Entities.Car then
+					local inventory = entity.get_inventory( defines.inventory.car_trunk )
+					if inventory and inventory.supports_bar() then
+						inventory.set_bar( maxSlotCount < 1 and nil or maxSlotCount )
+					end
+				elseif type == SICommon.Types.Entities.SpiderVehicle then
+					local inventory = entity.get_inventory( defines.inventory.spider_trunk )
+					if inventory and inventory.supports_bar() then
+						inventory.set_bar( maxSlotCount < 1 and nil or maxSlotCount )
+					end
+				elseif type == SICommon.Types.Entities.WagonCargo then
+					local inventory = entity.get_inventory( defines.inventory.cargo_wagon )
+					if inventory and inventory.supports_bar() then
+						inventory.set_bar( maxSlotCount < 1 and nil or maxSlotCount )
+					end
+				end
+			end
+			-- ----------------------------------------
+			-- 绿箱向蓝箱供货
+			-- ----------------------------------------
+			if type == SICommon.Types.Entities.ContainerLogic then
+				local logisticMode = entityPrototype.logistic_mode
+				if logisticMode == SICommon.Flags.LogisticMode.Requester then
+					entity.request_from_buffers = greenToBlue
+				end
+			end
+			-- ----------------------------------------
+			-- 设置插件
+			-- ----------------------------------------
+			local setModuleList = tabSettings.SetModule.List[entityName]
+			if setModuleList then
+				local inventory = entity.get_module_inventory()
+				if inventory then
+					
+				end
+			end
+			-- ----------------------------------------
+			-- 移除插件
+			-- ----------------------------------------
+			local removeModuleList = tabSettings.RemoveModule.List[entityName]
+			if removeModuleList then
+			end
+			-- ----------------------------------------
+			-- 插入燃料
+			-- ----------------------------------------
+			-- ----------------------------------------
+			-- 插入弹药
+			-- ----------------------------------------
+		end
 	end ,
 	EffectSelect1 = function( playerIndex , entities )
 		local settings = SIGlobal.GetPlayerSettings( SIRequestMap.Settings.Name , playerIndex )
