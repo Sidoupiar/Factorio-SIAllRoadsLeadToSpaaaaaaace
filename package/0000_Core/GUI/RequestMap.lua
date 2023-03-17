@@ -1927,6 +1927,8 @@ SIRequestMap =
 		local fuelTotalList = {}
 		local ammoTotalList = {}
 		for index , entity in pairs( settings.entities ) do
+			local force = entity.force
+			local surface = entity.surface
 			local entityName = entity.name
 			local entityPrototype = entity.prototype
 			local type = entityPrototype.type
@@ -1939,12 +1941,7 @@ SIRequestMap =
 					if type == SICommon.Types.Entities.ContainerLogic then
 						local logisticMode = entityPrototype.logistic_mode
 						if logisticMode == SICommon.Flags.LogisticMode.Requester or logisticMode == SICommon.Flags.LogisticMode.Buffer then
-							local maxSlot = 0
-							for key , value in pairs( requestItemList ) do
-								maxSlot = math.max( maxSlot , key )
-							end
-							for slotIndex = 1 , maxSlot , 1 do
-								local itemName = requestItemList[slotIndex]
+							for slotIndex , itemName in pairs( requestItemList ) do
 								if not itemName or game.item_prototypes[itemName] then
 									entity.set_filter( slotIndex , itemName )
 								end
@@ -1956,12 +1953,7 @@ SIRequestMap =
 							end
 						end
 					elseif type == SICommon.Types.Entities.Inserter or type == SICommon.Types.Entities.BeltLoader or type == SICommon.Types.Entities.BeltLoaderSmall then
-						local maxSlot = 0
-						for key , value in pairs( requestItemList ) do
-							maxSlot = math.max( maxSlot , key )
-						end
-						for slotIndex = 1 , maxSlot , 1 do
-							local itemName = requestItemList[slotIndex]
+						for slotIndex , itemName in pairs( requestItemList ) do
 							if not itemName or game.item_prototypes[itemName] then
 								entity.set_filter( slotIndex , itemName )
 							end
@@ -1969,8 +1961,7 @@ SIRequestMap =
 					elseif type == SICommon.Types.Entities.Car then
 						local inventory = entity.get_inventory( defines.inventory.car_trunk )
 						if inventory and inventory.supports_filters() then
-							for slotIndex = 1 , #inventory , 1 do
-								local itemName = requestItemList[slotIndex]
+							for slotIndex , itemName in pairs( requestItemList ) do
 								if not itemName or game.item_prototypes[itemName] then
 									if inventory.can_set_filter( slotIndex , itemName ) then
 										inventory.set_filter( slotIndex , itemName )
@@ -1981,8 +1972,7 @@ SIRequestMap =
 					elseif type == SICommon.Types.Entities.SpiderVehicle then
 						local inventory = entity.get_inventory( defines.inventory.spider_trunk )
 						if inventory and inventory.supports_filters() then
-							for slotIndex = 1 , #inventory , 1 do
-								local itemName = requestItemList[slotIndex]
+							for slotIndex , itemName in pairs( requestItemList ) do
 								if not itemName or game.item_prototypes[itemName] then
 									if inventory.can_set_filter( slotIndex , itemName ) then
 										inventory.set_filter( slotIndex , itemName )
@@ -1993,8 +1983,7 @@ SIRequestMap =
 					elseif type == SICommon.Types.Entities.WagonCargo then
 						local inventory = entity.get_inventory( defines.inventory.cargo_wagon )
 						if inventory and inventory.supports_filters() then
-							for slotIndex = 1 , #inventory , 1 do
-								local itemName = requestItemList[slotIndex]
+							for slotIndex , itemName in pairs( requestItemList ) do
 								if not itemName or game.item_prototypes[itemName] then
 									if inventory.can_set_filter( slotIndex , itemName ) then
 										inventory.set_filter( slotIndex , itemName )
@@ -2053,9 +2042,17 @@ SIRequestMap =
 				if setModuleList then
 					local inventory = entity.get_module_inventory()
 					if inventory then
-						for slotIndex = 1 , #inventory , 1 do
-							local itemName = setModuleList[slotIndex]
-							
+						for slotIndex , itemName in pairs( setModuleList ) do
+							if itemName and game.item_prototypes[itemName] then
+								local currentItemStack = inventory[slotIndex]
+								if currentItemStack.valid_for_read and currentItemStack.name ~= itemName then
+									if fromInventory then
+										
+									else
+										surface.spill_item_stack( entity.position , { name = currentItemStack.name , count = 1 } , true , force , false )
+									end
+								end
+							end
 						end
 					end
 				end
@@ -2081,8 +2078,7 @@ SIRequestMap =
 					local inventory = entity.get_fuel_inventory()
 					-- 判断存储空间
 					if inventory then
-						for slotIndex = 1 , #inventory , 1 do
-							local itemData = insertFuelList[slotIndex]
+						for slotIndex , itemData in pairs( insertFuelList ) do
 							local itemName = itemData.Item
 							local itemPrototype = game.item_prototypes[itemName]
 							-- 判断燃料物品是否存在
@@ -2153,8 +2149,7 @@ SIRequestMap =
 						inventory = entity.get_inventory( defines.inventory.artillery_wagon_ammo )
 					end
 					if inventory then
-						for slotIndex = 1 , #inventory , 1 do
-							local itemData = insertAmmoList[slotIndex]
+						for slotIndex , itemData in pairs( insertAmmoList ) do
 							local itemName = itemData.Item
 							local itemPrototype = game.item_prototypes[itemName]
 							-- 判断弹药物品是否存在
