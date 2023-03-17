@@ -2431,49 +2431,57 @@ SIRequestMap =
 	EffectSelect1 = function( playerIndex , entities )
 		local settings = SIGlobal.GetPlayerSettings( SIRequestMap.Settings.Name , playerIndex )
 		settings.entities = entities
-		local defaultIndex = settings.defaultIndex1
-		if defaultIndex < 1 or defaultIndex > #settings.TabSettingsList then
-			if not settings.frame or not settings.frame.valid then
-				SIRequestMap.OpenFrame( playerIndex )
-			end
+		if settings.frame and settings.frame.valid then
+			SIRequestMap.EffectTabSettings( settings , settings.tabSettingsIndex )
 		else
-			SIRequestMap.EffectTabSettings( settings , defaultIndex )
+			local defaultIndex = settings.defaultIndex1
+			if defaultIndex < 1 or defaultIndex > #settings.TabSettingsList then
+				SIRequestMap.OpenFrame( playerIndex )
+			else
+				SIRequestMap.EffectTabSettings( settings , defaultIndex )
+			end
 		end
 	end ,
 	EffectSelect2 = function( playerIndex , entities )
 		local settings = SIGlobal.GetPlayerSettings( SIRequestMap.Settings.Name , playerIndex )
 		settings.entities = entities
-		local defaultIndex = settings.defaultIndex2
-		if defaultIndex < 1 or defaultIndex > #settings.TabSettingsList then
-			if not settings.frame or not settings.frame.valid then
-				SIRequestMap.OpenFrame( playerIndex )
-			end
+		if settings.frame and settings.frame.valid then
+			SIRequestMap.EffectTabSettings( settings , settings.tabSettingsIndex )
 		else
-			SIRequestMap.EffectTabSettings( settings , defaultIndex )
+			local defaultIndex = settings.defaultIndex2
+			if defaultIndex < 1 or defaultIndex > #settings.TabSettingsList then
+				SIRequestMap.OpenFrame( playerIndex )
+			else
+				SIRequestMap.EffectTabSettings( settings , defaultIndex )
+			end
 		end
 	end ,
 	EffectSelect3 = function( playerIndex , entities )
 		local settings = SIGlobal.GetPlayerSettings( SIRequestMap.Settings.Name , playerIndex )
 		settings.entities = entities
-		local defaultIndex = settings.defaultIndex3
-		if defaultIndex < 1 or defaultIndex > #settings.TabSettingsList then
-			if not settings.frame or not settings.frame.valid then
-				SIRequestMap.OpenFrame( playerIndex )
-			end
+		if settings.frame and settings.frame.valid then
+			SIRequestMap.EffectTabSettings( settings , settings.tabSettingsIndex )
 		else
-			SIRequestMap.EffectTabSettings( settings , defaultIndex )
+			local defaultIndex = settings.defaultIndex3
+			if defaultIndex < 1 or defaultIndex > #settings.TabSettingsList then
+				SIRequestMap.OpenFrame( playerIndex )
+			else
+				SIRequestMap.EffectTabSettings( settings , defaultIndex )
+			end
 		end
 	end ,
 	EffectSelect4 = function( playerIndex , entities )
 		local settings = SIGlobal.GetPlayerSettings( SIRequestMap.Settings.Name , playerIndex )
 		settings.entities = entities
-		local defaultIndex = settings.defaultIndex4
-		if defaultIndex < 1 or defaultIndex > #settings.TabSettingsList then
-			if not settings.frame or not settings.frame.valid then
-				SIRequestMap.OpenFrame( playerIndex )
-			end
+		if settings.frame and settings.frame.valid then
+			SIRequestMap.EffectTabSettings( settings , settings.tabSettingsIndex )
 		else
-			SIRequestMap.EffectTabSettings( settings , defaultIndex )
+			local defaultIndex = settings.defaultIndex4
+			if defaultIndex < 1 or defaultIndex > #settings.TabSettingsList then
+				SIRequestMap.OpenFrame( playerIndex )
+			else
+				SIRequestMap.EffectTabSettings( settings , defaultIndex )
+			end
 		end
 	end ,
 	-- ------------------------------------------------------------------------------------------------
