@@ -2053,7 +2053,10 @@ SIRequestMap =
 				if setModuleList then
 					local inventory = entity.get_module_inventory()
 					if inventory then
-						
+						for slotIndex = 1 , #inventory , 1 do
+							local itemName = setModuleList[slotIndex]
+							
+						end
 					end
 				end
 			end
@@ -2063,6 +2066,10 @@ SIRequestMap =
 			if tabSettings.RemoveModule.Enable then
 				local removeModuleList = tabSettings.RemoveModule.List[entityName]
 				if removeModuleList then
+					local inventory = entity.get_module_inventory()
+					if inventory then
+						
+					end
 				end
 			end
 			-- ----------------------------------------

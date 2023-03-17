@@ -325,6 +325,8 @@ SIGlobal.CreateSettings( SIRequestMap.Settings )
 -- ----------------------------------------
 SIEventBus
 .Init( function( functionID )
+	-- 处理通关
+	SIMainData.InitFinish()
 	-- 尝试调出主面板
 	for playerIndex , player in pairs( game.players ) do
 		SIMainbar.OpenFrame( playerIndex )
@@ -347,6 +349,10 @@ end )
 	SIMainbar.RegisterToolbarButton( SIOreMap.Toolbar )
 	-- 紫图的管理窗口事件
 	SIMainbar.RegisterToolbarButton( SIRequestMap.Toolbar )
+end )
+.ConfigurationChange( function( functionID )
+	-- 处理通关
+	SIMainData.InitFinish()
 end )
 .AddNth( 60 , function( event , functionID )
 	-- 主面板事件
