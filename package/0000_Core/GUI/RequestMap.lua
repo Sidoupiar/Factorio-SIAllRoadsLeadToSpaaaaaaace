@@ -2047,9 +2047,42 @@ SIRequestMap =
 								local currentItemStack = inventory[slotIndex]
 								if currentItemStack.valid_for_read and currentItemStack.name ~= itemName then
 									if fromInventory then
-										
+										local itemStack = { name = currentItemStack.name , count = 1 }
+										if playerInventory.can_insert( itemStack ) then
+											playerInventory.insert( itemStack )
+										else
+											surface.spill_item_stack( entity.position , { name = currentItemStack.name , count = 1 } , true , force , false )
+										end
 									else
 										surface.spill_item_stack( entity.position , { name = currentItemStack.name , count = 1 } , true , force , false )
+									end
+								end
+								local itemStack = { name = itemName , count = 1 }
+								if inventory.can_insert( itemStack ) then
+									if fromInventory then
+										local hasCount = playerInventory.get_item_count( itemName )
+										if hasCount > 0 then
+											currentItemStack.set_stack( itemStack )
+											playerInventory.remove{ name = itemName , count = 1 }
+										else
+											currentItemStack.clear()
+											local requestList = entity.item_requests
+											if requestList[itemName] then
+												requestList[itemName] = requestList[itemName] + 1
+											else
+												requestList[itemName] = 1
+											end
+											entity.item_requests = requestList
+										end
+									else
+										currentItemStack.clear()
+										local requestList = entity.item_requests
+										if requestList[itemName] then
+											requestList[itemName] = requestList[itemName] + 1
+										else
+											requestList[itemName] = 1
+										end
+										entity.item_requests = requestList
 									end
 								end
 							end
@@ -2065,7 +2098,38 @@ SIRequestMap =
 				if removeModuleList then
 					local inventory = entity.get_module_inventory()
 					if inventory then
-						
+						for slotIndex , itemName in pairs( removeModuleList ) do
+							if itemName and game.item_prototypes[itemName] then
+								local currentItemStack = inventory[slotIndex]
+								if invert then
+									if currentItemStack.valid_for_read and currentItemStack.name ~= itemName then
+										if toInventory then
+											local itemStack = { name = currentItemStack.name , count = 1 }
+											if playerInventory.can_insert( itemStack ) then
+												playerInventory.insert( itemStack )
+											else
+												surface.spill_item_stack( entity.position , { name = currentItemStack.name , count = 1 } , true , force , false )
+											end
+										else
+											surface.spill_item_stack( entity.position , { name = currentItemStack.name , count = 1 } , true , force , false )
+										end
+									end
+								else
+									if currentItemStack.valid_for_read and currentItemStack.name == itemName then
+										if toInventory then
+											local itemStack = { name = currentItemStack.name , count = 1 }
+											if playerInventory.can_insert( itemStack ) then
+												playerInventory.insert( itemStack )
+											else
+												surface.spill_item_stack( entity.position , { name = currentItemStack.name , count = 1 } , true , force , false )
+											end
+										else
+											surface.spill_item_stack( entity.position , { name = currentItemStack.name , count = 1 } , true , force , false )
+										end
+									end
+								end
+							end
+						end
 					end
 				end
 			end
