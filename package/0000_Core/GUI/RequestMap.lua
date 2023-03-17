@@ -163,10 +163,10 @@ SIRequestMap =
 		[4] = { "SICore.紫图-窗口-选择-3" } ,
 		[5] = { "SICore.紫图-窗口-选择-4" }
 	} ,
-	CountModeText =
+	CountMode =
 	{
-		[1] = { "SICore.紫图-窗口-计数-整体计数" } ,
-		[2] = { "SICore.紫图-窗口-计数-独立计数" }
+		Total = 1 ,
+		Single = 2
 	} ,
 	RequestSlot_ItemSlotMax = 200 ,
 	RequestSlot_Entity_Filters =
@@ -681,7 +681,7 @@ SIRequestMap =
 		for entityName , requestItemList in pairs( tabSettings.RequestSlot.List ) do
 			local entityPrototype = game.entity_prototypes[entityName]
 			local entityTooltip = nil
-			local entity = entityName
+			local entityNameSelected = entityName
 			local maxSlot = 0
 			if entityPrototype then
 				entityTooltip = { "SICore.紫图-窗口-请求格子-实体-提示" , entityPrototype.localised_name }
@@ -707,12 +707,12 @@ SIRequestMap =
 					maxSlot = 0
 				end
 				if maxSlot > SIRequestMap.RequestSlot_ItemSlotMax then
-					SIPrint.Warning( settings.playerIndex , { "SICore.紫图-提示-请求格子-格子太多" , entity , entityPrototype.localised_name , SIRequestMap.RequestSlot_ItemSlotMax } )
+					SIPrint.Warning( settings.playerIndex , { "SICore.紫图-提示-请求格子-格子太多" , entityName , entityPrototype.localised_name , SIRequestMap.RequestSlot_ItemSlotMax } )
 					maxSlot = SIRequestMap.RequestSlot_ItemSlotMax
 				end
 			else
-				entityTooltip = { "SICore.紫图-窗口-请求格子-实体-空-提示" , entity }
-				entity = SIConstants_Core.raw.Entities.IconEmpty
+				entityTooltip = { "SICore.紫图-窗口-请求格子-实体-空-提示" , entityName }
+				entityNameSelected = SIConstants_Core.raw.Entities.IconEmpty
 				for key , value in pairs( requestItemList ) do
 					maxSlot = math.max( maxSlot , key )
 				end
@@ -723,7 +723,7 @@ SIRequestMap =
 				name = SIRequestMap.Names.RequestSlot_Entity_Prefix .. entityName ,
 				tooltip = entityTooltip ,
 				elem_type = "entity" ,
-				entity = entity ,
+				entity = entityNameSelected ,
 				elem_filters = SIRequestMap.RequestSlot_Entity_Filters ,
 				style = SIConstants_Core.raw.Styles.RequestMap_ListChooser
 			}
@@ -732,14 +732,14 @@ SIRequestMap =
 			for slotIndex = 1 , maxSlot , 1 do
 				local selectList = math.fmod( math.floor( slotIndex / 10 ) , 2 ) == 0 and selectList1 or selectList2
 				local itemTooltip = nil
-				local item = requestItemList[slotIndex]
-				if item then
-					local itemPrototype = game.item_prototypes[item]
+				local itemName = requestItemList[slotIndex]
+				if itemName then
+					local itemPrototype = game.item_prototypes[itemName]
 					if itemPrototype then
 						itemTooltip = { "SICore.紫图-窗口-请求格子-物品-提示" , itemPrototype.localised_name }
 					else
-						itemTooltip = { "SICore.紫图-窗口-请求格子-物品-空-提示" , item }
-						item = SIConstants_Core.raw.Items.IconEmpty
+						itemTooltip = { "SICore.紫图-窗口-请求格子-物品-空-提示" , itemName }
+						itemName = SIConstants_Core.raw.Items.IconEmpty
 					end
 				else
 					itemTooltip = { "SICore.紫图-窗口-请求格子-物品-选择-提示" }
@@ -750,7 +750,7 @@ SIRequestMap =
 					name = SIRequestMap.Names.RequestSlot_Item_Prefix .. slotIndex .. "_" .. entityName ,
 					tooltip = itemTooltip ,
 					elem_type = "item" ,
-					item = item ,
+					item = itemName ,
 					elem_filters = SIRequestMap.RequestSlot_Item_Filters ,
 					style = SIConstants_Core.raw.Styles.RequestMap_ListChooser
 				}
@@ -777,7 +777,7 @@ SIRequestMap =
 		for entityName , count in pairs( tabSettings.MaxSlot.List ) do
 			local entityPrototype = game.entity_prototypes[entityName]
 			local entityTooltip = nil
-			local entity = entityName
+			local entityNameSelected = entityName
 			local maxCount = 0
 			if entityPrototype then
 				entityTooltip = { "SICore.紫图-窗口-最大格子-实体-提示" , entityPrototype.localised_name }
@@ -794,8 +794,8 @@ SIRequestMap =
 					maxCount = 0
 				end
 			else
-				entityTooltip = { "SICore.紫图-窗口-最大格子-实体-空-提示" , entity }
-				entity = SIConstants_Core.raw.Entities.IconEmpty
+				entityTooltip = { "SICore.紫图-窗口-最大格子-实体-空-提示" , entityName }
+				entityNameSelected = SIConstants_Core.raw.Entities.IconEmpty
 				maxCount = 0
 			end
 			list.add
@@ -804,7 +804,7 @@ SIRequestMap =
 				name = SIRequestMap.Names.MaxSlot_Entity_Prefix .. entityName ,
 				tooltip = entityTooltip ,
 				elem_type = "entity" ,
-				entity = entity ,
+				entity = entityNameSelected ,
 				elem_filters = SIRequestMap.MaxSlot_Entity_Filters ,
 				style = SIConstants_Core.raw.Styles.RequestMap_ListChooser
 			}
@@ -838,7 +838,7 @@ SIRequestMap =
 		for entityName , moduleList in pairs( tabSettings.SetModule.List ) do
 			local entityPrototype = game.entity_prototypes[entityName]
 			local entityTooltip = nil
-			local entity = entityName
+			local entityNameSelected = entityName
 			local maxSlot = 0
 			if entityPrototype then
 				entityTooltip = { "SICore.紫图-窗口-设置插件-实体-提示" , entityPrototype.localised_name }
@@ -859,8 +859,8 @@ SIRequestMap =
 					maxSlot = 0
 				end
 			else
-				entityTooltip = { "SICore.紫图-窗口-设置插件-实体-空-提示" , entity }
-				entity = SIConstants_Core.raw.Entities.IconEmpty
+				entityTooltip = { "SICore.紫图-窗口-设置插件-实体-空-提示" , entityName }
+				entityNameSelected = SIConstants_Core.raw.Entities.IconEmpty
 				for key , value in pairs( moduleList ) do
 					maxSlot = math.max( maxSlot , key )
 				end
@@ -871,7 +871,7 @@ SIRequestMap =
 				name = SIRequestMap.Names.SetModule_Entity_Prefix .. entityName ,
 				tooltip = entityTooltip ,
 				elem_type = "entity" ,
-				entity = entity ,
+				entity = entityNameSelected ,
 				elem_filters = SIRequestMap.SetModule_Entity_Filters ,
 				style = SIConstants_Core.raw.Styles.RequestMap_ListChooser
 			}
@@ -880,14 +880,14 @@ SIRequestMap =
 			for slotIndex = 1 , maxSlot , 1 do
 				local selectList = math.fmod( math.floor( slotIndex / 10 ) , 2 ) == 0 and selectList1 or selectList2
 				local itemTooltip = nil
-				local item = moduleList[slotIndex]
-				if item then
-					local itemPrototype = game.item_prototypes[item]
+				local itemName = moduleList[slotIndex]
+				if itemName then
+					local itemPrototype = game.item_prototypes[itemName]
 					if itemPrototype then
 						itemTooltip = { "SICore.紫图-窗口-设置插件-物品-提示" , itemPrototype.localised_name }
 					else
-						itemTooltip = { "SICore.紫图-窗口-设置插件-物品-空-提示" , item }
-						item = SIConstants_Core.raw.Items.IconEmpty
+						itemTooltip = { "SICore.紫图-窗口-设置插件-物品-空-提示" , itemName }
+						itemName = SIConstants_Core.raw.Items.IconEmpty
 					end
 				else
 					itemTooltip = { "SICore.紫图-窗口-设置插件-物品-选择-提示" }
@@ -898,7 +898,7 @@ SIRequestMap =
 					name = SIRequestMap.Names.SetModule_Item_Prefix .. slotIndex .. "_" .. entityName ,
 					tooltip = itemTooltip ,
 					elem_type = "item" ,
-					item = item ,
+					item = itemName ,
 					elem_filters = SIRequestMap.SetModule_Item_Filters ,
 					style = SIConstants_Core.raw.Styles.RequestMap_ListChooser
 				}
@@ -929,7 +929,7 @@ SIRequestMap =
 		for entityName , moduleList in pairs( tabSettings.RemoveModule.List ) do
 			local entityPrototype = game.entity_prototypes[entityName]
 			local entityTooltip = nil
-			local entity = entityName
+			local entityNameSelected = entityName
 			local maxSlot = 0
 			if entityPrototype then
 				entityTooltip = { "SICore.紫图-窗口-移除插件-实体-提示" , entityPrototype.localised_name }
@@ -950,8 +950,8 @@ SIRequestMap =
 					maxSlot = 0
 				end
 			else
-				entityTooltip = { "SICore.紫图-窗口-移除插件-实体-空-提示" , entity }
-				entity = SIConstants_Core.raw.Entities.IconEmpty
+				entityTooltip = { "SICore.紫图-窗口-移除插件-实体-空-提示" , entityName }
+				entityNameSelected = SIConstants_Core.raw.Entities.IconEmpty
 				for key , value in pairs( moduleList ) do
 					maxSlot = math.max( maxSlot , key )
 				end
@@ -962,7 +962,7 @@ SIRequestMap =
 				name = SIRequestMap.Names.RemoveModule_Entity_Prefix .. entityName ,
 				tooltip = entityTooltip ,
 				elem_type = "entity" ,
-				entity = entity ,
+				entity = entityNameSelected ,
 				elem_filters = SIRequestMap.RemoveModule_Entity_Filters ,
 				style = SIConstants_Core.raw.Styles.RequestMap_ListChooser
 			}
@@ -971,14 +971,14 @@ SIRequestMap =
 			for slotIndex = 1 , maxSlot , 1 do
 				local selectList = math.fmod( math.floor( slotIndex / 10 ) , 2 ) == 0 and selectList1 or selectList2
 				local itemTooltip = nil
-				local item = moduleList[slotIndex]
-				if item then
-					local itemPrototype = game.item_prototypes[item]
+				local itemName = moduleList[slotIndex]
+				if itemName then
+					local itemPrototype = game.item_prototypes[itemName]
 					if itemPrototype then
 						itemTooltip = { "SICore.紫图-窗口-移除插件-物品-提示" , itemPrototype.localised_name }
 					else
-						itemTooltip = { "SICore.紫图-窗口-移除插件-物品-空-提示" , item }
-						item = SIConstants_Core.raw.Items.IconEmpty
+						itemTooltip = { "SICore.紫图-窗口-移除插件-物品-空-提示" , itemName }
+						itemName = SIConstants_Core.raw.Items.IconEmpty
 					end
 				else
 					itemTooltip = { "SICore.紫图-窗口-移除插件-物品-选择-提示" }
@@ -989,7 +989,7 @@ SIRequestMap =
 					name = SIRequestMap.Names.RemoveModule_Item_Prefix .. slotIndex .. "_" .. entityName ,
 					tooltip = itemTooltip ,
 					elem_type = "item" ,
-					item = item ,
+					item = itemName ,
 					elem_filters = SIRequestMap.RemoveModule_Item_Filters ,
 					style = SIConstants_Core.raw.Styles.RequestMap_ListChooser
 				}
@@ -1048,14 +1048,14 @@ SIRequestMap =
 							itemDataList[itemDataIndex] = itemData
 						end
 						local itemTooltip = nil
-						local item = itemData.Item
-						if item then
-							local itemPrototype = game.item_prototypes[item]
+						local itemName = itemData.Item
+						if itemName then
+							local itemPrototype = game.item_prototypes[itemName]
 							if itemPrototype then
 								itemTooltip = { "SICore.紫图-窗口-插入燃料-物品-提示" , itemPrototype.localised_name }
 							else
-								itemTooltip = { "SICore.紫图-窗口-插入燃料-物品-空-提示" , item }
-								item = SIConstants_Core.raw.Items.IconEmpty
+								itemTooltip = { "SICore.紫图-窗口-插入燃料-物品-空-提示" , itemName }
+								itemName = SIConstants_Core.raw.Items.IconEmpty
 							end
 						else
 							itemTooltip = { "SICore.紫图-窗口-插入燃料-物品-选择-提示" }
@@ -1066,7 +1066,7 @@ SIRequestMap =
 							name = SIRequestMap.Names.InsertFuel_Item_Prefix .. itemDataIndex .. "_" .. entityName ,
 							tooltip = itemTooltip ,
 							elem_type = "item" ,
-							item = item ,
+							item = itemName ,
 							elem_filters = fuelFilter ,
 							style = SIConstants_Core.raw.Styles.RequestMap_ListChooser
 						}
@@ -1108,14 +1108,14 @@ SIRequestMap =
 				} )
 				for itemDataIndex , itemData in pairs( itemDataList ) do
 					local itemTooltip = nil
-					local item = itemData.Item
-					if item then
-						local itemPrototype = game.item_prototypes[item]
+					local itemName = itemData.Item
+					if itemName then
+						local itemPrototype = game.item_prototypes[itemName]
 						if itemPrototype then
 							itemTooltip = { "SICore.紫图-窗口-插入燃料-物品-提示" , itemPrototype.localised_name }
 						else
-							itemTooltip = { "SICore.紫图-窗口-插入燃料-物品-空-提示" , item }
-							item = SIConstants_Core.raw.Items.IconEmpty
+							itemTooltip = { "SICore.紫图-窗口-插入燃料-物品-空-提示" , itemName }
+							itemName = SIConstants_Core.raw.Items.IconEmpty
 						end
 					else
 						itemTooltip = { "SICore.紫图-窗口-插入燃料-物品-选择-提示" }
@@ -1126,7 +1126,7 @@ SIRequestMap =
 						name = SIRequestMap.Names.InsertFuel_Item_Prefix .. itemDataIndex .. "_" .. entityName ,
 						tooltip = itemTooltip ,
 						elem_type = "item" ,
-						item = item ,
+						item = itemName ,
 						elem_filters = fuelFilter ,
 						style = SIConstants_Core.raw.Styles.RequestMap_ListChooser
 					}
@@ -1233,14 +1233,14 @@ SIRequestMap =
 					}
 					weaponChooser.enabled = false
 					local itemTooltip = nil
-					local item = itemData.Item
-					if item then
-						local itemPrototype = game.item_prototypes[item]
+					local itemName = itemData.Item
+					if itemName then
+						local itemPrototype = game.item_prototypes[itemName]
 						if itemPrototype then
 							itemTooltip = { "SICore.紫图-窗口-插入弹药-物品-提示" , itemPrototype.localised_name }
 						else
-							itemTooltip = { "SICore.紫图-窗口-插入弹药-物品-空-提示" , item }
-							item = SIConstants_Core.raw.Items.IconEmpty
+							itemTooltip = { "SICore.紫图-窗口-插入弹药-物品-空-提示" , itemName }
+							itemName = SIConstants_Core.raw.Items.IconEmpty
 						end
 					else
 						itemTooltip = { "SICore.紫图-窗口-插入弹药-物品-选择-提示" }
@@ -1262,7 +1262,7 @@ SIRequestMap =
 						name = SIRequestMap.Names.InsertAmmo_Item_Prefix .. itemDataIndex .. "_" .. entityName ,
 						tooltip = itemTooltip ,
 						elem_type = "item" ,
-						item = item ,
+						item = itemName ,
 						elem_filters = filter ,
 						style = SIConstants_Core.raw.Styles.RequestMap_ListChooser
 					}
@@ -1305,14 +1305,14 @@ SIRequestMap =
 					}
 					weaponChooser.enabled = false
 					local itemTooltip = nil
-					local item = itemData.Item
-					if item then
-						local itemPrototype = game.item_prototypes[item]
+					local itemName = itemData.Item
+					if itemName then
+						local itemPrototype = game.item_prototypes[itemName]
 						if itemPrototype then
 							itemTooltip = { "SICore.紫图-窗口-插入弹药-物品-提示" , itemPrototype.localised_name }
 						else
-							itemTooltip = { "SICore.紫图-窗口-插入弹药-物品-空-提示" , item }
-							item = SIConstants_Core.raw.Items.IconEmpty
+							itemTooltip = { "SICore.紫图-窗口-插入弹药-物品-空-提示" , itemName }
+							itemName = SIConstants_Core.raw.Items.IconEmpty
 						end
 					else
 						itemTooltip = { "SICore.紫图-窗口-插入弹药-物品-选择-提示" }
@@ -1323,7 +1323,7 @@ SIRequestMap =
 						name = SIRequestMap.Names.InsertAmmo_Item_Prefix .. itemDataIndex .. "_" .. entityName ,
 						tooltip = itemTooltip ,
 						elem_type = "item" ,
-						item = item ,
+						item = itemName ,
 						elem_filters = SIRequestMap.InsertAmmo_Item_Filters ,
 						style = SIConstants_Core.raw.Styles.RequestMap_ListChooser
 					}
@@ -1924,6 +1924,8 @@ SIRequestMap =
 		local fromInventory = tabSettings.SetModule.FromInventory
 		local toInventory = tabSettings.RemoveModule.ToInventory
 		local invert = tabSettings.RemoveModule.Invert
+		local fuelTotalList = {}
+		local ammoTotalList = {}
 		for index , entity in pairs( settings.entities ) do
 			local entityName = entity.name
 			local entityPrototype = entity.prototype
@@ -1931,70 +1933,72 @@ SIRequestMap =
 			-- ----------------------------------------
 			-- 请求格子
 			-- ----------------------------------------
-			local requestItemList = tabSettings.RequestSlot.List[entityName]
-			if requestItemList then
-				if type == SICommon.Types.Entities.ContainerLogic then
-					local logisticMode = entityPrototype.logistic_mode
-					if logisticMode == SICommon.Flags.LogisticMode.Requester or logisticMode == SICommon.Flags.LogisticMode.Buffer then
+			if tabSettings.RequestSlot.Enable then
+				local requestItemList = tabSettings.RequestSlot.List[entityName]
+				if requestItemList then
+					if type == SICommon.Types.Entities.ContainerLogic then
+						local logisticMode = entityPrototype.logistic_mode
+						if logisticMode == SICommon.Flags.LogisticMode.Requester or logisticMode == SICommon.Flags.LogisticMode.Buffer then
+							local maxSlot = 0
+							for key , value in pairs( requestItemList ) do
+								maxSlot = math.max( maxSlot , key )
+							end
+							for slotIndex = 1 , maxSlot , 1 do
+								local itemName = requestItemList[slotIndex]
+								if not itemName or game.item_prototypes[itemName] then
+									entity.set_filter( slotIndex , itemName )
+								end
+							end
+						elseif logisticMode == SICommon.Flags.LogisticMode.Storage then
+							local itemName = requestItemList[1]
+							if not itemName or game.item_prototypes[itemName] then
+								entity.set_filter( 1 , itemName )
+							end
+						end
+					elseif type == SICommon.Types.Entities.Inserter or type == SICommon.Types.Entities.BeltLoader or type == SICommon.Types.Entities.BeltLoaderSmall then
 						local maxSlot = 0
 						for key , value in pairs( requestItemList ) do
 							maxSlot = math.max( maxSlot , key )
 						end
 						for slotIndex = 1 , maxSlot , 1 do
-							local item = requestItemList[slotIndex]
-							if not item or game.item_prototypes[item] then
-								entity.set_filter( slotIndex , item )
+							local itemName = requestItemList[slotIndex]
+							if not itemName or game.item_prototypes[itemName] then
+								entity.set_filter( slotIndex , itemName )
 							end
 						end
-					elseif logisticMode == SICommon.Flags.LogisticMode.Storage then
-						local item = requestItemList[1]
-						if not item or game.item_prototypes[item] then
-							entity.set_filter( 1 , item )
-						end
-					end
-				elseif type == SICommon.Types.Entities.Inserter or type == SICommon.Types.Entities.BeltLoader or type == SICommon.Types.Entities.BeltLoaderSmall then
-					local maxSlot = 0
-					for key , value in pairs( requestItemList ) do
-						maxSlot = math.max( maxSlot , key )
-					end
-					for slotIndex = 1 , maxSlot , 1 do
-						local item = requestItemList[slotIndex]
-						if not item or game.item_prototypes[item] then
-							entity.set_filter( slotIndex , item )
-						end
-					end
-				elseif type == SICommon.Types.Entities.Car then
-					local inventory = entity.get_inventory( defines.inventory.car_trunk )
-					if inventory and inventory.supports_filters() then
-						for slotIndex = 1 , #inventory , 1 do
-							local item = requestItemList[slotIndex]
-							if not item or game.item_prototypes[item] then
-								if inventory.can_set_filter( slotIndex , item ) then
-									inventory.set_filter( slotIndex , item )
+					elseif type == SICommon.Types.Entities.Car then
+						local inventory = entity.get_inventory( defines.inventory.car_trunk )
+						if inventory and inventory.supports_filters() then
+							for slotIndex = 1 , #inventory , 1 do
+								local itemName = requestItemList[slotIndex]
+								if not itemName or game.item_prototypes[itemName] then
+									if inventory.can_set_filter( slotIndex , itemName ) then
+										inventory.set_filter( slotIndex , itemName )
+									end
 								end
 							end
 						end
-					end
-				elseif type == SICommon.Types.Entities.SpiderVehicle then
-					local inventory = entity.get_inventory( defines.inventory.spider_trunk )
-					if inventory and inventory.supports_filters() then
-						for slotIndex = 1 , #inventory , 1 do
-							local item = requestItemList[slotIndex]
-							if not item or game.item_prototypes[item] then
-								if inventory.can_set_filter( slotIndex , item ) then
-									inventory.set_filter( slotIndex , item )
+					elseif type == SICommon.Types.Entities.SpiderVehicle then
+						local inventory = entity.get_inventory( defines.inventory.spider_trunk )
+						if inventory and inventory.supports_filters() then
+							for slotIndex = 1 , #inventory , 1 do
+								local itemName = requestItemList[slotIndex]
+								if not itemName or game.item_prototypes[itemName] then
+									if inventory.can_set_filter( slotIndex , itemName ) then
+										inventory.set_filter( slotIndex , itemName )
+									end
 								end
 							end
 						end
-					end
-				elseif type == SICommon.Types.Entities.WagonCargo then
-					local inventory = entity.get_inventory( defines.inventory.cargo_wagon )
-					if inventory and inventory.supports_filters() then
-						for slotIndex = 1 , #inventory , 1 do
-							local item = requestItemList[slotIndex]
-							if not item or game.item_prototypes[item] then
-								if inventory.can_set_filter( slotIndex , item ) then
-									inventory.set_filter( slotIndex , item )
+					elseif type == SICommon.Types.Entities.WagonCargo then
+						local inventory = entity.get_inventory( defines.inventory.cargo_wagon )
+						if inventory and inventory.supports_filters() then
+							for slotIndex = 1 , #inventory , 1 do
+								local itemName = requestItemList[slotIndex]
+								if not itemName or game.item_prototypes[itemName] then
+									if inventory.can_set_filter( slotIndex , itemName ) then
+										inventory.set_filter( slotIndex , itemName )
+									end
 								end
 							end
 						end
@@ -2004,84 +2008,253 @@ SIRequestMap =
 			-- ----------------------------------------
 			-- 最大格子
 			-- ----------------------------------------
-			local maxSlotCount = tabSettings.MaxSlot.List[entityName]
-			if maxSlotCount then
-				if type == SICommon.Types.Entities.Container or type == SICommon.Types.Entities.ContainerLogic then
-					local inventory = entity.get_inventory( defines.inventory.chest )
-					if inventory and inventory.supports_bar() then
-						inventory.set_bar( maxSlotCount < 1 and nil or maxSlotCount )
-					end
-				elseif type == SICommon.Types.Entities.Car then
-					local inventory = entity.get_inventory( defines.inventory.car_trunk )
-					if inventory and inventory.supports_bar() then
-						inventory.set_bar( maxSlotCount < 1 and nil or maxSlotCount )
-					end
-				elseif type == SICommon.Types.Entities.SpiderVehicle then
-					local inventory = entity.get_inventory( defines.inventory.spider_trunk )
-					if inventory and inventory.supports_bar() then
-						inventory.set_bar( maxSlotCount < 1 and nil or maxSlotCount )
-					end
-				elseif type == SICommon.Types.Entities.WagonCargo then
-					local inventory = entity.get_inventory( defines.inventory.cargo_wagon )
-					if inventory and inventory.supports_bar() then
-						inventory.set_bar( maxSlotCount < 1 and nil or maxSlotCount )
+			if tabSettings.MaxSlot.Enable then
+				local maxSlotCount = tabSettings.MaxSlot.List[entityName]
+				if maxSlotCount then
+					if type == SICommon.Types.Entities.Container or type == SICommon.Types.Entities.ContainerLogic then
+						local inventory = entity.get_inventory( defines.inventory.chest )
+						if inventory and inventory.supports_bar() then
+							inventory.set_bar( maxSlotCount < 1 and nil or maxSlotCount )
+						end
+					elseif type == SICommon.Types.Entities.Car then
+						local inventory = entity.get_inventory( defines.inventory.car_trunk )
+						if inventory and inventory.supports_bar() then
+							inventory.set_bar( maxSlotCount < 1 and nil or maxSlotCount )
+						end
+					elseif type == SICommon.Types.Entities.SpiderVehicle then
+						local inventory = entity.get_inventory( defines.inventory.spider_trunk )
+						if inventory and inventory.supports_bar() then
+							inventory.set_bar( maxSlotCount < 1 and nil or maxSlotCount )
+						end
+					elseif type == SICommon.Types.Entities.WagonCargo then
+						local inventory = entity.get_inventory( defines.inventory.cargo_wagon )
+						if inventory and inventory.supports_bar() then
+							inventory.set_bar( maxSlotCount < 1 and nil or maxSlotCount )
+						end
 					end
 				end
 			end
 			-- ----------------------------------------
 			-- 绿箱向蓝箱供货
 			-- ----------------------------------------
-			if type == SICommon.Types.Entities.ContainerLogic then
-				local logisticMode = entityPrototype.logistic_mode
-				if logisticMode == SICommon.Flags.LogisticMode.Requester then
-					entity.request_from_buffers = greenToBlue
+			if tabSettings.GreenToBlue.Enable then
+				if type == SICommon.Types.Entities.ContainerLogic then
+					local logisticMode = entityPrototype.logistic_mode
+					if logisticMode == SICommon.Flags.LogisticMode.Requester then
+						entity.request_from_buffers = greenToBlue
+					end
 				end
 			end
 			-- ----------------------------------------
 			-- 设置插件
 			-- ----------------------------------------
-			local setModuleList = tabSettings.SetModule.List[entityName]
-			if setModuleList then
-				local inventory = entity.get_module_inventory()
-				if inventory then
-					
+			if tabSettings.SetModule.Enable then
+				local setModuleList = tabSettings.SetModule.List[entityName]
+				if setModuleList then
+					local inventory = entity.get_module_inventory()
+					if inventory then
+						
+					end
 				end
 			end
 			-- ----------------------------------------
 			-- 移除插件
 			-- ----------------------------------------
-			local removeModuleList = tabSettings.RemoveModule.List[entityName]
-			if removeModuleList then
+			if tabSettings.RemoveModule.Enable then
+				local removeModuleList = tabSettings.RemoveModule.List[entityName]
+				if removeModuleList then
+				end
 			end
 			-- ----------------------------------------
 			-- 插入燃料
 			-- ----------------------------------------
-			local insertFuelList = tabSettings.InsertFuel.List[entityName]
-			if insertFuelList then
-				local inventory = entity.get_fuel_inventory()
-				if inventory then
-
+			if tabSettings.InsertFuel.Enable then
+				local insertFuelList = tabSettings.InsertFuel.List[entityName]
+				if insertFuelList then
+					local inventory = entity.get_fuel_inventory()
+					-- 判断存储空间
+					if inventory then
+						for slotIndex = 1 , #inventory , 1 do
+							local itemData = insertFuelList[slotIndex]
+							local itemName = itemData.Item
+							local itemPrototype = game.item_prototypes[itemName]
+							-- 判断燃料物品是否存在
+							if itemName and itemPrototype then
+								local hasCount = playerInventory.get_item_count( itemName )
+								-- 判断玩家背包内的燃料物品数量
+								if hasCount > 0 then
+									local currentItemStack = inventory[slotIndex]
+									-- 判断指定空间内是否可以填充指定种类的燃料物品
+									if not currentItemStack.valid_for_read or currentItemStack.valid_for_read and currentItemStack.name == itemName then
+										local currentCount = currentItemStack.valid_for_read and currentItemStack.count or 0
+										local mode = itemData.Mode
+										-- 根据模式决定操作方式
+										if mode == SIRequestMap.CountMode.Total then
+											local fuelEntityList = fuelTotalList[entityName]
+											if not fuelEntityList then
+												fuelEntityList = {}
+												fuelTotalList[entityName] = fuelEntityList
+											end
+											local fuelList = fuelEntityList[itemName]
+											if not fuelList then
+												fuelList = {}
+												fuelEntityList[itemName] = fuelList
+											end
+											table.insert( fuelList ,
+											{
+												ItemStack = currentItemStack ,
+												CurretnCount = currentCount ,
+												Max = itemPrototype.stack_size }
+											)
+										elseif mode == SIRequestMap.CountMode.Single then
+											-- 计算可以填充的数量
+											local count = math.min( math.max( ( itemData.Count or 1 ) - currentCount , 0 ) , itemPrototype.stack_size )
+											count = math.min( count , hasCount )
+											if count > 0 then
+												-- 填充燃料物品
+												if currentItemStack.valid_for_read then
+													currentItemStack.count = currentItemStack.count + count
+												else
+													currentItemStack.set_stack{ name = itemName , count = count }
+												end
+												playerInventory.remove{ name = itemName , count = count }
+											end
+										end
+									end
+								end
+							end
+						end
+					end
 				end
 			end
 			-- ----------------------------------------
 			-- 插入弹药
 			-- ----------------------------------------
-			local insertAmmoList = tabSettings.InsertAmmo.List[entityName]
-			if insertAmmoList then
-				local inventory = nil
-				if type == SICommon.Types.Entities.TurretAmmo then
-					inventory = entity.get_inventory( defines.inventory.turret_ammo )
-				elseif type == SICommon.Types.Entities.TurretArtillery then
-					inventory = entity.get_inventory( defines.inventory.artillery_turret_ammo )
-				elseif type == SICommon.Types.Entities.Car then
-					inventory = entity.get_inventory( defines.inventory.car_ammo )
-				elseif type == SICommon.Types.Entities.SpiderVehicle then
-					inventory = entity.get_inventory( defines.inventory.spider_ammo )
-				elseif type == SICommon.Types.Entities.WagonArtillery then
-					inventory = entity.get_inventory( defines.inventory.artillery_wagon_ammo )
+			if tabSettings.InsertAmmo.Enable then
+				local insertAmmoList = tabSettings.InsertAmmo.List[entityName]
+				if insertAmmoList then
+					local inventory = nil
+					if type == SICommon.Types.Entities.TurretAmmo then
+						inventory = entity.get_inventory( defines.inventory.turret_ammo )
+					elseif type == SICommon.Types.Entities.TurretArtillery then
+						inventory = entity.get_inventory( defines.inventory.artillery_turret_ammo )
+					elseif type == SICommon.Types.Entities.Car then
+						inventory = entity.get_inventory( defines.inventory.car_ammo )
+					elseif type == SICommon.Types.Entities.SpiderVehicle then
+						inventory = entity.get_inventory( defines.inventory.spider_ammo )
+					elseif type == SICommon.Types.Entities.WagonArtillery then
+						inventory = entity.get_inventory( defines.inventory.artillery_wagon_ammo )
+					end
+					if inventory then
+						for slotIndex = 1 , #inventory , 1 do
+							local itemData = insertAmmoList[slotIndex]
+							local itemName = itemData.Item
+							local itemPrototype = game.item_prototypes[itemName]
+							-- 判断弹药物品是否存在
+							if itemName and itemPrototype then
+								local hasCount = playerInventory.get_item_count( itemName )
+								-- 判断玩家背包内的弹药物品数量
+								if hasCount > 0 then
+									local currentItemStack = inventory[slotIndex]
+									-- 判断指定空间内是否可以填充指定种类的弹药物品
+									if not currentItemStack.valid_for_read or currentItemStack.valid_for_read and currentItemStack.name == itemName then
+										local currentCount = currentItemStack.valid_for_read and currentItemStack.count or 0
+										local mode = itemData.Mode
+										-- 根据模式决定操作方式
+										if mode == SIRequestMap.CountMode.Total then
+											local ammoEntityList = ammoTotalList[entityName]
+											if not ammoEntityList then
+												ammoEntityList = {}
+												ammoTotalList[entityName] = ammoEntityList
+											end
+											local ammoList = ammoEntityList[itemName]
+											if not ammoList then
+												ammoList = {}
+												ammoEntityList[itemName] = ammoList
+											end
+											table.insert( ammoList ,
+											{
+												ItemStack = currentItemStack ,
+												CurretnCount = currentCount ,
+												Max = itemPrototype.stack_size }
+											)
+										elseif mode == SIRequestMap.CountMode.Single then
+											-- 计算可以填充的数量
+											local count = math.min( math.max( ( itemData.Count or 1 ) - currentCount , 0 ) , itemPrototype.stack_size )
+											count = math.min( count , hasCount )
+											if count > 0 then
+												-- 填充燃料物品
+												if currentItemStack.valid_for_read then
+													currentItemStack.count = currentItemStack.count + count
+												else
+													currentItemStack.set_stack{ name = itemName , count = count }
+												end
+												playerInventory.remove{ name = itemName , count = count }
+											end
+										end
+									end
+								end
+							end
+						end
+					end
 				end
-				if inventory then
-
+			end
+		end
+		-- ----------------------------------------
+		-- 插入燃料 , 整体计数
+		-- ----------------------------------------
+		if tabSettings.InsertFuel.Enable then
+			for entityName , fuelEntityList in pairs( fuelTotalList ) do
+				for itemName , fuelList in pairs( fuelEntityList ) do
+					local hasCount = playerInventory.get_item_count( itemName )
+					if hasCount > 0 then
+						local singleCount = math.max( math.floor( hasCount / #fuelList ) , 1 )
+						for index , fuelData in pairs( fuelList ) do
+							local count = math.min( math.max( singleCount - fuelData.CurretnCount , 0 ) , fuelData.Max )
+							count = math.min( count , playerInventory.get_item_count( itemName ) )
+							if count > 0 then
+								-- 填充燃料物品
+								local currentItemStack = fuelData.ItemStack
+								if currentItemStack.valid_for_read then
+									currentItemStack.count = currentItemStack.count + count
+								else
+									currentItemStack.set_stack{ name = itemName , count = count }
+								end
+								playerInventory.remove{ name = itemName , count = count }
+							else
+								break
+							end
+						end
+					end
+				end
+			end
+		end
+		-- ----------------------------------------
+		-- 插入弹药 , 整体计数
+		-- ----------------------------------------
+		if tabSettings.InsertAmmo.Enable then
+			for entityName , ammoEntityList in pairs( ammoTotalList ) do
+				for itemName , ammoList in pairs( ammoEntityList ) do
+					local hasCount = playerInventory.get_item_count( itemName )
+					if hasCount > 0 then
+						local singleCount = math.max( math.floor( hasCount / #ammoList ) , 1 )
+						for index , fuelData in pairs( ammoList ) do
+							local count = math.min( math.max( singleCount - fuelData.CurretnCount , 0 ) , fuelData.Max )
+							count = math.min( count , playerInventory.get_item_count( itemName ) )
+							if count > 0 then
+								-- 填充弹药物品
+								local currentItemStack = fuelData.ItemStack
+								if currentItemStack.valid_for_read then
+									currentItemStack.count = currentItemStack.count + count
+								else
+									currentItemStack.set_stack{ name = itemName , count = count }
+								end
+								playerInventory.remove{ name = itemName , count = count }
+							else
+								break
+							end
+						end
+					end
 				end
 			end
 		end
@@ -2177,6 +2350,12 @@ SIRequestMap =
 			SIRequestMap.CloseFrame( playerIndex )
 		end
 	end
+}
+
+SIRequestMap.CountModeText =
+{
+	[SIRequestMap.CountMode.Total] = { "SICore.紫图-窗口-计数-整体计数" } ,
+	[SIRequestMap.CountMode.Single] = { "SICore.紫图-窗口-计数-独立计数" }
 }
 
 SIRequestMap.Names.ListButtonPosition = #SIRequestMap.Names.ListButtonPrefix + 1
