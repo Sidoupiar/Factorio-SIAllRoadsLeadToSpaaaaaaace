@@ -18,7 +18,7 @@ SIMainData =
 	InitFinish = function()
 		-- 取消默认通关条件
 		if remote.interfaces.silo_script and remote.interfaces.silo_script.set_no_victory then
-			remote.interfaces.silo_script.set_no_victory( true )
+			remote.call( "silo_script" , "set_no_victory" , true )
 		end
 	end ,
 	-- ------------------------------------------------------------------------------------------------
