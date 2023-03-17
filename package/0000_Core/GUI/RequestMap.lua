@@ -1918,7 +1918,7 @@ SIRequestMap =
 	end ,
 	EffectTabSettings = function( settings , tabSettingsIndex )
 		local player = game.get_player( settings.playerIndex )
-		local inventory = player.get_main_inventory()
+		local playerInventory = player.get_main_inventory()
 		local tabSettings = settings.TabSettingsList[tabSettingsIndex]
 		local greenToBlue = tabSettings.GreenToBlue.Check
 		local fromInventory = tabSettings.SetModule.FromInventory
@@ -1941,10 +1941,16 @@ SIRequestMap =
 							maxSlot = math.max( maxSlot , key )
 						end
 						for slotIndex = 1 , maxSlot , 1 do
-							entity.set_filter( slotIndex , requestItemList[slotIndex] )
+							local item = requestItemList[slotIndex]
+							if not item or game.item_prototypes[item] then
+								entity.set_filter( slotIndex , item )
+							end
 						end
 					elseif logisticMode == SICommon.Flags.LogisticMode.Storage then
-						entity.set_filter( 1 , requestItemList[1] )
+						local item = requestItemList[1]
+						if not item or game.item_prototypes[item] then
+							entity.set_filter( 1 , item )
+						end
 					end
 				elseif type == SICommon.Types.Entities.Inserter or type == SICommon.Types.Entities.BeltLoader or type == SICommon.Types.Entities.BeltLoaderSmall then
 					local maxSlot = 0
@@ -1952,15 +1958,20 @@ SIRequestMap =
 						maxSlot = math.max( maxSlot , key )
 					end
 					for slotIndex = 1 , maxSlot , 1 do
-						entity.set_filter( slotIndex , requestItemList[slotIndex] )
+						local item = requestItemList[slotIndex]
+						if not item or game.item_prototypes[item] then
+							entity.set_filter( slotIndex , item )
+						end
 					end
 				elseif type == SICommon.Types.Entities.Car then
 					local inventory = entity.get_inventory( defines.inventory.car_trunk )
 					if inventory and inventory.supports_filters() then
 						for slotIndex = 1 , #inventory , 1 do
 							local item = requestItemList[slotIndex]
-							if inventory.can_set_filter( slotIndex , item ) then
-								inventory.set_filter( slotIndex , item )
+							if not item or game.item_prototypes[item] then
+								if inventory.can_set_filter( slotIndex , item ) then
+									inventory.set_filter( slotIndex , item )
+								end
 							end
 						end
 					end
@@ -1969,8 +1980,10 @@ SIRequestMap =
 					if inventory and inventory.supports_filters() then
 						for slotIndex = 1 , #inventory , 1 do
 							local item = requestItemList[slotIndex]
-							if inventory.can_set_filter( slotIndex , item ) then
-								inventory.set_filter( slotIndex , item )
+							if not item or game.item_prototypes[item] then
+								if inventory.can_set_filter( slotIndex , item ) then
+									inventory.set_filter( slotIndex , item )
+								end
 							end
 						end
 					end
@@ -1979,8 +1992,10 @@ SIRequestMap =
 					if inventory and inventory.supports_filters() then
 						for slotIndex = 1 , #inventory , 1 do
 							local item = requestItemList[slotIndex]
-							if inventory.can_set_filter( slotIndex , item ) then
-								inventory.set_filter( slotIndex , item )
+							if not item or game.item_prototypes[item] then
+								if inventory.can_set_filter( slotIndex , item ) then
+									inventory.set_filter( slotIndex , item )
+								end
 							end
 						end
 					end
@@ -2041,9 +2056,34 @@ SIRequestMap =
 			-- ----------------------------------------
 			-- 插入燃料
 			-- ----------------------------------------
+			local insertFuelList = tabSettings.InsertFuel.List[entityName]
+			if insertFuelList then
+				local inventory = entity.get_fuel_inventory()
+				if inventory then
+
+				end
+			end
 			-- ----------------------------------------
 			-- 插入弹药
 			-- ----------------------------------------
+			local insertAmmoList = tabSettings.InsertAmmo.List[entityName]
+			if insertAmmoList then
+				local inventory = nil
+				if type == SICommon.Types.Entities.TurretAmmo then
+					inventory = entity.get_inventory( defines.inventory.turret_ammo )
+				elseif type == SICommon.Types.Entities.TurretArtillery then
+					inventory = entity.get_inventory( defines.inventory.artillery_turret_ammo )
+				elseif type == SICommon.Types.Entities.Car then
+					inventory = entity.get_inventory( defines.inventory.car_ammo )
+				elseif type == SICommon.Types.Entities.SpiderVehicle then
+					inventory = entity.get_inventory( defines.inventory.spider_ammo )
+				elseif type == SICommon.Types.Entities.WagonArtillery then
+					inventory = entity.get_inventory( defines.inventory.artillery_wagon_ammo )
+				end
+				if inventory then
+
+				end
+			end
 		end
 	end ,
 	EffectSelect1 = function( playerIndex , entities )
