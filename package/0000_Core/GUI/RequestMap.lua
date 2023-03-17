@@ -698,7 +698,7 @@ SIRequestMap =
 			local selectList1 = list.add{ type = "table" , column_count = 10 , style = SIConstants_Core.raw.Styles.RequestMap_SelectList }
 			local selectList2 = list.add{ type = "table" , column_count = 10 , style = SIConstants_Core.raw.Styles.RequestMap_SelectList }
 			for slotIndex = 1 , maxSlot , 1 do
-				local selectList = math.fmod( math.floor( slotIndex / 10 ) , 2 ) == 0 and selectList1 or selectList2
+				local selectList = math.fmod( math.floor( ( slotIndex - 1 ) / 10 ) , 2 ) == 0 and selectList1 or selectList2
 				local itemTooltip = nil
 				local itemName = requestItemList[slotIndex]
 				if itemName then
@@ -846,7 +846,7 @@ SIRequestMap =
 			local selectList1 = list.add{ type = "table" , column_count = 10 , style = SIConstants_Core.raw.Styles.RequestMap_SelectList }
 			local selectList2 = list.add{ type = "table" , column_count = 10 , style = SIConstants_Core.raw.Styles.RequestMap_SelectList }
 			for slotIndex = 1 , maxSlot , 1 do
-				local selectList = math.fmod( math.floor( slotIndex / 10 ) , 2 ) == 0 and selectList1 or selectList2
+				local selectList = math.fmod( math.floor( ( slotIndex - 1 ) / 10 ) , 2 ) == 0 and selectList1 or selectList2
 				local itemTooltip = nil
 				local itemName = moduleList[slotIndex]
 				if itemName then
@@ -937,7 +937,7 @@ SIRequestMap =
 			local selectList1 = list.add{ type = "table" , column_count = 10 , style = SIConstants_Core.raw.Styles.RequestMap_SelectList }
 			local selectList2 = list.add{ type = "table" , column_count = 10 , style = SIConstants_Core.raw.Styles.RequestMap_SelectList }
 			for slotIndex = 1 , maxSlot , 1 do
-				local selectList = math.fmod( math.floor( slotIndex / 10 ) , 2 ) == 0 and selectList1 or selectList2
+				local selectList = math.fmod( math.floor( ( slotIndex - 1 ) / 10 ) , 2 ) == 0 and selectList1 or selectList2
 				local itemTooltip = nil
 				local itemName = moduleList[slotIndex]
 				if itemName then
@@ -1384,9 +1384,13 @@ SIRequestMap =
 					if type == SICommon.Types.Entities.ContainerLogic then
 						local logisticMode = entityPrototype.logistic_mode
 						if logisticMode == SICommon.Flags.LogisticMode.Requester or logisticMode == SICommon.Flags.LogisticMode.Buffer then
+							for slotIndex = 1 , entity.request_slot_count , 1 do
+								entity.clear_request_slot( slotIndex )
+							end
 							for slotIndex , itemName in pairs( requestItemList ) do
-								if not itemName or game.item_prototypes[itemName] then
-									entity.set_filter( slotIndex , itemName )
+								local itemPrototype = game.item_prototypes[itemName]
+								if not itemName or itemPrototype then
+									entity.set_request_slot( { name = itemName , count = itemPrototype.stack_size } , slotIndex )
 								end
 							end
 						elseif logisticMode == SICommon.Flags.LogisticMode.Storage then
@@ -1396,6 +1400,9 @@ SIRequestMap =
 							end
 						end
 					elseif type == SICommon.Types.Entities.Inserter or type == SICommon.Types.Entities.BeltLoader or type == SICommon.Types.Entities.BeltLoaderSmall then
+						for slotIndex = 1 , entity.filter_slot_count , 1 do
+							entity.set_filter( slotIndex , nil )
+						end
 						for slotIndex , itemName in pairs( requestItemList ) do
 							if not itemName or game.item_prototypes[itemName] then
 								entity.set_filter( slotIndex , itemName )
@@ -1404,7 +1411,8 @@ SIRequestMap =
 					elseif type == SICommon.Types.Entities.Car then
 						local inventory = entity.get_inventory( defines.inventory.car_trunk )
 						if inventory and inventory.supports_filters() then
-							for slotIndex , itemName in pairs( requestItemList ) do
+							for slotIndex = 1 , #inventory , 1 do
+								local itemName = requestItemList[slotIndex]
 								if not itemName or game.item_prototypes[itemName] then
 									if inventory.can_set_filter( slotIndex , itemName ) then
 										inventory.set_filter( slotIndex , itemName )
@@ -1415,7 +1423,8 @@ SIRequestMap =
 					elseif type == SICommon.Types.Entities.SpiderVehicle then
 						local inventory = entity.get_inventory( defines.inventory.spider_trunk )
 						if inventory and inventory.supports_filters() then
-							for slotIndex , itemName in pairs( requestItemList ) do
+							for slotIndex = 1 , #inventory , 1 do
+								local itemName = requestItemList[slotIndex]
 								if not itemName or game.item_prototypes[itemName] then
 									if inventory.can_set_filter( slotIndex , itemName ) then
 										inventory.set_filter( slotIndex , itemName )
@@ -1426,7 +1435,8 @@ SIRequestMap =
 					elseif type == SICommon.Types.Entities.WagonCargo then
 						local inventory = entity.get_inventory( defines.inventory.cargo_wagon )
 						if inventory and inventory.supports_filters() then
-							for slotIndex , itemName in pairs( requestItemList ) do
+							for slotIndex = 1 , #inventory , 1 do
+								local itemName = requestItemList[slotIndex]
 								if not itemName or game.item_prototypes[itemName] then
 									if inventory.can_set_filter( slotIndex , itemName ) then
 										inventory.set_filter( slotIndex , itemName )
@@ -1485,7 +1495,8 @@ SIRequestMap =
 				if setModuleList then
 					local inventory = entity.get_module_inventory()
 					if inventory then
-						for slotIndex , itemName in pairs( setModuleList ) do
+						for slotIndex = 1 , #inventory , 1 do
+							local itemName = setModuleList[slotIndex]
 							if itemName and game.item_prototypes[itemName] then
 								local currentItemStack = inventory[slotIndex]
 								if currentItemStack.valid_for_read and currentItemStack.name ~= itemName then
@@ -1499,6 +1510,7 @@ SIRequestMap =
 									else
 										surface.spill_item_stack( entity.position , { name = currentItemStack.name , count = 1 } , true , force , false )
 									end
+									currentItemStack.clear()
 								end
 								local itemStack = { name = itemName , count = 1 }
 								if inventory.can_insert( itemStack ) then
@@ -1528,6 +1540,21 @@ SIRequestMap =
 										entity.item_requests = requestList
 									end
 								end
+							else
+								local currentItemStack = inventory[slotIndex]
+								if currentItemStack.valid_for_read then
+									if fromInventory then
+										local itemStack = { name = currentItemStack.name , count = 1 }
+										if playerInventory.can_insert( itemStack ) then
+											playerInventory.insert( itemStack )
+										else
+											surface.spill_item_stack( entity.position , { name = currentItemStack.name , count = 1 } , true , force , false )
+										end
+									else
+										surface.spill_item_stack( entity.position , { name = currentItemStack.name , count = 1 } , true , force , false )
+									end
+									currentItemStack.clear()
+								end
 							end
 						end
 					end
@@ -1541,7 +1568,8 @@ SIRequestMap =
 				if removeModuleList then
 					local inventory = entity.get_module_inventory()
 					if inventory then
-						for slotIndex , itemName in pairs( removeModuleList ) do
+						for slotIndex = 1 , #inventory , 1 do
+							local itemName = removeModuleList[slotIndex]
 							if itemName and game.item_prototypes[itemName] then
 								local currentItemStack = inventory[slotIndex]
 								if invert then
@@ -1556,6 +1584,7 @@ SIRequestMap =
 										else
 											surface.spill_item_stack( entity.position , { name = currentItemStack.name , count = 1 } , true , force , false )
 										end
+										currentItemStack.clear()
 									end
 								else
 									if currentItemStack.valid_for_read and currentItemStack.name == itemName then
@@ -1569,6 +1598,24 @@ SIRequestMap =
 										else
 											surface.spill_item_stack( entity.position , { name = currentItemStack.name , count = 1 } , true , force , false )
 										end
+										currentItemStack.clear()
+									end
+								end
+							else
+								local currentItemStack = inventory[slotIndex]
+								if invert then
+									if currentItemStack.valid_for_read then
+										if toInventory then
+											local itemStack = { name = currentItemStack.name , count = 1 }
+											if playerInventory.can_insert( itemStack ) then
+												playerInventory.insert( itemStack )
+											else
+												surface.spill_item_stack( entity.position , { name = currentItemStack.name , count = 1 } , true , force , false )
+											end
+										else
+											surface.spill_item_stack( entity.position , { name = currentItemStack.name , count = 1 } , true , force , false )
+										end
+										currentItemStack.clear()
 									end
 								end
 							end
