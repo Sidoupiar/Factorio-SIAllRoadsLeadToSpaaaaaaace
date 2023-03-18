@@ -3,7 +3,7 @@
 
 ##功能介绍：
 * 增加了一系列辅助窗口，包括显示时间、进化因子、击杀统计并可以调整游戏速度等等。
-* 增加了一系列辅助工具，包括粉图、黄图等等。
+* 增加了一系列辅助工具，包括粉图、黄图、紫图等等。
 * 实验性的权限管理模块。
 * RPG 加点/属性/技能系统。
 * 修改物品堆叠的能力，以及装桶、无尽科技。
@@ -24,7 +24,7 @@
 
 ##Features :
 * Adds some auxiliary frames, includes "show time", "show evolution", "show kills" , "control game speed", etc.
-* Adds some auxiliary tools, such as Delete Map (pink map), and Ore Map (yellow map).
+* Adds some auxiliary tools, such as Delete Map (pink map), Ore Map (yellow map), and Request Map (purple map).
 * Adds a permission control panel for tests, includes some permission nodes only used in this mod.
 * Adds RPG property/skill system.
 * Modifies items' stack size, and fill barrels, infinite technologies.
