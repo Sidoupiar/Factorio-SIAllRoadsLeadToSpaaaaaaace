@@ -94,21 +94,14 @@ end
 -- ---------- 火星功能 ----------------------------------------------------------------------------
 -- ------------------------------------------------------------------------------------------------
 
-NotClickList =
-{
-	{ "SIUtils.点了也没用1" } ,
-	{ "SIUtils.点了也没用2" } ,
-	{ "SIUtils.点了也没用3" } ,
-	{ "SIUtils.点了也没用4" }
-}
-NotClickListSize = #NotClickList
+NotClickListSize = 4
 
 function NotClick( playerIndex )
 	local index = math.floor( math.random() * NotClickListSize ) + 1
 	if index > 0 and index <= NotClickListSize then
 		local player = game.get_player( playerIndex )
 		if player and player.valid then
-			player.print( NotClickList[index] , SICommon.Colors.PrintColor.ORANGE )
+			player.print( { "SIUtils.点了也没用" .. index } , SICommon.Colors.PrintColor.ORANGE )
 		end
 	end
 end
