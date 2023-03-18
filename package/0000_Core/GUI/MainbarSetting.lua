@@ -18,11 +18,16 @@ SIMainbarSetting =
 		Import = "SI核心-主面板设置管理-导入" ,
 		ImportPlayerData = "SI核心-主面板设置管理-导入-玩家信息" ,
 		Export = "SI核心-主面板设置管理-导出" ,
-		ExportPlayerData = "SI核心-主面板设置管理-导出-玩家信息"
+		ExportPlayerData = "SI核心-主面板设置管理-导出-玩家信息" ,
+		ExportType = "SI核心-主面板设置管理-导出-类型"
 	} ,
 	QuickBarMax = 100 ,
 	RequestBarMax = 100 ,
-	ExportDataPrefix = "SIExportData" ,
+	ExportType =
+	{
+		JSON = 1 ,
+		Table = 2
+	} ,
 	SettingsDataID = "SICore-MainbarSetting" ,
 	SettingsDataList = {} ,
 	-- ------------------------------------------------------------------------------------------------
@@ -166,6 +171,18 @@ SIMainbarSetting =
 			caption = { "SICore.主面板设置管理-窗口-导出-玩家信息" } ,
 			tooltip = { "SICore.主面板设置管理-窗口-导出-玩家信息-提示" } ,
 			style = SIConstants_Core.raw.Styles.Mainbar_Setting_ListCheck
+		}
+		local flow32 = flow3.add{ type = "flow" , direction = "horizontal" , style = SIConstants_Core.raw.Styles.Common_FlowCenterH }
+		flow32.add{ type = "label" , caption = { "SICore.主面板设置管理-窗口-导出-类型" } , tooltip = { "SICore.主面板设置管理-窗口-导出-类型-提示" } , style = SIConstants_Core.raw.Styles.Mainbar_Setting_ListLabel }
+		flow32.add
+		{
+			type = "drop-down" ,
+			name = SIMainbarSetting.Names.ExportType ,
+			caption = { "SICore.主面板设置管理-窗口-导出-类型" } ,
+			tooltip = { "SICore.主面板设置管理-窗口-导出-类型-提示" } ,
+			items = SIMainbarSetting.ExportTypeText ,
+			selected_index = settings.Setting.Other.exportType or SIMainbarSetting.ExportType.JSON ,
+			style = SIConstants_Core.raw.Styles.Mainbar_Setting_DropDown
 		}
 		-- 第 4 层
 		local flow4 = page.add{ type = "flow" , direction = "vertical" , style = SIConstants_Core.raw.Styles.Common_FlowRight }
@@ -494,7 +511,31 @@ SIMainbarSetting =
 	end ,
 	ImportSettings = function( settings )
 		local playerIndex = settings.playerIndex
-		local data = game.json_to_table( settings.Setting.importText.text:sub( SIMainbarSetting.ExportDataPosition ) )
+		-- 读取数据
+		local sourceData = settings.Setting.importText.text
+		local currentExportType = nil
+		for exportType , exportDataPrefix in pairs( SIMainbarSetting.ExportDataPrefix ) do
+			if sourceData:StartsWith( exportDataPrefix ) then
+				sourceData = sourceData:sub( SIMainbarSetting.ExportDataPosition[exportType] )
+				currentExportType = exportType
+				break
+			end
+		end
+		if not currentExportType then
+			SIPrint.Alert( playerIndex , { "SICore.主面板设置管理-导入-错误的数据" } )
+			return
+		end
+		local data = nil
+		if currentExportType == SIMainbarSetting.ExportType.Table then
+			data = load( "return " .. sourceData )()
+		else
+			data = game.json_to_table( sourceData )
+		end
+		if not data or SITools.IsNotTable( data ) or not data.Tick then
+			SIPrint.Alert( playerIndex , { "SICore.主面板设置管理-导入-错误的数据" } )
+			return
+		end
+		-- 应用数据
 		local gameTick = data.Tick
 		settings.Setting.Base = data.Base
 		SIMainbarSetting.FreshList( settings )
@@ -529,6 +570,7 @@ SIMainbarSetting =
 				remote.call( settingsData.ImportRemoteInterfaceID , settingsData.ImportRemoteFunctionName , playerIndex , subData , settingsDataID , gameTick )
 			end
 		end
+		SIPrint.Message( playerIndex , { "SICore.主面板设置管理-导入-完成" } )
 	end ,
 	ExportSettings = function( settings )
 		local playerIndex = settings.playerIndex
@@ -575,7 +617,14 @@ SIMainbarSetting =
 				end
 			end
 		end
-		settings.Setting.exportText.text = SIMainbarSetting.ExportDataPrefix .. game.table_to_json( data )
+		local exportType = settings.Setting.Other.exportType
+		if exportType == SIMainbarSetting.ExportType.Table then
+			local prefix = SIMainbarSetting.ExportDataPrefix[exportType]
+			settings.Setting.exportText.text = prefix .. serpent.block( data )
+		else
+			local prefix = SIMainbarSetting.ExportDataPrefix[SIMainbarSetting.ExportType.JSON]
+			settings.Setting.exportText.text = prefix .. game.table_to_json( data )
+		end
 	end ,
 	-- ------------------------------------------------------------------------------------------------
 	-- ---------- 事件函数 ----------------------------------------------------------------------------
@@ -640,6 +689,15 @@ SIMainbarSetting =
 			settings.Setting.Other.exportPlayerData = element.state
 		end
 	end ,
+	Set_ExportType = function( playerIndex , element )
+		local settings = SIGlobal.GetPlayerSettings( SIMainData.Settings.Name , playerIndex )
+		if settings.Setting.frame and settings.Setting.frame.valid then
+			local selectedIndex = element.selected_index or SIMainbarSetting.ExportType.JSON
+			element.selected_index = selectedIndex
+			-- 保存 [导出-类型] 选择的值
+			settings.Setting.Other.exportType = selectedIndex
+		end
+	end ,
 	-- ------------------------------------------------------------------------------------------------
 	-- ---- 接口函数 -- 设置数据 ----------------------------------------------------------------------
 	-- ------------------------------------------------------------------------------------------------
@@ -683,4 +741,19 @@ SIMainbarSetting =
 	end
 }
 
-SIMainbarSetting.ExportDataPosition = #SIMainbarSetting.ExportDataPrefix + 1
+SIMainbarSetting.ExportDataPrefix =
+{
+	[SIMainbarSetting.ExportType.JSON] = "SIExportDataJSON" ,
+	[SIMainbarSetting.ExportType.Table] = "SIExportDataTable\n"
+}
+
+SIMainbarSetting.ExportDataPosition = {}
+for exportType , exportDataPrefix in pairs( SIMainbarSetting.ExportDataPrefix ) do
+	SIMainbarSetting.ExportDataPosition[exportType] = #exportDataPrefix + 1
+end
+
+SIMainbarSetting.ExportTypeText =
+{
+	[SIMainbarSetting.ExportType.JSON] = { "SICore.主面板设置管理-窗口-导出类型-JSON" } ,
+	[SIMainbarSetting.ExportType.Table] = { "SICore.主面板设置管理-窗口-导出类型-表" }
+}

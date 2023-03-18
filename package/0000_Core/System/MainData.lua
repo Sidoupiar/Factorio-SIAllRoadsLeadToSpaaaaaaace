@@ -135,7 +135,8 @@ SIMainData.Settings =
 			Other =
 			{
 				importPlayerData = true ,
-				exportPlayerData = true
+				exportPlayerData = true ,
+				exportType = nil
 			} ,
 			back = nil -- 表 , 打开窗口时保存未经过修改的设置值 , 用于撤销功能 , 关闭窗口后此值变为 nil
 		} ,

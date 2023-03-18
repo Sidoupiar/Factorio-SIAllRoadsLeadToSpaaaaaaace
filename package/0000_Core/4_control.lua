@@ -918,6 +918,11 @@ end )
 	end
 	local name = element.name
 	local playerIndex = event.player_index
+	-- 主面板设置管理窗口事件
+	if name == SIMainbarSetting.Names.ExportType then
+		SIMainbarSetting.Set_ExportType( playerIndex , element )
+		return
+	end
 	-- 信息查询窗口事件
 	if name == SIFinder.Names.Selector then
 		SIFinder.SelectElementType( playerIndex , element.selected_index )
