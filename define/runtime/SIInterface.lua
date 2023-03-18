@@ -42,6 +42,9 @@ function SIInterface.Add( interfaceID , interfaceList )
 	if not interfaceList or SITable.Size( interfaceList ) < 1 then
 		return CodeE( SIInterface , "注册接口时 , 接口列表不能为空" )
 	end
+	if SIInterface.Interfaces[interfaceID] then
+		return CodeE( SIInterface , "当前接口集合已经注册过了 , 接口集合的名称不能重复" )
+	end
 	SIInterface.Interfaces[interfaceID] = interfaceList
 	remote.add_interface( interfaceID , interfaceList )
 	return SIInterface
