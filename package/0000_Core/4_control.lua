@@ -397,6 +397,7 @@ end )
 	local playerIndex = event.player_index
 	-- 紫图的管理窗口事件
 	if SIPermission.HasPermission( SIPermission.PermissionIDs.RequestMap , playerIndex ) then
+		SIRequestMap.OpenFrame( playerIndex )
 	end
 end )
 .Add( SIEvents.on_player_joined_game , function( event , functionID )
@@ -1136,7 +1137,9 @@ end )
 	end
 	local playerIndex = event.player_index
 	-- 自动填充的管理窗口事件
-	SIAutoInsert.EffectSelect( playerIndex , entity )
+	if SIPermission.HasPermission( SIPermission.PermissionIDs.AutoInsert , playerIndex ) then
+		SIAutoInsert.EffectSelect( playerIndex , entity )
+	end
 end )
 .Add( SIPermission.EventID , function( event , functionID )
 	local playerIndex = event.player_index
