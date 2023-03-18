@@ -43,73 +43,86 @@ end
 -- ------------------------------------------------------------------------------------------------
 
 if SIConfigs.SIOverhaul.OreCollision then
-	local resourceLayer = "resource-layer"
-	local defaultMask = { "object-layer" , "item-layer" , "player-layer" , "water-tile" , resourceLayer }
-	for maskType , maskList in pairs
-	{
-		[SICommon.Types.Entities.Boiler]              = {} ,
-		[SICommon.Types.Entities.Generator]           = {} ,
-		[SICommon.Types.Entities.BurnerGenerator]     = {} ,
-		[SICommon.Types.Entities.Solar]               = {} ,
-		[SICommon.Types.Entities.Reactor]             = {} ,
-		[SICommon.Types.Entities.Accumulator]         = {} ,
-		[SICommon.Types.Entities.AccumulatorInfinity] = {} ,
-		[SICommon.Types.Entities.Pump]                = {} ,
-		[SICommon.Types.Entities.Furnace]             = {} ,
-		[SICommon.Types.Entities.Machine]             = {} ,
-		[SICommon.Types.Entities.Lab]                 = {} ,
-		[SICommon.Types.Entities.Beacon]              = {} ,
-		[SICommon.Types.Entities.RocketSilo]          = {} ,
-		[SICommon.Types.Entities.Belt]                = { "object-layer" , "item-layer" , "transport-belt-layer" , "water-tile" } ,
-		[SICommon.Types.Entities.BeltGround]          = { "object-layer" , "item-layer" , "transport-belt-layer" , "water-tile" } ,
-		[SICommon.Types.Entities.BeltLinked]          = { "object-layer" , "item-layer" , "transport-belt-layer" , "water-tile" } ,
-		[SICommon.Types.Entities.BeltLoader]          = { "object-layer" , "item-layer" , "transport-belt-layer" , "water-tile" } ,
-		[SICommon.Types.Entities.BeltLoaderSmall]     = { "object-layer" , "item-layer" , "transport-belt-layer" , "water-tile" } ,
-		[SICommon.Types.Entities.BeltSplitter]        = { "object-layer" , "item-layer" , "transport-belt-layer" , "water-tile" } ,
-		[SICommon.Types.Entities.Pipe]                = {} ,
-		[SICommon.Types.Entities.PipeGround]          = {} ,
-		[SICommon.Types.Entities.PipeHeat]            = { "object-layer" , "floor-layer" , "water-tile" } ,
-		[SICommon.Types.Entities.RailStraight]        = { "object-layer" , "item-layer" , "rail-layer" , "floor-layer" , "water-tile" } ,
-		[SICommon.Types.Entities.RailCurved]          = { "object-layer" , "item-layer" , "rail-layer" , "floor-layer" , "water-tile" } ,
-		[SICommon.Types.Entities.RailStop]            = {} ,
-		[SICommon.Types.Entities.RailSign]            = { "item-layer" , "rail-layer" , "floor-layer" } ,
-		[SICommon.Types.Entities.RailChain]           = { "item-layer" , "rail-layer" , "floor-layer" } ,
-		[SICommon.Types.Entities.Inserter]            = {} ,
-		[SICommon.Types.Entities.Container]           = {} ,
-		[SICommon.Types.Entities.ContainerLogic]      = {} ,
-		[SICommon.Types.Entities.ContainerLinked]     = {} ,
-		[SICommon.Types.Entities.ContainerFluid]      = {} ,
-		[SICommon.Types.Entities.Pole]                = {} ,
-		[SICommon.Types.Entities.PowerSwitch]         = {} ,
-		[SICommon.Types.Entities.Lamp]                = {} ,
-		[SICommon.Types.Entities.Roboport]            = {} ,
-		[SICommon.Types.Entities.PlayerPort]          = { "object-layer" , "floor-layer" , "water-tile" } ,
-		[SICommon.Types.Entities.Radar]               = {} ,
-		[SICommon.Types.Entities.Wall]                = {} ,
-		[SICommon.Types.Entities.Gate]                = { "object-layer" , "item-layer" , "player-layer" , "water-tile" , "train-layer" } ,
-		[SICommon.Types.Entities.TurretAmmo]          = {} ,
-		[SICommon.Types.Entities.TurretElectric]      = {} ,
-		[SICommon.Types.Entities.TurretArtillery]     = {} ,
-		[SICommon.Types.Entities.CombArithmetic]      = {} ,
-		[SICommon.Types.Entities.CombDecider]         = {} ,
-		[SICommon.Types.Entities.CombConstant]        = {} ,
-		[SICommon.Types.Entities.Speaker]             = {}
-	} do
-		if SITable.Size( maskList ) > 0 then
-			table.insert( maskList , resourceLayer )
-		else
-			maskList = defaultMask
-		end
-		SIGen.ForEach( maskType , function( prototypeName , prototypeData )
-			if SIConfigs.SIOverhaul.OreCollisionBlackList[prototypeName] then
-				return
-			end
+	local resourceLayer = SIUtils.CollisionMask.get_first_unused_layer()
+	-- 修改矿物的碰撞信息
+	local resourceMaskList = SIUtils.CollisionMask.get_default_mask( SICommon.Types.Entities.Resource )
+	table.insert( resourceMaskList , resourceLayer )
+	SIGen.ForEachInner( SICommon.Types.Entities.Resource , function( prototypeName , prototypeData )
+		if prototypeData then
 			if prototypeData.collision_mask then
 				if not SITable.Has( prototypeData.collision_mask , resourceLayer ) then
 					table.insert( prototypeData.collision_mask , resourceLayer )
 				end
 			else
-				prototypeData.collision_mask = maskList
+				prototypeData.collision_mask = resourceMaskList
+			end
+		end
+	end )
+	-- 修改实体的碰撞信息
+	for index , maskType in pairs
+	{
+		SICommon.Types.Entities.Boiler ,
+		SICommon.Types.Entities.Generator ,
+		SICommon.Types.Entities.BurnerGenerator ,
+		SICommon.Types.Entities.Solar ,
+		SICommon.Types.Entities.Reactor ,
+		SICommon.Types.Entities.Accumulator ,
+		SICommon.Types.Entities.AccumulatorInfinity ,
+		SICommon.Types.Entities.Pump ,
+		SICommon.Types.Entities.Furnace ,
+		SICommon.Types.Entities.Machine ,
+		SICommon.Types.Entities.Lab ,
+		SICommon.Types.Entities.Beacon ,
+		SICommon.Types.Entities.RocketSilo ,
+		SICommon.Types.Entities.Belt ,
+		SICommon.Types.Entities.BeltGround ,
+		SICommon.Types.Entities.BeltLinked ,
+		SICommon.Types.Entities.BeltLoader ,
+		SICommon.Types.Entities.BeltLoaderSmall ,
+		SICommon.Types.Entities.BeltSplitter ,
+		SICommon.Types.Entities.Pipe ,
+		SICommon.Types.Entities.PipeGround ,
+		SICommon.Types.Entities.PipeHeat ,
+		SICommon.Types.Entities.RailStraight ,
+		SICommon.Types.Entities.RailCurved ,
+		SICommon.Types.Entities.RailStop ,
+		SICommon.Types.Entities.RailSign ,
+		SICommon.Types.Entities.RailChain ,
+		SICommon.Types.Entities.Inserter ,
+		SICommon.Types.Entities.Container ,
+		SICommon.Types.Entities.ContainerLogic ,
+		SICommon.Types.Entities.ContainerLinked ,
+		SICommon.Types.Entities.ContainerFluid ,
+		SICommon.Types.Entities.Pole ,
+		SICommon.Types.Entities.PowerSwitch ,
+		SICommon.Types.Entities.Lamp ,
+		SICommon.Types.Entities.Roboport ,
+		SICommon.Types.Entities.PlayerPort ,
+		SICommon.Types.Entities.Radar ,
+		SICommon.Types.Entities.Wall ,
+		SICommon.Types.Entities.Gate ,
+		SICommon.Types.Entities.TurretAmmo ,
+		SICommon.Types.Entities.TurretElectric ,
+		SICommon.Types.Entities.TurretArtillery ,
+		SICommon.Types.Entities.CombArithmetic ,
+		SICommon.Types.Entities.CombDecider ,
+		SICommon.Types.Entities.CombConstant ,
+		SICommon.Types.Entities.Speaker
+	} do
+		local maskList = SIUtils.CollisionMask.get_default_mask( maskType )
+		table.insert( maskList , resourceLayer )
+		SIGen.ForEach( maskType , function( prototypeName , prototypeData )
+			if prototypeData then
+				if SIConfigs.SIOverhaul.OreCollisionBlackList[prototypeName] then
+					return
+				end
+				if prototypeData.collision_mask then
+					if not SITable.Has( prototypeData.collision_mask , resourceLayer ) then
+						table.insert( prototypeData.collision_mask , resourceLayer )
+					end
+				else
+					prototypeData.collision_mask = maskList
+				end
 			end
 		end )
 	end
