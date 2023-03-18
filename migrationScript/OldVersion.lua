@@ -5,9 +5,7 @@
 SIGlobal.Set( SIMainData.Settings.Name , SIGlobal.Get( "Mainbar" ) )
 SIGlobal.Set( "Mainbar" , nil )
 local mainData = SIGlobal.GetGlobalSettings( SIMainData.Settings.Name )
-if not mainData.InnerVersion then
-	mainData.InnerVersion = 1
-end
+mainData.InnerVersion = 0
 
 -- ------------------------------------------------------------------------------------------------
 -- ------- 调整持久化数据 -------------------------------------------------------------------------
