@@ -166,7 +166,8 @@ SIControl.Init
 		Mainbar_Setting_Number = "主面板设置管理-数字框" ,
 		Mainbar_Setting_DropDown = "主面板设置管理-下拉列表" ,
 		Mainbar_Setting_PageFlow = "主面板设置管理-分页布局" ,
-		Mainbar_Setting_TextBox = "主面板设置管理-文本区域" ,
+		Mainbar_Setting_TextBoxImport = "主面板设置管理-文本区域-导入" ,
+		Mainbar_Setting_TextBoxExport = "主面板设置管理-文本区域-导出" ,
 		-- 主面板便签管理控件样式
 		Mainbar_Note_Frame = "主面板便签管理-窗口" ,
 		Mainbar_Note_LabelTop = "主面板便签管理-标签顶部" ,

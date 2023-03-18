@@ -1193,7 +1193,14 @@ SIGen
 	bottom_padding = 0 ,
 	left_padding = 30 ,
 } )
-.AddStyle( "Mainbar_Setting_TextBox" , "主面板设置管理-文本区域" ,
+.AddStyle( "Mainbar_Setting_TextBoxImport" , "主面板设置管理-文本区域-导入" ,
+{
+	type = "textbox_style" ,
+	-- 体积
+	width = 512 ,
+	height = 330
+} )
+.AddStyle( "Mainbar_Setting_TextBoxExport" , "主面板设置管理-文本区域-导出" ,
 {
 	type = "textbox_style" ,
 	-- 体积

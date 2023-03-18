@@ -127,7 +127,7 @@ SIMainbarSetting =
 		local flow1 = page.add{ type = "flow" , direction = "horizontal" , style = SIConstants_Core.raw.Styles.Common_FlowTop }
 		flow1.add{ type = "label" , caption = { "SICore.主面板设置管理-窗口-导入-说明" } , style = SIConstants_Core.raw.Styles.Mainbar_Setting_LabelTop }
 		-- 第 2 层
-		settings.Setting.importText = page.add{ type = "text-box" , text = nil , tooltip = { "SICore.主面板设置管理-窗口-导入-文本-提示" } , style = SIConstants_Core.raw.Styles.Mainbar_Setting_TextBox }
+		settings.Setting.importText = page.add{ type = "text-box" , text = nil , tooltip = { "SICore.主面板设置管理-窗口-导入-文本-提示" } , style = SIConstants_Core.raw.Styles.Mainbar_Setting_TextBoxImport }
 		settings.Setting.importText.word_wrap = true
 		-- 第 3 层
 		local flow3 = page.add{ type = "flow" , direction = "vertical" , style = SIConstants_Core.raw.Styles.Mainbar_Setting_PageFlow }
@@ -158,7 +158,7 @@ SIMainbarSetting =
 		local flow1 = page.add{ type = "flow" , direction = "horizontal" , style = SIConstants_Core.raw.Styles.Common_FlowTop }
 		flow1.add{ type = "label" , caption = { "SICore.主面板设置管理-窗口-导出-说明" } , style = SIConstants_Core.raw.Styles.Mainbar_Setting_LabelTop }
 		-- 第 2 层
-		settings.Setting.exportText = page.add{ type = "text-box" , text = nil , tooltip = { "SICore.主面板设置管理-窗口-导出-文本-提示" } , style = SIConstants_Core.raw.Styles.Mainbar_Setting_TextBox }
+		settings.Setting.exportText = page.add{ type = "text-box" , text = nil , tooltip = { "SICore.主面板设置管理-窗口-导出-文本-提示" } , style = SIConstants_Core.raw.Styles.Mainbar_Setting_TextBoxExport }
 		settings.Setting.exportText.word_wrap = true
 		settings.Setting.exportText.read_only = true
 		-- 第 3 层
@@ -734,7 +734,7 @@ SIMainbarSetting =
 	-- 参数 2 = 导入导出设置数据包的 ID<br>
 	-- 参数 3 = 当前的游戏时间 , tick<br>
 	-- 需要返回保存了足够全面的设置数据的表 , 如果返回 nil 则它不会被包含进最终输出中<br>
-	-- 返回的数据中不应该包含引用信息 , 因为这种操作必然会使引用无效化<br>
+	-- 返回的数据中只能包含基本数据类型以及子表 , 且不应该包含引用 , 因为这种操作必然会使引用无效化<br>
 	-- ----------------------------------------
 	RegisterSettingsData = function( settingsData )
 		SIMainbarSetting.SettingsDataList[settingsData.ID] = settingsData
