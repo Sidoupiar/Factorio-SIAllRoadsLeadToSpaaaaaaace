@@ -488,6 +488,7 @@ SIOreMap.Toolbar =
 SIOreMap.SettingsData =
 {
 	ID = "SI核心-黄图" ,
+	Tooltip = { "SICore.黄图-导出设置-提示" } ,
 	ImportRemoteInterfaceID = SIOreMap.InterfaceID ,
 	ImportRemoteFunctionName = "ImpoerSettingsData" ,
 	ExportRemoteInterfaceID = SIOreMap.InterfaceID ,

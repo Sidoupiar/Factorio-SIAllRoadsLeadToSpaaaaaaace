@@ -711,7 +711,8 @@ SIMainbarSetting =
 	-- settingsData = 导入导出设置数据包<br>
 	-- ----------------------------------------
 	-- 导入导出设置数据包中包含的属性 :<br>
-	-- ID                       = 设置数据包的保存 ID<br>
+	-- ID                       = 导入导出设置数据包的保存 ID<br>
+	-- Tooltip                  = 导入导出设置数据包的提示信息 , 本地化字符串<br>
 	-- ImportRemoteInterfaceID  = 从外部导入设置数据时会执行一个 remote 接口函数 , 此项定义接口的名称 , 如果为 nil 则不会调用 remote 接口函数<br>
 	-- ImportRemoteFunctionName = 从外部导入设置数据时会执行一个 remote 接口函数 , 此项定义接口的函数名称<br>
 	-- ExportRemoteInterfaceID  = 从外部导出设置数据时会执行一个 remote 接口函数 , 此项定义接口的名称 , 如果为 nil 则不会调用 remote 接口函数<br>

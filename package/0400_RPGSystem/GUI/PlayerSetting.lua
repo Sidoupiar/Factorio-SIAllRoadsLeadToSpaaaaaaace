@@ -263,6 +263,7 @@ SIRPGPlayerSetting =
 SIRPGPlayerSetting.SettingsData =
 {
 	ID = "SIRPG系统-玩家设置" ,
+	Tooltip = { "SIRPGSystem.玩家设置-导出设置-提示" } ,
 	ImportRemoteInterfaceID = SIRPGPlayerSetting.InterfaceID ,
 	ImportRemoteFunctionName = "ImpoerSettingsData" ,
 	ExportRemoteInterfaceID = SIRPGPlayerSetting.InterfaceID ,

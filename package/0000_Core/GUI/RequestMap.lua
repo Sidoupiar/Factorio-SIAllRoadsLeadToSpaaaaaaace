@@ -2624,6 +2624,7 @@ SIRequestMap.Toolbar =
 SIRequestMap.SettingsData =
 {
 	ID = "SI核心-紫图" ,
+	Tooltip = { "SICore.紫图-导出设置-提示" } ,
 	ImportRemoteInterfaceID = SIRequestMap.InterfaceID ,
 	ImportRemoteFunctionName = "ImpoerSettingsData" ,
 	ExportRemoteInterfaceID = SIRequestMap.InterfaceID ,

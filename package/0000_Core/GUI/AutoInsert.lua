@@ -1132,6 +1132,7 @@ SIAutoInsert.Toolbar =
 SIAutoInsert.SettingsData =
 {
 	ID = "SI核心-自动填充" ,
+	Tooltip = { "SICore.自动填充-导出设置-提示" } ,
 	ImportRemoteInterfaceID = SIAutoInsert.InterfaceID ,
 	ImportRemoteFunctionName = "ImpoerSettingsData" ,
 	ExportRemoteInterfaceID = SIAutoInsert.InterfaceID ,
