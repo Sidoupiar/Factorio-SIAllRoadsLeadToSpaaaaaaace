@@ -131,6 +131,12 @@ SIMainData.Settings =
 				-- 不由设置窗口修改的设置数据
 				showGameTimeMode = 1
 			} ,
+			-- 这些不会被导入导出控制
+			Other =
+			{
+				importPlayerData = true ,
+				exportPlayerData = true
+			} ,
 			back = nil -- 表 , 打开窗口时保存未经过修改的设置值 , 用于撤销功能 , 关闭窗口后此值变为 nil
 		} ,
 		Note =

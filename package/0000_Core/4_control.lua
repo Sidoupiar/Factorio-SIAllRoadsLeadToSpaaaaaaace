@@ -165,6 +165,7 @@ SIControl.Init
 		Mainbar_Setting_Slider = "主面板设置管理-滑块" ,
 		Mainbar_Setting_Number = "主面板设置管理-数字框" ,
 		Mainbar_Setting_DropDown = "主面板设置管理-下拉列表" ,
+		Mainbar_Setting_PageFlow = "主面板设置管理-分页布局" ,
 		Mainbar_Setting_TextBox = "主面板设置管理-文本区域" ,
 		-- 主面板便签管理控件样式
 		Mainbar_Note_Frame = "主面板便签管理-窗口" ,
@@ -861,6 +862,15 @@ end )
 	end
 	local name = element.name
 	local playerIndex = event.player_index
+	-- 主面板设置管理窗口事件
+	if name == SIMainbarSetting.Names.ImportPlayerData then
+		SIMainbarSetting.Set_ImportPlayerData( playerIndex , element )
+		return
+	end
+	if name == SIMainbarSetting.Names.ExportPlayerData then
+		SIMainbarSetting.Set_ExportPlayerData( playerIndex , element )
+		return
+	end
 	-- 权限管理窗口事件
 	if name:StartsWith( SIPermission.Names.GlobalRadioPrefix ) then
 		SIPermission.SwitchRadio_Global( playerIndex , name )

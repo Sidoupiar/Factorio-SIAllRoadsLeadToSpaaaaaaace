@@ -16,8 +16,13 @@ SIMainbarSetting =
 		ToolbarColumn = "SI核心-主面板设置管理-工具栏数量" ,
 		ToolbarColumnText = "SI核心-主面板设置管理-工具栏数量文本" ,
 		Import = "SI核心-主面板设置管理-导入" ,
-		Export = "SI核心-主面板设置管理-导出"
+		ImportPlayerData = "SI核心-主面板设置管理-导入-玩家信息" ,
+		Export = "SI核心-主面板设置管理-导出" ,
+		ExportPlayerData = "SI核心-主面板设置管理-导出-玩家信息"
 	} ,
+	QuickBarMax = 100 ,
+	RequestBarMax = 100 ,
+	ExportDataPrefix = "SIExportData" ,
 	SettingsDataID = "SICore-MainbarSetting" ,
 	SettingsDataList = {} ,
 	-- ------------------------------------------------------------------------------------------------
@@ -66,9 +71,7 @@ SIMainbarSetting =
 			settings.Setting.list = nil
 			settings.Setting.importText = nil
 			settings.Setting.exportText = nil
-			for key , element in pairs( settings.Setting.Elements ) do
-				settings.Setting.Elements[key] = nil
-			end
+			settings.Setting.Elements = {}
 			settings.Setting.back = nil
 		end
 	end ,
@@ -121,11 +124,22 @@ SIMainbarSetting =
 		-- 第 2 层
 		settings.Setting.importText = page.add{ type = "text-box" , text = nil , tooltip = { "SICore.主面板设置管理-窗口-导入-文本-提示" } , style = SIConstants_Core.raw.Styles.Mainbar_Setting_TextBox }
 		-- 第 3 层
-		local flow3 = page.add{ type = "flow" , direction = "vertical" , style = SIConstants_Core.raw.Styles.Common_FlowRight }
-		flow3.add{ type = "line" , direction = "horizontal" }
-		-- 第 3.1 层
-		local flow31 = flow3.add{ type = "flow" , direction = "horizontal" , style = SIConstants_Core.raw.Styles.Common_FlowTop }
-		flow31.add{ type = "button" , name = SIMainbarSetting.Names.Import , caption = { "SICore.主面板设置管理-窗口-导入" } , tooltip = { "SICore.主面板设置管理-窗口-导入-提示" } , style = SIConstants_Core.raw.Styles.Common_ButtonGreen }
+		local flow3 = page.add{ type = "flow" , direction = "vertical" , style = SIConstants_Core.raw.Styles.Mainbar_Setting_PageFlow }
+		flow3.add
+		{
+			type = "checkbox" ,
+			name = SIMainbarSetting.Names.ImportPlayerData ,
+			state = settings.Setting.Other.importPlayerData ,
+			caption = { "SICore.主面板设置管理-窗口-导入-玩家信息" } ,
+			tooltip = { "SICore.主面板设置管理-窗口-导入-玩家信息-提示" } ,
+			style = SIConstants_Core.raw.Styles.Mainbar_Setting_ListCheck
+		}
+		-- 第 4 层
+		local flow4 = page.add{ type = "flow" , direction = "vertical" , style = SIConstants_Core.raw.Styles.Common_FlowRight }
+		flow4.add{ type = "line" , direction = "horizontal" }
+		-- 第 4.1 层
+		local flow41 = flow4.add{ type = "flow" , direction = "horizontal" , style = SIConstants_Core.raw.Styles.Common_FlowTop }
+		flow41.add{ type = "button" , name = SIMainbarSetting.Names.Import , caption = { "SICore.主面板设置管理-窗口-导入" } , tooltip = { "SICore.主面板设置管理-窗口-导入-提示" } , style = SIConstants_Core.raw.Styles.Common_ButtonGreen }
 		-- 返回分页
 		return page
 	end ,
@@ -141,11 +155,22 @@ SIMainbarSetting =
 		settings.Setting.exportText = page.add{ type = "text-box" , text = nil , tooltip = { "SICore.主面板设置管理-窗口-导出-文本-提示" } , style = SIConstants_Core.raw.Styles.Mainbar_Setting_TextBox }
 		settings.Setting.exportText.read_only = true
 		-- 第 3 层
-		local flow3 = page.add{ type = "flow" , direction = "vertical" , style = SIConstants_Core.raw.Styles.Common_FlowRight }
-		flow3.add{ type = "line" , direction = "horizontal" }
-		-- 第 3.1 层
-		local flow31 = flow3.add{ type = "flow" , direction = "horizontal" , style = SIConstants_Core.raw.Styles.Common_FlowTop }
-		flow31.add{ type = "button" , name = SIMainbarSetting.Names.Export , caption = { "SICore.主面板设置管理-窗口-导出" } , tooltip = { "SICore.主面板设置管理-窗口-导出-提示" } , style = SIConstants_Core.raw.Styles.Common_ButtonGreen }
+		local flow3 = page.add{ type = "flow" , direction = "vertical" , style = SIConstants_Core.raw.Styles.Mainbar_Setting_PageFlow }
+		flow3.add
+		{
+			type = "checkbox" ,
+			name = SIMainbarSetting.Names.ExportPlayerData ,
+			state = settings.Setting.Other.exportPlayerData ,
+			caption = { "SICore.主面板设置管理-窗口-导出-玩家信息" } ,
+			tooltip = { "SICore.主面板设置管理-窗口-导出-玩家信息-提示" } ,
+			style = SIConstants_Core.raw.Styles.Mainbar_Setting_ListCheck
+		}
+		-- 第 4 层
+		local flow4 = page.add{ type = "flow" , direction = "vertical" , style = SIConstants_Core.raw.Styles.Common_FlowRight }
+		flow4.add{ type = "line" , direction = "horizontal" }
+		-- 第 4.1 层
+		local flow41 = flow4.add{ type = "flow" , direction = "horizontal" , style = SIConstants_Core.raw.Styles.Common_FlowTop }
+		flow41.add{ type = "button" , name = SIMainbarSetting.Names.Export , caption = { "SICore.主面板设置管理-窗口-导出" } , tooltip = { "SICore.主面板设置管理-窗口-导出-提示" } , style = SIConstants_Core.raw.Styles.Common_ButtonGreen }
 		-- 返回分页
 		return page
 	end ,
@@ -467,10 +492,34 @@ SIMainbarSetting =
 	end ,
 	ImportSettings = function( settings )
 		local playerIndex = settings.playerIndex
-		local data = game.json_to_table( settings.Setting.importText.text )
+		local data = game.json_to_table( settings.Setting.importText.text:sub( SIMainbarSetting.ExportDataPosition ) )
 		local gameTick = data.Tick
 		settings.Setting.Base = data.Base
 		SIMainbarSetting.Save( settings , false )
+		-- 玩家数据
+		if settings.Setting.Other.importPlayerData then
+			local playerData = data.PlayerData
+			if playerData then
+				local player = game.get_player( playerIndex )
+				for slotIndex = 1 , SIMainbarSetting.QuickBarMax , 1 do
+					local itemName = playerData.QuickBar[slotIndex]
+					if itemName and game.item_prototypes[itemName] then
+						player.set_quick_bar_slot( slotIndex , itemName )
+					else
+						player.set_quick_bar_slot( slotIndex , nil )
+					end
+				end
+				for slotIndex = 1 , SIMainbarSetting.RequestBarMax , 1 do
+					local requestData = playerData.RequestBar[slotIndex]
+					if requestData then
+						player.set_personal_logistic_slot( slotIndex , { name = requestData.ItemName , min = requestData.min , requestData.max } )
+					else
+						player.clear_personal_logistic_slot( slotIndex )
+					end
+				end
+			end
+		end
+		-- 通过接口分发设置数据
 		for settingsDataID , settingsData in pairs( SIMainbarSetting.SettingsDataList ) do
 			if remote.interfaces[settingsData.ImportRemoteInterfaceID] and remote.interfaces[settingsData.ImportRemoteInterfaceID][settingsData.ImportRemoteFunctionName] then
 				local subData = data.Data[settingsDataID]
@@ -487,6 +536,34 @@ SIMainbarSetting =
 			Base = settings.Setting.Base ,
 			Data = {}
 		}
+		-- 玩家数据
+		if settings.Setting.Other.exportPlayerData then
+			local player = game.get_player( playerIndex )
+			local playerData =
+			{
+				QuickBar = {} ,
+				RequestBar = {}
+			}
+			for slotIndex = 1 , SIMainbarSetting.QuickBarMax , 1 do
+				local itemPrototype = player.get_quick_bar_slot( slotIndex )
+				if itemPrototype then
+					playerData.QuickBar[slotIndex] = itemPrototype.name
+				end
+			end
+			for slotIndex = 1 , SIMainbarSetting.RequestBarMax , 1 do
+				local requestData = player.get_personal_logistic_slot( slotIndex )
+				if requestData and requestData.name then
+					playerData.RequestBar[slotIndex] =
+					{
+						ItemName = requestData.name ,
+						Min = requestData.min ,
+						Max = requestData.max
+					}
+				end
+			end
+			data.PlayerData = playerData
+		end
+		-- 通过接口获取设置数据
 		for settingsDataID , settingsData in pairs( SIMainbarSetting.SettingsDataList ) do
 			if remote.interfaces[settingsData.ExportRemoteInterfaceID] and remote.interfaces[settingsData.ExportRemoteInterfaceID][settingsData.ExportRemoteFunctionName] then
 				local subData = remote.call( settingsData.ExportRemoteInterfaceID , settingsData.ExportRemoteFunctionName , playerIndex , settingsDataID , gameTick )
@@ -495,7 +572,7 @@ SIMainbarSetting =
 				end
 			end
 		end
-		settings.Setting.exportText.text = game.table_to_json( data )
+		settings.Setting.exportText.text = SIMainbarSetting.ExportDataPrefix .. game.table_to_json( data )
 	end ,
 	-- ------------------------------------------------------------------------------------------------
 	-- ---------- 事件函数 ----------------------------------------------------------------------------
@@ -540,10 +617,24 @@ SIMainbarSetting =
 			SIMainbarSetting.ImportSettings( settings )
 		end
 	end ,
+	Set_ImportPlayerData = function( playerIndex , element )
+		local settings = SIGlobal.GetPlayerSettings( SIMainData.Settings.Name , playerIndex )
+		if settings.Setting.frame and settings.Setting.frame.valid then
+			-- 保存 [导入-玩家信息] 的值
+			settings.Setting.Other.importPlayerData = element.state
+		end
+	end ,
 	Export = function( playerIndex )
 		local settings = SIGlobal.GetPlayerSettings( SIMainData.Settings.Name , playerIndex )
 		if settings.Setting.frame and settings.Setting.frame.valid then
 			SIMainbarSetting.ExportSettings( settings )
+		end
+	end ,
+	Set_ExportPlayerData = function( playerIndex , element )
+		local settings = SIGlobal.GetPlayerSettings( SIMainData.Settings.Name , playerIndex )
+		if settings.Setting.frame and settings.Setting.frame.valid then
+			-- 保存 [导出-玩家信息] 的值
+			settings.Setting.Other.exportPlayerData = element.state
 		end
 	end ,
 	-- ------------------------------------------------------------------------------------------------
@@ -588,3 +679,5 @@ SIMainbarSetting =
 		SIMainbarSetting.SettingsDataList[settingsData.ID] = settingsData
 	end
 }
+
+SIMainbarSetting.ExportDataPosition = #SIMainbarSetting.ExportDataPrefix + 1

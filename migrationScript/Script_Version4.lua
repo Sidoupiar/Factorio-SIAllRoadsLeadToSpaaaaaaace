@@ -2,6 +2,12 @@
 -- ------- 调整持久化数据 -------------------------------------------------------------------------
 -- ------------------------------------------------------------------------------------------------
 
+-- 维护主面板数据
+for playerIndex , settings in pairs( SIGlobal.GetAllPlayerSettings( SIMainData.Settings.Name ) ) do
+	-- 导入导出数据
+	settings.Setting.Other = SIUtils.table.deepcopy( SIMainData.Settings.DefaultPlayer.Setting.Other )
+end
+
 -- 添加新增的权限项目
 if SIGlobal.HasGlobalSettings( SIPermission.Settings.Name ) then
 	local permissionGlobalSettings = SIGlobal.GetGlobalSettings( SIPermission.Settings.Name )

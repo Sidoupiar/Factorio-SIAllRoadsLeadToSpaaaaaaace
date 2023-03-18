@@ -1182,6 +1182,16 @@ SIGen
 	width = 200 ,
 	height = 28
 } )
+.AddStyle( "Mainbar_Setting_PageFlow" , "主面板设置管理-分页布局" ,
+{
+	type = "vertical_flow_style" ,
+	parent = SIConstants_Core.raw.Styles.Common_FlowLeft ,
+	-- 偏移
+	top_padding = 0 ,
+	right_padding = 0 ,
+	bottom_padding = 0 ,
+	left_padding = 30 ,
+} )
 .AddStyle( "Mainbar_Setting_TextBox" , "主面板设置管理-文本区域" ,
 {
 	type = "textbox_style" ,
