@@ -205,10 +205,14 @@ SIEventBus
 .Init( function( functionID )
 	-- 玩家属性窗口事件
 	SIMainbar.RegisterToolbarButton( SIRPGPlayerStatus.Toolbar )
+	-- 玩家设置窗口事件
+	SIMainbarSetting.RegisterSettingsData( SIRPGPlayerSetting.SettingsData )
 end )
 .Load( function( functionID )
 	-- 玩家属性窗口事件
 	SIMainbar.RegisterToolbarButton( SIRPGPlayerStatus.Toolbar )
+	-- 玩家设置窗口事件
+	SIMainbarSetting.RegisterSettingsData( SIRPGPlayerSetting.SettingsData )
 end )
 .Add( SIEvents.on_player_joined_game , function( event , functionID )
 	local playerIndex = event.player_index

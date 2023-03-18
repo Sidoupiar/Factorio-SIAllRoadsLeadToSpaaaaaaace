@@ -72,6 +72,16 @@ SIInterface
 } )
 
 -- ----------------------------------------
+-- RPG 玩家设置接口<br>
+-- ----------------------------------------
+.Add( SIRPGPlayerSetting.InterfaceID ,
+{
+	-- 导入导出
+	ImpoerSettingsData = SIRPGPlayerSetting.ImpoerSettingsData ,
+	ExportSettingsData = SIRPGPlayerSetting.ExportSettingsData
+} )
+
+-- ----------------------------------------
 -- RPG 技能 , 洞察<br>
 -- ----------------------------------------
 .Add( SIRPGSkillUI_OverView.InterfaceID ,

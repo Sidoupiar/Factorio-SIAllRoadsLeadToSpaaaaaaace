@@ -365,10 +365,13 @@ SIEventBus
 	SIMainbar.RegisterToolbarButton( SIFinder.Toolbar )
 	-- 黄图的管理窗口事件
 	SIMainbar.RegisterToolbarButton( SIOreMap.Toolbar )
+	SIMainbarSetting.RegisterSettingsData( SIOreMap.SettingsData )
 	-- 紫图的管理窗口事件
 	SIMainbar.RegisterToolbarButton( SIRequestMap.Toolbar )
+	SIMainbarSetting.RegisterSettingsData( SIRequestMap.SettingsData )
 	-- 自动填充的管理窗口事件
 	SIMainbar.RegisterToolbarButton( SIAutoInsert.Toolbar )
+	SIMainbarSetting.RegisterSettingsData( SIRequestMap.SettingsData )
 end )
 .Load( function( functionID )
 	-- 权限管理窗口事件
@@ -377,10 +380,13 @@ end )
 	SIMainbar.RegisterToolbarButton( SIFinder.Toolbar )
 	-- 黄图的管理窗口事件
 	SIMainbar.RegisterToolbarButton( SIOreMap.Toolbar )
+	SIMainbarSetting.RegisterSettingsData( SIOreMap.SettingsData )
 	-- 紫图的管理窗口事件
 	SIMainbar.RegisterToolbarButton( SIRequestMap.Toolbar )
+	SIMainbarSetting.RegisterSettingsData( SIRequestMap.SettingsData )
 	-- 自动填充的管理窗口事件
 	SIMainbar.RegisterToolbarButton( SIAutoInsert.Toolbar )
+	SIMainbarSetting.RegisterSettingsData( SIRequestMap.SettingsData )
 end )
 .ConfigurationChange( function( functionID )
 	-- 处理通关

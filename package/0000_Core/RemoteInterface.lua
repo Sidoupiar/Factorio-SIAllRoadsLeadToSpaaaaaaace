@@ -114,6 +114,9 @@ SIInterface
 	CloseFrameByPlayerIndex = SIOreMap.CloseFrameByPlayerIndex ,
 	OpenFrames = SIOreMap.OpenFrames ,
 	CloseFrames = SIOreMap.CloseFrames ,
+	-- 导入导出
+	ImpoerSettingsData = SIOreMap.ImpoerSettingsData ,
+	ExportSettingsData = SIOreMap.ExportSettingsData ,
 	-- 数据操作
 	AddOre = SIOreMap.AddOre ,
 	RemoveOre = SIOreMap.RemoveOre
@@ -128,7 +131,10 @@ SIInterface
 	OpenFrameByPlayerIndex = SIRequestMap.OpenFrameByPlayerIndex ,
 	CloseFrameByPlayerIndex = SIRequestMap.CloseFrameByPlayerIndex ,
 	OpenFrames = SIRequestMap.OpenFrames ,
-	CloseFrames = SIRequestMap.CloseFrames
+	CloseFrames = SIRequestMap.CloseFrames ,
+	-- 导入导出
+	ImpoerSettingsData = SIRequestMap.ImpoerSettingsData ,
+	ExportSettingsData = SIRequestMap.ExportSettingsData
 } )
 
 -- ----------------------------------------
@@ -140,5 +146,8 @@ SIInterface
 	OpenFrameByPlayerIndex = SIAutoInsert.OpenFrameByPlayerIndex ,
 	CloseFrameByPlayerIndex = SIAutoInsert.CloseFrameByPlayerIndex ,
 	OpenFrames = SIAutoInsert.OpenFrames ,
-	CloseFrames = SIAutoInsert.CloseFrames
+	CloseFrames = SIAutoInsert.CloseFrames ,
+	-- 导入导出
+	ImpoerSettingsData = SIAutoInsert.ImpoerSettingsData ,
+	ExportSettingsData = SIAutoInsert.ExportSettingsData
 } )

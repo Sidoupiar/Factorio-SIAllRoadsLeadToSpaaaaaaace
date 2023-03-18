@@ -1,7 +1,8 @@
 SIRPGPlayerSetting =
 {
-	ID = "RPGPlayerStatusMini" ,
-	Name = "RPG玩家属性迷你" ,
+	ID = "RPGPlayerSetting" ,
+	Name = "RPG玩家设置" ,
+	InterfaceID = "SIRPGSystem-PlayerSetting" ,
 	Names =
 	{
 		Prefix = "SIRPG系统-玩家设置-" ,
@@ -221,5 +222,49 @@ SIRPGPlayerSetting =
 			local skillColumnCount = SITools.AsNumberInt( elements.itemSkillColumnCountText.text , SIRPGPlayerSkillMini.ListColumnMin , SIRPGPlayerSkillMini.ListColumnMax )
 			elements.itemSkillColumnCount.slider_value = skillColumnCount
 		end
+	end ,
+	-- ------------------------------------------------------------------------------------------------
+	-- ---- 接口函数 -- 导入导出 ----------------------------------------------------------------------
+	-- ------------------------------------------------------------------------------------------------
+
+	-- ----------------------------------------
+	-- 导入数据<br>
+	-- ----------------------------------------
+	-- playerIndex    = 点击按钮的玩家索引<br>
+	-- data           = 导出时保存的数据 , 根据导出时导出接口函数返回的数据 , 此参数可能为 nil<br>
+	-- settingsDataID = 导入导出设置数据包的 ID<br>
+	-- gameTick       = 导出数据时的游戏时间 , tick<br>
+	-- ----------------------------------------
+	ImpoerSettingsData = function( playerIndex , data , settingsDataID , gameTick )
+		if not data then
+			return
+		end
+		local settings = SIGlobal.GetPlayerSettings( SIRPGSystem.Settings.Name , playerIndex )
+		settings.PlayerSetting.Base = data
+		SIRPGPlayerSetting.FreshList( settings )
+		SIRPGPlayerSetting.Save( settings , false )
+	end ,
+
+	-- ----------------------------------------
+	-- 导出数据<br>
+	-- ----------------------------------------
+	-- playerIndex    = 点击按钮的玩家索引<br>
+	-- settingsDataID = 导入导出设置数据包的 ID<br>
+	-- gameTick       = 当前的游戏时间 , tick<br>
+	-- ----------------------------------------
+	-- 返回值 = 导出的数据<br>
+	-- ----------------------------------------
+	ExportSettingsData = function( playerIndex , settingsDataID , gameTick )
+		local settings = SIGlobal.GetPlayerSettings( SIRPGSystem.Settings.Name , playerIndex )
+		return settings.PlayerSetting.Base
 	end
+}
+
+SIRPGPlayerSetting.SettingsData =
+{
+	ID = "SIRPG系统-玩家设置" ,
+	ImportRemoteInterfaceID = SIRPGPlayerSetting.InterfaceID ,
+	ImportRemoteFunctionName = "ImpoerSettingsData" ,
+	ExportRemoteInterfaceID = SIRPGPlayerSetting.InterfaceID ,
+	ExportRemoteFunctionName = "ExportSettingsData"
 }

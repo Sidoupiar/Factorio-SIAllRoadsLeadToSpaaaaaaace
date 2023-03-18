@@ -339,7 +339,7 @@ SIOreMap =
 	-- ----------------------------------------
 	-- 打开指定玩家的黄图的管理窗口<br>
 	-- ----------------------------------------
-	-- playerIndex = 玩家索引<br>
+	-- playerIndex    = 玩家索引<br>
 	-- ----------------------------------------
 	OpenFrameByPlayerIndex = function( playerIndex )
 		SIOreMap.OpenFrame( playerIndex )
@@ -348,7 +348,7 @@ SIOreMap =
 	-- ----------------------------------------
 	-- 关闭指定玩家的黄图的管理窗口<br>
 	-- ----------------------------------------
-	-- playerIndex = 玩家索引<br>
+	-- playerIndex    = 玩家索引<br>
 	-- ----------------------------------------
 	CloseFrameByPlayerIndex = function( playerIndex )
 		SIOreMap.CloseFrame( playerIndex )
@@ -376,15 +376,60 @@ SIOreMap =
 		end
 	end ,
 	-- ------------------------------------------------------------------------------------------------
+	-- ---- 接口函数 -- 导入导出 ----------------------------------------------------------------------
+	-- ------------------------------------------------------------------------------------------------
+
+	-- ----------------------------------------
+	-- 导入数据<br>
+	-- ----------------------------------------
+	-- playerIndex    = 点击按钮的玩家索引<br>
+	-- data           = 导出时保存的数据 , 根据导出时导出接口函数返回的数据 , 此参数可能为 nil<br>
+	-- settingsDataID = 导入导出设置数据包的 ID<br>
+	-- gameTick       = 导出数据时的游戏时间 , tick<br>
+	-- ----------------------------------------
+	ImpoerSettingsData = function( playerIndex , data , settingsDataID , gameTick )
+		if not data then
+			return
+		end
+		local settings = SIGlobal.GetPlayerSettings( SIOreMap.Settings.Name , playerIndex )
+		settings.asDefault = data.asDefault or false
+		settings.totalMode = data.totalMode or false
+		settings.count = data.count or 0
+		if settings.frame and settings.frame.valid then
+			settings.Elements.asDefault.state = settings.asDefault
+			settings.Elements.totalMode.state = settings.totalMode
+			settings.Elements.count.text = tostring( settings.count )
+		end
+	end ,
+
+	-- ----------------------------------------
+	-- 导出数据<br>
+	-- ----------------------------------------
+	-- playerIndex    = 点击按钮的玩家索引<br>
+	-- settingsDataID = 导入导出设置数据包的 ID<br>
+	-- gameTick       = 当前的游戏时间 , tick<br>
+	-- ----------------------------------------
+	-- 返回值 = 导出的数据<br>
+	-- ----------------------------------------
+	ExportSettingsData = function( playerIndex , settingsDataID , gameTick )
+		local settings = SIGlobal.GetPlayerSettings( SIOreMap.Settings.Name , playerIndex )
+		return
+		{
+			asDefault = settings.asDefault ,
+			totalMode = settings.totalMode ,
+			count = settings.count
+		}
+	end ,
+	-- ------------------------------------------------------------------------------------------------
 	-- ---- 接口函数 -- 数据操作 ----------------------------------------------------------------------
 	-- ------------------------------------------------------------------------------------------------
 
 	-- ----------------------------------------
 	-- 向玩家数据内添加矿物<br>
 	-- ----------------------------------------
-	-- playerIndex = 玩家索引<br>
-	-- oreName     = 矿物实体名称<br>
-	-- count       = 添加的数量 , 不能小于 1<br>
+	-- playerIndex    = 玩家索引<br>
+	-- oreName        = 矿物实体名称<br>
+	-- count          = 添加的数量 , 不能小于 1<br>
 	-- ----------------------------------------
 	AddOre = function( playerIndex , oreName , count )
 		if count > 0 then
@@ -405,9 +450,9 @@ SIOreMap =
 	-- 从玩家数据中移除矿物<br>
 	-- 数量不足时会直接删除条目<br>
 	-- ----------------------------------------
-	-- playerIndex = 玩家索引<br>
-	-- oreName     = 矿物实体名称<br>
-	-- count       = 移除的数量 , 不能小于 1<br>
+	-- playerIndex    = 玩家索引<br>
+	-- oreName        = 矿物实体名称<br>
+	-- count          = 移除的数量 , 不能小于 1<br>
 	-- ----------------------------------------
 	RemoveOre = function( playerIndex , oreName , count )
 		if count > 0 then
@@ -439,4 +484,12 @@ SIOreMap.Toolbar =
 	ActionRemoteFunctionName = "OpenFrameByPlayerIndex" ,
 	Permission = SIPermission.PermissionIDs.OreMap ,
 	Order = "SICore-MapOre"
+}
+SIOreMap.SettingsData =
+{
+	ID = "SI核心-黄图" ,
+	ImportRemoteInterfaceID = SIOreMap.InterfaceID ,
+	ImportRemoteFunctionName = "ImpoerSettingsData" ,
+	ExportRemoteInterfaceID = SIOreMap.InterfaceID ,
+	ExportRemoteFunctionName = "ExportSettingsData"
 }

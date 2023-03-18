@@ -1060,6 +1060,47 @@ SIAutoInsert =
 		for playerIndex , settings in pairs( SIGlobal.GetAllPlayerSettings( SIAutoInsert.Settings.Name ) ) do
 			SIAutoInsert.CloseFrame( playerIndex )
 		end
+	end ,
+	-- ------------------------------------------------------------------------------------------------
+	-- ---- 接口函数 -- 导入导出 ----------------------------------------------------------------------
+	-- ------------------------------------------------------------------------------------------------
+
+	-- ----------------------------------------
+	-- 导入数据<br>
+	-- ----------------------------------------
+	-- playerIndex    = 点击按钮的玩家索引<br>
+	-- data           = 导出时保存的数据 , 根据导出时导出接口函数返回的数据 , 此参数可能为 nil<br>
+	-- settingsDataID = 导入导出设置数据包的 ID<br>
+	-- gameTick       = 导出数据时的游戏时间 , tick<br>
+	-- ----------------------------------------
+	ImpoerSettingsData = function( playerIndex , data , settingsDataID , gameTick )
+		if not data then
+			return
+		end
+		local settings = SIGlobal.GetPlayerSettings( SIAutoInsert.Settings.Name , playerIndex )
+		settings.defaultIndex = data.defaultIndex or 0
+		settings.TabSettingsList = data.TabSettingsList or {}
+		if settings.frame and settings.frame.valid then
+			SIAutoInsert.CreateTab( settings )
+		end
+	end ,
+
+	-- ----------------------------------------
+	-- 导出数据<br>
+	-- ----------------------------------------
+	-- playerIndex    = 点击按钮的玩家索引<br>
+	-- settingsDataID = 导入导出设置数据包的 ID<br>
+	-- gameTick       = 当前的游戏时间 , tick<br>
+	-- ----------------------------------------
+	-- 返回值 = 导出的数据<br>
+	-- ----------------------------------------
+	ExportSettingsData = function( playerIndex , settingsDataID , gameTick )
+		local settings = SIGlobal.GetPlayerSettings( SIAutoInsert.Settings.Name , playerIndex )
+		return
+		{
+			defaultIndex = settings.defaultIndex ,
+			TabSettingsList = settings.TabSettingsList
+		}
 	end
 }
 
@@ -1083,4 +1124,12 @@ SIAutoInsert.Toolbar =
 	ActionRemoteFunctionName = "OpenFrameByPlayerIndex" ,
 	Permission = SIPermission.PermissionIDs.AutoInsert ,
 	Order = "SICore-AutoInsert"
+}
+SIAutoInsert.SettingsData =
+{
+	ID = "SI核心-自动填充" ,
+	ImportRemoteInterfaceID = SIAutoInsert.InterfaceID ,
+	ImportRemoteFunctionName = "ImpoerSettingsData" ,
+	ExportRemoteInterfaceID = SIAutoInsert.InterfaceID ,
+	ExportRemoteFunctionName = "ExportSettingsData"
 }
