@@ -2,6 +2,7 @@ SIMainbarSetting =
 {
 	ID = "MainbarSetting" ,
 	Name = "主面板设置管理" ,
+	InterfaceID = "SICore-MainbarSetting" ,
 	Names =
 	{
 		Prefix = "SI核心-主面板设置管理-" ,
@@ -13,8 +14,12 @@ SIMainbarSetting =
 		Back = "SI核心-主面板设置管理-撤销" ,
 		Reset = "SI核心-主面板设置管理-默认" ,
 		ToolbarColumn = "SI核心-主面板设置管理-工具栏数量" ,
-		ToolbarColumnText = "SI核心-主面板设置管理-工具栏数量文本"
+		ToolbarColumnText = "SI核心-主面板设置管理-工具栏数量文本" ,
+		Import = "SI核心-主面板设置管理-导入" ,
+		Export = "SI核心-主面板设置管理-导出"
 	} ,
+	SettingsDataID = "SICore-MainbarSetting" ,
+	SettingsDataList = {} ,
 	-- ------------------------------------------------------------------------------------------------
 	-- ---------- 窗口函数 ----------------------------------------------------------------------------
 	-- ------------------------------------------------------------------------------------------------
@@ -36,25 +41,16 @@ SIMainbarSetting =
 				CloseTooltip = { "SICore.主面板设置管理-窗口-关闭-提示" }
 			} )
 			-- 第 1 层
-			local flow1 = frame.add{ type = "flow" , direction = "horizontal" , style = SIConstants_Core.raw.Styles.Common_FlowTop }
-			flow1.add{ type = "label" , caption = { "SICore.主面板设置管理-窗口-说明" } , style = SIConstants_Core.raw.Styles.Mainbar_Setting_LabelTop }
-			-- 第 2 层
-			settings.Setting.list = frame
-			.add{ type = "scroll-pane" , horizontal_scroll_policy = "never" , vertical_scroll_policy = "auto-and-reserve-space" , style = SIConstants_Core.raw.Styles.Common_ScrollPane }
-			.add{ type = "table" , column_count = 3 , style = SIConstants_Core.raw.Styles.Common_List }
-			-- 第 3 层
-			local flow3 = frame.add{ type = "flow" , direction = "horizontal" , style = SIConstants_Core.raw.Styles.Common_FlowTop }
-			flow3.add{ type = "button" , name = SIMainbarSetting.Names.Reset , caption = { "SICore.主面板设置管理-窗口-默认" } , tooltip = { "SICore.主面板设置管理-窗口-默认-提示" } , style = SIConstants_Core.raw.Styles.Common_ButtonGray }
-			flow3.add{ type = "button" , name = SIMainbarSetting.Names.Back , caption = { "SICore.主面板设置管理-窗口-撤销" } , tooltip = { "SICore.主面板设置管理-窗口-撤销-提示" } , style = SIConstants_Core.raw.Styles.Common_ButtonBlue }
-			flow3.add{ type = "button" , name = SIMainbarSetting.Names.Save , caption = { "SICore.主面板设置管理-窗口-保存" } , tooltip = { "SICore.主面板设置管理-窗口-保存-提示" } , style = SIConstants_Core.raw.Styles.Common_ButtonGreen }
-			flow3.add{ type = "button" , name = SIMainbarSetting.Names.Fresh , caption = { "SICore.主面板设置管理-窗口-刷新主面板" } , tooltip = { "SICore.主面板设置管理-窗口-刷新主面板-提示" } , style = SIConstants_Core.raw.Styles.Common_ButtonPurple }
-			-- 第 4 层
-			local flow4 = frame.add{ type = "flow" , direction = "vertical" , style = SIConstants_Core.raw.Styles.Common_FlowRight }
-			flow4.add{ type = "line" , direction = "horizontal" }
-			-- 第 4.1 层
-			local flow41 = flow4.add{ type = "flow" , direction = "horizontal" , style = SIConstants_Core.raw.Styles.Common_FlowTop }
-			flow41.add{ type = "button" , name = SIMainbarSetting.Names.Close , caption = { "SICore.主面板设置管理-窗口-取消" } , tooltip = { "SICore.主面板设置管理-窗口-取消-提示" } , style = SIConstants_Core.raw.Styles.Common_ButtonRed }
-			flow41.add{ type = "button" , name = SIMainbarSetting.Names.OK , caption = { "SICore.主面板设置管理-窗口-确定" } , tooltip = { "SICore.主面板设置管理-窗口-确定-提示" } , style = SIConstants_Core.raw.Styles.Common_ButtonGreen }
+			local tabPane = frame.add{ type = "tabbed-pane" , style = SIConstants_Core.raw.Styles.Mainbar_Setting_TabPane }
+			local tabSettings = tabPane.add{ type = "tab" , caption = { "SICore.主面板设置管理-窗口-分页-设置" } , tooltip = { "SICore.主面板设置管理-窗口-分页-设置-提示" } }
+			local tabImport = tabPane.add{ type = "tab" , caption = { "SICore.主面板设置管理-窗口-导入-设置" } , tooltip = { "SICore.主面板设置管理-窗口-分页-导入-提示" } }
+			local tabExport = tabPane.add{ type = "tab" , caption = { "SICore.主面板设置管理-窗口-导出-设置" } , tooltip = { "SICore.主面板设置管理-窗口-分页-导出-提示" } }
+			local pageSettings = SIMainbarSetting.CreatePage_Settings( settings , tabPane )
+			local pageImport = SIMainbarSetting.CreatePage_Import( settings , tabPane )
+			local pageExport = SIMainbarSetting.CreatePage_Export( settings , tabPane )
+			tabPane.add_tab( tabSettings , pageSettings )
+			tabPane.add_tab( tabImport , pageImport )
+			tabPane.add_tab( tabExport , pageExport )
 			-- 根据设置更新控件
 			settings.Setting.back = SIUtils.table.deepcopy( settings.Setting.Base )
 			settings.Setting.back.showMainbar = SISettings.PerUser.SICore.ShowMainbar( playerIndex )
@@ -68,6 +64,8 @@ SIMainbarSetting =
 			settings.Setting.frame.destroy()
 			settings.Setting.frame = nil
 			settings.Setting.list = nil
+			settings.Setting.importText = nil
+			settings.Setting.exportText = nil
 			for key , element in pairs( settings.Setting.Elements ) do
 				settings.Setting.Elements[key] = nil
 			end
@@ -83,6 +81,74 @@ SIMainbarSetting =
 	-- ------------------------------------------------------------------------------------------------
 	-- ---------- 控件函数 ----------------------------------------------------------------------------
 	-- ------------------------------------------------------------------------------------------------
+
+	-- ----------------------------------------
+	-- 这是一个内部函数 , 请勿外部调用<br>
+	-- ----------------------------------------
+	CreatePage_Settings = function( settings , tabPane )
+		local page = tabPane.add{ type = "flow" , direction = "vertical" , style = SIConstants_Core.raw.Styles.Common_FlowLeft }
+		-- 第 1 层
+		local flow1 = page.add{ type = "flow" , direction = "horizontal" , style = SIConstants_Core.raw.Styles.Common_FlowTop }
+		flow1.add{ type = "label" , caption = { "SICore.主面板设置管理-窗口-设置-说明" } , style = SIConstants_Core.raw.Styles.Mainbar_Setting_LabelTop }
+		-- 第 2 层
+		settings.Setting.list = page
+		.add{ type = "scroll-pane" , horizontal_scroll_policy = "never" , vertical_scroll_policy = "auto-and-reserve-space" , style = SIConstants_Core.raw.Styles.Common_ScrollPane }
+		.add{ type = "table" , column_count = 3 , style = SIConstants_Core.raw.Styles.Common_List }
+		-- 第 3 层
+		local flow3 = page.add{ type = "flow" , direction = "horizontal" , style = SIConstants_Core.raw.Styles.Common_FlowTop }
+		flow3.add{ type = "button" , name = SIMainbarSetting.Names.Reset , caption = { "SICore.主面板设置管理-窗口-设置-默认" } , tooltip = { "SICore.主面板设置管理-窗口-设置-默认-提示" } , style = SIConstants_Core.raw.Styles.Common_ButtonGray }
+		flow3.add{ type = "button" , name = SIMainbarSetting.Names.Back , caption = { "SICore.主面板设置管理-窗口-设置-撤销" } , tooltip = { "SICore.主面板设置管理-窗口-设置-撤销-提示" } , style = SIConstants_Core.raw.Styles.Common_ButtonBlue }
+		flow3.add{ type = "button" , name = SIMainbarSetting.Names.Save , caption = { "SICore.主面板设置管理-窗口-设置-保存" } , tooltip = { "SICore.主面板设置管理-窗口-设置-保存-提示" } , style = SIConstants_Core.raw.Styles.Common_ButtonGreen }
+		flow3.add{ type = "button" , name = SIMainbarSetting.Names.Fresh , caption = { "SICore.主面板设置管理-窗口-设置-刷新主面板" } , tooltip = { "SICore.主面板设置管理-窗口-设置-刷新主面板-提示" } , style = SIConstants_Core.raw.Styles.Common_ButtonPurple }
+		-- 第 4 层
+		local flow4 = page.add{ type = "flow" , direction = "vertical" , style = SIConstants_Core.raw.Styles.Common_FlowRight }
+		flow4.add{ type = "line" , direction = "horizontal" }
+		-- 第 4.1 层
+		local flow41 = flow4.add{ type = "flow" , direction = "horizontal" , style = SIConstants_Core.raw.Styles.Common_FlowTop }
+		flow41.add{ type = "button" , name = SIMainbarSetting.Names.Close , caption = { "SICore.主面板设置管理-窗口-设置-取消" } , tooltip = { "SICore.主面板设置管理-窗口-设置-取消-提示" } , style = SIConstants_Core.raw.Styles.Common_ButtonRed }
+		flow41.add{ type = "button" , name = SIMainbarSetting.Names.OK , caption = { "SICore.主面板设置管理-窗口-设置-确定" } , tooltip = { "SICore.主面板设置管理-窗口-设置-确定-提示" } , style = SIConstants_Core.raw.Styles.Common_ButtonGreen }
+		-- 返回分页
+		return page
+	end ,
+	-- ----------------------------------------
+	-- 这是一个内部函数 , 请勿外部调用<br>
+	-- ----------------------------------------
+	CreatePage_Import = function( settings , tabPane )
+		local page = tabPane.add{ type = "flow" , direction = "vertical" , style = SIConstants_Core.raw.Styles.Common_FlowLeft }
+		-- 第 1 层
+		local flow1 = page.add{ type = "flow" , direction = "horizontal" , style = SIConstants_Core.raw.Styles.Common_FlowTop }
+		flow1.add{ type = "label" , caption = { "SICore.主面板设置管理-窗口-导入-说明" } , style = SIConstants_Core.raw.Styles.Mainbar_Setting_LabelTop }
+		-- 第 2 层
+		settings.Setting.importText = page.add{ type = "text-box" , text = nil , tooltip = { "SICore.主面板设置管理-窗口-导入-文本-提示" } , style = SIConstants_Core.raw.Styles.Mainbar_Setting_TextBox }
+		-- 第 3 层
+		local flow3 = page.add{ type = "flow" , direction = "vertical" , style = SIConstants_Core.raw.Styles.Common_FlowRight }
+		flow3.add{ type = "line" , direction = "horizontal" }
+		-- 第 3.1 层
+		local flow31 = flow3.add{ type = "flow" , direction = "horizontal" , style = SIConstants_Core.raw.Styles.Common_FlowTop }
+		flow31.add{ type = "button" , name = SIMainbarSetting.Names.Import , caption = { "SICore.主面板设置管理-窗口-导入" } , tooltip = { "SICore.主面板设置管理-窗口-导入-提示" } , style = SIConstants_Core.raw.Styles.Common_ButtonGreen }
+		-- 返回分页
+		return page
+	end ,
+	-- ----------------------------------------
+	-- 这是一个内部函数 , 请勿外部调用<br>
+	-- ----------------------------------------
+	CreatePage_Export = function( settings , tabPane )
+		local page = tabPane.add{ type = "flow" , direction = "vertical" , style = SIConstants_Core.raw.Styles.Common_FlowLeft }
+		-- 第 1 层
+		local flow1 = page.add{ type = "flow" , direction = "horizontal" , style = SIConstants_Core.raw.Styles.Common_FlowTop }
+		flow1.add{ type = "label" , caption = { "SICore.主面板设置管理-窗口-导出-说明" } , style = SIConstants_Core.raw.Styles.Mainbar_Setting_LabelTop }
+		-- 第 2 层
+		settings.Setting.exportText = page.add{ type = "text-box" , text = nil , tooltip = { "SICore.主面板设置管理-窗口-导出-文本-提示" } , style = SIConstants_Core.raw.Styles.Mainbar_Setting_TextBox }
+		settings.Setting.exportText.read_only = true
+		-- 第 3 层
+		local flow3 = page.add{ type = "flow" , direction = "vertical" , style = SIConstants_Core.raw.Styles.Common_FlowRight }
+		flow3.add{ type = "line" , direction = "horizontal" }
+		-- 第 3.1 层
+		local flow31 = flow3.add{ type = "flow" , direction = "horizontal" , style = SIConstants_Core.raw.Styles.Common_FlowTop }
+		flow31.add{ type = "button" , name = SIMainbarSetting.Names.Export , caption = { "SICore.主面板设置管理-窗口-导出" } , tooltip = { "SICore.主面板设置管理-窗口-导出-提示" } , style = SIConstants_Core.raw.Styles.Common_ButtonGreen }
+		-- 返回分页
+		return page
+	end ,
 	FreshList = function( settings )
 		local list = settings.Setting.list
 		if list then
@@ -399,6 +465,38 @@ SIMainbarSetting =
 			elements.itemCommonToolbar2.selected_index = ( default.commonToolbar2 or 0 ) + 1
 		end
 	end ,
+	ImportSettings = function( settings )
+		local playerIndex = settings.playerIndex
+		local data = game.json_to_table( settings.Setting.importText.text )
+		local gameTick = data.Tick
+		settings.Setting.Base = data.Base
+		SIMainbarSetting.Save( settings , false )
+		for settingsDataID , settingsData in pairs( SIMainbarSetting.SettingsDataList ) do
+			if remote.interfaces[settingsData.ImportRemoteInterfaceID] and remote.interfaces[settingsData.ImportRemoteInterfaceID][settingsData.ImportRemoteFunctionName] then
+				local subData = data.Data[settingsDataID]
+				remote.call( settingsData.ImportRemoteInterfaceID , settingsData.ImportRemoteFunctionName , playerIndex , subData , settingsDataID , gameTick )
+			end
+		end
+	end ,
+	ExportSettings = function( settings )
+		local playerIndex = settings.playerIndex
+		local gameTick = game.tick
+		local data =
+		{
+			Tick = gameTick ,
+			Base = settings.Setting.Base ,
+			Data = {}
+		}
+		for settingsDataID , settingsData in pairs( SIMainbarSetting.SettingsDataList ) do
+			if remote.interfaces[settingsData.ExportRemoteInterfaceID] and remote.interfaces[settingsData.ExportRemoteInterfaceID][settingsData.ExportRemoteFunctionName] then
+				local subData = remote.call( settingsData.ExportRemoteInterfaceID , settingsData.ExportRemoteFunctionName , playerIndex , settingsDataID , gameTick )
+				if subData then
+					data.Data[settingsDataID] = subData
+				end
+			end
+		end
+		settings.Setting.exportText.text = game.table_to_json( data )
+	end ,
 	-- ------------------------------------------------------------------------------------------------
 	-- ---------- 事件函数 ----------------------------------------------------------------------------
 	-- ------------------------------------------------------------------------------------------------
@@ -435,5 +533,58 @@ SIMainbarSetting =
 			local toolbarColumn = SITools.AsNumberInt( elements.itemToolbarColumnText.text , SIMainbar.ToolbarColumnMin , SIMainbar.ToolbarColumnMax )
 			elements.itemToolbarColumn.slider_value = toolbarColumn
 		end
+	end ,
+	Import = function( playerIndex )
+		local settings = SIGlobal.GetPlayerSettings( SIMainData.Settings.Name , playerIndex )
+		if settings.Setting.frame and settings.Setting.frame.valid then
+			SIMainbarSetting.ImportSettings( settings )
+		end
+	end ,
+	Export = function( playerIndex )
+		local settings = SIGlobal.GetPlayerSettings( SIMainData.Settings.Name , playerIndex )
+		if settings.Setting.frame and settings.Setting.frame.valid then
+			SIMainbarSetting.ExportSettings( settings )
+		end
+	end ,
+	-- ------------------------------------------------------------------------------------------------
+	-- ---- 接口函数 -- 设置数据 ----------------------------------------------------------------------
+	-- ------------------------------------------------------------------------------------------------
+
+	-- ----------------------------------------
+	-- 注册导入导出设置数据包<br>
+	-- 玩家可以通过界面导入和导出各种设置数据 , 以便这些数据可以分享给好友或用于多周目游戏<br>
+	-- 如果需要使用导入导出设置数据的功能 , 那么应该在 on_init 和 on_load 中都添加注册代码<br>
+	-- 因为需要的属性比较多 , 不慎将 nil 作为参数传递进来后果自负<br>
+	-- ----------------------------------------
+	-- settingsData = 导入导出设置数据包<br>
+	-- ----------------------------------------
+	-- 导入导出设置数据包中包含的属性 :<br>
+	-- ID                       = 设置数据包的保存 ID<br>
+	-- ImportRemoteInterfaceID  = 从外部导入设置数据时会执行一个 remote 接口函数 , 此项定义接口的名称 , 如果为 nil 则不会调用 remote 接口函数<br>
+	-- ImportRemoteFunctionName = 从外部导入设置数据时会执行一个 remote 接口函数 , 此项定义接口的函数名称<br>
+	-- ExportRemoteInterfaceID  = 从外部导出设置数据时会执行一个 remote 接口函数 , 此项定义接口的名称 , 如果为 nil 则不会调用 remote 接口函数<br>
+	-- ExportRemoteFunctionName = 从外部导出设置数据时会执行一个 remote 接口函数 , 此项定义接口的函数名称<br>
+	-- ----------------------------------------
+	-- 导出数据时 , 要求导出接口函数返回一个表<br>
+	-- 这个表里应该保存了足够全面的设置数据<br>
+	-- 这个表会在导入时会作为参数传递进导入接口函数<br>
+	-- ----------------------------------------
+	-- 当玩家点击导入按钮时 , 会立刻调用导入接口函数<br>
+	-- 每次调用时 , 都会传递 4 个参数 :<br>
+	-- 参数 1 = 点击按钮的玩家索引<br>
+	-- 参数 2 = 导出时保存的数据 , 根据导出时导出接口函数返回的数据 , 此参数可能为 nil<br>
+	-- 参数 3 = 导入导出设置数据包的 ID<br>
+	-- 参数 4 = 导出数据时的游戏时间 , tick<br>
+	-- ----------------------------------------
+	-- 当玩家点击导出按钮时 , 会立刻调用导出接口函数<br>
+	-- 每次调用时 , 都会传递 3 个参数 :<br>
+	-- 参数 1 = 点击按钮的玩家索引<br>
+	-- 参数 2 = 导入导出设置数据包的 ID<br>
+	-- 参数 3 = 当前的游戏时间 , tick<br>
+	-- 需要返回保存了足够全面的设置数据的表 , 如果返回 nil 则它不会被包含进最终输出中<br>
+	-- 返回的数据中不应该包含引用信息 , 因为这种操作必然会使引用无效化<br>
+	-- ----------------------------------------
+	RegisterSettingsData = function( settingsData )
+		SIMainbarSetting.SettingsDataList[settingsData.ID] = settingsData
 	end
 }

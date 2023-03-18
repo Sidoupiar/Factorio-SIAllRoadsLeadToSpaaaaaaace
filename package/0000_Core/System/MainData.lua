@@ -97,6 +97,8 @@ SIMainData.Settings =
 			frame = nil ,
 			frameLocation = nil ,
 			list = nil ,
+			importText = nil ,
+			exportText = nil ,
 			Elements =
 			{
 				itemMainbar = nil ,

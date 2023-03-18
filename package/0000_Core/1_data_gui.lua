@@ -1050,6 +1050,61 @@ SIGen
 	minimal_height = 100 ,
 	maximal_height = 700
 } )
+.AddStyle( "Mainbar_Setting_TabPane" , "主面板设置管理--分页面板" ,
+{
+	type = "tabbed_pane_style" ,
+	-- 偏移
+	padding = 0 ,
+	-- 体积
+	minimal_width = 200 ,
+	minimal_height = 250 ,
+	-- 元素间距
+	vertical_spacing = 0 ,
+	-- 标签头部
+	tab_content_frame =
+	{
+		type = "frame_style" ,
+		-- 偏移
+		top_padding = 8 ,
+		right_padding = 4 ,
+		bottom_padding = 4 ,
+		left_padding = 4 ,
+		-- 图形
+		graphical_set =
+		{
+			base =
+			{
+				-- 选项卡面板是一种嵌入式面板 , 因此下方接触面的阴影不应该绘制
+				top =
+				{
+					position = { 76 , 0 } ,
+					size = { 1 , 8 }
+				} ,
+				bottom =
+				{
+					position = { 76 , 9 } ,
+					size = { 1 , 8 }
+				} ,
+				center =
+				{
+					position = { 76 , 8 } ,
+					size = { 1 , 1 }
+				}
+			} ,
+			shadow = SIStyle.DirtTop.Shadow
+		}
+	} ,
+	-- 标签本体
+	tab_container =
+	{
+		type = "horizontal_flow_style" ,
+		-- 偏移
+		right_padding = 12 ,
+		left_padding = 12 ,
+		-- 元素间距
+		horizontal_spacing = 0
+	}
+} )
 .AddStyle( "Mainbar_Setting_LabelTop" , "主面板设置管理-标签顶部" ,
 {
 	type = "label_style" ,
@@ -1126,6 +1181,13 @@ SIGen
 	-- 体积
 	width = 200 ,
 	height = 28
+} )
+.AddStyle( "Mainbar_Setting_TextBox" , "主面板设置管理-文本区域" ,
+{
+	type = "textbox_style" ,
+	-- 体积
+	width = 300 ,
+	height = 300
 } )
 -- ----------------------------------------
 -- 主面板便签管理控件样式

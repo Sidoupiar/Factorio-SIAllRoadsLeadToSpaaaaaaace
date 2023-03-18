@@ -32,6 +32,15 @@ SIInterface
 } )
 
 -- ----------------------------------------
+-- 主面板设置管理接口<br>
+-- ----------------------------------------
+.Add( SIMainbarSetting.InterfaceID ,
+{
+	-- 设置数据
+	RegisterSettingsData = SIMainbarSetting.RegisterSettingsData
+} )
+
+-- ----------------------------------------
 -- 主面板便签管理接口<br>
 -- ----------------------------------------
 .Add( SIMainbarNote.InterfaceID ,

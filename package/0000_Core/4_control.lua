@@ -155,6 +155,7 @@ SIControl.Init
 		Mainbar_Button_TimeSwitch = "主面板-游戏时间-显示切换" ,
 		-- 主面板设置管理控件样式
 		Mainbar_Setting_Frame = "主面板设置管理-窗口" ,
+		Mainbar_Setting_TabPane = "主面板设置管理--分页面板" ,
 		Mainbar_Setting_LabelTop = "主面板设置管理-标签顶部" ,
 		Mainbar_Setting_ListTitleFlow = "主面板设置管理-列表标题布局" ,
 		Mainbar_Setting_ListLabel = "主面板设置管理-列表标签" ,
@@ -164,6 +165,7 @@ SIControl.Init
 		Mainbar_Setting_Slider = "主面板设置管理-滑块" ,
 		Mainbar_Setting_Number = "主面板设置管理-数字框" ,
 		Mainbar_Setting_DropDown = "主面板设置管理-下拉列表" ,
+		Mainbar_Setting_TextBox = "主面板设置管理-文本区域" ,
 		-- 主面板便签管理控件样式
 		Mainbar_Note_Frame = "主面板便签管理-窗口" ,
 		Mainbar_Note_LabelTop = "主面板便签管理-标签顶部" ,
@@ -544,6 +546,14 @@ end )
 		end
 		if name == SIMainbarSetting.Names.Reset then
 			SIMainbarSetting.ResetSettings( playerIndex )
+			return
+		end
+		if name == SIMainbarSetting.Names.Import then
+			SIMainbarSetting.Import( playerIndex )
+			return
+		end
+		if name == SIMainbarSetting.Names.Export then
+			SIMainbarSetting.Export( playerIndex )
 			return
 		end
 		return
