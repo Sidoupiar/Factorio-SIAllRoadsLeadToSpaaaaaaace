@@ -13,6 +13,8 @@ SIAutoInsert =
 		TabPane = "SI核心-自动填充-分页面板" ,
 		TabSettingsName = "SI核心-自动填充-设置名称" ,
 		DefaultIndex = "SI核心-自动填充-默认选择" ,
+		ListButtonPrefix = "SI核心-自动填充-列表定位按钮-" ,
+		EnablePrefix = "SI核心-自动填充-启用功能-" ,
 		InsertFuel_Entity_Prefix = "SI核心-自动填充-插入燃料-实体-" ,
 		InsertFuel_Item_Prefix = "SI核心-自动填充-插入燃料-物品-" ,
 		InsertFuel_Count_Prefix = "SI核心-自动填充-插入燃料-数量-" ,
@@ -1061,6 +1063,8 @@ SIAutoInsert =
 	end
 }
 
+SIAutoInsert.Names.ListButtonPosition = #SIAutoInsert.Names.ListButtonPrefix + 1
+SIAutoInsert.Names.EnablePosition = #SIAutoInsert.Names.EnablePrefix + 1
 SIAutoInsert.Names.InsertFuel_Entity_Position = #SIAutoInsert.Names.InsertFuel_Entity_Prefix + 1
 SIAutoInsert.Names.InsertFuel_Item_Position = #SIAutoInsert.Names.InsertFuel_Item_Prefix + 1
 SIAutoInsert.Names.InsertFuel_Count_Position = #SIAutoInsert.Names.InsertFuel_Count_Prefix + 1
@@ -1072,7 +1076,7 @@ SIAutoInsert.Toolbar =
 {
 	ID = "SI核心-自动填充" ,
 	Name = "自动填充" ,
-	IconItemName = SIConstants_Core.raw.Items.AutoInsert ,
+	IconItemName = SIConstants_Core.raw.Items.IconAuto ,
 	LocalizedName = { "SICore.自动填充-工具栏-按钮" } ,
 	LocalizedDescription = { "SICore.自动填充-工具栏-提示" } ,
 	ActionRemoteInterfaceID = SIAutoInsert.InterfaceID ,

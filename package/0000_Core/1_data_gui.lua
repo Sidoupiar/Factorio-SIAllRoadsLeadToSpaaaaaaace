@@ -22,6 +22,7 @@ SIGen
 	IconToolbar = "图标工具" ,
 	IconNote = "图标便签" ,
 	IconMessage = "图标消息" ,
+	IconAuto = "图标自动" ,
 	IconFindYellow = "图标查询-黄" ,
 	IconEditYellow = "图标修改-黄" ,
 	IconSaveYellow = "图标保存-黄" ,
@@ -29,6 +30,7 @@ SIGen
 	IconToolbarYellow = "图标工具-黄" ,
 	IconNoteYellow = "图标便签-黄" ,
 	IconMessageYellow = "图标消息-黄" ,
+	IconAutoYellow = "图标自动-黄" ,
 	IconSettingWhite = "图标设置-白" ,
 	IconNext1 = "图标前进1" ,
 	IconNext2 = "图标前进2" ,
@@ -52,7 +54,6 @@ SIGen
 	IconUnlock = "图标解锁" ,
 	IconClose = "图标关闭" ,
 	IconAdd = "图标添加" ,
-	IconAuto = "图标自动" ,
 	-- 纯色图标
 	IconColorSky = "图标纯色天色" ,
 	IconColorCopper = "图标纯色铜色" ,
@@ -1196,7 +1197,7 @@ SIGen
 {
 	type = "textbox_style" ,
 	-- 体积
-	width = 300 ,
+	width = 512 ,
 	height = 300
 } )
 -- ----------------------------------------

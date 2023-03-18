@@ -27,9 +27,9 @@ SIUtils = require( "__core__/lualib/util" )
 require( CorePath .. "/define/SITools" )
 require( CorePath .. "/define/SICommon" )
 
+SIUtils.CollisionMask = require( "__core__/lualib/collision-mask-util" )
 SIUtils.Settings =
 {
-	CollisionMask = require( "__core__/lualib/collision_mask_util" ) ,
 	ShowPatreon = function()
 		return settings and settings.startup and settings.startup["SIUtils-ShowPatreon"].value or false
 	end ,

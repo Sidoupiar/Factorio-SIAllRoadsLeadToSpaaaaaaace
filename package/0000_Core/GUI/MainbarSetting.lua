@@ -48,8 +48,8 @@ SIMainbarSetting =
 			-- 第 1 层
 			local tabPane = frame.add{ type = "tabbed-pane" , style = SIConstants_Core.raw.Styles.Mainbar_Setting_TabPane }
 			local tabSettings = tabPane.add{ type = "tab" , caption = { "SICore.主面板设置管理-窗口-分页-设置" } , tooltip = { "SICore.主面板设置管理-窗口-分页-设置-提示" } }
-			local tabImport = tabPane.add{ type = "tab" , caption = { "SICore.主面板设置管理-窗口-导入-设置" } , tooltip = { "SICore.主面板设置管理-窗口-分页-导入-提示" } }
-			local tabExport = tabPane.add{ type = "tab" , caption = { "SICore.主面板设置管理-窗口-导出-设置" } , tooltip = { "SICore.主面板设置管理-窗口-分页-导出-提示" } }
+			local tabImport = tabPane.add{ type = "tab" , caption = { "SICore.主面板设置管理-窗口-分页-导入" } , tooltip = { "SICore.主面板设置管理-窗口-分页-导入-提示" } }
+			local tabExport = tabPane.add{ type = "tab" , caption = { "SICore.主面板设置管理-窗口-分页-导出" } , tooltip = { "SICore.主面板设置管理-窗口-分页-导出-提示" } }
 			local pageSettings = SIMainbarSetting.CreatePage_Settings( settings , tabPane )
 			local pageImport = SIMainbarSetting.CreatePage_Import( settings , tabPane )
 			local pageExport = SIMainbarSetting.CreatePage_Export( settings , tabPane )
@@ -123,6 +123,7 @@ SIMainbarSetting =
 		flow1.add{ type = "label" , caption = { "SICore.主面板设置管理-窗口-导入-说明" } , style = SIConstants_Core.raw.Styles.Mainbar_Setting_LabelTop }
 		-- 第 2 层
 		settings.Setting.importText = page.add{ type = "text-box" , text = nil , tooltip = { "SICore.主面板设置管理-窗口-导入-文本-提示" } , style = SIConstants_Core.raw.Styles.Mainbar_Setting_TextBox }
+		settings.Setting.importText.word_wrap = true
 		-- 第 3 层
 		local flow3 = page.add{ type = "flow" , direction = "vertical" , style = SIConstants_Core.raw.Styles.Mainbar_Setting_PageFlow }
 		flow3.add
@@ -153,6 +154,7 @@ SIMainbarSetting =
 		flow1.add{ type = "label" , caption = { "SICore.主面板设置管理-窗口-导出-说明" } , style = SIConstants_Core.raw.Styles.Mainbar_Setting_LabelTop }
 		-- 第 2 层
 		settings.Setting.exportText = page.add{ type = "text-box" , text = nil , tooltip = { "SICore.主面板设置管理-窗口-导出-文本-提示" } , style = SIConstants_Core.raw.Styles.Mainbar_Setting_TextBox }
+		settings.Setting.exportText.word_wrap = true
 		settings.Setting.exportText.read_only = true
 		-- 第 3 层
 		local flow3 = page.add{ type = "flow" , direction = "vertical" , style = SIConstants_Core.raw.Styles.Mainbar_Setting_PageFlow }
@@ -495,6 +497,7 @@ SIMainbarSetting =
 		local data = game.json_to_table( settings.Setting.importText.text:sub( SIMainbarSetting.ExportDataPosition ) )
 		local gameTick = data.Tick
 		settings.Setting.Base = data.Base
+		SIMainbarSetting.FreshList( settings )
 		SIMainbarSetting.Save( settings , false )
 		-- 玩家数据
 		if settings.Setting.Other.importPlayerData then
