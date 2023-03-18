@@ -121,3 +121,15 @@ SIInterface
 	OpenFrames = SIRequestMap.OpenFrames ,
 	CloseFrames = SIRequestMap.CloseFrames
 } )
+
+-- ----------------------------------------
+-- 自动填充功能相关接口<br>
+-- ----------------------------------------
+.Add( SIAutoInsert.InterfaceID ,
+{
+	-- 窗口
+	OpenFrameByPlayerIndex = SIAutoInsert.OpenFrameByPlayerIndex ,
+	CloseFrameByPlayerIndex = SIAutoInsert.CloseFrameByPlayerIndex ,
+	OpenFrames = SIAutoInsert.OpenFrames ,
+	CloseFrames = SIAutoInsert.CloseFrames
+} )

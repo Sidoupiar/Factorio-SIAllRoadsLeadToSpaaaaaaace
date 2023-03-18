@@ -78,6 +78,7 @@ SIControl.Init
 		IconUnlock = "图标解锁" ,
 		IconClose = "图标关闭" ,
 		IconAdd = "图标添加" ,
+		IconAuto = "图标自动" ,
 		-- 纯色图标
 		IconColorSky = "图标纯色天色" ,
 		IconColorCopper = "图标纯色铜色" ,
@@ -288,7 +289,27 @@ SIControl.Init
 		RequestMap_ListLabel = "紫图-列表标签" ,
 		RequestMap_ListText = "紫图-列表文本条" ,
 		RequestMap_ListDropDown = "紫图-列表下拉列表" ,
-		RequestMap_ListEmptyFlow = "紫图-列表占位布局"
+		RequestMap_ListEmptyFlow = "紫图-列表占位布局" ,
+		-- 自动填充控件样式
+		AutoInsert_Frame = "自动填充-窗口" ,
+		AutoInsert_TabPane = "自动填充-分页面板" ,
+		AutoInsert_Label = "自动填充-标签" ,
+		AutoInsert_Text = "自动填充-文本条" ,
+		AutoInsert_EmptyFlow = "自动填充-空布局" ,
+		AutoInsert_DropDown = "自动填充-下拉列表" ,
+		AutoInsert_ListButtonFlow = "自动填充-列表定位按钮布局" ,
+		AutoInsert_ListButton = "自动填充-列表定位按钮" ,
+		AutoInsert_BlankFlow = "自动填充-空白区" ,
+		AutoInsert_ListCheck = "自动填充-列表复选" ,
+		AutoInsert_ListPanelFlow = "自动填充-列表面板布局" ,
+		AutoInsert_SubList = "自动填充-子列表" ,
+		AutoInsert_SelectList = "自动填充-选择列表" ,
+		AutoInsert_ListChooser = "自动填充-列表选择" ,
+		AutoInsert_ListFlow = "自动填充-列表布局" ,
+		AutoInsert_ListLabel = "自动填充-列表标签" ,
+		AutoInsert_ListText = "自动填充-列表文本条" ,
+		AutoInsert_ListDropDown = "自动填充-列表下拉列表" ,
+		AutoInsert_ListEmptyFlow = "自动填充-列表占位布局"
 	}
 }
 
@@ -311,11 +332,13 @@ SINeed( "GUI/Permission" )
 SINeed( "GUI/Finder" )
 SINeed( "GUI/OreMap" )
 SINeed( "GUI/RequestMap" )
+SINeed( "GUI/AutoInsert" )
 SIGlobal.CreateSettings( SIMainData.Settings )
 SIGlobal.CreateSettings( SIPermission.Settings )
 SIGlobal.CreateSettings( SIFinder.Settings )
 SIGlobal.CreateSettings( SIOreMap.Settings )
 SIGlobal.CreateSettings( SIRequestMap.Settings )
+SIGlobal.CreateSettings( SIAutoInsert.Settings )
 
 -- ------------------------------------------------------------------------------------------------
 -- ---------- 图形界面 ----------------------------------------------------------------------------
@@ -340,6 +363,8 @@ SIEventBus
 	SIMainbar.RegisterToolbarButton( SIOreMap.Toolbar )
 	-- 紫图的管理窗口事件
 	SIMainbar.RegisterToolbarButton( SIRequestMap.Toolbar )
+	-- 自动填充的管理窗口事件
+	SIMainbar.RegisterToolbarButton( SIAutoInsert.Toolbar )
 end )
 .Load( function( functionID )
 	-- 权限管理窗口事件
@@ -350,6 +375,8 @@ end )
 	SIMainbar.RegisterToolbarButton( SIOreMap.Toolbar )
 	-- 紫图的管理窗口事件
 	SIMainbar.RegisterToolbarButton( SIRequestMap.Toolbar )
+	-- 自动填充的管理窗口事件
+	SIMainbar.RegisterToolbarButton( SIAutoInsert.Toolbar )
 end )
 .ConfigurationChange( function( functionID )
 	-- 处理通关
@@ -397,6 +424,8 @@ end )
 	SIOreMap.CloseFrame( playerIndex )
 	-- 紫图的管理窗口事件
 	SIRequestMap.CloseFrame( playerIndex )
+	-- 自动填充的管理窗口事件
+	SIAutoInsert.CloseFrame( playerIndex )
 end )
 .Add( SIEvents.on_runtime_mod_setting_changed , function( event , functionID )
 	local playerIndex = event.player_index
@@ -710,6 +739,26 @@ end )
 		end
 		return
 	end
+	-- 自动填充的管理窗口事件
+	if name:StartsWith( SIAutoInsert.Names.Prefix ) then
+		if name == SIAutoInsert.Names.Close then
+			SIAutoInsert.CloseFrame( playerIndex )
+			return
+		end
+		if name == SIAutoInsert.Names.Add then
+			SIAutoInsert.Out_AddTabSettings( playerIndex )
+			return
+		end
+		if name == SIAutoInsert.Names.Delete then
+			SIAutoInsert.Out_DeleteTabSettings( playerIndex )
+			return
+		end
+		if name:StartsWith( SIAutoInsert.Names.ListButtonPrefix ) then
+			SIAutoInsert.ListScroll( playerIndex , name )
+			return
+		end
+		return
+	end
 end )
 .Add( SIEvents.on_gui_value_changed , function( event , functionID )
 	local element = event.element
@@ -742,6 +791,15 @@ end )
 	end
 	if name:StartsWith( SIRequestMap.Names.InsertAmmo_Count_Prefix ) then
 		SIRequestMap.Set_InsertAmmo_Count( playerIndex , name , element )
+		return
+	end
+	-- 自动填充的管理窗口事件
+	if name:StartsWith( SIAutoInsert.Names.InsertFuel_Count_Prefix ) then
+		SIAutoInsert.Set_InsertFuel_Count( playerIndex , name , element )
+		return
+	end
+	if name:StartsWith( SIAutoInsert.Names.InsertAmmo_Count_Prefix ) then
+		SIAutoInsert.Set_InsertAmmo_Count( playerIndex , name , element )
 		return
 	end
 end )
@@ -777,6 +835,11 @@ end )
 	-- 紫图的管理窗口事件
 	if name == SIRequestMap.Names.TabSettingsName then
 		SIRequestMap.Set_TabSettingsName( playerIndex , element )
+		return
+	end
+	-- 自动填充的管理窗口事件
+	if name == SIAutoInsert.Names.TabSettingsName then
+		SIAutoInsert.Set_TabSettingsName( playerIndex , element )
 		return
 	end
 end )
@@ -821,6 +884,11 @@ end )
 		SIRequestMap.EnableFunction( playerIndex , name , element )
 		return
 	end
+	-- 自动填充的管理窗口事件
+	if name:StartsWith( SIAutoInsert.Names.EnablePrefix ) then
+		SIAutoInsert.EnableFunction( playerIndex , name , element )
+		return
+	end
 end )
 .Add( SIEvents.on_gui_selection_state_changed , function( event , functionID )
 	local element = event.element
@@ -845,6 +913,11 @@ end )
 	end
 	if name:StartsWith( SIRequestMap.Names.InsertAmmo_Mode_Prefix ) then
 		SIRequestMap.Set_InsertAmmo_Mode( playerIndex , name , element )
+		return
+	end
+	-- 自动填充的管理窗口事件
+	if name == SIAutoInsert.Names.DefaultIndex then
+		SIAutoInsert.Set_DefaultIndex( playerIndex , element )
 		return
 	end
 end )
@@ -928,6 +1001,26 @@ end )
 		end
 		return
 	end
+	-- 自动填充的管理窗口事件
+	if name:StartsWith( SIAutoInsert.Names.Prefix ) then
+		if name:StartsWith( SIAutoInsert.Names.InsertFuel_Entity_Prefix ) then
+			SIAutoInsert.Set_InsertFuel_Entity( playerIndex , name , element )
+			return
+		end
+		if name:StartsWith( SIAutoInsert.Names.InsertFuel_Item_Prefix ) then
+			SIAutoInsert.Set_InsertFuel_Item( playerIndex , name , element )
+			return
+		end
+		if name:StartsWith( SIAutoInsert.Names.InsertAmmo_Entity_Prefix ) then
+			SIAutoInsert.Set_InsertAmmo_Entity( playerIndex , name , element )
+			return
+		end
+		if name:StartsWith( SIAutoInsert.Names.InsertAmmo_Item_Prefix ) then
+			SIAutoInsert.Set_InsertAmmo_Item( playerIndex , name , element )
+			return
+		end
+		return
+	end
 end )
 .Add( SIEvents.on_gui_selected_tab_changed , function( event , functionID )
 	local element = event.element
@@ -939,6 +1032,11 @@ end )
 	-- 紫图的管理窗口事件
 	if name == SIRequestMap.Names.TabPane then
 		SIRequestMap.SwitchTab( playerIndex )
+		return
+	end
+	-- 自动填充的管理窗口事件
+	if name == SIAutoInsert.Names.TabPane then
+		SIAutoInsert.SwitchTab( playerIndex )
 		return
 	end
 end )
@@ -984,6 +1082,11 @@ end )
 		SIRequestMap.MoveFrame( playerIndex )
 		return
 	end
+	-- 自动填充的管理窗口事件
+	if name == SIAutoInsert.Names.Frame then
+		SIAutoInsert.MoveFrame( playerIndex )
+		return
+	end
 end )
 
 -- ------------------------------------------------------------------------------------------------
@@ -1025,6 +1128,15 @@ end )
 	local oldName = event.old_name
 	-- 主面板窗口事件
 	SIMainbar.ChangeSurfaceTime( surfaceIndex , oldName )
+end )
+.Add( SIEvents.on_built_entity , function( event , functionID )
+	local entity = event.created_entity
+	if not entity.valid then
+		return
+	end
+	local playerIndex = event.player_index
+	-- 自动填充的管理窗口事件
+	SIAutoInsert.EffectSelect( playerIndex , entity )
 end )
 .Add( SIPermission.EventID , function( event , functionID )
 	local playerIndex = event.player_index
