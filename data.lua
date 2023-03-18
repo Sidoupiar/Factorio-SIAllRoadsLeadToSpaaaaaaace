@@ -10,6 +10,7 @@ SIInit
 .AutoLoadState( SIInit.StateCodeDefine.Data )
 .AutoLoad()
 -- 如果你想在附属 MOD 中使用这个框架 , 则仅需在 settings.lua , data.lua , control.lua 中使用 SIInit.AutoLoad 函数即可 ( 不要在其他文件中使用 )
+-- 使用方法可以参考我做的其他附属 MOD
 --
 -- 定义 : package 中的每个文件夹都可以看作是一个 "功能包"
 --
@@ -68,3 +69,4 @@ SIInit
 -- 34.一套新的传送带 , 包括地下传送带 , 筛选器 , 装卸机 , 堆叠机
 -- 35.超级加倍污染仪 , 什么工作也不做 , 专业施放污染 , 有 1000 倍满效率矿机的污染能力
 -- 36.一套新的箱子 , 包括各种尺寸 , 2x2 , 3x3 , 4x4 , 6x6 , 11x11 , 以及 4x2 和 11x3
+-- 37.齿轮箱逻辑
