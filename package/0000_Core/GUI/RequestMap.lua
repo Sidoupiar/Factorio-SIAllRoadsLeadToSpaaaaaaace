@@ -2043,11 +2043,11 @@ SIRequestMap =
 						countList[entityName] = nil
 					else
 						local newCountList = {}
-						for innerEntityName , requestItemList in pairs( countList ) do
+						for innerEntityName , count in pairs( countList ) do
 							if entityName == innerEntityName then
 								newCountList[selectEntityName] = 0
 							else
-								newCountList[innerEntityName] = requestItemList
+								newCountList[innerEntityName] = count
 							end
 						end
 						tabSettings.MaxSlot.List = newCountList
@@ -2117,11 +2117,11 @@ SIRequestMap =
 						moduleList[entityName] = nil
 					else
 						local newModuleList = {}
-						for innerEntityName , requestItemList in pairs( moduleList ) do
+						for innerEntityName , moduleData in pairs( moduleList ) do
 							if entityName == innerEntityName then
 								newModuleList[selectEntityName] = {}
 							else
-								newModuleList[innerEntityName] = requestItemList
+								newModuleList[innerEntityName] = moduleData
 							end
 						end
 						tabSettings.SetModule.List = newModuleList
@@ -2196,11 +2196,11 @@ SIRequestMap =
 						moduleList[entityName] = nil
 					else
 						local newModuleList = {}
-						for innerEntityName , requestItemList in pairs( moduleList ) do
+						for innerEntityName , moduleData in pairs( moduleList ) do
 							if entityName == innerEntityName then
 								newModuleList[selectEntityName] = {}
 							else
-								newModuleList[innerEntityName] = requestItemList
+								newModuleList[innerEntityName] = moduleData
 							end
 						end
 						tabSettings.RemoveModule.List = newModuleList
@@ -2255,11 +2255,11 @@ SIRequestMap =
 						itemDataList[entityName] = nil
 					else
 						local newItemDataList = {}
-						for innerEntityName , requestItemList in pairs( itemDataList ) do
+						for innerEntityName , itemData in pairs( itemDataList ) do
 							if entityName == innerEntityName then
 								newItemDataList[selectEntityName] = {}
 							else
-								newItemDataList[innerEntityName] = requestItemList
+								newItemDataList[innerEntityName] = itemData
 							end
 						end
 						tabSettings.InsertFuel.List = newItemDataList
@@ -2350,11 +2350,11 @@ SIRequestMap =
 						itemDataList[entityName] = nil
 					else
 						local newItemDataList = {}
-						for innerEntityName , requestItemList in pairs( itemDataList ) do
+						for innerEntityName , itemData in pairs( itemDataList ) do
 							if entityName == innerEntityName then
 								newItemDataList[selectEntityName] = {}
 							else
-								newItemDataList[innerEntityName] = requestItemList
+								newItemDataList[innerEntityName] = itemData
 							end
 						end
 						tabSettings.InsertAmmo.List = newItemDataList
@@ -2549,6 +2549,14 @@ SIRequestMap =
 		settings.defaultIndex3 = data.defaultIndex3 or 0
 		settings.defaultIndex4 = data.defaultIndex4 or 0
 		settings.TabSettingsList = data.TabSettingsList or {}
+		-- 整理数据
+		local tabSettingsCount = #settings.TabSettingsList
+		if tabSettingsCount < 1 then
+			SIRequestMap.CreateTabSettings( settings )
+			tabSettingsCount = #settings.TabSettingsList
+		end
+		settings.tabSettingsIndex = SITools.AsNumberInt( settings.tabSettingsIndex , 1 , tabSettingsCount )
+		-- 更新控件
 		if settings.frame and settings.frame.valid then
 			SIRequestMap.CreateTab( settings )
 		end

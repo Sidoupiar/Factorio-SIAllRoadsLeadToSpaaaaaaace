@@ -371,7 +371,7 @@ SIEventBus
 	SIMainbarSetting.RegisterSettingsData( SIRequestMap.SettingsData )
 	-- 自动填充的管理窗口事件
 	SIMainbar.RegisterToolbarButton( SIAutoInsert.Toolbar )
-	SIMainbarSetting.RegisterSettingsData( SIRequestMap.SettingsData )
+	SIMainbarSetting.RegisterSettingsData( SIAutoInsert.SettingsData )
 end )
 .Load( function( functionID )
 	-- 权限管理窗口事件
@@ -386,7 +386,7 @@ end )
 	SIMainbarSetting.RegisterSettingsData( SIRequestMap.SettingsData )
 	-- 自动填充的管理窗口事件
 	SIMainbar.RegisterToolbarButton( SIAutoInsert.Toolbar )
-	SIMainbarSetting.RegisterSettingsData( SIRequestMap.SettingsData )
+	SIMainbarSetting.RegisterSettingsData( SIAutoInsert.SettingsData )
 end )
 .ConfigurationChange( function( functionID )
 	-- 处理通关

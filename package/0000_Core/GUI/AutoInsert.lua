@@ -350,7 +350,7 @@ SIAutoInsert =
 					elem_filters = SIAutoInsert.InsertFuel_Entity_Filters ,
 					style = SIConstants_Core.raw.Styles.AutoInsert_ListChooser
 				}
-				local subList = list.add{ type = "table" , column_count = 6 , style = SIConstants_Core.raw.Styles.AutoInsert_SelectList }
+				local subList = list.add{ type = "table" , column_count = 5 , style = SIConstants_Core.raw.Styles.AutoInsert_SelectList }
 				if entityPrototype.burner_prototype then
 					local fuelFilter = SIUtils.table.deepcopy( SIAutoInsert.InsertFuel_Item_Filters )
 					for categoryName , value in pairs( entityPrototype.burner_prototype.fuel_categories ) do
@@ -394,7 +394,6 @@ SIAutoInsert =
 						subList.add{ type = "label" , caption = { "SICore.自动填充-窗口-插入燃料-数量" } , tooltip = { "SICore.自动填充-窗口-插入燃料-数量-提示" } , style = SIConstants_Core.raw.Styles.AutoInsert_ListLabel }
 						subList.add{ type = "textfield" , name = SIAutoInsert.Names.InsertFuel_Count_Prefix .. itemDataIndex .. "_" .. entityName , text = tostring( itemData.Count or 1 ) , numeric = true , tooltip = { "SICore.自动填充-窗口-插入燃料-数量-提示" } , style = SIConstants_Core.raw.Styles.AutoInsert_ListText }
 						subList.add{ type = "flow" , direction = "horizontal" , style = SIConstants_Core.raw.Styles.AutoInsert_ListEmptyFlow }
-						subList.add{ type = "label" , caption = { "SICore.自动填充-窗口-插入燃料-模式" } , tooltip = { "SICore.自动填充-窗口-插入燃料-模式-提示" } , style = SIConstants_Core.raw.Styles.AutoInsert_ListLabel }
 					end
 				end
 			else
@@ -408,7 +407,7 @@ SIAutoInsert =
 					elem_filters = SIAutoInsert.InsertFuel_Entity_Filters ,
 					style = SIConstants_Core.raw.Styles.AutoInsert_ListChooser
 				}
-				local subList = list.add{ type = "table" , column_count = 6 , style = SIConstants_Core.raw.Styles.AutoInsert_SelectList }
+				local subList = list.add{ type = "table" , column_count = 5 , style = SIConstants_Core.raw.Styles.AutoInsert_SelectList }
 				local fuelFilter = SIUtils.table.deepcopy( SIAutoInsert.InsertFuel_Item_Filters )
 				table.insert( fuelFilter ,
 				{
@@ -444,7 +443,6 @@ SIAutoInsert =
 					subList.add{ type = "label" , caption = { "SICore.自动填充-窗口-插入燃料-数量" } , tooltip = { "SICore.自动填充-窗口-插入燃料-数量-提示" } , style = SIConstants_Core.raw.Styles.AutoInsert_ListLabel }
 					subList.add{ type = "textfield" , name = SIAutoInsert.Names.InsertFuel_Count_Prefix .. itemDataIndex .. "_" .. entityName , text = tostring( itemData.Count or 1 ) , numeric = true , tooltip = { "SICore.自动填充-窗口-插入燃料-数量-提示" } , style = SIConstants_Core.raw.Styles.AutoInsert_ListText }
 					subList.add{ type = "flow" , direction = "horizontal" , style = SIConstants_Core.raw.Styles.AutoInsert_ListEmptyFlow }
-					subList.add{ type = "label" , caption = { "SICore.自动填充-窗口-插入燃料-模式" } , tooltip = { "SICore.自动填充-窗口-插入燃料-模式-提示" } , style = SIConstants_Core.raw.Styles.AutoInsert_ListLabel }
 				end
 			end
 		end
@@ -492,7 +490,7 @@ SIAutoInsert =
 				elseif type == SICommon.Types.Entities.WagonArtillery then
 					maxAmmoSize = entityPrototype.get_inventory_size( defines.inventory.artillery_wagon_ammo )
 				end
-				local subList = list.add{ type = "table" , column_count = 7 , style = SIConstants_Core.raw.Styles.AutoInsert_SelectList }
+				local subList = list.add{ type = "table" , column_count = 6 , style = SIConstants_Core.raw.Styles.AutoInsert_SelectList }
 				for itemDataIndex = 1 , maxAmmoSize , 1 do
 					local itemData = itemDataList[itemDataIndex]
 					if not itemData then
@@ -570,7 +568,6 @@ SIAutoInsert =
 					subList.add{ type = "label" , caption = { "SICore.自动填充-窗口-插入弹药-数量" } , tooltip = { "SICore.自动填充-窗口-插入弹药-数量-提示" } , style = SIConstants_Core.raw.Styles.AutoInsert_ListLabel }
 					subList.add{ type = "textfield" , name = SIAutoInsert.Names.InsertAmmo_Count_Prefix .. itemDataIndex .. "_" .. entityName , text = tostring( itemData.Count or 1 ) , numeric = true , tooltip = { "SICore.自动填充-窗口-插入弹药-数量-提示" } , style = SIConstants_Core.raw.Styles.AutoInsert_ListText }
 					subList.add{ type = "flow" , direction = "horizontal" , style = SIConstants_Core.raw.Styles.AutoInsert_ListEmptyFlow }
-					subList.add{ type = "label" , caption = { "SICore.自动填充-窗口-插入弹药-模式" } , tooltip = { "SICore.自动填充-窗口-插入弹药-模式-提示" } , style = SIConstants_Core.raw.Styles.AutoInsert_ListLabel }
 				end
 			else
 				list.add
@@ -583,7 +580,7 @@ SIAutoInsert =
 					elem_filters = SIAutoInsert.InsertAmmo_Entity_Filters ,
 					style = SIConstants_Core.raw.Styles.AutoInsert_ListChooser
 				}
-				local subList = list.add{ type = "table" , column_count = 7 , style = SIConstants_Core.raw.Styles.AutoInsert_SelectList }
+				local subList = list.add{ type = "table" , column_count = 6 , style = SIConstants_Core.raw.Styles.AutoInsert_SelectList }
 				for itemDataIndex , itemData in pairs( itemDataList ) do
 					local weaponChooser = subList.add
 					{
@@ -621,7 +618,6 @@ SIAutoInsert =
 					subList.add{ type = "label" , caption = { "SICore.自动填充-窗口-插入弹药-数量" } , tooltip = { "SICore.自动填充-窗口-插入弹药-数量-提示" } , style = SIConstants_Core.raw.Styles.AutoInsert_ListLabel }
 					subList.add{ type = "textfield" , name = SIAutoInsert.Names.InsertAmmo_Count_Prefix .. itemDataIndex .. "_" .. entityName , text = tostring( itemData.Count or 1 ) , numeric = true , tooltip = { "SICore.自动填充-窗口-插入弹药-数量-提示" } , style = SIConstants_Core.raw.Styles.AutoInsert_ListText }
 					subList.add{ type = "flow" , direction = "horizontal" , style = SIConstants_Core.raw.Styles.AutoInsert_ListEmptyFlow }
-					subList.add{ type = "label" , caption = { "SICore.自动填充-窗口-插入弹药-模式" } , tooltip = { "SICore.自动填充-窗口-插入弹药-模式-提示" } , style = SIConstants_Core.raw.Styles.AutoInsert_ListLabel }
 				end
 			end
 		end
@@ -867,11 +863,11 @@ SIAutoInsert =
 						itemDataList[entityName] = nil
 					else
 						local newItemDataList = {}
-						for innerEntityName , requestItemList in pairs( itemDataList ) do
+						for innerEntityName , itemData in pairs( itemDataList ) do
 							if entityName == innerEntityName then
 								newItemDataList[selectEntityName] = {}
 							else
-								newItemDataList[innerEntityName] = requestItemList
+								newItemDataList[innerEntityName] = itemData
 							end
 						end
 						tabSettings.InsertFuel.List = newItemDataList
@@ -944,11 +940,11 @@ SIAutoInsert =
 						itemDataList[entityName] = nil
 					else
 						local newItemDataList = {}
-						for innerEntityName , requestItemList in pairs( itemDataList ) do
+						for innerEntityName , itemData in pairs( itemDataList ) do
 							if entityName == innerEntityName then
 								newItemDataList[selectEntityName] = {}
 							else
-								newItemDataList[innerEntityName] = requestItemList
+								newItemDataList[innerEntityName] = itemData
 							end
 						end
 						tabSettings.InsertAmmo.List = newItemDataList
@@ -1080,6 +1076,14 @@ SIAutoInsert =
 		local settings = SIGlobal.GetPlayerSettings( SIAutoInsert.Settings.Name , playerIndex )
 		settings.defaultIndex = data.defaultIndex or 0
 		settings.TabSettingsList = data.TabSettingsList or {}
+		-- 整理数据
+		local tabSettingsCount = #settings.TabSettingsList
+		if tabSettingsCount < 1 then
+			SIAutoInsert.CreateTabSettings( settings )
+			tabSettingsCount = #settings.TabSettingsList
+		end
+		settings.tabSettingsIndex = SITools.AsNumberInt( settings.tabSettingsIndex , 1 , tabSettingsCount )
+		-- 更新控件
 		if settings.frame and settings.frame.valid then
 			SIAutoInsert.CreateTab( settings )
 		end
