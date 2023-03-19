@@ -5,7 +5,7 @@ local constantsData =
 	FileList =
 	{
 		[SIInit.StateCodeDefine.Data]    = { "1_data_rock" , "1_data_ore" , "1_data_crystal" } ,
-		[SIInit.StateCodeDefine.Control] = { "4_control"          }
+		[SIInit.StateCodeDefine.Control] = { "4_control" }
 	} ,
 	Autoload =
 	{
