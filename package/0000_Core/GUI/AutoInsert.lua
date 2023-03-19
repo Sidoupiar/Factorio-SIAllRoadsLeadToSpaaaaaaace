@@ -1007,9 +1007,7 @@ SIAutoInsert =
 			SIAutoInsert.EffectTabSettings( settings , settings.tabSettingsIndex )
 		else
 			local defaultIndex = settings.defaultIndex
-			if defaultIndex < 1 or defaultIndex > #settings.TabSettingsList then
-				SIAutoInsert.OpenFrame( playerIndex )
-			else
+			if defaultIndex > 0 and defaultIndex <= #settings.TabSettingsList then
 				SIAutoInsert.EffectTabSettings( settings , defaultIndex )
 			end
 		end
