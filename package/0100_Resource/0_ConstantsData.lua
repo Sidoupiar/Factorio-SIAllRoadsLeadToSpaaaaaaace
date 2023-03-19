@@ -4,8 +4,9 @@ local constantsData =
 	Name = "自然矿产" ,
 	FileList =
 	{
-		[SIInit.StateCodeDefine.Data]    = { "1_data_rock" , "1_data_ore" , "1_data_crystal" } ,
-		[SIInit.StateCodeDefine.Control] = { "4_control" }
+		[SIInit.StateCodeDefine.Data]           = { "1_data_ore" , "1_data_crystal" , "1_data_rock" } ,
+		[SIInit.StateCodeDefine.DataFinalFixes] = { "3_data-final-fixes" } ,
+		[SIInit.StateCodeDefine.Control]        = { "4_control" }
 	} ,
 	Autoload =
 	{
@@ -17,7 +18,9 @@ local constantsData =
 				Name = "自然矿产" ,
 				Subgroups =
 				{
-					Shelling = "开壳"
+					Ore = "矿石" ,
+					Crystal = "魔力结晶" ,
+					Rock = "矿山石"
 				}
 			}
 		}
