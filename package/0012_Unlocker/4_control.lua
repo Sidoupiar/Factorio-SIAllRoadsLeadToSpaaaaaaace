@@ -33,6 +33,18 @@ end )
 -- 事件
 -- ----------------------------------------
 SIEventBus
+.Add( SIEvents.on_force_created , function( event , functionID )
+	local force = event.force
+	SIUnlocker.InitForce( force.index )
+end )
+.Add( SIEvents.on_force_reset , function( event , functionID )
+	local force = event.force
+	SIUnlocker.ResetForce( force.index )
+end )
+.Add( SIEvents.on_forces_merged , function( event , functionID )
+	local forceIndex = event.source_index
+	SIUnlocker.ResetForce( forceIndex )
+end )
 .Add( SIEvents.on_player_mined_entity , function( event , functionID )
 	local entity = event.entity
 	if not entity.valid then

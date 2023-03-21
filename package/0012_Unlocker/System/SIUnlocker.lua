@@ -12,6 +12,7 @@ SIUnlocker =
 		} ,
 		DefaultForce =
 		{
+			Init = false ,
 			UnlockData = {} ,
 			Mined = {} ,
 			MinedResult = {} ,
@@ -35,6 +36,10 @@ SIUnlocker =
 	InitForce = function( forceIndex )
 		local globalSettings = SIGlobal.GetGlobalSettings( SIUnlocker.Settings.Name )
 		local forceSettings = SIGlobal.GetForceSettings( SIUnlocker.Settings.Name , forceIndex )
+		if forceSettings.Init then
+			return
+		end
+		forceSettings.Init = true
 		for index , unlockData in pairs( globalSettings.UnlockData ) do
 			local unlockDataID = unlockData.ID
 			local forceUnlockData = SIUtils.table.deepcopy( unlockData )
@@ -56,6 +61,7 @@ SIUnlocker =
 	end ,
 	ResetForce = function( forceIndex )
 		local forceSettings = SIGlobal.GetForceSettings( SIUnlocker.Settings.Name , forceIndex )
+		forceSettings.Init = false
 		forceSettings.UnlockData = {}
 		for triggerTypeName , triggerType in pairs( SIUnlocker.TriggerTypeID ) do
 			forceSettings[triggerType] = {}
