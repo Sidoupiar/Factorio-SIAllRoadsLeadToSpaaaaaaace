@@ -32,6 +32,28 @@ end )
 -- ----------------------------------------
 -- 事件
 -- ----------------------------------------
+SIEventBus
+.Add( SIEvents.on_player_mined_entity , function( event , functionID )
+	local entity = event.entity
+	if not entity.valid then
+		return
+	end
+	local playerIndex = event.player_index
+	local player = game.get_player( playerIndex )
+	local forceIndex = player.force.index
+	SIUnlocker.FreshMined( forceIndex , entity.name )
+	for itemName , count in pairs( event.inventory.get_contents() ) do
+		SIUnlocker.FreshMinedResult( forceIndex , itemName , count )
+	end
+end )
+.Add( SIEvents.on_player_crafted_item , function( event , functionID )
+end )
+.Add( SIEvents.on_built_entity , function( event , functionID )
+end )
+.Add( SIEvents.on_entity_died , function( event , functionID )
+end )
+.Add( SIEvents.on_player_used_capsule , function( event , functionID )
+end )
 
 -- ------------------------------------------------------------------------------------------------
 -- ---------- 外部接口 ----------------------------------------------------------------------------
