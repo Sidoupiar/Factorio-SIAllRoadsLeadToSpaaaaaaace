@@ -58,6 +58,17 @@ if SIConfigs.SIOverhaul.OreCollision then
 			end
 		end
 	end )
+	-- 工具函数
+	local function FixNextUpgrade( upgradeEntityName , entityMask )
+		SIGen.ForEachType( SICommon.Types.Entities , function( prototypeName , prototypeData )
+			if prototypeName == upgradeEntityName and prototypeData then
+				prototypeData.collision_mask = entityMask
+				if prototypeData.next_upgrade then
+					FixNextUpgrade( prototypeData.next_upgrade , entityMask )
+				end
+			end
+		end )
+	end
 	-- 修改实体的碰撞信息
 	local maskTypeList =
 	{
@@ -117,12 +128,18 @@ if SIConfigs.SIOverhaul.OreCollision then
 				if SIConfigs.SIOverhaul.OreCollisionBlackList[prototypeName] then
 					return
 				end
+				local entityMask = nil
 				if prototypeData.collision_mask then
 					if not SITable.Has( prototypeData.collision_mask , resourceLayer ) then
 						table.insert( prototypeData.collision_mask , resourceLayer )
+						entityMask = prototypeData.collision_mask
 					end
 				else
 					prototypeData.collision_mask = maskList
+					entityMask = maskList
+				end
+				if prototypeData.next_upgrade then
+					FixNextUpgrade( prototypeData.next_upgrade , entityMask )
 				end
 			end
 		end )
