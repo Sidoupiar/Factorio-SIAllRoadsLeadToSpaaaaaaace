@@ -59,7 +59,7 @@ if SIConfigs.SIOverhaul.OreCollision then
 		end
 	end )
 	-- 修改实体的碰撞信息
-	for index , maskType in pairs
+	local maskTypeList =
 	{
 		SICommon.Types.Entities.Boiler ,
 		SICommon.Types.Entities.Generator ,
@@ -108,7 +108,8 @@ if SIConfigs.SIOverhaul.OreCollision then
 		SICommon.Types.Entities.CombDecider ,
 		SICommon.Types.Entities.CombConstant ,
 		SICommon.Types.Entities.Speaker
-	} do
+	}
+	for index , maskType in pairs( maskTypeList ) do
 		local maskList = SIUtils.CollisionMask.get_default_mask( maskType )
 		table.insert( maskList , resourceLayer )
 		SIGen.ForEach( maskType , function( prototypeName , prototypeData )
