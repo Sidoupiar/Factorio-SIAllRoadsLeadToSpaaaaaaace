@@ -743,7 +743,7 @@ end )
 				SIRPGSystem.CreateAttackDriveExp( driver , diedEntity , causeEntity )
 			elseif driver.type == SICommon.Types.Entities.Character then
 				local player = driver.player
-				if player.is_player() then
+				if player and player.valid and player.is_player() then
 					SIRPGSystem.CreateAttackDriveExp( player , diedEntity , causeEntity )
 				end
 			end

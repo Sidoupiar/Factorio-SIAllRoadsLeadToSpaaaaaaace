@@ -47,12 +47,64 @@ SIEventBus
 	end
 end )
 .Add( SIEvents.on_player_crafted_item , function( event , functionID )
+	local recipe = event.recipe
+	local playerIndex = event.player_index
+	local player = game.get_player( playerIndex )
+	local forceIndex = player.force.index
+	SIUnlocker.FreshCraft( forceIndex , playerIndex , recipe.name )
 end )
 .Add( SIEvents.on_built_entity , function( event , functionID )
+	local entity = event.created_entity
+	if not entity.valid then
+		return
+	end
+	local playerIndex = event.player_index
+	local player = game.get_player( playerIndex )
+	local forceIndex = player.force.index
+	SIUnlocker.FreshBuild( forceIndex , playerIndex , entity.name )
 end )
 .Add( SIEvents.on_entity_died , function( event , functionID )
+	local entity = event.entity
+	if not entity.valid then
+		return
+	end
+	local causeEntity = event.cause
+	if not causeEntity or not causeEntity.valid then
+		return
+	end
+	local player = nil
+	if causeEntity.is_player() then
+		player = causeEntity
+	elseif causeEntity.type == SICommon.Types.Entities.Character then
+		local causePlayer = causeEntity.player
+		if causePlayer and causePlayer.valid and causePlayer.is_player() then
+			player = causePlayer
+		end
+	elseif causeEntity.type == SICommon.Types.Entities.Car or causeEntity.type == SICommon.Types.Entities.SpiderVehicle then
+		local driver = causeEntity.get_driver()
+		if driver and driver.valid then
+			if driver.is_player() then
+				player = driver
+			elseif driver.type == SICommon.Types.Entities.Character then
+				local causePlayer = driver.player
+				if causePlayer and causePlayer.valid and causePlayer.is_player() then
+					player = causePlayer
+				end
+			end
+		end
+	end
+	if not player then
+		return
+	end
+	local forceIndex = player.force.index
+	SIUnlocker.FreshDestroy( forceIndex , player.index , entity.name )
 end )
 .Add( SIEvents.on_player_used_capsule , function( event , functionID )
+	local item = event.item
+	local playerIndex = event.player_index
+	local player = game.get_player( playerIndex )
+	local forceIndex = player.force.index
+	SIUnlocker.FreshCapsule( forceIndex , playerIndex , item.name )
 end )
 
 -- ------------------------------------------------------------------------------------------------

@@ -138,6 +138,74 @@ SIUnlocker =
 			end
 		end
 	end ,
+	FreshCraft = function( forceIndex , playerIndex , recipeName )
+		local forceSettings = SIGlobal.GetForceSettings( SIUnlocker.Settings.Name , forceIndex )
+		local craftDataList = forceSettings.Craft[recipeName]
+		if not craftDataList then
+			return
+		end
+		for index , unlockDataID in pairs( SIUtils.table.deepcopy( craftDataList ) ) do
+			local unlockData = forceSettings.UnlockData[unlockDataID]
+			local craftData = unlockData.Triggers.Craft[recipeName]
+			craftData.Count = craftData.Count + 1
+			if craftData.Count > craftData.Max then
+				craftData.Finish = true
+				table.remove( craftDataList , index )
+				SIUnlocker.EffectUnlockData( unlockData , forceIndex , playerIndex )
+			end
+		end
+	end ,
+	FreshBuild = function( forceIndex , playerIndex , entityName )
+		local forceSettings = SIGlobal.GetForceSettings( SIUnlocker.Settings.Name , forceIndex )
+		local buildDataList = forceSettings.Build[entityName]
+		if not buildDataList then
+			return
+		end
+		for index , unlockDataID in pairs( SIUtils.table.deepcopy( buildDataList ) ) do
+			local unlockData = forceSettings.UnlockData[unlockDataID]
+			local buildData = unlockData.Triggers.Build[entityName]
+			buildData.Count = buildData.Count + 1
+			if buildData.Count > buildData.Max then
+				buildData.Finish = true
+				table.remove( buildDataList , index )
+				SIUnlocker.EffectUnlockData( unlockData , forceIndex , playerIndex )
+			end
+		end
+	end ,
+	FreshDestroy = function( forceIndex , playerIndex , entityName )
+		local forceSettings = SIGlobal.GetForceSettings( SIUnlocker.Settings.Name , forceIndex )
+		local destroyDataList = forceSettings.Destroy[entityName]
+		if not destroyDataList then
+			return
+		end
+		for index , unlockDataID in pairs( SIUtils.table.deepcopy( destroyDataList ) ) do
+			local unlockData = forceSettings.UnlockData[unlockDataID]
+			local destroyData = unlockData.Triggers.Destroy[entityName]
+			destroyData.Count = destroyData.Count + 1
+			if destroyData.Count > destroyData.Max then
+				destroyData.Finish = true
+				table.remove( destroyDataList , index )
+				SIUnlocker.EffectUnlockData( unlockData , forceIndex , playerIndex )
+			end
+		end
+	end ,
+	FreshCapsule = function( forceIndex , playerIndex , itemName )
+		local forceSettings = SIGlobal.GetForceSettings( SIUnlocker.Settings.Name , forceIndex )
+		local capsuleDataList = forceSettings.Capsule[itemName]
+		if not capsuleDataList then
+			return
+		end
+		for index , unlockDataID in pairs( SIUtils.table.deepcopy( capsuleDataList ) ) do
+			local unlockData = forceSettings.UnlockData[unlockDataID]
+			local capsuleData = unlockData.Triggers.Capsule[itemName]
+			capsuleData.Count = capsuleData.Count + 1
+			if capsuleData.Count > capsuleData.Max then
+				capsuleData.Finish = true
+				table.remove( capsuleDataList , index )
+				SIUnlocker.EffectUnlockData( unlockData , forceIndex , playerIndex )
+			end
+		end
+	end ,
 	-- ------------------------------------------------------------------------------------------------
 	-- ------ 接口函数 -- 注册 ------------------------------------------------------------------------
 	-- ------------------------------------------------------------------------------------------------
