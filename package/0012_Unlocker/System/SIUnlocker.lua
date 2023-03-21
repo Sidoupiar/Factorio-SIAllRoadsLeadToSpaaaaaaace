@@ -49,6 +49,20 @@ SIUnlocker =
 				for index , recipeName in pairs( result.Recipes ) do
 					force.recipes[recipeName].enabled = false
 				end
+			elseif resultType == SIUnlocker.ResultTypeID.AddTechnology then
+				local force = game.forces[forceIndex]
+				for index , technologyName in pairs( result.Technologies ) do
+					local technology = force.technologies[technologyName]
+					technology.enabled = true
+					technology.visible_when_disabled = true
+				end
+			elseif resultType == SIUnlocker.ResultTypeID.RemoveTechnology then
+				local force = game.forces[forceIndex]
+				for index , technologyName in pairs( result.Technologies ) do
+					local technology = force.technologies[technologyName]
+					technology.enabled = false
+					technology.visible_when_disabled = false
+				end
 			elseif resultType == SIUnlocker.ResultTypeID.AddItem then
 				local outItemStacks = {}
 				local player = game.get_player( playerIndex )
@@ -154,12 +168,14 @@ SIUnlocker.TriggerTypeID =
 }
 SIUnlocker.ResultTypeID =
 {
-	AddRecipe     = "AddRecipe"     , -- 解锁配方
-	RemoveRecipe  = "RemoveRecipe"  , -- 锁定配方
-	AddItem       = "AddItem"       , -- 添加物品 , 阵营内如果有多个玩家 , 则只有最终触发玩家会获得物品
-	MessageForce  = "MessageForce"  , -- 向阵营发送消息
-	MessagePlayer = "MessagePlayer" , -- 向最终触发的玩家发送消息
-	Interface     = "Interface"       -- 执行 remote 接口函数 , 有五个参数 , 第 1 个参数是解锁数据的 ID , 第 2 个参数是保存在其中的数据包 , 第 3 个参数是触发的阵营编号 , 第 4 个参数是最终触发的玩家编号 , 第 5 个参数是当前游戏刻
+	AddRecipe        = "AddRecipe"        , -- 解锁配方
+	RemoveRecipe     = "RemoveRecipe"     , -- 锁定配方
+	AddTechnology    = "AddTechnology"    , -- 解锁科技
+	RemoveTechnology = "RemoveTechnology" , -- 锁定科技
+	AddItem          = "AddItem"          , -- 添加物品 , 阵营内如果有多个玩家 , 则只有最终触发玩家会获得物品
+	MessageForce     = "MessageForce"     , -- 向阵营发送消息
+	MessagePlayer    = "MessagePlayer"    , -- 向最终触发的玩家发送消息
+	Interface        = "Interface"          -- 执行 remote 接口函数 , 有五个参数 , 第 1 个参数是解锁数据的 ID , 第 2 个参数是保存在其中的数据包 , 第 3 个参数是触发的阵营编号 , 第 4 个参数是最终触发的玩家编号 , 第 5 个参数是当前游戏刻
 }
 SIUnlocker.MinedResultMode =
 {
