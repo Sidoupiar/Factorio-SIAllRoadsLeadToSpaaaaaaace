@@ -25,10 +25,42 @@ SIUnlocker =
 	-- ----------- 初始化 -----------------------------------------------------------------------------
 	-- ------------------------------------------------------------------------------------------------
 	InitData = function()
+		for forceIndex , force in pairs( game.forces ) do
+			SIUnlocker.InitForce( forceIndex )
+		end
 	end ,
 	-- ------------------------------------------------------------------------------------------------
 	-- ---------- 功能函数 ----------------------------------------------------------------------------
 	-- ------------------------------------------------------------------------------------------------
+	InitForce = function( forceIndex )
+		local globalSettings = SIGlobal.GetGlobalSettings( SIUnlocker.Settings.Name )
+		local forceSettings = SIGlobal.GetForceSettings( SIUnlocker.Settings.Name , forceIndex )
+		for index , unlockData in pairs( globalSettings.UnlockData ) do
+			local unlockDataID = unlockData.ID
+			local forceUnlockData = SIUtils.table.deepcopy( unlockData )
+			forceSettings.UnlockData[unlockDataID] = forceUnlockData
+			for triggerType , triggerList in pairs( forceUnlockData.Triggers ) do
+				local triggerIDListPack = forceSettings[triggerType]
+				for triggerName , trigger in pairs( triggerList ) do
+					trigger.Count = 0
+					trigger.Finish = false
+					local triggerIDList = triggerIDListPack[triggerName]
+					if not triggerIDList then
+						triggerIDList = {}
+						triggerIDListPack[triggerName] = triggerIDList
+					end
+					table.insert( triggerIDList , unlockDataID )
+				end
+			end
+		end
+	end ,
+	ResetForce = function( forceIndex )
+		local forceSettings = SIGlobal.GetForceSettings( SIUnlocker.Settings.Name , forceIndex )
+		forceSettings.UnlockData = {}
+		for triggerTypeName , triggerType in pairs( SIUnlocker.TriggerTypeID ) do
+			forceSettings[triggerType] = {}
+		end
+	end ,
 	EffectUnlockData = function( unlockData , forceIndex , playerIndex )
 		for triggerType , triggerList in pairs( unlockData.Triggers ) do
 			for triggerName , trigger in pairs( triggerList ) do
@@ -227,6 +259,28 @@ SIUnlocker =
 	-- ----------------------------------------
 	AddUnlockData = function( unlockData )
 		local globalSettings = SIGlobal.GetGlobalSettings( SIUnlocker.Settings.Name )
+		local unlockDataID = unlockData.ID
+		if globalSettings.UnlockData[unlockDataID] then
+			return
+		end
+		globalSettings.UnlockData[unlockDataID] = unlockData
+		for forceIndex , forceSettings in pairs( SIGlobal.GetAllForceSettings( SIUnlocker.Settings.Name ) ) do
+			local forceUnlockData = SIUtils.table.deepcopy( unlockData )
+			forceSettings.UnlockData[unlockDataID] = forceUnlockData
+			for triggerType , triggerList in pairs( forceUnlockData.Triggers ) do
+				local triggerIDListPack = forceSettings[triggerType]
+				for triggerName , trigger in pairs( triggerList ) do
+					trigger.Count = 0
+					trigger.Finish = false
+					local triggerIDList = triggerIDListPack[triggerName]
+					if not triggerIDList then
+						triggerIDList = {}
+						triggerIDListPack[triggerName] = triggerIDList
+					end
+					table.insert( triggerIDList , unlockDataID )
+				end
+			end
+		end
 	end ,
 
 	-- ----------------------------------------
@@ -236,6 +290,29 @@ SIUnlocker =
 	-- ----------------------------------------
 	AddUnlockDataList = function( unlockDataList )
 		local globalSettings = SIGlobal.GetGlobalSettings( SIUnlocker.Settings.Name )
+		for index , unlockData in pairs( unlockDataList ) do
+			local unlockDataID = unlockData.ID
+			if not globalSettings.UnlockData[unlockDataID] then
+				globalSettings.UnlockData[unlockDataID] = unlockData
+				for forceIndex , forceSettings in pairs( SIGlobal.GetAllForceSettings( SIUnlocker.Settings.Name ) ) do
+					local forceUnlockData = SIUtils.table.deepcopy( unlockData )
+					forceSettings.UnlockData[unlockDataID] = forceUnlockData
+					for triggerType , triggerList in pairs( forceUnlockData.Triggers ) do
+						local triggerIDListPack = forceSettings[triggerType]
+						for triggerName , trigger in pairs( triggerList ) do
+							trigger.Count = 0
+							trigger.Finish = false
+							local triggerIDList = triggerIDListPack[triggerName]
+							if not triggerIDList then
+								triggerIDList = {}
+								triggerIDListPack[triggerName] = triggerIDList
+							end
+							table.insert( triggerIDList , unlockDataID )
+						end
+					end
+				end
+			end
+		end
 	end ,
 
 	-- ----------------------------------------
@@ -245,6 +322,41 @@ SIUnlocker =
 	-- ----------------------------------------
 	FreshUnlockData = function( unlockData )
 		local globalSettings = SIGlobal.GetGlobalSettings( SIUnlocker.Settings.Name )
+		local unlockDataID = unlockData.ID
+		if not globalSettings.UnlockData[unlockDataID] then
+			return
+		end
+		globalSettings.UnlockData[unlockDataID] = unlockData
+		for forceIndex , forceSettings in pairs( SIGlobal.GetAllForceSettings( SIUnlocker.Settings.Name ) ) do
+			local newForceUnlockData = SIUtils.table.deepcopy( unlockData )
+			local oldForceUnlockData = forceSettings.UnlockData[unlockDataID]
+			forceSettings.UnlockData[unlockDataID] = newForceUnlockData
+			for triggerType , triggerList in pairs( oldForceUnlockData.Triggers ) do
+				local triggerIDListPack = forceSettings[triggerType]
+				for triggerName , trigger in pairs( triggerList ) do
+					local triggerIDList = triggerIDListPack[triggerName]
+					for index , innerUnlockDataID in pairs( triggerIDList ) do
+						if innerUnlockDataID == unlockDataID then
+							table.remove( triggerIDList , index )
+							break
+						end
+					end
+				end
+			end
+			for triggerType , triggerList in pairs( newForceUnlockData.Triggers ) do
+				local triggerIDListPack = forceSettings[triggerType]
+				for triggerName , trigger in pairs( triggerList ) do
+					trigger.Count = 0
+					trigger.Finish = false
+					local triggerIDList = triggerIDListPack[triggerName]
+					if not triggerIDList then
+						triggerIDList = {}
+						triggerIDListPack[triggerName] = triggerIDList
+					end
+					table.insert( triggerIDList , unlockDataID )
+				end
+			end
+		end
 	end ,
 
 	-- ----------------------------------------
@@ -254,6 +366,43 @@ SIUnlocker =
 	-- ----------------------------------------
 	FreshUnlockDataList = function( unlockDataList )
 		local globalSettings = SIGlobal.GetGlobalSettings( SIUnlocker.Settings.Name )
+		for index , unlockData in pairs( unlockDataList ) do
+			local unlockDataID = unlockData.ID
+			if not globalSettings.UnlockData[unlockDataID] then
+				return
+			end
+			globalSettings.UnlockData[unlockDataID] = unlockData
+			for forceIndex , forceSettings in pairs( SIGlobal.GetAllForceSettings( SIUnlocker.Settings.Name ) ) do
+				local newForceUnlockData = SIUtils.table.deepcopy( unlockData )
+				local oldForceUnlockData = forceSettings.UnlockData[unlockDataID]
+				forceSettings.UnlockData[unlockDataID] = newForceUnlockData
+				for triggerType , triggerList in pairs( oldForceUnlockData.Triggers ) do
+					local triggerIDListPack = forceSettings[triggerType]
+					for triggerName , trigger in pairs( triggerList ) do
+						local triggerIDList = triggerIDListPack[triggerName]
+						for index , innerUnlockDataID in pairs( triggerIDList ) do
+							if innerUnlockDataID == unlockDataID then
+								table.remove( triggerIDList , index )
+								break
+							end
+						end
+					end
+				end
+				for triggerType , triggerList in pairs( newForceUnlockData.Triggers ) do
+					local triggerIDListPack = forceSettings[triggerType]
+					for triggerName , trigger in pairs( triggerList ) do
+						trigger.Count = 0
+						trigger.Finish = false
+						local triggerIDList = triggerIDListPack[triggerName]
+						if not triggerIDList then
+							triggerIDList = {}
+							triggerIDListPack[triggerName] = triggerIDList
+						end
+						table.insert( triggerIDList , unlockDataID )
+					end
+				end
+			end
+		end
 	end ,
 	-- ------------------------------------------------------------------------------------------------
 	-- ------ 接口函数 -- 控制 ------------------------------------------------------------------------
