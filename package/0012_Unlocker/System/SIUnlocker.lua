@@ -29,22 +29,64 @@ SIUnlocker =
 	-- ------------------------------------------------------------------------------------------------
 	-- ---------- 功能函数 ----------------------------------------------------------------------------
 	-- ------------------------------------------------------------------------------------------------
-	EffectUnlockData = function( unlockData )
-		for triggerType , triggerList in pairs( unlockData.Trigger ) do
+	EffectUnlockData = function( unlockData , forceIndex , playerIndex )
+		for triggerType , triggerList in pairs( unlockData.Triggers ) do
 			for triggerName , trigger in pairs( triggerList ) do
 				if not trigger.Finish then
 					return
 				end
 			end
 		end
-		for resultType , result in pairs( unlockData.Result ) do
-			
+		local gameTick = game.tick
+		for resultType , result in pairs( unlockData.Results ) do
+			if resultType == SIUnlocker.ResultTypeID.AddRecipe then
+				local force = game.forces[forceIndex]
+				for index , recipeName in pairs( result.Recipes ) do
+					force.recipes[recipeName].enabled = true
+				end
+			elseif resultType == SIUnlocker.ResultTypeID.RemoveRecipe then
+				local force = game.forces[forceIndex]
+				for index , recipeName in pairs( result.Recipes ) do
+					force.recipes[recipeName].enabled = false
+				end
+			elseif resultType == SIUnlocker.ResultTypeID.AddItem then
+				local outItemStacks = {}
+				local player = game.get_player( playerIndex )
+				local inventory = player.get_main_inventory()
+				for itemName , count in pairs( result.Items ) do
+					local itemStack = { name = itemName , count = count }
+					if inventory and inventory.can_insert( itemStack ) then
+						local innerCount = inventory.insert( itemStack )
+						if innerCount < count then
+							table.insert( outItemStacks , { name = itemName , count = count - innerCount } )
+						end
+					else
+						table.insert( outItemStacks , itemStack )
+					end
+				end
+				if #outItemStacks > 0 then
+					local surface = player.surface
+					local force = player.force
+					local position = force.get_spawn_position( surface )
+					for index , itemStack in pairs( outItemStacks ) do
+						surface.spill_item_stack( position , itemStack , true , force , false )
+					end
+				end
+			elseif resultType == SIUnlocker.ResultTypeID.MessageForce then
+				game.forces[forceIndex].print( result.Message )
+			elseif resultType == SIUnlocker.ResultTypeID.MessagePlayer then
+				game.get_player( playerIndex ).print( result.Message )
+			elseif resultType == SIUnlocker.ResultTypeID.Interface then
+				if remote.interfaces[result.RemoteInterfaceID] and remote.interfaces[result.RemoteInterfaceID][result.RemoteFunctionName] then
+					remote.call( result.RemoteInterfaceID , result.RemoteFunctionName , unlockData.ID , result.Data , forceIndex , playerIndex , gameTick )
+				end
+			end
 		end
 	end ,
 	-- ------------------------------------------------------------------------------------------------
 	-- ---------- 事件函数 ----------------------------------------------------------------------------
 	-- ------------------------------------------------------------------------------------------------
-	FreshMined = function( forceIndex , entityName )
+	FreshMined = function( forceIndex , playerIndex , entityName )
 		local forceSettings = SIGlobal.GetForceSettings( SIUnlocker.Settings.Name , forceIndex )
 		local minedDataList = forceSettings.Mined[entityName]
 		if not minedDataList then
@@ -52,16 +94,35 @@ SIUnlocker =
 		end
 		for index , unlockDataID in pairs( SIUtils.table.deepcopy( minedDataList ) ) do
 			local unlockData = forceSettings.UnlockData[unlockDataID]
-			local minedData = unlockData.Trigger.Mined[entityName]
+			local minedData = unlockData.Triggers.Mined[entityName]
 			minedData.Count = minedData.Count + 1
 			if minedData.Count > minedData.Max then
 				minedData.Finish = true
 				table.remove( minedDataList , index )
-				SIUnlocker.EffectUnlockData( unlockData )
+				SIUnlocker.EffectUnlockData( unlockData , forceIndex , playerIndex )
 			end
 		end
 	end ,
-	FreshMinedResult = function( forceIndex , itemName , count )
+	FreshMinedResult = function( forceIndex , playerIndex , itemName , count )
+		local forceSettings = SIGlobal.GetForceSettings( SIUnlocker.Settings.Name , forceIndex )
+		local minedResultDataList = forceSettings.MinedResult[itemName]
+		if not minedResultDataList then
+			return
+		end
+		for index , unlockDataID in pairs( SIUtils.table.deepcopy( minedResultDataList ) ) do
+			local unlockData = forceSettings.UnlockData[unlockDataID]
+			local minedResultData = unlockData.Triggers.MinedResult[itemName]
+			if minedResultData.Mode == SIUnlocker.MinedResultMode.Total then
+				minedResultData.Count = minedResultData.Count + count
+			else
+				minedResultData.Count = minedResultData.Count + 1
+			end
+			if minedResultData.Count > minedResultData.Max then
+				minedResultData.Finish = true
+				table.remove( minedResultDataList , index )
+				SIUnlocker.EffectUnlockData( unlockData , forceIndex , playerIndex )
+			end
+		end
 	end ,
 	-- ------------------------------------------------------------------------------------------------
 	-- ------ 接口函数 -- 注册 ------------------------------------------------------------------------
@@ -95,8 +156,13 @@ SIUnlocker.ResultTypeID =
 {
 	AddRecipe     = "AddRecipe"     , -- 解锁配方
 	RemoveRecipe  = "RemoveRecipe"  , -- 锁定配方
-	AddItem       = "AddItem"       , -- 添加物品 , 阵营内如果有多个玩家 , 则只有其中一个玩家会获得
+	AddItem       = "AddItem"       , -- 添加物品 , 阵营内如果有多个玩家 , 则只有最终触发玩家会获得物品
 	MessageForce  = "MessageForce"  , -- 向阵营发送消息
 	MessagePlayer = "MessagePlayer" , -- 向最终触发的玩家发送消息
 	Interface     = "Interface"       -- 执行 remote 接口函数 , 有五个参数 , 第 1 个参数是解锁数据的 ID , 第 2 个参数是保存在其中的数据包 , 第 3 个参数是触发的阵营编号 , 第 4 个参数是最终触发的玩家编号 , 第 5 个参数是当前游戏刻
+}
+SIUnlocker.MinedResultMode =
+{
+	Single = 1 ,
+	Total = 2
 }

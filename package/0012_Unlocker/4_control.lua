@@ -41,9 +41,9 @@ SIEventBus
 	local playerIndex = event.player_index
 	local player = game.get_player( playerIndex )
 	local forceIndex = player.force.index
-	SIUnlocker.FreshMined( forceIndex , entity.name )
+	SIUnlocker.FreshMined( forceIndex , playerIndex , entity.name )
 	for itemName , count in pairs( event.inventory.get_contents() ) do
-		SIUnlocker.FreshMinedResult( forceIndex , itemName , count )
+		SIUnlocker.FreshMinedResult( forceIndex , playerIndex , itemName , count )
 	end
 end )
 .Add( SIEvents.on_player_crafted_item , function( event , functionID )
