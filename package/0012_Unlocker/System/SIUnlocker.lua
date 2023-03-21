@@ -219,17 +219,52 @@ SIUnlocker =
 	-- ------------------------------------------------------------------------------------------------
 	-- ------ 接口函数 -- 注册 ------------------------------------------------------------------------
 	-- ------------------------------------------------------------------------------------------------
-	AddUnlockData = function()
+	
+	-- ----------------------------------------
+	-- 添加一个解锁数据包<br>
+	-- ----------------------------------------
+	-- unlockData     = 解锁数据包<br>
+	-- ----------------------------------------
+	AddUnlockData = function( unlockData )
+		local globalSettings = SIGlobal.GetGlobalSettings( SIUnlocker.Settings.Name )
 	end ,
-	AddUnlockDataList = function()
+	
+	-- ----------------------------------------
+	-- 添加多个解锁数据包<br>
+	-- ----------------------------------------
+	-- unlockDataList = 解锁数据包数组 , 其中包含多个解锁数据包<br>
+	-- ----------------------------------------
+	AddUnlockDataList = function( unlockDataList )
+		local globalSettings = SIGlobal.GetGlobalSettings( SIUnlocker.Settings.Name )
 	end ,
-	FreshUnlockData = function()
+	
+	-- ----------------------------------------
+	-- 更新一个解锁数据包<br>
+	-- ----------------------------------------
+	-- unlockData     = 解锁数据包<br>
+	-- ----------------------------------------
+	FreshUnlockData = function( unlockData )
+		local globalSettings = SIGlobal.GetGlobalSettings( SIUnlocker.Settings.Name )
 	end ,
-	FreshUnlockDataList = function()
+	
+	-- ----------------------------------------
+	-- 更新多个解锁数据包<br>
+	-- ----------------------------------------
+	-- unlockDataList = 解锁数据包数组 , 其中包含多个解锁数据包<br>
+	-- ----------------------------------------
+	FreshUnlockDataList = function( unlockDataList )
+		local globalSettings = SIGlobal.GetGlobalSettings( SIUnlocker.Settings.Name )
 	end ,
 	-- ------------------------------------------------------------------------------------------------
 	-- ------ 接口函数 -- 控制 ------------------------------------------------------------------------
 	-- ------------------------------------------------------------------------------------------------
+	
+	-- ----------------------------------------
+	-- 强制解锁<br>
+	-- ----------------------------------------
+	-- forceIndex     = 阵营索引 , 不可以是阵营的名称<br>
+	-- unlockDataID   = 解锁数据包的 ID<br>
+	-- ----------------------------------------
 	Unlock = function( forceIndex , unlockDataID )
 		local forceSettings = SIGlobal.GetForceSettings( SIUnlocker.Settings.Name , forceIndex )
 		local unlockData = forceSettings.UnlockData[unlockDataID]
