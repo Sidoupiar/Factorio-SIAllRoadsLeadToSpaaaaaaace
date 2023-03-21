@@ -65,22 +65,30 @@ SIUnlocker =
 				end
 			elseif resultType == SIUnlocker.ResultTypeID.AddItem then
 				local outItemStacks = {}
-				local player = game.get_player( playerIndex )
-				local inventory = player.get_main_inventory()
-				for itemName , count in pairs( result.Items ) do
-					local itemStack = { name = itemName , count = count }
-					if inventory and inventory.can_insert( itemStack ) then
-						local innerCount = inventory.insert( itemStack )
-						if innerCount < count then
-							table.insert( outItemStacks , { name = itemName , count = count - innerCount } )
+				local player = nil
+				if playerIndex then
+					player = game.get_player( playerIndex )
+					local inventory = player.get_main_inventory()
+					for itemName , count in pairs( result.Items ) do
+						local itemStack = { name = itemName , count = count }
+						if inventory and inventory.can_insert( itemStack ) then
+							local innerCount = inventory.insert( itemStack )
+							if innerCount < count then
+								table.insert( outItemStacks , { name = itemName , count = count - innerCount } )
+							end
+						else
+							table.insert( outItemStacks , itemStack )
 						end
-					else
+					end
+				else
+					for itemName , count in pairs( result.Items ) do
+						local itemStack = { name = itemName , count = count }
 						table.insert( outItemStacks , itemStack )
 					end
 				end
 				if #outItemStacks > 0 then
-					local surface = player.surface
-					local force = player.force
+					local surface = player and player.surface or game.get_surface( "nauvis" )
+					local force = game.forces[forceIndex]
 					local position = force.get_spawn_position( surface )
 					for index , itemStack in pairs( outItemStacks ) do
 						surface.spill_item_stack( position , itemStack , true , force , false )
@@ -89,7 +97,9 @@ SIUnlocker =
 			elseif resultType == SIUnlocker.ResultTypeID.MessageForce then
 				game.forces[forceIndex].print( result.Message )
 			elseif resultType == SIUnlocker.ResultTypeID.MessagePlayer then
-				game.get_player( playerIndex ).print( result.Message )
+				if playerIndex then
+					game.get_player( playerIndex ).print( result.Message )
+				end
 			elseif resultType == SIUnlocker.ResultTypeID.Interface then
 				if remote.interfaces[result.RemoteInterfaceID] and remote.interfaces[result.RemoteInterfaceID][result.RemoteFunctionName] then
 					remote.call( result.RemoteInterfaceID , result.RemoteFunctionName , unlockData.ID , result.Data , forceIndex , playerIndex , gameTick )
@@ -222,6 +232,21 @@ SIUnlocker =
 	-- ------------------------------------------------------------------------------------------------
 	Unlock = function( forceIndex , unlockDataID )
 		local forceSettings = SIGlobal.GetForceSettings( SIUnlocker.Settings.Name , forceIndex )
+		local unlockData = forceSettings.UnlockData[unlockDataID]
+		for triggerType , triggerList in pairs( unlockData.Triggers ) do
+			local triggerIDListPack = forceSettings[triggerType]
+			for triggerName , trigger in pairs( triggerList ) do
+				trigger.Finish = true
+				local triggerIDList = triggerIDListPack[triggerName]
+				for index , innerUnlockDataID in pairs( triggerIDList ) do
+					if innerUnlockDataID == unlockDataID then
+						table.remove( triggerIDList , index )
+						break
+					end
+				end
+			end
+		end
+		SIUnlocker.EffectUnlockData( unlockData , forceIndex , nil )
 	end
 }
 
@@ -243,7 +268,7 @@ SIUnlocker.ResultTypeID =
 	AddItem          = "AddItem"          , -- 添加物品 , 阵营内如果有多个玩家 , 则只有最终触发玩家会获得物品
 	MessageForce     = "MessageForce"     , -- 向阵营发送消息
 	MessagePlayer    = "MessagePlayer"    , -- 向最终触发的玩家发送消息
-	Interface        = "Interface"          -- 执行 remote 接口函数 , 有五个参数 , 第 1 个参数是解锁数据的 ID , 第 2 个参数是保存在其中的数据包 , 第 3 个参数是触发的阵营编号 , 第 4 个参数是最终触发的玩家编号 , 第 5 个参数是当前游戏刻
+	Interface        = "Interface"          -- 执行 remote 接口函数 , 有五个参数 , 第 1 个参数是解锁数据的 ID , 第 2 个参数是保存在其中的数据包 , 第 3 个参数是触发的阵营编号 , 第 4 个参数是最终触发的玩家编号 , 可能为 nil , 第 5 个参数是当前游戏刻
 }
 SIUnlocker.MinedResultMode =
 {
