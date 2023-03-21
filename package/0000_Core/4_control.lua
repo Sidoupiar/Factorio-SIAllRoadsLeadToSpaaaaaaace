@@ -344,6 +344,19 @@ SIGlobal.CreateSettings( SIOreMap.Settings )
 SIGlobal.CreateSettings( SIRequestMap.Settings )
 SIGlobal.CreateSettings( SIAutoInsert.Settings )
 
+-- ----------------------------------------
+-- 事件
+-- ----------------------------------------
+SIEventBus
+.Init( function( functionID )
+	-- 处理通关
+	SIMainData.InitFinish()
+end )
+.ConfigurationChange( function( functionID )
+	-- 处理通关
+	SIMainData.InitFinish()
+end )
+
 -- ------------------------------------------------------------------------------------------------
 -- ---------- 图形界面 ----------------------------------------------------------------------------
 -- ------------------------------------------------------------------------------------------------
@@ -353,8 +366,6 @@ SIGlobal.CreateSettings( SIAutoInsert.Settings )
 -- ----------------------------------------
 SIEventBus
 .Init( function( functionID )
-	-- 处理通关
-	SIMainData.InitFinish()
 	-- 尝试调出主面板
 	for playerIndex , player in pairs( game.players ) do
 		SIMainbar.OpenFrame( playerIndex )
@@ -387,10 +398,6 @@ end )
 	-- 自动填充的管理窗口事件
 	SIMainbar.RegisterToolbarButton( SIAutoInsert.Toolbar )
 	SIMainbarSetting.RegisterSettingsData( SIAutoInsert.SettingsData )
-end )
-.ConfigurationChange( function( functionID )
-	-- 处理通关
-	SIMainData.InitFinish()
 end )
 .AddNth( 60 , function( event , functionID )
 	-- 主面板事件
