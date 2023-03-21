@@ -418,10 +418,10 @@ if SIConfigs.SIOverhaul.HideTechnology then
 			if SIConfigs.SIOverhaul.HideTechnologyBlackList[prototypeName] then
 				return
 			end
-			if not prototypeData.prerequisites or #prototypeData.prerequisites < 1 then
+			if not prototypeData.SIGenData then
 				return
 			end
-			if not prototypeData.SIGenData then
+			if not prototypeData.prerequisites or #prototypeData.prerequisites < 1 then
 				return
 			end
 			prototypeData.enabled = false
