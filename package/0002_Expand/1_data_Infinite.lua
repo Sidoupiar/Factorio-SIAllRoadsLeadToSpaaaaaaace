@@ -691,6 +691,30 @@ SIGen
 -- ----------------------------------------
 -- 无尽科技 - 前置科技
 -- ----------------------------------------
+.New( SICommon.Types.Technology , "InfiniteStart" , "无尽研究入门" ,
+{
+	enabled = true ,
+	hidden = false ,
+	visible_when_disabled = true ,
+	ignore_tech_cost_multiplier = true ,
+	upgrade = false ,
+	prerequisites = {} ,
+	unit =
+	{
+		count = 25 ,
+		time = 60 ,
+		ingredients =
+		{
+			{
+				type = SICommon.Types.Items.Item ,
+				name = "automation-science-pack" ,
+				amount = 1
+			}
+		}
+	} ,
+	effects = {}
+} )
+.AutoIcon()
 .New( SICommon.Types.Technology , "Infinite_1" , "第一代产业研究" ,
 {
 	enabled = true ,
@@ -700,10 +724,7 @@ SIGen
 	upgrade = false ,
 	prerequisites =
 	{
-		"automation" ,
-		"optics" ,
-		"stone-wall" ,
-		"logistics"
+		SIConstants_Expand.raw.Technologies.InfiniteStart
 	} ,
 	unit =
 	{
