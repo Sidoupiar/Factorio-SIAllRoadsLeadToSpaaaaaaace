@@ -42,22 +42,9 @@ SIUnlocker =
 		end
 		forceSettings.Init = true
 		for index , unlockData in pairs( globalSettings.UnlockData ) do
-			local unlockDataID = unlockData.ID
 			local forceUnlockData = SIUtils.table.deepcopy( unlockData )
-			forceSettings.UnlockData[unlockDataID] = forceUnlockData
-			for triggerType , triggerList in pairs( forceUnlockData.Triggers ) do
-				local triggerIDListPack = forceSettings[triggerType]
-				for triggerName , trigger in pairs( triggerList ) do
-					trigger.Count = 0
-					trigger.Finish = false
-					local triggerIDList = triggerIDListPack[triggerName]
-					if not triggerIDList then
-						triggerIDList = {}
-						triggerIDListPack[triggerName] = triggerIDList
-					end
-					table.insert( triggerIDList , unlockDataID )
-				end
-			end
+			forceSettings.UnlockData[unlockData.ID] = forceUnlockData
+			SIUnlocker.InitUnlockData( forceSettings , forceUnlockData )
 		end
 	end ,
 	ResetForce = function( forceIndex )
@@ -68,10 +55,62 @@ SIUnlocker =
 			forceSettings[triggerType] = {}
 		end
 	end ,
+	InitUnlockData = function( forceSettings , unlockData )
+		local unlockDataID = unlockData.ID
+		unlockData.FireCount = unlockData.FireCount or 0
+		for triggerType , triggerList in pairs( unlockData.Triggers ) do
+			local triggerIDListPack = forceSettings[triggerType]
+			for triggerName , triggerData in pairs( triggerList ) do
+				triggerData.Count = 0
+				triggerData.TotalCount = triggerData.TotalCount or 0
+				triggerData.Finish = false
+				local triggerIDList = triggerIDListPack[triggerName]
+				if not triggerIDList then
+					triggerIDList = {}
+					triggerIDListPack[triggerName] = triggerIDList
+				end
+				table.insert( triggerIDList , unlockDataID )
+			end
+		end
+	end ,
+	MergeUnlockData = function( forceSettings , newUnlockData , oldUnlockData )
+		local unlockDataID = newUnlockData.ID
+		newUnlockData.FireCount = oldUnlockData.FireCount or newUnlockData.FireCount or 0
+		for triggerType , triggerList in pairs( oldUnlockData.Triggers ) do
+			local triggerIDListPack = forceSettings[triggerType]
+			for triggerName , triggerData in pairs( triggerList ) do
+				local triggerIDList = triggerIDListPack[triggerName]
+				for index , innerUnlockDataID in pairs( triggerIDList ) do
+					if innerUnlockDataID == unlockDataID then
+						table.remove( triggerIDList , index )
+						break
+					end
+				end
+			end
+		end
+		for triggerType , newTriggerList in pairs( newUnlockData.Triggers ) do
+			local oldTriggerList = oldUnlockData.Triggers[triggerType]
+			local triggerIDListPack = forceSettings[triggerType]
+			for triggerName , newTriggerData in pairs( newTriggerList ) do
+				local oldTriggerData = oldTriggerList and oldTriggerList[triggerName] or nil
+				newTriggerData.Count = oldTriggerData and oldTriggerData.Count or 0
+				newTriggerData.TotalCount = oldTriggerData and oldTriggerData.TotalCount or newTriggerData.TotalCount or 0
+				newTriggerData.Finish = oldTriggerData and oldTriggerData.Finish or false
+				if not newTriggerData.Finish then
+					local triggerIDList = triggerIDListPack[triggerName]
+					if not triggerIDList then
+						triggerIDList = {}
+						triggerIDListPack[triggerName] = triggerIDList
+					end
+					table.insert( triggerIDList , unlockDataID )
+				end
+			end
+		end
+	end ,
 	EffectUnlockData = function( unlockData , forceIndex , playerIndex )
 		for triggerType , triggerList in pairs( unlockData.Triggers ) do
-			for triggerName , trigger in pairs( triggerList ) do
-				if not trigger.Finish then
+			for triggerName , triggerData in pairs( triggerList ) do
+				if not triggerData.Finish then
 					return
 				end
 			end
@@ -162,6 +201,7 @@ SIUnlocker =
 			local minedData = unlockData.Triggers.Mined[entityName]
 			minedData.Count = minedData.Count + 1
 			if minedData.Count > minedData.Max then
+				minedData.TotalCount = minedData.TotalCount + minedData.Count
 				minedData.Finish = true
 				table.remove( minedDataList , index )
 				SIUnlocker.EffectUnlockData( unlockData , forceIndex , playerIndex )
@@ -183,6 +223,7 @@ SIUnlocker =
 				minedResultData.Count = minedResultData.Count + 1
 			end
 			if minedResultData.Count > minedResultData.Max then
+				minedResultData.TotalCount = minedResultData.TotalCount + minedResultData.Count
 				minedResultData.Finish = true
 				table.remove( minedResultDataList , index )
 				SIUnlocker.EffectUnlockData( unlockData , forceIndex , playerIndex )
@@ -200,6 +241,7 @@ SIUnlocker =
 			local craftData = unlockData.Triggers.Craft[recipeName]
 			craftData.Count = craftData.Count + 1
 			if craftData.Count > craftData.Max then
+				craftData.TotalCount = craftData.TotalCount + craftData.Count
 				craftData.Finish = true
 				table.remove( craftDataList , index )
 				SIUnlocker.EffectUnlockData( unlockData , forceIndex , playerIndex )
@@ -217,6 +259,7 @@ SIUnlocker =
 			local buildData = unlockData.Triggers.Build[entityName]
 			buildData.Count = buildData.Count + 1
 			if buildData.Count > buildData.Max then
+				buildData.TotalCount = buildData.TotalCount + buildData.Count
 				buildData.Finish = true
 				table.remove( buildDataList , index )
 				SIUnlocker.EffectUnlockData( unlockData , forceIndex , playerIndex )
@@ -234,6 +277,7 @@ SIUnlocker =
 			local destroyData = unlockData.Triggers.Destroy[entityName]
 			destroyData.Count = destroyData.Count + 1
 			if destroyData.Count > destroyData.Max then
+				destroyData.TotalCount = destroyData.TotalCount + destroyData.Count
 				destroyData.Finish = true
 				table.remove( destroyDataList , index )
 				SIUnlocker.EffectUnlockData( unlockData , forceIndex , playerIndex )
@@ -251,6 +295,7 @@ SIUnlocker =
 			local capsuleData = unlockData.Triggers.Capsule[itemName]
 			capsuleData.Count = capsuleData.Count + 1
 			if capsuleData.Count > capsuleData.Max then
+				capsuleData.TotalCount = capsuleData.TotalCount + capsuleData.Count
 				capsuleData.Finish = true
 				table.remove( capsuleDataList , index )
 				SIUnlocker.EffectUnlockData( unlockData , forceIndex , playerIndex )
@@ -278,21 +323,8 @@ SIUnlocker =
 		globalSettings.UnlockData[unlockDataID] = unlockData
 		for forceIndex , forceSettings in pairs( SIGlobal.GetAllForceSettings( SIUnlocker.Settings.Name ) ) do
 			local forceUnlockData = SIUtils.table.deepcopy( unlockData )
-			forceUnlockData.FireCount = 0
 			forceSettings.UnlockData[unlockDataID] = forceUnlockData
-			for triggerType , triggerList in pairs( forceUnlockData.Triggers ) do
-				local triggerIDListPack = forceSettings[triggerType]
-				for triggerName , trigger in pairs( triggerList ) do
-					trigger.Count = 0
-					trigger.Finish = false
-					local triggerIDList = triggerIDListPack[triggerName]
-					if not triggerIDList then
-						triggerIDList = {}
-						triggerIDListPack[triggerName] = triggerIDList
-					end
-					table.insert( triggerIDList , unlockDataID )
-				end
-			end
+			SIUnlocker.InitUnlockData( forceSettings , forceUnlockData )
 		end
 	end ,
 
@@ -310,21 +342,8 @@ SIUnlocker =
 					globalSettings.UnlockData[unlockDataID] = unlockData
 					for forceIndex , forceSettings in pairs( SIGlobal.GetAllForceSettings( SIUnlocker.Settings.Name ) ) do
 						local forceUnlockData = SIUtils.table.deepcopy( unlockData )
-						forceUnlockData.FireCount = 0
 						forceSettings.UnlockData[unlockDataID] = forceUnlockData
-						for triggerType , triggerList in pairs( forceUnlockData.Triggers ) do
-							local triggerIDListPack = forceSettings[triggerType]
-							for triggerName , trigger in pairs( triggerList ) do
-								trigger.Count = 0
-								trigger.Finish = false
-								local triggerIDList = triggerIDListPack[triggerName]
-								if not triggerIDList then
-									triggerIDList = {}
-									triggerIDListPack[triggerName] = triggerIDList
-								end
-								table.insert( triggerIDList , unlockDataID )
-							end
-						end
+						SIUnlocker.InitUnlockData( forceSettings , forceUnlockData )
 					end
 				end
 			end
@@ -349,37 +368,8 @@ SIUnlocker =
 		for forceIndex , forceSettings in pairs( SIGlobal.GetAllForceSettings( SIUnlocker.Settings.Name ) ) do
 			local newForceUnlockData = SIUtils.table.deepcopy( unlockData )
 			local oldForceUnlockData = forceSettings.UnlockData[unlockDataID]
-			newForceUnlockData.FireCount = oldForceUnlockData.FireCount
 			forceSettings.UnlockData[unlockDataID] = newForceUnlockData
-			for triggerType , triggerList in pairs( oldForceUnlockData.Triggers ) do
-				local triggerIDListPack = forceSettings[triggerType]
-				for triggerName , trigger in pairs( triggerList ) do
-					local triggerIDList = triggerIDListPack[triggerName]
-					for index , innerUnlockDataID in pairs( triggerIDList ) do
-						if innerUnlockDataID == unlockDataID then
-							table.remove( triggerIDList , index )
-							break
-						end
-					end
-				end
-			end
-			for triggerType , newTriggerList in pairs( newForceUnlockData.Triggers ) do
-				local oldTriggerList = oldForceUnlockData.Triggers[triggerType]
-				local triggerIDListPack = forceSettings[triggerType]
-				for triggerName , newTrigger in pairs( newTriggerList ) do
-					local oldTrigger = oldTriggerList and oldTriggerList[triggerName] or nil
-					newTrigger.Count = oldTrigger and oldTrigger.Count or 0
-					newTrigger.Finish = oldTrigger and oldTrigger.Finish or false
-					if not newTrigger.Finish then
-						local triggerIDList = triggerIDListPack[triggerName]
-						if not triggerIDList then
-							triggerIDList = {}
-							triggerIDListPack[triggerName] = triggerIDList
-						end
-						table.insert( triggerIDList , unlockDataID )
-					end
-				end
-			end
+			SIUnlocker.MergeUnlockData( forceSettings , newForceUnlockData , oldForceUnlockData )
 		end
 	end ,
 
@@ -398,37 +388,8 @@ SIUnlocker =
 					for forceIndex , forceSettings in pairs( SIGlobal.GetAllForceSettings( SIUnlocker.Settings.Name ) ) do
 						local newForceUnlockData = SIUtils.table.deepcopy( unlockData )
 						local oldForceUnlockData = forceSettings.UnlockData[unlockDataID]
-						newForceUnlockData.FireCount = oldForceUnlockData.FireCount
 						forceSettings.UnlockData[unlockDataID] = newForceUnlockData
-						for triggerType , triggerList in pairs( oldForceUnlockData.Triggers ) do
-							local triggerIDListPack = forceSettings[triggerType]
-							for triggerName , trigger in pairs( triggerList ) do
-								local triggerIDList = triggerIDListPack[triggerName]
-								for index , innerUnlockDataID in pairs( triggerIDList ) do
-									if innerUnlockDataID == unlockDataID then
-										table.remove( triggerIDList , index )
-										break
-									end
-								end
-							end
-						end
-						for triggerType , newTriggerList in pairs( newForceUnlockData.Triggers ) do
-							local oldTriggerList = oldForceUnlockData.Triggers[triggerType]
-							local triggerIDListPack = forceSettings[triggerType]
-							for triggerName , newTrigger in pairs( newTriggerList ) do
-								local oldTrigger = oldTriggerList and oldTriggerList[triggerName] or nil
-								newTrigger.Count = oldTrigger and oldTrigger.Count or 0
-								newTrigger.Finish = oldTrigger and oldTrigger.Finish or false
-								if not newTrigger.Finish then
-									local triggerIDList = triggerIDListPack[triggerName]
-									if not triggerIDList then
-										triggerIDList = {}
-										triggerIDListPack[triggerName] = triggerIDList
-									end
-									table.insert( triggerIDList , unlockDataID )
-								end
-							end
-						end
+						SIUnlocker.MergeUnlockData( forceSettings , newForceUnlockData , oldForceUnlockData )
 					end
 				end
 			end
@@ -450,8 +411,9 @@ SIUnlocker =
 		local unlockData = forceSettings.UnlockData[unlockDataID]
 		for triggerType , triggerList in pairs( unlockData.Triggers ) do
 			local triggerIDListPack = forceSettings[triggerType]
-			for triggerName , trigger in pairs( triggerList ) do
-				trigger.Finish = true
+			for triggerName , triggerData in pairs( triggerList ) do
+				triggerData.TotalCount = triggerData.TotalCount + triggerData.Count
+				triggerData.Finish = true
 				local triggerIDList = triggerIDListPack[triggerName]
 				for index , innerUnlockDataID in pairs( triggerIDList ) do
 					if innerUnlockDataID == unlockDataID then
@@ -546,7 +508,7 @@ SIUnlocker.MinedResultMode =
 --          }
 --     }
 -- } ,
--- Results =    -- 成功触发后 , 解锁的内容 , 不同于 Trigger , 这是一个数组 , 由 Type 属性决定类型 , Type 值取自 SIUnlocker.ResultTypeID , 无 Type 则无实际效果 , 以下是每种类型的栗子
+-- Results =    -- 成功触发后 , 解锁的内容 , 不同于 Triggers 表 , 这是一个数组 , 由 Type 属性决定类型 , Type 值取自 SIUnlocker.ResultTypeID , 无 Type 则无实际效果 , 以下是每种类型的栗子
 -- {
 --     {
 --         Type = SIUnlocker.ResultTypeID.AddRecipe , -- 解锁配方
