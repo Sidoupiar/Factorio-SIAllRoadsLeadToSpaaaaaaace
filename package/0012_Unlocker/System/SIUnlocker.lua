@@ -198,11 +198,11 @@ SIUnlocker =
 		end
 		for index , unlockDataID in pairs( SIUtils.table.deepcopy( minedDataList ) ) do
 			local unlockData = forceSettings.UnlockData[unlockDataID]
-			local minedData = unlockData.Triggers.Mined[entityName]
-			minedData.Count = minedData.Count + 1
-			if minedData.Count > minedData.Max then
-				minedData.TotalCount = minedData.TotalCount + minedData.Count
-				minedData.Finish = true
+			local triggerData = unlockData.Triggers.Mined[entityName]
+			triggerData.Count = triggerData.Count + 1
+			if triggerData.Count > triggerData.Max then
+				triggerData.TotalCount = triggerData.TotalCount + triggerData.Count
+				triggerData.Finish = true
 				table.remove( minedDataList , index )
 				SIUnlocker.EffectUnlockData( unlockData , forceIndex , playerIndex )
 			end
@@ -216,15 +216,15 @@ SIUnlocker =
 		end
 		for index , unlockDataID in pairs( SIUtils.table.deepcopy( minedResultDataList ) ) do
 			local unlockData = forceSettings.UnlockData[unlockDataID]
-			local minedResultData = unlockData.Triggers.MinedResult[itemName]
-			if minedResultData.Mode == SIUnlocker.MinedResultMode.Total then
-				minedResultData.Count = minedResultData.Count + count
+			local triggerData = unlockData.Triggers.MinedResult[itemName]
+			if triggerData.Mode == SIUnlocker.CountMode.Total then
+				triggerData.Count = triggerData.Count + count
 			else
-				minedResultData.Count = minedResultData.Count + 1
+				triggerData.Count = triggerData.Count + 1
 			end
-			if minedResultData.Count > minedResultData.Max then
-				minedResultData.TotalCount = minedResultData.TotalCount + minedResultData.Count
-				minedResultData.Finish = true
+			if triggerData.Count > triggerData.Max then
+				triggerData.TotalCount = triggerData.TotalCount + triggerData.Count
+				triggerData.Finish = true
 				table.remove( minedResultDataList , index )
 				SIUnlocker.EffectUnlockData( unlockData , forceIndex , playerIndex )
 			end
@@ -238,11 +238,11 @@ SIUnlocker =
 		end
 		for index , unlockDataID in pairs( SIUtils.table.deepcopy( craftDataList ) ) do
 			local unlockData = forceSettings.UnlockData[unlockDataID]
-			local craftData = unlockData.Triggers.Craft[recipeName]
-			craftData.Count = craftData.Count + 1
-			if craftData.Count > craftData.Max then
-				craftData.TotalCount = craftData.TotalCount + craftData.Count
-				craftData.Finish = true
+			local triggerData = unlockData.Triggers.Craft[recipeName]
+			triggerData.Count = triggerData.Count + 1
+			if triggerData.Count > triggerData.Max then
+				triggerData.TotalCount = triggerData.TotalCount + triggerData.Count
+				triggerData.Finish = true
 				table.remove( craftDataList , index )
 				SIUnlocker.EffectUnlockData( unlockData , forceIndex , playerIndex )
 			end
@@ -256,11 +256,11 @@ SIUnlocker =
 		end
 		for index , unlockDataID in pairs( SIUtils.table.deepcopy( buildDataList ) ) do
 			local unlockData = forceSettings.UnlockData[unlockDataID]
-			local buildData = unlockData.Triggers.Build[entityName]
-			buildData.Count = buildData.Count + 1
-			if buildData.Count > buildData.Max then
-				buildData.TotalCount = buildData.TotalCount + buildData.Count
-				buildData.Finish = true
+			local triggerData = unlockData.Triggers.Build[entityName]
+			triggerData.Count = triggerData.Count + 1
+			if triggerData.Count > triggerData.Max then
+				triggerData.TotalCount = triggerData.TotalCount + triggerData.Count
+				triggerData.Finish = true
 				table.remove( buildDataList , index )
 				SIUnlocker.EffectUnlockData( unlockData , forceIndex , playerIndex )
 			end
@@ -274,11 +274,11 @@ SIUnlocker =
 		end
 		for index , unlockDataID in pairs( SIUtils.table.deepcopy( destroyDataList ) ) do
 			local unlockData = forceSettings.UnlockData[unlockDataID]
-			local destroyData = unlockData.Triggers.Destroy[entityName]
-			destroyData.Count = destroyData.Count + 1
-			if destroyData.Count > destroyData.Max then
-				destroyData.TotalCount = destroyData.TotalCount + destroyData.Count
-				destroyData.Finish = true
+			local triggerData = unlockData.Triggers.Destroy[entityName]
+			triggerData.Count = triggerData.Count + 1
+			if triggerData.Count > triggerData.Max then
+				triggerData.TotalCount = triggerData.TotalCount + triggerData.Count
+				triggerData.Finish = true
 				table.remove( destroyDataList , index )
 				SIUnlocker.EffectUnlockData( unlockData , forceIndex , playerIndex )
 			end
@@ -292,11 +292,11 @@ SIUnlocker =
 		end
 		for index , unlockDataID in pairs( SIUtils.table.deepcopy( capsuleDataList ) ) do
 			local unlockData = forceSettings.UnlockData[unlockDataID]
-			local capsuleData = unlockData.Triggers.Capsule[itemName]
-			capsuleData.Count = capsuleData.Count + 1
-			if capsuleData.Count > capsuleData.Max then
-				capsuleData.TotalCount = capsuleData.TotalCount + capsuleData.Count
-				capsuleData.Finish = true
+			local triggerData = unlockData.Triggers.Capsule[itemName]
+			triggerData.Count = triggerData.Count + 1
+			if triggerData.Count > triggerData.Max then
+				triggerData.TotalCount = triggerData.TotalCount + triggerData.Count
+				triggerData.Finish = true
 				table.remove( capsuleDataList , index )
 				SIUnlocker.EffectUnlockData( unlockData , forceIndex , playerIndex )
 			end
@@ -447,7 +447,7 @@ SIUnlocker.ResultTypeID =
 	MessagePlayer    = "MessagePlayer"    , -- 向最终触发的玩家发送一个消息
 	Interface        = "Interface"          -- 执行 remote 接口函数 , 有六个参数 , 第 1 个参数是解锁数据的 ID , 第 2 个参数是保存在其中的数据包 , 第 3 个参数是触发的阵营编号 , 第 4 个参数是最终触发的玩家编号 , 可能为 nil , 第 5 个参数是触发的次数 , 第 6 个参数是当前游戏刻
 }
-SIUnlocker.MinedResultMode =
+SIUnlocker.CountMode =
 {
 	Single = 1 ,
 	Total = 2
@@ -476,7 +476,7 @@ SIUnlocker.MinedResultMode =
 --          ["物品原型的 name 属性值"] =
 --          {
 --              Max = 数字    -- 需要挖掘出来的这种物品的数量 , 实际挖掘出来的数量要超过这个值才算完成 , 也就是说要求挖 1 个物品 , 这里要填写 0 , 最少要求挖 1 个物品
---              Mode = 数字   -- 需填写 SIUnlocker.MinedResultMode 的值之一 , 默认 SIUnlocker.MinedResultMode.Single , 决定记录实际挖到的数量还是只计算 1 次
+--              Mode = 数字   -- 需填写 SIUnlocker.CountMode 的值之一 , 默认 SIUnlocker.CountMode.Single , 决定记录实际挖到的数量还是只计算 1 次
 --          }
 --     } ,
 --     Craft =
