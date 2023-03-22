@@ -528,9 +528,9 @@ SIGen
 		buffer_capacity = "1MJ" ,
 		input_flow_limit = "50KW" ,
 		output_flow_limit = "50KW" ,
-		drain = "0J"
+		drain = "50J"
 	} ,
-	energy_usage = "25KW" ,
+	energy_usage = "22KW" ,
 	allowed_effects =
 	{
 		"speed" ,
@@ -850,9 +850,9 @@ SIGen
 		buffer_capacity = "1MJ" ,
 		input_flow_limit = "50KW" ,
 		output_flow_limit = "50KW" ,
-		drain = "0J"
+		drain = "50J"
 	} ,
-	energy_usage = "25KW" ,
+	energy_usage = "22KW" ,
 	allowed_effects =
 	{
 		"speed" ,
