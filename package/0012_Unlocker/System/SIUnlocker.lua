@@ -14,6 +14,7 @@ SIUnlocker =
 		{
 			Init = false ,
 			UnlockData = {} ,
+			-- 分类触发条件
 			Mined = {} ,
 			MinedResult = {} ,
 			Craft = {} ,
