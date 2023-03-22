@@ -76,6 +76,7 @@ SIUnlocker =
 				end
 			end
 		end
+		unlockData.FireCount = unlockData.FireCount + 1
 		local gameTick = game.tick
 		for resultIndex , result in pairs( unlockData.Results ) do
 			local resultType = result.Type
@@ -142,7 +143,7 @@ SIUnlocker =
 				end
 			elseif resultType == SIUnlocker.ResultTypeID.Interface then
 				if remote.interfaces[result.RemoteInterfaceID] and remote.interfaces[result.RemoteInterfaceID][result.RemoteFunctionName] then
-					remote.call( result.RemoteInterfaceID , result.RemoteFunctionName , unlockData.ID , result.Data , forceIndex , playerIndex , gameTick )
+					remote.call( result.RemoteInterfaceID , result.RemoteFunctionName , unlockData.ID , result.Data , forceIndex , playerIndex , unlockData.FireCount , gameTick )
 				end
 			end
 		end
@@ -277,6 +278,7 @@ SIUnlocker =
 		globalSettings.UnlockData[unlockDataID] = unlockData
 		for forceIndex , forceSettings in pairs( SIGlobal.GetAllForceSettings( SIUnlocker.Settings.Name ) ) do
 			local forceUnlockData = SIUtils.table.deepcopy( unlockData )
+			forceUnlockData.FireCount = 0
 			forceSettings.UnlockData[unlockDataID] = forceUnlockData
 			for triggerType , triggerList in pairs( forceUnlockData.Triggers ) do
 				local triggerIDListPack = forceSettings[triggerType]
@@ -308,6 +310,7 @@ SIUnlocker =
 					globalSettings.UnlockData[unlockDataID] = unlockData
 					for forceIndex , forceSettings in pairs( SIGlobal.GetAllForceSettings( SIUnlocker.Settings.Name ) ) do
 						local forceUnlockData = SIUtils.table.deepcopy( unlockData )
+						forceUnlockData.FireCount = 0
 						forceSettings.UnlockData[unlockDataID] = forceUnlockData
 						for triggerType , triggerList in pairs( forceUnlockData.Triggers ) do
 							local triggerIDListPack = forceSettings[triggerType]
@@ -346,6 +349,7 @@ SIUnlocker =
 		for forceIndex , forceSettings in pairs( SIGlobal.GetAllForceSettings( SIUnlocker.Settings.Name ) ) do
 			local newForceUnlockData = SIUtils.table.deepcopy( unlockData )
 			local oldForceUnlockData = forceSettings.UnlockData[unlockDataID]
+			newForceUnlockData.FireCount = oldForceUnlockData.FireCount
 			forceSettings.UnlockData[unlockDataID] = newForceUnlockData
 			for triggerType , triggerList in pairs( oldForceUnlockData.Triggers ) do
 				local triggerIDListPack = forceSettings[triggerType]
@@ -394,6 +398,7 @@ SIUnlocker =
 					for forceIndex , forceSettings in pairs( SIGlobal.GetAllForceSettings( SIUnlocker.Settings.Name ) ) do
 						local newForceUnlockData = SIUtils.table.deepcopy( unlockData )
 						local oldForceUnlockData = forceSettings.UnlockData[unlockDataID]
+						newForceUnlockData.FireCount = oldForceUnlockData.FireCount
 						forceSettings.UnlockData[unlockDataID] = newForceUnlockData
 						for triggerType , triggerList in pairs( oldForceUnlockData.Triggers ) do
 							local triggerIDListPack = forceSettings[triggerType]
@@ -478,7 +483,7 @@ SIUnlocker.ResultTypeID =
 	GiveItem         = "GiveItem"         , -- 赠予物品 , 阵营内如果有多个玩家 , 则只有最终触发玩家会获得物品
 	MessageForce     = "MessageForce"     , -- 向阵营所有玩家发送一个消息
 	MessagePlayer    = "MessagePlayer"    , -- 向最终触发的玩家发送一个消息
-	Interface        = "Interface"          -- 执行 remote 接口函数 , 有五个参数 , 第 1 个参数是解锁数据的 ID , 第 2 个参数是保存在其中的数据包 , 第 3 个参数是触发的阵营编号 , 第 4 个参数是最终触发的玩家编号 , 可能为 nil , 第 5 个参数是当前游戏刻
+	Interface        = "Interface"          -- 执行 remote 接口函数 , 有六个参数 , 第 1 个参数是解锁数据的 ID , 第 2 个参数是保存在其中的数据包 , 第 3 个参数是触发的阵营编号 , 第 4 个参数是最终触发的玩家编号 , 可能为 nil , 第 5 个参数是触发的次数 , 第 6 个参数是当前游戏刻
 }
 SIUnlocker.MinedResultMode =
 {
@@ -592,7 +597,7 @@ SIUnlocker.MinedResultMode =
 --         Message = { "本地化字符串" }
 --     } ,
 --     {
---         Type = SIUnlocker.ResultTypeID.Interface , -- 执行 remote 接口函数 , 有五个参数 , 第 1 个参数是解锁数据的 ID , 第 2 个参数是保存在其中的数据包 , 第 3 个参数是触发的阵营编号 , 第 4 个参数是最终触发的玩家编号 , 可能为 nil , 第 5 个参数是当前游戏刻
+--         Type = SIUnlocker.ResultTypeID.Interface , -- 执行 remote 接口函数 , 有五个参数 , 第 1 个参数是解锁数据的 ID , 第 2 个参数是保存在其中的数据包 , 第 3 个参数是触发的阵营编号 , 第 4 个参数是最终触发的玩家编号 , 可能为 nil , 第 5 个参数是触发的次数 , 第 6 个参数是当前游戏刻
 --         RemoteInterfaceID = "remote 接口函数集的名称" ,
 --         RemoteFunctionName = "remote 接口函数的名称"
 --     }
