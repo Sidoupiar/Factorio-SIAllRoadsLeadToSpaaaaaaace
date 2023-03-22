@@ -62,7 +62,13 @@ if SIConfigs.SIOverhaul.OreCollision then
 	local function FixNextUpgrade( upgradeEntityName , entityMask )
 		SIGen.ForEachType( SICommon.Types.Entities , function( prototypeName , prototypeData )
 			if prototypeName == upgradeEntityName and prototypeData then
-				prototypeData.collision_mask = entityMask
+				if prototypeData.collision_mask then
+					if not SITable.Has( prototypeData.collision_mask , resourceLayer ) then
+						table.insert( prototypeData.collision_mask , resourceLayer )
+					end
+				else
+					prototypeData.collision_mask = entityMask
+				end
 				if prototypeData.next_upgrade then
 					FixNextUpgrade( prototypeData.next_upgrade , entityMask )
 				end

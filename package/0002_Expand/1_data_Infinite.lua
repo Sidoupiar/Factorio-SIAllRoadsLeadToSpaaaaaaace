@@ -382,13 +382,8 @@ SIGen
 	{
 		{
 			type = SICommon.Types.Items.Item ,
-			name = "stone-brick" ,
-			amount = 48
-		} ,
-		{
-			type = SICommon.Types.Items.Item ,
-			name = "electronic-circuit" ,
-			amount = 35
+			name = "stone-wall" ,
+			amount = 28
 		} ,
 		{
 			type = SICommon.Types.Items.Item ,
@@ -398,7 +393,17 @@ SIGen
 		{
 			type = SICommon.Types.Items.Item ,
 			name = "transport-belt" ,
-			amount = 16
+			amount = 22
+		} ,
+		{
+			type = SICommon.Types.Items.Item ,
+			name = "small-lamp" ,
+			amount = 8
+		} ,
+		{
+			type = SICommon.Types.Items.Item ,
+			name = "assembling-machine-1" ,
+			amount = 12
 		}
 	} ,
 	results =
