@@ -190,7 +190,7 @@ SIUnlocker =
 	-- ------------------------------------------------------------------------------------------------
 	-- ---------- 事件函数 ----------------------------------------------------------------------------
 	-- ------------------------------------------------------------------------------------------------
-	FreshMined = function( forceIndex , playerIndex , entityName )
+	EffectMined = function( forceIndex , playerIndex , entityName )
 		local forceSettings = SIGlobal.GetForceSettings( SIUnlocker.Settings.Name , forceIndex )
 		local minedDataList = forceSettings.Mined[entityName]
 		if not minedDataList then
@@ -208,7 +208,7 @@ SIUnlocker =
 			end
 		end
 	end ,
-	FreshMinedResult = function( forceIndex , playerIndex , itemName , count )
+	EffectMinedResult = function( forceIndex , playerIndex , itemName , count )
 		local forceSettings = SIGlobal.GetForceSettings( SIUnlocker.Settings.Name , forceIndex )
 		local minedResultDataList = forceSettings.MinedResult[itemName]
 		if not minedResultDataList then
@@ -230,7 +230,7 @@ SIUnlocker =
 			end
 		end
 	end ,
-	FreshCraft = function( forceIndex , playerIndex , recipeName )
+	EffectCraft = function( forceIndex , playerIndex , recipeName )
 		local forceSettings = SIGlobal.GetForceSettings( SIUnlocker.Settings.Name , forceIndex )
 		local craftDataList = forceSettings.Craft[recipeName]
 		if not craftDataList then
@@ -248,7 +248,7 @@ SIUnlocker =
 			end
 		end
 	end ,
-	FreshBuild = function( forceIndex , playerIndex , entityName )
+	EffectBuild = function( forceIndex , playerIndex , entityName )
 		local forceSettings = SIGlobal.GetForceSettings( SIUnlocker.Settings.Name , forceIndex )
 		local buildDataList = forceSettings.Build[entityName]
 		if not buildDataList then
@@ -266,7 +266,7 @@ SIUnlocker =
 			end
 		end
 	end ,
-	FreshDestroy = function( forceIndex , playerIndex , entityName )
+	EffectDestroy = function( forceIndex , playerIndex , entityName )
 		local forceSettings = SIGlobal.GetForceSettings( SIUnlocker.Settings.Name , forceIndex )
 		local destroyDataList = forceSettings.Destroy[entityName]
 		if not destroyDataList then
@@ -284,7 +284,7 @@ SIUnlocker =
 			end
 		end
 	end ,
-	FreshCapsule = function( forceIndex , playerIndex , itemName )
+	EffectCapsule = function( forceIndex , playerIndex , itemName )
 		local forceSettings = SIGlobal.GetForceSettings( SIUnlocker.Settings.Name , forceIndex )
 		local capsuleDataList = forceSettings.Capsule[itemName]
 		if not capsuleDataList then

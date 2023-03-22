@@ -53,11 +53,11 @@ end )
 	local playerIndex = event.player_index
 	local player = game.get_player( playerIndex )
 	local forceIndex = player.force.index
-	SIUnlocker.FreshMined( forceIndex , playerIndex , entity.name )
+	SIUnlocker.EffectMined( forceIndex , playerIndex , entity.name )
 	local inventory = event.buffer
 	if inventory then
 		for itemName , count in pairs( inventory.get_contents() ) do
-			SIUnlocker.FreshMinedResult( forceIndex , playerIndex , itemName , count )
+			SIUnlocker.EffectMinedResult( forceIndex , playerIndex , itemName , count )
 		end
 	end
 end )
@@ -66,7 +66,7 @@ end )
 	local playerIndex = event.player_index
 	local player = game.get_player( playerIndex )
 	local forceIndex = player.force.index
-	SIUnlocker.FreshCraft( forceIndex , playerIndex , recipe.name )
+	SIUnlocker.EffectCraft( forceIndex , playerIndex , recipe.name )
 end )
 .Add( SIEvents.on_built_entity , function( event , functionID )
 	local entity = event.created_entity
@@ -76,7 +76,7 @@ end )
 	local playerIndex = event.player_index
 	local player = game.get_player( playerIndex )
 	local forceIndex = player.force.index
-	SIUnlocker.FreshBuild( forceIndex , playerIndex , entity.name )
+	SIUnlocker.EffectBuild( forceIndex , playerIndex , entity.name )
 end )
 .Add( SIEvents.on_entity_died , function( event , functionID )
 	local entity = event.entity
@@ -112,14 +112,14 @@ end )
 		return
 	end
 	local forceIndex = player.force.index
-	SIUnlocker.FreshDestroy( forceIndex , player.index , entity.name )
+	SIUnlocker.EffectDestroy( forceIndex , player.index , entity.name )
 end )
 .Add( SIEvents.on_player_used_capsule , function( event , functionID )
 	local item = event.item
 	local playerIndex = event.player_index
 	local player = game.get_player( playerIndex )
 	local forceIndex = player.force.index
-	SIUnlocker.FreshCapsule( forceIndex , playerIndex , item.name )
+	SIUnlocker.EffectCapsule( forceIndex , playerIndex , item.name )
 end )
 
 -- ------------------------------------------------------------------------------------------------
