@@ -79,13 +79,7 @@ SIUnlocker =
 		for triggerType , triggerList in pairs( oldUnlockData.Triggers ) do
 			local triggerIDListPack = forceSettings[triggerType]
 			for triggerName , triggerData in pairs( triggerList ) do
-				local triggerIDList = triggerIDListPack[triggerName]
-				for index , innerUnlockDataID in pairs( triggerIDList ) do
-					if innerUnlockDataID == unlockDataID then
-						table.remove( triggerIDList , index )
-						break
-					end
-				end
+				SITable.Remove( triggerIDListPack[triggerName] , unlockDataID )
 			end
 		end
 		for triggerType , newTriggerList in pairs( newUnlockData.Triggers ) do
@@ -309,7 +303,7 @@ SIUnlocker =
 	-- ----------------------------------------
 	-- 添加一个解锁数据包<br>
 	-- ----------------------------------------
-	-- unlockData     = 解锁数据包 , 结构见文件末尾的注释<br>
+	-- unlockData     = 解锁数据包 , 其结构见文件末尾的注释<br>
 	-- ----------------------------------------
 	AddUnlockData = function( unlockData )
 		local globalSettings = SIGlobal.GetGlobalSettings( SIUnlocker.Settings.Name )
@@ -331,7 +325,7 @@ SIUnlocker =
 	-- ----------------------------------------
 	-- 添加多个解锁数据包<br>
 	-- ----------------------------------------
-	-- unlockDataList = 解锁数据包数组 , 其中包含多个解锁数据包 , 结构见文件末尾的注释<br>
+	-- unlockDataList = 解锁数据包数组 , 其中包含多个解锁数据包 , 其结构见文件末尾的注释<br>
 	-- ----------------------------------------
 	AddUnlockDataList = function( unlockDataList )
 		local globalSettings = SIGlobal.GetGlobalSettings( SIUnlocker.Settings.Name )
@@ -353,7 +347,7 @@ SIUnlocker =
 	-- ----------------------------------------
 	-- 更新一个解锁数据包<br>
 	-- ----------------------------------------
-	-- unlockData     = 解锁数据包 , 结构见文件末尾的注释<br>
+	-- unlockData     = 解锁数据包 , 其结构见文件末尾的注释<br>
 	-- ----------------------------------------
 	FreshUnlockData = function( unlockData )
 		local globalSettings = SIGlobal.GetGlobalSettings( SIUnlocker.Settings.Name )
@@ -376,7 +370,7 @@ SIUnlocker =
 	-- ----------------------------------------
 	-- 更新多个解锁数据包<br>
 	-- ----------------------------------------
-	-- unlockDataList = 解锁数据包数组 , 其中包含多个解锁数据包 , 结构见文件末尾的注释<br>
+	-- unlockDataList = 解锁数据包数组 , 其中包含多个解锁数据包 , 其结构见文件末尾的注释<br>
 	-- ----------------------------------------
 	FreshUnlockDataList = function( unlockDataList )
 		local globalSettings = SIGlobal.GetGlobalSettings( SIUnlocker.Settings.Name )
@@ -459,7 +453,7 @@ SIUnlocker.CountMode =
 -- 2. Triggers 和 Results 不能为空 , 且长度不能小于 1
 -- ----------------------------------------
 -- 解锁数据包的数据结构如下 :
--- ID          = "解锁数据包的 ID , 用于各种事件判断" ,
+-- ID          = "解锁数据包的 ID , 用于各种事件的判断" ,
 -- Name        = { "解锁数据包的名称 , 本地化字符串" } ,
 -- Description = { "解锁数据包的名称 , 本地化字符串" } ,
 -- Triggers =    -- 触发器列表 , 需要满足所有触发器的条件 , 才会执行解锁操作

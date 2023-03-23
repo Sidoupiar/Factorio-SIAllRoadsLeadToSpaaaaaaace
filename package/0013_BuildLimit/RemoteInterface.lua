@@ -2,12 +2,16 @@
 -- ---------- 外部接口 ----------------------------------------------------------------------------
 -- ------------------------------------------------------------------------------------------------
 
--- SIInterface
+SIInterface
 
 -- ----------------------------------------
 -- 解锁逻辑<br>
 -- ----------------------------------------
--- .Add( SIUnlocker.InterfaceID ,
--- {
+.Add( SIBuildLimit.InterfaceID ,
+{
 	-- 注册
--- } )
+	AddLimitData = SIBuildLimit.AddLimitData ,
+	AddLimitDataList = SIBuildLimit.AddLimitDataList ,
+	FreshLimitData = SIBuildLimit.FreshLimitData ,
+	FreshLimitDataList = SIBuildLimit.FreshLimitDataList
+} )
