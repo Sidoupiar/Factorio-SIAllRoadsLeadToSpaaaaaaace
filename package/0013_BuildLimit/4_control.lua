@@ -105,12 +105,13 @@ end )
 	end
 	SIBuildLimit.DestroyEntity( entity )
 end )
-.Add( SIEvents.on_gui_closed , function( event , functionID )
-	local entity = event.entity
-	if not entity or not entity.valid then
-		return
+.Add( SIEvents.on_tick , function( event , functionID )
+	for playerIndex , settings in pairs( SIGlobal.GetAllPlayerSettings( SIBuildLimit.Settings.Name ) ) do
+		local entity = settings.CurrentEntity
+		if entity then
+			SIBuildLimit.CheckModule( entity )
+		end
 	end
-	SIBuildLimit.CheckModule( entity )
 end )
 .Add( SIRequestMap.GetModuleEventID() , function( event , functionID )
 	local entity = event.entity
@@ -118,6 +119,29 @@ end )
 		return
 	end
 	SIBuildLimit.CheckModule( entity )
+end )
+
+-- ------------------------------------------------------------------------------------------------
+-- -------- 玩家操作事件 --------------------------------------------------------------------------
+-- ------------------------------------------------------------------------------------------------
+
+-- ----------------------------------------
+-- 事件
+-- ----------------------------------------
+SIEventBus
+.Add( SIEvents.on_gui_opened , function( event , functionID )
+	local entity = event.entity
+	if not entity or not entity.valid then
+		return
+	end
+	SIBuildLimit.PlayerOpenEntity( entity )
+end )
+.Add( SIEvents.on_gui_closed , function( event , functionID )
+	local entity = event.entity
+	if not entity or not entity.valid then
+		return
+	end
+	SIBuildLimit.PlayerCloseEntity( entity )
 end )
 
 -- ------------------------------------------------------------------------------------------------

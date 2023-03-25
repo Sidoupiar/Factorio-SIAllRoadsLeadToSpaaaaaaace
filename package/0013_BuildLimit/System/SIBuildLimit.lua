@@ -6,12 +6,16 @@ SIBuildLimit =
 	Settings =
 	{
 		Name = "SIBuildLimit" ,
-		Default =
+		DefaultGlobal =
 		{
 			LimitData = {} ,
 			Machines = {} ,
 			Beacons = {} ,
 			Modules = {}
+		} ,
+		DefaultPlayer =
+		{
+			CurrentEntity = nil
 		}
 	} ,
 	-- ------------------------------------------------------------------------------------------------
@@ -200,6 +204,14 @@ SIBuildLimit =
 	CheckModule = function( entity )
 		local globalSettings = SIGlobal.GetGlobalSettings( SIBuildLimit.Settings.Name )
 		SIBuildLimit.EffectMachine( globalSettings , entity )
+	end ,
+	PlayerOpenEntity = function( entity )
+		local settings = SIGlobal.GetPlayerSettings( SIBuildLimit.Settings.Name )
+		settings.CurrentEntity = entity
+	end ,
+	PlayerCloseEntity = function( entity )
+		local settings = SIGlobal.GetPlayerSettings( SIBuildLimit.Settings.Name )
+		settings.CurrentEntity = nil
 	end ,
 	-- ------------------------------------------------------------------------------------------------
 	-- ------ 接口函数 -- 注册 ------------------------------------------------------------------------
