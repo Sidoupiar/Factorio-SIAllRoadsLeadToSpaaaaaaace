@@ -38,7 +38,7 @@ SIEventBus
 	if not entity or not entity.valid then
 		return
 	end
-	if entity.type == SICommon.Types.Entities.GhostEntity then
+	if entity.type == SICommon.Types.Entities.GhostEntity or entity.type == SICommon.Types.Entities.ProxyItemRequest then
 		SIBuildLimit.CheckModule( entity )
 	else
 		SIBuildLimit.BuildEntity( entity )
@@ -49,7 +49,7 @@ end )
 	if not entity or not entity.valid then
 		return
 	end
-	if entity.type == SICommon.Types.Entities.GhostEntity then
+	if entity.type == SICommon.Types.Entities.GhostEntity or entity.type == SICommon.Types.Entities.ProxyItemRequest then
 		SIBuildLimit.CheckModule( entity )
 	else
 		SIBuildLimit.BuildEntity( entity )
@@ -60,7 +60,7 @@ end )
 	if not entity or not entity.valid then
 		return
 	end
-	if entity.type == SICommon.Types.Entities.GhostEntity then
+	if entity.type == SICommon.Types.Entities.GhostEntity or entity.type == SICommon.Types.Entities.ProxyItemRequest then
 		SIBuildLimit.CheckModule( entity )
 	else
 		SIBuildLimit.BuildEntity( entity )
@@ -71,7 +71,7 @@ end )
 	if not entity or not entity.valid then
 		return
 	end
-	if entity.type == SICommon.Types.Entities.GhostEntity then
+	if entity.type == SICommon.Types.Entities.GhostEntity or entity.type == SICommon.Types.Entities.ProxyItemRequest then
 		SIBuildLimit.CheckModule( entity )
 	else
 		SIBuildLimit.BuildEntity( entity )
@@ -134,14 +134,16 @@ SIEventBus
 	if not entity or not entity.valid then
 		return
 	end
-	SIBuildLimit.PlayerOpenEntity( entity )
+	local playerIndex = event.player_index
+	SIBuildLimit.PlayerOpenEntity( playerIndex , entity )
 end )
 .Add( SIEvents.on_gui_closed , function( event , functionID )
 	local entity = event.entity
 	if not entity or not entity.valid then
 		return
 	end
-	SIBuildLimit.PlayerCloseEntity( entity )
+	local playerIndex = event.player_index
+	SIBuildLimit.PlayerCloseEntity( playerIndex , entity )
 end )
 
 -- ------------------------------------------------------------------------------------------------

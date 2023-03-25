@@ -95,18 +95,130 @@ SIBuildLimit =
 		machine.active = true
 	end ,
 	EffectModule = function( globalSettings , entity )
-		local isGhost = entity.type == SICommon.Types.Entities.GhostEntity
-		local limitDataIDList = isGhost and globalSettings.Modules[entity.ghost_prototype.name] or globalSettings.Modules[entity.name]
-		if limitDataIDList then
-			-- 统计设备插件情况
-			local moduleCount = 0
-			local moduleCountList = {}
-			if isGhost then
+		local type = entity.type
+		if type == SICommon.Types.Entities.GhostEntity then
+			local limitDataIDList = globalSettings.Modules[entity.ghost_prototype.name]
+			if limitDataIDList then
+				-- 统计设备插件情况
+				local moduleCount = 0
+				local moduleCountList = {}
 				for itemName , count in pairs( entity.item_requests or {} ) do
 					moduleCount = moduleCount + count
 					moduleCountList[itemName] = count
 				end
-			else
+				-- 遍历建造限制数据包
+				for limitDataIDIndex , limitDataID in pairs( limitDataIDList ) do
+					local limitData = globalSettings.LimitData[limitDataID]
+					if moduleCount < limitData.MinModuleCount then
+						entity.item_requests = {}
+						return
+					end
+					if moduleCount > limitData.MaxModuleCount then
+						entity.item_requests = {}
+						return
+					end
+					if limitData.NeedModuleList then
+						for moduleName , needCount in pairs( limitData.RequireList ) do
+							local count = moduleCountList[moduleName] or 0
+							if count < needCount then
+								entity.item_requests = {}
+								return
+							end
+						end
+					end
+					local supportModuleList = limitData.SupportModuleList
+					if supportModuleList then
+						for moduleName , count in pairs( moduleCountList ) do
+							if not supportModuleList[moduleName] then
+								entity.item_requests = {}
+								return
+							end
+							if count > supportModuleList[moduleName] then
+								entity.item_requests = {}
+								return
+							end
+						end
+					end
+				end
+			end
+		elseif type == SICommon.Types.Entities.ProxyItemRequest then
+			local targetEntity = entity.proxy_target
+			local limitDataIDList = globalSettings.Modules[targetEntity.name]
+			if limitDataIDList then
+				local position = targetEntity.position
+				local selectionBox = targetEntity.prototype.selection_box
+				local proxyList = targetEntity.surface.find_entities_filtered
+				{
+					type = SICommon.Types.Entities.ProxyItemRequest ,
+					area = { { selectionBox.left_top.x + position.x , selectionBox.left_top.y + position.y } , { selectionBox.right_bottom.x + position.x , selectionBox.right_bottom.y + position.y } }
+				}
+				if #proxyList > 0 then
+					local unit_number = targetEntity.unit_number
+					-- 统计设备插件情况
+					local moduleCount = 0
+					local moduleCountList = {}
+					local newProxyList = {}
+					for index , proxy in pairs( proxyList ) do
+						if proxy.proxy_target.unit_number == unit_number then
+							for itemName , count in pairs( proxy.item_requests or {} ) do
+								moduleCount = moduleCount + count
+								moduleCountList[itemName] = ( moduleCountList[itemName] or 0 ) + count
+								table.insert( newProxyList , proxy )
+							end
+						end
+					end
+					-- 遍历建造限制数据包
+					for limitDataIDIndex , limitDataID in pairs( limitDataIDList ) do
+						local limitData = globalSettings.LimitData[limitDataID]
+						if moduleCount < limitData.MinModuleCount then
+							for index , proxy in pairs( newProxyList ) do
+								proxy.item_requests = {}
+							end
+							return
+						end
+						if moduleCount > limitData.MaxModuleCount then
+							for index , proxy in pairs( newProxyList ) do
+								proxy.item_requests = {}
+							end
+							return
+						end
+						if limitData.NeedModuleList then
+							for moduleName , needCount in pairs( limitData.RequireList ) do
+								local count = moduleCountList[moduleName] or 0
+								if count < needCount then
+									for index , proxy in pairs( newProxyList ) do
+										proxy.item_requests = {}
+									end
+									return
+								end
+							end
+						end
+						local supportModuleList = limitData.SupportModuleList
+						if supportModuleList then
+							for moduleName , count in pairs( moduleCountList ) do
+								if not supportModuleList[moduleName] then
+									for index , proxy in pairs( newProxyList ) do
+										proxy.item_requests = {}
+									end
+									return
+								end
+								if count > supportModuleList[moduleName] then
+									for index , proxy in pairs( newProxyList ) do
+										proxy.item_requests = {}
+									end
+									return
+								end
+							end
+						end
+					end
+				end
+			end
+		else
+			local limitDataIDList = globalSettings.Modules[entity.name]
+			if limitDataIDList then
+				-- 统计设备插件情况
+				local moduleCount = 0
+				local moduleCountList = {}
 				local moduleInventory = entity.get_module_inventory()
 				if moduleInventory then
 					for itemName , count in pairs( moduleInventory.get_contents() ) do
@@ -114,61 +226,109 @@ SIBuildLimit =
 						moduleCountList[itemName] = count
 					end
 				end
-			end
-			-- 遍历建造限制数据包
-			for limitDataIDIndex , limitDataID in pairs( limitDataIDList ) do
-				local limitData = globalSettings.LimitData[limitDataID]
-				if moduleCount < limitData.MinModuleCount then
-					if isGhost then
-						entity.item_requests = {}
-					else
+				-- 遍历建造限制数据包
+				for limitDataIDIndex , limitDataID in pairs( limitDataIDList ) do
+					local limitData = globalSettings.LimitData[limitDataID]
+					if moduleCount < limitData.MinModuleCount then
 						entity.active = false
+						return
 					end
-					return
-				end
-				if moduleCount > limitData.MaxModuleCount then
-					if isGhost then
-						entity.item_requests = {}
-					else
+					if moduleCount > limitData.MaxModuleCount then
 						entity.active = false
+						return
 					end
-					return
-				end
-				if limitData.NeedModuleList then
-					for moduleName , needCount in pairs( limitData.RequireList ) do
-						local count = moduleCountList[moduleName] or 0
-						if count < needCount then
-							if isGhost then
-								entity.item_requests = {}
-							else
+					if limitData.NeedModuleList then
+						for moduleName , needCount in pairs( limitData.RequireList ) do
+							local count = moduleCountList[moduleName] or 0
+							if count < needCount then
 								entity.active = false
+								return
 							end
-							return
+						end
+					end
+					local supportModuleList = limitData.SupportModuleList
+					if supportModuleList then
+						for moduleName , count in pairs( moduleCountList ) do
+							if not supportModuleList[moduleName] then
+								entity.active = false
+								return
+							end
+							if count > supportModuleList[moduleName] then
+								entity.active = false
+								return
+							end
 						end
 					end
 				end
-				local supportModuleList = limitData.SupportModuleList
-				if supportModuleList then
-					for moduleName , count in pairs( moduleCountList ) do
-						if not supportModuleList[moduleName] then
-							if isGhost then
-								entity.item_requests = {}
-							else
-								entity.active = false
+				-- 额外检测物品请求实体
+				local position = entity.position
+				local selectionBox = entity.prototype.selection_box
+				local proxyList = entity.surface.find_entities_filtered
+				{
+					type = SICommon.Types.Entities.ProxyItemRequest ,
+					area = { { selectionBox.left_top.x + position.x , selectionBox.left_top.y + position.y } , { selectionBox.right_bottom.x + position.x , selectionBox.right_bottom.y + position.y } }
+				}
+				if #proxyList > 0 then
+					local unit_number = entity.unit_number
+					moduleCount = 0
+					moduleCountList = {}
+					local newProxyList = {}
+					for index , proxy in pairs( proxyList ) do
+						if proxy.proxy_target.unit_number == unit_number then
+							for itemName , count in pairs( proxy.item_requests or {} ) do
+								moduleCount = moduleCount + count
+								moduleCountList[itemName] = ( moduleCountList[itemName] or 0 ) + count
+								table.insert( newProxyList , proxy )
 							end
-							return
 						end
-						if count > supportModuleList[moduleName] then
-							if isGhost then
-								entity.item_requests = {}
-							else
-								entity.active = false
+					end
+					-- 额外遍历建造限制数据包来检测物品请求实体
+					for limitDataIDIndex , limitDataID in pairs( limitDataIDList ) do
+						local limitData = globalSettings.LimitData[limitDataID]
+						if moduleCount < limitData.MinModuleCount then
+							for index , proxy in pairs( newProxyList ) do
+								proxy.item_requests = {}
 							end
-							return
+							break
+						end
+						if moduleCount > limitData.MaxModuleCount then
+							for index , proxy in pairs( newProxyList ) do
+								proxy.item_requests = {}
+							end
+							break
+						end
+						if limitData.NeedModuleList then
+							for moduleName , needCount in pairs( limitData.RequireList ) do
+								local count = moduleCountList[moduleName] or 0
+								if count < needCount then
+									for index , proxy in pairs( newProxyList ) do
+										proxy.item_requests = {}
+									end
+									break
+								end
+							end
+						end
+						local supportModuleList = limitData.SupportModuleList
+						if supportModuleList then
+							for moduleName , count in pairs( moduleCountList ) do
+								if not supportModuleList[moduleName] then
+									for index , proxy in pairs( newProxyList ) do
+										proxy.item_requests = {}
+									end
+									break
+								end
+								if count > supportModuleList[moduleName] then
+									for index , proxy in pairs( newProxyList ) do
+										proxy.item_requests = {}
+									end
+									break
+								end
+							end
 						end
 					end
 				end
 			end
+			entity.active = true
 		end
 	end ,
 	-- ------------------------------------------------------------------------------------------------
@@ -203,15 +363,17 @@ SIBuildLimit =
 	end ,
 	CheckModule = function( entity )
 		local globalSettings = SIGlobal.GetGlobalSettings( SIBuildLimit.Settings.Name )
-		SIBuildLimit.EffectMachine( globalSettings , entity )
+		SIBuildLimit.EffectModule( globalSettings , entity )
 	end ,
-	PlayerOpenEntity = function( entity )
-		local settings = SIGlobal.GetPlayerSettings( SIBuildLimit.Settings.Name )
+	PlayerOpenEntity = function( playerIndex , entity )
+		local settings = SIGlobal.GetPlayerSettings( SIBuildLimit.Settings.Name , playerIndex )
 		settings.CurrentEntity = entity
 	end ,
-	PlayerCloseEntity = function( entity )
-		local settings = SIGlobal.GetPlayerSettings( SIBuildLimit.Settings.Name )
+	PlayerCloseEntity = function( playerIndex , entity )
+		local settings = SIGlobal.GetPlayerSettings( SIBuildLimit.Settings.Name , playerIndex )
 		settings.CurrentEntity = nil
+		local globalSettings = SIGlobal.GetGlobalSettings( SIBuildLimit.Settings.Name )
+		SIBuildLimit.EffectModule( globalSettings , entity )
 	end ,
 	-- ------------------------------------------------------------------------------------------------
 	-- ------ 接口函数 -- 注册 ------------------------------------------------------------------------
