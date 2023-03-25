@@ -82,9 +82,6 @@ end )
 	end
 	SIBuildLimit.DestroyEntity( entity )
 end )
--- .Add( SIEvents.on_entity_destroyed , function( event , functionID )
--- 	SIBuildLimit.DestroyEntity( entity )
--- end )
 .Add( SIEvents.script_raised_destroy , function( event , functionID )
 	local entity = event.entity
 	if not entity or not entity.valid then

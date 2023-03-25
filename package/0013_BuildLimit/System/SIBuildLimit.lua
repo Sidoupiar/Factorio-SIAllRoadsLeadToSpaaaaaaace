@@ -21,25 +21,40 @@ SIBuildLimit =
 	-- ------------------------------------------------------------------------------------------------
 	-- ---------- 功能函数 ----------------------------------------------------------------------------
 	-- ------------------------------------------------------------------------------------------------
-	EffectMachine = function( globalSettings , machine )
+	EffectMachine = function( globalSettings , machine , removedBeacon )
 		local name = machine.name
+		local removedBeaconNumber = removedBeacon and removedBeacon.unit_number or nil
 		for index , beacon in pairs( machine.get_beacons() or {} ) do
-			local limitDataIDList = globalSettings.Beacons[beacon.name]
-			if limitDataIDList then
-				for limitDataIDIndex , limitDataID in pairs( limitDataIDList ) do
-					local limitData = globalSettings.LimitData[limitDataID]
-					if not limitData.WhiteList[name] then
-						machine.active = false
-						return
+			if beacon.unit_number ~= removedBeaconNumber then
+				local limitDataIDList = globalSettings.Beacons[beacon.name]
+				if limitDataIDList then
+					for limitDataIDIndex , limitDataID in pairs( limitDataIDList ) do
+						local limitData = globalSettings.LimitData[limitDataID]
+						if not limitData.WhiteList[name] then
+							machine.active = false
+							return
+						end
 					end
 				end
 			end
 		end
 		local limitDataIDList = globalSettings.Machines[name]
 		if limitDataIDList then
+			-- 统计设备插件塔情况
+			local beaconCount = machine.beacons_count
+			if removedBeacon then
+				beaconCount = beaconCount - 1
+			end
+			local beaconCountList = {}
+			for index , beacon in pairs( machine.get_beacons() or {} ) do
+				if beacon.unit_number ~= removedBeaconNumber then
+					local beaconName = beacon.name
+					beaconCountList[beaconName] = ( beaconCountList[beaconName] or 0 ) + 1
+				end
+			end
+			-- 遍历建造限制数据包
 			for limitDataIDIndex , limitDataID in pairs( limitDataIDList ) do
 				local limitData = globalSettings.LimitData[limitDataID]
-				local beaconCount = machine.beacons_count
 				if beaconCount < limitData.MinBeaconCount then
 					machine.active = false
 					return
@@ -48,26 +63,26 @@ SIBuildLimit =
 					machine.active = false
 					return
 				end
-				local beaconCountList = {}
-				for index , beacon in pairs( machine.get_beacons() or {} ) do
-					local beaconName = beacon.name
-					beaconCountList[beaconName] = ( beaconCountList[beaconName] or 0 ) + 1
-				end
-				for beaconName , count in pairs( limitData.Require ) do
-					if beaconCountList[beaconName] < count then
-						machine.active = false
-						return
+				if limitData.Require then
+					for beaconName , requireCount in pairs( limitData.Require ) do
+						local count = beaconCountList[beaconName] or 0
+						if count < requireCount then
+							machine.active = false
+							return
+						end
 					end
 				end
 				local whiteList = limitData.WhiteList
-				for beaconName , count in pairs( beaconCountList ) do
-					if not whiteList[beaconName] then
-						machine.active = false
-						return
-					end
-					if whiteList[beaconName] < count then
-						machine.active = false
-						return
+				if whiteList then
+					for beaconName , count in pairs( beaconCountList ) do
+						if not whiteList[beaconName] then
+							machine.active = false
+							return
+						end
+						if count > whiteList[beaconName] then
+							machine.active = false
+							return
+						end
 					end
 				end
 			end
@@ -83,12 +98,12 @@ SIBuildLimit =
 			return
 		end
 		local globalSettings = SIGlobal.GetGlobalSettings( SIBuildLimit.Settings.Name )
-		if type == SICommon.Types.Entities.Beacons then
+		if type == SICommon.Types.Entities.Beacon then
 			for index , machine in pairs( entity.get_beacon_effect_receivers() ) do
-				SIBuildLimit.EffectMachine( globalSettings , machine )
+				SIBuildLimit.EffectMachine( globalSettings , machine , nil )
 			end
 		else
-			SIBuildLimit.EffectMachine( globalSettings , entity )
+			SIBuildLimit.EffectMachine( globalSettings , entity , nil )
 		end
 	end ,
 	DestroyEntity = function( entity )
@@ -97,9 +112,9 @@ SIBuildLimit =
 			return
 		end
 		local globalSettings = SIGlobal.GetGlobalSettings( SIBuildLimit.Settings.Name )
-		if type == SICommon.Types.Entities.Beacons then
+		if type == SICommon.Types.Entities.Beacon then
 			for index , machine in pairs( entity.get_beacon_effect_receivers() ) do
-				SIBuildLimit.EffectMachine( globalSettings , machine )
+				SIBuildLimit.EffectMachine( globalSettings , machine , entity )
 			end
 		end
 	end ,
@@ -121,8 +136,8 @@ SIBuildLimit =
 		end
 		limitData.MinBeaconCount = limitData.MinBeaconCount or -1
 		limitData.MaxBeaconCount = limitData.MaxBeaconCount or 256
-		limitData.Require = limitData.Require or {}
-		limitData.WhiteList = limitData.WhiteList or {}
+		limitData.Require = limitData.Require
+		limitData.WhiteList = limitData.WhiteList
 		globalSettings.LimitData[limitDataID] = limitData
 		if limitData.Machine then
 			local limitDataIDList = globalSettings.Machines[limitData.Machine]
@@ -154,8 +169,8 @@ SIBuildLimit =
 			if limitDataID and not globalSettings.LimitData[limitDataID] then
 				limitData.MinBeaconCount = limitData.MinBeaconCount or -1
 				limitData.MaxBeaconCount = limitData.MaxBeaconCount or 256
-				limitData.Require = limitData.Require or {}
-				limitData.WhiteList = limitData.WhiteList or {}
+				limitData.Require = limitData.Require
+				limitData.WhiteList = limitData.WhiteList
 				globalSettings.LimitData[limitDataID] = limitData
 				if limitData.Machine then
 					local limitDataIDList = globalSettings.Machines[limitData.Machine]
@@ -196,8 +211,8 @@ SIBuildLimit =
 		end
 		limitData.MinBeaconCount = limitData.MinBeaconCount or -1
 		limitData.MaxBeaconCount = limitData.MaxBeaconCount or 256
-		limitData.Require = limitData.Require or {}
-		limitData.WhiteList = limitData.WhiteList or {}
+		limitData.Require = limitData.Require
+		limitData.WhiteList = limitData.WhiteList
 		globalSettings.LimitData[limitDataID] = limitData
 		if limitData.Machine then
 			local limitDataIDList = globalSettings.Machines[limitData.Machine]
@@ -235,8 +250,8 @@ SIBuildLimit =
 				end
 				limitData.MinBeaconCount = limitData.MinBeaconCount or -1
 				limitData.MaxBeaconCount = limitData.MaxBeaconCount or 256
-				limitData.Require = limitData.Require or {}
-				limitData.WhiteList = limitData.WhiteList or {}
+				limitData.Require = limitData.Require
+				limitData.WhiteList = limitData.WhiteList
 				globalSettings.LimitData[limitDataID] = limitData
 				if limitData.Machine then
 					local limitDataIDList = globalSettings.Machines[limitData.Machine]
