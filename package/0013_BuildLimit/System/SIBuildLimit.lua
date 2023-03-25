@@ -118,7 +118,7 @@ SIBuildLimit =
 						return
 					end
 					if limitData.NeedModuleList then
-						for moduleName , needCount in pairs( limitData.RequireList ) do
+						for moduleName , needCount in pairs( limitData.NeedModuleList ) do
 							local count = moduleCountList[moduleName] or 0
 							if count < needCount then
 								entity.item_requests = {}
@@ -183,7 +183,7 @@ SIBuildLimit =
 							return
 						end
 						if limitData.NeedModuleList then
-							for moduleName , needCount in pairs( limitData.RequireList ) do
+							for moduleName , needCount in pairs( limitData.NeedModuleList ) do
 								local count = moduleCountList[moduleName] or 0
 								if count < needCount then
 									for index , proxy in pairs( newProxyList ) do
@@ -238,7 +238,7 @@ SIBuildLimit =
 						return
 					end
 					if limitData.NeedModuleList then
-						for moduleName , needCount in pairs( limitData.RequireList ) do
+						for moduleName , needCount in pairs( limitData.NeedModuleList ) do
 							local count = moduleCountList[moduleName] or 0
 							if count < needCount then
 								entity.active = false
@@ -298,7 +298,7 @@ SIBuildLimit =
 							break
 						end
 						if limitData.NeedModuleList then
-							for moduleName , needCount in pairs( limitData.RequireList ) do
+							for moduleName , needCount in pairs( limitData.NeedModuleList ) do
 								local count = moduleCountList[moduleName] or 0
 								if count < needCount then
 									for index , proxy in pairs( newProxyList ) do
