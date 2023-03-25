@@ -23,7 +23,7 @@ SIBuildLimit =
 	-- ------------------------------------------------------------------------------------------------
 	EffectMachine = function( globalSettings , machine )
 		local name = machine.name
-		for index , beacon in pairs( machine.get_beacons() ) do
+		for index , beacon in pairs( machine.get_beacons() or {} ) do
 			local limitDataIDList = globalSettings.Beacons[beacon.name]
 			if limitDataIDList then
 				for limitDataIDIndex , limitDataID in pairs( limitDataIDList ) do
@@ -35,7 +35,7 @@ SIBuildLimit =
 				end
 			end
 		end
-		local limitDataIDList = globalSettings.Entities[name]
+		local limitDataIDList = globalSettings.Machines[name]
 		if limitDataIDList then
 			for limitDataIDIndex , limitDataID in pairs( limitDataIDList ) do
 				local limitData = globalSettings.LimitData[limitDataID]
@@ -49,7 +49,7 @@ SIBuildLimit =
 					return
 				end
 				local beaconCountList = {}
-				for index , beacon in pairs( machine.get_beacons() ) do
+				for index , beacon in pairs( machine.get_beacons() or {} ) do
 					local beaconName = beacon.name
 					beaconCountList[beaconName] = ( beaconCountList[beaconName] or 0 ) + 1
 				end
