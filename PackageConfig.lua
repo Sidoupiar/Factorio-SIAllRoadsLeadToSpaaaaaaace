@@ -712,6 +712,9 @@ local PackageConfig =
 	{
 		PackageName = "0100_Resource"
 	} ,
+	{
+		PackageName = "0101_Agriculture"
+	} ,
 	-- ----------------------------------------
 	-- RPG 系统 , 包括加点 , 技能 , 副本 , 装备等等<br>
 	-- ----------------------------------------
