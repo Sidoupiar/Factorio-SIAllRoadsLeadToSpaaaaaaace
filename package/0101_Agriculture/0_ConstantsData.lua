@@ -13,13 +13,20 @@ local constantsData =
 		Enable = true ,
 		Groups =
 		{
-			Resource =
+			Agriculture =
 			{
 				Name = "农业种植" ,
 				Subgroups =
 				{
 					Farm = "农场" ,
-					Fruit = "水果"
+					Irrigation = "灌溉" ,
+					Manure = "施肥" ,
+					Manager = "管理" ,
+					Base = "基础作物" ,
+					Food = "粮食作物" ,
+					Vegetable = "蔬菜作物" ,
+					Fruit = "水果作物" ,
+					Special = "特殊作物"
 				}
 			}
 		}

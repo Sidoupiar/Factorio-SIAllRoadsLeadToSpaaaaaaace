@@ -87,6 +87,7 @@ SIInterface
 	HasPermission = SIPermission.HasPermission ,
 	GetPermissionMessage = SIPermission.GetPermissionMessage ,
 	IsAdmin = SIPermission.IsAdmin ,
+	-- 事件
 	GetEventID = SIPermission.GetEventID
 } )
 
@@ -134,7 +135,9 @@ SIInterface
 	CloseFrames = SIRequestMap.CloseFrames ,
 	-- 导入导出
 	ImpoerSettingsData = SIRequestMap.ImpoerSettingsData ,
-	ExportSettingsData = SIRequestMap.ExportSettingsData
+	ExportSettingsData = SIRequestMap.ExportSettingsData ,
+	-- 事件
+	GetModuleEventID = SIRequestMap.GetModuleEventID
 } )
 
 -- ----------------------------------------

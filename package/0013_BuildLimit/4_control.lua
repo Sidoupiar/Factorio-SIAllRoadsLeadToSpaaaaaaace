@@ -38,28 +38,44 @@ SIEventBus
 	if not entity or not entity.valid then
 		return
 	end
-	SIBuildLimit.BuildEntity( entity )
+	if entity.type == SICommon.Types.Entities.GhostEntity then
+		SIBuildLimit.CheckModule( entity )
+	else
+		SIBuildLimit.BuildEntity( entity )
+	end
 end )
 .Add( SIEvents.on_robot_built_entity , function( event , functionID )
 	local entity = event.created_entity
 	if not entity or not entity.valid then
 		return
 	end
-	SIBuildLimit.BuildEntity( entity )
+	if entity.type == SICommon.Types.Entities.GhostEntity then
+		SIBuildLimit.CheckModule( entity )
+	else
+		SIBuildLimit.BuildEntity( entity )
+	end
 end )
 .Add( SIEvents.on_trigger_created_entity , function( event , functionID )
 	local entity = event.entity
 	if not entity or not entity.valid then
 		return
 	end
-	SIBuildLimit.BuildEntity( entity )
+	if entity.type == SICommon.Types.Entities.GhostEntity then
+		SIBuildLimit.CheckModule( entity )
+	else
+		SIBuildLimit.BuildEntity( entity )
+	end
 end )
 .Add( SIEvents.script_raised_built , function( event , functionID )
 	local entity = event.entity
 	if not entity or not entity.valid then
 		return
 	end
-	SIBuildLimit.BuildEntity( entity )
+	if entity.type == SICommon.Types.Entities.GhostEntity then
+		SIBuildLimit.CheckModule( entity )
+	else
+		SIBuildLimit.BuildEntity( entity )
+	end
 end )
 .Add( SIEvents.on_player_mined_entity , function( event , functionID )
 	local entity = event.entity
@@ -88,6 +104,20 @@ end )
 		return
 	end
 	SIBuildLimit.DestroyEntity( entity )
+end )
+.Add( SIEvents.on_gui_closed , function( event , functionID )
+	local entity = event.entity
+	if not entity or not entity.valid then
+		return
+	end
+	SIBuildLimit.CheckModule( entity )
+end )
+.Add( SIRequestMap.GetModuleEventID() , function( event , functionID )
+	local entity = event.entity
+	if not entity or not entity.valid then
+		return
+	end
+	SIBuildLimit.CheckModule( entity )
 end )
 
 -- ------------------------------------------------------------------------------------------------

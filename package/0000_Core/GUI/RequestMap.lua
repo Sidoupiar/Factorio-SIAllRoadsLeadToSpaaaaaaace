@@ -95,6 +95,7 @@ SIRequestMap =
 			TabSettingsList = {}
 		}
 	} ,
+	ModuleEventID = script.generate_event_name() ,
 	TabSettingsMaxCount = 8 ,
 	DefaultTabSettings =
 	{
@@ -1358,8 +1359,22 @@ SIRequestMap =
 			settings.defaultIndex4 = 0
 		end
 	end ,
+	-- ----------------------------------------
+	-- 这是一个内部函数 , 请勿外部调用<br>
+	-- ----------------------------------------
+	FireModuleEvent = function( playerIndex , entity )
+		local data =
+		{
+			name = SIRequestMap.ModuleEventID ,
+			tick = game.tick ,
+			player_index = playerIndex ,
+			entity = entity
+		}
+		script.raise_event( SIRequestMap.ModuleEventID , data )
+	end ,
 	EffectTabSettings = function( settings , tabSettingsIndex )
-		local player = game.get_player( settings.playerIndex )
+		local playerIndex = settings.playerIndex
+		local player = game.get_player( playerIndex )
 		local playerInventory = player.get_main_inventory()
 		local tabSettings = settings.TabSettingsList[tabSettingsIndex]
 		local greenToBlue = tabSettings.GreenToBlue.Check
@@ -1375,6 +1390,7 @@ SIRequestMap =
 			local entityName = entity.name
 			local entityPrototype = entity.prototype
 			local type = entityPrototype.type
+			local moduleFlag = false
 			-- ----------------------------------------
 			-- 请求格子
 			-- ----------------------------------------
@@ -1532,6 +1548,7 @@ SIRequestMap =
 											surface.spill_item_stack( entity.position , { name = currentItemStack.name , count = 1 } , true , force , false )
 										end
 										currentItemStack.clear()
+										moduleFlag = true
 									end
 									local itemStack = { name = itemName , count = 1 }
 									if inventory.can_insert( itemStack ) then
@@ -1572,6 +1589,7 @@ SIRequestMap =
 												}
 											end
 										end
+										moduleFlag = true
 									end
 								end
 							else
@@ -1589,6 +1607,7 @@ SIRequestMap =
 										surface.spill_item_stack( entity.position , { name = currentItemStack.name , count = 1 } , true , force , false )
 									end
 									currentItemStack.clear()
+									moduleFlag = true
 								end
 							end
 						end
@@ -1621,6 +1640,7 @@ SIRequestMap =
 											surface.spill_item_stack( entity.position , { name = currentItemStack.name , count = 1 } , true , force , false )
 										end
 										currentItemStack.clear()
+										moduleFlag = true
 									end
 								else
 									if currentItemStack.valid_for_read and currentItemStack.name == itemName then
@@ -1636,6 +1656,7 @@ SIRequestMap =
 											surface.spill_item_stack( entity.position , { name = currentItemStack.name , count = 1 } , true , force , false )
 										end
 										currentItemStack.clear()
+										moduleFlag = true
 									end
 								end
 							else
@@ -1654,12 +1675,17 @@ SIRequestMap =
 											surface.spill_item_stack( entity.position , { name = currentItemStack.name , count = 1 } , true , force , false )
 										end
 										currentItemStack.clear()
+										moduleFlag = true
 									end
 								end
 							end
 						end
 					end
 				end
+			end
+			-- 触发插件事件
+			if moduleFlag then
+				SIRequestMap.FireModuleEvent( playerIndex , entity )
 			end
 			-- ----------------------------------------
 			-- 插入燃料
@@ -2581,6 +2607,23 @@ SIRequestMap =
 			defaultIndex4 = settings.defaultIndex4 ,
 			TabSettingsList = settings.TabSettingsList
 		}
+	end ,
+	-- ------------------------------------------------------------------------------------------------
+	-- ------ 接口函数 -- 事件 ------------------------------------------------------------------------
+	-- ------------------------------------------------------------------------------------------------
+
+	-- ----------------------------------------
+	-- 当一个玩家通过紫图修改了实体的插件时 , 会触发此事件<br>
+	-- 事件会包含 4 个参数 :<br>
+	-- name          = 事件的 ID 值<br>
+	-- tick          = 当前游戏刻<nr>
+	-- player_index  = 操作玩家的索引<br>
+	-- entity        = 被修改了插件的实体<br>
+	-- ----------------------------------------
+	-- 返回值 = 事件的 ID 值<br>
+	-- ----------------------------------------
+	GetModuleEventID = function()
+		return SIRequestMap.ModuleEventID
 	end
 }
 
