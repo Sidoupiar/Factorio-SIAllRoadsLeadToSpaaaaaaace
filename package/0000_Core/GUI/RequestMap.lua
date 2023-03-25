@@ -1559,7 +1559,6 @@ SIRequestMap =
 												currentItemStack.set_stack( itemStack )
 												playerInventory.remove{ name = itemName , count = 1 }
 												needProxyFlag = false
-												moduleFlag = true
 											end
 										end
 										if needProxyFlag then
@@ -1588,8 +1587,10 @@ SIRequestMap =
 													target = entity ,
 													modules = { [itemName] = 1 }
 												}
+												proxyList[entity.unit_number] = proxy
 											end
 										end
+										moduleFlag = true
 									end
 								end
 							else
