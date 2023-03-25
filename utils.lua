@@ -688,6 +688,13 @@ function SIInit.AutoLoad( ModName , CustomPackageConfig , ConstantsDataPrefix , 
 	if SIInit.State == SIInit.StateCodeDefine.Settings or SIInit.State == SIInit.StateCodeDefine.Data or SIInit.State == SIInit.StateCodeDefine.Control then
 		for packageIndex , packageConfig in pairs( CustomPackageConfig ) do
 			local packageName = packageConfig.PackageName
+			if packageConfig.Requires then
+				for requireIndex , requirePackageName in pairs( packageConfig.Requires ) do
+					if not SIInit.ConstantsDataList[ModName .. "_" .. requirePackageName] then
+						return CodeE( SIInit , "模块缺少强制依赖 , Package=\"" .. packageName .. "\" , Require=\"" .. requirePackageName .. "\"" )
+					end
+				end
+			end
 			local packagePath = SIInit.ModPath .. "/package/" .. packageName .. "/"
 			local constantsData = SINeed( packagePath .. "0_ConstantsData" , true )
 			if constantsData and constantsData.ID then
