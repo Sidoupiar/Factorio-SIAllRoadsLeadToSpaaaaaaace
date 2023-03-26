@@ -31,7 +31,7 @@ SIUtils.CollisionMask = require( "__core__/lualib/collision-mask-util" )
 SIUtils.Settings =
 {
 	ShowPatreon = function()
-		return settings and settings.startup and settings.startup["SIUtils-ShowPatreon"].value or false
+		return settings and settings.startup and settings.startup["SIUtils-ShowPatreon"].value or true
 	end ,
 	Debug = function()
 		return settings and settings.startup and settings.startup["SIUtils-Debug"].value or false
