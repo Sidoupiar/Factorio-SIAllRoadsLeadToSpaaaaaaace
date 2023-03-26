@@ -703,14 +703,7 @@ SIGen
 	{
 		count = 25 ,
 		time = 60 ,
-		ingredients =
-		{
-			{
-				type = SICommon.Types.Items.Item ,
-				name = "automation-science-pack" ,
-				amount = 1
-			}
-		}
+		ingredients = {}
 	} ,
 	effects = {}
 } )
@@ -730,14 +723,7 @@ SIGen
 	{
 		count = 100 ,
 		time = 60 ,
-		ingredients =
-		{
-			{
-				type = SICommon.Types.Items.Item ,
-				name = "automation-science-pack" ,
-				amount = 1
-			}
-		}
+		ingredients = {}
 	} ,
 	effects =
 	{
