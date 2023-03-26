@@ -10,21 +10,27 @@ local Settings =
 {
 	{
 		type = "bool-setting" ,
-		setting_type = "startup" ,
+		setting_type = SICommon.SettingAffectTypes.StartUp ,
 		name = "SIUtils-ShowPatreon" ,
-		default_value = true ,
+		default_value = true
 	} ,
 	{
 		type = "bool-setting" ,
-		setting_type = "startup" ,
+		setting_type = SICommon.SettingAffectTypes.StartUp ,
 		name = "SIUtils-Debug" ,
-		default_value = false ,
+		default_value = false
 	} ,
 	{
 		type = "bool-setting" ,
-		setting_type = "startup" ,
+		setting_type = SICommon.SettingAffectTypes.StartUp ,
 		name = "SIUtils-ShowError" ,
-		default_value = false ,
+		default_value = false
+	} ,
+	{
+		type = "bool-setting" ,
+		setting_type = SICommon.SettingAffectTypes.StartUp ,
+		name = "SIUtils-CodeError" ,
+		default_value = true
 	}
 }
 local function LoadSettings( list )

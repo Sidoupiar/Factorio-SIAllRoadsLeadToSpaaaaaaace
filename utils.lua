@@ -36,8 +36,11 @@ SIUtils.Settings =
 	Debug = function()
 		return settings and settings.startup and settings.startup["SIUtils-Debug"].value or false
 	end ,
-	ShowError = function ()
+	ShowError = function()
 		return settings and settings.startup and settings.startup["SIUtils-ShowError"].value or false
+	end ,
+	CodeError = function()
+		return settings and settings.startup and settings.startup["SIUtils-CodeError"].value or true
 	end
 }
 function SIUtils.PrintLocalised( localisedString )
@@ -418,7 +421,11 @@ function E( message )
 		end
 		output = output .. " :: "
 	end
-	SIMmess( "_____ :: "..output..message )
+	if SIUtils.Settings.CodeError() then
+		SIMmess( "_____ :: " .. output .. message )
+		return
+	end
+	log( "[获取错误] : _____ :: " .. output .. message )
 end
 
 function CodeE( Structure , message )
