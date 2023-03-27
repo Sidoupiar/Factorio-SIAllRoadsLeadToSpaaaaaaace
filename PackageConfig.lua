@@ -737,7 +737,7 @@ local PackageConfig =
 			-- 使用代码 [ remote.call( "SIConfigManager" , "Set" , 键 , 值 ) ] 来修改它的值<br>
 			-- 使用代码 [ remote.call( "SIConfigManager" , "Get" , 键 ) ] 来读取它的值<br>
 			-- ----------------------------------------
-			RuinStrengthAdden = 0.143
+			RuinStrengthAdden = 0.146
 		} ,
 		Requires =
 		{

@@ -713,6 +713,9 @@ SIRuinControl =
 		end
 		local surface = game.get_surface( surfaceIndex )
 		local ruinStrength = ( surfaceSettings.ruinStrength or SIConfigs.SIRuinControl.RuinStrength ) + distance / 32 * ( surfaceSettings.ruinStrengthAdden or SIConfigs.SIRuinControl.RuinStrengthAdden )
+		if ruinStrength > 20 then
+			ruinStrength = ruinStrength ^ 1.5
+		end
 		return SIRuinControl.CreateRuinInner( surface , globalSettings , surfaceSettings , chunkPosition , ruinCenter , ruinStyle , ruinStrength )
 	end ,
 
