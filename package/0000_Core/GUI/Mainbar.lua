@@ -595,23 +595,23 @@ SIMainbar =
 			SIMainbar.FreshPanel_GameTime( settings )
 		end
 	end ,
-	SaveSurfaceTime = function( surface_index )
+	SaveSurfaceTime = function( surfaceIndex )
 		local globalSettings = SIGlobal.GetGlobalSettings( SIMainData.Settings.Name )
-		local surface = game.get_surface( surface_index )
+		local surface = game.get_surface( surfaceIndex )
 		if surface and surface.valid then
 			globalSettings.SurfaceTime[surface.name] = game.ticks_played
 		end
 	end ,
-	RemoveSurfaceTime = function( surface_index )
+	RemoveSurfaceTime = function( surfaceIndex )
 		local globalSettings = SIGlobal.GetGlobalSettings( SIMainData.Settings.Name )
-		local surface = game.get_surface( surface_index )
+		local surface = game.get_surface( surfaceIndex )
 		if surface then
 			globalSettings.SurfaceTime[surface.name] = nil
 		end
 	end ,
-	ChangeSurfaceTime = function( surface_index , oldName )
+	ChangeSurfaceTime = function( surfaceIndex , oldName )
 		local globalSettings = SIGlobal.GetGlobalSettings( SIMainData.Settings.Name )
-		local surface = game.get_surface( surface_index )
+		local surface = game.get_surface( surfaceIndex )
 		if surface and surface.valid then
 			globalSettings.SurfaceTime[surface.name] = globalSettings.SurfaceTime[oldName] or 0
 			globalSettings.SurfaceTime[oldName] = nil

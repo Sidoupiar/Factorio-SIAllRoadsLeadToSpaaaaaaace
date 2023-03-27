@@ -281,7 +281,41 @@ SIRPGSkillUI_OverView =
 						SIRPGSystem.SavePlayerSkillData( playerIndex , SIRPGSkillUI_OverView.SkillID , playerSkillData )
 					end
 				end
-				return
+				break
+			end
+		end
+	end ,
+	ChangeSurfaceName = function( surface , oldName )
+		local oldSurfaceName = oldName or surface.name
+		local newSurfaceName = surface.name
+		local surfaceIndex = surface.index
+		for playerIndex , settings in pairs( SIGlobal.GetAllPlayerSettings( SIRPGSystem.Settings.Name ) ) do
+			local skill = settings.SkillUI.OverView
+			local globalSkillData , playerSkillData = SIRPGSystem.GetPlayerSkillData( playerIndex , SIRPGSkillUI_OverView.SkillID )
+			local changeFlag = false
+			local currentPointData = playerSkillData.CustomData.CurrentPoint
+			if currentPointData and currentPointData.name == oldSurfaceName then
+				currentPointData.name = newSurfaceName
+				currentPointData.surface = surfaceIndex
+				changeFlag = true
+				if skill.frame and skill.frame.valid then
+					local pointText = { "SIRPGSystem.技能面板-洞察-窗口-坐标" , currentPointData.name , currentPointData.x , currentPointData.y }
+					skill.point.caption = pointText
+					skill.point.tooltip = pointText
+				end
+			end
+			for pointDataIndex , pointData in pairs( playerSkillData.CustomData.PointList ) do
+				if pointData.name == oldSurfaceName then
+					pointData.name = newSurfaceName
+					pointData.surface = surfaceIndex
+					changeFlag = true
+				end
+			end
+			if changeFlag then
+				if skill.frame and skill.frame.valid then
+					SIRPGSkillUI_OverView.FreshList( settings , playerSkillData )
+				end
+				SIRPGSystem.SavePlayerSkillData( playerIndex , SIRPGSkillUI_OverView.SkillID , playerSkillData )
 			end
 		end
 	end ,

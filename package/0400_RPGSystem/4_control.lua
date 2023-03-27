@@ -853,6 +853,15 @@ end )
 	-- 技能面板洞察窗口事件
 	SIRPGSkillUI_OverView.FreshSurfaceName( surface )
 end )
+.Add( SIEvents.on_surface_renamed , function( event , functionID )
+	local surface = game.get_surface( event.surface_index )
+	if not surface or not surface.valid then
+		return
+	end
+	local oldName = event.old_name
+	-- 技能面板洞察窗口事件
+	SIRPGSkillUI_OverView.ChangeSurfaceName( surface , oldName )
+end )
 
 -- ------------------------------------------------------------------------------------------------
 -- ---------- 时间流逝 ----------------------------------------------------------------------------
