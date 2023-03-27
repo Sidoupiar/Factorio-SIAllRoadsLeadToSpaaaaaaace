@@ -747,6 +747,10 @@ function SIInit.AutoLoad( ModName , CustomPackageConfig , ConstantsDataPrefix , 
 				constantsData.OrderCode = SIInit.OrderCode
 				constantsData.LocalisedName = { "ConstantsDataName." .. constantsData.CodeName }
 				constantsData.LocalisedDescription = { "ConstantsDataDescription." .. constantsData.CodeName }
+				constantsData.GetNextOrderCode = function()
+					constantsData.OrderCode = constantsData.OrderCode + 1
+					return constantsData.OrderCode
+				end
 				constantsData.GetOrderString = function()
 					constantsData.OrderCode = constantsData.OrderCode + 1
 					return constantsData.OrderPrefix .. constantsData.OrderCode
@@ -755,7 +759,9 @@ function SIInit.AutoLoad( ModName , CustomPackageConfig , ConstantsDataPrefix , 
 					return CodeE( SIInit , "已存在的 ConstantsData.CodeName , CodeName=" .. constantsData.CodeName )
 				end
 				SIAPI[constantsData.CodeName] = constantsData.API
+				constantsData.API.CodeName = constantsData.CodeName
 				constantsData.API.OrderPrefix = constantsData.OrderPrefix
+				constantsData.API.GetNextOrderCode = constantsData.GetNextOrderCode
 				constantsData.API.GetOrderString = constantsData.GetOrderString
 				-- 加载开始前回调
 				if constantsData.BeforeLoad then
@@ -873,14 +879,11 @@ function SIInit.AutoLoad( ModName , CustomPackageConfig , ConstantsDataPrefix , 
 								for groupID , groupData in pairs( autoload.Groups ) do
 									local groupShowName = SICommon.ShowNamePrefix[SICommon.Types.Group] .. ( groupData and groupData.Name or groupID ):gsub( "_" , "-" )
 									local groupRealName = constantsData.ShowNamePrefix .. groupShowName
+									if not groupData.Order then
+										groupData.Order = constantsData.Order
+									end
 									if autoload.Enable then
-										local groupOrderString = ""
-										if groupData.Order then
-											constantsData.OrderCode = constantsData.OrderCode + 1
-											groupOrderString = "zSIOrder[" .. groupData.Order .. constantsData.CodeName .. "]-" .. constantsData.OrderCode
-										else
-											groupOrderString = constantsData.GetOrderString()
-										end
+										local groupOrderString = "zSIOrder[" .. groupData.Order .. constantsData.CodeName .. "]-" .. constantsData.GetNextOrderCode()
 										local group =
 										{
 											type = SICommon.Types.Group ,
@@ -897,6 +900,7 @@ function SIInit.AutoLoad( ModName , CustomPackageConfig , ConstantsDataPrefix , 
 									end
 									constantsData.raw.Groups[groupID] = {}
 									if groupData.Subgroups then
+										local subOrder = groupData.SubOrder or "0"
 										for subgroupID , subgroupUseName in pairs( groupData.Subgroups ) do
 											local subgroupShowName = groupShowName .. "-" .. ( subgroupUseName or subgroupID ):gsub( "_" , "-" )
 											local subgroupRealName = constantsData.ShowNamePrefix .. subgroupShowName
@@ -908,13 +912,14 @@ function SIInit.AutoLoad( ModName , CustomPackageConfig , ConstantsDataPrefix , 
 													localised_name = { constantsData.CodeName .. "Name." .. subgroupShowName } ,
 													localised_description = { constantsData.CodeName .. "Description." .. subgroupShowName } ,
 													group = groupRealName ,
-													order = constantsData.GetOrderString()
+													order = "zSIOrder[" .. groupData.Order .. constantsData.CodeName .. "]-[" .. subOrder .. "]-" .. constantsData.GetNextOrderCode()
 												}
 												table.insert( prototypes , subgroup )
 											end
 											constantsData.raw.Groups[groupID][subgroupID] = subgroupRealName
 										end
 									end
+									groupData.Subgroups = nil
 									groupData.ShowName = groupShowName
 									groupData.RealName = groupRealName
 								end
@@ -943,6 +948,7 @@ function SIInit.AutoLoad( ModName , CustomPackageConfig , ConstantsDataPrefix , 
 										constantsData.raw.Groups[groupID] = {}
 									end
 									local aimGroupData = APIData.Groups[groupID]
+									local subOrder = groupData.SubOrder or "0"
 									for subgroupID , subgroupUseName in pairs( groupData.Subgroups ) do
 										local subgroupShowName = aimGroupData.ShowName .. "-" .. ( subgroupUseName or subgroupID ):gsub( "_" , "-" )
 										local subgroupRealName = constantsData.ShowNamePrefix .. subgroupShowName
@@ -954,7 +960,7 @@ function SIInit.AutoLoad( ModName , CustomPackageConfig , ConstantsDataPrefix , 
 												localised_name = { constantsData.CodeName .. "Name." .. subgroupShowName } ,
 												localised_description = { constantsData.CodeName .. "Description." .. subgroupShowName } ,
 												group = aimGroupData.RealName ,
-												order = APIData.GetOrderString()
+												order = "zSIOrder[" .. aimGroupData.Order .. ConstantsDataCodeName .. "]-[" .. subOrder .. "]-" .. APIData.GetNextOrderCode()
 											}
 											table.insert( prototypes , subgroup )
 										end

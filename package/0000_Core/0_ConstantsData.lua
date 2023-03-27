@@ -147,7 +147,7 @@ local constantsData =
 		-- {<br>
 		--     Name =  别名 , 在计算 [ name ] 值时代替 ID 进行计算<br>
 		--     Order = 排序编号 , 效果等于 [ ConstantsData.Order ] , 只不过它仅在创建分组的时候代替 [ ConstantsData.Order ] 使用<br>
-		--     SubOrder = 子分组的排序编号 , 默认 "0000"<br>
+		--     SubOrder = 子分组的排序编号 , 默认 "0"<br>
 		--     Subgroups =<br>
 		--     {<br>
 		--         子分组id1 = 子分组别名1 , 不想写别名就写个布尔型的 false 就行了<br>
@@ -169,7 +169,7 @@ local constantsData =
 			{
 				Name = "扩展" ,
 				Order = "9997" ,
-				SubOrder = "0000" ,
+				SubOrder = "0" ,
 				Subgroups =
 				{
 					Misc = "杂项"
@@ -179,7 +179,7 @@ local constantsData =
 			{
 				Name = "杂项" ,
 				Order = "9998" ,
-				SubOrder = "0000" ,
+				SubOrder = "0" ,
 				Subgroups =
 				{
 					Misc = "杂项"
@@ -189,7 +189,7 @@ local constantsData =
 			{
 				Name = "隐藏" ,
 				Order = "9999" ,
-				SubOrder = "0000" ,
+				SubOrder = "0" ,
 				Subgroups =
 				{
 					Debug = "调试物品" ,
@@ -210,7 +210,7 @@ local constantsData =
 		-- 值的结构如下 :<br>
 		-- {<br>
 		--     ConstantsDataCodeName = 目标 ConstantsData 的 CodeName 值 , 可以取当前正在加载的 ConstantsData 的 CodeName 属性 , 也可以通过 BeforeLoad 函数使用代码来添加 , 省去手动计算的麻烦<br>
-		--     SubOrder = 子分组的排序编号 , 默认 "0000"<br>
+		--     SubOrder = 子分组的排序编号 , 默认 "0"<br>
 		--     Subgroups =<br>
 		--     {<br>
 		--         子分组id1 = 子分组别名1 , 不想写别名就写个布尔型的 false 就行了<br>
