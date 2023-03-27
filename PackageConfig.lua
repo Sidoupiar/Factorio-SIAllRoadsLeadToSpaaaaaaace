@@ -644,7 +644,6 @@ local PackageConfig =
 	-- ----------------------------------------
 	{
 		PackageName = "0011_Bookshelf" ,
-		Configs = {} ,
 		Requires =
 		{
 			"0000_Core"
@@ -655,7 +654,6 @@ local PackageConfig =
 	-- ----------------------------------------
 	{
 		PackageName = "0012_Unlocker" ,
-		Configs = {} ,
 		Requires =
 		{
 			"0000_Core"
@@ -666,7 +664,6 @@ local PackageConfig =
 	-- ----------------------------------------
 	{
 		PackageName = "0013_BuildLimit" ,
-		Configs = {} ,
 		Requires =
 		{
 			"0000_Core"
@@ -749,7 +746,6 @@ local PackageConfig =
 	-- ----------------------------------------
 	{
 		PackageName = "0101_Resource" ,
-		Configs = {} ,
 		Requires =
 		{
 			"0000_Core" ,
@@ -762,7 +758,6 @@ local PackageConfig =
 	-- ----------------------------------------
 	{
 		PackageName = "0102_Plant" ,
-		Configs = {} ,
 		Requires =
 		{
 			"0000_Core" ,
@@ -775,7 +770,6 @@ local PackageConfig =
 	-- ----------------------------------------
 	{
 		PackageName = "0103_Animal" ,
-		Configs = {} ,
 		Requires =
 		{
 			"0000_Core" ,
@@ -788,7 +782,6 @@ local PackageConfig =
 	-- ----------------------------------------
 	{
 		PackageName = "0201_Planting" ,
-		Configs = {} ,
 		Requires =
 		{
 			"0101_Resource" ,
@@ -801,7 +794,6 @@ local PackageConfig =
 	-- ----------------------------------------
 	{
 		PackageName = "0202_Husbandry" ,
-		Configs = {} ,
 		Requires =
 		{
 			"0101_Resource" ,
@@ -814,7 +806,6 @@ local PackageConfig =
 	-- ----------------------------------------
 	{
 		PackageName = "0211_Steam" ,
-		Configs = {} ,
 		Requires =
 		{
 			"0101_Resource" ,
@@ -827,7 +818,6 @@ local PackageConfig =
 	-- ----------------------------------------
 	{
 		PackageName = "0212_Electric" ,
-		Configs = {} ,
 		Requires =
 		{
 			"0101_Resource" ,
@@ -840,7 +830,6 @@ local PackageConfig =
 	-- ----------------------------------------
 	{
 		PackageName = "0213_Glitter" ,
-		Configs = {} ,
 		Requires =
 		{
 			"0101_Resource" ,
@@ -853,7 +842,6 @@ local PackageConfig =
 	-- ----------------------------------------
 	{
 		PackageName = "0221_Scorch" ,
-		Configs = {} ,
 		Requires =
 		{
 			"0101_Resource" ,
@@ -866,7 +854,6 @@ local PackageConfig =
 	-- ----------------------------------------
 	{
 		PackageName = "0222_Light" ,
-		Configs = {} ,
 		Requires =
 		{
 			"0101_Resource" ,
@@ -879,7 +866,6 @@ local PackageConfig =
 	-- ----------------------------------------
 	{
 		PackageName = "0223_Shadow" ,
-		Configs = {} ,
 		Requires =
 		{
 			"0101_Resource" ,
@@ -892,7 +878,6 @@ local PackageConfig =
 	-- ----------------------------------------
 	{
 		PackageName = "0291_Ammo" ,
-		Configs = {} ,
 		Requires =
 		{
 			"0101_Resource" ,
@@ -905,7 +890,6 @@ local PackageConfig =
 	-- ----------------------------------------
 	{
 		PackageName = "0292_Defence" ,
-		Configs = {} ,
 		Requires =
 		{
 			"0101_Resource" ,
@@ -918,7 +902,6 @@ local PackageConfig =
 	-- ----------------------------------------
 	{
 		PackageName = "0301_PlantingMachine" ,
-		Configs = {} ,
 		Requires =
 		{
 			"0201_Planting" ,
@@ -938,7 +921,6 @@ local PackageConfig =
 	-- ----------------------------------------
 	{
 		PackageName = "0302_HusbandryMachine" ,
-		Configs = {} ,
 		Requires =
 		{
 			"0201_Planting" ,
@@ -958,7 +940,6 @@ local PackageConfig =
 	-- ----------------------------------------
 	{
 		PackageName = "0311_SteamMachine" ,
-		Configs = {} ,
 		Requires =
 		{
 			"0201_Planting" ,
@@ -978,7 +959,6 @@ local PackageConfig =
 	-- ----------------------------------------
 	{
 		PackageName = "0312_ElectricMachine" ,
-		Configs = {} ,
 		Requires =
 		{
 			"0201_Planting" ,
@@ -998,7 +978,6 @@ local PackageConfig =
 	-- ----------------------------------------
 	{
 		PackageName = "0313_GlitterMachine" ,
-		Configs = {} ,
 		Requires =
 		{
 			"0201_Planting" ,
@@ -1018,7 +997,6 @@ local PackageConfig =
 	-- ----------------------------------------
 	{
 		PackageName = "0321_ScorchMachine" ,
-		Configs = {} ,
 		Requires =
 		{
 			"0201_Planting" ,
@@ -1038,7 +1016,6 @@ local PackageConfig =
 	-- ----------------------------------------
 	{
 		PackageName = "0322_LightMachine" ,
-		Configs = {} ,
 		Requires =
 		{
 			"0201_Planting" ,
@@ -1058,7 +1035,6 @@ local PackageConfig =
 	-- ----------------------------------------
 	{
 		PackageName = "0323_ShadowMachine" ,
-		Configs = {} ,
 		Requires =
 		{
 			"0201_Planting" ,
@@ -1078,7 +1054,6 @@ local PackageConfig =
 	-- ----------------------------------------
 	{
 		PackageName = "0391_AmmoMachine" ,
-		Configs = {} ,
 		Requires =
 		{
 			"0201_Planting" ,
@@ -1098,7 +1073,6 @@ local PackageConfig =
 	-- ----------------------------------------
 	{
 		PackageName = "0392_DefenceMachine" ,
-		Configs = {} ,
 		Requires =
 		{
 			"0201_Planting" ,
@@ -1145,7 +1119,6 @@ local PackageConfig =
 	-- ----------------------------------------
 	{
 		PackageName = "0500_Colorful" ,
-		Configs = {} ,
 		Requires =
 		{
 			"0000_Core" ,
