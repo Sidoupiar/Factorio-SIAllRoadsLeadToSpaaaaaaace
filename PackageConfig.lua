@@ -701,7 +701,7 @@ local PackageConfig =
 			-- 使用代码 [ remote.call( "SIConfigManager" , "Set" , 键 , 值 ) ] 来修改它的值<br>
 			-- 使用代码 [ remote.call( "SIConfigManager" , "Get" , 键 ) ] 来读取它的值<br>
 			-- ----------------------------------------
-			MinRuinDistance = 1200 ,
+			MinRuinDistance = 1000 ,
 
 			-- ----------------------------------------
 			-- 符合距离时 , 每个区块生成遗迹的概率<br>
