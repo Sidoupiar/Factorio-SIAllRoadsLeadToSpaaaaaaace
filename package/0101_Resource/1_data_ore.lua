@@ -160,9 +160,13 @@ SIGen
     tree_removal_max_distance = 1024 ,
 	autoplace = SIAutoPlace.Create
 	{
-
+		Name = SIConstants_Resource.raw.Entities.OreBase ,
+		BaseDensity = 4 ,
+		RegularMultiplier = 1.0 ,
+		StartingMultiplier = 1.1 ,
+		HasStarting = false
 	} ,
-	stage_counts = { 100000 , 30000 , 10000 , 3000 , 1000 , 300 , 100 , 30 } ,
+	stage_counts = { 100000 , 33333 , 10000 , 3333 , 1000 , 333 , 100 , 33 } ,
 	stages =
 	{
 		sheet =

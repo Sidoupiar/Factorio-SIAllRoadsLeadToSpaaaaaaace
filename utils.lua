@@ -26,6 +26,7 @@ require( CorePath .. "/define/SICommon" )
 
 SIUtils.CollisionMask = require( "__core__/lualib/collision-mask-util" )
 SIUtils.Noise = require( "__core__/lualib/noise" )
+SIUtils.NoiseMath = require( "__core__/lualib/noise/expression-to-ascii-math" )
 SIUtils.Settings =
 {
 	ShowPatreon = function()
