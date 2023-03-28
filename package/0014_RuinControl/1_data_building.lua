@@ -551,8 +551,10 @@ CreateRuinBuildings( SICommon.Types.Entities.Wall , "RuinWall" , "遗迹围墙" 
 	} ,
 	mined_sound =
 	{
-		filename = "__base__/sound/deconstruct-bricks.ogg" ,
-		volume = 0.8
+		{
+			filename = "__base__/sound/deconstruct-bricks.ogg" ,
+			volume = 0.8
+		}
 	} ,
 	vehicle_impact_sound =
 	{
