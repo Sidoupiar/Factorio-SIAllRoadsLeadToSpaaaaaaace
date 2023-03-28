@@ -1375,6 +1375,7 @@ SIRequestMap =
 	EffectTabSettings = function( settings , tabSettingsIndex )
 		local playerIndex = settings.playerIndex
 		local player = game.get_player( playerIndex )
+		local playerForce = player.force
 		local playerInventory = player.get_main_inventory()
 		local tabSettings = settings.TabSettingsList[tabSettingsIndex]
 		local greenToBlue = tabSettings.GreenToBlue.Check
@@ -1386,286 +1387,219 @@ SIRequestMap =
 		local ammoTotalList = {}
 		for index , entity in pairs( settings.entities ) do
 			local force = entity.force
-			local surface = entity.surface
-			local entityName = entity.name
-			local entityPrototype = entity.prototype
-			local type = entityPrototype.type
-			local moduleFlag = false
-			-- ----------------------------------------
-			-- 请求格子
-			-- ----------------------------------------
-			if tabSettings.RequestSlot.Enable then
-				local requestItemList = tabSettings.RequestSlot.List[entityName]
-				if requestItemList then
-					if type == SICommon.Types.Entities.ContainerLogic then
-						local logisticMode = entityPrototype.logistic_mode
-						if logisticMode == SICommon.Flags.LogisticMode.Requester or logisticMode == SICommon.Flags.LogisticMode.Buffer then
-							for slotIndex = 1 , entity.request_slot_count , 1 do
-								entity.clear_request_slot( slotIndex )
+			if force.index == playerForce.index then
+				local surface = entity.surface
+				local entityName = entity.name
+				local entityPrototype = entity.prototype
+				local type = entityPrototype.type
+				local moduleFlag = false
+				-- ----------------------------------------
+				-- 请求格子
+				-- ----------------------------------------
+				if tabSettings.RequestSlot.Enable then
+					local requestItemList = tabSettings.RequestSlot.List[entityName]
+					if requestItemList then
+						if type == SICommon.Types.Entities.ContainerLogic then
+							local logisticMode = entityPrototype.logistic_mode
+							if logisticMode == SICommon.Flags.LogisticMode.Requester or logisticMode == SICommon.Flags.LogisticMode.Buffer then
+								for slotIndex = 1 , entity.request_slot_count , 1 do
+									entity.clear_request_slot( slotIndex )
+								end
+								for slotIndex , itemName in pairs( requestItemList ) do
+									local itemPrototype = game.item_prototypes[itemName]
+									if not itemName or itemPrototype then
+										entity.set_request_slot( { name = itemName , count = itemPrototype.stack_size } , slotIndex )
+									end
+								end
+							elseif logisticMode == SICommon.Flags.LogisticMode.Storage then
+								local itemName = requestItemList[1]
+								if not itemName or game.item_prototypes[itemName] then
+									entity.set_filter( 1 , itemName )
+								end
+							end
+						elseif type == SICommon.Types.Entities.Inserter or type == SICommon.Types.Entities.BeltLoader or type == SICommon.Types.Entities.BeltLoaderSmall then
+							for slotIndex = 1 , entity.filter_slot_count , 1 do
+								entity.set_filter( slotIndex , nil )
 							end
 							for slotIndex , itemName in pairs( requestItemList ) do
-								local itemPrototype = game.item_prototypes[itemName]
-								if not itemName or itemPrototype then
-									entity.set_request_slot( { name = itemName , count = itemPrototype.stack_size } , slotIndex )
+								if not itemName or game.item_prototypes[itemName] then
+									entity.set_filter( slotIndex , itemName )
 								end
 							end
-						elseif logisticMode == SICommon.Flags.LogisticMode.Storage then
-							local itemName = requestItemList[1]
-							if not itemName or game.item_prototypes[itemName] then
-								entity.set_filter( 1 , itemName )
-							end
-						end
-					elseif type == SICommon.Types.Entities.Inserter or type == SICommon.Types.Entities.BeltLoader or type == SICommon.Types.Entities.BeltLoaderSmall then
-						for slotIndex = 1 , entity.filter_slot_count , 1 do
-							entity.set_filter( slotIndex , nil )
-						end
-						for slotIndex , itemName in pairs( requestItemList ) do
-							if not itemName or game.item_prototypes[itemName] then
-								entity.set_filter( slotIndex , itemName )
-							end
-						end
-					elseif type == SICommon.Types.Entities.Car then
-						local inventory = entity.get_inventory( defines.inventory.car_trunk )
-						if inventory and inventory.supports_filters() then
-							for slotIndex = 1 , #inventory , 1 do
-								local itemName = requestItemList[slotIndex]
-								if itemName and game.item_prototypes[itemName] then
-									if inventory.can_set_filter( slotIndex , itemName ) then
-										inventory.set_filter( slotIndex , itemName )
+						elseif type == SICommon.Types.Entities.Car then
+							local inventory = entity.get_inventory( defines.inventory.car_trunk )
+							if inventory and inventory.supports_filters() then
+								for slotIndex = 1 , #inventory , 1 do
+									local itemName = requestItemList[slotIndex]
+									if itemName and game.item_prototypes[itemName] then
+										if inventory.can_set_filter( slotIndex , itemName ) then
+											inventory.set_filter( slotIndex , itemName )
+										end
+									else
+										inventory.set_filter( slotIndex , nil )
 									end
-								else
-									inventory.set_filter( slotIndex , nil )
 								end
 							end
-						end
-					elseif type == SICommon.Types.Entities.SpiderVehicle then
-						local inventory = entity.get_inventory( defines.inventory.spider_trunk )
-						if inventory and inventory.supports_filters() then
-							for slotIndex = 1 , #inventory , 1 do
-								local itemName = requestItemList[slotIndex]
-								if itemName and game.item_prototypes[itemName] then
-									if inventory.can_set_filter( slotIndex , itemName ) then
-										inventory.set_filter( slotIndex , itemName )
+						elseif type == SICommon.Types.Entities.SpiderVehicle then
+							local inventory = entity.get_inventory( defines.inventory.spider_trunk )
+							if inventory and inventory.supports_filters() then
+								for slotIndex = 1 , #inventory , 1 do
+									local itemName = requestItemList[slotIndex]
+									if itemName and game.item_prototypes[itemName] then
+										if inventory.can_set_filter( slotIndex , itemName ) then
+											inventory.set_filter( slotIndex , itemName )
+										end
+									else
+										inventory.set_filter( slotIndex , nil )
 									end
-								else
-									inventory.set_filter( slotIndex , nil )
 								end
 							end
-						end
-					elseif type == SICommon.Types.Entities.WagonCargo then
-						local inventory = entity.get_inventory( defines.inventory.cargo_wagon )
-						if inventory and inventory.supports_filters() then
-							for slotIndex = 1 , #inventory , 1 do
-								local itemName = requestItemList[slotIndex]
-								if itemName and game.item_prototypes[itemName] then
-									if inventory.can_set_filter( slotIndex , itemName ) then
-										inventory.set_filter( slotIndex , itemName )
+						elseif type == SICommon.Types.Entities.WagonCargo then
+							local inventory = entity.get_inventory( defines.inventory.cargo_wagon )
+							if inventory and inventory.supports_filters() then
+								for slotIndex = 1 , #inventory , 1 do
+									local itemName = requestItemList[slotIndex]
+									if itemName and game.item_prototypes[itemName] then
+										if inventory.can_set_filter( slotIndex , itemName ) then
+											inventory.set_filter( slotIndex , itemName )
+										end
+									else
+										inventory.set_filter( slotIndex , nil )
 									end
-								else
-									inventory.set_filter( slotIndex , nil )
 								end
 							end
 						end
 					end
 				end
-			end
-			-- ----------------------------------------
-			-- 最大格子
-			-- ----------------------------------------
-			if tabSettings.MaxSlot.Enable then
-				local maxSlotCount = tabSettings.MaxSlot.List[entityName]
-				if maxSlotCount then
-					maxSlotCount = maxSlotCount + 1 -- 因为实际是设置到此格子 , 而保存的值是空余这么多格子 , 所以此处的值要 + 1
-					if type == SICommon.Types.Entities.Container or type == SICommon.Types.Entities.ContainerLogic then
-						local inventory = entity.get_inventory( defines.inventory.chest )
-						if inventory and inventory.supports_bar() then
-							local inventorySize = #inventory
-							if maxSlotCount < inventorySize then
-								inventory.set_bar( maxSlotCount < 1 and nil or maxSlotCount )
+				-- ----------------------------------------
+				-- 最大格子
+				-- ----------------------------------------
+				if tabSettings.MaxSlot.Enable then
+					local maxSlotCount = tabSettings.MaxSlot.List[entityName]
+					if maxSlotCount then
+						maxSlotCount = maxSlotCount + 1 -- 因为实际是设置到此格子 , 而保存的值是空余这么多格子 , 所以此处的值要 + 1
+						if type == SICommon.Types.Entities.Container or type == SICommon.Types.Entities.ContainerLogic then
+							local inventory = entity.get_inventory( defines.inventory.chest )
+							if inventory and inventory.supports_bar() then
+								local inventorySize = #inventory
+								if maxSlotCount < inventorySize then
+									inventory.set_bar( maxSlotCount < 1 and nil or maxSlotCount )
+								end
 							end
-						end
-					elseif type == SICommon.Types.Entities.Car then
-						local inventory = entity.get_inventory( defines.inventory.car_trunk )
-						if inventory and inventory.supports_bar() then
-							local inventorySize = #inventory
-							if maxSlotCount < inventorySize then
-								inventory.set_bar( maxSlotCount < 1 and nil or maxSlotCount )
+						elseif type == SICommon.Types.Entities.Car then
+							local inventory = entity.get_inventory( defines.inventory.car_trunk )
+							if inventory and inventory.supports_bar() then
+								local inventorySize = #inventory
+								if maxSlotCount < inventorySize then
+									inventory.set_bar( maxSlotCount < 1 and nil or maxSlotCount )
+								end
 							end
-						end
-					elseif type == SICommon.Types.Entities.SpiderVehicle then
-						local inventory = entity.get_inventory( defines.inventory.spider_trunk )
-						if inventory and inventory.supports_bar() then
-							local inventorySize = #inventory
-							if maxSlotCount < inventorySize then
-								inventory.set_bar( maxSlotCount < 1 and nil or maxSlotCount )
+						elseif type == SICommon.Types.Entities.SpiderVehicle then
+							local inventory = entity.get_inventory( defines.inventory.spider_trunk )
+							if inventory and inventory.supports_bar() then
+								local inventorySize = #inventory
+								if maxSlotCount < inventorySize then
+									inventory.set_bar( maxSlotCount < 1 and nil or maxSlotCount )
+								end
 							end
-						end
-					elseif type == SICommon.Types.Entities.WagonCargo then
-						local inventory = entity.get_inventory( defines.inventory.cargo_wagon )
-						if inventory and inventory.supports_bar() then
-							local inventorySize = #inventory
-							if maxSlotCount < inventorySize then
-								inventory.set_bar( maxSlotCount < 1 and nil or maxSlotCount )
+						elseif type == SICommon.Types.Entities.WagonCargo then
+							local inventory = entity.get_inventory( defines.inventory.cargo_wagon )
+							if inventory and inventory.supports_bar() then
+								local inventorySize = #inventory
+								if maxSlotCount < inventorySize then
+									inventory.set_bar( maxSlotCount < 1 and nil or maxSlotCount )
+								end
 							end
 						end
 					end
 				end
-			end
-			-- ----------------------------------------
-			-- 绿箱向蓝箱供货
-			-- ----------------------------------------
-			if tabSettings.GreenToBlue.Enable then
-				if type == SICommon.Types.Entities.ContainerLogic then
-					local logisticMode = entityPrototype.logistic_mode
-					if logisticMode == SICommon.Flags.LogisticMode.Requester then
-						entity.request_from_buffers = greenToBlue
+				-- ----------------------------------------
+				-- 绿箱向蓝箱供货
+				-- ----------------------------------------
+				if tabSettings.GreenToBlue.Enable then
+					if type == SICommon.Types.Entities.ContainerLogic then
+						local logisticMode = entityPrototype.logistic_mode
+						if logisticMode == SICommon.Flags.LogisticMode.Requester then
+							entity.request_from_buffers = greenToBlue
+						end
 					end
 				end
-			end
-			-- ----------------------------------------
-			-- 设置插件
-			-- ----------------------------------------
-			if tabSettings.SetModule.Enable then
-				local setModuleList = tabSettings.SetModule.List[entityName]
-				if setModuleList then
-					local inventory = entity.get_module_inventory()
-					if inventory then
-						for slotIndex = 1 , #inventory , 1 do
-							local itemName = setModuleList[slotIndex]
-							if itemName and game.item_prototypes[itemName] then
-								local currentItemStack = inventory[slotIndex]
-								if not currentItemStack.valid_for_read or currentItemStack.name ~= itemName then
-									if currentItemStack.valid_for_read and currentItemStack.name ~= itemName then
-										local dropItemFlag = true
-										if fromInventory then
-											local itemStack = { name = currentItemStack.name , count = 1 }
-											if playerInventory.can_insert( itemStack ) then
-												playerInventory.insert( itemStack )
-												dropItemFlag = false
-											end
-										end
-										if dropItemFlag then
-											surface.spill_item_stack( entity.position , { name = currentItemStack.name , count = 1 } , true , force , false )
-										end
-										currentItemStack.clear()
-										moduleFlag = true
-									end
-									local itemStack = { name = itemName , count = 1 }
-									if inventory.can_insert( itemStack ) then
-										local needProxyFlag = true
-										if fromInventory then
-											local hasCount = playerInventory.get_item_count( itemName )
-											if hasCount > 0 then
-												currentItemStack.set_stack( itemStack )
-												playerInventory.remove{ name = itemName , count = 1 }
-												needProxyFlag = false
-											end
-										end
-										if needProxyFlag then
-											local proxy = proxyList[entity.unit_number]
-											if proxy then
-												local requestList = proxy.item_requests
-												if requestList[itemName] then
-													requestList[itemName] = requestList[itemName] + 1
-												else
-													requestList[itemName] = 1
+				-- ----------------------------------------
+				-- 设置插件
+				-- ----------------------------------------
+				if tabSettings.SetModule.Enable then
+					local setModuleList = tabSettings.SetModule.List[entityName]
+					if setModuleList then
+						local inventory = entity.get_module_inventory()
+						if inventory then
+							for slotIndex = 1 , #inventory , 1 do
+								local itemName = setModuleList[slotIndex]
+								if itemName and game.item_prototypes[itemName] then
+									local currentItemStack = inventory[slotIndex]
+									if not currentItemStack.valid_for_read or currentItemStack.name ~= itemName then
+										if currentItemStack.valid_for_read and currentItemStack.name ~= itemName then
+											local dropItemFlag = true
+											if fromInventory then
+												local itemStack = { name = currentItemStack.name , count = 1 }
+												if playerInventory.can_insert( itemStack ) then
+													playerInventory.insert( itemStack )
+													dropItemFlag = false
 												end
-												proxy.item_requests = requestList
-											else
-												proxy = surface.create_entity
-												{
-													name = "item-request-proxy" ,
-													position = entity.position ,
-													direction = defines.direction.north ,
-													force = force ,
-													fast_replace = false ,
-													player = player ,
-													raise_built = false ,
-													create_build_effect_smoke = false ,
-													spawn_decorations = false ,
-													move_stuck_players = true ,
-													target = entity ,
-													modules = { [itemName] = 1 }
-												}
-												proxyList[entity.unit_number] = proxy
 											end
-										end
-										moduleFlag = true
-									end
-								end
-							else
-								local currentItemStack = inventory[slotIndex]
-								if currentItemStack.valid_for_read then
-									local dropItemFlag = true
-									if fromInventory then
-										local itemStack = { name = currentItemStack.name , count = 1 }
-										if playerInventory.can_insert( itemStack ) then
-											playerInventory.insert( itemStack )
-											dropItemFlag = false
-										end
-									end
-									if dropItemFlag then
-										surface.spill_item_stack( entity.position , { name = currentItemStack.name , count = 1 } , true , force , false )
-									end
-									currentItemStack.clear()
-									moduleFlag = true
-								end
-							end
-						end
-					end
-				end
-			end
-			-- ----------------------------------------
-			-- 移除插件
-			-- ----------------------------------------
-			if tabSettings.RemoveModule.Enable then
-				local removeModuleList = tabSettings.RemoveModule.List[entityName]
-				if removeModuleList then
-					local inventory = entity.get_module_inventory()
-					if inventory then
-						for slotIndex = 1 , #inventory , 1 do
-							local itemName = removeModuleList[slotIndex]
-							if itemName and game.item_prototypes[itemName] then
-								local currentItemStack = inventory[slotIndex]
-								if invert then
-									if currentItemStack.valid_for_read and currentItemStack.name ~= itemName then
-										local dropItemFlag = true
-										if toInventory then
-											local itemStack = { name = currentItemStack.name , count = 1 }
-											if playerInventory.can_insert( itemStack ) then
-												playerInventory.insert( itemStack )
-												dropItemFlag = false
+											if dropItemFlag then
+												surface.spill_item_stack( entity.position , { name = currentItemStack.name , count = 1 } , true , force , false )
 											end
+											currentItemStack.clear()
+											moduleFlag = true
 										end
-										if dropItemFlag then
-											surface.spill_item_stack( entity.position , { name = currentItemStack.name , count = 1 } , true , force , false )
+										local itemStack = { name = itemName , count = 1 }
+										if inventory.can_insert( itemStack ) then
+											local needProxyFlag = true
+											if fromInventory then
+												local hasCount = playerInventory.get_item_count( itemName )
+												if hasCount > 0 then
+													currentItemStack.set_stack( itemStack )
+													playerInventory.remove{ name = itemName , count = 1 }
+													needProxyFlag = false
+												end
+											end
+											if needProxyFlag then
+												local proxy = proxyList[entity.unit_number]
+												if proxy then
+													local requestList = proxy.item_requests
+													if requestList[itemName] then
+														requestList[itemName] = requestList[itemName] + 1
+													else
+														requestList[itemName] = 1
+													end
+													proxy.item_requests = requestList
+												else
+													proxy = surface.create_entity
+													{
+														name = "item-request-proxy" ,
+														position = entity.position ,
+														direction = defines.direction.north ,
+														force = force ,
+														fast_replace = false ,
+														player = player ,
+														raise_built = false ,
+														create_build_effect_smoke = false ,
+														spawn_decorations = false ,
+														move_stuck_players = true ,
+														target = entity ,
+														modules = { [itemName] = 1 }
+													}
+													proxyList[entity.unit_number] = proxy
+												end
+											end
+											moduleFlag = true
 										end
-										currentItemStack.clear()
-										moduleFlag = true
 									end
 								else
-									if currentItemStack.valid_for_read and currentItemStack.name == itemName then
-										local dropItemFlag = true
-										if toInventory then
-											local itemStack = { name = currentItemStack.name , count = 1 }
-											if playerInventory.can_insert( itemStack ) then
-												playerInventory.insert( itemStack )
-												dropItemFlag = true
-											end
-										end
-										if dropItemFlag then
-											surface.spill_item_stack( entity.position , { name = currentItemStack.name , count = 1 } , true , force , false )
-										end
-										currentItemStack.clear()
-										moduleFlag = true
-									end
-								end
-							else
-								local currentItemStack = inventory[slotIndex]
-								if invert then
+									local currentItemStack = inventory[slotIndex]
 									if currentItemStack.valid_for_read then
 										local dropItemFlag = true
-										if toInventory then
+										if fromInventory then
 											local itemStack = { name = currentItemStack.name , count = 1 }
 											if playerInventory.can_insert( itemStack ) then
 												playerInventory.insert( itemStack )
@@ -1683,67 +1617,136 @@ SIRequestMap =
 						end
 					end
 				end
-			end
-			-- 触发插件事件
-			if moduleFlag then
-				SIRequestMap.FireModuleEvent( playerIndex , entity )
-			end
-			-- ----------------------------------------
-			-- 插入燃料
-			-- ----------------------------------------
-			if tabSettings.InsertFuel.Enable then
-				local insertFuelList = tabSettings.InsertFuel.List[entityName]
-				if insertFuelList then
-					local inventory = entity.get_fuel_inventory()
-					-- 判断存储空间
-					if inventory then
-						for slotIndex , itemData in pairs( insertFuelList ) do
-							local itemName = itemData.ItemName
-							local itemPrototype = game.item_prototypes[itemName]
-							-- 判断燃料物品是否存在
-							if itemName and itemPrototype then
-								local hasCount = playerInventory.get_item_count( itemName )
-								-- 判断玩家背包内的燃料物品数量
-								if hasCount > 0 then
+				-- ----------------------------------------
+				-- 移除插件
+				-- ----------------------------------------
+				if tabSettings.RemoveModule.Enable then
+					local removeModuleList = tabSettings.RemoveModule.List[entityName]
+					if removeModuleList then
+						local inventory = entity.get_module_inventory()
+						if inventory then
+							for slotIndex = 1 , #inventory , 1 do
+								local itemName = removeModuleList[slotIndex]
+								if itemName and game.item_prototypes[itemName] then
 									local currentItemStack = inventory[slotIndex]
-									-- 判断指定空间内是否可以填充指定种类的燃料物品
-									if not currentItemStack.valid_for_read or currentItemStack.name == itemName then
-										local currentCount = currentItemStack.valid_for_read and currentItemStack.count or 0
-										local mode = itemData.Mode or SIRequestMap.CountMode.Total
-										-- 根据模式决定操作方式
-										if mode == SIRequestMap.CountMode.Total then
-											local fuelEntityList = fuelTotalList[entityName]
-											if not fuelEntityList then
-												fuelEntityList = {}
-												fuelTotalList[entityName] = fuelEntityList
-											end
-											local fuelList = fuelEntityList[slotIndex]
-											if not fuelList then
-												fuelList =
-												{
-													ItemData = itemData ,
-													List = {}
-												}
-												fuelEntityList[slotIndex] = fuelList
-											end
-											table.insert( fuelList.List ,
-											{
-												ItemStack = currentItemStack ,
-												CurretnCount = currentCount ,
-												Max = itemPrototype.stack_size }
-											)
-										elseif mode == SIRequestMap.CountMode.Single then
-											-- 计算可以填充的数量
-											local count = math.min( math.max( ( itemData.Count or 1 ) - currentCount , 0 ) , itemPrototype.stack_size )
-											count = math.min( count , hasCount )
-											if count > 0 then
-												-- 填充燃料物品
-												if currentItemStack.valid_for_read then
-													currentItemStack.count = currentItemStack.count + count
-												else
-													currentItemStack.set_stack{ name = itemName , count = count }
+									if invert then
+										if currentItemStack.valid_for_read and currentItemStack.name ~= itemName then
+											local dropItemFlag = true
+											if toInventory then
+												local itemStack = { name = currentItemStack.name , count = 1 }
+												if playerInventory.can_insert( itemStack ) then
+													playerInventory.insert( itemStack )
+													dropItemFlag = false
 												end
-												playerInventory.remove{ name = itemName , count = count }
+											end
+											if dropItemFlag then
+												surface.spill_item_stack( entity.position , { name = currentItemStack.name , count = 1 } , true , force , false )
+											end
+											currentItemStack.clear()
+											moduleFlag = true
+										end
+									else
+										if currentItemStack.valid_for_read and currentItemStack.name == itemName then
+											local dropItemFlag = true
+											if toInventory then
+												local itemStack = { name = currentItemStack.name , count = 1 }
+												if playerInventory.can_insert( itemStack ) then
+													playerInventory.insert( itemStack )
+													dropItemFlag = true
+												end
+											end
+											if dropItemFlag then
+												surface.spill_item_stack( entity.position , { name = currentItemStack.name , count = 1 } , true , force , false )
+											end
+											currentItemStack.clear()
+											moduleFlag = true
+										end
+									end
+								else
+									local currentItemStack = inventory[slotIndex]
+									if invert then
+										if currentItemStack.valid_for_read then
+											local dropItemFlag = true
+											if toInventory then
+												local itemStack = { name = currentItemStack.name , count = 1 }
+												if playerInventory.can_insert( itemStack ) then
+													playerInventory.insert( itemStack )
+													dropItemFlag = false
+												end
+											end
+											if dropItemFlag then
+												surface.spill_item_stack( entity.position , { name = currentItemStack.name , count = 1 } , true , force , false )
+											end
+											currentItemStack.clear()
+											moduleFlag = true
+										end
+									end
+								end
+							end
+						end
+					end
+				end
+				-- 触发插件事件
+				if moduleFlag then
+					SIRequestMap.FireModuleEvent( playerIndex , entity )
+				end
+				-- ----------------------------------------
+				-- 插入燃料
+				-- ----------------------------------------
+				if tabSettings.InsertFuel.Enable then
+					local insertFuelList = tabSettings.InsertFuel.List[entityName]
+					if insertFuelList then
+						local inventory = entity.get_fuel_inventory()
+						-- 判断存储空间
+						if inventory then
+							for slotIndex , itemData in pairs( insertFuelList ) do
+								local itemName = itemData.ItemName
+								local itemPrototype = game.item_prototypes[itemName]
+								-- 判断燃料物品是否存在
+								if itemName and itemPrototype then
+									local hasCount = playerInventory.get_item_count( itemName )
+									-- 判断玩家背包内的燃料物品数量
+									if hasCount > 0 then
+										local currentItemStack = inventory[slotIndex]
+										-- 判断指定空间内是否可以填充指定种类的燃料物品
+										if not currentItemStack.valid_for_read or currentItemStack.name == itemName then
+											local currentCount = currentItemStack.valid_for_read and currentItemStack.count or 0
+											local mode = itemData.Mode or SIRequestMap.CountMode.Total
+											-- 根据模式决定操作方式
+											if mode == SIRequestMap.CountMode.Total then
+												local fuelEntityList = fuelTotalList[entityName]
+												if not fuelEntityList then
+													fuelEntityList = {}
+													fuelTotalList[entityName] = fuelEntityList
+												end
+												local fuelList = fuelEntityList[slotIndex]
+												if not fuelList then
+													fuelList =
+													{
+														ItemData = itemData ,
+														List = {}
+													}
+													fuelEntityList[slotIndex] = fuelList
+												end
+												table.insert( fuelList.List ,
+												{
+													ItemStack = currentItemStack ,
+													CurretnCount = currentCount ,
+													Max = itemPrototype.stack_size }
+												)
+											elseif mode == SIRequestMap.CountMode.Single then
+												-- 计算可以填充的数量
+												local count = math.min( math.max( ( itemData.Count or 1 ) - currentCount , 0 ) , itemPrototype.stack_size )
+												count = math.min( count , hasCount )
+												if count > 0 then
+													-- 填充燃料物品
+													if currentItemStack.valid_for_read then
+														currentItemStack.count = currentItemStack.count + count
+													else
+														currentItemStack.set_stack{ name = itemName , count = count }
+													end
+													playerInventory.remove{ name = itemName , count = count }
+												end
 											end
 										end
 									end
@@ -1752,73 +1755,73 @@ SIRequestMap =
 						end
 					end
 				end
-			end
-			-- ----------------------------------------
-			-- 插入弹药
-			-- ----------------------------------------
-			if tabSettings.InsertAmmo.Enable then
-				local insertAmmoList = tabSettings.InsertAmmo.List[entityName]
-				if insertAmmoList then
-					local inventory = nil
-					if type == SICommon.Types.Entities.TurretAmmo then
-						inventory = entity.get_inventory( defines.inventory.turret_ammo )
-					elseif type == SICommon.Types.Entities.TurretArtillery then
-						inventory = entity.get_inventory( defines.inventory.artillery_turret_ammo )
-					elseif type == SICommon.Types.Entities.Car then
-						inventory = entity.get_inventory( defines.inventory.car_ammo )
-					elseif type == SICommon.Types.Entities.SpiderVehicle then
-						inventory = entity.get_inventory( defines.inventory.spider_ammo )
-					elseif type == SICommon.Types.Entities.WagonArtillery then
-						inventory = entity.get_inventory( defines.inventory.artillery_wagon_ammo )
-					end
-					if inventory then
-						for slotIndex , itemData in pairs( insertAmmoList ) do
-							local itemName = itemData.ItemName
-							local itemPrototype = game.item_prototypes[itemName]
-							-- 判断弹药物品是否存在
-							if itemName and itemPrototype then
-								local hasCount = playerInventory.get_item_count( itemName )
-								-- 判断玩家背包内的弹药物品数量
-								if hasCount > 0 then
-									local currentItemStack = inventory[slotIndex]
-									-- 判断指定空间内是否可以填充指定种类的弹药物品
-									if not currentItemStack.valid_for_read or currentItemStack.valid_for_read and currentItemStack.name == itemName then
-										local currentCount = currentItemStack.valid_for_read and currentItemStack.count or 0
-										local mode = itemData.Mode or SIRequestMap.CountMode.Total
-										-- 根据模式决定操作方式
-										if mode == SIRequestMap.CountMode.Total then
-											local ammoEntityList = ammoTotalList[entityName]
-											if not ammoEntityList then
-												ammoEntityList = {}
-												ammoTotalList[entityName] = ammoEntityList
-											end
-											local ammoList = ammoEntityList[slotIndex]
-											if not ammoList then
-												ammoList =
-												{
-													ItemData = itemData ,
-													List = {}
-												}
-												ammoEntityList[slotIndex] = ammoList
-											end
-											table.insert( ammoList.List ,
-											{
-												ItemStack = currentItemStack ,
-												CurretnCount = currentCount ,
-												Max = itemPrototype.stack_size }
-											)
-										elseif mode == SIRequestMap.CountMode.Single then
-											-- 计算可以填充的数量
-											local count = math.min( math.max( ( itemData.Count or 1 ) - currentCount , 0 ) , itemPrototype.stack_size )
-											count = math.min( count , hasCount )
-											if count > 0 then
-												-- 填充燃料物品
-												if currentItemStack.valid_for_read then
-													currentItemStack.count = currentItemStack.count + count
-												else
-													currentItemStack.set_stack{ name = itemName , count = count }
+				-- ----------------------------------------
+				-- 插入弹药
+				-- ----------------------------------------
+				if tabSettings.InsertAmmo.Enable then
+					local insertAmmoList = tabSettings.InsertAmmo.List[entityName]
+					if insertAmmoList then
+						local inventory = nil
+						if type == SICommon.Types.Entities.TurretAmmo then
+							inventory = entity.get_inventory( defines.inventory.turret_ammo )
+						elseif type == SICommon.Types.Entities.TurretArtillery then
+							inventory = entity.get_inventory( defines.inventory.artillery_turret_ammo )
+						elseif type == SICommon.Types.Entities.Car then
+							inventory = entity.get_inventory( defines.inventory.car_ammo )
+						elseif type == SICommon.Types.Entities.SpiderVehicle then
+							inventory = entity.get_inventory( defines.inventory.spider_ammo )
+						elseif type == SICommon.Types.Entities.WagonArtillery then
+							inventory = entity.get_inventory( defines.inventory.artillery_wagon_ammo )
+						end
+						if inventory then
+							for slotIndex , itemData in pairs( insertAmmoList ) do
+								local itemName = itemData.ItemName
+								local itemPrototype = game.item_prototypes[itemName]
+								-- 判断弹药物品是否存在
+								if itemName and itemPrototype then
+									local hasCount = playerInventory.get_item_count( itemName )
+									-- 判断玩家背包内的弹药物品数量
+									if hasCount > 0 then
+										local currentItemStack = inventory[slotIndex]
+										-- 判断指定空间内是否可以填充指定种类的弹药物品
+										if not currentItemStack.valid_for_read or currentItemStack.valid_for_read and currentItemStack.name == itemName then
+											local currentCount = currentItemStack.valid_for_read and currentItemStack.count or 0
+											local mode = itemData.Mode or SIRequestMap.CountMode.Total
+											-- 根据模式决定操作方式
+											if mode == SIRequestMap.CountMode.Total then
+												local ammoEntityList = ammoTotalList[entityName]
+												if not ammoEntityList then
+													ammoEntityList = {}
+													ammoTotalList[entityName] = ammoEntityList
 												end
-												playerInventory.remove{ name = itemName , count = count }
+												local ammoList = ammoEntityList[slotIndex]
+												if not ammoList then
+													ammoList =
+													{
+														ItemData = itemData ,
+														List = {}
+													}
+													ammoEntityList[slotIndex] = ammoList
+												end
+												table.insert( ammoList.List ,
+												{
+													ItemStack = currentItemStack ,
+													CurretnCount = currentCount ,
+													Max = itemPrototype.stack_size }
+												)
+											elseif mode == SIRequestMap.CountMode.Single then
+												-- 计算可以填充的数量
+												local count = math.min( math.max( ( itemData.Count or 1 ) - currentCount , 0 ) , itemPrototype.stack_size )
+												count = math.min( count , hasCount )
+												if count > 0 then
+													-- 填充燃料物品
+													if currentItemStack.valid_for_read then
+														currentItemStack.count = currentItemStack.count + count
+													else
+														currentItemStack.set_stack{ name = itemName , count = count }
+													end
+													playerInventory.remove{ name = itemName , count = count }
+												end
 											end
 										end
 									end

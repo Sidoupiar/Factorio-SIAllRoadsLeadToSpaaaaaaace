@@ -16,7 +16,9 @@ for r = 0 , SIConstants_Colorful.ColorMax , SIConstants_Colorful.ColorStep do
 			local tint = SICommon.Colors.MakeColor256( r , g , b )
 			local colorText = tostring( tint.r ) .. "," .. tostring( tint.g ) .. "," .. tostring( tint.b )
 			local colorTextHex = SICommon.Colors.MakeHex256( r , g , b )
-			SIGen.New( SICommon.Types.Entities.SimpleOwner , "Pixel_" .. r .. "_" .. g .. "_" .. b , "像素块-" .. r .. "-" .. g .. "-" .. b )
+			SIGen
+			.New( SICommon.Types.Entities.SimpleOwner , "Pixel_" .. r .. "_" .. g .. "_" .. b , "像素块-" .. r .. "-" .. g .. "-" .. b )
+			.SetSizeScale( 1 , 1 , 0.04 )
 			.Append
 			{
 				localised_name = SIGen.MakeSelfLocalisedName( "像素块" , colorTextHex ) ,
@@ -128,7 +130,6 @@ for r = 0 , SIConstants_Colorful.ColorMax , SIConstants_Colorful.ColorStep do
 					}
 				}
 			}
-			.SetSizeScale( 1 , 1 , 0.04 )
 		end
 	end
 end

@@ -120,6 +120,8 @@ end
 -- ----------------------------------------
 SIGen
 .New( SICommon.Types.Entities.Corpse , "RuinWallRemnants" , "遗迹围墙-残骸" )
+.AutoIcon()
+.SetSizeScale( 1 , 1 , 0 )
 .Append
 {
 	flags = { SICommon.Flags.Entity.PlaceableNeutral , SICommon.Flags.Entity.NotOnMap , SICommon.Flags.Entity.Hidden } ,
@@ -144,8 +146,6 @@ SIGen
 		}
 	} )
 }
-.AutoIcon()
-.SetSizeScale( 1 , 1 , 0 )
 CreateRuinBuildings( SICommon.Types.Entities.Wall , "RuinWall" , "遗迹围墙" , 0.85 , SIConstants_RuinControl.LevelValueList ,
 {
 	localised_name = SIGen.MakeLocalisedName( SICommon.Types.Entities.Wall , "遗迹围墙" ) ,
@@ -625,6 +625,8 @@ CreateRuinBuildings( SICommon.Types.Entities.Wall , "RuinWall" , "遗迹围墙" 
 -- ----------------------------------------
 SIGen
 .New( SICommon.Types.Entities.Corpse , "RuinLandMineRemnants" , "遗迹地雷-残骸" )
+.AutoIcon()
+.SetSizeScale( 1 , 1 , 0 )
 .Append
 {
 	flags = { SICommon.Flags.Entity.PlaceableNeutral , SICommon.Flags.Entity.NotOnMap , SICommon.Flags.Entity.Hidden } ,
@@ -650,8 +652,6 @@ SIGen
 		}
 	} )
 }
-.AutoIcon()
-.SetSizeScale( 1 , 1 , 0 )
 CreateRuinBuildings( SICommon.Types.Entities.LandMine , "RuinLandMine" , "遗迹地雷" , 1 , SIConstants_RuinControl.LevelValueList ,
 {
 	localised_name = SIGen.MakeLocalisedName( SICommon.Types.Entities.LandMine , "遗迹地雷" ) ,
@@ -819,6 +819,8 @@ CreateRuinBuildings( SICommon.Types.Entities.LandMine , "RuinLandMine" , "遗迹
 -- ----------------------------------------
 SIGen
 .New( SICommon.Types.Entities.Corpse , "RuinGunTurretRemnants" , "遗迹机枪炮塔-残骸" )
+.AutoIcon()
+.SetSizeScale( 2 , 2 , 0 )
 .Append
 {
 	flags = { SICommon.Flags.Entity.PlaceableNeutral , SICommon.Flags.Entity.NotOnMap , SICommon.Flags.Entity.Hidden } ,
@@ -856,8 +858,6 @@ SIGen
 		}
 	} )
 }
-.AutoIcon()
-.SetSizeScale( 2 , 2 , 0 )
 CreateRuinBuildings( SICommon.Types.Entities.Turret , "RuinGunTurret" , "遗迹机枪炮塔" , 2 , SIConstants_RuinControl.LevelValueList ,
 {
 	localised_name = SIGen.MakeLocalisedName( SICommon.Types.Entities.Turret , "遗迹机枪炮塔" ) ,
@@ -1458,6 +1458,8 @@ CreateRuinBuildings( SICommon.Types.Entities.Turret , "RuinGunTurret" , "遗迹�
 -- ----------------------------------------
 SIGen
 .New( SICommon.Types.Entities.Corpse , "RuinLaserTurretRemnants" , "遗迹激光炮塔-残骸" )
+.AutoIcon()
+.SetSizeScale( 2 , 2 , 0 )
 .Append
 {
 	flags = { SICommon.Flags.Entity.PlaceableNeutral , SICommon.Flags.Entity.NotOnMap , SICommon.Flags.Entity.Hidden } ,
@@ -1495,8 +1497,6 @@ SIGen
 		}
 	} )
 }
-.AutoIcon()
-.SetSizeScale( 2 , 2 , 0 )
 .New( SICommon.Types.Entities.Beam , "RuinLaserTurret_Beam" , "遗迹激光炮塔-激光" )
 .Append
 {
@@ -2048,6 +2048,8 @@ CreateRuinBuildings( SICommon.Types.Entities.Turret , "RuinLaserTurret" , "遗�
 -- ----------------------------------------
 SIGen
 .New( SICommon.Types.Entities.Corpse , "RuinFlameTurretRemnants" , "遗迹喷火炮塔-残骸" )
+.AutoIcon()
+.SetSizeScale( 2 , 2 , 0 )
 .Append
 {
 	flags = { SICommon.Flags.Entity.PlaceableNeutral , SICommon.Flags.Entity.NotOnMap , SICommon.Flags.Entity.Hidden } ,
@@ -2090,8 +2092,6 @@ SIGen
 		}
 	}
 }
-.AutoIcon()
-.SetSizeScale( 2 , 2 , 0 )
 local function RuinFlameTurretGunAnimationSingle( shift , attacking )
 	local layers =
 	{
@@ -2653,6 +2653,8 @@ CreateRuinBuildings( SICommon.Types.Entities.Turret , "RuinFlameTurret" , "遗�
 -- ----------------------------------------
 SIGen
 .New( SICommon.Types.Entities.Corpse , "RuinChestRemnants" , "遗迹箱子-残骸" )
+.AutoIcon()
+.SetSizeScale( 1 , 1 , 0 )
 .Append
 {
 	flags = { SICommon.Flags.Entity.PlaceableNeutral , SICommon.Flags.Entity.Building8Way , SICommon.Flags.Entity.NotOnMap , SICommon.Flags.Entity.Hidden } ,
@@ -2675,8 +2677,6 @@ SIGen
 		shift = SIUtils.by_pixel( 8 , -1 )
 	}
 }
-.AutoIcon()
-.SetSizeScale( 1 , 1 , 0 )
 CreateRuinBuildings( SICommon.Types.Entities.Container , "RuinChest" , "遗迹箱子" , 1 , SIConstants_RuinControl.LevelValueList ,
 {
 	localised_name = SIGen.MakeLocalisedName( SICommon.Types.Entities.Container , "遗迹箱子" ) ,
@@ -2804,6 +2804,8 @@ CreateRuinBuildings( SICommon.Types.Entities.Container , "RuinChest" , "遗迹�
 -- ----------------------------------------
 SIGen
 .New( SICommon.Types.Entities.Corpse , "RuinMachineRemnants" , "遗迹组装机-残骸" )
+.AutoIcon()
+.SetSizeScale( 2 , 2 , 0 )
 .Append
 {
 	flags = { SICommon.Flags.Entity.PlaceableNeutral , SICommon.Flags.Entity.NotOnMap , SICommon.Flags.Entity.Hidden } ,
@@ -2830,8 +2832,6 @@ SIGen
 		}
 	} )
 }
-.AutoIcon()
-.SetSizeScale( 2 , 2 , 0 )
 CreateRuinBuildings( SICommon.Types.Entities.Machine , "RuinMachine" , "遗迹组装机" , 2 , SIConstants_RuinControl.LevelValueList ,
 {
 	localised_name = SIGen.MakeLocalisedName( SICommon.Types.Entities.Machine , "遗迹组装机" ) ,
@@ -3316,6 +3316,8 @@ CreateRuinBuildings( SICommon.Types.Entities.Machine , "RuinMachine" , "遗迹�
 -- ----------------------------------------
 SIGen
 .New( SICommon.Types.Entities.Corpse , "RuinInserterRemnants" , "遗迹爪子-残骸" )
+.AutoIcon()
+.SetSizeScale( 1 , 1 , 0 )
 .Append
 {
 	flags = { SICommon.Flags.Entity.PlaceableNeutral , SICommon.Flags.Entity.NotOnMap , SICommon.Flags.Entity.Hidden } ,
@@ -3341,9 +3343,9 @@ SIGen
 		}
 	} )
 }
-.AutoIcon()
-.SetSizeScale( 1 , 1 , 0 )
 .New( SICommon.Types.Entities.Inserter , "RuinInserter" , "遗迹爪子" )
+.AutoIcon()
+.SetSize( 1 , 1 )
 .Append
 {
 	flags = { SICommon.Flags.Entity.PlaceableEnemy , SICommon.Flags.Entity.NotOnMap , SICommon.Flags.Entity.Hidden } ,
@@ -3541,8 +3543,6 @@ SIGen
 		audible_distance_modifier = 0.3
 	}
 }
-.AutoIcon()
-.SetSize( 1 , 1 )
 
 -- ----------------------------------------
 -- 遗迹地板
@@ -3599,6 +3599,7 @@ local function MakeTileTransition( options )
 end
 SIGen
 .New( SICommon.Types.Tile , "RuinFloor" , "遗迹地板" )
+.AutoIcon()
 .Append
 {
 	minable =
@@ -4030,4 +4031,3 @@ SIGen
 		}
 	}
 }
-.AutoIcon()

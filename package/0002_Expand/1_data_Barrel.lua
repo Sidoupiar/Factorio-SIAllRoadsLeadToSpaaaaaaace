@@ -71,6 +71,9 @@ SIGen
 } )
 .AutoIcon()
 .New( SICommon.Types.Entities.SimpleOwner , "WoodenBarrel" , "木桶" )
+.AutoIcon()
+.SetSize( 1 , 1 )
+.ReferencePlaceResult( SICommon.Types.Items.Item , SIConstants_Expand.raw.Items.WoodenBarrel )
 .Append
 {
 	flags = { SICommon.Flags.Entity.PlaceablePlayer , SICommon.Flags.Entity.PlayerCreation , SICommon.Flags.Entity.HideAltInfo } ,
@@ -174,9 +177,6 @@ SIGen
 		}
 	}
 }
-.AutoIcon()
-.SetSize( 1 , 1 )
-.ReferencePlaceResult( SICommon.Types.Items.Item , SIConstants_Expand.raw.Items.WoodenBarrel )
 .New( SICommon.Types.Items.Item , "PlasticCapable" , "塑料胶囊" ,
 {
 	stack_size = 1000
@@ -229,6 +229,9 @@ SIGen
 } )
 .AutoIcon()
 .New( SICommon.Types.Entities.SimpleOwner , "PlasticCapable" , "塑料胶囊" )
+.AutoIcon()
+.SetSizeSize( 1 , 1 , 0.5 )
+.ReferencePlaceResult( SICommon.Types.Items.Item , SIConstants_Expand.raw.Items.PlasticCapable )
 .Append
 {
 	flags = { SICommon.Flags.Entity.PlaceablePlayer , SICommon.Flags.Entity.PlayerCreation , SICommon.Flags.Entity.HideAltInfo } ,
@@ -394,9 +397,6 @@ SIGen
 		}
 	}
 }
-.AutoIcon()
-.SetSizeSize( 1 , 1 , 0.5 )
-.ReferencePlaceResult( SICommon.Types.Items.Item , SIConstants_Expand.raw.Items.PlasticCapable )
 
 -- ----------------------------------------
 -- 灌装和倾倒设备
@@ -474,6 +474,9 @@ SIGen
 } )
 .AutoIcon()
 .New( SICommon.Types.Entities.Furnace , "BarrelMaker" , "灌装设备" )
+.AutoIcon()
+.SetSize( 2 , 2 )
+.ReferencePlaceResult( SICommon.Types.Items.Item , SIConstants_Expand.raw.Items.BarrelMaker )
 .Append
 {
 	flags = { SICommon.Flags.Entity.PlaceablePlayer , SICommon.Flags.Entity.PlayerCreation } ,
@@ -720,9 +723,6 @@ SIGen
 		fade_out_ticks = 20
 	}
 }
-.AutoIcon()
-.SetSize( 2 , 2 )
-.ReferencePlaceResult( SICommon.Types.Items.Item , SIConstants_Expand.raw.Items.BarrelMaker )
 .New( SICommon.Types.Items.Item , "BarrelDropper" , "倾倒设备" ,
 {
 	stack_size = 100 ,
@@ -796,6 +796,9 @@ SIGen
 } )
 .AutoIcon()
 .New( SICommon.Types.Entities.Furnace , "BarrelDropper" , "倾倒设备" )
+.AutoIcon()
+.SetSize( 2 , 2 )
+.ReferencePlaceResult( SICommon.Types.Items.Item , SIConstants_Expand.raw.Items.BarrelDropper )
 .Append
 {
 	flags = { SICommon.Flags.Entity.PlaceablePlayer , SICommon.Flags.Entity.PlayerCreation } ,
@@ -1042,9 +1045,6 @@ SIGen
 		fade_out_ticks = 20
 	}
 }
-.AutoIcon()
-.SetSize( 2 , 2 )
-.ReferencePlaceResult( SICommon.Types.Items.Item , SIConstants_Expand.raw.Items.BarrelDropper )
 
 -- ----------------------------------------
 -- 灌装科技

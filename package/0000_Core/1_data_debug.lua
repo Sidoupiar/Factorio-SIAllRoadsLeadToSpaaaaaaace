@@ -16,15 +16,20 @@ SIGen
 	} ,
 	animation =
 	{
-		filename = SIGen.MakePicturePath( SICommon.Types.Items.Capsule , "璀璨之闪耀能量罐头-图标" ) ,
-		priority = "high" ,
-		scale = 0.25 ,
-		draw_as_glow = true ,
-		frame_count = 1 ,
-		line_length = 1 ,
-		animation_speed = 1 ,
-		width = 64 ,
-		height = 64
+		layers =
+		{
+			{
+				filename = SIGen.MakePicturePath( SICommon.Types.Items.Capsule , "璀璨之闪耀能量罐头-图标" ) ,
+				priority = "high" ,
+				width = 64 ,
+				height = 64 ,
+				frame_count = 1 ,
+				line_length = 1 ,
+				animation_speed = 1 ,
+				scale = 0.25 ,
+				draw_as_glow = true
+			}
+		}
 	} ,
 	acceleration = 0 ,
 	action =

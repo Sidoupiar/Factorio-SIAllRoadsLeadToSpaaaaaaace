@@ -117,6 +117,7 @@ SIGen
 				place_result = nil
 			}
 			.New( SICommon.Types.Recipe , BarrelFullIDPrefix_1 .. fluidID , BarrelFullAliasPrefix_1 .. fluidID )
+			.ReferenceUnlockRecipe( SIConstants_Expand.raw.Technologies.Barrel_1 )
 			.Append
 			{
 				localised_name = SIGen.MakeSelfLocalisedName( BarrelFullLocalisedPrefix_1 , localName ) ,
@@ -193,8 +194,8 @@ SIGen
 					table.insert( prototypeData.icons , iconData )
 				end
 			end )
-			.ReferenceUnlockRecipe( SIConstants_Expand.raw.Technologies.Barrel_1 )
 			.New( SICommon.Types.Recipe , BarrelEmptyIDPrefix_1 .. fluidID , BarrelEmptyAliasPrefix_1 .. fluidID )
+			.ReferenceUnlockRecipe( SIConstants_Expand.raw.Technologies.Barrel_1 )
 			.Append
 			{
 				localised_name = SIGen.MakeSelfLocalisedName( BarrelEmptyLocalisedPrefix_1 , localName ) ,
@@ -272,8 +273,8 @@ SIGen
 					table.insert( prototypeData.icons , iconData )
 				end
 			end )
-			.ReferenceUnlockRecipe( SIConstants_Expand.raw.Technologies.Barrel_1 )
 			.New( SICommon.Types.Recipe , BarrelFullAssembledIDPrefix_1 .. fluidID , BarrelFullAssembledAliasPrefix_1 .. fluidID )
+			.ReferenceUnlockRecipe( SIConstants_Expand.raw.Technologies.Barrel_1 )
 			.Append
 			{
 				localised_name = SIGen.MakeSelfLocalisedName( BarrelFullLocalisedPrefix_1 , localName ) ,
@@ -350,8 +351,8 @@ SIGen
 					table.insert( prototypeData.icons , iconData )
 				end
 			end )
-			.ReferenceUnlockRecipe( SIConstants_Expand.raw.Technologies.Barrel_1 )
 			.New( SICommon.Types.Recipe , BarrelEmptyAssembledIDPrefix_1 .. fluidID , BarrelEmptyAssembledAliasPrefix_1 .. fluidID )
+			.ReferenceUnlockRecipe( SIConstants_Expand.raw.Technologies.Barrel_1 )
 			.Append
 			{
 				localised_name = SIGen.MakeSelfLocalisedName( BarrelEmptyLocalisedPrefix_1 , localName ) ,
@@ -429,8 +430,9 @@ SIGen
 					table.insert( prototypeData.icons , iconData )
 				end
 			end )
-			.ReferenceUnlockRecipe( SIConstants_Expand.raw.Technologies.Barrel_1 )
 			.New( SICommon.Types.Entities.SimpleOwner , BarrelItemIDPrefix_1 .. fluidID , BarrelItemAliasPrefix_1 .. fluidName )
+			.SetSize( 1 , 1 )
+			.ReferencePlaceResult( SICommon.Types.Items.Item , SIConstants_Expand.raw.Items[BarrelItemIDPrefix_1 .. fluidID] )
 			.Append
 			{
 				localised_name = SIGen.MakeSelfLocalisedName( BarrelItemLocalisedPrefix_1 , localName ) ,
@@ -561,8 +563,6 @@ SIGen
 					}
 				}
 			}
-			.SetSize( 1 , 1 )
-			.ReferencePlaceResult( SICommon.Types.Items.Item , SIConstants_Expand.raw.Items[BarrelItemIDPrefix_1 .. fluidID] )
 			-- ----------------------------------------
 			-- 灌装科技 2
 			-- ----------------------------------------
@@ -591,6 +591,7 @@ SIGen
 				place_result = nil
 			}
 			.New( SICommon.Types.Recipe , BarrelFullIDPrefix_2 .. fluidID , BarrelFullAliasPrefix_2 .. fluidID )
+			.ReferenceUnlockRecipe( SIConstants_Expand.raw.Technologies.Barrel_2 )
 			.Append
 			{
 				localised_name = SIGen.MakeSelfLocalisedName( BarrelFullLocalisedPrefix_2 , localName ) ,
@@ -667,8 +668,8 @@ SIGen
 					table.insert( prototypeData.icons , iconData )
 				end
 			end )
-			.ReferenceUnlockRecipe( SIConstants_Expand.raw.Technologies.Barrel_2 )
 			.New( SICommon.Types.Recipe , BarrelEmptyIDPrefix_2 .. fluidID , BarrelEmptyAliasPrefix_2 .. fluidID )
+			.ReferenceUnlockRecipe( SIConstants_Expand.raw.Technologies.Barrel_2 )
 			.Append
 			{
 				localised_name = SIGen.MakeSelfLocalisedName( BarrelEmptyLocalisedPrefix_2 , localName ) ,
@@ -740,8 +741,8 @@ SIGen
 					table.insert( prototypeData.icons , iconData )
 				end
 			end )
-			.ReferenceUnlockRecipe( SIConstants_Expand.raw.Technologies.Barrel_2 )
 			.New( SICommon.Types.Recipe , BarrelFullAssembledIDPrefix_2 .. fluidID , BarrelFullAssembledAliasPrefix_2 .. fluidID )
+			.ReferenceUnlockRecipe( SIConstants_Expand.raw.Technologies.Barrel_2 )
 			.Append
 			{
 				localised_name = SIGen.MakeSelfLocalisedName( BarrelFullLocalisedPrefix_2 , localName ) ,
@@ -818,8 +819,8 @@ SIGen
 					table.insert( prototypeData.icons , iconData )
 				end
 			end )
-			.ReferenceUnlockRecipe( SIConstants_Expand.raw.Technologies.Barrel_2 )
 			.New( SICommon.Types.Recipe , BarrelEmptyAssembledIDPrefix_2 .. fluidID , BarrelEmptyAssembledAliasPrefix_2 .. fluidID )
+			.ReferenceUnlockRecipe( SIConstants_Expand.raw.Technologies.Barrel_2 )
 			.Append
 			{
 				localised_name = SIGen.MakeSelfLocalisedName( BarrelEmptyLocalisedPrefix_2 , localName ) ,
@@ -891,8 +892,9 @@ SIGen
 					table.insert( prototypeData.icons , iconData )
 				end
 			end )
-			.ReferenceUnlockRecipe( SIConstants_Expand.raw.Technologies.Barrel_2 )
 			.New( SICommon.Types.Entities.SimpleOwner , BarrelItemIDPrefix_2 .. fluidID , BarrelItemAliasPrefix_2 .. fluidName )
+			.SetSizeSize( 1 , 1 , 0.5 )
+			.ReferencePlaceResult( SICommon.Types.Items.Item , SIConstants_Expand.raw.Items[BarrelItemIDPrefix_2 .. fluidID] )
 			.Append
 			{
 				localised_name = SIGen.MakeSelfLocalisedName( BarrelItemLocalisedPrefix_2 , localName ) ,
@@ -1108,8 +1110,6 @@ SIGen
 					}
 				}
 			}
-			.SetSizeSize( 1 , 1 , 0.5 )
-			.ReferencePlaceResult( SICommon.Types.Items.Item , SIConstants_Expand.raw.Items[BarrelItemIDPrefix_2 .. fluidID] )
 			-- ----------------------------------------
 			-- 灌装科技 3
 			-- ----------------------------------------
@@ -1139,6 +1139,7 @@ SIGen
 				end
 			end )
 			.New( SICommon.Types.Recipe , BarrelFullIDPrefix_3 .. fluidID , BarrelFullAliasPrefix_3 .. fluidID )
+			.ReferenceUnlockRecipe( SIConstants_Expand.raw.Technologies.Barrel_3 )
 			.Append
 			{
 				localised_name = SIGen.MakeSelfLocalisedName( BarrelFullLocalisedPrefix_3 , localName ) ,
@@ -1205,8 +1206,8 @@ SIGen
 					table.insert( prototypeData.icons , iconData )
 				end
 			end )
-			.ReferenceUnlockRecipe( SIConstants_Expand.raw.Technologies.Barrel_3 )
 			.New( SICommon.Types.Recipe , BarrelEmptyIDPrefix_3 .. fluidID , BarrelEmptyAliasPrefix_3 .. fluidID )
+			.ReferenceUnlockRecipe( SIConstants_Expand.raw.Technologies.Barrel_3 )
 			.Append
 			{
 				localised_name = SIGen.MakeSelfLocalisedName( BarrelEmptyLocalisedPrefix_3 , localName ) ,
@@ -1273,8 +1274,8 @@ SIGen
 					table.insert( prototypeData.icons , iconData )
 				end
 			end )
-			.ReferenceUnlockRecipe( SIConstants_Expand.raw.Technologies.Barrel_3 )
 			.New( SICommon.Types.Recipe , BarrelEmptyAssembledIDPrefix_3 .. fluidID , BarrelEmptyAssembledAliasPrefix_3 .. fluidID )
+			.ReferenceUnlockRecipe( SIConstants_Expand.raw.Technologies.Barrel_3 )
 			.Append
 			{
 				localised_name = SIGen.MakeSelfLocalisedName( BarrelEmptyLocalisedPrefix_3 , localName ) ,
@@ -1341,7 +1342,6 @@ SIGen
 					table.insert( prototypeData.icons , iconData )
 				end
 			end )
-			.ReferenceUnlockRecipe( SIConstants_Expand.raw.Technologies.Barrel_3 )
 		end
 	end
 end )

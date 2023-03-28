@@ -430,6 +430,8 @@ SIGen
 } )
 .AutoIcon()
 .New( SICommon.Types.Entities.Corpse , "LabRemnants" , "无尽研究球-残骸" )
+.AutoIcon()
+.SetSizeScale( 3 , 3 , 0 )
 .Append
 {
 	flags = { SICommon.Flags.Entity.PlaceableNeutral , SICommon.Flags.Entity.NotOnMap } ,
@@ -455,9 +457,10 @@ SIGen
 		}
 	} )
 }
-.AutoIcon()
-.SetSizeScale( 3 , 3 , 0 )
 .New( SICommon.Types.Entities.Lab , "Lab" , "无尽研究球" )
+.AutoIcon()
+.SetSize( 3 , 3 )
+.ReferencePlaceResult( SICommon.Types.Items.Item , SIConstants_Expand.raw.Items.Lab )
 .Append
 {
 	flags = { SICommon.Flags.Entity.PlaceablePlayer , SICommon.Flags.Entity.PlayerCreation } ,
@@ -684,9 +687,6 @@ SIGen
 		fade_out_ticks = 20
 	}
 }
-.AutoIcon()
-.SetSize( 3 , 3 )
-.ReferencePlaceResult( SICommon.Types.Items.Item , SIConstants_Expand.raw.Items.Lab )
 
 -- ----------------------------------------
 -- 无尽科技 - 前置科技

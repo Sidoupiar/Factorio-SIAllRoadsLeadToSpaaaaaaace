@@ -77,6 +77,8 @@ end
 
 SIGen
 .New( SICommon.Types.Entities.Corpse , "EXPChestRemnants" , "经验箱子-残骸" )
+.AutoIcon()
+.SetSizeScale( 1 , 1 , 0 )
 .Append
 {
 	flags = { SICommon.Flags.Entity.PlaceableNeutral , SICommon.Flags.Entity.Building8Way , SICommon.Flags.Entity.NotOnMap } ,
@@ -99,9 +101,9 @@ SIGen
 		shift = SIUtils.by_pixel( 12 , 0 )
 	}
 }
-.AutoIcon()
-.SetSizeScale( 1 , 1 , 0 )
 .New( SICommon.Types.Entities.Container , "EXPChest" , "经验箱子" )
+.AutoIcon()
+.SetSize( 1 , 1 )
 .Append
 {
 	flags = { SICommon.Flags.Entity.PlaceableEnemy , SICommon.Flags.Entity.NotOnMap } ,
@@ -209,8 +211,6 @@ SIGen
 		}
 	}
 }
-.AutoIcon()
-.SetSize( 1 , 1 )
 
 -- ------------------------------------------------------------------------------------------------
 -- -------- 创建图标物品 --------------------------------------------------------------------------
