@@ -419,13 +419,13 @@ function E( message )
 		else
 			output = output .. ":[filecode]"
 		end
-		output = output .. " :: "
+		output = output .. " ::\n"
 	end
 	if SIUtils.Settings.CodeError() then
-		SIMmess( "_____ :: " .. output .. message )
+		SIMmess( "\n_____ ::\n" .. output .. message )
 		return
 	end
-	log( "[获取错误] : _____ :: " .. output .. message )
+	log( "[获取错误] :\n_____ ::\n" .. output .. message )
 end
 
 function CodeE( Structure , message )
