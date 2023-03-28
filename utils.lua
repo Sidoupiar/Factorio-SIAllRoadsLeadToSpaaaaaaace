@@ -5,10 +5,7 @@
 
 local CoreName = "SIAllRoadsLeadToSpaaaaaaace"
 local CorePath = "__" .. CoreName .. "__"
-local ClassList =
-{
-	-- "SIClass_PowerNumber"
-}
+local ClassList = {}
 if defines and defines.events then
 	SIEvents = {}
 	for k , v in pairs( defines.events ) do
@@ -28,6 +25,7 @@ require( CorePath .. "/define/SITools" )
 require( CorePath .. "/define/SICommon" )
 
 SIUtils.CollisionMask = require( "__core__/lualib/collision-mask-util" )
+SIUtils.Noise = require( "__core__/lualib/noise" )
 SIUtils.Settings =
 {
 	ShowPatreon = function()

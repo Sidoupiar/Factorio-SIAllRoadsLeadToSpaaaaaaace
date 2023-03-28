@@ -289,14 +289,14 @@ local PackageConfig =
 					[SICommon.Types.StackableItems.Item] =
 					{
 						-- 资源
-						["wood"]                             = 6000 , -- 木头
-						["iron-ore"]                         = 6000 , -- 铁矿
-						["copper-ore"]                       = 6000 , -- 铜矿
-						["uranium-ore"]                      = 6000 , -- 铀矿
-						["stone"]                            = 6000 , -- 石矿
-						["coal"]                             = 6000 , -- 煤矿
-						["uranium-235"]                      = 6000 , -- U235
-						["uranium-238"]                      = 6000 , -- U238
+						["wood"]                             = 5000 , -- 木头
+						["iron-ore"]                         = 5000 , -- 铁矿
+						["copper-ore"]                       = 5000 , -- 铜矿
+						["uranium-ore"]                      = 5000 , -- 铀矿
+						["stone"]                            = 5000 , -- 石矿
+						["coal"]                             = 5000 , -- 煤矿
+						["uranium-235"]                      = 5000 , -- U235
+						["uranium-238"]                      = 5000 , -- U238
 						-- 冶炼物
 						["iron-plate"]                       = 1000 , -- 铁板
 						["steel-plate"]                      = 1000 , -- 钢板

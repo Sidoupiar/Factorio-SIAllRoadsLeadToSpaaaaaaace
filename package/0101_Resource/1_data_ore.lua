@@ -86,7 +86,7 @@ for oreID , oreAlias in pairs( oreList ) do
 	}
 	.New( SICommon.Types.Items.Capsule , oreID , oreAlias ,
 	{
-		stack_size = 6000 ,
+		stack_size = 5000 ,
 		default_request_amount = 100 ,
 		capsule_action =
 		{
@@ -163,14 +163,18 @@ SIGen
     tree_removal_max_distance = 1024 ,
 	autoplace =
 	{
-
+		
 	} ,
 	stage_counts = { 100000 , 30000 , 10000 , 3000 , 1000 , 300 , 100 , 30 } ,
 	stages =
 	{
 		sheet =
 		{
-
+			filename = SIGen.MakeSelfPicturePath( "矿山岩" ) ,
+			priority = "extra-high" ,
+			size = 64 ,
+			frame_count = 8 ,
+			variation_count = 8
 		}
 	} ,
 	mining_sound =
