@@ -3,6 +3,7 @@ SIAutoPlace = {}
 
 
 local noise = SIUtils.Noise
+local expression_to_ascii_math = SIUtils.NoiseMath
 local tne = noise.to_noise_expression
 local litexp = noise.literal_expression
 
@@ -58,6 +59,10 @@ end
 
 local pointillist_mode = false
 local patch_blobbiness_enabled = true
+
+local function dump_expression( name , expr )
+	log( name .. ":\n" .. tostring( expression_to_ascii_math( expr ) ) )
+end
 
 local onethird = tne( 1 ) / 3 -- Looks nicer in output than 0.333333
 
