@@ -649,6 +649,7 @@ function SIInit.AutoLoadState( StateCode )
 		SINeed( CorePath .. "/define/data/SIGen" , true )
 		SINeed( CorePath .. "/define/data/SIGraphics" , true )
 		SINeed( CorePath .. "/define/data/SIStyle" , true )
+		SINeed( CorePath .. "/define/data/SIAutoPlace" , true )
 		if not circuit_connector_definitions then
 			require( "circuit-connector-sprites" )
 		end

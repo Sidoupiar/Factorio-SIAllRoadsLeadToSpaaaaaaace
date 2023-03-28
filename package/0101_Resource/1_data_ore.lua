@@ -139,9 +139,6 @@ for oreID , oreAlias in pairs( oreList ) do
 	} )
 end
 
-for oreID , oreAlias in pairs( oreList ) do
-end
-
 SIGen
 .New( SICommon.Types.Entities.Resource , "OreBase" , "矿山岩" )
 .AutoIcon()
@@ -161,9 +158,9 @@ SIGen
 	mining_visualisation_tint = { r = 0.98 , g = 0.88 , b = 0.65 } ,
 	tree_removal_probability = 0.6 ,
     tree_removal_max_distance = 1024 ,
-	autoplace =
+	autoplace = SIAutoPlace.Create
 	{
-		
+
 	} ,
 	stage_counts = { 100000 , 30000 , 10000 , 3000 , 1000 , 300 , 100 , 30 } ,
 	stages =
