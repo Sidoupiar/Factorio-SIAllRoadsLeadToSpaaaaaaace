@@ -401,21 +401,21 @@ end
 function E( message )
 	local output = ""
 	for i = 5 , 2 , -1 do
-		local a = debug.getinfo( i , "S" )
-		local b = debug.getinfo( i , "l" )
-		local c = debug.getinfo( i , "n" )
-		if a and a.source then
-			output = output .. a.source:sub( 2 , -1 )
+		local S = debug.getinfo( i , "S" )
+		local l = debug.getinfo( i , "l" )
+		local n = debug.getinfo( i , "n" )
+		if S and S.source then
+			output = output .. S.source:sub( 2 , -1 )
 		else
 			output = output .. "[unknown]"
 		end
-		if b and b.currentline then
-			output = output .. ":" .. b.currentline
+		if l and l.currentline then
+			output = output .. ":" .. l.currentline
 		else
 			output = output .. ":-1"
 		end
-		if c and c.name then
-			output = output .. ":" .. c.name .. "()"
+		if n and n.name then
+			output = output .. ":" .. n.name .. "()"
 		else
 			output = output .. ":[filecode]"
 		end
@@ -555,9 +555,8 @@ local SINeedListData = {}
 function SINeed( name , notself )
 	local source = debug.getinfo( 2 , "S" ).source
 	if notself then
-		local info
 		for i = 3 , 10 , 1 do
-			info = debug.getinfo( i , "S" )
+			local info = debug.getinfo( i , "S" )
 			if info then
 				source = info.source
 				if not source:find( CorePath ) then
@@ -576,7 +575,7 @@ function SINeed( name , notself )
 		path = isBase and "" or source:match( "^.*/" ) or ""
 		SINeedListData[source] = path
 	end
-	return require( path..name )
+	return require( path .. name )
 end
 
 function SINeedList( basePath , ... )
