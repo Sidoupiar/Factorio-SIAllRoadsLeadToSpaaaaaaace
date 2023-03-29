@@ -22,6 +22,11 @@ local constantsData =
 			}
 		}
 	} ,
+	AfterLoad = function( constantsData )
+		if not SIConfigs.SIRPGSystem.Enable then
+			constantsData.FileList = nil
+		end
+	end ,
 	ExpTrigger =
 	{
 		Attack_1 = "SIRPGSystem-EXP-Attack-1" ,

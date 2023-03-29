@@ -1028,12 +1028,12 @@ function SIInit.AutoLoad( ModName , CustomPackageConfig , ConstantsDataPrefix , 
 						constantsData.Autoload = nil
 					end
 				end
+				-- 注册功能包配置
+				SIConfigs[constantsData.CodeName] = packageConfig.Configs or {}
 				-- 加载完毕后回调
 				if constantsData.AfterLoad then
 					constantsData.AfterLoad( constantsData )
 				end
-				-- 注册功能包配置
-				SIConfigs[constantsData.CodeName] = packageConfig.Configs or {}
 			end
 		end
 		for packageIndex , packageConfig in pairs( CustomPackageConfig ) do

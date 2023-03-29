@@ -68,7 +68,7 @@ local onethird = tne( 1 ) / 3 -- Looks nicer in output than 0.333333
 
 --- Creates and returns an AutoplaceSpecification that will generate spot-based ore patches.
 -- Required parameters:
--- - name - name for the type, used as the default autoplace control name and patch set name
+-- - Name - name for the type, used as the default autoplace control name and patch set name
 --   (each of which can be overridden separately)
 -- - BaseDensity - amount of stuff, on average, to be placed per tile
 -- Optional parameters:
@@ -80,7 +80,7 @@ local onethird = tne( 1 ) / 3 -- Looks nicer in output than 0.333333
 -- - seed1 - random seed to use when generating patch positions; default: 100
 -- More obscure parameters can be read about in the inline comments.
 function SIAutoPlace.Create( parameters )
-	local name = parameters.name
+	local name = parameters.Name
 	local order = parameters.order or "d"
 
 	local patch_set_name = parameters.patch_set_name or name

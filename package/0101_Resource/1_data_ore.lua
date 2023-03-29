@@ -160,7 +160,7 @@ SIGen
     tree_removal_max_distance = 1024 ,
 	autoplace = SIAutoPlace.Create
 	{
-		Name = SIConstants_Resource.raw.Entities.OreBase ,
+		Name = "" ,
 		BaseDensity = 4 ,
 		RegularMultiplier = 1.0 ,
 		StartingMultiplier = 1.1 ,
@@ -265,3 +265,12 @@ SIGen
 		}
 	}
 }
+
+TableE( SIAutoPlace.Create
+{
+	Name = SIConstants_Resource.raw.Entities.OreBase ,
+	BaseDensity = 4 ,
+	RegularMultiplier = 1.0 ,
+	StartingMultiplier = 1.1 ,
+	HasStarting = false
+} )
