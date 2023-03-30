@@ -380,7 +380,7 @@ SIBuildLimit =
 		if type == SICommon.Types.Entities.Beacon then
 			for index , machine in pairs( entity.get_beacon_effect_receivers() ) do
 				SIBuildLimit.EffectMachine( globalSettings , machine , nil )
-				if entity.active then
+				if machine.active then
 					SIBuildLimit.EffectModule( globalSettings , machine )
 				end
 			end
@@ -397,7 +397,7 @@ SIBuildLimit =
 		if entity.type == SICommon.Types.Entities.Beacon then
 			for index , machine in pairs( entity.get_beacon_effect_receivers() ) do
 				SIBuildLimit.EffectMachine( globalSettings , machine , entity )
-				if entity.active then
+				if machine.active then
 					SIBuildLimit.EffectModule( globalSettings , machine )
 				end
 			end
