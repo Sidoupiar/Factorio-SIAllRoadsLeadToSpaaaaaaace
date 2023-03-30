@@ -29,22 +29,9 @@ SIBuildLimit =
 	EffectMachine = function( globalSettings , machine , removedBeacon )
 		local name = machine.name
 		local removedBeaconNumber = removedBeacon and removedBeacon.unit_number or nil
-		for index , beacon in pairs( machine.get_beacons() or {} ) do
-			if beacon.unit_number ~= removedBeaconNumber then
-				local limitDataIDList = globalSettings.Beacons[beacon.name]
-				if limitDataIDList then
-					for limitDataIDIndex , limitDataID in pairs( limitDataIDList ) do
-						local limitData = globalSettings.LimitData[limitDataID]
-						if not limitData.WhiteList[name] then
-							machine.active = false
-							return
-						end
-					end
-				end
-			end
-		end
+		local beaconList = machine.get_beacons() or {}
 		local limitDataIDList = globalSettings.Machines[name]
-		if limitDataIDList then
+		if #beaconList > 0 or limitDataIDList then
 			-- 统计设备插件塔情况
 			local beaconCount = machine.beacons_count
 			if removedBeacon then
@@ -57,36 +44,72 @@ SIBuildLimit =
 					beaconCountList[beaconName] = ( beaconCountList[beaconName] or 0 ) + 1
 				end
 			end
-			-- 遍历建造限制数据包
-			for limitDataIDIndex , limitDataID in pairs( limitDataIDList ) do
-				local limitData = globalSettings.LimitData[limitDataID]
-				if beaconCount < limitData.MinBeaconCount then
-					machine.active = false
-					return
-				end
-				if beaconCount > limitData.MaxBeaconCount then
-					machine.active = false
-					return
-				end
-				if limitData.RequireList then
-					for beaconName , requireCount in pairs( limitData.RequireList ) do
-						local count = beaconCountList[beaconName] or 0
-						if count < requireCount then
-							machine.active = false
-							return
+			-- 遍历建造限制数据包 - 插件塔
+			if #beaconList > 0 then
+				for index , beacon in pairs( beaconList ) do
+					if beacon.unit_number ~= removedBeaconNumber then
+						local beaconName = beacon.name
+						local limitDataIDList = globalSettings.Beacons[beaconName]
+						if limitDataIDList then
+							for limitDataIDIndex , limitDataID in pairs( limitDataIDList ) do
+								local limitData = globalSettings.LimitData[limitDataID]
+								if beaconCount < limitData.MinBeaconCount then
+									machine.active = false
+									return
+								end
+								if beaconCount > limitData.MaxBeaconCount then
+									machine.active = false
+									return
+								end
+								local whiteList = limitData.WhiteList
+								if whiteList then
+									if not whiteList[name] then
+										machine.active = false
+										return
+									end
+									local count = beaconCountList[beaconName] or 0
+									if count > whiteList[name] then
+										machine.active = false
+										return
+									end
+								end
+							end
 						end
 					end
 				end
-				local whiteList = limitData.WhiteList
-				if whiteList then
-					for beaconName , count in pairs( beaconCountList ) do
-						if not whiteList[beaconName] then
-							machine.active = false
-							return
+			end
+			-- 遍历建造限制数据包 - 设备
+			if limitDataIDList then
+				for limitDataIDIndex , limitDataID in pairs( limitDataIDList ) do
+					local limitData = globalSettings.LimitData[limitDataID]
+					if beaconCount < limitData.MinBeaconCount then
+						machine.active = false
+						return
+					end
+					if beaconCount > limitData.MaxBeaconCount then
+						machine.active = false
+						return
+					end
+					if limitData.RequireList then
+						for beaconName , requireCount in pairs( limitData.RequireList ) do
+							local count = beaconCountList[beaconName] or 0
+							if count < requireCount then
+								machine.active = false
+								return
+							end
 						end
-						if count > whiteList[beaconName] then
-							machine.active = false
-							return
+					end
+					local whiteList = limitData.WhiteList
+					if whiteList then
+						for beaconName , count in pairs( beaconCountList ) do
+							if not whiteList[beaconName] then
+								machine.active = false
+								return
+							end
+							if count > whiteList[beaconName] then
+								machine.active = false
+								return
+							end
 						end
 					end
 				end
@@ -588,7 +611,7 @@ SIBuildLimit =
 -- Name           = { "解锁数据包的名称 , 本地化字符串" } ,
 -- Description    = { "解锁数据包的名称 , 本地化字符串" } ,
 -- Machine        = "设备原型的 name 值" ,     -- 要求填写一个可以支持插件或插件塔的设备 (机器) , 不符合下列条件时 , 它会被代码禁用 , 一个设备可以拥有多个限制 , 限制之间结果合并方式为并集
--- Beacon         = "插件塔原型的 name 值" ,   -- 要求填写一个插件塔 , 此类型下只有 [ 插件塔条件列表下的白名单 ] 和 [ 插件条件列表的各项生效 ] , 且白名单其中的数量设置会被忽视 , 不在白名单内的设备均会被代码禁用
+-- Beacon         = "插件塔原型的 name 值" ,   -- 要求填写一个插件塔 , 此类型下各个 "插件塔原型的 name 值" 改为 "设备原型的 name 值" , RequireList 失效 , 不在白名单内的设备均会被代码禁用 , 禁用对象仍为设备而非插件塔
 --
 -- -- 插件塔条件列表
 -- MinBeaconCount = 最小插件塔数量 ,    -- 默认 -1 , 也就是没有最小值
@@ -598,7 +621,7 @@ SIBuildLimit =
 --     ["插件塔原型的 name 值"] = 必要数量 ,
 --     ...
 -- } ,
--- WhiteList =    -- 白名单模式 , 设备可以且只可以被这些插件塔影响 , 且最多不超过这么多插件塔 , 如果是用于插件塔 , 最大数量请填写 1
+-- WhiteList =    -- 白名单模式 , 设备可以且只可以被这些插件塔影响 , 且最多不超过这么多插件塔
 -- {
 --     ["插件塔原型的 name 值"] = 最大数量 ,
 --     ...

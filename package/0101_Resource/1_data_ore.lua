@@ -35,7 +35,7 @@ for oreID , oreAlias in pairs( oreList ) do
 			layers =
 			{
 				{
-					filename = SIGen.MakeSelfPicturePath( oreAlias ) ,
+					filename = SIGen.MakeSelfPicturePath( "扔出去的" .. oreAlias ) ,
 					priority = "high" ,
 					scale = 0.5 ,
 					draw_as_glow = true ,
