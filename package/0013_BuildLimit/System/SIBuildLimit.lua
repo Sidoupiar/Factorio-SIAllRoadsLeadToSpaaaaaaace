@@ -30,8 +30,8 @@ SIBuildLimit =
 		local name = machine.name
 		local removedBeaconNumber = removedBeacon and removedBeacon.unit_number or nil
 		local beaconList = machine.get_beacons() or {}
-		local limitDataIDList = globalSettings.Machines[name]
-		if #beaconList > 0 or limitDataIDList then
+		local entityLimitDataIDList = globalSettings.Machines[name]
+		if #beaconList > 0 or entityLimitDataIDList then
 			-- 统计设备插件塔情况
 			local beaconCount = machine.beacons_count
 			if removedBeacon then
@@ -49,9 +49,9 @@ SIBuildLimit =
 				for index , beacon in pairs( beaconList ) do
 					if beacon.unit_number ~= removedBeaconNumber then
 						local beaconName = beacon.name
-						local limitDataIDList = globalSettings.Beacons[beaconName]
-						if limitDataIDList then
-							for limitDataIDIndex , limitDataID in pairs( limitDataIDList ) do
+						local beaconLimitDataIDList = globalSettings.Beacons[beaconName]
+						if beaconLimitDataIDList then
+							for limitDataIDIndex , limitDataID in pairs( beaconLimitDataIDList ) do
 								local limitData = globalSettings.LimitData[limitDataID]
 								if beaconCount < limitData.MinBeaconCount then
 									machine.active = false
@@ -79,8 +79,8 @@ SIBuildLimit =
 				end
 			end
 			-- 遍历建造限制数据包 - 设备
-			if limitDataIDList then
-				for limitDataIDIndex , limitDataID in pairs( limitDataIDList ) do
+			if entityLimitDataIDList then
+				for limitDataIDIndex , limitDataID in pairs( entityLimitDataIDList ) do
 					local limitData = globalSettings.LimitData[limitDataID]
 					if beaconCount < limitData.MinBeaconCount then
 						machine.active = false
@@ -351,7 +351,6 @@ SIBuildLimit =
 					end
 				end
 			end
-			entity.active = true
 		end
 	end ,
 	-- ------------------------------------------------------------------------------------------------
@@ -367,10 +366,13 @@ SIBuildLimit =
 			for index , machine in pairs( entity.get_beacon_effect_receivers() ) do
 				SIBuildLimit.EffectMachine( globalSettings , machine , nil )
 			end
+			SIBuildLimit.EffectModule( globalSettings , entity )
 		else
 			SIBuildLimit.EffectMachine( globalSettings , entity , nil )
+			if entity.active then
+				SIBuildLimit.EffectModule( globalSettings , entity )
+			end
 		end
-		SIBuildLimit.EffectModule( globalSettings , entity )
 	end ,
 	DestroyEntity = function( entity )
 		local type = entity.type
@@ -385,7 +387,17 @@ SIBuildLimit =
 		end
 	end ,
 	CheckModule = function( entity )
+		local type = entity.type
+		if type == SICommon.Types.Entities.Smoke or type == SICommon.Types.Entities.Corpse then
+			return
+		end
 		local globalSettings = SIGlobal.GetGlobalSettings( SIBuildLimit.Settings.Name )
+		if type ~= SICommon.Types.Entities.Beacon then
+			SIBuildLimit.EffectMachine( globalSettings , entity , nil )
+			if not entity.active then
+				return
+			end
+		end
 		SIBuildLimit.EffectModule( globalSettings , entity )
 	end ,
 	PlayerOpenEntity = function( playerIndex , entity )
@@ -395,7 +407,17 @@ SIBuildLimit =
 	PlayerCloseEntity = function( playerIndex , entity )
 		local settings = SIGlobal.GetPlayerSettings( SIBuildLimit.Settings.Name , playerIndex )
 		settings.CurrentEntity = nil
+		local type = entity.type
+		if type == SICommon.Types.Entities.Smoke or type == SICommon.Types.Entities.Corpse then
+			return
+		end
 		local globalSettings = SIGlobal.GetGlobalSettings( SIBuildLimit.Settings.Name )
+		if type ~= SICommon.Types.Entities.Beacon then
+			SIBuildLimit.EffectMachine( globalSettings , entity , nil )
+			if not entity.active then
+				return
+			end
+		end
 		SIBuildLimit.EffectModule( globalSettings , entity )
 	end ,
 	-- ------------------------------------------------------------------------------------------------
