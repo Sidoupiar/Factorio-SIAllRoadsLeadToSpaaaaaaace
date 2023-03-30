@@ -18,6 +18,23 @@ SIBuildLimit =
 			CurrentEntity = nil
 		}
 	} ,
+	ModuleMachine =
+	{
+		[SICommon.Types.Entities.Mining] = true ,
+		[SICommon.Types.Entities.Furnace] = true ,
+		[SICommon.Types.Entities.Machine] = true ,
+		[SICommon.Types.Entities.Lab] = true ,
+		[SICommon.Types.Entities.RocketSilo] = true
+	} ,
+	ModuleEntity =
+	{
+		[SICommon.Types.Entities.Mining] = true ,
+		[SICommon.Types.Entities.Furnace] = true ,
+		[SICommon.Types.Entities.Machine] = true ,
+		[SICommon.Types.Entities.Lab] = true ,
+		[SICommon.Types.Entities.RocketSilo] = true ,
+		[SICommon.Types.Entities.Beacon] = true
+	} ,
 	-- ------------------------------------------------------------------------------------------------
 	-- ----------- 初始化 -----------------------------------------------------------------------------
 	-- ------------------------------------------------------------------------------------------------
@@ -236,7 +253,7 @@ SIBuildLimit =
 					end
 				end
 			end
-		else
+		elseif SIBuildLimit.ModuleEntity[type] then
 			local limitDataIDList = globalSettings.Modules[entity.name]
 			if limitDataIDList then
 				-- 统计设备插件情况
@@ -351,23 +368,24 @@ SIBuildLimit =
 					end
 				end
 			end
+			entity.active = true
 		end
 	end ,
 	-- ------------------------------------------------------------------------------------------------
 	-- ---------- 事件函数 ----------------------------------------------------------------------------
 	-- ------------------------------------------------------------------------------------------------
 	BuildEntity = function( entity )
-		local type = entity.type
-		if type == SICommon.Types.Entities.Smoke or type == SICommon.Types.Entities.Corpse then
-			return
-		end
 		local globalSettings = SIGlobal.GetGlobalSettings( SIBuildLimit.Settings.Name )
+		local type = entity.type
 		if type == SICommon.Types.Entities.Beacon then
 			for index , machine in pairs( entity.get_beacon_effect_receivers() ) do
 				SIBuildLimit.EffectMachine( globalSettings , machine , nil )
+				if entity.active then
+					SIBuildLimit.EffectModule( globalSettings , machine )
+				end
 			end
 			SIBuildLimit.EffectModule( globalSettings , entity )
-		else
+		elseif SIBuildLimit.ModuleMachine[type] then
 			SIBuildLimit.EffectMachine( globalSettings , entity , nil )
 			if entity.active then
 				SIBuildLimit.EffectModule( globalSettings , entity )
@@ -375,50 +393,37 @@ SIBuildLimit =
 		end
 	end ,
 	DestroyEntity = function( entity )
-		local type = entity.type
-		if type == SICommon.Types.Entities.GhostEntity or type == SICommon.Types.Entities.Smoke or type == SICommon.Types.Entities.Corpse then
-			return
-		end
 		local globalSettings = SIGlobal.GetGlobalSettings( SIBuildLimit.Settings.Name )
-		if type == SICommon.Types.Entities.Beacon then
+		if entity.type == SICommon.Types.Entities.Beacon then
 			for index , machine in pairs( entity.get_beacon_effect_receivers() ) do
 				SIBuildLimit.EffectMachine( globalSettings , machine , entity )
+				if entity.active then
+					SIBuildLimit.EffectModule( globalSettings , machine )
+				end
 			end
 		end
 	end ,
 	CheckModule = function( entity )
-		local type = entity.type
-		if type == SICommon.Types.Entities.Smoke or type == SICommon.Types.Entities.Corpse then
-			return
-		end
 		local globalSettings = SIGlobal.GetGlobalSettings( SIBuildLimit.Settings.Name )
-		if type ~= SICommon.Types.Entities.Beacon then
-			SIBuildLimit.EffectMachine( globalSettings , entity , nil )
-			if not entity.active then
-				return
-			end
-		end
 		SIBuildLimit.EffectModule( globalSettings , entity )
+		if entity.active and SIBuildLimit.ModuleMachine[entity.type] then
+			SIBuildLimit.EffectMachine( globalSettings , entity , nil )
+		end
 	end ,
 	PlayerOpenEntity = function( playerIndex , entity )
-		local settings = SIGlobal.GetPlayerSettings( SIBuildLimit.Settings.Name , playerIndex )
-		settings.CurrentEntity = entity
+		if SIBuildLimit.ModuleEntity[entity.type] then
+			local settings = SIGlobal.GetPlayerSettings( SIBuildLimit.Settings.Name , playerIndex )
+			settings.CurrentEntity = entity
+		end
 	end ,
 	PlayerCloseEntity = function( playerIndex , entity )
 		local settings = SIGlobal.GetPlayerSettings( SIBuildLimit.Settings.Name , playerIndex )
 		settings.CurrentEntity = nil
-		local type = entity.type
-		if type == SICommon.Types.Entities.Smoke or type == SICommon.Types.Entities.Corpse then
-			return
-		end
 		local globalSettings = SIGlobal.GetGlobalSettings( SIBuildLimit.Settings.Name )
-		if type ~= SICommon.Types.Entities.Beacon then
-			SIBuildLimit.EffectMachine( globalSettings , entity , nil )
-			if not entity.active then
-				return
-			end
-		end
 		SIBuildLimit.EffectModule( globalSettings , entity )
+		if entity.active and SIBuildLimit.ModuleMachine[entity.type] then
+			SIBuildLimit.EffectMachine( globalSettings , entity , nil )
+		end
 	end ,
 	-- ------------------------------------------------------------------------------------------------
 	-- ------ 接口函数 -- 注册 ------------------------------------------------------------------------
