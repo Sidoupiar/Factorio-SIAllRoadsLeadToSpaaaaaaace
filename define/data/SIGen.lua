@@ -1075,12 +1075,14 @@ function SIGen.AutoIconItem( iconItemDataList )
 			rocket_launch_products =
 			{
 				{
+					type = SICommon.Types.Items.Item ,
 					name = "small-lamp" ,
 					amount_min = 0 ,
 					amount_max = 3 ,
 					catalyst_amount = 3
 				} ,
 				{
+					type = SICommon.Types.Items.Item ,
 					name = "coin" ,
 					amount_min = 0 ,
 					amount_max = 210 ,
@@ -1207,7 +1209,7 @@ function SIGen.AutoIconItem( iconItemDataList )
 			take_result = itemPrototypeData.name ,
 			categories =
 			{
-				"armor"
+				SIConstants_Core.raw.Categories.Equipment.Special
 			} ,
 			shape =
 			{

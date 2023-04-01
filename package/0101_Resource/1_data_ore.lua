@@ -86,7 +86,7 @@ for oreID , oreAlias in pairs( oreList ) do
 	}
 	.New( SICommon.Types.Items.Capsule , oreID , oreAlias ,
 	{
-		stack_size = 5000 ,
+		stack_size = 10000 ,
 		default_request_amount = 100 ,
 		capsule_action =
 		{

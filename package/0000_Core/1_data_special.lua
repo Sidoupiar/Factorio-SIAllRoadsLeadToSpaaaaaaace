@@ -41,30 +41,35 @@ SIGen
 	rocket_launch_products =
 	{
 		{
+			type = SICommon.Types.Items.Item ,
 			name = "cluster-grenade" ,
 			amount_min = 0 ,
 			amount_max = 48 ,
 			catalyst_amount = 48
 		} ,
 		{
+			type = SICommon.Types.Items.Item ,
 			name = "destroyer-capsule" ,
 			amount_min = 0 ,
 			amount_max = 48 ,
 			catalyst_amount = 48
 		} ,
 		{
+			type = SICommon.Types.Items.Item ,
 			name = "defender-capsule" ,
 			amount_min = 0 ,
 			amount_max = 48 ,
 			catalyst_amount = 48
 		} ,
 		{
+			type = SICommon.Types.Items.Item ,
 			name = "poison-capsule" ,
 			amount_min = 0 ,
 			amount_max = 48 ,
 			catalyst_amount = 48
 		} ,
 		{
+			type = SICommon.Types.Items.Item ,
 			name = "slowdown-capsule" ,
 			amount_min = 0 ,
 			amount_max = 48 ,
@@ -78,7 +83,7 @@ SIGen
 	take_result = SIConstants_Core.raw.Items.DeleteMap ,
 	categories =
 	{
-		"armor"
+		SIConstants_Core.raw.Categories.Equipment.Special
 	} ,
 	shape =
 	{
@@ -132,6 +137,7 @@ SIGen
 	rocket_launch_products =
 	{
 		{
+			type = SICommon.Types.Items.Item ,
 			name = "iron-ore" ,
 			probability = 0.5 ,
 			amount_min = 0 ,
@@ -139,6 +145,7 @@ SIGen
 			catalyst_amount = 500
 		} ,
 		{
+			type = SICommon.Types.Items.Item ,
 			name = "copper-ore" ,
 			probability = 0.5 ,
 			amount_min = 0 ,
@@ -146,6 +153,7 @@ SIGen
 			catalyst_amount = 500
 		} ,
 		{
+			type = SICommon.Types.Items.Item ,
 			name = "uranium-ore" ,
 			probability = 0.5 ,
 			amount_min = 0 ,
@@ -153,6 +161,7 @@ SIGen
 			catalyst_amount = 500
 		} ,
 		{
+			type = SICommon.Types.Items.Item ,
 			name = "stone" ,
 			probability = 0.5 ,
 			amount_min = 0 ,
@@ -160,6 +169,7 @@ SIGen
 			catalyst_amount = 500
 		} ,
 		{
+			type = SICommon.Types.Items.Item ,
 			name = "coal" ,
 			probability = 0.5 ,
 			amount_min = 0 ,
@@ -174,7 +184,7 @@ SIGen
 	take_result = SIConstants_Core.raw.Items.OreMap ,
 	categories =
 	{
-		"armor"
+		SIConstants_Core.raw.Categories.Equipment.Special
 	} ,
 	shape =
 	{
@@ -228,6 +238,7 @@ SIGen
 	rocket_launch_products =
 	{
 		{
+			type = SICommon.Types.Items.Item ,
 			name = "burner-inserter" ,
 			probability = 0.35 ,
 			amount_min = 0 ,
@@ -235,6 +246,7 @@ SIGen
 			catalyst_amount = 35
 		} ,
 		{
+			type = SICommon.Types.Items.Item ,
 			name = "inserter" ,
 			probability = 0.35 ,
 			amount_min = 0 ,
@@ -242,6 +254,7 @@ SIGen
 			catalyst_amount = 35
 		} ,
 		{
+			type = SICommon.Types.Items.Item ,
 			name = "fast-inserter" ,
 			probability = 0.35 ,
 			amount_min = 0 ,
@@ -249,6 +262,7 @@ SIGen
 			catalyst_amount = 35
 		} ,
 		{
+			type = SICommon.Types.Items.Item ,
 			name = "filter-inserter" ,
 			probability = 0.35 ,
 			amount_min = 0 ,
@@ -256,6 +270,7 @@ SIGen
 			catalyst_amount = 35
 		} ,
 		{
+			type = SICommon.Types.Items.Item ,
 			name = "long-handed-inserter" ,
 			probability = 0.35 ,
 			amount_min = 0 ,
@@ -270,7 +285,7 @@ SIGen
 	take_result = SIConstants_Core.raw.Items.RequestMap ,
 	categories =
 	{
-		"armor"
+		SIConstants_Core.raw.Categories.Equipment.Special
 	} ,
 	shape =
 	{

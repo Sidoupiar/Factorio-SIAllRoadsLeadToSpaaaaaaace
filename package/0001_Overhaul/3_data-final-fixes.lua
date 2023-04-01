@@ -29,6 +29,21 @@ end )
 	end
 end )
 
+-- 给所有模块区域添加支持的模块类型
+-- 此项不可以禁用或删除
+.ForEach( SICommon.Types.EquipmentGrid , function( prototypeName , prototypeData )
+	if prototypeData then
+		local equipmentCategories = prototypeData.equipment_categories
+		if equipmentCategories then
+			if not SITable.Has( equipmentCategories , SIConstants_Core.raw.Categories.Equipment.Special ) then
+				table.insert( equipmentCategories , SIConstants_Core.raw.Categories.Equipment.Special )
+			end
+		else
+			prototypeData.equipment_categories = { SIConstants_Core.raw.Categories.Equipment.Special }
+		end
+	end
+end )
+
 -- 修改树木血量
 if SIConfigs.SIOverhaul.TreeHealth then
 	SIGen.ForEach( SICommon.Types.Entities.Tree , function( prototypeName , prototypeData )
@@ -230,6 +245,9 @@ if SIConfigs.SIOverhaul.ItemStackSizeModify and SIConfigs.SIOverhaul.ItemStackSi
 							if config.IgnoreCannotStack then
 								if itemStackSize == 1 or not prototypeData.flags or not SITable.Has( prototypeData.flags , SICommon.Flags.Item.NotStackable ) then
 									prototypeData.stack_size = itemStackSize
+									if prototypeData.default_request_amount then
+										prototypeData.default_request_amount = math.min( prototypeData.default_request_amount , itemStackSize )
+									end
 								end
 							else
 								if itemStackSize > 1 and prototypeData.flags then
@@ -238,6 +256,9 @@ if SIConfigs.SIOverhaul.ItemStackSizeModify and SIConfigs.SIOverhaul.ItemStackSi
 									end
 								end
 								prototypeData.stack_size = itemStackSize
+								if prototypeData.default_request_amount then
+									prototypeData.default_request_amount = math.min( prototypeData.default_request_amount , itemStackSize )
+								end
 							end
 						end
 					end )
@@ -266,6 +287,9 @@ if SIConfigs.SIOverhaul.ItemStackSizeModify and SIConfigs.SIOverhaul.ItemStackSi
 							if config.IgnoreCannotStack then
 								if itemStackSize == 1 or not prototypeData.flags or not SITable.Has( prototypeData.flags , SICommon.Flags.Item.NotStackable ) then
 									prototypeData.stack_size = itemStackSize
+									if prototypeData.default_request_amount then
+										prototypeData.default_request_amount = math.min( prototypeData.default_request_amount , itemStackSize )
+									end
 								end
 							else
 								if itemStackSize > 1 and prototypeData.flags then
@@ -274,6 +298,9 @@ if SIConfigs.SIOverhaul.ItemStackSizeModify and SIConfigs.SIOverhaul.ItemStackSi
 									end
 								end
 								prototypeData.stack_size = itemStackSize
+								if prototypeData.default_request_amount then
+									prototypeData.default_request_amount = math.min( prototypeData.default_request_amount , itemStackSize )
+								end
 							end
 						end
 					end )
@@ -294,6 +321,9 @@ if SIConfigs.SIOverhaul.ItemStackSizeModify and SIConfigs.SIOverhaul.ItemStackSi
 							if config.IgnoreCannotStack then
 								if itemStackSize == 1 or not prototypeData.flags or not SITable.Has( prototypeData.flags , SICommon.Flags.Item.NotStackable ) then
 									prototypeData.stack_size = itemStackSize
+									if prototypeData.default_request_amount then
+										prototypeData.default_request_amount = math.min( prototypeData.default_request_amount , itemStackSize )
+									end
 								end
 							else
 								if itemStackSize > 1 and prototypeData.flags then
@@ -302,6 +332,9 @@ if SIConfigs.SIOverhaul.ItemStackSizeModify and SIConfigs.SIOverhaul.ItemStackSi
 									end
 								end
 								prototypeData.stack_size = itemStackSize
+								if prototypeData.default_request_amount then
+									prototypeData.default_request_amount = math.min( prototypeData.default_request_amount , itemStackSize )
+								end
 							end
 						elseif config.ErrorWhenItemNotExist then
 							E( "不存在的物品 : " .. itemName )
