@@ -668,7 +668,7 @@ CreateRuinBuildings( SICommon.Types.Entities.LandMine , "RuinLandMine" , "遗迹
 	} ,
 	icon_size = 64 ,
 	icon_mipmaps = 4 ,
-	flags = { SICommon.Flags.Entity.PlaceableEnemy , SICommon.Flags.Entity.PlaceableOffGrid , SICommon.Flags.Entity.NotOnMap , SICommon.Flags.Entity.Hidden } ,
+	flags = { SICommon.Flags.Entity.PlaceableEnemy , SICommon.Flags.Entity.NotOnMap , SICommon.Flags.Entity.Hidden } ,
 	minable =
 	{
 		mining_time = 6000.0 ,
