@@ -1071,7 +1071,7 @@ SIRequestMap =
 				table.insert( fuelFilter ,
 				{
 					filter = "fuel-category" ,
-					["fuel-category"] = "chemical" ,
+					["fuel-category"] = SIConstants_Core.raw.Categories.Fuel.Special ,
 					mode = SICommon.Flags.Condition.OR
 				} )
 				for itemDataIndex , itemData in pairs( itemDataList ) do

@@ -1063,7 +1063,7 @@ function SIGen.AutoIconItem( iconItemDataList )
 		{
 			flags = { SICommon.Flags.Item.Hidden } ,
 			stack_size = 1000 ,
-			fuel_category = "chemical" ,
+			fuel_category = SIConstants_Core.raw.Categories.Fuel.Special ,
 			fuel_value = "1KJ" ,
 			fuel_acceleration_multiplier = 0.3 ,
 			fuel_top_speed_multiplier = 0.3 ,

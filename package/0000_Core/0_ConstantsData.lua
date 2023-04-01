@@ -318,6 +318,10 @@ local constantsData =
 			{
 				Special = "特殊模块"
 			} ,
+			Fuel =
+			{
+				Special = "特殊燃料" ,
+			} ,
 			Module =
 			{
 				FishModule = "双鱼插件"

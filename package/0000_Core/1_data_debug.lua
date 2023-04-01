@@ -14,7 +14,7 @@ SIGen
 	flags = { SICommon.Flags.Item.Hidden } ,
 	stack_size = 1000 ,
 	default_request_amount = 1000 ,
-	fuel_category = "chemical" ,
+	fuel_category = SIConstants_Core.raw.Categories.Fuel.Special ,
 	fuel_value = "1J" ,
 	fuel_acceleration_multiplier = 1.00 ,
 	fuel_top_speed_multiplier = 1.00 ,
@@ -201,7 +201,7 @@ SIGen
 	flags = { SICommon.Flags.Item.Hidden } ,
 	stack_size = 100 ,
 	default_request_amount = 100 ,
-	fuel_category = "chemical" ,
+	fuel_category = SIConstants_Core.raw.Categories.Fuel.Special ,
 	fuel_value = "7.4EJ" ,
 	fuel_acceleration_multiplier = 4.22 ,
 	fuel_top_speed_multiplier = 1.47 ,
@@ -322,7 +322,16 @@ SIGen
 	max_power_output = "3.35PW" ,
 	burner =
 	{
-		type = SICommon.Flags.EnergySourceType.Void
+		type = SICommon.Flags.EnergySourceType.Burner ,
+		emissions_per_minute = 10 ,
+		render_no_power_icon = true ,
+		render_no_network_icon = true ,
+		fuel_inventory_size = 3 ,
+		burnt_inventory_size = 3 ,
+		smoke = nil ,
+		light_flicker = nil ,
+		effectivity = 2.5 ,
+		fuel_categories = { SIConstants_Core.raw.Categories.Fuel.Special }
 	} ,
 	animation =
 	{
@@ -472,7 +481,7 @@ SIGen
 	flags = { SICommon.Flags.Item.Hidden } ,
 	stack_size = 100 ,
 	default_request_amount = 100 ,
-	fuel_category = "chemical" ,
+	fuel_category = SIConstants_Core.raw.Categories.Fuel.Special ,
 	fuel_value = "520KJ" ,
 	fuel_acceleration_multiplier = 4.91 ,
 	fuel_top_speed_multiplier = 1.76 ,
