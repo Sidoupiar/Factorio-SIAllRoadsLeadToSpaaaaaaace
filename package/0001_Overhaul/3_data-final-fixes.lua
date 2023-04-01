@@ -490,6 +490,8 @@ SIGen.Find( SICommon.Types.Style , "default" , function( prototypeName , prototy
 	if prototypeData then
 		SetProperty( prototypeData.tooltip_title_label , "maximal_width" , 406 )
 		SetProperty( prototypeData.tooltip_label , "maximal_width" , 406 )
+		SetProperty( prototypeData.module_inventory_scroll_pane , "maximal_height" , 350 )
+		SetProperty( prototypeData.horizontally_limited_equipment_grid_scroll_pane , "maximal_width" , 408 )
 	end
 end )
 

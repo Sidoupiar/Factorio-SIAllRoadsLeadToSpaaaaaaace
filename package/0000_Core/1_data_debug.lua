@@ -288,7 +288,7 @@ SIGen
 			}
 		}
 	} ,
-	max_health = 8000 ,
+	max_health = 21000 ,
 	corpse = "nuclear-reactor-remnants" ,
 	dying_explosion = "nuke-explosion" ,
 	map_color = { r = 1.00 , g = 0.94 , b = 0.46 } ,
@@ -306,7 +306,7 @@ SIGen
 		offsets = { { 0 , 1 } } ,
 		damage_type_filters = "fire"
 	} ,
-	repair_speed_modifier = 1.0 ,
+	repair_speed_modifier = 12.0 ,
 	energy_source =
 	{
 		type = SICommon.Flags.EnergySourceType.Electric ,
@@ -557,7 +557,7 @@ SIGen
 			}
 		}
 	} ,
-	max_health = 8000 ,
+	max_health = 21000 ,
 	corpse = "beacon-remnants" ,
 	dying_explosion = "nuke-explosion" ,
 	map_color = { r = 1.00 , g = 0.94 , b = 0.46 } ,
@@ -575,7 +575,7 @@ SIGen
 		offsets = { { 0 , 1 } } ,
 		damage_type_filters = "fire"
 	} ,
-	repair_speed_modifier = 1.0 ,
+	repair_speed_modifier = 12.0 ,
 	energy_source =
 	{
 		type = SICommon.Flags.EnergySourceType.Electric ,
