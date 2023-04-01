@@ -19,7 +19,7 @@ SIGen
 	fuel_acceleration_multiplier = 1.00 ,
 	fuel_top_speed_multiplier = 1.00 ,
 	fuel_emissions_multiplier = 520.00 ,
-	fuel_glow_color = { 1 , 0.94 , 0.46 } ,
+	fuel_glow_color = { r = 1.00 , g = 0.94 , b = 0.46 } ,
 	burnt_result = SIConstants_Core.raw.Items.Candy ,
 	place_result = nil ,
 	placed_as_equipment_result = nil ,
@@ -59,6 +59,102 @@ SIGen
 	durability = 1.0 ,
 	durability_description_key = SICommon.Flags.SciencePack.Key ,
 	durability_description_value = SICommon.Flags.SciencePack.Value
+}
+.New( SICommon.Types.Entities.SimpleOwner , "Candy" , "量产之酥皮夹心糖果" )
+.MakeIcon( SICommon.Types.Items.Tool , "量产之酥皮夹心糖果" , 64 , 4 )
+.SetSize( 1 , 1 )
+.ReferencePlaceResult( SICommon.Types.Items.Tool , SIConstants_Core.raw.Items.Candy )
+.Append
+{
+	flags = { SICommon.Flags.Entity.PlaceablePlayer , SICommon.Flags.Entity.PlayerCreation , SICommon.Flags.Entity.HideAltInfo , SICommon.Flags.Entity.Hidden } ,
+	minable =
+	{
+		mining_time = 1.0 ,
+		results =
+		{
+			{
+				type = SICommon.Types.Items.item ,
+				name = SIConstants_Core.raw.Items.Candy ,
+				amount = 1
+			}
+		}
+	} ,
+	max_health = 50 ,
+	corpse = "small-remnants" ,
+	dying_explosion = "wall-explosion" ,
+	map_color = { r = 1.00 , g = 0.94 , b = 0.46 } ,
+	friendly_map_color = { r = 1.00 , g = 0.94 , b = 0.46 } ,
+	enemy_map_color = { r = 1.00 , g = 0.94 , b = 0.46 } ,
+	alert_when_damaged = true ,
+	hide_resistances = true ,
+	return_ingredients_on_change = false ,
+	render_layer = SICommon.Flags.RenderLayer.FloorMechanics ,
+	pictures =
+	{
+		{
+			layers =
+			{
+				{
+					filename = SIGen.MakePicturePath( SICommon.Types.Items.Tool , "量产之酥皮夹心糖果" .. SICommon.ShowNameSuffix.ICON ) ,
+					width = 64 ,
+					height = 64 ,
+					scale = 0.5 ,
+					priority = "medium" ,
+				}
+			}
+		}
+	} ,
+	mined_sound =
+	{
+		{
+			filename = "__core__/sound/deconstruct-small.ogg" ,
+			volume = 1
+		}
+	} ,
+	vehicle_impact_sound =
+	{
+		{
+			filename = "__base__/sound/car-metal-impact.ogg" ,
+			volume = 1
+		}
+	} ,
+	repair_sound =
+	{
+		{
+			filename = "__base__/sound/manual-repair-simple-1.ogg" ,
+			volume = 0.5
+		} ,
+		{
+			filename = "__base__/sound/manual-repair-simple-2.ogg" ,
+			volume = 0.5
+		} ,
+		{
+			filename = "__base__/sound/manual-repair-simple-3.ogg" ,
+			volume = 0.5
+		} ,
+		{
+			filename = "__base__/sound/manual-repair-simple-4.ogg" ,
+			volume = 0.5
+		} ,
+		{
+			filename = "__base__/sound/manual-repair-simple-5.ogg" ,
+			volume = 0.5
+		}
+	} ,
+	open_sound =
+	{
+		{
+			filename = "__base__/sound/machine-open.ogg" ,
+			volume = 0.5
+		}
+	} ,
+	close_sound =
+	{
+		{
+			filename = "__base__/sound/machine-close.ogg" ,
+			volume = 0.5
+		}
+	}
 }
 .New( SICommon.Types.Equipments.Battery , "Candy" , "量产之酥皮夹心糖果" ,
 {
@@ -111,7 +207,7 @@ SIGen
 	fuel_acceleration_multiplier = 4.22 ,
 	fuel_top_speed_multiplier = 1.47 ,
 	fuel_emissions_multiplier = 1.18 ,
-	fuel_glow_color = { 1 , 0.94 , 0.46 } ,
+	fuel_glow_color = { r = 1.00 , g = 0.94 , b = 0.46 } ,
 	burnt_result = "landfill" ,
 	place_result = nil ,
 	placed_as_equipment_result = nil ,
@@ -174,6 +270,14 @@ SIGen
 		}
 	}
 }
+.New( SICommon.Types.Entities.BurnerGenerator , "BrightBar" , "璀璨之闪耀能量罐头" )
+.AutoIcon()
+.SetSize( 5 , 5 )
+.ReferencePlaceResult( SICommon.Types.Items.Item , SIConstants_Core.raw.Items.BrightBar )
+.Append
+{
+
+}
 .New( SICommon.Types.Equipments.GeneratorEquip , "BrightBar" , "璀璨之闪耀能量罐头" ,
 {
 	take_result = SIConstants_Core.raw.Items.BrightBar ,
@@ -203,15 +307,15 @@ SIGen
 	burner = nil ,
 	sprite =
 	{
-		filename = SIGen.MakePicturePath( SICommon.Types.Items.Capsule , "璀璨之闪耀能量罐头" .. SICommon.ShowNameSuffix.ICON ) ,
+		filename = SIGen.MakePicturePath( SICommon.Types.Items.Item , "璀璨之闪耀能量罐头" .. SICommon.ShowNameSuffix.ICON ) ,
 		priority = "medium" ,
 		width = 64 ,
 		height = 64 ,
 		scale = 1.0
 	}
 } )
-.MakeIcon( SICommon.Types.Items.Capsule , "璀璨之闪耀能量罐头" , 64 , 4 )
-.ReferenceEquipmentResult( SICommon.Types.Items.Capsule , SIConstants_Core.raw.Items.BrightBar )
+.MakeIcon( SICommon.Types.Items.Item , "璀璨之闪耀能量罐头" , 64 , 4 )
+.ReferenceEquipmentResult( SICommon.Types.Items.Item , SIConstants_Core.raw.Items.BrightBar )
 -- ----------------------------------------
 -- 奇妙之双鱼螺旋插件
 -- ----------------------------------------
@@ -227,7 +331,7 @@ SIGen
 	fuel_acceleration_multiplier = 4.91 ,
 	fuel_top_speed_multiplier = 1.76 ,
 	fuel_emissions_multiplier = 74.45 ,
-	fuel_glow_color = { 1 , 0.94 , 0.46 } ,
+	fuel_glow_color = { r = 1.00 , g = 0.94 , b = 0.46 } ,
 	burnt_result = "solar-panel" ,
 	place_result = nil ,
 	placed_as_equipment_result = nil ,
@@ -278,6 +382,14 @@ SIGen
 	} ,
 	art_style = "vanilla" ,
 	requires_beacon_alt_mode = false
+}
+.New( SICommon.Types.Entities.Beacon , "FishModule" , "奇妙之双鱼螺旋插件" )
+.AutoIcon()
+.SetSize( 3 , 3 )
+.ReferencePlaceResult( SICommon.Types.Items.Module , SIConstants_Core.raw.Items.FishModule )
+.Append
+{
+
 }
 .New( SICommon.Types.Equipments.Movement , "FishModule" , "奇妙之双鱼螺旋插件" ,
 {
