@@ -473,8 +473,8 @@ SIGen
 				friendly_map_color = fluidColor ,
 				enemy_map_color = fluidColor ,
 				alert_when_damaged = true ,
+				create_ghost_on_death = true ,
 				hide_resistances = true ,
-				return_ingredients_on_change = false ,
 				render_layer = SICommon.Flags.RenderLayer.Object ,
 				alert_icon_shift = { 0 , 0 } ,
 				pictures =
@@ -935,8 +935,8 @@ SIGen
 				friendly_map_color = fluidColor ,
 				enemy_map_color = fluidColor ,
 				alert_when_damaged = true ,
+				create_ghost_on_death = true ,
 				hide_resistances = true ,
-				return_ingredients_on_change = false ,
 				render_layer = SICommon.Flags.RenderLayer.Object ,
 				alert_icon_shift = { 0 , 0 } ,
 				pictures =

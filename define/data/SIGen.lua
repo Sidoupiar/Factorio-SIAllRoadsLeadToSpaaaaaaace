@@ -1126,11 +1126,11 @@ function SIGen.AutoIconItem( iconItemDataList )
 			corpse = "small-remnants" ,
 			dying_explosion = "wall-explosion" ,
 			map_color = { r = 1.0 , g = 1.0 , b = 1.0 } ,
-			friendly_map_color =  { r = 0.2 , g = 0.2 , b = 1.0 } ,
-			enemy_map_color =  { r = 1.0 , g = 0.2 , b = 0.2 } ,
+			friendly_map_color = { r = 0.2 , g = 0.2 , b = 1.0 } ,
+			enemy_map_color = { r = 1.0 , g = 0.2 , b = 0.2 } ,
 			alert_when_damaged = false ,
+			create_ghost_on_death = false ,
 			hide_resistances = true ,
-			return_ingredients_on_change = false ,
 			render_layer = SICommon.Flags.RenderLayer.FloorMechanics ,
 			pictures =
 			{
@@ -1139,10 +1139,10 @@ function SIGen.AutoIconItem( iconItemDataList )
 					{
 						{
 							filename = SIGen.MakePicturePath( SICommon.Types.Items.Item , alias .. SICommon.ShowNameSuffix.ICON ) ,
+							priority = "medium" ,
 							width = 64 ,
 							height = 64 ,
-							scale = 0.5 ,
-							priority = "medium" ,
+							scale = 0.5
 						}
 					}
 				}

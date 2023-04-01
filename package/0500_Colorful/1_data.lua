@@ -59,8 +59,8 @@ for r = 0 , SIConstants_Colorful.ColorMax , SIConstants_Colorful.ColorStep do
 				friendly_map_color = tint ,
 				enemy_map_color = tint ,
 				alert_when_damaged = false ,
+				create_ghost_on_death = true ,
 				hide_resistances = true ,
-				return_ingredients_on_change = false ,
 				render_layer = SICommon.Flags.RenderLayer.FloorMechanics ,
 				pictures =
 				{
