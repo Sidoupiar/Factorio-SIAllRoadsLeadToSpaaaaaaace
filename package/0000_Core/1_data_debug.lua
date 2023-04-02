@@ -1396,7 +1396,7 @@ SIGen
 	default_total_construction_output_signal = { type = "virtual" , name = "signal-T" } ,
 	draw_circuit_wires = true ,
 	draw_copper_wires = true ,
-	draw_construction_radius_visualization = false ,
+	draw_construction_radius_visualization = true ,
 	draw_logistic_radius_visualization = true ,
 	open_door_trigger_effect =
 	{
