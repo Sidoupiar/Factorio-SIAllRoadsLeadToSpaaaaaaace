@@ -426,7 +426,7 @@ local PackageConfig =
 						["energy-shield-mk2-equipment"]      = 1     , -- 能量护盾模块 mk2
 						-- 其他
 						["construction-robot"]               = 100   , -- 建设机器人
-						["logistic-robot"]                   = 100    -- 物流机器人
+						["logistic-robot"]                   = 100     -- 物流机器人
 					} ,
 					[SICommon.Types.StackableItems.ItemEntity] =
 					{
@@ -434,7 +434,7 @@ local PackageConfig =
 						["locomotive"]                       = 1     , -- 内燃机车
 						["cargo-wagon"]                      = 1     , -- 货运车厢
 						["fluid-wagon"]                      = 1     , -- 液罐车厢
-						["artillery-wagon"]                  = 1      -- 重炮车厢
+						["artillery-wagon"]                  = 1       -- 重炮车厢
 					} ,
 					[SICommon.Types.StackableItems.Tool] =
 					{
@@ -445,17 +445,17 @@ local PackageConfig =
 						["chemical-science-pack"]            = 1000  , -- 蓝瓶
 						["production-science-pack"]          = 1000  , -- 紫瓶
 						["utility-science-pack"]             = 1000  , -- 金瓶
-						["space-science-pack"]               = 1000   -- 白瓶
+						["space-science-pack"]               = 1000    -- 白瓶
 					} ,
 					[SICommon.Types.StackableItems.ToolRepair] =
 					{
 						-- 军火
-						["repair-pack"]                      = 100    -- 维修包
+						["repair-pack"]                      = 100     -- 维修包
 					} ,
 					[SICommon.Types.StackableItems.RailPlanner] =
 					{
 						-- 机器
-						["rail"]                             = 500    -- 铁轨布设器
+						["rail"]                             = 500     -- 铁轨布设器
 					} ,
 					[SICommon.Types.StackableItems.Ammo] =
 					{
@@ -473,7 +473,7 @@ local PackageConfig =
 						["uranium-cannon-shell"]             = 100   , -- 贫铀坦克炮弹
 						["explosive-uranium-cannon-shell"]   = 100   , -- 贫铀爆破坦克炮弹
 						["flamethrower-ammo"]                = 100   , -- 喷火燃料罐
-						["artillery-shell"]                  = 30     -- 重炮炮弹
+						["artillery-shell"]                  = 30      -- 重炮炮弹
 					} ,
 					[SICommon.Types.StackableItems.Capsule] =
 					{
@@ -489,7 +489,7 @@ local PackageConfig =
 						["distractor-capsule"]               = 100   , -- 放电胶囊
 						["cliff-explosives"]                 = 5     , -- 悬崖炸药
 						["discharge-defense-remote"]         = 1     , -- 放电防御模块控制器
-						["artillery-targeting-remote"]       = 1      -- 重炮控制器
+						["artillery-targeting-remote"]       = 1       -- 重炮控制器
 					} ,
 					[SICommon.Types.StackableItems.Gun] =
 					{
@@ -499,7 +499,7 @@ local PackageConfig =
 						["shotgun"]                          = 1     , -- 霰弹枪
 						["combat-shotgun"]                   = 1     , -- 战斗霰弹枪
 						["rocket-launcher"]                  = 1     , -- 火箭筒
-						["flamethrower"]                     = 1      -- 喷火器
+						["flamethrower"]                     = 1       -- 喷火器
 					} ,
 					[SICommon.Types.StackableItems.Module] =
 					{
@@ -512,7 +512,7 @@ local PackageConfig =
 						["effectivity-module-3"]             = 100   , -- 节能插件 mk3
 						["productivity-module"]              = 100   , -- 产能插件 mk1
 						["productivity-module-2"]            = 100   , -- 产能插件 mk2
-						["productivity-module-3"]            = 100    -- 产能插件 mk3
+						["productivity-module-3"]            = 100     -- 产能插件 mk3
 					}
 				}
 			} ,

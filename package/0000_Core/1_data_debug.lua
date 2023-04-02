@@ -1002,3 +1002,257 @@ SIGen
 } )
 .MakeIcon( SICommon.Types.Items.Module , "奇妙之双鱼螺旋插件" , 64 , 4 )
 .ReferenceEquipmentResult( SICommon.Types.Items.Module , SIConstants_Core.raw.Items.FishModule )
+-- ----------------------------------------
+-- 洞察之一览无余雷达
+-- ----------------------------------------
+.New( SICommon.Types.Items.Item , "LookRadar" , "洞察之一览无余雷达" )
+.AutoIcon()
+.Append
+{
+	flags = { SICommon.Flags.Item.Hidden } ,
+	stack_size = 100 ,
+	default_request_amount = 100 ,
+	fuel_category = SIConstants_Core.raw.Categories.Fuel.Special ,
+	fuel_value = "1MJ" ,
+	fuel_acceleration_multiplier = 1.20 ,
+	fuel_top_speed_multiplier = 1.20 ,
+	fuel_emissions_multiplier = 85.55 ,
+	fuel_glow_color = { r = 1.00 , g = 0.94 , b = 0.46 } ,
+	burnt_result = "radar" ,
+	place_result = nil ,
+	placed_as_equipment_result = nil ,
+	rocket_launch_products =
+	{
+		{
+			type = SICommon.Types.Items.Item ,
+			name = "arithmetic-combinator" ,
+			amount_min = 0 ,
+			amount_max = 5 ,
+			catalyst_amount = 5
+		} ,
+		{
+			type = SICommon.Types.Items.Item ,
+			name = "decider-combinator" ,
+			amount_min = 0 ,
+			amount_max = 5 ,
+			catalyst_amount = 5
+		} ,
+		{
+			type = SICommon.Types.Items.Item ,
+			name = "constant-combinator" ,
+			amount_min = 0 ,
+			amount_max = 5 ,
+			catalyst_amount = 5
+		} ,
+		{
+			type = SICommon.Types.Items.Item ,
+			name = "power-switch" ,
+			amount_min = 0 ,
+			amount_max = 5 ,
+			catalyst_amount = 5
+		} ,
+		{
+			type = SICommon.Types.Items.Item ,
+			name = "programmable-speaker" ,
+			amount_min = 0 ,
+			amount_max = 5 ,
+			catalyst_amount = 5
+		}
+	}
+}
+.New( SICommon.Types.Equipments.Night , "LookRadar" , "洞察之一览无余雷达" ,
+{
+	take_result = SIConstants_Core.raw.Items.LookRadar ,
+	categories =
+	{
+		SIConstants_Core.raw.Categories.Equipment.Special
+	} ,
+	shape =
+	{
+		type = SICommon.Flags.EquipmentShapeType.Full ,
+		width = 2 ,
+		height = 2
+	} ,
+	energy_source =
+	{
+		type = SICommon.Flags.EnergySourceType.Electric ,
+		emissions_per_minute = 0 ,
+		render_no_power_icon = false ,
+		render_no_network_icon = false ,
+		usage_priority = SICommon.Flags.ElectricUsagePriority.InputSecondary ,
+		buffer_capacity = "50TJ" ,
+		input_flow_limit = "10TW" ,
+		output_flow_limit = "10TW" ,
+		drain = "0J"
+	} ,
+	energy_consumption = "1TW" ,
+	darkness_to_turn_on = 0.7 ,
+	color_lookup =
+	{
+		{
+			1.0 ,
+			SIGen.MakeRawPicturePath( "世界光线-洞察之一览无余雷达" )
+		}
+	} ,
+	sprite =
+	{
+		filename = SIGen.MakePicturePath( SICommon.Types.Items.Items , "洞察之一览无余雷达" .. SICommon.ShowNameSuffix.ICON ) ,
+		priority = "medium" ,
+		width = 64 ,
+		height = 64 ,
+		scale = 1.0
+	} ,
+	activate_sound =
+	{
+		{
+			filename = "__base__/sound/nightvision-on.ogg" ,
+			volume = 0.5
+		}
+	} ,
+	deactivate_sound =
+	{
+		{
+			filename = "__base__/sound/nightvision-off.ogg" ,
+			volume = 0.5
+		}
+	}
+} )
+.MakeIcon( SICommon.Types.Items.Items , "洞察之一览无余雷达" , 64 , 4 )
+.ReferenceEquipmentResult( SICommon.Types.Items.Items , SIConstants_Core.raw.Items.LookRadar )
+-- ----------------------------------------
+-- 集成之指点江山平台
+-- ----------------------------------------
+.New( SICommon.Types.Items.Item , "Roboport" , "集成之指点江山平台" )
+.AutoIcon()
+.Append
+{
+	flags = { SICommon.Flags.Item.Hidden } ,
+	stack_size = 10 ,
+	default_request_amount = 10 ,
+	fuel_category = SIConstants_Core.raw.Categories.Fuel.Special ,
+	fuel_value = "1MJ" ,
+	fuel_acceleration_multiplier = 1.24 ,
+	fuel_top_speed_multiplier = 1.12 ,
+	fuel_emissions_multiplier = 99.99 ,
+	fuel_glow_color = { r = 1.00 , g = 0.94 , b = 0.46 } ,
+	burnt_result = "roboport" ,
+	place_result = nil ,
+	placed_as_equipment_result = nil ,
+	rocket_launch_products =
+	{
+		{
+			type = SICommon.Types.Items.Item ,
+			name = "battery" ,
+			amount_min = 0 ,
+			amount_max = 17 ,
+			catalyst_amount = 17
+		} ,
+		{
+			type = SICommon.Types.Items.Item ,
+			name = "copper-plate" ,
+			amount_min = 0 ,
+			amount_max = 555 ,
+			catalyst_amount = 555
+		} ,
+		{
+			type = SICommon.Types.Items.Item ,
+			name = "iron-plate" ,
+			amount_min = 0 ,
+			amount_max = 555 ,
+			catalyst_amount = 555
+		} ,
+		{
+			type = SICommon.Types.Items.Item ,
+			name = "plastic-bar" ,
+			amount_min = 0 ,
+			amount_max = 555 ,
+			catalyst_amount = 555
+		}
+	}
+}
+.New( SICommon.Types.Equipments.Roboport , "Roboport" , "集成之指点江山平台" ,
+{
+	take_result = SIConstants_Core.raw.Items.Roboport ,
+	categories =
+	{
+		SIConstants_Core.raw.Categories.Equipment.Special
+	} ,
+	shape =
+	{
+		type = SICommon.Flags.EquipmentShapeType.Full ,
+		width = 2 ,
+		height = 2
+	} ,
+	energy_source =
+	{
+		type = SICommon.Flags.EnergySourceType.Electric ,
+		emissions_per_minute = 0 ,
+		render_no_power_icon = false ,
+		render_no_network_icon = false ,
+		usage_priority = SICommon.Flags.ElectricUsagePriority.InputSecondary ,
+		buffer_capacity = "50TJ" ,
+		input_flow_limit = "10TW" ,
+		output_flow_limit = "10TW" ,
+		drain = "0J"
+	} ,
+	burner = nil ,
+	power = nil ,
+	spawn_minimum = "1TJ" ,
+	construction_radius = 200 ,
+	stationing_offset = { 0.0 , -0.6 } ,
+	robot_limit = 1000 ,
+	robot_vertical_acceleration = 0.01 ,
+	robots_shrink_when_entering_and_exiting = true ,
+	spawn_and_station_height = 0.4 ,
+	spawn_and_station_shadow_height_offset = 0.5 ,
+	charge_approach_distance = 2.5 ,
+	charging_energy = "1GW" ,
+	charging_station_count = 25 ,
+	charging_station_shift = { 0.0 , 0.5 } ,
+	charging_distance = 2.0 ,
+	charging_threshold_distance = 10.0 ,
+	charging_offsets = { 0.0 , 0.0 } ,
+	draw_logistic_radius_visualization = true ,
+	draw_construction_radius_visualization = true ,
+	sprite =
+	{
+		filename = SIGen.MakePicturePath( SICommon.Types.Items.Items , "集成之指点江山平台" .. SICommon.ShowNameSuffix.ICON ) ,
+		priority = "medium" ,
+		width = 64 ,
+		height = 64 ,
+		scale = 1.0
+	} ,
+	recharging_animation =
+	{
+		layers =
+		{
+			{
+				filename = SIGen.MakePicturePath( SICommon.Types.Entities.Roboport , "集成之指点江山平台-充电" ) ,
+				priority = "high" ,
+				width = 37 ,
+				height = 35 ,
+				frame_count = 16 ,
+				animation_speed = 0.5 ,
+				scale = 1.5 ,
+				draw_as_glow = true
+			}
+		}
+	} ,
+	recharging_light =
+	{
+		intensity = 0.2 ,
+		size = 3 ,
+		color = { r = 0.50 , g = 0.50 , b = 1.00 }
+	}
+} )
+.MakeIcon( SICommon.Types.Items.Items , "集成之指点江山平台" , 64 , 4 )
+.ReferenceEquipmentResult( SICommon.Types.Items.Items , SIConstants_Core.raw.Items.Roboport )
+-- ----------------------------------------
+-- 伟力之移山填海建设单元
+-- ----------------------------------------
+-- ----------------------------------------
+-- 伟力之移山填海物流单元
+-- ----------------------------------------
+-- ----------------------------------------
+-- 终末之横扫千军光束
+-- ----------------------------------------
