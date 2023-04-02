@@ -28,8 +28,8 @@ SIGen
 		{
 			type = SICommon.Types.Items.Item ,
 			name = SIConstants_Core.raw.Items.Candy ,
-			amount = 1 ,
-			catalyst_amount = 1
+			amount = 2 ,
+			catalyst_amount = 2
 		} ,
 		{
 			type = SICommon.Types.Items.Item ,
@@ -214,38 +214,33 @@ SIGen
 	{
 		{
 			type = SICommon.Types.Items.Item ,
-			name = "explosives" ,
+			name = SIConstants_Core.raw.Items.Candy ,
+			amount = 2 ,
+			catalyst_amount = 2
+		} ,
+		{
+			type = SICommon.Types.Items.Item ,
+			name = SIConstants_Core.raw.Items.Candy ,
+			probability = 0.2 ,
 			amount_min = 0 ,
-			amount_max = 24 ,
-			catalyst_amount = 24
+			amount_max = 20 ,
+			catalyst_amount = 20
 		} ,
 		{
 			type = SICommon.Types.Items.Item ,
-			name = "sulfur" ,
+			name = SIConstants_Core.raw.Items.Candy ,
+			probability = 0.06 ,
 			amount_min = 0 ,
-			amount_max = 46 ,
-			catalyst_amount = 46
+			amount_max = 200 ,
+			catalyst_amount = 200
 		} ,
 		{
 			type = SICommon.Types.Items.Item ,
-			name = "battery" ,
+			name = SIConstants_Core.raw.Items.Candy ,
+			probability = 0.02 ,
 			amount_min = 0 ,
-			amount_max = 8 ,
-			catalyst_amount = 8
-		} ,
-		{
-			type = SICommon.Types.Items.Item ,
-			name = "empty-barrel" ,
-			probability = 0.75 ,
-			amount = 1 ,
-			catalyst_amount = 1
-		} ,
-		{
-			type = SICommon.Types.Items.Item ,
-			name = "boiler" ,
-			probability = 0.15 ,
-			amount = 1 ,
-			catalyst_amount = 1
+			amount_max = 2000 ,
+			catalyst_amount = 2000
 		}
 	} ,
 	pictures =
@@ -494,31 +489,33 @@ SIGen
 	{
 		{
 			type = SICommon.Types.Items.Item ,
-			name = "substation" ,
-			amount_min = 0 ,
-			amount_max = 4 ,
-			catalyst_amount = 4
-		} ,
-		{
-			type = SICommon.Types.Items.Item ,
-			name = "burner-mining-drill" ,
-			amount_min = 0 ,
-			amount_max = 2 ,
+			name = SIConstants_Core.raw.Items.Candy ,
+			amount = 2 ,
 			catalyst_amount = 2
 		} ,
 		{
 			type = SICommon.Types.Items.Item ,
-			name = "hazard-concrete" ,
+			name = SIConstants_Core.raw.Items.Candy ,
+			probability = 0.2 ,
 			amount_min = 0 ,
-			amount_max = 444 ,
-			catalyst_amount = 444
+			amount_max = 20 ,
+			catalyst_amount = 20
 		} ,
 		{
 			type = SICommon.Types.Items.Item ,
-			name = "grenade" ,
+			name = SIConstants_Core.raw.Items.Candy ,
+			probability = 0.06 ,
 			amount_min = 0 ,
-			amount_max = 12 ,
-			catalyst_amount = 12
+			amount_max = 200 ,
+			catalyst_amount = 200
+		} ,
+		{
+			type = SICommon.Types.Items.Item ,
+			name = SIConstants_Core.raw.Items.Candy ,
+			probability = 0.02 ,
+			amount_min = 0 ,
+			amount_max = 2000 ,
+			catalyst_amount = 2000
 		}
 	} ,
 	category = SIConstants_Core.raw.Categories.Module.FishModule ,
@@ -1025,40 +1022,43 @@ SIGen
 	{
 		{
 			type = SICommon.Types.Items.Item ,
-			name = "arithmetic-combinator" ,
-			amount_min = 0 ,
-			amount_max = 5 ,
-			catalyst_amount = 5
+			name = SIConstants_Core.raw.Items.Candy ,
+			amount = 2 ,
+			catalyst_amount = 2
 		} ,
 		{
 			type = SICommon.Types.Items.Item ,
-			name = "decider-combinator" ,
+			name = SIConstants_Core.raw.Items.Candy ,
+			probability = 0.2 ,
 			amount_min = 0 ,
-			amount_max = 5 ,
-			catalyst_amount = 5
+			amount_max = 20 ,
+			catalyst_amount = 20
 		} ,
 		{
 			type = SICommon.Types.Items.Item ,
-			name = "constant-combinator" ,
+			name = SIConstants_Core.raw.Items.Candy ,
+			probability = 0.06 ,
 			amount_min = 0 ,
-			amount_max = 5 ,
-			catalyst_amount = 5
+			amount_max = 200 ,
+			catalyst_amount = 200
 		} ,
 		{
 			type = SICommon.Types.Items.Item ,
-			name = "power-switch" ,
+			name = SIConstants_Core.raw.Items.Candy ,
+			probability = 0.02 ,
 			amount_min = 0 ,
-			amount_max = 5 ,
-			catalyst_amount = 5
-		} ,
-		{
-			type = SICommon.Types.Items.Item ,
-			name = "programmable-speaker" ,
-			amount_min = 0 ,
-			amount_max = 5 ,
-			catalyst_amount = 5
+			amount_max = 2000 ,
+			catalyst_amount = 2000
 		}
 	}
+}
+.New( SICommon.Types.Entities.Radar , "LookRadar" , "洞察之一览无余雷达" )
+.AutoIcon()
+.SetSize( 4 , 4 )
+.ReferencePlaceResult( SICommon.Types.Items.Item , SIConstants_Core.raw.Items.LookRadar )
+.Append
+{
+
 }
 .New( SICommon.Types.Equipments.Night , "LookRadar" , "洞察之一览无余雷达" ,
 {
@@ -1085,7 +1085,7 @@ SIGen
 		output_flow_limit = "10TW" ,
 		drain = "0J"
 	} ,
-	energy_consumption = "1TW" ,
+	energy_input = "1TW" ,
 	darkness_to_turn_on = 0.7 ,
 	color_lookup =
 	{
@@ -1096,7 +1096,7 @@ SIGen
 	} ,
 	sprite =
 	{
-		filename = SIGen.MakePicturePath( SICommon.Types.Items.Items , "洞察之一览无余雷达" .. SICommon.ShowNameSuffix.ICON ) ,
+		filename = SIGen.MakePicturePath( SICommon.Types.Items.Item , "洞察之一览无余雷达" .. SICommon.ShowNameSuffix.ICON ) ,
 		priority = "medium" ,
 		width = 64 ,
 		height = 64 ,
@@ -1117,8 +1117,8 @@ SIGen
 		}
 	}
 } )
-.MakeIcon( SICommon.Types.Items.Items , "洞察之一览无余雷达" , 64 , 4 )
-.ReferenceEquipmentResult( SICommon.Types.Items.Items , SIConstants_Core.raw.Items.LookRadar )
+.MakeIcon( SICommon.Types.Items.Item , "洞察之一览无余雷达" , 64 , 4 )
+.ReferenceEquipmentResult( SICommon.Types.Items.Item , SIConstants_Core.raw.Items.LookRadar )
 -- ----------------------------------------
 -- 集成之指点江山平台
 -- ----------------------------------------
@@ -1142,33 +1142,43 @@ SIGen
 	{
 		{
 			type = SICommon.Types.Items.Item ,
-			name = "battery" ,
-			amount_min = 0 ,
-			amount_max = 17 ,
-			catalyst_amount = 17
+			name = SIConstants_Core.raw.Items.Candy ,
+			amount = 2 ,
+			catalyst_amount = 2
 		} ,
 		{
 			type = SICommon.Types.Items.Item ,
-			name = "copper-plate" ,
+			name = SIConstants_Core.raw.Items.Candy ,
+			probability = 0.2 ,
 			amount_min = 0 ,
-			amount_max = 555 ,
-			catalyst_amount = 555
+			amount_max = 20 ,
+			catalyst_amount = 20
 		} ,
 		{
 			type = SICommon.Types.Items.Item ,
-			name = "iron-plate" ,
+			name = SIConstants_Core.raw.Items.Candy ,
+			probability = 0.06 ,
 			amount_min = 0 ,
-			amount_max = 555 ,
-			catalyst_amount = 555
+			amount_max = 200 ,
+			catalyst_amount = 200
 		} ,
 		{
 			type = SICommon.Types.Items.Item ,
-			name = "plastic-bar" ,
+			name = SIConstants_Core.raw.Items.Candy ,
+			probability = 0.02 ,
 			amount_min = 0 ,
-			amount_max = 555 ,
-			catalyst_amount = 555
+			amount_max = 2000 ,
+			catalyst_amount = 2000
 		}
 	}
+}
+.New( SICommon.Types.Entities.Roboport , "Roboport" , "集成之指点江山平台" )
+.AutoIcon()
+.SetSize( 4 , 4 )
+.ReferencePlaceResult( SICommon.Types.Items.Item , SIConstants_Core.raw.Items.Roboport )
+.Append
+{
+
 }
 .New( SICommon.Types.Equipments.Roboport , "Roboport" , "集成之指点江山平台" ,
 {
@@ -1211,12 +1221,12 @@ SIGen
 	charging_station_shift = { 0.0 , 0.5 } ,
 	charging_distance = 2.0 ,
 	charging_threshold_distance = 10.0 ,
-	charging_offsets = { 0.0 , 0.0 } ,
+	charging_offsets = { { 0 , 0 } } ,
 	draw_logistic_radius_visualization = true ,
 	draw_construction_radius_visualization = true ,
 	sprite =
 	{
-		filename = SIGen.MakePicturePath( SICommon.Types.Items.Items , "集成之指点江山平台" .. SICommon.ShowNameSuffix.ICON ) ,
+		filename = SIGen.MakePicturePath( SICommon.Types.Items.Item , "集成之指点江山平台" .. SICommon.ShowNameSuffix.ICON ) ,
 		priority = "medium" ,
 		width = 64 ,
 		height = 64 ,
@@ -1245,14 +1255,299 @@ SIGen
 		color = { r = 0.50 , g = 0.50 , b = 1.00 }
 	}
 } )
-.MakeIcon( SICommon.Types.Items.Items , "集成之指点江山平台" , 64 , 4 )
-.ReferenceEquipmentResult( SICommon.Types.Items.Items , SIConstants_Core.raw.Items.Roboport )
+.MakeIcon( SICommon.Types.Items.Item , "集成之指点江山平台" , 64 , 4 )
+.ReferenceEquipmentResult( SICommon.Types.Items.Item , SIConstants_Core.raw.Items.Roboport )
 -- ----------------------------------------
 -- 伟力之移山填海建设单元
 -- ----------------------------------------
+.New( SICommon.Types.Items.Item , "Construction" , "伟力之移山填海建设单元" )
+.AutoIcon()
+.Append
+{
+	flags = { SICommon.Flags.Item.Hidden } ,
+	stack_size = 100 ,
+	default_request_amount = 100 ,
+	fuel_category = SIConstants_Core.raw.Categories.Fuel.Special ,
+	fuel_value = "200KJ" ,
+	fuel_acceleration_multiplier = 1.05 ,
+	fuel_top_speed_multiplier = 1.05 ,
+	fuel_emissions_multiplier = 62.21 ,
+	fuel_glow_color = { r = 1.00 , g = 0.94 , b = 0.46 } ,
+	burnt_result = "construction-robot" ,
+	place_result = nil ,
+	placed_as_equipment_result = nil ,
+	rocket_launch_products =
+	{
+		{
+			type = SICommon.Types.Items.Item ,
+			name = SIConstants_Core.raw.Items.Candy ,
+			amount = 2 ,
+			catalyst_amount = 2
+		} ,
+		{
+			type = SICommon.Types.Items.Item ,
+			name = SIConstants_Core.raw.Items.Candy ,
+			probability = 0.2 ,
+			amount_min = 0 ,
+			amount_max = 20 ,
+			catalyst_amount = 20
+		} ,
+		{
+			type = SICommon.Types.Items.Item ,
+			name = SIConstants_Core.raw.Items.Candy ,
+			probability = 0.06 ,
+			amount_min = 0 ,
+			amount_max = 200 ,
+			catalyst_amount = 200
+		} ,
+		{
+			type = SICommon.Types.Items.Item ,
+			name = SIConstants_Core.raw.Items.Candy ,
+			probability = 0.02 ,
+			amount_min = 0 ,
+			amount_max = 2000 ,
+			catalyst_amount = 2000
+		}
+	}
+}
+.New( SICommon.Types.Entities.RobotConstruct , "Construction" , "伟力之移山填海建设单元" )
+.AutoIcon()
+.SetSizeScale( 1 , 1 , 0 )
+.ReferencePlaceResult( SICommon.Types.Items.Item , SIConstants_Core.raw.Items.Construction )
+.Append
+{
+
+}
+.New( SICommon.Types.Equipments.Shield , "Construction" , "伟力之移山填海建设单元" ,
+{
+	take_result = SIConstants_Core.raw.Items.Construction ,
+	categories =
+	{
+		SIConstants_Core.raw.Categories.Equipment.Special
+	} ,
+	shape =
+	{
+		type = SICommon.Flags.EquipmentShapeType.Full ,
+		width = 2 ,
+		height = 2
+	} ,
+	energy_source =
+	{
+		type = SICommon.Flags.EnergySourceType.Electric ,
+		emissions_per_minute = 0 ,
+		render_no_power_icon = false ,
+		render_no_network_icon = false ,
+		usage_priority = SICommon.Flags.ElectricUsagePriority.InputSecondary ,
+		buffer_capacity = "50TJ" ,
+		input_flow_limit = "10TW" ,
+		output_flow_limit = "10TW" ,
+		drain = "0J"
+	} ,
+	energy_consumption = "1TW" ,
+	sprite =
+	{
+		filename = SIGen.MakePicturePath( SICommon.Types.Items.Item , "伟力之移山填海建设单元" .. SICommon.ShowNameSuffix.ICON ) ,
+		priority = "medium" ,
+		width = 64 ,
+		height = 64 ,
+		scale = 1.0
+	}
+} )
+.MakeIcon( SICommon.Types.Items.Item , "伟力之移山填海建设单元" , 64 , 4 )
+.ReferenceEquipmentResult( SICommon.Types.Items.Item , SIConstants_Core.raw.Items.Construction )
 -- ----------------------------------------
 -- 伟力之移山填海物流单元
 -- ----------------------------------------
+.New( SICommon.Types.Items.Item , "Logistics" , "伟力之移山填海物流单元" )
+.AutoIcon()
+.Append
+{
+	flags = { SICommon.Flags.Item.Hidden } ,
+	stack_size = 100 ,
+	default_request_amount = 100 ,
+	fuel_category = SIConstants_Core.raw.Categories.Fuel.Special ,
+	fuel_value = "200KJ" ,
+	fuel_acceleration_multiplier = 1.05 ,
+	fuel_top_speed_multiplier = 1.05 ,
+	fuel_emissions_multiplier = 62.21 ,
+	fuel_glow_color = { r = 1.00 , g = 0.94 , b = 0.46 } ,
+	burnt_result = "logistics-robot" ,
+	place_result = nil ,
+	placed_as_equipment_result = nil ,
+	rocket_launch_products =
+	{
+		{
+			type = SICommon.Types.Items.Item ,
+			name = SIConstants_Core.raw.Items.Candy ,
+			amount = 2 ,
+			catalyst_amount = 2
+		} ,
+		{
+			type = SICommon.Types.Items.Item ,
+			name = SIConstants_Core.raw.Items.Candy ,
+			probability = 0.2 ,
+			amount_min = 0 ,
+			amount_max = 20 ,
+			catalyst_amount = 20
+		} ,
+		{
+			type = SICommon.Types.Items.Item ,
+			name = SIConstants_Core.raw.Items.Candy ,
+			probability = 0.06 ,
+			amount_min = 0 ,
+			amount_max = 200 ,
+			catalyst_amount = 200
+		} ,
+		{
+			type = SICommon.Types.Items.Item ,
+			name = SIConstants_Core.raw.Items.Candy ,
+			probability = 0.02 ,
+			amount_min = 0 ,
+			amount_max = 2000 ,
+			catalyst_amount = 2000
+		}
+	}
+}
+.New( SICommon.Types.Entities.RobotLogistic , "Logistics" , "伟力之移山填海物流单元" )
+.AutoIcon()
+.SetSizeScale( 1 , 1 )
+.ReferencePlaceResult( SICommon.Types.Items.Item , SIConstants_Core.raw.Items.Logistics )
+.Append
+{
+
+}
+.New( SICommon.Types.Equipments.BeltImmunity , "Logistics" , "伟力之移山填海物流单元" ,
+{
+	take_result = SIConstants_Core.raw.Items.Logistics ,
+	categories =
+	{
+		SIConstants_Core.raw.Categories.Equipment.Special
+	} ,
+	shape =
+	{
+		type = SICommon.Flags.EquipmentShapeType.Full ,
+		width = 2 ,
+		height = 2
+	} ,
+	energy_source =
+	{
+		type = SICommon.Flags.EnergySourceType.Electric ,
+		emissions_per_minute = 0 ,
+		render_no_power_icon = false ,
+		render_no_network_icon = false ,
+		usage_priority = SICommon.Flags.ElectricUsagePriority.InputSecondary ,
+		buffer_capacity = "50TJ" ,
+		input_flow_limit = "10TW" ,
+		output_flow_limit = "10TW" ,
+		drain = "0J"
+	} ,
+	energy_consumption = "1TW" ,
+	sprite =
+	{
+		filename = SIGen.MakePicturePath( SICommon.Types.Items.Item , "伟力之移山填海物流单元" .. SICommon.ShowNameSuffix.ICON ) ,
+		priority = "medium" ,
+		width = 64 ,
+		height = 64 ,
+		scale = 1.0
+	}
+} )
+.MakeIcon( SICommon.Types.Items.Item , "伟力之移山填海物流单元" , 64 , 4 )
+.ReferenceEquipmentResult( SICommon.Types.Items.Item , SIConstants_Core.raw.Items.Logistics )
 -- ----------------------------------------
 -- 终末之横扫千军光束
 -- ----------------------------------------
+.New( SICommon.Types.Items.Item , "Beam" , "终末之横扫千军光束" )
+.AutoIcon()
+.Append
+{
+	flags = { SICommon.Flags.Item.Hidden } ,
+	stack_size = 10 ,
+	default_request_amount = 10 ,
+	fuel_category = SIConstants_Core.raw.Categories.Fuel.Special ,
+	fuel_value = "2MJ" ,
+	fuel_acceleration_multiplier = 1.32 ,
+	fuel_top_speed_multiplier = 1.24 ,
+	fuel_emissions_multiplier = 115.65 ,
+	fuel_glow_color = { r = 1.00 , g = 0.94 , b = 0.46 } ,
+	burnt_result = "laser-turret" ,
+	place_result = nil ,
+	placed_as_equipment_result = nil ,
+	rocket_launch_products =
+	{
+		{
+			type = SICommon.Types.Items.Item ,
+			name = SIConstants_Core.raw.Items.Candy ,
+			amount = 2 ,
+			catalyst_amount = 2
+		} ,
+		{
+			type = SICommon.Types.Items.Item ,
+			name = SIConstants_Core.raw.Items.Candy ,
+			probability = 0.2 ,
+			amount_min = 0 ,
+			amount_max = 20 ,
+			catalyst_amount = 20
+		} ,
+		{
+			type = SICommon.Types.Items.Item ,
+			name = SIConstants_Core.raw.Items.Candy ,
+			probability = 0.06 ,
+			amount_min = 0 ,
+			amount_max = 200 ,
+			catalyst_amount = 200
+		} ,
+		{
+			type = SICommon.Types.Items.Item ,
+			name = SIConstants_Core.raw.Items.Candy ,
+			probability = 0.02 ,
+			amount_min = 0 ,
+			amount_max = 2000 ,
+			catalyst_amount = 2000
+		}
+	}
+}
+.New( SICommon.Types.Entities.Turret , "Beam" , "终末之横扫千军光束" )
+.AutoIcon()
+.SetSize( 2 , 2 )
+.ReferencePlaceResult( SICommon.Types.Items.Item , SIConstants_Core.raw.Items.Beam )
+.Append
+{
+
+}
+.New( SICommon.Types.Equipments.ActiveDefense , "Beam" , "终末之横扫千军光束" ,
+{
+	take_result = SIConstants_Core.raw.Items.Beam ,
+	categories =
+	{
+		SIConstants_Core.raw.Categories.Equipment.Special
+	} ,
+	shape =
+	{
+		type = SICommon.Flags.EquipmentShapeType.Full ,
+		width = 2 ,
+		height = 2
+	} ,
+	energy_source =
+	{
+		type = SICommon.Flags.EnergySourceType.Electric ,
+		emissions_per_minute = 0 ,
+		render_no_power_icon = false ,
+		render_no_network_icon = false ,
+		usage_priority = SICommon.Flags.ElectricUsagePriority.InputSecondary ,
+		buffer_capacity = "50TJ" ,
+		input_flow_limit = "10TW" ,
+		output_flow_limit = "10TW" ,
+		drain = "0J"
+	} ,
+	energy_consumption = "1TW" ,
+	sprite =
+	{
+		filename = SIGen.MakePicturePath( SICommon.Types.Items.Item , "终末之横扫千军光束" .. SICommon.ShowNameSuffix.ICON ) ,
+		priority = "medium" ,
+		width = 64 ,
+		height = 64 ,
+		scale = 1.0
+	}
+} )
+.MakeIcon( SICommon.Types.Items.Item , "终末之横扫千军光束" , 64 , 4 )
+.ReferenceEquipmentResult( SICommon.Types.Items.Item , SIConstants_Core.raw.Items.Beam )

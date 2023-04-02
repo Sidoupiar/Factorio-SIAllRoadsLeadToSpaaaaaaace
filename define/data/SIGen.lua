@@ -558,8 +558,8 @@ function SIGen.MakeIcon( typeCode , iconFileName , size , mipmaps )
 	if not iconFileName then
 		return CodeE( SIGen , "完善原型数据属性时 , 图标文件名称不能为空" )
 	end
-	if not SICommon.ShowNamePrefix[typeCode] then
-		return CodeE( SIGen , "构造器无法创建不支持的类型的原型数据 , 当前类型 = " .. typeCode )
+	if not typeCode or not SICommon.ShowNamePrefix[typeCode] then
+		return CodeE( SIGen , "构造器无法创建不支持的类型的原型数据 , 当前类型 = " .. tostring( typeCode ) )
 	end
 	if not SIGen.CurrentPrototypeData then
 		return CodeE( SIGen , "需要先创建新的原型数据 , 之后才可以完善它" )
@@ -793,16 +793,16 @@ function SIGen.ReferencePlaceResult( targetPrototypeType , targetPrototypeName )
 		return CodeE( SIGen , "需要先创建新的原型数据 , 之后才可以使用 SIGen.ReferencePlaceResult 函数" )
 	end
 	if not SITable.Has( SICommon.Types.Entities , SIGen.CurrentPrototypeData.type ) then
-		return CodeE( SIGen , "无法把非实体类型的原型数据添加至目标物品的 place_result 属性中" )
+		return CodeE( SIGen , "无法把非实体类型的原型数据添加至目标物品的 place_result 属性中 , 当前类型 = " .. tostring( SIGen.CurrentPrototypeData.type ) )
 	end
 	if not SITable.Has( SICommon.Types.Items , targetPrototypeType ) then
-		return CodeE( SIGen , "无法给非物品类型的原型数据添加交叉引用数据" )
+		return CodeE( SIGen , "无法给非物品类型的原型数据添加交叉引用数据 , 当前类型 = " .. tostring( targetPrototypeType ) )
 	end
 	SIGen.Find( targetPrototypeType , targetPrototypeName , function( prototypeName , prototypeData )
 		if prototypeData then
 			prototypeData.place_result = SIGen.CurrentPrototypeData.name
 		else
-			CodeE( SIGen , "无法给不存在的目标物品添加交叉引用数据"  )
+			CodeE( SIGen , "无法给不存在的目标物品添加交叉引用数据 , 当前类型 = " .. tostring( targetPrototypeType ) .. " , 原型名称 = " .. tostring( targetPrototypeName )  )
 		end
 	end )
 	return SIGen
@@ -819,16 +819,16 @@ function SIGen.ReferenceEquipmentResult( targetPrototypeType , targetPrototypeNa
 		return CodeE( SIGen , "需要先创建新的原型数据 , 之后才可以使用 SIGen.ReferenceEquipmentResult 函数" )
 	end
 	if not SITable.Has( SICommon.Types.Equipments , SIGen.CurrentPrototypeData.type ) then
-		return CodeE( SIGen , "无法把非模块类型的原型数据添加至目标物品的 placed_as_equipment_result 属性中" )
+		return CodeE( SIGen , "无法把非模块类型的原型数据添加至目标物品的 placed_as_equipment_result 属性中 , 当前类型 = " .. tostring( SIGen.CurrentPrototypeData.type ) )
 	end
 	if not SITable.Has( SICommon.Types.Items , targetPrototypeType ) then
-		return CodeE( SIGen , "无法给非物品类型的原型数据添加交叉引用数据" )
+		return CodeE( SIGen , "无法给非物品类型的原型数据添加交叉引用数据 , 当前类型 = " .. tostring( targetPrototypeType ) )
 	end
 	SIGen.Find( targetPrototypeType , targetPrototypeName , function( prototypeName , prototypeData )
 		if prototypeData then
 			prototypeData.placed_as_equipment_result = SIGen.CurrentPrototypeData.name
 		else
-			CodeE( SIGen , "无法给不存在的目标物品添加交叉引用数据"  )
+			CodeE( SIGen , "无法给不存在的目标物品添加交叉引用数据 , 当前类型 = " .. tostring( targetPrototypeType ) .. " , 原型名称 = " .. tostring( targetPrototypeName )  )
 		end
 	end )
 	return SIGen
@@ -844,7 +844,7 @@ function SIGen.ReferenceUnlockRecipe( technologyName )
 		return CodeE( SIGen , "需要先创建新的原型数据 , 之后才可以使用 SIGen.ReferenceUnlockRecipe 函数" )
 	end
 	if SIGen.CurrentPrototypeData.type ~= SICommon.Types.Recipe then
-		return CodeE( SIGen , "无法把非配方类型的原型数据添加至目标科技的 effects 属性中" )
+		return CodeE( SIGen , "无法把非配方类型的原型数据添加至目标科技的 effects 属性中 , 当前类型 = " .. tostring( SIGen.CurrentPrototypeData.type ) )
 	end
 	SIGen.Find( SICommon.Types.Technology , technologyName , function( prototypeName , prototypeData )
 		if prototypeData then
@@ -854,7 +854,7 @@ function SIGen.ReferenceUnlockRecipe( technologyName )
 				recipe = SIGen.CurrentPrototypeData.name
 			} )
 		else
-			CodeE( SIGen , "无法给不存在的目标科技添加交叉引用数据"  )
+			CodeE( SIGen , "无法给不存在的目标科技添加交叉引用数据 , 当前类型 = " .. SICommon.Types.Technology .. " , 原型名称 = " .. tostring( technologyName )  )
 		end
 	end )
 	return SIGen
@@ -1431,7 +1431,7 @@ function SIGen.Finish()
 			end
 		end
 		if not styleData.type then
-			return CodeE( SIGen , "控件样式的 type 不能为空 , name = " .. styleRealName )
+			return CodeE( SIGen , "控件样式的 type 不能为空 , 样式名称 = " .. styleRealName )
 		end
 		styleList[styleRealName] = styleData
 	end
