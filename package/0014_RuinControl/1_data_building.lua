@@ -1532,123 +1532,168 @@ SIGen
 	} ,
 	body =
 	{
-		filename = SIGen.MakePicturePath( SICommon.Types.Entities.Beam , "遗迹激光炮塔-激光-身体" ) ,
-		priority = "medium" ,
-		blend_mode = "additive" ,
-		flags = { "trilinear-filtering" } ,
-		width = 64 ,
-		height = 12 ,
-		frame_count = 8 ,
-		line_length = 8 ,
-		animation_speed = 0.5 ,
-		scale = 0.5
+		layers =
+		{
+			{
+				filename = SIGen.MakeSelfPicturePath( "遗迹激光炮塔-激光-身体" ) ,
+				priority = "medium" ,
+				blend_mode = "additive" ,
+				flags = { "trilinear-filtering" } ,
+				width = 64 ,
+				height = 12 ,
+				frame_count = 8 ,
+				line_length = 8 ,
+				animation_speed = 0.5 ,
+				scale = 0.5
+			}
+		}
 	} ,
 	head =
 	{
-		filename = SIGen.MakePicturePath( SICommon.Types.Entities.Beam , "遗迹激光炮塔-激光-身体" ) ,
-		priority = "medium" ,
-		blend_mode = "additive" ,
-		flags = { "trilinear-filtering" } ,
-		width = 64 ,
-		height = 12 ,
-		frame_count = 8 ,
-		line_length = 8 ,
-		animation_speed = 0.5 ,
-		scale = 0.5
+		layers =
+		{
+			{
+				filename = SIGen.MakeSelfPicturePath( "遗迹激光炮塔-激光-身体" ) ,
+				priority = "medium" ,
+				blend_mode = "additive" ,
+				flags = { "trilinear-filtering" } ,
+				width = 64 ,
+				height = 12 ,
+				frame_count = 8 ,
+				line_length = 8 ,
+				animation_speed = 0.5 ,
+				scale = 0.5
+			}
+		}
 	} ,
 	tail =
 	{
-		filename = SIGen.MakePicturePath( SICommon.Types.Entities.Beam , "遗迹激光炮塔-激光-尾部" ) ,
-		priority = "medium" ,
-		blend_mode = "additive" ,
-		flags = { "trilinear-filtering" } ,
-		width = 110 ,
-		height = 62 ,
-		frame_count = 8 ,
-		line_length = 8 ,
-		animation_speed = 0.5 ,
-		scale = 0.5 ,
-		shift = SIUtils.by_pixel( 11.5 , 1 )
+		layers =
+		{
+			{
+				filename = SIGen.MakeSelfPicturePath( "遗迹激光炮塔-激光-尾部" ) ,
+				priority = "medium" ,
+				blend_mode = "additive" ,
+				flags = { "trilinear-filtering" } ,
+				width = 110 ,
+				height = 62 ,
+				frame_count = 8 ,
+				line_length = 8 ,
+				animation_speed = 0.5 ,
+				scale = 0.5 ,
+				shift = SIUtils.by_pixel( 11.5 , 1 )
+			}
+		}
 	} ,
 	light_animations =
 	{
 		body =
 		{
-			filename = SIGen.MakePicturePath( SICommon.Types.Entities.Beam , "遗迹激光炮塔-激光-身体-光效" ) ,
-			priority = "medium" ,
-			width = 64 ,
-			height = 12 ,
-			frame_count = 8 ,
-			line_length = 8 ,
-			animation_speed = 0.5 ,
-			scale = 0.5
+			layers =
+			{
+				{
+					filename = SIGen.MakeSelfPicturePath( "遗迹激光炮塔-激光-身体-光效" ) ,
+					priority = "medium" ,
+					width = 64 ,
+					height = 12 ,
+					frame_count = 8 ,
+					line_length = 8 ,
+					animation_speed = 0.5 ,
+					scale = 0.5
+				}
+			}
 		} ,
 		head =
 		{
-			filename = SIGen.MakePicturePath( SICommon.Types.Entities.Beam , "遗迹激光炮塔-激光-身体-光效" ) ,
-			priority = "medium" ,
-			width = 64 ,
-			height = 12 ,
-			frame_count = 8 ,
-			line_length = 8 ,
-			animation_speed = 0.5 ,
-			scale = 0.5
+			layers =
+			{
+				{
+					filename = SIGen.MakeSelfPicturePath( "遗迹激光炮塔-激光-身体-光效" ) ,
+					priority = "medium" ,
+					width = 64 ,
+					height = 12 ,
+					frame_count = 8 ,
+					line_length = 8 ,
+					animation_speed = 0.5 ,
+					scale = 0.5
+				}
+			}
 		} ,
 		tail =
 		{
-			filename = SIGen.MakePicturePath( SICommon.Types.Entities.Beam , "遗迹激光炮塔-激光-尾部-光效" ) ,
-			priority = "medium" ,
-			width = 110 ,
-			height = 62 ,
-			frame_count = 8 ,
-			line_length = 8 ,
-			animation_speed = 0.5 ,
-			scale = 0.5 ,
-			shift = SIUtils.by_pixel( 11.5 , 1 )
+			layers =
+			{
+				{
+					filename = SIGen.MakeSelfPicturePath( "遗迹激光炮塔-激光-尾部-光效" ) ,
+					priority = "medium" ,
+					width = 110 ,
+					height = 62 ,
+					frame_count = 8 ,
+					line_length = 8 ,
+					animation_speed = 0.5 ,
+					scale = 0.5 ,
+					shift = SIUtils.by_pixel( 11.5 , 1 )
+				}
+			}
 		}
 	} ,
 	ground_light_animations =
 	{
 		body =
 		{
-			filename = SIGen.MakePicturePath( SICommon.Types.Entities.Beam , "遗迹激光炮塔-激光-地面-身体" ) ,
-			priority = "medium" ,
-			width = 64 ,
-			height = 256 ,
-			frame_count = 1 ,
-			line_length = 1 ,
-			repeat_count = 8 ,
-			animation_speed = 0.5 ,
-			scale = 0.5 ,
-			tint = { r = 0.50 , g = 0.05 , b = 0.05 }
+			layers =
+			{
+				{
+					filename = SIGen.MakeSelfPicturePath( "遗迹激光炮塔-激光-地面-身体" ) ,
+					priority = "medium" ,
+					width = 64 ,
+					height = 256 ,
+					frame_count = 1 ,
+					line_length = 1 ,
+					repeat_count = 8 ,
+					animation_speed = 0.5 ,
+					scale = 0.5 ,
+					tint = { r = 0.05 , g = 0.50 , b = 0.05 }
+				}
+			}
 		} ,
 		head =
 		{
-			filename = SIGen.MakePicturePath( SICommon.Types.Entities.Beam , "遗迹激光炮塔-激光-地面-头部" ) ,
-			priority = "medium" ,
-			width = 256 ,
-			height = 256 ,
-			frame_count = 1 ,
-			line_length = 1 ,
-			repeat_count = 8 ,
-			animation_speed = 0.5 ,
-			scale = 0.5 ,
-			tint = { r = 0.50 , g = 0.05 , b = 0.05 } ,
-			shift = SIUtils.by_pixel( -32 , 0 )
+			layers =
+			{
+				{
+					filename = SIGen.MakeSelfPicturePath( "遗迹激光炮塔-激光-地面-头部" ) ,
+					priority = "medium" ,
+					width = 256 ,
+					height = 256 ,
+					frame_count = 1 ,
+					line_length = 1 ,
+					repeat_count = 8 ,
+					animation_speed = 0.5 ,
+					scale = 0.5 ,
+					tint = { r = 0.05 , g = 0.50 , b = 0.05 } ,
+					shift = SIUtils.by_pixel( -32 , 0 )
+				}
+			}
 		} ,
 		tail =
 		{
-			filename = SIGen.MakePicturePath( SICommon.Types.Entities.Beam , "遗迹激光炮塔-激光-地面-尾部" ) ,
-			priority = "medium" ,
-			width = 256 ,
-			height = 256 ,
-			frame_count = 1 ,
-			line_length = 1 ,
-			repeat_count = 8 ,
-			animation_speed = 0.5 ,
-			scale = 0.5 ,
-			tint = { r = 0.50 , g = 0.05 , b = 0.05 } ,
-			shift = SIUtils.by_pixel( 32 , 0 )
+			layers =
+			{
+				{
+					filename = SIGen.MakeSelfPicturePath( "遗迹激光炮塔-激光-地面-尾部" ) ,
+					priority = "medium" ,
+					width = 256 ,
+					height = 256 ,
+					frame_count = 1 ,
+					line_length = 1 ,
+					repeat_count = 8 ,
+					animation_speed = 0.5 ,
+					scale = 0.5 ,
+					tint = { r = 0.05 , g = 0.50 , b = 0.05 } ,
+					shift = SIUtils.by_pixel( 32 , 0 )
+				}
+			}
 		}
 	} ,
 	working_sound =

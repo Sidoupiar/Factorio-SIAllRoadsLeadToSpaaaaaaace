@@ -81,7 +81,7 @@ SIGen
 	} ,
 	max_health = 50 ,
 	corpse = "small-remnants" ,
-	dying_explosion = "wall-explosion" ,
+	dying_explosion = "nuke-explosion" ,
 	map_color = { r = 1.00 , g = 0.94 , b = 0.46 } ,
 	friendly_map_color = { r = 1.00 , g = 0.94 , b = 0.46 } ,
 	enemy_map_color = { r = 1.00 , g = 0.94 , b = 0.46 } ,
@@ -202,7 +202,7 @@ SIGen
 	stack_size = 100 ,
 	default_request_amount = 100 ,
 	fuel_category = SIConstants_Core.raw.Categories.Fuel.Special ,
-	fuel_value = "7.4EJ" ,
+	fuel_value = "7.42EJ" ,
 	fuel_acceleration_multiplier = 4.22 ,
 	fuel_top_speed_multiplier = 1.47 ,
 	fuel_emissions_multiplier = 1.18 ,
@@ -283,7 +283,7 @@ SIGen
 			}
 		}
 	} ,
-	max_health = 21000 ,
+	max_health = 24000 ,
 	corpse = "nuclear-reactor-remnants" ,
 	dying_explosion = "nuke-explosion" ,
 	map_color = { r = 1.00 , g = 0.94 , b = 0.46 } ,
@@ -554,7 +554,7 @@ SIGen
 			}
 		}
 	} ,
-	max_health = 21000 ,
+	max_health = 24000 ,
 	corpse = "beacon-remnants" ,
 	dying_explosion = "nuke-explosion" ,
 	map_color = { r = 1.00 , g = 0.94 , b = 0.46 } ,
@@ -575,15 +575,7 @@ SIGen
 	repair_speed_modifier = 12.0 ,
 	energy_source =
 	{
-		type = SICommon.Flags.EnergySourceType.Electric ,
-		emissions_per_minute = 10 ,
-		render_no_power_icon = true ,
-		render_no_network_icon = true ,
-		usage_priority = SICommon.Flags.ElectricUsagePriority.InputSecondary ,
-		buffer_capacity = "50TJ" ,
-		input_flow_limit = "10TW" ,
-		output_flow_limit = "10TW" ,
-		drain = "0J"
+		type = SICommon.Flags.EnergySourceType.Void
 	} ,
 	energy_usage = "1TW" ,
 	allowed_effects =
@@ -1058,7 +1050,163 @@ SIGen
 .ReferencePlaceResult( SICommon.Types.Items.Item , SIConstants_Core.raw.Items.LookRadar )
 .Append
 {
-
+	flags = { SICommon.Flags.Entity.PlaceablePlayer , SICommon.Flags.Entity.PlayerCreation , SICommon.Flags.Entity.Hidden } ,
+	minable =
+	{
+		mining_time = 5.0 ,
+		results =
+		{
+			{
+				type = SICommon.Types.Items.item ,
+				name = SIConstants_Core.raw.Items.LookRadar ,
+				amount = 1
+			}
+		}
+	} ,
+	max_health = 24000 ,
+	corpse = "radar-remnants" ,
+	dying_explosion = "nuke-explosion" ,
+	map_color = { r = 1.00 , g = 0.94 , b = 0.46 } ,
+	friendly_map_color = { r = 1.00 , g = 0.94 , b = 0.46 } ,
+	enemy_map_color = { r = 1.00 , g = 0.94 , b = 0.46 } ,
+	alert_when_damaged = true ,
+	create_ghost_on_death = false ,
+	hide_resistances = true ,
+	resistances = nil ,
+	damaged_trigger_effect =
+	{
+		type = "create-entity" ,
+		entity_name = "spark-explosion" ,
+		offset_deviation = { { -0.5 , -0.5 } , { 0.5 , 0.5 } } ,
+		offsets = { { 0 , 1 } } ,
+		damage_type_filters = "fire"
+	} ,
+	repair_speed_modifier = 12.0 ,
+	energy_source =
+	{
+		type = SICommon.Flags.EnergySourceType.Void
+	} ,
+	energy_usage = "1TW" ,
+	energy_per_nearby_scan = "2TJ" ,
+	energy_per_sector = "1EJ" ,
+	max_distance_of_nearby_sector_revealed = 200 ,
+	max_distance_of_sector_revealed = 0 ,
+	rotation_speed = 0.01 ,
+	radius_minimap_visualisation_color = { r = 1.00 , g = 0.94 , b = 0.46 , a = 0.28 } ,
+	pictures =
+	{
+		layers =
+		{
+			{
+				filename = SIGen.MakeSelfPicturePath( "洞察之一览无余雷达" ) ,
+				priority = "low" ,
+				width = 98 ,
+				height = 128 ,
+				line_length = 8 ,
+				direction_count = 64 ,
+				shift = SIUtils.by_pixel( 1 , -16 ) ,
+				apply_projection = false
+			} ,
+			{
+				filename = SIGen.MakeSelfPicturePath( "洞察之一览无余雷达-影子" ) ,
+				priority = "low" ,
+				width = 172 ,
+				height = 94 ,
+				line_length = 8 ,
+				direction_count = 64 ,
+				shift = SIUtils.by_pixel( 39 , 3 ) ,
+				draw_as_shadow = true ,
+				apply_projection = false
+			}
+		}
+	} ,
+	integration_patch =
+	{
+		filename = SIGen.MakeSelfPicturePath( "洞察之一览无余雷达-结合" ) ,
+		priority = "low" ,
+		width = 119 ,
+		height = 108 ,
+		direction_count = 1 ,
+		shift = SIUtils.by_pixel( 1.5 , 4 )
+	} ,
+	water_reflection =
+	{
+		rotate = false ,
+		orientation_to_variation = false ,
+		pictures =
+		{
+			filename = SIGen.MakeSelfPicturePath( "洞察之一览无余雷达-反射" ) ,
+			priority = "extra-high" ,
+			width = 28 ,
+			height = 32 ,
+			variation_count = 1 ,
+			scale = 5.0 ,
+			shift = SIUtils.by_pixel( 5 , 35 )
+		}
+	} ,
+	mined_sound =
+	{
+		{
+			filename = "__core__/sound/deconstruct-large.ogg" ,
+			volume = 1
+		}
+	} ,
+	vehicle_impact_sound =
+	{
+		{
+			filename = "__base__/sound/car-metal-impact.ogg" ,
+			volume = 1
+		}
+	} ,
+	repair_sound =
+	{
+		{
+			filename = "__base__/sound/manual-repair-simple-1.ogg" ,
+			volume = 0.5
+		} ,
+		{
+			filename = "__base__/sound/manual-repair-simple-2.ogg" ,
+			volume = 0.5
+		} ,
+		{
+			filename = "__base__/sound/manual-repair-simple-3.ogg" ,
+			volume = 0.5
+		} ,
+		{
+			filename = "__base__/sound/manual-repair-simple-4.ogg" ,
+			volume = 0.5
+		} ,
+		{
+			filename = "__base__/sound/manual-repair-simple-5.ogg" ,
+			volume = 0.5
+		}
+	} ,
+	open_sound =
+	{
+		{
+			filename = "__base__/sound/machine-open.ogg" ,
+			volume = 0.5
+		}
+	} ,
+	close_sound =
+	{
+		{
+			filename = "__base__/sound/machine-close.ogg" ,
+			volume = 0.5
+		}
+	} ,
+	working_sound =
+	{
+		sound =
+		{
+			{
+				filename = "__base__/sound/radar.ogg" ,
+				volume = 0.8
+			}
+		} ,
+		use_doppler_shift = false ,
+		max_sounds_per_type = 3
+	}
 }
 .New( SICommon.Types.Equipments.Night , "LookRadar" , "洞察之一览无余雷达" ,
 {
@@ -1178,7 +1326,278 @@ SIGen
 .ReferencePlaceResult( SICommon.Types.Items.Item , SIConstants_Core.raw.Items.Roboport )
 .Append
 {
-
+	flags = { SICommon.Flags.Entity.PlaceablePlayer , SICommon.Flags.Entity.PlayerCreation , SICommon.Flags.Entity.Hidden } ,
+	minable =
+	{
+		mining_time = 5.0 ,
+		results =
+		{
+			{
+				type = SICommon.Types.Items.item ,
+				name = SIConstants_Core.raw.Items.Roboport ,
+				amount = 1
+			}
+		}
+	} ,
+	max_health = 24000 ,
+	corpse = "roboport-remnants" ,
+	dying_explosion = "nuke-explosion" ,
+	map_color = { r = 1.00 , g = 0.94 , b = 0.46 } ,
+	friendly_map_color = { r = 1.00 , g = 0.94 , b = 0.46 } ,
+	enemy_map_color = { r = 1.00 , g = 0.94 , b = 0.46 } ,
+	alert_when_damaged = true ,
+	create_ghost_on_death = false ,
+	hide_resistances = true ,
+	resistances = nil ,
+	damaged_trigger_effect =
+	{
+		type = "create-entity" ,
+		entity_name = "spark-explosion" ,
+		offset_deviation = { { -0.5 , -0.5 } , { 0.5 , 0.5 } } ,
+		offsets = { { 0 , 1 } } ,
+		damage_type_filters = "fire"
+	} ,
+	repair_speed_modifier = 12.0 ,
+	energy_source =
+	{
+		type = SICommon.Flags.EnergySourceType.Void
+	} ,
+	energy_usage = "1TW" ,
+	construction_radius = 2000 ,
+	logistics_radius = 100 ,
+	logistics_connection_distance = 0 ,
+	robot_slots_count = 7 ,
+	material_slots_count = 7 ,
+	stationing_offset = { 0.0 , 0.0 } ,
+	robot_limit = 10000 ,
+	robot_vertical_acceleration = 0.01 ,
+	robots_shrink_when_entering_and_exiting = true ,
+	spawn_and_station_height = -0.1 ,
+	spawn_and_station_shadow_height_offset = 0 ,
+	recharge_minimum = "1TJ" ,
+	charge_approach_distance = 3 ,
+	charging_energy = "1GW" ,
+	charging_station_count = 50 ,
+	charging_station_shift = { 0.0 , 0.0 } ,
+	charging_distance = 2.5 ,
+	charging_threshold_distance = 10.0 ,
+	charging_offsets = { { 0.0 , 0.0 } } ,
+	request_to_open_door_timeout = 15 ,
+	circuit_wire_connection_point = circuit_connector_definitions.roboport.points ,
+	circuit_connector_sprites = circuit_connector_definitions.roboport.sprites ,
+	circuit_wire_max_distance = 10 ,
+	default_available_logistic_output_signal = { type = "virtual" , name = "signal-X" } ,
+	default_total_logistic_output_signal = { type = "virtual" , name = "signal-Y" } ,
+	default_available_construction_output_signal = { type = "virtual" , name = "signal-Z" } ,
+	default_total_construction_output_signal = { type = "virtual" , name = "signal-T" } ,
+	draw_circuit_wires = true ,
+	draw_copper_wires = true ,
+	draw_logistic_radius_visualization = true ,
+	draw_construction_radius_visualization = true ,
+	open_door_trigger_effect =
+	{
+		{
+			type = "play-sound" ,
+			sound =
+			{
+				filename = "__base__/sound/roboport-door.ogg" ,
+				volume = 0.3 ,
+				min_speed = 1 ,
+				max_speed = 1.5
+			}
+		}
+	} ,
+	close_door_trigger_effect =
+	{
+		{
+			type = "play-sound" ,
+			sound =
+			{
+				filename = "__base__/sound/roboport-door-close.ogg" ,
+				volume = 0.2 ,
+				min_speed = 1 ,
+				max_speed = 1.5
+			}
+		}
+	} ,
+	base =
+	{
+		layers =
+		{
+			{
+				filename = SIGen.MakeSelfPicturePath( "集成之指点江山平台" ) ,
+				priority = "medium" ,
+				width = 143 ,
+				height = 135 ,
+				shift = { 0.5 , 0.25 }
+			} ,
+			{
+				filename = SIGen.MakeSelfPicturePath( "集成之指点江山平台-影子" ) ,
+				priority = "medium" ,
+				width = 147 ,
+				height = 101 ,
+				shift = SIUtils.by_pixel( 28.5 , 19.25 ) ,
+				draw_as_shadow = true
+			}
+		}
+	} ,
+	base_patch =
+	{
+		layers =
+		{
+			{
+				filename = SIGen.MakeSelfPicturePath( "集成之指点江山平台-顶部" ) ,
+				priority = "medium" ,
+				width = 69 ,
+				height = 50 ,
+				frame_count = 1 ,
+				shift = { 0.03125 , 0.203125 }
+			}
+		}
+	} ,
+	base_animation =
+	{
+		layers =
+		{
+			{
+				filename = SIGen.MakeSelfPicturePath( "集成之指点江山平台-动画" ) ,
+				priority = "medium" ,
+				width = 42 ,
+				height = 31 ,
+				frame_count = 8 ,
+				animation_speed = 0.5 ,
+				shift = { -0.5315 , -1.9375 }
+			}
+		}
+	} ,
+	door_animation_up =
+	{
+		layers =
+		{
+			{
+				filename = SIGen.MakeSelfPicturePath( "集成之指点江山平台-门-顶部" ) ,
+				priority = "medium" ,
+				width = 52 ,
+				height = 20 ,
+				frame_count = 16 ,
+				shift = { 0.015625 , -0.890625 }
+			}
+		}
+	} ,
+	door_animation_down =
+	{
+		layers =
+		{
+			{
+				filename = SIGen.MakeSelfPicturePath( "集成之指点江山平台-门-底部" ) ,
+				priority = "medium" ,
+				width = 52 ,
+				height = 22 ,
+				frame_count = 16 ,
+				shift = { 0.015625 , -0.234375 }
+			}
+		}
+	} ,
+	recharging_animation =
+	{
+		layers =
+		{
+			{
+				filename = SIGen.MakeSelfPicturePath( "集成之指点江山平台-充电" ) ,
+				priority = "high" ,
+				width = 37 ,
+				height = 35 ,
+				frame_count = 16 ,
+				animation_speed = 0.5 ,
+				scale = 1.5 ,
+				draw_as_glow = true
+			}
+		}
+	} ,
+	recharging_light =
+	{
+		intensity = 0.2 ,
+		size = 3 ,
+		color = { r = 0.50 , g = 0.50 , b = 1.00 }
+	} ,
+	water_reflection =
+	{
+		rotate = false ,
+		orientation_to_variation = false ,
+		pictures =
+		{
+			filename = SIGen.MakeSelfPicturePath( "集成之指点江山平台-反射" ) ,
+			priority = "extra-high" ,
+			width = 28 ,
+			height = 28 ,
+			variation_count = 1 ,
+			scale = 5.0 ,
+			shift = SIUtils.by_pixel( 0 , 75 )
+		}
+	} ,
+	mined_sound =
+	{
+		{
+			filename = "__core__/sound/deconstruct-large.ogg" ,
+			volume = 1
+		}
+	} ,
+	vehicle_impact_sound =
+	{
+		{
+			filename = "__base__/sound/car-metal-impact.ogg" ,
+			volume = 1
+		}
+	} ,
+	repair_sound =
+	{
+		{
+			filename = "__base__/sound/manual-repair-simple-1.ogg" ,
+			volume = 0.5
+		} ,
+		{
+			filename = "__base__/sound/manual-repair-simple-2.ogg" ,
+			volume = 0.5
+		} ,
+		{
+			filename = "__base__/sound/manual-repair-simple-3.ogg" ,
+			volume = 0.5
+		} ,
+		{
+			filename = "__base__/sound/manual-repair-simple-4.ogg" ,
+			volume = 0.5
+		} ,
+		{
+			filename = "__base__/sound/manual-repair-simple-5.ogg" ,
+			volume = 0.5
+		}
+	} ,
+	open_sound =
+	{
+		{
+			filename = "__base__/sound/machine-open.ogg" ,
+			volume = 0.5
+		}
+	} ,
+	close_sound =
+	{
+		{
+			filename = "__base__/sound/machine-close.ogg" ,
+			volume = 0.5
+		}
+	} ,
+	working_sound =
+	{
+		sound =
+		{
+			{
+				filename = "__base__/sound/roboport-working.ogg" ,
+				volume = 0.4
+			}
+		} ,
+		max_sounds_per_type = 3 ,
+		audible_distance_modifier = 0.75
+	}
 }
 .New( SICommon.Types.Equipments.Roboport , "Roboport" , "集成之指点江山平台" ,
 {
@@ -1316,7 +1735,385 @@ SIGen
 .ReferencePlaceResult( SICommon.Types.Items.Item , SIConstants_Core.raw.Items.Construction )
 .Append
 {
-
+	flags = { SICommon.Flags.Entity.PlaceablePlayer , SICommon.Flags.Entity.PlayerCreation , SICommon.Flags.Entity.PlaceableOffGrid , SICommon.Flags.Entity.NotOnMap , SICommon.Flags.Entity.Hidden } ,
+	minable =
+	{
+		mining_time = 5.0 ,
+		results =
+		{
+			{
+				type = SICommon.Types.Items.item ,
+				name = SIConstants_Core.raw.Items.Construction ,
+				amount = 1
+			}
+		}
+	} ,
+	max_health = 24000 ,
+	hit_visualization_box = { { -0.1 , -1.1 } , { 0.1 , -1.0 } } ,
+	corpse = nil ,
+	dying_explosion = "nuke-explosion" ,
+	map_color = { r = 1.00 , g = 0.94 , b = 0.46 } ,
+	friendly_map_color = { r = 1.00 , g = 0.94 , b = 0.46 } ,
+	enemy_map_color = { r = 1.00 , g = 0.94 , b = 0.46 } ,
+	alert_when_damaged = true ,
+	create_ghost_on_death = false ,
+	hide_resistances = true ,
+	resistances = nil ,
+	damaged_trigger_effect =
+	{
+		type = "create-entity" ,
+		entity_name = "flying-robot-damaged-explosion" ,
+		offset_deviation = { { -0.25 , -0.25 } , { 0.25 , 0.25 } } ,
+		offsets = { { 0 , 0 } } ,
+		damage_type_filters = "fire"
+	} ,
+	repair_speed_modifier = 12.0 ,
+	max_energy = "10TJ" ,
+	energy_per_tick = "0J" ,
+	energy_per_move = "0J" ,
+	speed_multiplier_when_out_of_energy = 1.0 ,
+	min_to_charge = 0.2 ,
+	max_to_charge = 0.95 ,
+	max_payload_size = 10 ,
+	speed = 0.24 ,
+	cargo_centered = { 0.0 , 0.2 } ,
+	construction_vector = { 0.30 , 0.22 } ,
+	idle =
+	{
+		layers =
+		{
+			{
+				filename = SIGen.MakeSelfPicturePath( "伟力之移山填海建设单元" ) ,
+				priority = "high" ,
+				width = 32 ,
+				height = 36 ,
+				frame_count = 1 ,
+				line_length = 16 ,
+				direction_count = 16 ,
+				shift = SIUtils.by_pixel( 0 , -4.5 )
+			}
+		}
+	} ,
+	in_motion =
+	{
+		layers =
+		{
+			{
+				filename = SIGen.MakeSelfPicturePath( "伟力之移山填海建设单元" ) ,
+				priority = "high" ,
+				width = 32 ,
+				height = 36 ,
+				frame_count = 1 ,
+				line_length = 16 ,
+				direction_count = 16 ,
+				shift = SIUtils.by_pixel( 0 , -4.5 )
+			}
+		}
+	} ,
+	shadow_idle =
+	{
+		layers =
+		{
+			{
+				filename = SIGen.MakeSelfPicturePath( "伟力之移山填海建设单元-影子" ) ,
+				priority = "high" ,
+				width = 53 ,
+				height = 25 ,
+				frame_count = 1 ,
+				line_length = 16 ,
+				direction_count = 16 ,
+				shift = SIUtils.by_pixel( 33.5 , 18.5 ) ,
+				draw_as_shadow = true
+			}
+		}
+	} ,
+	shadow_in_motion =
+	{
+		layers =
+		{
+			{
+				filename = SIGen.MakeSelfPicturePath( "伟力之移山填海建设单元-影子" ) ,
+				priority = "high" ,
+				width = 53 ,
+				height = 25 ,
+				frame_count = 1 ,
+				line_length = 16 ,
+				direction_count = 16 ,
+				shift = SIUtils.by_pixel( 33.5 , 18.5 ) ,
+				draw_as_shadow = true
+			}
+		}
+	} ,
+	working =
+	{
+		layers =
+		{
+			{
+				filename = SIGen.MakeSelfPicturePath( "伟力之移山填海建设单元-工作" ) ,
+				priority = "high" ,
+				width = 28 ,
+				height = 36 ,
+				frame_count = 2 ,
+				line_length = 2 ,
+				direction_count = 16 ,
+				animation_speed = 0.3 ,
+				shift = SIUtils.by_pixel( -0.25 , -5 )
+			}
+		}
+	} ,
+	shadow_working =
+	{
+		layers =
+		{
+			{
+				filename = SIGen.MakeSelfPicturePath( "伟力之移山填海建设单元-影子" ) ,
+				priority = "high" ,
+				width = 53 ,
+				height = 25 ,
+				frame_count = 1 ,
+				line_length = 16 ,
+				direction_count = 16 ,
+				shift = SIUtils.by_pixel( 33.5 , 18.5 ) ,
+				draw_as_shadow = true
+			}
+		}
+	} ,
+	smoke =
+	{
+		layers =
+		{
+			{
+				filename = "__base__/graphics/entity/smoke-construction/smoke-01.png" ,
+				width = 39 ,
+				height = 32 ,
+				frame_count = 19 ,
+				line_length = 19 ,
+				animation_speed = 0.3 ,
+				shift = { 0.078125 , -0.15625 }
+			}
+		}
+	} ,
+	sparks =
+	{
+		{
+			layers =
+			{
+				{
+					filename = "__base__/graphics/entity/sparks/sparks-01.png" ,
+					width = 39 ,
+					height = 34 ,
+					frame_count = 19 ,
+					line_length = 19 ,
+					animation_speed = 0.3 ,
+					tint = { r = 1.00 , g = 0.90 , b = 0.00 , a = 1.00 } ,
+					shift = { -0.109375 , 0.3125 } ,
+					draw_as_glow = true
+				}
+			}
+		} ,
+		{
+			layers =
+			{
+				{
+					filename = "__base__/graphics/entity/sparks/sparks-02.png" ,
+					width = 36 ,
+					height = 32 ,
+					frame_count = 19 ,
+					line_length = 19 ,
+					animation_speed = 0.3 ,
+					tint = { r = 1.00 , g = 0.90 , b = 0.00 , a = 1.00 } ,
+					shift = { 0.03125 , 0.125 } ,
+					draw_as_glow = true
+				}
+			}
+		} ,
+		{
+			layers =
+			{
+				{
+					filename = "__base__/graphics/entity/sparks/sparks-03.png" ,
+					width = 42 ,
+					height = 29 ,
+					frame_count = 19 ,
+					line_length = 19 ,
+					animation_speed = 0.3 ,
+					tint = { r = 1.00 , g = 0.90 , b = 0.00 , a = 1.00 } ,
+					shift = { -0.0625 , 0.203125 } ,
+					draw_as_glow = true
+				}
+			}
+		} ,
+		{
+			layers =
+			{
+				{
+					filename = "__base__/graphics/entity/sparks/sparks-04.png" ,
+					width = 40 ,
+					height = 35 ,
+					frame_count = 19 ,
+					line_length = 19 ,
+					animation_speed = 0.3 ,
+					shift = { -0.0625 , 0.234375 } ,
+					tint = { r = 1.00 , g = 0.90 , b = 0.00 , a = 1.00 } ,
+					draw_as_glow = true
+				}
+			}
+		} ,
+		{
+			layers =
+			{
+				{
+					filename = "__base__/graphics/entity/sparks/sparks-05.png" ,
+					width = 39 ,
+					height = 29 ,
+					frame_count = 19 ,
+					line_length = 19 ,
+					animation_speed = 0.3 ,
+					tint = { r = 1.00 , g = 0.90 , b = 0.00 , a = 1.00 } ,
+					shift = { -0.109375 , 0.171875 } ,
+					draw_as_glow = true
+				}
+			}
+		} ,
+		{
+			layers =
+			{
+				{
+					filename = "__base__/graphics/entity/sparks/sparks-06.png" ,
+					width = 44 ,
+					height = 36 ,
+					frame_count = 19 ,
+					line_length = 19 ,
+					animation_speed = 0.3 ,
+					tint = { r = 1.00 , g = 0.90 , b = 0.00 , a = 1.00 } ,
+					shift = { 0.03125 , 0.3125 } ,
+					draw_as_glow = true
+				}
+			}
+		}
+	} ,
+	working_light =
+	{
+		intensity = 0.8 ,
+		size = 3 ,
+		color = { r = 0.80 , g = 0.80 , b = 0.80 }
+	} ,
+	water_reflection =
+	{
+		rotate = false ,
+		orientation_to_variation = false ,
+		pictures =
+		{
+			filename = SIGen.MakeSelfPicturePath( "伟力之移山填海建设单元-反射" ) ,
+			priority = "extra-high" ,
+			width = 12 ,
+			height = 12 ,
+			variation_count = 1 ,
+			scale = 5.0 ,
+			shift = SIUtils.by_pixel( 0 , 105 )
+		}
+	} ,
+	mined_sound =
+	{
+		{
+			filename = "__core__/sound/deconstruct-small.ogg" ,
+			volume = 1
+		}
+	} ,
+	repairing_sound =
+	{
+		{
+			filename = "__base__/sound/robot-repair-1.ogg" ,
+			volume = 0.6
+		} ,
+		{
+			filename = "__base__/sound/robot-repair-2.ogg" ,
+			volume = 0.6
+		} ,
+		{
+			filename = "__base__/sound/robot-repair-3.ogg" ,
+			volume = 0.6
+		} ,
+		{
+			filename = "__base__/sound/robot-repair-4.ogg" ,
+			volume = 0.6
+		} ,
+		{
+			filename = "__base__/sound/robot-repair-5.ogg" ,
+			volume = 0.6
+		} ,
+		{
+			filename = "__base__/sound/robot-repair-6.ogg" ,
+			volume = 0.6
+		}
+	} ,
+	working_sound =
+	{
+		sound =
+		{
+			{
+				filename = "__base__/sound/construction-robot-1.ogg" ,
+				volume = 0.47
+			} ,
+			{
+				filename = "__base__/sound/construction-robot-2.ogg" ,
+				volume = 0.47
+			} ,
+			{
+				filename = "__base__/sound/construction-robot-3.ogg" ,
+				volume = 0.47
+			} ,
+			{
+				filename = "__base__/sound/construction-robot-4.ogg" ,
+				volume = 0.47
+			} ,
+			{
+				filename = "__base__/sound/construction-robot-5.ogg" ,
+				volume = 0.47
+			} ,
+			{
+				filename = "__base__/sound/construction-robot-6.ogg" ,
+				volume = 0.47
+			} ,
+			{
+				filename = "__base__/sound/construction-robot-7.ogg" ,
+				volume = 0.47
+			} ,
+			{
+				filename = "__base__/sound/construction-robot-8.ogg" ,
+				volume = 0.47
+			} ,
+			{
+				filename = "__base__/sound/construction-robot-9.ogg" ,
+				volume = 0.47
+			} ,
+			{
+				filename = "__base__/sound/flying-robot-1.ogg" ,
+				volume = 0.43
+			} ,
+			{
+				filename = "__base__/sound/flying-robot-2.ogg" ,
+				volume = 0.43
+			} ,
+			{
+				filename = "__base__/sound/flying-robot-3.ogg" ,
+				volume = 0.43
+			} ,
+			{
+				filename = "__base__/sound/flying-robot-4.ogg" ,
+				volume = 0.43
+			} ,
+			{
+				filename = "__base__/sound/flying-robot-5.ogg" ,
+				volume = 0.43
+			}
+		} ,
+		max_sounds_per_type = 20 ,
+		audible_distance_modifier = 1 ,
+		fade_in_ticks = 8 ,
+		fade_out_ticks = 8 ,
+		probability = 1 / ( 10 * 60 )
+	}
 }
 .New( SICommon.Types.Equipments.Shield , "Construction" , "伟力之移山填海建设单元" ,
 {
@@ -1343,7 +2140,8 @@ SIGen
 		output_flow_limit = "10TW" ,
 		drain = "0J"
 	} ,
-	energy_consumption = "1TW" ,
+	energy_per_shield = "1GJ" ,
+	max_shield_value = 10000 ,
 	sprite =
 	{
 		filename = SIGen.MakePicturePath( SICommon.Types.Items.Item , "伟力之移山填海建设单元" .. SICommon.ShowNameSuffix.ICON ) ,
@@ -1414,7 +2212,304 @@ SIGen
 .ReferencePlaceResult( SICommon.Types.Items.Item , SIConstants_Core.raw.Items.Logistics )
 .Append
 {
-
+	flags = { SICommon.Flags.Entity.PlaceablePlayer , SICommon.Flags.Entity.PlayerCreation , SICommon.Flags.Entity.PlaceableOffGrid , SICommon.Flags.Entity.NotOnMap , SICommon.Flags.Entity.Hidden } ,
+	minable =
+	{
+		mining_time = 5.0 ,
+		results =
+		{
+			{
+				type = SICommon.Types.Items.item ,
+				name = SIConstants_Core.raw.Items.Logistics ,
+				amount = 1
+			}
+		}
+	} ,
+	max_health = 24000 ,
+	hit_visualization_box = { { -0.1 , -1.1 } , { 0.1 , -1.0 } } ,
+	corpse = nil ,
+	dying_explosion = "nuke-explosion" ,
+	map_color = { r = 1.00 , g = 0.94 , b = 0.46 } ,
+	friendly_map_color = { r = 1.00 , g = 0.94 , b = 0.46 } ,
+	enemy_map_color = { r = 1.00 , g = 0.94 , b = 0.46 } ,
+	alert_when_damaged = true ,
+	create_ghost_on_death = false ,
+	hide_resistances = true ,
+	resistances = nil ,
+	damaged_trigger_effect =
+	{
+		type = "create-entity" ,
+		entity_name = "flying-robot-damaged-explosion" ,
+		offset_deviation = { { -0.25 , -0.25 } , { 0.25 , 0.25 } } ,
+		offsets = { { 0 , 0 } } ,
+		damage_type_filters = "fire"
+	} ,
+	repair_speed_modifier = 12.0 ,
+	max_energy = "10TJ" ,
+	energy_per_tick = "0J" ,
+	energy_per_move = "0J" ,
+	speed_multiplier_when_out_of_energy = 1.0 ,
+	min_to_charge = 0.2 ,
+	max_to_charge = 0.95 ,
+	max_payload_size = 10 ,
+	speed = 0.24 ,
+	cargo_centered = { 0.0 , 0.2 } ,
+	idle =
+	{
+		layers =
+		{
+			{
+				filename = SIGen.MakeSelfPicturePath( "伟力之移山填海物流单元" ) ,
+				priority = "high" ,
+				width = 41 ,
+				height = 42 ,
+				frame_count = 1 ,
+				line_length = 16 ,
+				direction_count = 16 ,
+				y = 42 ,
+				shift = SIUtils.by_pixel( 0 , -3 )
+			}
+		}
+	} ,
+	idle_with_cargo =
+	{
+		layers =
+		{
+			{
+				filename = SIGen.MakeSelfPicturePath( "伟力之移山填海物流单元" ) ,
+				priority = "high" ,
+				width = 41 ,
+				height = 42 ,
+				frame_count = 1 ,
+				line_length = 16 ,
+				direction_count = 16 ,
+				y = 0 ,
+				shift = SIUtils.by_pixel( 0 , -3 )
+			}
+		}
+	} ,
+	in_motion =
+	{
+		layers =
+		{
+			{
+				filename = SIGen.MakeSelfPicturePath( "伟力之移山填海物流单元" ) ,
+				priority = "high" ,
+				width = 41 ,
+				height = 42 ,
+				frame_count = 1 ,
+				line_length = 16 ,
+				direction_count = 16 ,
+				y = 126 ,
+				shift = SIUtils.by_pixel( 0 , -3 )
+			}
+		}
+	} ,
+	in_motion_with_cargo =
+	{
+		layers =
+		{
+			{
+				filename = SIGen.MakeSelfPicturePath( "伟力之移山填海物流单元" ) ,
+				priority = "high" ,
+				width = 41 ,
+				height = 42 ,
+				frame_count = 1 ,
+				line_length = 16 ,
+				direction_count = 16 ,
+				y = 84 ,
+				shift = SIUtils.by_pixel( 0 , -3 )
+			}
+		}
+	} ,
+	shadow_idle =
+	{
+		layers =
+		{
+			{
+				filename = SIGen.MakeSelfPicturePath( "伟力之移山填海物流单元-影子" ) ,
+				priority = "high" ,
+				width = 58 ,
+				height = 29 ,
+				frame_count = 1 ,
+				line_length = 16 ,
+				direction_count = 16 ,
+				y = 29 ,
+				shift = SIUtils.by_pixel( 32 , 19.5 ) ,
+				draw_as_shadow = true
+			}
+		}
+	} ,
+	shadow_idle_with_cargo =
+	{
+		layers =
+		{
+			{
+				filename = SIGen.MakeSelfPicturePath( "伟力之移山填海物流单元-影子" ) ,
+				priority = "high" ,
+				width = 58 ,
+				height = 29 ,
+				frame_count = 1 ,
+				line_length = 16 ,
+				direction_count = 16 ,
+				y = 0 ,
+				shift = SIUtils.by_pixel( 32 , 19.5 ) ,
+				draw_as_shadow = true
+			}
+		}
+	} ,
+	shadow_in_motion =
+	{
+		layers =
+		{
+			{
+				filename = SIGen.MakeSelfPicturePath( "伟力之移山填海物流单元-影子" ) ,
+				priority = "high" ,
+				width = 58 ,
+				height = 29 ,
+				frame_count = 1 ,
+				line_length = 16 ,
+				direction_count = 16 ,
+				y = 87 ,
+				shift = SIUtils.by_pixel( 32 , 19.5 ) ,
+				draw_as_shadow = true
+			}
+		}
+	} ,
+	shadow_in_motion_with_cargo =
+	{
+		layers =
+		{
+			{
+				filename = SIGen.MakeSelfPicturePath( "伟力之移山填海物流单元-影子" ) ,
+				priority = "high" ,
+				width = 58 ,
+				height = 29 ,
+				frame_count = 1 ,
+				line_length = 16 ,
+				direction_count = 16 ,
+				y = 58 ,
+				shift = SIUtils.by_pixel( 32 , 19.5 ) ,
+				draw_as_shadow = true
+			}
+		}
+	} ,
+	water_reflection =
+	{
+		rotate = false ,
+		orientation_to_variation = false ,
+		pictures =
+		{
+			filename = SIGen.MakeSelfPicturePath( "伟力之移山填海物流单元-反射" ) ,
+			priority = "extra-high" ,
+			width = 12 ,
+			height = 12 ,
+			variation_count = 1 ,
+			scale = 5.0 ,
+			shift = SIUtils.by_pixel( 0 , 105 )
+		}
+	} ,
+	mined_sound =
+	{
+		{
+			filename = "__core__/sound/deconstruct-small.ogg" ,
+			volume = 1
+		}
+	} ,
+	repairing_sound =
+	{
+		{
+			filename = "__base__/sound/robot-repair-1.ogg" ,
+			volume = 0.6
+		} ,
+		{
+			filename = "__base__/sound/robot-repair-2.ogg" ,
+			volume = 0.6
+		} ,
+		{
+			filename = "__base__/sound/robot-repair-3.ogg" ,
+			volume = 0.6
+		} ,
+		{
+			filename = "__base__/sound/robot-repair-4.ogg" ,
+			volume = 0.6
+		} ,
+		{
+			filename = "__base__/sound/robot-repair-5.ogg" ,
+			volume = 0.6
+		} ,
+		{
+			filename = "__base__/sound/robot-repair-6.ogg" ,
+			volume = 0.6
+		}
+	} ,
+	working_sound =
+	{
+		sound =
+		{
+			{
+				filename = "__base__/sound/construction-robot-11.ogg" ,
+				volume = 0.48
+			} ,
+			{
+				filename = "__base__/sound/construction-robot-12.ogg" ,
+				volume = 0.48
+			} ,
+			{
+				filename = "__base__/sound/construction-robot-13.ogg" ,
+				volume = 0.48
+			} ,
+			{
+				filename = "__base__/sound/construction-robot-14.ogg" ,
+				volume = 0.48
+			} ,
+			{
+				filename = "__base__/sound/construction-robot-15.ogg" ,
+				volume = 0.48
+			} ,
+			{
+				filename = "__base__/sound/construction-robot-16.ogg" ,
+				volume = 0.48
+			} ,
+			{
+				filename = "__base__/sound/construction-robot-17.ogg" ,
+				volume = 0.48
+			} ,
+			{
+				filename = "__base__/sound/construction-robot-18.ogg" ,
+				volume = 0.48
+			} ,
+			{
+				filename = "__base__/sound/construction-robot-19.ogg" ,
+				volume = 0.48
+			} ,
+			{
+				filename = "__base__/sound/flying-robot-1.ogg" ,
+				volume = 0.43
+			} ,
+			{
+				filename = "__base__/sound/flying-robot-2.ogg" ,
+				volume = 0.43
+			} ,
+			{
+				filename = "__base__/sound/flying-robot-3.ogg" ,
+				volume = 0.43
+			} ,
+			{
+				filename = "__base__/sound/flying-robot-4.ogg" ,
+				volume = 0.43
+			} ,
+			{
+				filename = "__base__/sound/flying-robot-5.ogg" ,
+				volume = 0.43
+			}
+		} ,
+		max_sounds_per_type = 20 ,
+		audible_distance_modifier = 1 ,
+		fade_in_ticks = 8 ,
+		fade_out_ticks = 10 ,
+		probability = 1 / ( 10 * 60 )
+	}
 }
 .New( SICommon.Types.Equipments.BeltImmunity , "Logistics" , "伟力之移山填海物流单元" ,
 {
@@ -1456,7 +2551,7 @@ SIGen
 -- ----------------------------------------
 -- 终末之横扫千军光束
 -- ----------------------------------------
-.New( SICommon.Types.Items.Item , "Beam" , "终末之横扫千军光束" )
+.New( SICommon.Types.Items.Item , "Laser" , "终末之横扫千军光束" )
 .AutoIcon()
 .Append
 {
@@ -1506,17 +2601,916 @@ SIGen
 		}
 	}
 }
-.New( SICommon.Types.Entities.Turret , "Beam" , "终末之横扫千军光束" )
-.AutoIcon()
-.SetSize( 2 , 2 )
-.ReferencePlaceResult( SICommon.Types.Items.Item , SIConstants_Core.raw.Items.Beam )
+.New( SICommon.Types.Entities.Beam , "Laser_BeamSmall" , "终末之横扫千军光束-激光细" )
 .Append
 {
-
+	flags = { SICommon.Flags.Entity.NotOnMap , SICommon.Flags.Entity.Hidden } ,
+	width = 2.5 ,
+	damage_interval = 4 ,
+	random_target_offset = true ,
+	action_triggered_automatically = false ,
+	action =
+	{
+		{
+			type = "area" ,
+			force = "enemy" ,
+			radius = 1.2 ,
+			trigger_from_target = false ,
+			target_entities = true ,
+			show_in_tooltip = false ,
+			collision_mode = "distance-from-collision-box" ,
+			action_delivery =
+			{
+				{
+					type = "instant" ,
+					target_effects =
+					{
+						{
+							type = "damage" ,
+							damage =
+							{
+								type = "physical" ,
+								amount = 4
+							}
+						} ,
+						{
+							type = "damage" ,
+							damage =
+							{
+								type = "impact" ,
+								amount = 4
+							}
+						} ,
+						{
+							type = "damage" ,
+							damage =
+							{
+								type = "poison" ,
+								amount = 4
+							}
+						} ,
+						{
+							type = "damage" ,
+							damage =
+							{
+								type = "explosion" ,
+								amount = 4
+							}
+						} ,
+						{
+							type = "damage" ,
+							damage =
+							{
+								type = "fire" ,
+								amount = 4
+							}
+						} ,
+						{
+							type = "damage" ,
+							damage =
+							{
+								type = "laser" ,
+								amount = 4
+							}
+						}
+					}
+				}
+			}
+		}
+	} ,
+	body =
+	{
+		layers =
+		{
+			{
+				filename = SIGen.MakeSelfPicturePath( "终末之横扫千军光束-激光-身体" ) ,
+				priority = "medium" ,
+				blend_mode = "additive" ,
+				flags = { "trilinear-filtering" } ,
+				width = 64 ,
+				height = 12 ,
+				frame_count = 8 ,
+				line_length = 8 ,
+				animation_speed = 0.5 ,
+				scale = 0.5
+			}
+		}
+	} ,
+	head =
+	{
+		layers =
+		{
+			{
+				filename = SIGen.MakeSelfPicturePath( "终末之横扫千军光束-激光-身体" ) ,
+				priority = "medium" ,
+				blend_mode = "additive" ,
+				flags = { "trilinear-filtering" } ,
+				width = 64 ,
+				height = 12 ,
+				frame_count = 8 ,
+				line_length = 8 ,
+				animation_speed = 0.5 ,
+				scale = 0.5
+			}
+		}
+	} ,
+	tail =
+	{
+		layers =
+		{
+			{
+				filename = SIGen.MakeSelfPicturePath( "终末之横扫千军光束-激光-尾部" ) ,
+				priority = "medium" ,
+				blend_mode = "additive" ,
+				flags = { "trilinear-filtering" } ,
+				width = 110 ,
+				height = 62 ,
+				frame_count = 8 ,
+				line_length = 8 ,
+				animation_speed = 0.5 ,
+				scale = 0.5 ,
+				shift = SIUtils.by_pixel( 11.5 , 1 )
+			}
+		}
+	} ,
+	light_animations =
+	{
+		body =
+		{
+			layers =
+			{
+				{
+					filename = SIGen.MakeSelfPicturePath( "终末之横扫千军光束-激光-身体-光效" ) ,
+					priority = "medium" ,
+					width = 64 ,
+					height = 12 ,
+					frame_count = 8 ,
+					line_length = 8 ,
+					animation_speed = 0.5 ,
+					scale = 0.5
+				}
+			}
+		} ,
+		head =
+		{
+			layers =
+			{
+				{
+					filename = SIGen.MakeSelfPicturePath( "终末之横扫千军光束-激光-身体-光效" ) ,
+					priority = "medium" ,
+					width = 64 ,
+					height = 12 ,
+					frame_count = 8 ,
+					line_length = 8 ,
+					animation_speed = 0.5 ,
+					scale = 0.5
+				}
+			}
+		} ,
+		tail =
+		{
+			layers =
+			{
+				{
+					filename = SIGen.MakeSelfPicturePath( "终末之横扫千军光束-激光-尾部-光效" ) ,
+					priority = "medium" ,
+					width = 110 ,
+					height = 62 ,
+					frame_count = 8 ,
+					line_length = 8 ,
+					animation_speed = 0.5 ,
+					scale = 0.5 ,
+					shift = SIUtils.by_pixel( 11.5 , 1 )
+				}
+			}
+		}
+	} ,
+	ground_light_animations =
+	{
+		body =
+		{
+			layers =
+			{
+				{
+					filename = SIGen.MakeSelfPicturePath( "终末之横扫千军光束-激光-地面-身体" ) ,
+					priority = "medium" ,
+					width = 64 ,
+					height = 256 ,
+					frame_count = 1 ,
+					line_length = 1 ,
+					repeat_count = 8 ,
+					animation_speed = 0.5 ,
+					scale = 0.5 ,
+					tint = { r = 0.50 , g = 0.50 , b = 0.05 }
+				}
+			}
+		} ,
+		head =
+		{
+			layers =
+			{
+				{
+					filename = SIGen.MakeSelfPicturePath( "终末之横扫千军光束-激光-地面-头部" ) ,
+					priority = "medium" ,
+					width = 256 ,
+					height = 256 ,
+					frame_count = 1 ,
+					line_length = 1 ,
+					repeat_count = 8 ,
+					animation_speed = 0.5 ,
+					scale = 0.5 ,
+					tint = { r = 0.50 , g = 0.50 , b = 0.05 } ,
+					shift = SIUtils.by_pixel( -32 , 0 )
+				}
+			}
+		} ,
+		tail =
+		{
+			layers =
+			{
+				{
+					filename = SIGen.MakeSelfPicturePath( "终末之横扫千军光束-激光-地面-尾部" ) ,
+					priority = "medium" ,
+					width = 256 ,
+					height = 256 ,
+					frame_count = 1 ,
+					line_length = 1 ,
+					repeat_count = 8 ,
+					animation_speed = 0.5 ,
+					scale = 0.5 ,
+					tint = { r = 0.50 , g = 0.50 , b = 0.05 } ,
+					shift = SIUtils.by_pixel( 32 , 0 )
+				}
+			}
+		}
+	} ,
+	working_sound =
+	{
+		sound =
+		{
+			filename = "__base__/sound/fight/laser-beam.ogg" ,
+			volume = 0.75
+		} ,
+		max_sounds_per_type = 1
+	}
 }
-.New( SICommon.Types.Equipments.ActiveDefense , "Beam" , "终末之横扫千军光束" ,
+.New( SICommon.Types.Entities.Beam , "Laser_BeamLarge" , "终末之横扫千军光束-激光粗" )
+.Append
 {
-	take_result = SIConstants_Core.raw.Items.Beam ,
+	flags = { SICommon.Flags.Entity.NotOnMap , SICommon.Flags.Entity.Hidden } ,
+	width = 2.5 ,
+	damage_interval = 4 ,
+	random_target_offset = true ,
+	action_triggered_automatically = false ,
+	action =
+	{
+		{
+			type = "area" ,
+			force = "enemy" ,
+			radius = 3.5 ,
+			trigger_from_target = false ,
+			target_entities = true ,
+			show_in_tooltip = true ,
+			collision_mode = "distance-from-collision-box" ,
+			action_delivery =
+			{
+				{
+					type = "instant" ,
+					target_effects =
+					{
+						{
+							type = "damage" ,
+							damage =
+							{
+								type = "physical" ,
+								amount = 6
+							}
+						} ,
+						{
+							type = "damage" ,
+							damage =
+							{
+								type = "impact" ,
+								amount = 6
+							}
+						} ,
+						{
+							type = "damage" ,
+							damage =
+							{
+								type = "poison" ,
+								amount = 6
+							}
+						} ,
+						{
+							type = "damage" ,
+							damage =
+							{
+								type = "explosion" ,
+								amount = 6
+							}
+						} ,
+						{
+							type = "damage" ,
+							damage =
+							{
+								type = "fire" ,
+								amount = 6
+							}
+						} ,
+						{
+							type = "damage" ,
+							damage =
+							{
+								type = "laser" ,
+								amount = 6
+							}
+						}
+					}
+				}
+			}
+		} ,
+		{
+			type = "cluster" ,
+			force = "enemy" ,
+			cluster_count = 3 ,
+			distance = 10 ,
+			distance_deviation = 10 ,
+			action_delivery =
+			{
+				{
+					type = "beam" ,
+					beam = SIConstants_Core.raw.Entities.Laser_BeamSmall ,
+					max_length = 0 ,
+					duration = 8 ,
+					source_offset = { 0 , 0 } ,
+					add_to_shooter = true
+				}
+			}
+		}
+	} ,
+	body =
+	{
+		layers =
+		{
+			{
+				filename = SIGen.MakeSelfPicturePath( "终末之横扫千军光束-激光-身体" ) ,
+				priority = "medium" ,
+				blend_mode = "additive" ,
+				flags = { "trilinear-filtering" } ,
+				width = 64 ,
+				height = 12 ,
+				frame_count = 8 ,
+				line_length = 8 ,
+				animation_speed = 0.5 ,
+				scale = 1.5
+			}
+		}
+	} ,
+	head =
+	{
+		layers =
+		{
+			{
+				filename = SIGen.MakeSelfPicturePath( "终末之横扫千军光束-激光-身体" ) ,
+				priority = "medium" ,
+				blend_mode = "additive" ,
+				flags = { "trilinear-filtering" } ,
+				width = 64 ,
+				height = 12 ,
+				frame_count = 8 ,
+				line_length = 8 ,
+				animation_speed = 0.5 ,
+				scale = 1.5
+			}
+		}
+	} ,
+	tail =
+	{
+		layers =
+		{
+			{
+				filename = SIGen.MakeSelfPicturePath( "终末之横扫千军光束-激光-尾部" ) ,
+				priority = "medium" ,
+				blend_mode = "additive" ,
+				flags = { "trilinear-filtering" } ,
+				width = 110 ,
+				height = 62 ,
+				frame_count = 8 ,
+				line_length = 8 ,
+				animation_speed = 0.5 ,
+				scale = 1.5 ,
+				shift = SIUtils.by_pixel( 11.5 , 1 )
+			}
+		}
+	} ,
+	light_animations =
+	{
+		body =
+		{
+			layers =
+			{
+				{
+					filename = SIGen.MakeSelfPicturePath( "终末之横扫千军光束-激光-身体-光效" ) ,
+					priority = "medium" ,
+					width = 64 ,
+					height = 12 ,
+					frame_count = 8 ,
+					line_length = 8 ,
+					animation_speed = 0.5 ,
+					scale = 1.5
+				}
+			}
+		} ,
+		head =
+		{
+			layers =
+			{
+				{
+					filename = SIGen.MakeSelfPicturePath( "终末之横扫千军光束-激光-身体-光效" ) ,
+					priority = "medium" ,
+					width = 64 ,
+					height = 12 ,
+					frame_count = 8 ,
+					line_length = 8 ,
+					animation_speed = 0.5 ,
+					scale = 1.5
+				}
+			}
+		} ,
+		tail =
+		{
+			layers =
+			{
+				{
+					filename = SIGen.MakeSelfPicturePath( "终末之横扫千军光束-激光-尾部-光效" ) ,
+					priority = "medium" ,
+					width = 110 ,
+					height = 62 ,
+					frame_count = 8 ,
+					line_length = 8 ,
+					animation_speed = 0.5 ,
+					scale = 1.5 ,
+					shift = SIUtils.by_pixel( 11.5 , 1 )
+				}
+			}
+		}
+	} ,
+	ground_light_animations =
+	{
+		body =
+		{
+			layers =
+			{
+				{
+					filename = SIGen.MakeSelfPicturePath( "终末之横扫千军光束-激光-地面-身体" ) ,
+					priority = "medium" ,
+					width = 64 ,
+					height = 256 ,
+					frame_count = 1 ,
+					line_length = 1 ,
+					repeat_count = 8 ,
+					animation_speed = 0.5 ,
+					scale = 1.5 ,
+					tint = { r = 0.50 , g = 0.50 , b = 0.05 }
+				}
+			}
+		} ,
+		head =
+		{
+			layers =
+			{
+				{
+					filename = SIGen.MakeSelfPicturePath( "终末之横扫千军光束-激光-地面-头部" ) ,
+					priority = "medium" ,
+					width = 256 ,
+					height = 256 ,
+					frame_count = 1 ,
+					line_length = 1 ,
+					repeat_count = 8 ,
+					animation_speed = 0.5 ,
+					scale = 1.5 ,
+					tint = { r = 0.50 , g = 0.50 , b = 0.05 } ,
+					shift = SIUtils.by_pixel( -32 , 0 )
+				}
+			}
+		} ,
+		tail =
+		{
+			layers =
+			{
+				{
+					filename = SIGen.MakeSelfPicturePath( "终末之横扫千军光束-激光-地面-尾部" ) ,
+					priority = "medium" ,
+					width = 256 ,
+					height = 256 ,
+					frame_count = 1 ,
+					line_length = 1 ,
+					repeat_count = 8 ,
+					animation_speed = 0.5 ,
+					scale = 1.5 ,
+					tint = { r = 0.50 , g = 0.50 , b = 0.05 } ,
+					shift = SIUtils.by_pixel( 32 , 0 )
+				}
+			}
+		}
+	} ,
+	working_sound =
+	{
+		sound =
+		{
+			filename = "__base__/sound/fight/laser-beam.ogg" ,
+			volume = 0.75
+		} ,
+		max_sounds_per_type = 1
+	}
+}
+.New( SICommon.Types.Entities.Turret , "Laser" , "终末之横扫千军光束" )
+.AutoIcon()
+.SetSize( 2 , 2 )
+.ReferencePlaceResult( SICommon.Types.Items.Item , SIConstants_Core.raw.Items.Laser )
+.Append
+{
+	flags = { SICommon.Flags.Entity.PlaceablePlayer , SICommon.Flags.Entity.PlayerCreation , SICommon.Flags.Entity.Hidden } ,
+	minable =
+	{
+		mining_time = 5.0 ,
+		results =
+		{
+			{
+				type = SICommon.Types.Items.item ,
+				name = SIConstants_Core.raw.Items.Laser ,
+				amount = 1
+			}
+		}
+	} ,
+	max_health = 24000 ,
+	corpse = "laser-turret-remnants" ,
+	dying_explosion = "nuke-explosion" ,
+	map_color = { r = 1.00 , g = 0.94 , b = 0.46 } ,
+	friendly_map_color = { r = 1.00 , g = 0.94 , b = 0.46 } ,
+	enemy_map_color = { r = 1.00 , g = 0.94 , b = 0.46 } ,
+	alert_when_damaged = true ,
+	create_ghost_on_death = false ,
+	hide_resistances = true ,
+	resistances = nil ,
+	damaged_trigger_effect =
+	{
+		type = "create-entity" ,
+		entity_name = "spark-explosion" ,
+		offset_deviation = { { -0.5 , -0.5 } , { 0.5 , 0.5 } } ,
+		offsets = { { 0 , 1 } } ,
+		damage_type_filters = "fire"
+	} ,
+	repair_speed_modifier = 12.0 ,
+	alert_when_attacking = true ,
+	rotation_speed = 0.01 ,
+	preparing_speed = 0.05 ,
+	folding_speed = 0.05 ,
+	attacking_speed = 1.0 ,
+	call_for_help_radius = 30 ,
+	attack_parameters =
+	{
+		type = "beam" ,
+		cooldown = 4 ,
+		range = 50 ,
+		damage_modifier = 1 ,
+		source_direction_count = 64 ,
+		source_offset = { 0 , -0.85587225 } ,
+		ammo_type =
+		{
+			category = SIConstants_Core.raw.Categories.Ammo.Special ,
+			action =
+			{
+				{
+					type = "direct" ,
+					force = "enemy" ,
+					action_delivery =
+					{
+						{
+							type = "beam" ,
+							beam = SIConstants_Core.raw.Entities.Laser_BeamLarge ,
+							max_length = 0 ,
+							duration = 8 ,
+							source_offset = { 0 , -1.31439 } ,
+							add_to_shooter = true
+						}
+					}
+				}
+			}
+		}
+	} ,
+	base_picture =
+	{
+		layers =
+		{
+			{
+				filename = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "终末之横扫千军光束" ) ,
+				priority = "high" ,
+				width = 70 ,
+				height = 52 ,
+				frame_count = 1 ,
+				line_length = 1 ,
+				direction_count = 1 ,
+				shift = SIUtils.by_pixel( 0 , 2 )
+			} ,
+			{
+				filename = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "终末之横扫千军光束-影子" ) ,
+				priority = "medium" ,
+				width = 66 ,
+				height = 42 ,
+				frame_count = 1 ,
+				line_length = 1 ,
+				direction_count = 1 ,
+				shift = SIUtils.by_pixel( 6 , 3 ) ,
+				draw_as_shadow = true
+			}
+		}
+	} ,
+	preparing_animation =
+	{
+		layers =
+		{
+			{
+				filename = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "终末之横扫千军光束-升起" ) ,
+				priority = "medium" ,
+				run_mode = "forward" ,
+				width = 66 ,
+				height = 64 ,
+				frame_count = 15 ,
+				line_length = 15 ,
+				direction_count = 4 ,
+				shift = SIUtils.by_pixel( 0 , -32 ) ,
+				axially_symmetrical = false
+			} ,
+			{
+				filename = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "终末之横扫千军光束-升起-遮盖" ) ,
+				priority = "medium" ,
+				run_mode = "forward" ,
+				flags = { "mask" } ,
+				width = 44 ,
+				height = 40 ,
+				frame_count = 15 ,
+				line_length = 15 ,
+				direction_count = 4 ,
+				shift = SIUtils.by_pixel( 0 , -43 ) ,
+				axially_symmetrical = false ,
+				apply_runtime_tint = true
+			} ,
+			{
+				filename = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "终末之横扫千军光束-升起-影子" ) ,
+				priority = "medium" ,
+				run_mode = "forward" ,
+				width = 92 ,
+				height = 50 ,
+				frame_count = 15 ,
+				line_length = 15 ,
+				direction_count = 4 ,
+				shift = SIUtils.by_pixel( 47 , 3 ) ,
+				draw_as_shadow = true ,
+				axially_symmetrical = false
+			}
+		}
+	} ,
+	prepared_animation =
+	{
+		layers =
+		{
+			{
+				filename = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "终末之横扫千军光束-射击" ) ,
+				priority = "medium" ,
+				width = 64 ,
+				height = 60 ,
+				frame_count = 1 ,
+				line_length = 8 ,
+				direction_count = 64 ,
+				shift = SIUtils.by_pixel( 0 , -35 )
+			} ,
+			{
+				filename = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "终末之横扫千军光束-射击-遮盖" ) ,
+				priority = "medium" ,
+				flags = { "mask" } ,
+				width = 46 ,
+				height = 42 ,
+				frame_count = 1 ,
+				line_length = 8 ,
+				direction_count = 64 ,
+				shift = SIUtils.by_pixel( 0 , -43 ) ,
+				apply_runtime_tint = true
+			} ,
+			{
+				filename = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "终末之横扫千军光束-射击-影子" ) ,
+				priority = "medium" ,
+				width = 86 ,
+				height = 46 ,
+				frame_count = 1 ,
+				line_length = 8 ,
+				direction_count = 64 ,
+				shift = SIUtils.by_pixel( 51 , 2 ) ,
+				draw_as_shadow = true
+			}
+		}
+	} ,
+	folding_animation =
+	{
+		layers =
+		{
+			{
+				filename = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "终末之横扫千军光束-升起" ) ,
+				priority = "medium" ,
+				run_mode = "backward" ,
+				width = 66 ,
+				height = 64 ,
+				frame_count = 15 ,
+				line_length = 15 ,
+				direction_count = 4 ,
+				shift = SIUtils.by_pixel( 0 , -32 ) ,
+				axially_symmetrical = false
+			} ,
+			{
+				filename = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "终末之横扫千军光束-升起-遮盖" ) ,
+				priority = "medium" ,
+				run_mode = "backward" ,
+				flags = { "mask" } ,
+				width = 44 ,
+				height = 40 ,
+				frame_count = 15 ,
+				line_length = 15 ,
+				direction_count = 4 ,
+				shift = SIUtils.by_pixel( 0 , -43 ) ,
+				axially_symmetrical = false ,
+				apply_runtime_tint = true
+			} ,
+			{
+				filename = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "终末之横扫千军光束-升起-影子" ) ,
+				priority = "medium" ,
+				run_mode = "backward" ,
+				width = 92 ,
+				height = 50 ,
+				frame_count = 15 ,
+				line_length = 15 ,
+				direction_count = 4 ,
+				shift = SIUtils.by_pixel( 47 , 3 ) ,
+				draw_as_shadow = true ,
+				axially_symmetrical = false
+			}
+		}
+	} ,
+	folded_animation =
+	{
+		layers =
+		{
+			{
+				filename = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "终末之横扫千军光束-升起" ) ,
+				priority = "medium" ,
+				run_mode = "forward" ,
+				width = 66 ,
+				height = 64 ,
+				frame_count = 1 ,
+				line_length = 1 ,
+				direction_count = 4 ,
+				shift = SIUtils.by_pixel( 0 , -32 ) ,
+				axially_symmetrical = false
+			} ,
+			{
+				filename = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "终末之横扫千军光束-升起-遮盖" ) ,
+				priority = "medium" ,
+				run_mode = "forward" ,
+				flags = { "mask" } ,
+				width = 44 ,
+				height = 40 ,
+				frame_count = 1 ,
+				line_length = 1 ,
+				direction_count = 4 ,
+				shift = SIUtils.by_pixel( 0 , -43 ) ,
+				axially_symmetrical = false ,
+				apply_runtime_tint = true
+			} ,
+			{
+				filename = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "终末之横扫千军光束-升起-影子" ) ,
+				priority = "medium" ,
+				run_mode = "forward" ,
+				width = 92 ,
+				height = 50 ,
+				frame_count = 1 ,
+				line_length = 1 ,
+				direction_count = 4 ,
+				shift = SIUtils.by_pixel( 47 , 3 ) ,
+				draw_as_shadow = true ,
+				axially_symmetrical = false
+			}
+		}
+	} ,
+	glow_light_intensity = 0.5 ,
+	energy_glow_animation =
+	{
+		layers =
+		{
+			{
+				filename = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "终末之横扫千军光束-射击-光效" ) ,
+				priority = "medium" ,
+				blend_mode = "additive" ,
+				width = 62 ,
+				height = 58 ,
+				frame_count = 1 ,
+				line_length = 8 ,
+				direction_count = 64 ,
+				shift = SIUtils.by_pixel( 0 , -35 )
+			}
+		}
+	} ,
+	water_reflection =
+	{
+		rotate = false ,
+		orientation_to_variation = false ,
+		pictures =
+		{
+			filename = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "终末之横扫千军光束-反射" ) ,
+			priority = "extra-high" ,
+			width = 20 ,
+			height = 32 ,
+			variation_count = 1 ,
+			scale = 5.0 ,
+			shift = SIUtils.by_pixel( 0 , 40 )
+		}
+	} ,
+	mined_sound =
+	{
+		{
+			filename = "__core__/sound/deconstruct-small.ogg" ,
+			volume = 1
+		}
+	} ,
+	vehicle_impact_sound =
+	{
+		{
+			filename = "__base__/sound/car-metal-impact.ogg" ,
+			volume = 1
+		}
+	} ,
+	repair_sound =
+	{
+		{
+			filename = "__core__/sound/manual-repair-advanced-1.ogg" ,
+			volume = 0.5
+		} ,
+		{
+			filename = "__core__/sound/manual-repair-advanced-2.ogg" ,
+			volume = 0.5
+		}
+	} ,
+	open_sound =
+	{
+		{
+			filename = "__base__/sound/machine-open.ogg" ,
+			volume = 0.5
+		}
+	} ,
+	close_sound =
+	{
+		{
+			filename = "__base__/sound/machine-close.ogg" ,
+			volume = 0.5
+		}
+	} ,
+	preparing_sound =
+	{
+		{
+			filename = "__base__/sound/fight/laser-turret-activate-01.ogg" ,
+			volume = 0.3
+		} ,
+		{
+			filename = "__base__/sound/fight/laser-turret-activate-02.ogg" ,
+			volume = 0.3
+		} ,
+		{
+			filename = "__base__/sound/fight/laser-turret-activate-03.ogg" ,
+			volume = 0.3
+		}
+	} ,
+	folding_sound =
+	{
+		{
+			filename = "__base__/sound/fight/laser-turret-deactivate-01.ogg" ,
+			volume = 0.3
+		} ,
+		{
+			filename = "__base__/sound/fight/laser-turret-deactivate-02.ogg" ,
+			volume = 0.3
+		} ,
+		{
+			filename = "__base__/sound/fight/laser-turret-deactivate-03.ogg" ,
+			volume = 0.3
+		} ,
+		{
+			filename = "__base__/sound/fight/laser-turret-deactivate-04.ogg" ,
+			volume = 0.3
+		}
+	}
+}
+.New( SICommon.Types.Equipments.ActiveDefense , "Laser" , "终末之横扫千军光束" ,
+{
+	take_result = SIConstants_Core.raw.Items.Laser ,
 	categories =
 	{
 		SIConstants_Core.raw.Categories.Equipment.Special
@@ -1539,7 +3533,39 @@ SIGen
 		output_flow_limit = "10TW" ,
 		drain = "0J"
 	} ,
-	energy_consumption = "1TW" ,
+	automatic = true ,
+	attack_parameters =
+	{
+		type = "beam" ,
+		cooldown = 4 ,
+		range = 50 ,
+		damage_modifier = 1 ,
+		source_direction_count = 64 ,
+		source_offset = { 0 , -0.5 } ,
+		ammo_type =
+		{
+			category = SIConstants_Core.raw.Categories.Ammo.Special ,
+			energy_consumption = "50GJ" ,
+			action =
+			{
+				{
+					type = "direct" ,
+					force = "enemy" ,
+					action_delivery =
+					{
+						{
+							type = "beam" ,
+							beam = SIConstants_Core.raw.Entities.Laser_BeamSmall ,
+							max_length = 0 ,
+							duration = 8 ,
+							source_offset = { 0 , -1.31439 } ,
+							add_to_shooter = true
+						}
+					}
+				}
+			}
+		}
+	} ,
 	sprite =
 	{
 		filename = SIGen.MakePicturePath( SICommon.Types.Items.Item , "终末之横扫千军光束" .. SICommon.ShowNameSuffix.ICON ) ,
@@ -1550,4 +3576,4 @@ SIGen
 	}
 } )
 .MakeIcon( SICommon.Types.Items.Item , "终末之横扫千军光束" , 64 , 4 )
-.ReferenceEquipmentResult( SICommon.Types.Items.Item , SIConstants_Core.raw.Items.Beam )
+.ReferenceEquipmentResult( SICommon.Types.Items.Item , SIConstants_Core.raw.Items.Laser )

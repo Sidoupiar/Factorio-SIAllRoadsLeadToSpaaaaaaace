@@ -314,6 +314,10 @@ local constantsData =
 		-- ----------------------------------------
 		Categories =
 		{
+			Ammo =
+			{
+				Special = "特殊弹药"
+			} ,
 			Equipment =
 			{
 				Special = "特殊模块"
