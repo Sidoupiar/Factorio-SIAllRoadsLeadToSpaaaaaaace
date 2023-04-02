@@ -2,8 +2,8 @@
 -- -------- 创建调试物品 --------------------------------------------------------------------------
 -- ------------------------------------------------------------------------------------------------
 
-local LaserSmallDamage = 1
-local LaserLargeDamage = 1
+local LaserSmallDamage = 6
+local LaserLargeDamage = 10
 
 SIGen
 .SetGroup( SIConstants_Core.raw.Groups.Hidden.Debug )
@@ -2855,15 +2855,258 @@ SIGen
 				}
 			}
 		}
-	} ,
-	working_sound =
+	}
+}
+.New( SICommon.Types.Entities.Beam , "Laser_BeamMedium" , "终末之横扫千军光束-激光中" )
+.Append
+{
+	flags = { SICommon.Flags.Entity.NotOnMap , SICommon.Flags.Entity.Hidden } ,
+	width = 2.5 ,
+	damage_interval = 4 ,
+	random_target_offset = false ,
+	transparent_start_end_animations = true ,
+	action_triggered_automatically = true ,
+	action =
 	{
-		sound =
 		{
-			filename = "__base__/sound/fight/laser-beam.ogg" ,
-			volume = 0.75
+			type = "area" ,
+			force = "enemy" ,
+			ignore_collision_condition = true ,
+			show_in_tooltip = true ,
+			radius = 1.2 ,
+			trigger_from_target = false ,
+			target_entities = true ,
+			collision_mode = "distance-from-collision-box" ,
+			action_delivery =
+			{
+				{
+					type = "instant" ,
+					target_effects =
+					{
+						{
+							type = "damage" ,
+							show_in_tooltip = true ,
+							damage =
+							{
+								type = "physical" ,
+								amount = LaserSmallDamage
+							}
+						} ,
+						{
+							type = "damage" ,
+							show_in_tooltip = true ,
+							damage =
+							{
+								type = "impact" ,
+								amount = LaserSmallDamage
+							}
+						} ,
+						{
+							type = "damage" ,
+							show_in_tooltip = true ,
+							damage =
+							{
+								type = "poison" ,
+								amount = LaserSmallDamage
+							}
+						} ,
+						{
+							type = "damage" ,
+							show_in_tooltip = true ,
+							damage =
+							{
+								type = "explosion" ,
+								amount = LaserSmallDamage
+							}
+						} ,
+						{
+							type = "damage" ,
+							show_in_tooltip = true ,
+							damage =
+							{
+								type = "fire" ,
+								amount = LaserSmallDamage
+							}
+						} ,
+						{
+							type = "damage" ,
+							show_in_tooltip = true ,
+							damage =
+							{
+								type = "laser" ,
+								amount = LaserSmallDamage
+							}
+						}
+					}
+				}
+			}
+		}
+	} ,
+	body =
+	{
+		layers =
+		{
+			{
+				filename = SIGen.MakeSelfPicturePath( "终末之横扫千军光束-激光-身体" ) ,
+				priority = "medium" ,
+				blend_mode = "additive" ,
+				flags = { "trilinear-filtering" } ,
+				width = 64 ,
+				height = 12 ,
+				frame_count = 8 ,
+				line_length = 8 ,
+				animation_speed = 0.5 ,
+				scale = 0.9
+			}
+		}
+	} ,
+	head =
+	{
+		layers =
+		{
+			{
+				filename = SIGen.MakeSelfPicturePath( "终末之横扫千军光束-激光-身体" ) ,
+				priority = "medium" ,
+				blend_mode = "additive" ,
+				flags = { "trilinear-filtering" } ,
+				width = 64 ,
+				height = 12 ,
+				frame_count = 8 ,
+				line_length = 8 ,
+				animation_speed = 0.5 ,
+				scale = 0.9
+			}
+		}
+	} ,
+	tail =
+	{
+		layers =
+		{
+			{
+				filename = SIGen.MakeSelfPicturePath( "终末之横扫千军光束-激光-尾部" ) ,
+				priority = "medium" ,
+				blend_mode = "additive" ,
+				flags = { "trilinear-filtering" } ,
+				width = 110 ,
+				height = 62 ,
+				frame_count = 8 ,
+				line_length = 8 ,
+				animation_speed = 0.5 ,
+				scale = 0.9 ,
+				shift = SIUtils.by_pixel( 11.5 , 1 )
+			}
+		}
+	} ,
+	light_animations =
+	{
+		body =
+		{
+			layers =
+			{
+				{
+					filename = SIGen.MakeSelfPicturePath( "终末之横扫千军光束-激光-身体-光效" ) ,
+					priority = "medium" ,
+					width = 64 ,
+					height = 12 ,
+					frame_count = 8 ,
+					line_length = 8 ,
+					animation_speed = 0.5 ,
+					scale = 0.9
+				}
+			}
 		} ,
-		max_sounds_per_type = 1
+		head =
+		{
+			layers =
+			{
+				{
+					filename = SIGen.MakeSelfPicturePath( "终末之横扫千军光束-激光-身体-光效" ) ,
+					priority = "medium" ,
+					width = 64 ,
+					height = 12 ,
+					frame_count = 8 ,
+					line_length = 8 ,
+					animation_speed = 0.5 ,
+					scale = 0.9
+				}
+			}
+		} ,
+		tail =
+		{
+			layers =
+			{
+				{
+					filename = SIGen.MakeSelfPicturePath( "终末之横扫千军光束-激光-尾部-光效" ) ,
+					priority = "medium" ,
+					width = 110 ,
+					height = 62 ,
+					frame_count = 8 ,
+					line_length = 8 ,
+					animation_speed = 0.5 ,
+					scale = 0.9 ,
+					shift = SIUtils.by_pixel( 11.5 , 1 )
+				}
+			}
+		}
+	} ,
+	ground_light_animations =
+	{
+		body =
+		{
+			layers =
+			{
+				{
+					filename = SIGen.MakeSelfPicturePath( "终末之横扫千军光束-激光-地面-身体" ) ,
+					priority = "medium" ,
+					width = 64 ,
+					height = 256 ,
+					frame_count = 1 ,
+					line_length = 1 ,
+					repeat_count = 8 ,
+					animation_speed = 0.5 ,
+					scale = 0.9 ,
+					tint = { r = 0.50 , g = 0.50 , b = 0.05 }
+				}
+			}
+		} ,
+		head =
+		{
+			layers =
+			{
+				{
+					filename = SIGen.MakeSelfPicturePath( "终末之横扫千军光束-激光-地面-头部" ) ,
+					priority = "medium" ,
+					width = 256 ,
+					height = 256 ,
+					frame_count = 1 ,
+					line_length = 1 ,
+					repeat_count = 8 ,
+					animation_speed = 0.5 ,
+					scale = 0.9 ,
+					tint = { r = 0.50 , g = 0.50 , b = 0.05 } ,
+					shift = SIUtils.by_pixel( -32 , 0 )
+				}
+			}
+		} ,
+		tail =
+		{
+			layers =
+			{
+				{
+					filename = SIGen.MakeSelfPicturePath( "终末之横扫千军光束-激光-地面-尾部" ) ,
+					priority = "medium" ,
+					width = 256 ,
+					height = 256 ,
+					frame_count = 1 ,
+					line_length = 1 ,
+					repeat_count = 8 ,
+					animation_speed = 0.5 ,
+					scale = 0.9 ,
+					tint = { r = 0.50 , g = 0.50 , b = 0.05 } ,
+					shift = SIUtils.by_pixel( 32 , 0 )
+				}
+			}
+		}
 	}
 }
 .New( SICommon.Types.Entities.Beam , "Laser_BeamLarge" , "终末之横扫千军光束-激光粗" )
@@ -2963,11 +3206,43 @@ SIGen
 			{
 				{
 					type = "beam" ,
-					beam = SIConstants_Core.raw.Entities.Laser_BeamSmall ,
+					beam = SIConstants_Core.raw.Entities.Laser_BeamMedium ,
 					max_length = 0 ,
-					duration = 8 ,
+					duration = 4 ,
 					source_offset = { 0 , 0 } ,
-					add_to_shooter = true
+					add_to_shooter = true ,
+					target_effects =
+					{
+						{
+							type = "nested-result" ,
+							probability = 0.34 ,
+							show_in_tooltip = true ,
+							action =
+							{
+								{
+									type = "area" ,
+									force = "enemy" ,
+									ignore_collision_condition = true ,
+									show_in_tooltip = false ,
+									radius = 16 ,
+									trigger_from_target = true ,
+									target_entities = false ,
+									collision_mode = "distance-from-collision-box" ,
+									action_delivery =
+									{
+										{
+											type = "beam" ,
+											beam = SIConstants_Core.raw.Entities.Laser_BeamSmall ,
+											max_length = 0 ,
+											duration = 12 ,
+											source_offset = { 0 , 0 } ,
+											add_to_shooter = true
+										}
+									}
+								}
+							}
+						}
+					}
 				}
 			}
 		}
@@ -3211,14 +3486,13 @@ SIGen
 					type = "direct" ,
 					force = "enemy" ,
 					show_in_tooltip = true ,
-					filter_enabled = true ,
 					action_delivery =
 					{
 						{
 							type = "beam" ,
 							beam = SIConstants_Core.raw.Entities.Laser_BeamLarge ,
 							max_length = 0 ,
-							duration = 8 ,
+							duration = 4 ,
 							source_offset = { 0 , -1.31439 } ,
 							add_to_shooter = true
 						}
@@ -3584,7 +3858,7 @@ SIGen
 							type = "beam" ,
 							beam = SIConstants_Core.raw.Entities.Laser_BeamSmall ,
 							max_length = 0 ,
-							duration = 8 ,
+							duration = 4 ,
 							source_offset = { 0 , -1 } ,
 							add_to_shooter = true
 						}
