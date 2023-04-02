@@ -1367,9 +1367,9 @@ SIGen
 		type = SICommon.Flags.EnergySourceType.Void
 	} ,
 	energy_usage = "1TW" ,
-	construction_radius = 2000 ,
-	logistics_radius = 50 ,
-	logistics_connection_distance = 50 ,
+	construction_radius = 3000 ,
+	logistics_radius = 60 ,
+	logistics_connection_distance = 60 ,
 	robot_slots_count = 7 ,
 	material_slots_count = 7 ,
 	stationing_offset = { 0.0 , 0.0 } ,
@@ -1396,8 +1396,8 @@ SIGen
 	default_total_construction_output_signal = { type = "virtual" , name = "signal-T" } ,
 	draw_circuit_wires = true ,
 	draw_copper_wires = true ,
+	draw_construction_radius_visualization = false ,
 	draw_logistic_radius_visualization = true ,
-	draw_construction_radius_visualization = true ,
 	open_door_trigger_effect =
 	{
 		{
