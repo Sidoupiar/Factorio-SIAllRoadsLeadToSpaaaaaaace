@@ -3541,7 +3541,7 @@ SIGen
 	{
 		type = "beam" ,
 		cooldown = 4 ,
-		range = 72 ,
+		range = 74 ,
 		damage_modifier = 1 ,
 		movement_slow_down_factor = 0.5 ,
 		source_direction_count = 64 ,
@@ -3916,7 +3916,7 @@ SIGen
 		ammo_type =
 		{
 			category = SIConstants_Core.raw.Categories.Ammo.Special ,
-			energy_consumption = "50GJ" ,
+			energy_consumption = "60GJ" ,
 			action =
 			{
 				{
