@@ -4,6 +4,7 @@
 
 local LaserSmallDamage = 6
 local LaserLargeDamage = 10
+local LaserLargeDamageDirect = 14
 
 SIGen
 .SetGroup( SIConstants_Core.raw.Groups.Hidden.Debug )
@@ -3187,6 +3188,75 @@ SIGen
 							{
 								type = "laser" ,
 								amount = LaserLargeDamage
+							}
+						}
+					}
+				}
+			}
+		} ,
+		{
+			type = "direct" ,
+			force = "enemy" ,
+			ignore_collision_condition = true ,
+			show_in_tooltip = false ,
+			action_delivery =
+			{
+				{
+					type = "instant" ,
+					target_effects =
+					{
+						{
+							type = "damage" ,
+							show_in_tooltip = false ,
+							damage =
+							{
+								type = "physical" ,
+								amount = LaserLargeDamageDirect
+							}
+						} ,
+						{
+							type = "damage" ,
+							show_in_tooltip = false ,
+							damage =
+							{
+								type = "impact" ,
+								amount = LaserLargeDamageDirect
+							}
+						} ,
+						{
+							type = "damage" ,
+							show_in_tooltip = false ,
+							damage =
+							{
+								type = "poison" ,
+								amount = LaserLargeDamageDirect
+							}
+						} ,
+						{
+							type = "damage" ,
+							show_in_tooltip = false ,
+							damage =
+							{
+								type = "explosion" ,
+								amount = LaserLargeDamageDirect
+							}
+						} ,
+						{
+							type = "damage" ,
+							show_in_tooltip = false ,
+							damage =
+							{
+								type = "fire" ,
+								amount = LaserLargeDamageDirect
+							}
+						} ,
+						{
+							type = "damage" ,
+							show_in_tooltip = false ,
+							damage =
+							{
+								type = "laser" ,
+								amount = LaserLargeDamageDirect
 							}
 						}
 					}
