@@ -1506,7 +1506,8 @@ SIGen
 	width = 2.5 ,
 	damage_interval = 15 ,
 	random_target_offset = true ,
-	action_triggered_automatically = false ,
+	transparent_start_end_animations = true ,
+	action_triggered_automatically = true ,
 	action =
 	{
 		{

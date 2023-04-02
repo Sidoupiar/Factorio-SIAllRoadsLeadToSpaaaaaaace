@@ -2,6 +2,9 @@
 -- -------- 创建调试物品 --------------------------------------------------------------------------
 -- ------------------------------------------------------------------------------------------------
 
+local LaserSmallDamage = 1
+local LaserLargeDamage = 1
+
 SIGen
 .SetGroup( SIConstants_Core.raw.Groups.Hidden.Debug )
 -- ----------------------------------------
@@ -1364,8 +1367,8 @@ SIGen
 	} ,
 	energy_usage = "1TW" ,
 	construction_radius = 2000 ,
-	logistics_radius = 100 ,
-	logistics_connection_distance = 0 ,
+	logistics_radius = 50 ,
+	logistics_connection_distance = 50 ,
 	robot_slots_count = 7 ,
 	material_slots_count = 7 ,
 	stationing_offset = { 0.0 , 0.0 } ,
@@ -1871,6 +1874,7 @@ SIGen
 				width = 53 ,
 				height = 25 ,
 				frame_count = 1 ,
+				repeat_count = 2 ,
 				line_length = 16 ,
 				direction_count = 16 ,
 				shift = SIUtils.by_pixel( 33.5 , 18.5 ) ,
@@ -2156,7 +2160,7 @@ SIGen
 -- ----------------------------------------
 -- 伟力之移山填海物流单元
 -- ----------------------------------------
-.New( SICommon.Types.Items.Item , "Logistics" , "伟力之移山填海物流单元" )
+.New( SICommon.Types.Items.Item , "Logistic" , "伟力之移山填海物流单元" )
 .AutoIcon()
 .Append
 {
@@ -2169,7 +2173,7 @@ SIGen
 	fuel_top_speed_multiplier = 1.05 ,
 	fuel_emissions_multiplier = 62.21 ,
 	fuel_glow_color = { r = 1.00 , g = 0.94 , b = 0.46 } ,
-	burnt_result = "logistics-robot" ,
+	burnt_result = "logistic-robot" ,
 	place_result = nil ,
 	placed_as_equipment_result = nil ,
 	rocket_launch_products =
@@ -2206,10 +2210,10 @@ SIGen
 		}
 	}
 }
-.New( SICommon.Types.Entities.RobotLogistic , "Logistics" , "伟力之移山填海物流单元" )
+.New( SICommon.Types.Entities.RobotLogistic , "Logistic" , "伟力之移山填海物流单元" )
 .AutoIcon()
-.SetSizeScale( 1 , 1 )
-.ReferencePlaceResult( SICommon.Types.Items.Item , SIConstants_Core.raw.Items.Logistics )
+.SetSizeScale( 1 , 1 , 0 )
+.ReferencePlaceResult( SICommon.Types.Items.Item , SIConstants_Core.raw.Items.Logistic )
 .Append
 {
 	flags = { SICommon.Flags.Entity.PlaceablePlayer , SICommon.Flags.Entity.PlayerCreation , SICommon.Flags.Entity.PlaceableOffGrid , SICommon.Flags.Entity.NotOnMap , SICommon.Flags.Entity.Hidden } ,
@@ -2220,7 +2224,7 @@ SIGen
 		{
 			{
 				type = SICommon.Types.Items.item ,
-				name = SIConstants_Core.raw.Items.Logistics ,
+				name = SIConstants_Core.raw.Items.Logistic ,
 				amount = 1
 			}
 		}
@@ -2511,9 +2515,9 @@ SIGen
 		probability = 1 / ( 10 * 60 )
 	}
 }
-.New( SICommon.Types.Equipments.BeltImmunity , "Logistics" , "伟力之移山填海物流单元" ,
+.New( SICommon.Types.Equipments.BeltImmunity , "Logistic" , "伟力之移山填海物流单元" ,
 {
-	take_result = SIConstants_Core.raw.Items.Logistics ,
+	take_result = SIConstants_Core.raw.Items.Logistic ,
 	categories =
 	{
 		SIConstants_Core.raw.Categories.Equipment.Special
@@ -2547,7 +2551,7 @@ SIGen
 	}
 } )
 .MakeIcon( SICommon.Types.Items.Item , "伟力之移山填海物流单元" , 64 , 4 )
-.ReferenceEquipmentResult( SICommon.Types.Items.Item , SIConstants_Core.raw.Items.Logistics )
+.ReferenceEquipmentResult( SICommon.Types.Items.Item , SIConstants_Core.raw.Items.Logistic )
 -- ----------------------------------------
 -- 终末之横扫千军光束
 -- ----------------------------------------
@@ -2607,17 +2611,19 @@ SIGen
 	flags = { SICommon.Flags.Entity.NotOnMap , SICommon.Flags.Entity.Hidden } ,
 	width = 2.5 ,
 	damage_interval = 4 ,
-	random_target_offset = true ,
-	action_triggered_automatically = false ,
+	random_target_offset = false ,
+	transparent_start_end_animations = true ,
+	action_triggered_automatically = true ,
 	action =
 	{
 		{
 			type = "area" ,
 			force = "enemy" ,
+			ignore_collision_condition = true ,
+			show_in_tooltip = true ,
 			radius = 1.2 ,
 			trigger_from_target = false ,
 			target_entities = true ,
-			show_in_tooltip = false ,
 			collision_mode = "distance-from-collision-box" ,
 			action_delivery =
 			{
@@ -2627,50 +2633,56 @@ SIGen
 					{
 						{
 							type = "damage" ,
+							show_in_tooltip = true ,
 							damage =
 							{
 								type = "physical" ,
-								amount = 4
+								amount = LaserSmallDamage
 							}
 						} ,
 						{
 							type = "damage" ,
+							show_in_tooltip = true ,
 							damage =
 							{
 								type = "impact" ,
-								amount = 4
+								amount = LaserSmallDamage
 							}
 						} ,
 						{
 							type = "damage" ,
+							show_in_tooltip = true ,
 							damage =
 							{
 								type = "poison" ,
-								amount = 4
+								amount = LaserSmallDamage
 							}
 						} ,
 						{
 							type = "damage" ,
+							show_in_tooltip = true ,
 							damage =
 							{
 								type = "explosion" ,
-								amount = 4
+								amount = LaserSmallDamage
 							}
 						} ,
 						{
 							type = "damage" ,
+							show_in_tooltip = true ,
 							damage =
 							{
 								type = "fire" ,
-								amount = 4
+								amount = LaserSmallDamage
 							}
 						} ,
 						{
 							type = "damage" ,
+							show_in_tooltip = true ,
 							damage =
 							{
 								type = "laser" ,
-								amount = 4
+								amount = LaserSmallDamage
 							}
 						}
 					}
@@ -2860,17 +2872,19 @@ SIGen
 	flags = { SICommon.Flags.Entity.NotOnMap , SICommon.Flags.Entity.Hidden } ,
 	width = 2.5 ,
 	damage_interval = 4 ,
-	random_target_offset = true ,
-	action_triggered_automatically = false ,
+	random_target_offset = false ,
+	transparent_start_end_animations = true ,
+	action_triggered_automatically = true ,
 	action =
 	{
 		{
 			type = "area" ,
 			force = "enemy" ,
-			radius = 3.5 ,
+			ignore_collision_condition = true ,
+			show_in_tooltip = true ,
+			radius = 3.2 ,
 			trigger_from_target = false ,
 			target_entities = true ,
-			show_in_tooltip = true ,
 			collision_mode = "distance-from-collision-box" ,
 			action_delivery =
 			{
@@ -2880,50 +2894,56 @@ SIGen
 					{
 						{
 							type = "damage" ,
+							show_in_tooltip = true ,
 							damage =
 							{
 								type = "physical" ,
-								amount = 6
+								amount = LaserLargeDamage
 							}
 						} ,
 						{
 							type = "damage" ,
+							show_in_tooltip = true ,
 							damage =
 							{
 								type = "impact" ,
-								amount = 6
+								amount = LaserLargeDamage
 							}
 						} ,
 						{
 							type = "damage" ,
+							show_in_tooltip = true ,
 							damage =
 							{
 								type = "poison" ,
-								amount = 6
+								amount = LaserLargeDamage
 							}
 						} ,
 						{
 							type = "damage" ,
+							show_in_tooltip = true ,
 							damage =
 							{
 								type = "explosion" ,
-								amount = 6
+								amount = LaserLargeDamage
 							}
 						} ,
 						{
 							type = "damage" ,
+							show_in_tooltip = true ,
 							damage =
 							{
 								type = "fire" ,
-								amount = 6
+								amount = LaserLargeDamage
 							}
 						} ,
 						{
 							type = "damage" ,
+							show_in_tooltip = true ,
 							damage =
 							{
 								type = "laser" ,
-								amount = 6
+								amount = LaserLargeDamage
 							}
 						}
 					}
@@ -2931,11 +2951,14 @@ SIGen
 			}
 		} ,
 		{
-			type = "cluster" ,
+			type = "area" ,
 			force = "enemy" ,
-			cluster_count = 3 ,
-			distance = 10 ,
-			distance_deviation = 10 ,
+			ignore_collision_condition = true ,
+			show_in_tooltip = false ,
+			radius = 22 ,
+			trigger_from_target = true ,
+			target_entities = true ,
+			collision_mode = "distance-from-collision-box" ,
 			action_delivery =
 			{
 				{
@@ -3164,27 +3187,31 @@ SIGen
 	} ,
 	repair_speed_modifier = 12.0 ,
 	alert_when_attacking = true ,
-	rotation_speed = 0.01 ,
-	preparing_speed = 0.05 ,
-	folding_speed = 0.05 ,
+	rotation_speed = 0.02 ,
+	preparing_speed = 0.08 ,
+	folding_speed = 0.08 ,
 	attacking_speed = 1.0 ,
 	call_for_help_radius = 30 ,
 	attack_parameters =
 	{
 		type = "beam" ,
 		cooldown = 4 ,
-		range = 50 ,
+		range = 65 ,
 		damage_modifier = 1 ,
+		movement_slow_down_factor = 0.5 ,
 		source_direction_count = 64 ,
 		source_offset = { 0 , -0.85587225 } ,
 		ammo_type =
 		{
 			category = SIConstants_Core.raw.Categories.Ammo.Special ,
+			target_type = "entity" ,
 			action =
 			{
 				{
 					type = "direct" ,
 					force = "enemy" ,
+					show_in_tooltip = true ,
+					filter_enabled = true ,
 					action_delivery =
 					{
 						{
@@ -3539,7 +3566,7 @@ SIGen
 		type = "beam" ,
 		cooldown = 4 ,
 		range = 50 ,
-		damage_modifier = 1 ,
+		damage_modifier = 1.5 ,
 		source_direction_count = 64 ,
 		source_offset = { 0 , -0.5 } ,
 		ammo_type =
@@ -3558,7 +3585,7 @@ SIGen
 							beam = SIConstants_Core.raw.Entities.Laser_BeamSmall ,
 							max_length = 0 ,
 							duration = 8 ,
-							source_offset = { 0 , -1.31439 } ,
+							source_offset = { 0 , -1 } ,
 							add_to_shooter = true
 						}
 					}
