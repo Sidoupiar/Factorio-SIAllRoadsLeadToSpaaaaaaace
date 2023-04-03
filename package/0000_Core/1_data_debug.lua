@@ -65,7 +65,7 @@ SIGen
 	durability_description_value = SICommon.Flags.SciencePack.Value
 }
 .New( SICommon.Types.Entities.SimpleOwner , "Candy" , "量产之酥皮夹心糖果" )
-.MakeIcon( SICommon.Types.Items.Tool , "量产之酥皮夹心糖果" , 64 , 4 )
+.AutoIcon()
 .SetSize( 1 , 1 )
 .ReferencePlaceResult( SICommon.Types.Items.Tool , SIConstants_Core.raw.Items.Candy )
 .Append
@@ -98,11 +98,20 @@ SIGen
 			layers =
 			{
 				{
-					filename = SIGen.MakePicturePath( SICommon.Types.Items.Tool , "量产之酥皮夹心糖果" .. SICommon.ShowNameSuffix.ICON ) ,
+					filename = SIGen.MakeSelfPicturePath( "量产之酥皮夹心糖果" ) ,
 					priority = "medium" ,
-					width = 64 ,
-					height = 64 ,
-					scale = 0.5
+					width = 32 ,
+					height = 32 ,
+					scale = 1.0
+				} ,
+				{
+					filename = SIGen.MakeSelfPicturePath( "量产之酥皮夹心糖果-影子" ) ,
+					priority = "medium" ,
+					width = 53 ,
+					height = 36 ,
+					scale = 1.0 ,
+					shift = SIUtils.by_pixel( 10.5 , 2.5 ) ,
+					draw_as_shadow = true
 				}
 			}
 		}
@@ -597,7 +606,7 @@ SIGen
 		module_info_max_icons_per_row = 4
 	} ,
 	supply_area_distance = 64 ,
-	distribution_effectivity = 10.0 ,
+	distribution_effectivity = 1.0 ,
 	graphics_set =
 	{
 		module_icons_suppressed = true ,

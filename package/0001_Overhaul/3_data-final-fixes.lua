@@ -2,30 +2,37 @@
 -- ----- 修改部分实体的属性 -----------------------------------------------------------------------
 -- ------------------------------------------------------------------------------------------------
 
-local function ModifyBurnerSource( source )
-	if source and source.type == SICommon.Flags.EnergySourceType.Burner then
-		if not source.burnt_inventory_size or source.burnt_inventory_size < 1 then
-			source.burnt_inventory_size = 1
-		end
-		if source.fuel_categories then
-			if not SITable.Has( source.fuel_categories , SIConstants_Core.raw.Categories.Fuel.Special ) then
-				table.insert( source.fuel_categories , SIConstants_Core.raw.Categories.Fuel.Special )
+local function ModifyBurnerSource( source , callBurner )
+	if source then
+		if callBurner then
+			if not source.type then
+				source.type = SICommon.Flags.EnergySourceType.Burner
 			end
-		else
-			if source.fuel_category then
-				if source.fuel_category == SIConstants_Core.raw.Categories.Fuel.Special then
-					source.fuel_categories = { SIConstants_Core.raw.Categories.Fuel.Special }
-					source.fuel_category = nil
-				else
-					source.fuel_categories =
-					{
-						source.fuel_category ,
-						SIConstants_Core.raw.Categories.Fuel.Special
-					}
-					source.fuel_category = nil
+		end
+		if source.type == SICommon.Flags.EnergySourceType.Burner then
+			if not source.burnt_inventory_size or source.burnt_inventory_size < 1 then
+				source.burnt_inventory_size = 1
+			end
+			if source.fuel_categories then
+				if not SITable.Has( source.fuel_categories , SIConstants_Core.raw.Categories.Fuel.Special ) then
+					table.insert( source.fuel_categories , SIConstants_Core.raw.Categories.Fuel.Special )
 				end
 			else
-				source.fuel_categories = { SIConstants_Core.raw.Categories.Fuel.Special }
+				if source.fuel_category then
+					if source.fuel_category == SIConstants_Core.raw.Categories.Fuel.Special then
+						source.fuel_categories = { SIConstants_Core.raw.Categories.Fuel.Special }
+						source.fuel_category = nil
+					else
+						source.fuel_categories =
+						{
+							source.fuel_category ,
+							SIConstants_Core.raw.Categories.Fuel.Special
+						}
+						source.fuel_category = nil
+					end
+				else
+					source.fuel_categories = { SIConstants_Core.raw.Categories.Fuel.Special }
+				end
 			end
 		end
 	end
@@ -55,8 +62,8 @@ end )
 -- 此项不可以禁用或删除
 .ForEachType( SICommon.Types.Entities , function( prototypeName , prototypeData )
 	if prototypeData then
-		ModifyBurnerSource( prototypeData.energy_source )
-		ModifyBurnerSource( prototypeData.burner )
+		ModifyBurnerSource( prototypeData.energy_source , false )
+		ModifyBurnerSource( prototypeData.burner , true )
 	end
 end )
 
