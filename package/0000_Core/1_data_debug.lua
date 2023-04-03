@@ -1102,7 +1102,7 @@ SIGen
 	energy_usage = "1TW" ,
 	energy_per_nearby_scan = "2TJ" ,
 	energy_per_sector = "1EJ" ,
-	max_distance_of_nearby_sector_revealed = 200 ,
+	max_distance_of_nearby_sector_revealed = 160 ,
 	max_distance_of_sector_revealed = 0 ,
 	rotation_speed = 0.01 ,
 	radius_minimap_visualisation_color = { r = 1.00 , g = 0.94 , b = 0.46 , a = 0.28 } ,
