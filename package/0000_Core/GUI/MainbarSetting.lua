@@ -654,6 +654,12 @@ SIMainbarSetting =
 	-- ------------------------------------------------------------------------------------------------
 	-- ---------- 事件函数 ----------------------------------------------------------------------------
 	-- ------------------------------------------------------------------------------------------------
+	RuntimeSettingsChanged = function( playerIndex )
+		local settings = SIGlobal.GetPlayerSettings( SIMainData.Settings.Name , playerIndex )
+		if settings.Setting.frame and settings.Setting.frame.valid then
+			SIMainbarSetting.FreshList( playerIndex )
+		end
+	end ,
 	SaveSettings = function( playerIndex )
 		local settings = SIGlobal.GetPlayerSettings( SIMainData.Settings.Name , playerIndex )
 		if settings.Setting.frame and settings.Setting.frame.valid then

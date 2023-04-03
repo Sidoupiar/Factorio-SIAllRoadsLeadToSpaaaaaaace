@@ -447,9 +447,11 @@ end )
 end )
 .Add( SIEvents.on_runtime_mod_setting_changed , function( event , functionID )
 	local playerIndex = event.player_index
-	-- 主面板窗口事件
 	if event.setting_type == SICommon.SettingAffectTypes.PerUser then
+		-- 主面板窗口事件
 		SIMainbar.OpenFrame( playerIndex )
+		-- 主面板设置管理窗口事件
+		SIMainbarSetting.RuntimeSettingsChanged( playerIndex )
 	end
 end )
 .Add( SIEvents.on_gui_click , function( event , functionID )
