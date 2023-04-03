@@ -64,6 +64,7 @@ SIMainbarSetting =
 			-- 根据设置更新控件
 			settings.Setting.back = SIUtils.table.deepcopy( settings.Setting.Base )
 			settings.Setting.back.showMainbar = SISettings.PerUser.SICore.ShowMainbar( playerIndex )
+			settings.Setting.back.showHiddenEntity = SISettings.PerUser.SICore.ShowHiddenEntity( playerIndex )
 			SIMainbarSetting.FreshList( settings )
 		end
 	end ,
@@ -278,22 +279,28 @@ SIMainbarSetting =
 			elements.itemKeyNote = list.add{ type = "checkbox" , state = base.showKeyNote , tooltip = { "SICore.主面板设置管理-窗口-设置-重点便签-提示" } , style = SIConstants_Core.raw.Styles.Mainbar_Setting_ListCheck }
 			list.add{ type = "label" , style = SIConstants_Core.raw.Styles.Mainbar_Setting_ListPlace }
 			-- 第 10 层 , 从游戏设置读取
-			local loadFromUserTooltip = { "SICore.主面板设置管理-窗口-设置-从游戏设置读取-提示" , game.mod_setting_prototypes[SIConstants_Core.raw.Settings.ShowMainbar].localised_name , { "gui-menu.settings" } , { "gui-menu.other" } , { "gui-other-settings.use-mod-settings-per-save" } }
-			local flow10_Label = list.add{ type = "flow" , direction = "horizontal" , style = SIConstants_Core.raw.Styles.Mainbar_Setting_ListTitleFlow }
-			flow10_Label.add{ type = "label" , caption = { "SICore.主面板设置管理-窗口-设置-从游戏设置读取" } , tooltip = loadFromUserTooltip , style = SIConstants_Core.raw.Styles.Mainbar_Setting_ListLabel }
-			flow10_Label.add{ type = "sprite" , sprite = "info" , tooltip = loadFromUserTooltip }
-			elements.itemLoadFromUser = list.add{ type = "checkbox" , state = base.loadFromUserSettings , tooltip = loadFromUserTooltip , style = SIConstants_Core.raw.Styles.Mainbar_Setting_ListCheck }
-			list.add{ type = "label" , style = SIConstants_Core.raw.Styles.Mainbar_Setting_ListPlace }
-			-- 第 11 层 , 工具栏常用按钮 1
+			-- local loadFromUserTooltip = { "SICore.主面板设置管理-窗口-设置-从游戏设置读取-提示" , game.mod_setting_prototypes[SIConstants_Core.raw.Settings.ShowMainbar].localised_name , { "gui-menu.settings" } , { "gui-menu.other" } , { "gui-other-settings.use-mod-settings-per-save" } }
+			-- local flow10_Label = list.add{ type = "flow" , direction = "horizontal" , style = SIConstants_Core.raw.Styles.Mainbar_Setting_ListTitleFlow }
+			-- flow10_Label.add{ type = "label" , caption = { "SICore.主面板设置管理-窗口-设置-从游戏设置读取" } , tooltip = loadFromUserTooltip , style = SIConstants_Core.raw.Styles.Mainbar_Setting_ListLabel }
+			-- flow10_Label.add{ type = "sprite" , sprite = "info" , tooltip = loadFromUserTooltip }
+			-- elements.itemLoadFromUser = list.add{ type = "checkbox" , state = base.loadFromUserSettings , tooltip = loadFromUserTooltip , style = SIConstants_Core.raw.Styles.Mainbar_Setting_ListCheck }
+			-- list.add{ type = "label" , style = SIConstants_Core.raw.Styles.Mainbar_Setting_ListPlace }
+			-- 第 11 层 , 筛选界面显示隐藏实体
 			local flow11_Label = list.add{ type = "flow" , direction = "horizontal" , style = SIConstants_Core.raw.Styles.Mainbar_Setting_ListTitleFlow }
-			flow11_Label.add{ type = "label" , caption = { "SICore.主面板设置管理-窗口-设置-工具栏常用按钮1" } , tooltip = { "SICore.主面板设置管理-窗口-设置-工具栏常用按钮1-提示" } , style = SIConstants_Core.raw.Styles.Mainbar_Setting_ListLabel }
-			flow11_Label.add{ type = "sprite" , sprite = "info" , tooltip = { "SICore.主面板设置管理-窗口-设置-工具栏常用按钮1-提示" } }
+			flow11_Label.add{ type = "label" , caption = { "SICore.主面板设置管理-窗口-设置-筛选界面显示隐藏实体" } , tooltip = { "SICore.主面板设置管理-窗口-设置-筛选界面显示隐藏实体-提示" } , style = SIConstants_Core.raw.Styles.Mainbar_Setting_ListLabel }
+			flow11_Label.add{ type = "sprite" , sprite = "info" , tooltip = { "SICore.主面板设置管理-窗口-设置-筛选界面显示隐藏实体-提示" } }
+			elements.itemshowHiddenEntity = list.add{ type = "checkbox" , state = SISettings.PerUser.SICore.ShowHiddenEntity( settings.playerIndex ) , tooltip = { "SICore.主面板设置管理-窗口-设置-筛选界面显示隐藏实体-提示" } , style = SIConstants_Core.raw.Styles.Mainbar_Setting_ListCheck }
+			list.add{ type = "label" , style = SIConstants_Core.raw.Styles.Mainbar_Setting_ListPlace }
+			-- 第 12 层 , 工具栏常用按钮 1
+			local flow12_Label = list.add{ type = "flow" , direction = "horizontal" , style = SIConstants_Core.raw.Styles.Mainbar_Setting_ListTitleFlow }
+			flow12_Label.add{ type = "label" , caption = { "SICore.主面板设置管理-窗口-设置-工具栏常用按钮1" } , tooltip = { "SICore.主面板设置管理-窗口-设置-工具栏常用按钮1-提示" } , style = SIConstants_Core.raw.Styles.Mainbar_Setting_ListLabel }
+			flow12_Label.add{ type = "sprite" , sprite = "info" , tooltip = { "SICore.主面板设置管理-窗口-设置-工具栏常用按钮1-提示" } }
 			elements.itemCommonToolbar1 = list.add{ type = "drop-down" , caption = { "SICore.主面板设置管理-窗口-设置-工具栏常用按钮-无" } , tooltip = { "SICore.主面板设置管理-窗口-设置-工具栏常用按钮1-提示" } , style = SIConstants_Core.raw.Styles.Mainbar_Setting_DropDown }
 			list.add{ type = "label" , style = SIConstants_Core.raw.Styles.Mainbar_Setting_ListPlace }
-			-- 第 12 层 , 工具栏常用按钮 2
-			local flow12_Label = list.add{ type = "flow" , direction = "horizontal" , style = SIConstants_Core.raw.Styles.Mainbar_Setting_ListTitleFlow }
-			flow12_Label.add{ type = "label" , caption = { "SICore.主面板设置管理-窗口-设置-工具栏常用按钮2" } , tooltip = { "SICore.主面板设置管理-窗口-设置-工具栏常用按钮2-提示" } , style = SIConstants_Core.raw.Styles.Mainbar_Setting_ListLabel }
-			flow12_Label.add{ type = "sprite" , sprite = "info" , tooltip = { "SICore.主面板设置管理-窗口-设置-工具栏常用按钮2-提示" } }
+			-- 第 13 层 , 工具栏常用按钮 2
+			local flow13_Label = list.add{ type = "flow" , direction = "horizontal" , style = SIConstants_Core.raw.Styles.Mainbar_Setting_ListTitleFlow }
+			flow13_Label.add{ type = "label" , caption = { "SICore.主面板设置管理-窗口-设置-工具栏常用按钮2" } , tooltip = { "SICore.主面板设置管理-窗口-设置-工具栏常用按钮2-提示" } , style = SIConstants_Core.raw.Styles.Mainbar_Setting_ListLabel }
+			flow13_Label.add{ type = "sprite" , sprite = "info" , tooltip = { "SICore.主面板设置管理-窗口-设置-工具栏常用按钮2-提示" } }
 			elements.itemCommonToolbar2 = list.add{ type = "drop-down" , caption = { "SICore.主面板设置管理-窗口-设置-工具栏常用按钮-无" } , tooltip = { "SICore.主面板设置管理-窗口-设置-工具栏常用按钮2-提示" } , style = SIConstants_Core.raw.Styles.Mainbar_Setting_DropDown }
 			list.add{ type = "label" , style = SIConstants_Core.raw.Styles.Mainbar_Setting_ListPlace }
 			-- 根据设置更新控件
@@ -388,6 +395,12 @@ SIMainbarSetting =
 		else
 			base.loadFromUserSettings = default.loadFromUserSettings
 		end
+		-- 筛选界面显示隐藏实体
+		local showHiddenEntity = false
+		if elements.itemshowHiddenEntity then
+			showHiddenEntity = elements.itemshowHiddenEntity.state
+		end
+		SISettings.PerUserChange.SICore.ShowHiddenEntity( settings.playerIndex , showHiddenEntity )
 		-- 工具栏常用按钮 1
 		if elements.itemCommonToolbar1 then
 			local selectedIndex = elements.itemCommonToolbar1.selected_index - 1
@@ -458,6 +471,9 @@ SIMainbarSetting =
 		if elements.itemLoadFromUser then
 			elements.itemLoadFromUser.state = back.loadFromUserSettings
 		end
+		if elements.itemshowHiddenEntity then
+			elements.itemshowHiddenEntity.state = back.showHiddenEntity
+		end
 		if elements.itemCommonToolbar1 then
 			elements.itemCommonToolbar1.selected_index = ( back.commonToolbar1 or 0 ) + 1
 		end
@@ -502,6 +518,9 @@ SIMainbarSetting =
 		if elements.itemLoadFromUser then
 			elements.itemLoadFromUser.state = default.loadFromUserSettings
 		end
+		if elements.itemshowHiddenEntity then
+			elements.itemshowHiddenEntity.state = false
+		end
 		if elements.itemCommonToolbar1 then
 			elements.itemCommonToolbar1.selected_index = ( default.commonToolbar1 or 0 ) + 1
 		end
@@ -537,6 +556,10 @@ SIMainbarSetting =
 		end
 		-- 应用数据
 		local gameTick = data.Tick
+		SISettings.PerUserChange.SICore.ShowMainbar( settings.playerIndex , data.Base.showMainbar ~= nil and data.Base.showMainbar or true )
+		SISettings.PerUserChange.SICore.ShowHiddenEntity( settings.playerIndex , data.Base.showHiddenEntity ~= nil and data.Base.showHiddenEntity or false )
+		data.Base.showMainbar = nil
+		data.Base.showHiddenEntity = nil
 		settings.Setting.Base = data.Base
 		SIMainbarSetting.FreshList( settings )
 		SIMainbarSetting.Save( settings , false )
@@ -581,6 +604,8 @@ SIMainbarSetting =
 			Base = settings.Setting.Base ,
 			Data = {}
 		}
+		data.Base.showMainbar = SISettings.PerUser.SICore.ShowMainbar( settings.playerIndex )
+		data.Base.showHiddenEntity = SISettings.PerUser.SICore.ShowHiddenEntity( settings.playerIndex )
 		-- 玩家数据
 		if settings.Setting.Other.exportPlayerData then
 			local player = game.get_player( playerIndex )

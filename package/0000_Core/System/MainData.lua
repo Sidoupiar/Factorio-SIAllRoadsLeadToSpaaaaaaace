@@ -113,6 +113,7 @@ SIMainData.Settings =
 				itemNewMessage = nil ,
 				itemKeyNote = nil ,
 				itemLoadFromUser = nil ,
+				itemshowHiddenEntity = nil ,
 				itemCommonToolbar1 = nil ,
 				itemCommonToolbar2 = nil ,
 			} ,
