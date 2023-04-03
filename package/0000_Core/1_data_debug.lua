@@ -591,7 +591,7 @@ SIGen
 	} ,
 	module_specification =
 	{
-		module_slots = 140 , -- 插件槽界面每行 10 个 , 物品信息概要存储每行 7 个 , 取最小公约数 10 * 7 = 70 个 , 70 太少变成 2 倍 , 总数 70 * 2 = 140 个
+		module_slots = 105 , -- 插件槽界面每行 15 个 , 物品信息概要存储每行 7 个 , 取最小公约数 15 * 7 = 105 个
 		module_info_icon_shift = { 0.0 , 0.0 } ,
 		module_info_multi_row_initial_height_modifier = -0.3 ,
 		module_info_max_icons_per_row = 4

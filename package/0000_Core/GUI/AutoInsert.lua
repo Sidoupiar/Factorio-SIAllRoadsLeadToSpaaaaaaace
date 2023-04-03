@@ -111,6 +111,33 @@ SIAutoInsert =
 			mode = SICommon.Flags.Condition.OR
 		}
 	} ,
+	InsertFuel_Entity_Filters_ShowHidden =
+	{
+		{
+			filter = "type" ,
+			type =
+			{
+				SICommon.Types.Entities.Machine ,
+				SICommon.Types.Entities.Furnace ,
+				SICommon.Types.Entities.Lab ,
+				SICommon.Types.Entities.Mining ,
+				SICommon.Types.Entities.Beacon ,
+				SICommon.Types.Entities.Inserter ,
+				SICommon.Types.Entities.Boiler ,
+				SICommon.Types.Entities.BurnerGenerator ,
+				SICommon.Types.Entities.Reactor ,
+				SICommon.Types.Entities.Car ,
+				SICommon.Types.Entities.SpiderVehicle ,
+				SICommon.Types.Entities.WagonLocomotive
+			} ,
+			mode = SICommon.Flags.Condition.OR
+		} ,
+		{
+			filter = "name" ,
+			name = SIConstants_Core.raw.Entities.IconEmpty ,
+			mode = SICommon.Flags.Condition.OR
+		}
+	} ,
 	InsertFuel_Item_Filters = {} , -- 暂时不需要设置筛选器
 	InsertAmmo_Entity_Filters =
 	{
@@ -130,6 +157,26 @@ SIAutoInsert =
 			filter = "hidden" ,
 			mode = SICommon.Flags.Condition.AND ,
 			invert = true
+		} ,
+		{
+			filter = "name" ,
+			name = SIConstants_Core.raw.Entities.IconEmpty ,
+			mode = SICommon.Flags.Condition.OR
+		}
+	} ,
+	InsertAmmo_Entity_Filters_ShowHidden =
+	{
+		{
+			filter = "type" ,
+			type =
+			{
+				SICommon.Types.Entities.TurretAmmo ,
+				SICommon.Types.Entities.TurretArtillery ,
+				SICommon.Types.Entities.Car ,
+				SICommon.Types.Entities.SpiderVehicle ,
+				SICommon.Types.Entities.WagonArtillery
+			} ,
+			mode = SICommon.Flags.Condition.OR
 		} ,
 		{
 			filter = "name" ,
@@ -336,6 +383,8 @@ SIAutoInsert =
 		-- 清空列表
 		local list = elements.InsertFuel_List
 		list.clear()
+		-- 选择筛选器
+		local entityFilter = SISettings.PerUser.SICore.ShowHiddenEntity() and SIAutoInsert.InsertFuel_Entity_Filters_ShowHidden or SIAutoInsert.InsertFuel_Entity_Filters
 		-- 重建列表
 		for entityName , itemDataList in pairs( tabSettings.InsertFuel.List ) do
 			local entityPrototype = game.entity_prototypes[entityName]
@@ -347,7 +396,7 @@ SIAutoInsert =
 					tooltip = { "SICore.自动填充-窗口-插入燃料-实体-提示" , entityPrototype.localised_name } ,
 					elem_type = "entity" ,
 					entity = entityName ,
-					elem_filters = SIAutoInsert.InsertFuel_Entity_Filters ,
+					elem_filters = entityFilter ,
 					style = SIConstants_Core.raw.Styles.AutoInsert_ListChooser
 				}
 				local subList = list.add{ type = "table" , column_count = 5 , style = SIConstants_Core.raw.Styles.AutoInsert_SelectList }
@@ -404,7 +453,7 @@ SIAutoInsert =
 					tooltip = { "SICore.自动填充-窗口-插入燃料-实体-空-提示" , entityName } ,
 					elem_type = "entity" ,
 					entity = SIConstants_Core.raw.Entities.IconEmpty ,
-					elem_filters = SIAutoInsert.InsertFuel_Entity_Filters ,
+					elem_filters = entityFilter ,
 					style = SIConstants_Core.raw.Styles.AutoInsert_ListChooser
 				}
 				local subList = list.add{ type = "table" , column_count = 5 , style = SIConstants_Core.raw.Styles.AutoInsert_SelectList }
@@ -453,7 +502,7 @@ SIAutoInsert =
 			tooltip = { "SICore.自动填充-窗口-插入燃料-实体-选择-提示" } ,
 			elem_type = "entity" ,
 			entity = nil ,
-			elem_filters = SIAutoInsert.InsertFuel_Entity_Filters ,
+			elem_filters = entityFilter ,
 			style = SIConstants_Core.raw.Styles.AutoInsert_ListChooser
 		}
 	end ,
@@ -463,6 +512,8 @@ SIAutoInsert =
 		-- 清空列表
 		local list = elements.InsertAmmo_List
 		list.clear()
+		-- 选择筛选器
+		local entityFilter = SISettings.PerUser.SICore.ShowHiddenEntity() and SIAutoInsert.InsertAmmo_Entity_Filters_ShowHidden or SIAutoInsert.InsertAmmo_Entity_Filters
 		-- 重建列表
 		for entityName , itemDataList in pairs( tabSettings.InsertAmmo.List ) do
 			local entityPrototype = game.entity_prototypes[entityName]
@@ -474,7 +525,7 @@ SIAutoInsert =
 					tooltip = { "SICore.自动填充-窗口-插入弹药-实体-提示" , entityPrototype.localised_name } ,
 					elem_type = "entity" ,
 					entity = entityName ,
-					elem_filters = SIAutoInsert.InsertAmmo_Entity_Filters ,
+					elem_filters = entityFilter ,
 					style = SIConstants_Core.raw.Styles.AutoInsert_ListChooser
 				}
 				local type = entityPrototype.type
@@ -577,7 +628,7 @@ SIAutoInsert =
 					tooltip = { "SICore.自动填充-窗口-插入弹药-实体-空-提示" , entityName } ,
 					elem_type = "entity" ,
 					entity = SIConstants_Core.raw.Entities.IconEmpty ,
-					elem_filters = SIAutoInsert.InsertAmmo_Entity_Filters ,
+					elem_filters = entityFilter ,
 					style = SIConstants_Core.raw.Styles.AutoInsert_ListChooser
 				}
 				local subList = list.add{ type = "table" , column_count = 6 , style = SIConstants_Core.raw.Styles.AutoInsert_SelectList }
@@ -628,7 +679,7 @@ SIAutoInsert =
 			tooltip = { "SICore.自动填充-窗口-插入弹药-实体-选择-提示" } ,
 			elem_type = "entity" ,
 			entity = nil ,
-			elem_filters = SIAutoInsert.InsertAmmo_Entity_Filters ,
+			elem_filters = entityFilter ,
 			style = SIConstants_Core.raw.Styles.AutoInsert_ListChooser
 		}
 	end ,

@@ -197,6 +197,28 @@ SIRequestMap =
 			mode = SICommon.Flags.Condition.OR
 		}
 	} ,
+	RequestSlot_Entity_Filters_ShowHidden =
+	{
+		{
+			filter = "type" ,
+			type =
+			{
+				SICommon.Types.Entities.ContainerLogic ,
+				SICommon.Types.Entities.Inserter ,
+				SICommon.Types.Entities.BeltLoader ,
+				SICommon.Types.Entities.BeltLoaderSmall ,
+				SICommon.Types.Entities.Car ,
+				SICommon.Types.Entities.SpiderVehicle ,
+				SICommon.Types.Entities.WagonCargo
+			} ,
+			mode = SICommon.Flags.Condition.OR
+		} ,
+		{
+			filter = "name" ,
+			name = SIConstants_Core.raw.Entities.IconEmpty ,
+			mode = SICommon.Flags.Condition.OR
+		}
+	} ,
 	RequestSlot_Item_Filters = {} , -- 暂时不需要设置筛选器
 	MaxSlot_Entity_Filters =
 	{
@@ -223,6 +245,26 @@ SIRequestMap =
 			mode = SICommon.Flags.Condition.OR
 		}
 	} ,
+	MaxSlot_Entity_Filters_ShowHidden =
+	{
+		{
+			filter = "type" ,
+			type =
+			{
+				SICommon.Types.Entities.Container ,
+				SICommon.Types.Entities.ContainerLogic ,
+				SICommon.Types.Entities.Car ,
+				SICommon.Types.Entities.SpiderVehicle ,
+				SICommon.Types.Entities.WagonCargo
+			} ,
+			mode = SICommon.Flags.Condition.OR
+		} ,
+		{
+			filter = "name" ,
+			name = SIConstants_Core.raw.Entities.IconEmpty ,
+			mode = SICommon.Flags.Condition.OR
+		}
+	} ,
 	SetModule_Entity_Filters =
 	{
 		{
@@ -242,6 +284,27 @@ SIRequestMap =
 			filter = "hidden" ,
 			mode = SICommon.Flags.Condition.AND ,
 			invert = true
+		} ,
+		{
+			filter = "name" ,
+			name = SIConstants_Core.raw.Entities.IconEmpty ,
+			mode = SICommon.Flags.Condition.OR
+		}
+	} ,
+	SetModule_Entity_Filters_ShowHidden =
+	{
+		{
+			filter = "type" ,
+			type =
+			{
+				SICommon.Types.Entities.Machine ,
+				SICommon.Types.Entities.Furnace ,
+				SICommon.Types.Entities.Lab ,
+				SICommon.Types.Entities.Mining ,
+				SICommon.Types.Entities.RocketSilo ,
+				SICommon.Types.Entities.Beacon
+			} ,
+			mode = SICommon.Flags.Condition.OR
 		} ,
 		{
 			filter = "name" ,
@@ -276,6 +339,27 @@ SIRequestMap =
 			filter = "hidden" ,
 			mode = SICommon.Flags.Condition.AND ,
 			invert = true
+		} ,
+		{
+			filter = "name" ,
+			name = SIConstants_Core.raw.Entities.IconEmpty ,
+			mode = SICommon.Flags.Condition.OR
+		}
+	} ,
+	RemoveModule_Entity_Filters_ShowHidden =
+	{
+		{
+			filter = "type" ,
+			type =
+			{
+				SICommon.Types.Entities.Machine ,
+				SICommon.Types.Entities.Furnace ,
+				SICommon.Types.Entities.Lab ,
+				SICommon.Types.Entities.Mining ,
+				SICommon.Types.Entities.RocketSilo ,
+				SICommon.Types.Entities.Beacon
+			} ,
+			mode = SICommon.Flags.Condition.OR
 		} ,
 		{
 			filter = "name" ,
@@ -323,6 +407,33 @@ SIRequestMap =
 			mode = SICommon.Flags.Condition.OR
 		}
 	} ,
+	InsertFuel_Entity_Filters_ShowHidden =
+	{
+		{
+			filter = "type" ,
+			type =
+			{
+				SICommon.Types.Entities.Machine ,
+				SICommon.Types.Entities.Furnace ,
+				SICommon.Types.Entities.Lab ,
+				SICommon.Types.Entities.Mining ,
+				SICommon.Types.Entities.Beacon ,
+				SICommon.Types.Entities.Inserter ,
+				SICommon.Types.Entities.Boiler ,
+				SICommon.Types.Entities.BurnerGenerator ,
+				SICommon.Types.Entities.Reactor ,
+				SICommon.Types.Entities.Car ,
+				SICommon.Types.Entities.SpiderVehicle ,
+				SICommon.Types.Entities.WagonLocomotive
+			} ,
+			mode = SICommon.Flags.Condition.OR
+		} ,
+		{
+			filter = "name" ,
+			name = SIConstants_Core.raw.Entities.IconEmpty ,
+			mode = SICommon.Flags.Condition.OR
+		}
+	} ,
 	InsertFuel_Item_Filters = {} , -- 暂时不需要设置筛选器
 	InsertAmmo_Entity_Filters =
 	{
@@ -342,6 +453,26 @@ SIRequestMap =
 			filter = "hidden" ,
 			mode = SICommon.Flags.Condition.AND ,
 			invert = true
+		} ,
+		{
+			filter = "name" ,
+			name = SIConstants_Core.raw.Entities.IconEmpty ,
+			mode = SICommon.Flags.Condition.OR
+		}
+	} ,
+	InsertAmmo_Entity_Filters_ShowHidden =
+	{
+		{
+			filter = "type" ,
+			type =
+			{
+				SICommon.Types.Entities.TurretAmmo ,
+				SICommon.Types.Entities.TurretArtillery ,
+				SICommon.Types.Entities.Car ,
+				SICommon.Types.Entities.SpiderVehicle ,
+				SICommon.Types.Entities.WagonArtillery
+			} ,
+			mode = SICommon.Flags.Condition.OR
 		} ,
 		{
 			filter = "name" ,
@@ -645,6 +776,8 @@ SIRequestMap =
 		-- 清空列表
 		local list = elements.RequestSlot_List
 		list.clear()
+		-- 选择筛选器
+		local entityFilter = SISettings.PerUser.SICore.ShowHiddenEntity() and SIRequestMap.RequestSlot_Entity_Filters_ShowHidden or SIRequestMap.RequestSlot_Entity_Filters
 		-- 重建列表
 		for entityName , requestItemList in pairs( tabSettings.RequestSlot.List ) do
 			local entityPrototype = game.entity_prototypes[entityName]
@@ -692,7 +825,7 @@ SIRequestMap =
 				tooltip = entityTooltip ,
 				elem_type = "entity" ,
 				entity = entityNameSelected ,
-				elem_filters = SIRequestMap.RequestSlot_Entity_Filters ,
+				elem_filters = entityFilter ,
 				style = SIConstants_Core.raw.Styles.RequestMap_ListChooser
 			}
 			local selectList1 = list.add{ type = "table" , column_count = 10 , style = SIConstants_Core.raw.Styles.RequestMap_SelectList }
@@ -731,7 +864,7 @@ SIRequestMap =
 			tooltip = { "SICore.紫图-窗口-请求格子-实体-选择-提示" } ,
 			elem_type = "entity" ,
 			entity = nil ,
-			elem_filters = SIRequestMap.RequestSlot_Entity_Filters ,
+			elem_filters = entityFilter ,
 			style = SIConstants_Core.raw.Styles.RequestMap_ListChooser
 		}
 	end ,
@@ -741,6 +874,8 @@ SIRequestMap =
 		-- 清空列表
 		local list = elements.MaxSlot_List
 		list.clear()
+		-- 选择筛选器
+		local entityFilter = SISettings.PerUser.SICore.ShowHiddenEntity() and SIRequestMap.MaxSlot_Entity_Filters_ShowHidden or SIRequestMap.MaxSlot_Entity_Filters
 		-- 重建列表
 		for entityName , count in pairs( tabSettings.MaxSlot.List ) do
 			local entityPrototype = game.entity_prototypes[entityName]
@@ -773,7 +908,7 @@ SIRequestMap =
 				tooltip = entityTooltip ,
 				elem_type = "entity" ,
 				entity = entityNameSelected ,
-				elem_filters = SIRequestMap.MaxSlot_Entity_Filters ,
+				elem_filters = entityFilter ,
 				style = SIConstants_Core.raw.Styles.RequestMap_ListChooser
 			}
 			local flow = list.add{ type = "flow" , direction = "horizontal" , style = SIConstants_Core.raw.Styles.RequestMap_ListFlow }
@@ -788,7 +923,7 @@ SIRequestMap =
 			tooltip = { "SICore.紫图-窗口-最大格子-实体-选择-提示" } ,
 			elem_type = "entity" ,
 			entity = nil ,
-			elem_filters = SIRequestMap.MaxSlot_Entity_Filters ,
+			elem_filters = entityFilter ,
 			style = SIConstants_Core.raw.Styles.RequestMap_ListChooser
 		}
 	end ,
@@ -802,6 +937,8 @@ SIRequestMap =
 		-- 清空列表
 		local list = elements.SetModule_List
 		list.clear()
+		-- 选择筛选器
+		local entityFilter = SISettings.PerUser.SICore.ShowHiddenEntity() and SIRequestMap.SetModule_Entity_Filters_ShowHidden or SIRequestMap.SetModule_Entity_Filters
 		-- 重建列表
 		for entityName , moduleList in pairs( tabSettings.SetModule.List ) do
 			local entityPrototype = game.entity_prototypes[entityName]
@@ -840,7 +977,7 @@ SIRequestMap =
 				tooltip = entityTooltip ,
 				elem_type = "entity" ,
 				entity = entityNameSelected ,
-				elem_filters = SIRequestMap.SetModule_Entity_Filters ,
+				elem_filters = entityFilter ,
 				style = SIConstants_Core.raw.Styles.RequestMap_ListChooser
 			}
 			local selectList1 = list.add{ type = "table" , column_count = 10 , style = SIConstants_Core.raw.Styles.RequestMap_SelectList }
@@ -879,7 +1016,7 @@ SIRequestMap =
 			tooltip = { "SICore.紫图-窗口-设置插件-实体-选择-提示" } ,
 			elem_type = "entity" ,
 			entity = nil ,
-			elem_filters = SIRequestMap.SetModule_Entity_Filters ,
+			elem_filters = entityFilter ,
 			style = SIConstants_Core.raw.Styles.RequestMap_ListChooser
 		}
 	end ,
@@ -893,6 +1030,8 @@ SIRequestMap =
 		-- 清空列表
 		local list = elements.RemoveModule_List
 		list.clear()
+		-- 选择筛选器
+		local entityFilter = SISettings.PerUser.SICore.ShowHiddenEntity() and SIRequestMap.RemoveModule_Entity_Filters_ShowHidden or SIRequestMap.RemoveModule_Entity_Filters
 		-- 重建列表
 		for entityName , moduleList in pairs( tabSettings.RemoveModule.List ) do
 			local entityPrototype = game.entity_prototypes[entityName]
@@ -931,7 +1070,7 @@ SIRequestMap =
 				tooltip = entityTooltip ,
 				elem_type = "entity" ,
 				entity = entityNameSelected ,
-				elem_filters = SIRequestMap.RemoveModule_Entity_Filters ,
+				elem_filters = entityFilter ,
 				style = SIConstants_Core.raw.Styles.RequestMap_ListChooser
 			}
 			local selectList1 = list.add{ type = "table" , column_count = 10 , style = SIConstants_Core.raw.Styles.RequestMap_SelectList }
@@ -970,7 +1109,7 @@ SIRequestMap =
 			tooltip = { "SICore.紫图-窗口-移除插件-实体-选择-提示" } ,
 			elem_type = "entity" ,
 			entity = nil ,
-			elem_filters = SIRequestMap.RemoveModule_Entity_Filters ,
+			elem_filters = entityFilter ,
 			style = SIConstants_Core.raw.Styles.RequestMap_ListChooser
 		}
 	end ,
@@ -984,6 +1123,8 @@ SIRequestMap =
 		-- 清空列表
 		local list = elements.InsertFuel_List
 		list.clear()
+		-- 选择筛选器
+		local entityFilter = SISettings.PerUser.SICore.ShowHiddenEntity() and SIRequestMap.InsertFuel_Entity_Filters_ShowHidden or SIRequestMap.InsertFuel_Entity_Filters
 		-- 重建列表
 		for entityName , itemDataList in pairs( tabSettings.InsertFuel.List ) do
 			local entityPrototype = game.entity_prototypes[entityName]
@@ -995,7 +1136,7 @@ SIRequestMap =
 					tooltip = { "SICore.紫图-窗口-插入燃料-实体-提示" , entityPrototype.localised_name } ,
 					elem_type = "entity" ,
 					entity = entityName ,
-					elem_filters = SIRequestMap.InsertFuel_Entity_Filters ,
+					elem_filters = entityFilter ,
 					style = SIConstants_Core.raw.Styles.RequestMap_ListChooser
 				}
 				local subList = list.add{ type = "table" , column_count = 7 , style = SIConstants_Core.raw.Styles.RequestMap_SelectList }
@@ -1063,7 +1204,7 @@ SIRequestMap =
 					tooltip = { "SICore.紫图-窗口-插入燃料-实体-空-提示" , entityName } ,
 					elem_type = "entity" ,
 					entity = SIConstants_Core.raw.Entities.IconEmpty ,
-					elem_filters = SIRequestMap.InsertFuel_Entity_Filters ,
+					elem_filters = entityFilter ,
 					style = SIConstants_Core.raw.Styles.RequestMap_ListChooser
 				}
 				local subList = list.add{ type = "table" , column_count = 7 , style = SIConstants_Core.raw.Styles.RequestMap_SelectList }
@@ -1123,7 +1264,7 @@ SIRequestMap =
 			tooltip = { "SICore.紫图-窗口-插入燃料-实体-选择-提示" } ,
 			elem_type = "entity" ,
 			entity = nil ,
-			elem_filters = SIRequestMap.InsertFuel_Entity_Filters ,
+			elem_filters = entityFilter ,
 			style = SIConstants_Core.raw.Styles.RequestMap_ListChooser
 		}
 	end ,
@@ -1133,6 +1274,8 @@ SIRequestMap =
 		-- 清空列表
 		local list = elements.InsertAmmo_List
 		list.clear()
+		-- 选择筛选器
+		local entityFilter = SISettings.PerUser.SICore.ShowHiddenEntity() and SIRequestMap.InsertAmmo_Entity_Filters_ShowHidden or SIRequestMap.InsertAmmo_Entity_Filters
 		-- 重建列表
 		for entityName , itemDataList in pairs( tabSettings.InsertAmmo.List ) do
 			local entityPrototype = game.entity_prototypes[entityName]
@@ -1144,7 +1287,7 @@ SIRequestMap =
 					tooltip = { "SICore.紫图-窗口-插入弹药-实体-提示" , entityPrototype.localised_name } ,
 					elem_type = "entity" ,
 					entity = entityName ,
-					elem_filters = SIRequestMap.InsertAmmo_Entity_Filters ,
+					elem_filters = entityFilter ,
 					style = SIConstants_Core.raw.Styles.RequestMap_ListChooser
 				}
 				local type = entityPrototype.type
@@ -1258,7 +1401,7 @@ SIRequestMap =
 					tooltip = { "SICore.紫图-窗口-插入弹药-实体-空-提示" , entityName } ,
 					elem_type = "entity" ,
 					entity = SIConstants_Core.raw.Entities.IconEmpty ,
-					elem_filters = SIRequestMap.InsertAmmo_Entity_Filters ,
+					elem_filters = entityFilter ,
 					style = SIConstants_Core.raw.Styles.RequestMap_ListChooser
 				}
 				local subList = list.add{ type = "table" , column_count = 8 , style = SIConstants_Core.raw.Styles.RequestMap_SelectList }
@@ -1320,7 +1463,7 @@ SIRequestMap =
 			tooltip = { "SICore.紫图-窗口-插入弹药-实体-选择-提示" } ,
 			elem_type = "entity" ,
 			entity = nil ,
-			elem_filters = SIRequestMap.InsertAmmo_Entity_Filters ,
+			elem_filters = entityFilter ,
 			style = SIConstants_Core.raw.Styles.RequestMap_ListChooser
 		}
 	end ,

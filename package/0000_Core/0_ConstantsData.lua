@@ -136,7 +136,8 @@ local constantsData =
 		-- ----------------------------------------
 		Settings =
 		{
-			ShowMainbar = { SICommon.SettingTypes.BOOL , SICommon.SettingAffectTypes.PerUser , true }
+			ShowMainbar = { SICommon.SettingTypes.BOOL , SICommon.SettingAffectTypes.PerUser , true } ,
+			ShowHiddenEntity = { SICommon.SettingTypes.BOOL , SICommon.SettingAffectTypes.PerUser , false }
 		} ,
 
 		-- ----------------------------------------
