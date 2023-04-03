@@ -175,6 +175,9 @@ SIGen
 	{
 		SIConstants_Core.raw.Categories.Equipment.Special
 	} ,
+	background_color = SICommon.Colors.Equipment.Building ,
+	background_border_color = SICommon.Colors.Equipment.Border ,
+	grabbed_background_color = SICommon.Colors.Equipment.BuildingHover ,
 	shape =
 	{
 		type = SICommon.Flags.EquipmentShapeType.Full ,
@@ -448,6 +451,9 @@ SIGen
 	{
 		SIConstants_Core.raw.Categories.Equipment.Special
 	} ,
+	background_color = SICommon.Colors.Equipment.Generator ,
+	background_border_color = SICommon.Colors.Equipment.Border ,
+	grabbed_background_color = SICommon.Colors.Equipment.GeneratorHover ,
 	shape =
 	{
 		type = SICommon.Flags.EquipmentShapeType.Full ,
@@ -973,6 +979,9 @@ SIGen
 	{
 		SIConstants_Core.raw.Categories.Equipment.Special
 	} ,
+	background_color = SICommon.Colors.Equipment.Modify ,
+	background_border_color = SICommon.Colors.Equipment.Border ,
+	grabbed_background_color = SICommon.Colors.Equipment.ModifyHover ,
 	shape =
 	{
 		type = SICommon.Flags.EquipmentShapeType.Full ,
@@ -992,7 +1001,7 @@ SIGen
 		drain = "0J"
 	} ,
 	energy_consumption = "1TW" ,
-	movement_bonus = 3.0 ,
+	movement_bonus = 1.0 ,
 	sprite =
 	{
 		filename = SIGen.MakePicturePath( SICommon.Types.Items.Module , "奇妙之双鱼螺旋插件" .. SICommon.ShowNameSuffix.ICON ) ,
@@ -1228,6 +1237,9 @@ SIGen
 	{
 		SIConstants_Core.raw.Categories.Equipment.Special
 	} ,
+	background_color = SICommon.Colors.Equipment.Building ,
+	background_border_color = SICommon.Colors.Equipment.Border ,
+	grabbed_background_color = SICommon.Colors.Equipment.BuildingHover ,
 	shape =
 	{
 		type = SICommon.Flags.EquipmentShapeType.Full ,
@@ -1619,6 +1631,9 @@ SIGen
 	{
 		SIConstants_Core.raw.Categories.Equipment.Special
 	} ,
+	background_color = SICommon.Colors.Equipment.Building ,
+	background_border_color = SICommon.Colors.Equipment.Border ,
+	grabbed_background_color = SICommon.Colors.Equipment.BuildingHover ,
 	shape =
 	{
 		type = SICommon.Flags.EquipmentShapeType.Full ,
@@ -1744,7 +1759,6 @@ SIGen
 }
 .New( SICommon.Types.Entities.RobotConstruct , "Construction" , "伟力之移山填海建设单元" )
 .AutoIcon()
-.SetSizeScale( 1 , 1 , 0 )
 .ReferencePlaceResult( SICommon.Types.Items.Item , SIConstants_Core.raw.Items.Construction )
 .Append
 {
@@ -1761,8 +1775,10 @@ SIGen
 			}
 		}
 	} ,
-	max_health = 24000 ,
+	collision_box = { { 0 , 0 } , { 0 , 0 } } ,
+	selection_box = { { -0.5 , -1.5 } , { 0.5 , -0.5 } } ,
 	hit_visualization_box = { { -0.1 , -1.1 } , { 0.1 , -1.0 } } ,
+	max_health = 24000 ,
 	corpse = nil ,
 	dying_explosion = "nuke-explosion" ,
 	map_color = { r = 1.00 , g = 0.94 , b = 0.46 } ,
@@ -1791,6 +1807,69 @@ SIGen
 	speed = 0.24 ,
 	cargo_centered = { 0.0 , 0.2 } ,
 	construction_vector = { 0.30 , 0.22 } ,
+	dying_trigger_effect =
+	{
+		{
+			type = "create-particle" ,
+			particle_name = "construction-robot-dying-particle" ,
+			initial_height = 1.8 ,
+			initial_vertical_speed = 0 ,
+			frame_speed = 1 ,
+			frame_speed_deviation = 0.5 ,
+			speed_from_center = 0 ,
+			speed_from_center_deviation = 0.2 ,
+			offset_deviation = { { -0.01 , -0.01 } , { 0.01 , 0.01 } } ,
+			offsets = { { 0 , 0.5 } }
+		} ,
+		{
+			type = "play-sound" ,
+			sound =
+			{
+				{
+					filename = "__base__/sound/fight/robot-die-whoosh-01.ogg" ,
+					volume = 0.5
+				} ,
+				{
+					filename = "__base__/sound/fight/robot-die-whoosh-02.ogg" ,
+					volume = 0.5
+				} ,
+				{
+					filename = "__base__/sound/fight/robot-die-whoosh-03.ogg" ,
+					volume = 0.5
+				}
+			}
+		} ,
+		{
+			type = "play-sound" ,
+			sound =
+			{
+				{
+					filename = "__base__/sound/fight/robot-die-vox-01.ogg" ,
+					volume = 0.5
+				} ,
+				{
+					filename = "__base__/sound/fight/robot-die-vox-02.ogg" ,
+					volume = 0.5
+				} ,
+				{
+					filename = "__base__/sound/fight/robot-die-vox-03.ogg" ,
+					volume = 0.5
+				} ,
+				{
+					filename = "__base__/sound/fight/robot-die-vox-04.ogg" ,
+					volume = 0.5
+				} ,
+				{
+					filename = "__base__/sound/fight/robot-die-vox-05.ogg" ,
+					volume = 0.5
+				} ,
+				{
+					filename = "__base__/sound/fight/robot-die-vox-06.ogg" ,
+					volume = 0.5
+				}
+			}
+		}
+	} ,
 	idle =
 	{
 		layers =
@@ -2136,6 +2215,9 @@ SIGen
 	{
 		SIConstants_Core.raw.Categories.Equipment.Special
 	} ,
+	background_color = SICommon.Colors.Equipment.Modify ,
+	background_border_color = SICommon.Colors.Equipment.Border ,
+	grabbed_background_color = SICommon.Colors.Equipment.ModifyHover ,
 	shape =
 	{
 		type = SICommon.Flags.EquipmentShapeType.Full ,
@@ -2222,7 +2304,6 @@ SIGen
 }
 .New( SICommon.Types.Entities.RobotLogistic , "Logistic" , "伟力之移山填海物流单元" )
 .AutoIcon()
-.SetSizeScale( 1 , 1 , 0 )
 .ReferencePlaceResult( SICommon.Types.Items.Item , SIConstants_Core.raw.Items.Logistic )
 .Append
 {
@@ -2239,8 +2320,10 @@ SIGen
 			}
 		}
 	} ,
-	max_health = 24000 ,
+	collision_box = { { 0 , 0 } , { 0 , 0 } } ,
+	selection_box = { { -0.5 , -1.5 } , { 0.5 , -0.5 } } ,
 	hit_visualization_box = { { -0.1 , -1.1 } , { 0.1 , -1.0 } } ,
+	max_health = 24000 ,
 	corpse = nil ,
 	dying_explosion = "nuke-explosion" ,
 	map_color = { r = 1.00 , g = 0.94 , b = 0.46 } ,
@@ -2268,6 +2351,69 @@ SIGen
 	max_payload_size = 10 ,
 	speed = 0.24 ,
 	cargo_centered = { 0.0 , 0.2 } ,
+	dying_trigger_effect =
+	{
+		{
+			type = "create-particle" ,
+			particle_name = "logistic-robot-dying-particle" ,
+			initial_height = 1.8 ,
+			initial_vertical_speed = 0 ,
+			frame_speed = 1 ,
+			frame_speed_deviation = 0.5 ,
+			speed_from_center = 0 ,
+			speed_from_center_deviation = 0.2 ,
+			offset_deviation = { { -0.01 , -0.01 } , { 0.01 , 0.01 } } ,
+			offsets = { { 0 , 0.5 } }
+		} ,
+		{
+			type = "play-sound" ,
+			sound =
+			{
+				{
+					filename = "__base__/sound/fight/robot-die-whoosh-01.ogg" ,
+					volume = 0.5
+				} ,
+				{
+					filename = "__base__/sound/fight/robot-die-whoosh-02.ogg" ,
+					volume = 0.5
+				} ,
+				{
+					filename = "__base__/sound/fight/robot-die-whoosh-03.ogg" ,
+					volume = 0.5
+				}
+			}
+		} ,
+		{
+			type = "play-sound" ,
+			sound =
+			{
+				{
+					filename = "__base__/sound/fight/robot-die-vox-01.ogg" ,
+					volume = 0.5
+				} ,
+				{
+					filename = "__base__/sound/fight/robot-die-vox-02.ogg" ,
+					volume = 0.5
+				} ,
+				{
+					filename = "__base__/sound/fight/robot-die-vox-03.ogg" ,
+					volume = 0.5
+				} ,
+				{
+					filename = "__base__/sound/fight/robot-die-vox-04.ogg" ,
+					volume = 0.5
+				} ,
+				{
+					filename = "__base__/sound/fight/robot-die-vox-05.ogg" ,
+					volume = 0.5
+				} ,
+				{
+					filename = "__base__/sound/fight/robot-die-vox-06.ogg" ,
+					volume = 0.5
+				}
+			}
+		}
+	} ,
 	idle =
 	{
 		layers =
@@ -2532,6 +2678,9 @@ SIGen
 	{
 		SIConstants_Core.raw.Categories.Equipment.Special
 	} ,
+	background_color = SICommon.Colors.Equipment.Building ,
+	background_border_color = SICommon.Colors.Equipment.Border ,
+	grabbed_background_color = SICommon.Colors.Equipment.BuildingHover ,
 	shape =
 	{
 		type = SICommon.Flags.EquipmentShapeType.Full ,
@@ -2619,6 +2768,7 @@ SIGen
 .Append
 {
 	flags = { SICommon.Flags.Entity.NotOnMap , SICommon.Flags.Entity.Hidden } ,
+	selectable_in_game = false ,
 	width = 2.5 ,
 	damage_interval = 4 ,
 	random_target_offset = false ,
@@ -2871,6 +3021,7 @@ SIGen
 .Append
 {
 	flags = { SICommon.Flags.Entity.NotOnMap , SICommon.Flags.Entity.Hidden } ,
+	selectable_in_game = false ,
 	width = 2.5 ,
 	damage_interval = 4 ,
 	random_target_offset = false ,
@@ -3123,6 +3274,7 @@ SIGen
 .Append
 {
 	flags = { SICommon.Flags.Entity.NotOnMap , SICommon.Flags.Entity.Hidden } ,
+	selectable_in_game = false ,
 	width = 2.5 ,
 	damage_interval = 4 ,
 	random_target_offset = false ,
@@ -3895,6 +4047,9 @@ SIGen
 	{
 		SIConstants_Core.raw.Categories.Equipment.Special
 	} ,
+	background_color = SICommon.Colors.Equipment.Attack ,
+	background_border_color = SICommon.Colors.Equipment.Border ,
+	grabbed_background_color = SICommon.Colors.Equipment.AttackHover ,
 	shape =
 	{
 		type = SICommon.Flags.EquipmentShapeType.Full ,

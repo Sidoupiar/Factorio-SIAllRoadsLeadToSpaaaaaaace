@@ -1503,6 +1503,7 @@ SIGen
 .Append
 {
 	flags = { SICommon.Flags.Entity.NotOnMap , SICommon.Flags.Entity.Hidden } ,
+	selectable_in_game = false ,
 	width = 2.5 ,
 	damage_interval = 15 ,
 	random_target_offset = true ,

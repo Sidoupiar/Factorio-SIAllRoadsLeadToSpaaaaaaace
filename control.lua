@@ -102,7 +102,7 @@ function NotClick( playerIndex )
 	if index > 0 and index <= NotClickListSize then
 		local player = game.get_player( playerIndex )
 		if player and player.valid then
-			player.print( { "SIUtils.点了也没用" .. index } , SICommon.Colors.PrintColor.ORANGE )
+			player.print( { "SIUtils.点了也没用" .. index } , SICommon.Colors.Print.ORANGE )
 		end
 	end
 end

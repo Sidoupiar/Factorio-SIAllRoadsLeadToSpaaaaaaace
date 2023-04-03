@@ -458,13 +458,13 @@ SIPrint =
 		if SIUtils.Settings.Debug() then
 			log( CoreName .. " : " .. ( message or "nil" ) )
 			if game then
-				game.print( { "SICommon.debug" , message } , SICommon.Colors.PrintColor.BLUE )
+				game.print( { "SICommon.debug" , message } , SICommon.Colors.Print.BLUE )
 			end
 		end
 	end ,
 	Print = function( message )
 		if SIInit.State == SIInit.StateCodeDefine.Control and game then
-			game.print( { "SICommon.message" , message } , SICommon.Colors.PrintColor.GREEN )
+			game.print( { "SICommon.message" , message } , SICommon.Colors.Print.GREEN )
 		end
 		SIPrint.Log( message )
 	end ,
@@ -478,7 +478,7 @@ SIPrint =
 			elseif SITools.IsNumber( playerOrIndex ) or not playerOrIndex.is_player then
 				playerOrIndex = game.get_player( playerOrIndex )
 			end
-			playerOrIndex.print( { "SICommon.message" , customMessage } , SICommon.Colors.PrintColor.GREEN )
+			playerOrIndex.print( { "SICommon.message" , customMessage } , SICommon.Colors.Print.GREEN )
 		else
 			SIPrint.Log( customMessage )
 		end
@@ -493,7 +493,7 @@ SIPrint =
 			elseif SITools.IsNumber( playerOrIndex ) or not playerOrIndex.is_player then
 				playerOrIndex = game.get_player( playerOrIndex )
 			end
-			playerOrIndex.print( { "SICommon.tip" , customMessage } , SICommon.Colors.PrintColor.BLUE )
+			playerOrIndex.print( { "SICommon.tip" , customMessage } , SICommon.Colors.Print.BLUE )
 		else
 			SIPrint.Log( customMessage )
 		end
@@ -508,7 +508,7 @@ SIPrint =
 			elseif SITools.IsNumber( playerOrIndex ) or not playerOrIndex.is_player then
 				playerOrIndex = game.get_player( playerOrIndex )
 			end
-			playerOrIndex.print( { "SICommon.warning" , customMessage } , SICommon.Colors.PrintColor.ORANGE )
+			playerOrIndex.print( { "SICommon.warning" , customMessage } , SICommon.Colors.Print.ORANGE )
 		else
 			SIPrint.Log( customMessage )
 		end
@@ -523,7 +523,7 @@ SIPrint =
 			elseif SITools.IsNumber( playerOrIndex ) or not playerOrIndex.is_player then
 				playerOrIndex = game.get_player( playerOrIndex )
 			end
-			playerOrIndex.print( { "SICommon.alert" , customMessage } , SICommon.Colors.PrintColor.RED )
+			playerOrIndex.print( { "SICommon.alert" , customMessage } , SICommon.Colors.Print.RED )
 		else
 			SIPrint.Log( customMessage )
 		end

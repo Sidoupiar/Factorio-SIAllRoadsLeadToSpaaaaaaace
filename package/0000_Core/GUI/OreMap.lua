@@ -317,7 +317,7 @@ SIOreMap =
 		if settings.asDefault then
 			if settings.count < 1 then
 				settings.asDefault = false
-				game.get_player( playerIndex ).print( { "SICore.黄图-设置-空-信息" , { "SICore.黄图-设置-取消默认" } } , SICommon.Colors.PrintColor.ORANGE )
+				game.get_player( playerIndex ).print( { "SICore.黄图-设置-空-信息" , { "SICore.黄图-设置-取消默认" } } , SICommon.Colors.Print.ORANGE )
 			else
 				settings.tiles = selectedTiles
 				if SIOreMap.SpawnOre( settings ) and settings.frame and settings.frame.valid then

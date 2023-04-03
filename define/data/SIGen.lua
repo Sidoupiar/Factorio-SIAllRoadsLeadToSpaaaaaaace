@@ -1211,6 +1211,9 @@ function SIGen.AutoIconItem( iconItemDataList )
 			{
 				SIConstants_Core.raw.Categories.Equipment.Special
 			} ,
+			background_color = SICommon.Colors.Equipment.Default ,
+			background_border_color = SICommon.Colors.Equipment.Border ,
+			grabbed_background_color = SICommon.Colors.Equipment.DefaultHover ,
 			shape =
 			{
 				type = SICommon.Flags.EquipmentShapeType.Full ,

@@ -91,14 +91,14 @@ SIGen
 	height = 24 ,
 	-- 字体
 	font = SIConstants_Core.raw.Fonts.CommonTitle ,
-	font_color = SICommon.Colors.FontColor.Title ,
-	disabled_font_color = SICommon.Colors.FontColor.Disable_Default ,
+	font_color = SICommon.Colors.Font.Title ,
+	disabled_font_color = SICommon.Colors.Font.Disable_Default ,
 	-- 富文本
 	rich_text_setting = "enabled" ,
 	single_line = true ,
-	rich_text_highlight_error_color = SICommon.Colors.FontColor.RED ,
-	rich_text_highlight_warning_color = SICommon.Colors.FontColor.YELLOW ,
-	rich_text_highlight_ok_color = SICommon.Colors.FontColor.GREEN
+	rich_text_highlight_error_color = SICommon.Colors.Font.RED ,
+	rich_text_highlight_warning_color = SICommon.Colors.Font.YELLOW ,
+	rich_text_highlight_ok_color = SICommon.Colors.Font.GREEN
 } )
 .AddStyle( "Common_Frame" , "通用-窗口" ,
 {
@@ -523,7 +523,7 @@ SIGen
 	} ,
 	-- 字体
 	font = SIConstants_Core.raw.Fonts.Common ,
-	font_color = SICommon.Colors.FontColor.BLACK ,
+	font_color = SICommon.Colors.Font.BLACK ,
 	side_text_padding = 8 ,
 	embed_text_in_bar = false
 } )
@@ -652,8 +652,8 @@ SIGen
 	-- 字体
 	text_padding = 8 ,
 	font = SIConstants_Core.raw.Fonts.Common ,
-	font_color = SICommon.Colors.FontColor.Default ,
-	disabled_font_color = SICommon.Colors.FontColor.Disable_Default ,
+	font_color = SICommon.Colors.Font.Default ,
+	disabled_font_color = SICommon.Colors.Font.Disable_Default ,
 	-- 声音
 	left_click_sound =
 	{
@@ -695,8 +695,8 @@ SIGen
 	-- 字体
 	text_padding = 8 ,
 	font = SIConstants_Core.raw.Fonts.Common ,
-	font_color = SICommon.Colors.FontColor.Default ,
-	disabled_font_color = SICommon.Colors.FontColor.Disable_Default ,
+	font_color = SICommon.Colors.Font.Default ,
+	disabled_font_color = SICommon.Colors.Font.Disable_Default ,
 	-- 图形
 	checkmark =
 	{

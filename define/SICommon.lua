@@ -8,7 +8,7 @@ SICommon =
 {
 	Colors =
 	{
-		BaseColor =
+		Base =
 		{
 			BASE_WHITE      = { r = 1.00 , g = 1.00 , b = 1.00 , a = 1.00 } , -- 纯白
 			BASE_BLACK      = { r = 0.00 , g = 0.00 , b = 0.00 , a = 1.00 } , -- 纯黑
@@ -23,7 +23,7 @@ SICommon =
 			ORANGE          = { r = 0.94 , g = 0.55 , b = 0.00 , a = 1.00 } , -- 橙色
 			GRAY            = { r = 0.50 , g = 0.50 , b = 0.50 , a = 1.00 }   -- 灰色
 		} ,
-		PrintColor =
+		Print =
 		{
 			WHITE           = { r = 0.88 , g = 0.88 , b = 0.88 , a = 1.00 } , -- 白色
 			RED             = { r = 1.00 , g = 0.40 , b = 0.40 , a = 1.00 } , -- 红色
@@ -32,7 +32,7 @@ SICommon =
 			YELLOW          = { r = 1.00 , g = 1.00 , b = 0.40 , a = 1.00 } , -- 黄色
 			ORANGE          = { r = 1.00 , g = 0.70 , b = 0.40 , a = 1.00 }   -- 橙色
 		} ,
-		DamageBeamColor =
+		DamageBeam =
 		{
 			Physical        = { r = 0.90 , g = 0.65 , b = 0.22 , a = 1.00 } , -- 物理伤害
 			Impact          = { r = 0.50 , g = 0.50 , b = 0.50 , a = 1.00 } ,
@@ -45,11 +45,26 @@ SICommon =
 			Curse           = { r = 0.15 , g = 0.15 , b = 0.15 , a = 1.00 } ,
 			Other           = { r = 1.00 , g = 1.00 , b = 1.00 , a = 1.00 }
 		} ,
-		TintColor =
+		Equipment =
+		{
+			Default         = { r = 0.35 , g = 0.35 , b = 0.35 , a = 0.30 } ,
+			DefaultHover    = { r = 0.55 , g = 0.55 , b = 0.55 , a = 0.30 } ,
+			Border          = { r = 0.10 , g = 0.10 , b = 0.10 , a = 1.00 } ,
+			-- 各种类别的模块的背景颜色
+			Generator       = { r = 0.04 , g = 0.37 , b = 0.29 , a = 0.30 } ,
+			GeneratorHover  = { r = 0.11 , g = 0.48 , b = 0.38 , a = 0.30 } ,
+			Building        = { r = 0.03 , g = 0.27 , b = 0.39 , a = 0.30 } ,
+			BuildingHover   = { r = 0.10 , g = 0.39 , b = 0.54 , a = 0.30 } ,
+			Modify          = { r = 0.36 , g = 0.28 , b = 0.05 , a = 0.30 } ,
+			ModifyHover     = { r = 0.49 , g = 0.38 , b = 0.10 , a = 0.30 } ,
+			Attack          = { r = 0.42 , g = 0.12 , b = 0.04 , a = 0.30 } ,
+			AttackHover     = { r = 0.52 , g = 0.17 , b = 0.08 , a = 0.30 }
+		} ,
+		Tint =
 		{
 			DEFAULT         = { r = 0.30 , g = 0.30 , b = 0.30 , a = 0.30 }   -- 深灰
 		} ,
-		FontColor =
+		Font =
 		{
 			Title           = { r = 1.00 , g = 0.90 , b = 0.75 , a = 1.00 } , -- 标题 , 浅橘黄
 			Default         = { r = 1.00 , g = 1.00 , b = 1.00 , a = 1.00 } , -- 默认颜色
