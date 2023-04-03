@@ -777,7 +777,7 @@ SIRequestMap =
 		local list = elements.RequestSlot_List
 		list.clear()
 		-- 选择筛选器
-		local entityFilter = SISettings.PerUser.SICore.ShowHiddenEntity() and SIRequestMap.RequestSlot_Entity_Filters_ShowHidden or SIRequestMap.RequestSlot_Entity_Filters
+		local entityFilter = SISettings.PerUser.SICore.ShowHiddenEntity( settings.playerIndex ) and SIRequestMap.RequestSlot_Entity_Filters_ShowHidden or SIRequestMap.RequestSlot_Entity_Filters
 		-- 重建列表
 		for entityName , requestItemList in pairs( tabSettings.RequestSlot.List ) do
 			local entityPrototype = game.entity_prototypes[entityName]
@@ -875,7 +875,7 @@ SIRequestMap =
 		local list = elements.MaxSlot_List
 		list.clear()
 		-- 选择筛选器
-		local entityFilter = SISettings.PerUser.SICore.ShowHiddenEntity() and SIRequestMap.MaxSlot_Entity_Filters_ShowHidden or SIRequestMap.MaxSlot_Entity_Filters
+		local entityFilter = SISettings.PerUser.SICore.ShowHiddenEntity( settings.playerIndex ) and SIRequestMap.MaxSlot_Entity_Filters_ShowHidden or SIRequestMap.MaxSlot_Entity_Filters
 		-- 重建列表
 		for entityName , count in pairs( tabSettings.MaxSlot.List ) do
 			local entityPrototype = game.entity_prototypes[entityName]
@@ -938,7 +938,7 @@ SIRequestMap =
 		local list = elements.SetModule_List
 		list.clear()
 		-- 选择筛选器
-		local entityFilter = SISettings.PerUser.SICore.ShowHiddenEntity() and SIRequestMap.SetModule_Entity_Filters_ShowHidden or SIRequestMap.SetModule_Entity_Filters
+		local entityFilter = SISettings.PerUser.SICore.ShowHiddenEntity( settings.playerIndex ) and SIRequestMap.SetModule_Entity_Filters_ShowHidden or SIRequestMap.SetModule_Entity_Filters
 		-- 重建列表
 		for entityName , moduleList in pairs( tabSettings.SetModule.List ) do
 			local entityPrototype = game.entity_prototypes[entityName]
@@ -1031,7 +1031,7 @@ SIRequestMap =
 		local list = elements.RemoveModule_List
 		list.clear()
 		-- 选择筛选器
-		local entityFilter = SISettings.PerUser.SICore.ShowHiddenEntity() and SIRequestMap.RemoveModule_Entity_Filters_ShowHidden or SIRequestMap.RemoveModule_Entity_Filters
+		local entityFilter = SISettings.PerUser.SICore.ShowHiddenEntity( settings.playerIndex ) and SIRequestMap.RemoveModule_Entity_Filters_ShowHidden or SIRequestMap.RemoveModule_Entity_Filters
 		-- 重建列表
 		for entityName , moduleList in pairs( tabSettings.RemoveModule.List ) do
 			local entityPrototype = game.entity_prototypes[entityName]
@@ -1124,7 +1124,7 @@ SIRequestMap =
 		local list = elements.InsertFuel_List
 		list.clear()
 		-- 选择筛选器
-		local entityFilter = SISettings.PerUser.SICore.ShowHiddenEntity() and SIRequestMap.InsertFuel_Entity_Filters_ShowHidden or SIRequestMap.InsertFuel_Entity_Filters
+		local entityFilter = SISettings.PerUser.SICore.ShowHiddenEntity( settings.playerIndex ) and SIRequestMap.InsertFuel_Entity_Filters_ShowHidden or SIRequestMap.InsertFuel_Entity_Filters
 		-- 重建列表
 		for entityName , itemDataList in pairs( tabSettings.InsertFuel.List ) do
 			local entityPrototype = game.entity_prototypes[entityName]
@@ -1275,7 +1275,7 @@ SIRequestMap =
 		local list = elements.InsertAmmo_List
 		list.clear()
 		-- 选择筛选器
-		local entityFilter = SISettings.PerUser.SICore.ShowHiddenEntity() and SIRequestMap.InsertAmmo_Entity_Filters_ShowHidden or SIRequestMap.InsertAmmo_Entity_Filters
+		local entityFilter = SISettings.PerUser.SICore.ShowHiddenEntity( settings.playerIndex ) and SIRequestMap.InsertAmmo_Entity_Filters_ShowHidden or SIRequestMap.InsertAmmo_Entity_Filters
 		-- 重建列表
 		for entityName , itemDataList in pairs( tabSettings.InsertAmmo.List ) do
 			local entityPrototype = game.entity_prototypes[entityName]

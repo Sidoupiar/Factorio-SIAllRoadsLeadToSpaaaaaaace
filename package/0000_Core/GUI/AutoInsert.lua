@@ -384,7 +384,7 @@ SIAutoInsert =
 		local list = elements.InsertFuel_List
 		list.clear()
 		-- 选择筛选器
-		local entityFilter = SISettings.PerUser.SICore.ShowHiddenEntity() and SIAutoInsert.InsertFuel_Entity_Filters_ShowHidden or SIAutoInsert.InsertFuel_Entity_Filters
+		local entityFilter = SISettings.PerUser.SICore.ShowHiddenEntity( settings.playerIndex ) and SIAutoInsert.InsertFuel_Entity_Filters_ShowHidden or SIAutoInsert.InsertFuel_Entity_Filters
 		-- 重建列表
 		for entityName , itemDataList in pairs( tabSettings.InsertFuel.List ) do
 			local entityPrototype = game.entity_prototypes[entityName]
@@ -513,7 +513,7 @@ SIAutoInsert =
 		local list = elements.InsertAmmo_List
 		list.clear()
 		-- 选择筛选器
-		local entityFilter = SISettings.PerUser.SICore.ShowHiddenEntity() and SIAutoInsert.InsertAmmo_Entity_Filters_ShowHidden or SIAutoInsert.InsertAmmo_Entity_Filters
+		local entityFilter = SISettings.PerUser.SICore.ShowHiddenEntity( settings.playerIndex ) and SIAutoInsert.InsertAmmo_Entity_Filters_ShowHidden or SIAutoInsert.InsertAmmo_Entity_Filters
 		-- 重建列表
 		for entityName , itemDataList in pairs( tabSettings.InsertAmmo.List ) do
 			local entityPrototype = game.entity_prototypes[entityName]
