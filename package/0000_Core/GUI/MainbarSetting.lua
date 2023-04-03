@@ -289,7 +289,7 @@ SIMainbarSetting =
 			local flow11_Label = list.add{ type = "flow" , direction = "horizontal" , style = SIConstants_Core.raw.Styles.Mainbar_Setting_ListTitleFlow }
 			flow11_Label.add{ type = "label" , caption = { "SICore.主面板设置管理-窗口-设置-筛选界面显示隐藏实体" } , tooltip = { "SICore.主面板设置管理-窗口-设置-筛选界面显示隐藏实体-提示" } , style = SIConstants_Core.raw.Styles.Mainbar_Setting_ListLabel }
 			flow11_Label.add{ type = "sprite" , sprite = "info" , tooltip = { "SICore.主面板设置管理-窗口-设置-筛选界面显示隐藏实体-提示" } }
-			elements.itemshowHiddenEntity = list.add{ type = "checkbox" , state = SISettings.PerUser.SICore.ShowHiddenEntity( settings.playerIndex ) , tooltip = { "SICore.主面板设置管理-窗口-设置-筛选界面显示隐藏实体-提示" } , style = SIConstants_Core.raw.Styles.Mainbar_Setting_ListCheck }
+			elements.itemShowHiddenEntity = list.add{ type = "checkbox" , state = SISettings.PerUser.SICore.ShowHiddenEntity( settings.playerIndex ) , tooltip = { "SICore.主面板设置管理-窗口-设置-筛选界面显示隐藏实体-提示" } , style = SIConstants_Core.raw.Styles.Mainbar_Setting_ListCheck }
 			list.add{ type = "label" , style = SIConstants_Core.raw.Styles.Mainbar_Setting_ListPlace }
 			-- 第 12 层 , 工具栏常用按钮 1
 			local flow12_Label = list.add{ type = "flow" , direction = "horizontal" , style = SIConstants_Core.raw.Styles.Mainbar_Setting_ListTitleFlow }
@@ -331,12 +331,13 @@ SIMainbarSetting =
 	-- ---------- 功能函数 ----------------------------------------------------------------------------
 	-- ------------------------------------------------------------------------------------------------
 	Save = function( settings , isClosing )
+		settings.Setting.Saveing = true
 		local elements = settings.Setting.Elements
 		local base = settings.Setting.Base
 		local default = SIMainData.Settings.DefaultPlayer.Setting.Base
 		-- 保存设置数据
 		-- 主窗口
-		local showMainbar = true
+		local showMainbar = game.mod_setting_prototypes[SIConstants_Core.raw.Settings.ShowMainbar].default_value
 		if elements.itemMainbar then
 			showMainbar = elements.itemMainbar.state
 		end
@@ -390,15 +391,15 @@ SIMainbarSetting =
 			base.showKeyNote = default.showKeyNote
 		end
 		-- 从游戏设置读取
-		if elements.itemLoadFromUser then
-			base.loadFromUserSettings = elements.itemLoadFromUser.state
-		else
-			base.loadFromUserSettings = default.loadFromUserSettings
-		end
+		-- if elements.itemLoadFromUser then
+		-- 	base.loadFromUserSettings = elements.itemLoadFromUser.state
+		-- else
+		-- 	base.loadFromUserSettings = default.loadFromUserSettings
+		-- end
 		-- 筛选界面显示隐藏实体
-		local showHiddenEntity = false
-		if elements.itemshowHiddenEntity then
-			showHiddenEntity = elements.itemshowHiddenEntity.state
+		local showHiddenEntity = game.mod_setting_prototypes[SIConstants_Core.raw.Settings.ShowHiddenEntity].default_value
+		if elements.itemShowHiddenEntity then
+			showHiddenEntity = elements.itemShowHiddenEntity.state
 		end
 		SISettings.PerUserChange.SICore.ShowHiddenEntity( settings.playerIndex , showHiddenEntity )
 		-- 工具栏常用按钮 1
@@ -429,6 +430,7 @@ SIMainbarSetting =
 		if not isClosing then
 			SIMainbarSetting.FreshList( settings )
 		end
+		settings.Setting.Saveing = false
 	end ,
 	Back = function( settings )
 		if not settings.Setting.back then
@@ -468,11 +470,11 @@ SIMainbarSetting =
 		if elements.itemKeyNote then
 			elements.itemKeyNote.state = back.showKeyNote
 		end
-		if elements.itemLoadFromUser then
-			elements.itemLoadFromUser.state = back.loadFromUserSettings
-		end
-		if elements.itemshowHiddenEntity then
-			elements.itemshowHiddenEntity.state = back.showHiddenEntity
+		-- if elements.itemLoadFromUser then
+		-- 	elements.itemLoadFromUser.state = back.loadFromUserSettings
+		-- end
+		if elements.itemShowHiddenEntity then
+			elements.itemShowHiddenEntity.state = back.showHiddenEntity
 		end
 		if elements.itemCommonToolbar1 then
 			elements.itemCommonToolbar1.selected_index = ( back.commonToolbar1 or 0 ) + 1
@@ -486,7 +488,7 @@ SIMainbarSetting =
 		local default = SIMainData.Settings.DefaultPlayer.Setting.Base
 		-- 修改控件的值
 		if elements.itemMainbar then
-			elements.itemMainbar.state = true
+			elements.itemMainbar.state = game.mod_setting_prototypes[SIConstants_Core.raw.Settings.ShowMainbar].default_value
 		end
 		if elements.itemToolbar then
 			elements.itemToolbar.state = default.showToolbar
@@ -515,11 +517,11 @@ SIMainbarSetting =
 		if elements.itemKeyNote then
 			elements.itemKeyNote.state = default.showKeyNote
 		end
-		if elements.itemLoadFromUser then
-			elements.itemLoadFromUser.state = default.loadFromUserSettings
-		end
-		if elements.itemshowHiddenEntity then
-			elements.itemshowHiddenEntity.state = false
+		-- if elements.itemLoadFromUser then
+		-- 	elements.itemLoadFromUser.state = default.loadFromUserSettings
+		-- end
+		if elements.itemShowHiddenEntity then
+			elements.itemShowHiddenEntity.state = game.mod_setting_prototypes[SIConstants_Core.raw.Settings.ShowHiddenEntity].default_value
 		end
 		if elements.itemCommonToolbar1 then
 			elements.itemCommonToolbar1.selected_index = ( default.commonToolbar1 or 0 ) + 1
@@ -556,8 +558,8 @@ SIMainbarSetting =
 		end
 		-- 应用数据
 		local gameTick = data.Tick
-		SISettings.PerUserChange.SICore.ShowMainbar( settings.playerIndex , data.Base.showMainbar ~= nil and data.Base.showMainbar or true )
-		SISettings.PerUserChange.SICore.ShowHiddenEntity( settings.playerIndex , data.Base.showHiddenEntity ~= nil and data.Base.showHiddenEntity or false )
+		SISettings.PerUserChange.SICore.ShowMainbar( playerIndex , data.Base.showMainbar ~= nil and data.Base.showMainbar or true )
+		SISettings.PerUserChange.SICore.ShowHiddenEntity( playerIndex , data.Base.showHiddenEntity ~= nil and data.Base.showHiddenEntity or false )
 		data.Base.showMainbar = nil
 		data.Base.showHiddenEntity = nil
 		settings.Setting.Base = data.Base
@@ -657,7 +659,9 @@ SIMainbarSetting =
 	RuntimeSettingsChanged = function( playerIndex )
 		local settings = SIGlobal.GetPlayerSettings( SIMainData.Settings.Name , playerIndex )
 		if settings.Setting.frame and settings.Setting.frame.valid then
-			SIMainbarSetting.FreshList( settings )
+			if not settings.Setting.Saveing then
+				SIMainbarSetting.FreshList( settings )
+			end
 		end
 	end ,
 	SaveSettings = function( playerIndex )

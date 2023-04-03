@@ -31,6 +31,17 @@ local function ModifyBurnerSource( source )
 	end
 end
 
+local function AppendFlag( prototypeData , newFlag )
+	local flags = prototypeData.flags
+	if flags then
+		if not SITable.Has( flags , newFlag ) then
+			table.insert( flags , newFlag )
+		end
+	else
+		prototypeData.flags = { newFlag }
+	end
+end
+
 SIGen
 -- 修改水蒸气的最高温度
 -- 此项不可以禁用或删除
@@ -69,6 +80,24 @@ end )
 		else
 			prototypeData.equipment_categories = { SIConstants_Core.raw.Categories.Equipment.Special }
 		end
+	end
+end )
+
+-- 修改原版装卸机的标识
+-- 此项不可以禁用或删除
+.Find( SICommon.Types.Entities.BeltLoader , "loader" , function( prototypeName , prototypeData )
+	if prototypeData then
+		AppendFlag( prototypeData , SICommon.Flags.Entity.PlaceablePlayer )
+	end
+end )
+.Find( SICommon.Types.Entities.BeltLoader , "fast-loader" , function( prototypeName , prototypeData )
+	if prototypeData then
+		AppendFlag( prototypeData , SICommon.Flags.Entity.PlaceablePlayer )
+	end
+end )
+.Find( SICommon.Types.Entities.BeltLoader , "express-loader" , function( prototypeName , prototypeData )
+	if prototypeData then
+		AppendFlag( prototypeData , SICommon.Flags.Entity.PlaceablePlayer )
 	end
 end )
 

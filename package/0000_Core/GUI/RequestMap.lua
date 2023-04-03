@@ -187,6 +187,11 @@ SIRequestMap =
 			mode = SICommon.Flags.Condition.OR
 		} ,
 		{
+			filter = "flag" ,
+			flag = SICommon.Flags.Entity.PlaceablePlayer ,
+			mode = SICommon.Flags.Condition.AND ,
+		} ,
+		{
 			filter = "hidden" ,
 			mode = SICommon.Flags.Condition.AND ,
 			invert = true
@@ -214,6 +219,11 @@ SIRequestMap =
 			mode = SICommon.Flags.Condition.OR
 		} ,
 		{
+			filter = "flag" ,
+			flag = SICommon.Flags.Entity.PlaceablePlayer ,
+			mode = SICommon.Flags.Condition.AND ,
+		} ,
+		{
 			filter = "name" ,
 			name = SIConstants_Core.raw.Entities.IconEmpty ,
 			mode = SICommon.Flags.Condition.OR
@@ -233,6 +243,11 @@ SIRequestMap =
 				SICommon.Types.Entities.WagonCargo
 			} ,
 			mode = SICommon.Flags.Condition.OR
+		} ,
+		{
+			filter = "flag" ,
+			flag = SICommon.Flags.Entity.PlaceablePlayer ,
+			mode = SICommon.Flags.Condition.AND ,
 		} ,
 		{
 			filter = "hidden" ,
@@ -260,6 +275,11 @@ SIRequestMap =
 			mode = SICommon.Flags.Condition.OR
 		} ,
 		{
+			filter = "flag" ,
+			flag = SICommon.Flags.Entity.PlaceablePlayer ,
+			mode = SICommon.Flags.Condition.AND ,
+		} ,
+		{
 			filter = "name" ,
 			name = SIConstants_Core.raw.Entities.IconEmpty ,
 			mode = SICommon.Flags.Condition.OR
@@ -279,6 +299,11 @@ SIRequestMap =
 				SICommon.Types.Entities.Beacon
 			} ,
 			mode = SICommon.Flags.Condition.OR
+		} ,
+		{
+			filter = "flag" ,
+			flag = SICommon.Flags.Entity.PlaceablePlayer ,
+			mode = SICommon.Flags.Condition.AND ,
 		} ,
 		{
 			filter = "hidden" ,
@@ -305,6 +330,11 @@ SIRequestMap =
 				SICommon.Types.Entities.Beacon
 			} ,
 			mode = SICommon.Flags.Condition.OR
+		} ,
+		{
+			filter = "flag" ,
+			flag = SICommon.Flags.Entity.PlaceablePlayer ,
+			mode = SICommon.Flags.Condition.AND ,
 		} ,
 		{
 			filter = "name" ,
@@ -336,6 +366,11 @@ SIRequestMap =
 			mode = SICommon.Flags.Condition.OR
 		} ,
 		{
+			filter = "flag" ,
+			flag = SICommon.Flags.Entity.PlaceablePlayer ,
+			mode = SICommon.Flags.Condition.AND ,
+		} ,
+		{
 			filter = "hidden" ,
 			mode = SICommon.Flags.Condition.AND ,
 			invert = true
@@ -360,6 +395,11 @@ SIRequestMap =
 				SICommon.Types.Entities.Beacon
 			} ,
 			mode = SICommon.Flags.Condition.OR
+		} ,
+		{
+			filter = "flag" ,
+			flag = SICommon.Flags.Entity.PlaceablePlayer ,
+			mode = SICommon.Flags.Condition.AND ,
 		} ,
 		{
 			filter = "name" ,
@@ -397,6 +437,11 @@ SIRequestMap =
 			mode = SICommon.Flags.Condition.OR
 		} ,
 		{
+			filter = "flag" ,
+			flag = SICommon.Flags.Entity.PlaceablePlayer ,
+			mode = SICommon.Flags.Condition.AND ,
+		} ,
+		{
 			filter = "hidden" ,
 			mode = SICommon.Flags.Condition.AND ,
 			invert = true
@@ -429,6 +474,11 @@ SIRequestMap =
 			mode = SICommon.Flags.Condition.OR
 		} ,
 		{
+			filter = "flag" ,
+			flag = SICommon.Flags.Entity.PlaceablePlayer ,
+			mode = SICommon.Flags.Condition.AND ,
+		} ,
+		{
 			filter = "name" ,
 			name = SIConstants_Core.raw.Entities.IconEmpty ,
 			mode = SICommon.Flags.Condition.OR
@@ -448,6 +498,11 @@ SIRequestMap =
 				SICommon.Types.Entities.WagonArtillery
 			} ,
 			mode = SICommon.Flags.Condition.OR
+		} ,
+		{
+			filter = "flag" ,
+			flag = SICommon.Flags.Entity.PlaceablePlayer ,
+			mode = SICommon.Flags.Condition.AND ,
 		} ,
 		{
 			filter = "hidden" ,
@@ -473,6 +528,11 @@ SIRequestMap =
 				SICommon.Types.Entities.WagonArtillery
 			} ,
 			mode = SICommon.Flags.Condition.OR
+		} ,
+		{
+			filter = "flag" ,
+			flag = SICommon.Flags.Entity.PlaceablePlayer ,
+			mode = SICommon.Flags.Condition.AND ,
 		} ,
 		{
 			filter = "name" ,

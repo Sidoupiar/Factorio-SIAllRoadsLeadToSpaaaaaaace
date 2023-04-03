@@ -101,6 +101,11 @@ SIAutoInsert =
 			mode = SICommon.Flags.Condition.OR
 		} ,
 		{
+			filter = "flag" ,
+			flag = SICommon.Flags.Entity.PlaceablePlayer ,
+			mode = SICommon.Flags.Condition.AND ,
+		} ,
+		{
 			filter = "hidden" ,
 			mode = SICommon.Flags.Condition.AND ,
 			invert = true
@@ -133,6 +138,11 @@ SIAutoInsert =
 			mode = SICommon.Flags.Condition.OR
 		} ,
 		{
+			filter = "flag" ,
+			flag = SICommon.Flags.Entity.PlaceablePlayer ,
+			mode = SICommon.Flags.Condition.AND ,
+		} ,
+		{
 			filter = "name" ,
 			name = SIConstants_Core.raw.Entities.IconEmpty ,
 			mode = SICommon.Flags.Condition.OR
@@ -152,6 +162,11 @@ SIAutoInsert =
 				SICommon.Types.Entities.WagonArtillery
 			} ,
 			mode = SICommon.Flags.Condition.OR
+		} ,
+		{
+			filter = "flag" ,
+			flag = SICommon.Flags.Entity.PlaceablePlayer ,
+			mode = SICommon.Flags.Condition.AND ,
 		} ,
 		{
 			filter = "hidden" ,
@@ -177,6 +192,11 @@ SIAutoInsert =
 				SICommon.Types.Entities.WagonArtillery
 			} ,
 			mode = SICommon.Flags.Condition.OR
+		} ,
+		{
+			filter = "flag" ,
+			flag = SICommon.Flags.Entity.PlaceablePlayer ,
+			mode = SICommon.Flags.Condition.AND ,
 		} ,
 		{
 			filter = "name" ,

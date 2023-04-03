@@ -101,6 +101,7 @@ SIMainData.Settings =
 			list = nil ,
 			importText = nil ,
 			exportText = nil ,
+			Saveing = false ,
 			Elements =
 			{
 				itemMainbar = nil ,
@@ -114,7 +115,7 @@ SIMainData.Settings =
 				itemNewMessage = nil ,
 				itemKeyNote = nil ,
 				itemLoadFromUser = nil ,
-				itemshowHiddenEntity = nil ,
+				itemShowHiddenEntity = nil ,
 				itemCommonToolbar1 = nil ,
 				itemCommonToolbar2 = nil ,
 			} ,
