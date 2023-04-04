@@ -1104,7 +1104,7 @@ function SIGen.AutoIconItem( iconItemDataList )
 				results =
 				{
 					{
-						type = SICommon.Types.Items.item ,
+						type = SICommon.Types.Items.Item ,
 						name = itemPrototypeData.name ,
 						amount = 1
 					}
@@ -1129,6 +1129,8 @@ function SIGen.AutoIconItem( iconItemDataList )
 			map_color = { r = 1.0 , g = 1.0 , b = 1.0 } ,
 			friendly_map_color = { r = 0.2 , g = 0.2 , b = 1.0 } ,
 			enemy_map_color = { r = 1.0 , g = 0.2 , b = 0.2 } ,
+			is_military_target = true ,
+			allow_run_time_change_of_is_military_target = true ,
 			alert_when_damaged = false ,
 			create_ghost_on_death = false ,
 			hide_resistances = true ,

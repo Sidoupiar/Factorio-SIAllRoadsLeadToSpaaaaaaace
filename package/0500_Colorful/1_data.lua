@@ -42,7 +42,7 @@ for r = 0 , SIConstants_Colorful.ColorMax , SIConstants_Colorful.ColorStep do
 					results =
 					{
 						{
-							type = SICommon.Types.Items.item ,
+							type = SICommon.Types.Items.Item ,
 							name = SIConstants_Colorful.raw.Items.Pixel ,
 							amount = 1
 						}
@@ -59,7 +59,9 @@ for r = 0 , SIConstants_Colorful.ColorMax , SIConstants_Colorful.ColorStep do
 				map_color = tint ,
 				friendly_map_color = tint ,
 				enemy_map_color = tint ,
-				alert_when_damaged = false ,
+				is_military_target = true ,
+				allow_run_time_change_of_is_military_target = true ,
+				alert_when_damaged = true ,
 				create_ghost_on_death = true ,
 				hide_resistances = true ,
 				resistances = nil ,

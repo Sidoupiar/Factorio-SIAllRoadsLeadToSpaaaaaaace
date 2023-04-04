@@ -119,7 +119,9 @@ SIGen
 	map_color = { r = 1.0 , g = 1.0 , b = 1.0 } ,
 	friendly_map_color = { r = 0.4 , g = 0.4 , b = 1.0 } ,
 	enemy_map_color = { r = 1.0 , g = 0.4 , b = 0.4 } ,
-	alert_when_damaged = false ,
+	is_military_target = false ,
+	allow_run_time_change_of_is_military_target = true ,
+	alert_when_damaged = true ,
 	create_ghost_on_death = false ,
 	hide_resistances = false ,
 	resistances =

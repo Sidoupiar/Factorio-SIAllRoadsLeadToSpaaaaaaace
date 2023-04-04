@@ -49,6 +49,23 @@ local function AppendFlag( prototypeData , newFlag )
 	end
 end
 
+local NoCollisionType =
+{
+	[SICommon.Types.HealthEntities.Fish]           = true ,
+	[SICommon.Types.HealthEntities.Market]         = true ,
+	[SICommon.Types.HealthEntities.Belt]           = true ,
+	[SICommon.Types.HealthEntities.BeltGround]     = true ,
+	[SICommon.Types.HealthEntities.BeltLinked]     = true ,
+	[SICommon.Types.HealthEntities.BeltSplitter]   = true ,
+	[SICommon.Types.HealthEntities.RailStraight]   = true ,
+	[SICommon.Types.HealthEntities.RailCurved]     = true ,
+	[SICommon.Types.HealthEntities.SpiderVehicle]  = true ,
+	[SICommon.Types.HealthEntities.RobotConstruct] = true ,
+	[SICommon.Types.HealthEntities.RobotLogistic]  = true ,
+	[SICommon.Types.HealthEntities.RobotCombat]    = true ,
+	[SICommon.Types.HealthEntities.PlayerPort]     = true
+}
+
 SIGen
 -- 修改水蒸气的最高温度
 -- 此项不可以禁用或删除
@@ -108,11 +125,26 @@ end )
 	end
 end )
 
+-- 给所有有生命值的实体添加特殊碰撞层
+-- 此项不可以禁用或删除
+.ForEachType( SICommon.Types.HealthEntities , function( prototypeName , prototypeData )
+	if prototypeData and not NoCollisionType[prototypeData.type] then
+		local collisionMask = prototypeData.collision_mask
+		if not collisionMask then
+			collisionMask = SIUtils.CollisionMask.get_default_mask( prototypeData.type ) or {}
+		end
+		if not SITable.Has( collisionMask , SIConstants_Core.TankCollisionMaskLayer ) then
+			table.insert( collisionMask , SIConstants_Core.TankCollisionMaskLayer )
+		end
+	end
+end )
+
 -- 修改树木血量
 if SIConfigs.SIOverhaul.TreeHealth then
 	SIGen.ForEach( SICommon.Types.Entities.Tree , function( prototypeName , prototypeData )
 		if prototypeData and prototypeData.max_health then
 			prototypeData.max_health = prototypeData.max_health * 30
+			prototypeData.healing_per_tick = ( prototypeData.healing_per_tick or 0.017 ) * 30
 		end
 	end )
 end

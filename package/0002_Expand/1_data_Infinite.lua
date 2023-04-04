@@ -476,7 +476,7 @@ SIGen
 		results =
 		{
 			{
-				type = SICommon.Types.Items.item ,
+				type = SICommon.Types.Items.Item ,
 				name = SIConstants_Expand.raw.Items.Lab ,
 				amount = 1
 			}
@@ -488,6 +488,8 @@ SIGen
 	map_color = { r = 1.00 , g = 1.00 , b = 1.00 } ,
 	friendly_map_color = { r = 0.40 , g = 0.40 , b = 1.00 } ,
 	enemy_map_color = { r = 1.00 , g = 0.40 , b = 0.40 } ,
+	is_military_target = true ,
+	allow_run_time_change_of_is_military_target = true ,
 	alert_when_damaged = true ,
 	create_ghost_on_death = true ,
 	hide_resistances = true ,

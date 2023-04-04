@@ -19,6 +19,9 @@ local defaultResistances =
 	SITools.Resistance( "electric" , 0 , 100 ) ,
 }
 
+local tankSize = 4.0
+local tankShiftY = 6
+
 SIGen
 .SetGroup( SIConstants_Core.raw.Groups.Hidden.Debug )
 
@@ -91,7 +94,7 @@ SIGen
 		results =
 		{
 			{
-				type = SICommon.Types.Items.item ,
+				type = SICommon.Types.Items.Item ,
 				name = SIConstants_Core.raw.Items.Candy ,
 				amount = 1
 			}
@@ -103,6 +106,8 @@ SIGen
 	map_color = { r = 1.00 , g = 0.94 , b = 0.46 } ,
 	friendly_map_color = { r = 1.00 , g = 0.94 , b = 0.46 } ,
 	enemy_map_color = { r = 1.00 , g = 0.94 , b = 0.46 } ,
+	is_military_target = true ,
+	allow_run_time_change_of_is_military_target = true ,
 	alert_when_damaged = true ,
 	create_ghost_on_death = false ,
 	hide_resistances = true ,
@@ -279,7 +284,7 @@ SIGen
 		results =
 		{
 			{
-				type = SICommon.Types.Items.item ,
+				type = SICommon.Types.Items.Item ,
 				name = SIConstants_Core.raw.Items.BrightBar ,
 				amount = 1
 			}
@@ -291,6 +296,8 @@ SIGen
 	map_color = { r = 1.00 , g = 0.94 , b = 0.46 } ,
 	friendly_map_color = { r = 1.00 , g = 0.94 , b = 0.46 } ,
 	enemy_map_color = { r = 1.00 , g = 0.94 , b = 0.46 } ,
+	is_military_target = false ,
+	allow_run_time_change_of_is_military_target = true ,
 	alert_when_damaged = true ,
 	create_ghost_on_death = false ,
 	hide_resistances = true ,
@@ -325,10 +332,23 @@ SIGen
 		render_no_network_icon = true ,
 		fuel_inventory_size = 3 ,
 		burnt_inventory_size = 3 ,
-		smoke = nil ,
+		smoke =
+		{
+			{
+				name = "tank-smoke" ,
+				deviation = { 0.25 , 0.25 } ,
+				frequency = 50 ,
+				position = { 0 , 1.5  ,
+				starting_frame = 0 ,
+				starting_frame_deviation = 60}
+			}
+		} ,
 		light_flicker = nil ,
 		effectivity = 2.5 ,
-		fuel_categories = { SIConstants_Core.raw.Categories.Fuel.Special }
+		fuel_categories =
+		{
+			SIConstants_Core.raw.Categories.Fuel.Special
+		}
 	} ,
 	animation =
 	{
@@ -518,7 +538,7 @@ SIGen
 		results =
 		{
 			{
-				type = SICommon.Types.Items.item ,
+				type = SICommon.Types.Items.Item ,
 				name = SIConstants_Core.raw.Items.FishModule ,
 				amount = 1
 			}
@@ -530,6 +550,8 @@ SIGen
 	map_color = { r = 1.00 , g = 0.94 , b = 0.46 } ,
 	friendly_map_color = { r = 1.00 , g = 0.94 , b = 0.46 } ,
 	enemy_map_color = { r = 1.00 , g = 0.94 , b = 0.46 } ,
+	is_military_target = false ,
+	allow_run_time_change_of_is_military_target = true ,
 	alert_when_damaged = true ,
 	create_ghost_on_death = false ,
 	hide_resistances = true ,
@@ -995,7 +1017,7 @@ SIGen
 		results =
 		{
 			{
-				type = SICommon.Types.Items.item ,
+				type = SICommon.Types.Items.Item ,
 				name = SIConstants_Core.raw.Items.LookRadar ,
 				amount = 1
 			}
@@ -1007,6 +1029,8 @@ SIGen
 	map_color = { r = 1.00 , g = 0.94 , b = 0.46 } ,
 	friendly_map_color = { r = 1.00 , g = 0.94 , b = 0.46 } ,
 	enemy_map_color = { r = 1.00 , g = 0.94 , b = 0.46 } ,
+	is_military_target = false ,
+	allow_run_time_change_of_is_military_target = true ,
 	alert_when_damaged = true ,
 	create_ghost_on_death = false ,
 	hide_resistances = true ,
@@ -1236,7 +1260,7 @@ SIGen
 		results =
 		{
 			{
-				type = SICommon.Types.Items.item ,
+				type = SICommon.Types.Items.Item ,
 				name = SIConstants_Core.raw.Items.Roboport ,
 				amount = 1
 			}
@@ -1248,6 +1272,8 @@ SIGen
 	map_color = { r = 1.00 , g = 0.94 , b = 0.46 } ,
 	friendly_map_color = { r = 1.00 , g = 0.94 , b = 0.46 } ,
 	enemy_map_color = { r = 1.00 , g = 0.94 , b = 0.46 } ,
+	is_military_target = false ,
+	allow_run_time_change_of_is_military_target = true ,
 	alert_when_damaged = true ,
 	create_ghost_on_death = false ,
 	hide_resistances = true ,
@@ -1609,14 +1635,14 @@ SIGen
 		results =
 		{
 			{
-				type = SICommon.Types.Items.item ,
+				type = SICommon.Types.Items.Item ,
 				name = SIConstants_Core.raw.Items.Construction ,
 				amount = 1
 			}
 		}
 	} ,
-	collision_box = { { 0 , 0 } , { 0 , 0 } } ,
 	selection_box = { { -0.5 , -1.5 } , { 0.5 , -0.5 } } ,
+	collision_box = { { 0 , 0 } , { 0 , 0 } } ,
 	hit_visualization_box = { { -0.1 , -1.1 } , { 0.1 , -1.0 } } ,
 	max_health = maxHealth ,
 	corpse = nil ,
@@ -1624,6 +1650,8 @@ SIGen
 	map_color = { r = 1.00 , g = 0.94 , b = 0.46 } ,
 	friendly_map_color = { r = 1.00 , g = 0.94 , b = 0.46 } ,
 	enemy_map_color = { r = 1.00 , g = 0.94 , b = 0.46 } ,
+	is_military_target = false ,
+	allow_run_time_change_of_is_military_target = true ,
 	alert_when_damaged = true ,
 	create_ghost_on_death = false ,
 	hide_resistances = true ,
@@ -2061,14 +2089,14 @@ SIGen
 		results =
 		{
 			{
-				type = SICommon.Types.Items.item ,
+				type = SICommon.Types.Items.Item ,
 				name = SIConstants_Core.raw.Items.Logistic ,
 				amount = 1
 			}
 		}
 	} ,
-	collision_box = { { 0 , 0 } , { 0 , 0 } } ,
 	selection_box = { { -0.5 , -1.5 } , { 0.5 , -0.5 } } ,
+	collision_box = { { 0 , 0 } , { 0 , 0 } } ,
 	hit_visualization_box = { { -0.1 , -1.1 } , { 0.1 , -1.0 } } ,
 	max_health = maxHealth ,
 	corpse = nil ,
@@ -2076,6 +2104,8 @@ SIGen
 	map_color = { r = 1.00 , g = 0.94 , b = 0.46 } ,
 	friendly_map_color = { r = 1.00 , g = 0.94 , b = 0.46 } ,
 	enemy_map_color = { r = 1.00 , g = 0.94 , b = 0.46 } ,
+	is_military_target = false ,
+	allow_run_time_change_of_is_military_target = true ,
 	alert_when_damaged = true ,
 	create_ghost_on_death = false ,
 	hide_resistances = true ,
@@ -3320,7 +3350,7 @@ SIGen
 		results =
 		{
 			{
-				type = SICommon.Types.Items.item ,
+				type = SICommon.Types.Items.Item ,
 				name = SIConstants_Core.raw.Items.Laser ,
 				amount = 1
 			}
@@ -3332,6 +3362,8 @@ SIGen
 	map_color = { r = 1.00 , g = 0.94 , b = 0.46 } ,
 	friendly_map_color = { r = 1.00 , g = 0.94 , b = 0.46 } ,
 	enemy_map_color = { r = 1.00 , g = 0.94 , b = 0.46 } ,
+	is_military_target = true ,
+	allow_run_time_change_of_is_military_target = true ,
 	alert_when_damaged = true ,
 	create_ghost_on_death = false ,
 	hide_resistances = true ,
@@ -4513,6 +4545,390 @@ SIGen
 			amount_max = 2000 ,
 			catalyst_amount = 2000
 		}
+	}
+}
+.New( SICommon.Types.Entities.Car , "Tank" , "超越之安如磐石战车" )
+.AutoIcon()
+.ReferencePlaceResult( SICommon.Types.Items.Item , SIConstants_Core.raw.Items.Tank )
+.Append
+{
+	flags = { SICommon.Flags.Entity.PlaceablePlayer , SICommon.Flags.Entity.PlayerCreation , SICommon.Flags.Entity.PlaceableOffGrid , SICommon.Flags.Entity.NotFlammable , SICommon.Flags.Entity.Hidden } ,
+	minable =
+	{
+		mining_time = 10.0 ,
+		results =
+		{
+			{
+				type = SICommon.Types.Items.Item ,
+				name = SIConstants_Core.raw.Items.Tank ,
+				amount = 1
+			}
+		}
+	} ,
+	selection_box = { { -0.9 * tankSize , -1.3 * tankSize } , { 0.9 * tankSize , 1.3 * tankSize } } ,
+	collision_box = { { -0.9 * tankSize , -1.3 * tankSize } , { 0.9 * tankSize , 1.3 * tankSize } } ,
+	drawing_box = { { -1.8 * tankSize , -1.8 * tankSize } , { 1.8 * tankSize , 1.5 * tankSize } } ,
+	collision_mask = { SIConstants_Core.TankCollisionMaskLayer , SICommon.Flags.CollisionMask.ConsiderTileTransitions } ,
+	max_health = maxHealth * 10 ,
+	corpse = "tank-remnants" ,
+	dying_explosion = "nuke-explosion" ,
+	map_color = { r = 1.00 , g = 0.94 , b = 0.46 } ,
+	friendly_map_color = { r = 1.00 , g = 0.94 , b = 0.46 } ,
+	enemy_map_color = { r = 1.00 , g = 0.94 , b = 0.46 } ,
+	is_military_target = true ,
+	allow_run_time_change_of_is_military_target = true ,
+	alert_when_damaged = true ,
+	create_ghost_on_death = false ,
+	hide_resistances = false ,
+	resistances = defaultResistances ,
+	damaged_trigger_effect =
+	{
+		type = "create-entity" ,
+		entity_name = "spark-explosion" ,
+		offset_deviation = { { -0.5 , -0.5 } , { 0.5 , 0.5 } } ,
+		offsets = { { 0 , 1 } } ,
+		damage_type_filters = "fire"
+	} ,
+	repair_speed_modifier = 12.0 ,
+	burner =
+	{
+		type = SICommon.Flags.EnergySourceType.Burner ,
+		emissions_per_minute = 10 ,
+		render_no_power_icon = true ,
+		render_no_network_icon = true ,
+		fuel_inventory_size = 3 ,
+		burnt_inventory_size = 3 ,
+		smoke =
+		{
+			{
+				name = "tank-smoke" ,
+				deviation = { 0.25 , 0.25 } ,
+				frequency = 50 ,
+				position = { 0 , 1.5  ,
+				starting_frame = 0 ,
+				starting_frame_deviation = 60}
+			}
+		} ,
+		light_flicker = nil ,
+		effectivity = 1 ,
+		fuel_categories =
+		{
+			SIConstants_Core.raw.Categories.Fuel.Special
+		}
+	} ,
+	weight = 2000000000 ,
+	braking_power = "80TW" ,
+	consumption = "2TW" ,
+	effectivity = 0.9 ,
+	terrain_friction_modifier = 0.1 ,
+	friction = 0.001 ,
+	stop_trigger_speed = 0.1 ,
+	stop_trigger =
+	{
+		{
+			type = "play-sound" ,
+			sound =
+			{
+				SISound.Base( "fight/tank-brakes" , 0.3 )
+			}
+		}
+	} ,
+	tank_driving = true ,
+	energy_per_hit_point = 0 ,
+	immune_to_tree_impacts = true ,
+	immune_to_rock_impacts = true ,
+	inventory_size = 200 ,
+	guns =
+	{
+		SIConstants_Core.raw.Items.Tank_Gun ,
+		SIConstants_Core.raw.Items.Tank_Shut ,
+		SIConstants_Core.raw.Items.Tank_Cannon ,
+		SIConstants_Core.raw.Items.Tank_Rocket ,
+		SIConstants_Core.raw.Items.Tank_Flame ,
+		SIConstants_Core.raw.Items.Tank_Heavy
+	} ,
+	track_particle_triggers =
+	{
+
+	} ,
+	rotation_speed = 0.0075 ,
+	turret_rotation_speed = 0.35 / 60 ,
+	turret_return_timeout = 300 ,
+	alert_icon_shift = SIUtils.by_pixel( 0 , -13 ) ,
+	light =
+	{
+		{
+			type = "oriented" ,
+			minimum_darkness = 0.25 ,
+			size = 2 ,
+			intensity = 0.8 ,
+			source_orientation_offset = -0.02 ,
+			shift = { -0.1 , -14 + tankShiftY / 32 } ,
+			color = { r = 1.00 , g = 1.00 , b = 0.8 } ,
+			picture =
+			{
+				layers =
+				{
+					{
+						filename = "__core__/graphics/light-cone.png" ,
+						priority = "extra-high" ,
+						flags = { "light" } ,
+						width = 200 ,
+						height = 200 ,
+						scale = 0.5 * tankSize
+					}
+				}
+			}
+		} ,
+		{
+			type = "oriented" ,
+			minimum_darkness = 0.25 ,
+			size = 2 ,
+			intensity = 0.8 ,
+			source_orientation_offset = 0.02 ,
+			shift = { 0.1 , -14 + tankShiftY / 32 } ,
+			color = { r = 1.00 , g = 1.00 , b = 0.8 } ,
+			picture =
+			{
+				layers =
+				{
+					{
+						filename = "__core__/graphics/light-cone.png" ,
+						priority = "extra-high" ,
+						flags = { "light" } ,
+						width = 200 ,
+						height = 200 ,
+						scale = 0.5 * tankSize
+					}
+				}
+			}
+		}
+	} ,
+	light_animation =
+	{
+		layers =
+		{
+			{
+				filename = SIGen.MakeSelfPicturePath( "超越之安如磐石战车-光效" ) ,
+				priority = "low" ,
+				blend_mode = "additive" ,
+				width = 260 ,
+				height = 210 ,
+				frame_count = 1 ,
+				repeat_count = 2 ,
+				line_length = 8 ,
+				direction_count = 64 ,
+				scale = 0.5 * tankSize ,
+				shift = SIUtils.by_pixel( -1 , -17 + tankShiftY ) ,
+				draw_as_glow = true
+			}
+		}
+	} ,
+	animation =
+	{
+		layers =
+		{
+			{
+				stripes = SIUtils.multiplystripes( 2 ,
+				{
+					{
+						filename = SIGen.MakeSelfPicturePath( "超越之安如磐石战车-1" ) ,
+						width_in_frames = 2 ,
+						height_in_frames = 16
+					} ,
+					{
+						filename = SIGen.MakeSelfPicturePath( "超越之安如磐石战车-2" ) ,
+						width_in_frames = 2 ,
+						height_in_frames = 16
+					} ,
+					{
+						filename = SIGen.MakeSelfPicturePath( "超越之安如磐石战车-3" ) ,
+						width_in_frames = 2 ,
+						height_in_frames = 16
+					} ,
+					{
+						filename = SIGen.MakeSelfPicturePath( "超越之安如磐石战车-4" ) ,
+						width_in_frames = 2 ,
+						height_in_frames = 16
+					}
+				} ) ,
+				priority = "low" ,
+				width = 270 ,
+				height = 212 ,
+				frame_count = 2 ,
+				line_length = 2 ,
+				animation_speed = 8 ,
+				direction_count = 64 ,
+				max_advance = 1 ,
+				scale = 0.5 * tankSize ,
+				shift = SIUtils.by_pixel( 0 , -16 + tankShiftY )
+			} ,
+			{
+				stripes = SIUtils.multiplystripes( 2 ,
+				{
+					{
+						filename = SIGen.MakeSelfPicturePath( "超越之安如磐石战车-遮盖-1" ) ,
+						width_in_frames = 1 ,
+						height_in_frames = 22
+					} ,
+					{
+						filename = SIGen.MakeSelfPicturePath( "超越之安如磐石战车-遮盖-2" ) ,
+						width_in_frames = 1 ,
+						height_in_frames = 22
+					} ,
+					{
+						filename = SIGen.MakeSelfPicturePath( "超越之安如磐石战车-遮盖-3" ) ,
+						width_in_frames = 1 ,
+						height_in_frames = 20
+					}
+				} ) ,
+				priority = "low" ,
+				width = 208 ,
+				height = 166 ,
+				frame_count = 2 ,
+				line_length = 2 ,
+				direction_count = 64 ,
+				max_advance = 1 ,
+				scale = 0.5 * tankSize ,
+				shift = SIUtils.by_pixel( 0 , -27.5 + tankShiftY ) ,
+				apply_runtime_tint = true
+			} ,
+			{
+				stripes = SIUtils.multiplystripes( 2 ,
+				{
+					{
+						filename = SIGen.MakeSelfPicturePath( "超越之安如磐石战车-影子-1" ) ,
+						width_in_frames = 1 ,
+						height_in_frames = 16
+					} ,
+					{
+						filename = SIGen.MakeSelfPicturePath( "超越之安如磐石战车-影子-2" ) ,
+						width_in_frames = 1 ,
+						height_in_frames = 16
+					} ,
+					{
+						filename = SIGen.MakeSelfPicturePath( "超越之安如磐石战车-影子-3" ) ,
+						width_in_frames = 1 ,
+						height_in_frames = 16
+					} ,
+					{
+						filename = SIGen.MakeSelfPicturePath( "超越之安如磐石战车-影子-4" ) ,
+						width_in_frames = 1 ,
+						height_in_frames = 16
+					}
+				} ) ,
+				priority = "low" ,
+				width = 302 ,
+				height = 194 ,
+				frame_count = 2 ,
+				line_length = 2 ,
+				direction_count = 64 ,
+				max_advance = 1 ,
+				scale = 0.5 * tankSize ,
+				shift = SIUtils.by_pixel( 22.5 , 1 + tankShiftY ) ,
+				draw_as_shadow = true
+			}
+		}
+	} ,
+	turret_animation =
+	{
+		layers =
+		{
+			{
+				filename = SIGen.MakeSelfPicturePath( "超越之安如磐石战车-炮塔" ) ,
+				priority = "low" ,
+				width = 179 ,
+				height = 132 ,
+				frame_count = 1 ,
+				line_length = 8 ,
+				animation_speed = 8 ,
+				direction_count = 64 ,
+				scale = 0.5 * tankSize ,
+				shift = SIUtils.by_pixel( 0.25 , -40.5 + tankShiftY )
+			} ,
+			{
+				filename = SIGen.MakeSelfPicturePath( "超越之安如磐石战车-炮塔-遮盖" ) ,
+				priority = "low" ,
+				width = 72 ,
+				height = 66 ,
+				frame_count = 1 ,
+				line_length = 8 ,
+				direction_count = 64 ,
+				scale = 0.5 * tankSize ,
+				shift = SIUtils.by_pixel( 0 , -41.5 + tankShiftY ) ,
+				apply_runtime_tint = true
+			} ,
+			{
+				filename = SIGen.MakeSelfPicturePath( "超越之安如磐石战车-炮塔-影子" ) ,
+				priority = "low" ,
+				width = 193 ,
+				height = 134 ,
+				frame_count = 1 ,
+				line_length = 8 ,
+				direction_count = 64 ,
+				scale = 0.5 * tankSize ,
+				shift = SIUtils.by_pixel( 56.25 , 0.5 + tankShiftY ) ,
+				draw_as_shadow = true
+			}
+		}
+	} ,
+	water_reflection =
+	{
+		rotate = true ,
+		orientation_to_variation = false ,
+		pictures =
+		{
+			filename = SIGen.MakeSelfPicturePath( "超越之安如磐石战车-反射" ) ,
+			priority = "extra-high" ,
+			width = 20 ,
+			height = 24 ,
+			variation_count = 1 ,
+			scale = 6.0 * tankSize ,
+			shift = SIUtils.by_pixel( 0 , 35 )
+		}
+	} ,
+	mined_sound =
+	{
+		SISound.Core( "deconstruct-large" , 1 )
+	} ,
+	vehicle_impact_sound =
+	{
+		SISound.Base( "car-metal-impact" , 1 )
+	} ,
+	repair_sound =
+	{
+		SISound.Core( "manual-repair-advanced-1" , 0.5 ) ,
+		SISound.Core( "manual-repair-advanced-2" , 0.5 )
+	} ,
+	open_sound =
+	{
+		SISound.Base( "fight/tank-door-open" , 0.5 )
+	} ,
+	close_sound =
+	{
+		SISound.Base( "fight/tank-door-close" , 0.5 )
+	} ,
+	sound_no_fuel =
+	{
+		SISound.Base( "fight/tank-no-fuel-1" , 0.4 )
+	} ,
+	sound_minimum_speed = 0.2 ,
+	sound_scaling_ratio = 0.8 ,
+	working_sound =
+	{
+		sound =
+		{
+			SISound.Base( "fight/tank-engine" , 0.25 )
+		} ,
+		activate_sound =
+		{
+			SISound.Base( "fight/tank-engine-start" , 0.25 )
+		} ,
+		deactivate_sound =
+		{
+			SISound.Base( "fight/tank-engine-stop" , 0.25 )
+		} ,
+		match_speed_to_activity = true
 	}
 }
 .New( SICommon.Types.Equipments.ActiveDefense , "Tank" , "超越之安如磐石战车" ,

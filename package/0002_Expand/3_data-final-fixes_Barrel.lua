@@ -461,7 +461,7 @@ SIGen
 					results =
 					{
 						{
-							type = SICommon.Types.Items.item ,
+							type = SICommon.Types.Items.Item ,
 							name = SIConstants_Expand.raw.Items[BarrelItemIDPrefix_1 .. fluidID] ,
 							amount = 1
 						}
@@ -473,6 +473,8 @@ SIGen
 				map_color = fluidColor ,
 				friendly_map_color = fluidColor ,
 				enemy_map_color = fluidColor ,
+				is_military_target = false ,
+				allow_run_time_change_of_is_military_target = true ,
 				alert_when_damaged = true ,
 				create_ghost_on_death = true ,
 				hide_resistances = true ,
@@ -895,7 +897,7 @@ SIGen
 					results =
 					{
 						{
-							type = SICommon.Types.Items.item ,
+							type = SICommon.Types.Items.Item ,
 							name = SIConstants_Expand.raw.Items[BarrelItemIDPrefix_2 .. fluidID] ,
 							amount = 1
 						}
@@ -907,6 +909,8 @@ SIGen
 				map_color = fluidColor ,
 				friendly_map_color = fluidColor ,
 				enemy_map_color = fluidColor ,
+				is_military_target = false ,
+				allow_run_time_change_of_is_military_target = true ,
 				alert_when_damaged = true ,
 				create_ghost_on_death = true ,
 				hide_resistances = true ,
