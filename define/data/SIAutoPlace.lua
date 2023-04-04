@@ -1,4 +1,9 @@
-SIAutoPlace = {}
+SIAutoPlace =
+{
+	-- 固定属性
+	ID = "SIAutoPlace" ,
+	Name = "自动生成管理"
+}
 
 
 

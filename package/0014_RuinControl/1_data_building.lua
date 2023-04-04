@@ -103,12 +103,7 @@ local function CreateRuinBuildings( type , IDPrefix , aliasPrefix , size , level
 							return
 						end
 					end
-					table.insert( prototypeData.resistances ,
-					{
-						type = damagePrototypeName ,
-						decrease = levelValue.Decrease ,
-						percent = levelValue.Defence
-					} )
+					table.insert( prototypeData.resistances , SITools.Resistance( damagePrototypeName , levelValue.Decrease , levelValue.Defence ) )
 				end
 			end )
 		end )
@@ -177,10 +172,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Wall , "RuinWall" , "遗迹围墙" 
 	hide_resistances = false ,
 	resistances =
 	{
-		{
-			type = "fire" ,
-			percent = 100
-		}
+		SITools.Resistance( "fire" , 0 , 100 )
 	} ,
 	damaged_trigger_effect =
 	{
@@ -551,74 +543,29 @@ CreateRuinBuildings( SICommon.Types.Entities.Wall , "RuinWall" , "遗迹围墙" 
 	} ,
 	mined_sound =
 	{
-		{
-			filename = "__base__/sound/deconstruct-bricks.ogg" ,
-			volume = 0.8
-		}
+		SISound.Base( "deconstruct-bricks" , 0.8 )
 	} ,
 	vehicle_impact_sound =
 	{
-		{
-			filename = "__base__/sound/car-stone-impact.ogg" ,
-			volume = 0.5
-		} ,
-		{
-			filename = "__base__/sound/car-stone-impact-2.ogg" ,
-			volume = 0.5
-		} ,
-		{
-			filename = "__base__/sound/car-stone-impact-3.ogg" ,
-			volume = 0.5
-		} ,
-		{
-			filename = "__base__/sound/car-stone-impact-4.ogg" ,
-			volume = 0.5
-		} ,
-		{
-			filename = "__base__/sound/car-stone-impact-5.ogg" ,
-			volume = 0.5
-		} ,
-		{
-			filename = "__base__/sound/car-stone-impact-6.ogg" ,
-			volume = 0.5
-		}
+		SISound.Base( "car-stone-impact" , 0.5 ) ,
+		SISound.Base( "car-stone-impact-2" , 0.5 ) ,
+		SISound.Base( "car-stone-impact-3" , 0.5 ) ,
+		SISound.Base( "car-stone-impact-4" , 0.5 ) ,
+		SISound.Base( "car-stone-impact-5" , 0.5 ) ,
+		SISound.Base( "car-stone-impact-6" , 0.5 )
 	} ,
 	repair_sound =
 	{
-		{
-			filename = "__base__/sound/manual-repair-simple-1.ogg" ,
-			volume = 0.5
-		} ,
-		{
-			filename = "__base__/sound/manual-repair-simple-2.ogg" ,
-			volume = 0.5
-		} ,
-		{
-			filename = "__base__/sound/manual-repair-simple-3.ogg" ,
-			volume = 0.5
-		} ,
-		{
-			filename = "__base__/sound/manual-repair-simple-4.ogg" ,
-			volume = 0.5
-		} ,
-		{
-			filename = "__base__/sound/manual-repair-simple-5.ogg" ,
-			volume = 0.5
-		}
+		SISound.Core( "manual-repair-advanced-1" , 0.5 ) ,
+		SISound.Core( "manual-repair-advanced-2" , 0.5 )
 	} ,
 	open_sound =
 	{
-		{
-			filename = "__base__/sound/machine-open.ogg" ,
-			volume = 0.5
-		}
+		SISound.Base( "machine-open" , 0.5 )
 	} ,
 	close_sound =
 	{
-		{
-			filename = "__base__/sound/machine-close.ogg" ,
-			volume = 0.5
-		}
+		SISound.Base( "machine-close" , 0.5 )
 	}
 } )
 
@@ -777,42 +724,24 @@ CreateRuinBuildings( SICommon.Types.Entities.LandMine , "RuinLandMine" , "遗迹
 	} ,
 	mined_sound =
 	{
-		{
-			filename = "__core__/sound/deconstruct-small.ogg" ,
-			volume = 1
-		}
+		SISound.Core( "deconstruct-small" , 1 )
 	} ,
 	vehicle_impact_sound =
 	{
-		{
-			filename = "__base__/sound/car-metal-impact.ogg" ,
-			volume = 1
-		}
+		SISound.Base( "car-metal-impact" , 1 )
 	} ,
 	repair_sound =
 	{
-		{
-			filename = "__core__/sound/manual-repair-advanced-1.ogg" ,
-			volume = 0.5
-		} ,
-		{
-			filename = "__core__/sound/manual-repair-advanced-2.ogg" ,
-			volume = 0.5
-		}
+		SISound.Core( "manual-repair-advanced-1" , 0.5 ) ,
+		SISound.Core( "manual-repair-advanced-2" , 0.5 )
 	} ,
 	open_sound =
 	{
-		{
-			filename = "__base__/sound/machine-open.ogg" ,
-			volume = 0.5
-		}
+		SISound.Base( "machine-open" , 0.5 )
 	} ,
 	close_sound =
 	{
-		{
-			filename = "__base__/sound/machine-close.ogg" ,
-			volume = 0.5
-		}
+		SISound.Base( "machine-close" , 0.5 )
 	}
 } )
 
@@ -966,22 +895,10 @@ CreateRuinBuildings( SICommon.Types.Entities.Turret , "RuinGunTurret" , "遗迹�
 		} ,
 		sound =
 		{
-			{
-				filename = "__base__/sound/fight/gun-turret-gunshot-01.ogg" ,
-				volume = 0.4
-			} ,
-			{
-				filename = "__base__/sound/fight/gun-turret-gunshot-02.ogg" ,
-				volume = 0.4
-			} ,
-			{
-				filename = "__base__/sound/fight/gun-turret-gunshot-03.ogg" ,
-				volume = 0.4
-			} ,
-			{
-				filename = "__base__/sound/fight/gun-turret-gunshot-04.ogg" ,
-				volume = 0.4
-			}
+			SISound.Base( "fight/gun-turret-gunshot-01" , 0.4 ) ,
+			SISound.Base( "fight/gun-turret-gunshot-02" , 0.4 ) ,
+			SISound.Base( "fight/gun-turret-gunshot-03" , 0.4 ) ,
+			SISound.Base( "fight/gun-turret-gunshot-04" , 0.4 )
 		}
 	} ,
 	base_picture =
@@ -1378,80 +1295,38 @@ CreateRuinBuildings( SICommon.Types.Entities.Turret , "RuinGunTurret" , "遗迹�
 	} ,
 	mined_sound =
 	{
-		{
-			filename = "__core__/sound/deconstruct-small.ogg" ,
-			volume = 1
-		}
+		SISound.Core( "deconstruct-small" , 1 )
 	} ,
 	vehicle_impact_sound =
 	{
-		{
-			filename = "__base__/sound/car-metal-impact.ogg" ,
-			volume = 1
-		}
+		SISound.Base( "car-metal-impact" , 1 )
 	} ,
 	repair_sound =
 	{
-		{
-			filename = "__core__/sound/manual-repair-advanced-1.ogg" ,
-			volume = 0.5
-		} ,
-		{
-			filename = "__core__/sound/manual-repair-advanced-2.ogg" ,
-			volume = 0.5
-		}
+		SISound.Core( "manual-repair-advanced-1" , 0.5 ) ,
+		SISound.Core( "manual-repair-advanced-2" , 0.5 )
 	} ,
 	open_sound =
 	{
-		{
-			filename = "__base__/sound/machine-open.ogg" ,
-			volume = 0.5
-		}
+		SISound.Base( "machine-open" , 0.5 )
 	} ,
 	close_sound =
 	{
-		{
-			filename = "__base__/sound/machine-close.ogg" ,
-			volume = 0.5
-		}
+		SISound.Base( "machine-close" , 0.5 )
 	} ,
 	preparing_sound =
 	{
-		{
-			filename = "__base__/sound/fight/gun-turret-activate-01.ogg" ,
-			volume = 0.3
-		} ,
-		{
-			filename = "__base__/sound/fight/gun-turret-activate-02.ogg" ,
-			volume = 0.3
-		} ,
-		{
-			filename = "__base__/sound/fight/gun-turret-activate-03.ogg" ,
-			volume = 0.3
-		} ,
-		{
-			filename = "__base__/sound/fight/gun-turret-activate-04.ogg" ,
-			volume = 0.3
-		}
+		SISound.Base( "fight/gun-turret-activate-01" , 0.3 ) ,
+		SISound.Base( "fight/gun-turret-activate-02" , 0.3 ) ,
+		SISound.Base( "fight/gun-turret-activate-03" , 0.3 ) ,
+		SISound.Base( "fight/gun-turret-activate-04" , 0.3 )
 	} ,
 	folding_sound =
 	{
-		{
-			filename = "__base__/sound/fight/gun-turret-deactivate-01.ogg" ,
-			volume = 0.3
-		} ,
-		{
-			filename = "__base__/sound/fight/gun-turret-deactivate-02.ogg" ,
-			volume = 0.3
-		} ,
-		{
-			filename = "__base__/sound/fight/gun-turret-deactivate-03.ogg" ,
-			volume = 0.3
-		} ,
-		{
-			filename = "__base__/sound/fight/gun-turret-deactivate-04.ogg" ,
-			volume = 0.3
-		}
+		SISound.Base( "fight/gun-turret-deactivate-01" , 0.3 ) ,
+		SISound.Base( "fight/gun-turret-deactivate-02" , 0.3 ) ,
+		SISound.Base( "fight/gun-turret-deactivate-03" , 0.3 ) ,
+		SISound.Base( "fight/gun-turret-deactivate-04" , 0.3 )
 	}
 } )
 
@@ -1702,8 +1577,7 @@ SIGen
 	{
 		sound =
 		{
-			filename = "__base__/sound/fight/laser-beam.ogg" ,
-			volume = 0.75
+			SISound.Base( "fight/laser-beam" , 0.75 )
 		} ,
 		max_sounds_per_type = 1
 	}
@@ -2019,76 +1893,37 @@ CreateRuinBuildings( SICommon.Types.Entities.Turret , "RuinLaserTurret" , "遗�
 	} ,
 	mined_sound =
 	{
-		{
-			filename = "__core__/sound/deconstruct-small.ogg" ,
-			volume = 1
-		}
+		SISound.Core( "deconstruct-small" , 1 )
 	} ,
 	vehicle_impact_sound =
 	{
-		{
-			filename = "__base__/sound/car-metal-impact.ogg" ,
-			volume = 1
-		}
+		SISound.Base( "car-metal-impact" , 1 )
 	} ,
 	repair_sound =
 	{
-		{
-			filename = "__core__/sound/manual-repair-advanced-1.ogg" ,
-			volume = 0.5
-		} ,
-		{
-			filename = "__core__/sound/manual-repair-advanced-2.ogg" ,
-			volume = 0.5
-		}
+		SISound.Core( "manual-repair-advanced-1" , 0.5 ) ,
+		SISound.Core( "manual-repair-advanced-2" , 0.5 )
 	} ,
 	open_sound =
 	{
-		{
-			filename = "__base__/sound/machine-open.ogg" ,
-			volume = 0.5
-		}
+		SISound.Base( "machine-open" , 0.5 )
 	} ,
 	close_sound =
 	{
-		{
-			filename = "__base__/sound/machine-close.ogg" ,
-			volume = 0.5
-		}
+		SISound.Base( "machine-close" , 0.5 )
 	} ,
 	preparing_sound =
 	{
-		{
-			filename = "__base__/sound/fight/laser-turret-activate-01.ogg" ,
-			volume = 0.3
-		} ,
-		{
-			filename = "__base__/sound/fight/laser-turret-activate-02.ogg" ,
-			volume = 0.3
-		} ,
-		{
-			filename = "__base__/sound/fight/laser-turret-activate-03.ogg" ,
-			volume = 0.3
-		}
+		SISound.Base( "fight/laser-turret-activate-01" , 0.3 ) ,
+		SISound.Base( "fight/laser-turret-activate-02" , 0.3 ) ,
+		SISound.Base( "fight/laser-turret-activate-03" , 0.3 )
 	} ,
 	folding_sound =
 	{
-		{
-			filename = "__base__/sound/fight/laser-turret-deactivate-01.ogg" ,
-			volume = 0.3
-		} ,
-		{
-			filename = "__base__/sound/fight/laser-turret-deactivate-02.ogg" ,
-			volume = 0.3
-		} ,
-		{
-			filename = "__base__/sound/fight/laser-turret-deactivate-03.ogg" ,
-			volume = 0.3
-		} ,
-		{
-			filename = "__base__/sound/fight/laser-turret-deactivate-04.ogg" ,
-			volume = 0.3
-		}
+		SISound.Base( "fight/laser-turret-deactivate-01" , 0.3 ) ,
+		SISound.Base( "fight/laser-turret-deactivate-02" , 0.3 ) ,
+		SISound.Base( "fight/laser-turret-deactivate-03" , 0.3 ) ,
+		SISound.Base( "fight/laser-turret-deactivate-04" , 0.3 )
 	}
 } )
 
@@ -2328,10 +2163,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Turret , "RuinFlameTurret" , "遗�
 	hide_resistances = false ,
 	resistances =
 	{
-		{
-			type = "fire" ,
-			percent = 100
-		}
+		SITools.Resistance( "fire" , 0 , 100 )
 	} ,
 	damaged_trigger_effect =
 	{
@@ -2392,48 +2224,21 @@ CreateRuinBuildings( SICommon.Types.Entities.Turret , "RuinFlameTurret" , "遗�
 		{
 			begin_sound =
 			{
-				{
-					filename = "__base__/sound/fight/flamethrower-turret-start-01.ogg" ,
-					volume = 0.5
-				} ,
-				{
-					filename = "__base__/sound/fight/flamethrower-turret-start-02.ogg" ,
-					volume = 0.5
-				} ,
-				{
-					filename = "__base__/sound/fight/flamethrower-turret-start-03.ogg" ,
-					volume = 0.5
-				}
+				SISound.Base( "fight/flamethrower-turret-start-01" , 0.5 ) ,
+				SISound.Base( "fight/flamethrower-turret-start-02" , 0.5 ) ,
+				SISound.Base( "fight/flamethrower-turret-start-03" , 0.5 )
 			} ,
 			middle_sound =
 			{
-				{
-					filename = "__base__/sound/fight/flamethrower-turret-mid-01.ogg" ,
-					volume = 0.5
-				} ,
-				{
-					filename = "__base__/sound/fight/flamethrower-turret-mid-02.ogg" ,
-					volume = 0.5
-				} ,
-				{
-					filename = "__base__/sound/fight/flamethrower-turret-mid-03.ogg" ,
-					volume = 0.5
-				}
+				SISound.Base( "fight/flamethrower-turret-mid-01" , 0.5 ) ,
+				SISound.Base( "fight/flamethrower-turret-mid-02" , 0.5 ) ,
+				SISound.Base( "fight/flamethrower-turret-mid-03" , 0.5 )
 			} ,
 			end_sound =
 			{
-				{
-					filename = "__base__/sound/fight/flamethrower-turret-end-01.ogg" ,
-					volume = 0.5
-				} ,
-				{
-					filename = "__base__/sound/fight/flamethrower-turret-end-02.ogg" ,
-					volume = 0.5
-				} ,
-				{
-					filename = "__base__/sound/fight/flamethrower-turret-end-03.ogg" ,
-					volume = 0.5
-				}
+				SISound.Base( "fight/flamethrower-turret-end-01" , 0.5 ) ,
+				SISound.Base( "fight/flamethrower-turret-end-02" , 0.5 ) ,
+				SISound.Base( "fight/flamethrower-turret-end-03" , 0.5 )
 			}
 		}
 	} ,
@@ -2620,80 +2425,38 @@ CreateRuinBuildings( SICommon.Types.Entities.Turret , "RuinFlameTurret" , "遗�
 	ending_attack_animation = RuinFlameTurretGunAnimation( true ) ,
 	mined_sound =
 	{
-		{
-			filename = "__core__/sound/deconstruct-small.ogg" ,
-			volume = 1
-		}
+		SISound.Core( "deconstruct-small" , 1 )
 	} ,
 	vehicle_impact_sound =
 	{
-		{
-			filename = "__base__/sound/car-metal-impact.ogg" ,
-			volume = 1
-		}
+		SISound.Base( "car-metal-impact" , 1 )
 	} ,
 	repair_sound =
 	{
-		{
-			filename = "__core__/sound/manual-repair-advanced-1.ogg" ,
-			volume = 0.5
-		} ,
-		{
-			filename = "__core__/sound/manual-repair-advanced-2.ogg" ,
-			volume = 0.5
-		}
+		SISound.Core( "manual-repair-advanced-1" , 0.5 ) ,
+		SISound.Core( "manual-repair-advanced-2" , 0.5 )
 	} ,
 	open_sound =
 	{
-		{
-			filename = "__base__/sound/machine-open.ogg" ,
-			volume = 0.5
-		}
+		SISound.Base( "machine-open" , 0.5 )
 	} ,
 	close_sound =
 	{
-		{
-			filename = "__base__/sound/machine-close.ogg" ,
-			volume = 0.5
-		}
+		SISound.Base( "machine-close" , 0.5 )
 	} ,
 	preparing_sound =
 	{
-		{
-			filename = "__base__/sound/fight/flamethrower-turret-activate-01.ogg" ,
-			volume = 0.3
-		} ,
-		{
-			filename = "__base__/sound/fight/flamethrower-turret-activate-02.ogg" ,
-			volume = 0.3
-		} ,
-		{
-			filename = "__base__/sound/fight/flamethrower-turret-activate-03.ogg" ,
-			volume = 0.3
-		} ,
-		{
-			filename = "__base__/sound/fight/flamethrower-turret-activate-04.ogg" ,
-			volume = 0.3
-		}
+		SISound.Base( "fight/flamethrower-turret-activate-01" , 0.3 ) ,
+		SISound.Base( "fight/flamethrower-turret-activate-02" , 0.3 ) ,
+		SISound.Base( "fight/flamethrower-turret-activate-03" , 0.3 ) ,
+		SISound.Base( "fight/flamethrower-turret-activate-04" , 0.3 )
 	} ,
 	folding_sound =
 	{
-		{
-			filename = "__base__/sound/fight/flamethrower-turret-deactivate-01.ogg" ,
-			volume = 0.2
-		} ,
-		{
-			filename = "__base__/sound/fight/flamethrower-turret-deactivate-02.ogg" ,
-			volume = 0.2
-		} ,
-		{
-			filename = "__base__/sound/fight/flamethrower-turret-deactivate-03.ogg" ,
-			volume = 0.2
-		} ,
-		{
-			filename = "__base__/sound/fight/flamethrower-turret-deactivate-04.ogg" ,
-			volume = 0.2
-		}
+		SISound.Base( "fight/flamethrower-turret-deactivate-01" , 0.3 ) ,
+		SISound.Base( "fight/flamethrower-turret-deactivate-02" , 0.3 ) ,
+		SISound.Base( "fight/flamethrower-turret-deactivate-03" , 0.3 ) ,
+		SISound.Base( "fight/flamethrower-turret-deactivate-04" , 0.3 )
 	}
 } )
 
@@ -2793,58 +2556,28 @@ CreateRuinBuildings( SICommon.Types.Entities.Container , "RuinChest" , "遗迹�
 	} ,
 	mined_sound =
 	{
-		{
-			filename = "__core__/sound/deconstruct-small.ogg" ,
-			volume = 1
-		}
+		SISound.Core( "deconstruct-small" , 1 )
 	} ,
 	vehicle_impact_sound =
 	{
-		{
-			filename = "__base__/sound/car-wood-impact.ogg" ,
-			volume = 0.5
-		} ,
-		{
-			filename = "__base__/sound/car-wood-impact-02.ogg" ,
-			volume = 0.5
-		} ,
-		{
-			filename = "__base__/sound/car-wood-impact-03.ogg" ,
-			volume = 0.5
-		} ,
-		{
-			filename = "__base__/sound/car-wood-impact-04.ogg" ,
-			volume = 0.5
-		} ,
-		{
-			filename = "__base__/sound/car-wood-impact-05.ogg" ,
-			volume = 0.5
-		}
+		SISound.Base( "car-wood-impact" , 0.5 ) ,
+		SISound.Base( "car-wood-impact-02" , 0.5 ) ,
+		SISound.Base( "car-wood-impact-03" , 0.5 ) ,
+		SISound.Base( "car-wood-impact-04" , 0.5 ) ,
+		SISound.Base( "car-wood-impact-05" , 0.5 )
 	} ,
 	repair_sound =
 	{
-		{
-			filename = "__core__/sound/manual-repair-advanced-1.ogg" ,
-			volume = 0.5
-		} ,
-		{
-			filename = "__core__/sound/manual-repair-advanced-2.ogg" ,
-			volume = 0.5
-		}
+		SISound.Core( "manual-repair-advanced-1" , 0.5 ) ,
+		SISound.Core( "manual-repair-advanced-2" , 0.5 )
 	} ,
 	open_sound =
 	{
-		{
-			filename = "__base__/sound/wooden-chest-open.ogg" ,
-			volume = 0.5
-		}
+		SISound.Base( "wooden-chest-open" , 0.5 )
 	} ,
 	close_sound =
 	{
-		{
-			filename = "__base__/sound/wooden-chest-close.ogg" ,
-			volume = 0.5
-		}
+		SISound.Base( "wooden-chest-close" , 0.5 )
 	}
 } )
 
@@ -3308,51 +3041,30 @@ CreateRuinBuildings( SICommon.Types.Entities.Machine , "RuinMachine" , "遗迹�
 	} ,
 	mined_sound =
 	{
-		{
-			filename = "__core__/sound/deconstruct-large.ogg" ,
-			volume = 1
-		}
+		SISound.Core( "deconstruct-large" , 1 )
 	} ,
 	vehicle_impact_sound =
 	{
-		{
-			filename = "__base__/sound/car-metal-impact.ogg" ,
-			volume = 1
-		}
+		SISound.Base( "car-metal-impact" , 1 )
 	} ,
 	repair_sound =
 	{
-		{
-			filename = "__core__/sound/manual-repair-advanced-1.ogg" ,
-			volume = 0.5
-		} ,
-		{
-			filename = "__core__/sound/manual-repair-advanced-2.ogg" ,
-			volume = 0.5
-		}
+		SISound.Core( "manual-repair-advanced-1" , 0.5 ) ,
+		SISound.Core( "manual-repair-advanced-2" , 0.5 )
 	} ,
 	open_sound =
 	{
-		{
-			filename = "__base__/sound/machine-open.ogg" ,
-			volume = 0.5
-		}
+		SISound.Base( "machine-open" , 0.5 )
 	} ,
 	close_sound =
 	{
-		{
-			filename = "__base__/sound/machine-close.ogg" ,
-			volume = 0.5
-		}
+		SISound.Base( "machine-close" , 0.5 )
 	} ,
 	working_sound =
 	{
 		sound =
 		{
-			{
-				filename = "__base__/sound/assembling-machine-t3-1.ogg" ,
-				volume = 0.5
-			}
+			SISound.Base( "assembling-machine-t3-1" , 0.5 )
 		} ,
 		audible_distance_modifier = 0.5 ,
 		fade_in_ticks = 4 ,
@@ -3414,10 +3126,7 @@ SIGen
 	hide_resistances = false ,
 	resistances =
 	{
-		{
-			type = "fire" ,
-			percent = 25
-		}
+		SITools.Resistance( "fire" , 0 , 25 )
 	} ,
 	damaged_trigger_effect =
 	{
@@ -3510,83 +3219,38 @@ SIGen
 	} ,
 	mined_sound =
 	{
-		{
-			filename = "__core__/sound/deconstruct-small.ogg" ,
-			volume = 1
-		}
+		SISound.Core( "deconstruct-small" , 1 )
 	} ,
 	vehicle_impact_sound =
 	{
-		{
-			filename = "__base__/sound/car-wood-impact.ogg" ,
-			volume = 0.5
-		} ,
-		{
-			filename = "__base__/sound/car-wood-impact-02.ogg" ,
-			volume = 0.5
-		} ,
-		{
-			filename = "__base__/sound/car-wood-impact-03.ogg" ,
-			volume = 0.5
-		} ,
-		{
-			filename = "__base__/sound/car-wood-impact-04.ogg" ,
-			volume = 0.5
-		} ,
-		{
-			filename = "__base__/sound/car-wood-impact-05.ogg" ,
-			volume = 0.5
-		}
+		SISound.Base( "car-wood-impact" , 0.5 ) ,
+		SISound.Base( "car-wood-impact-02" , 0.5 ) ,
+		SISound.Base( "car-wood-impact-03" , 0.5 ) ,
+		SISound.Base( "car-wood-impact-04" , 0.5 ) ,
+		SISound.Base( "car-wood-impact-05" , 0.5 )
 	} ,
 	repair_sound =
 	{
-		{
-			filename = "__core__/sound/manual-repair-advanced-1.ogg" ,
-			volume = 0.5
-		} ,
-		{
-			filename = "__core__/sound/manual-repair-advanced-2.ogg" ,
-			volume = 0.5
-		}
+		SISound.Core( "manual-repair-advanced-1" , 0.5 ) ,
+		SISound.Core( "manual-repair-advanced-2" , 0.5 )
 	} ,
 	open_sound =
 	{
-		{
-			filename = "__base__/sound/wooden-chest-open.ogg" ,
-			volume = 0.5
-		}
+		SISound.Base( "wooden-chest-open" , 0.5 )
 	} ,
 	close_sound =
 	{
-		{
-			filename = "__base__/sound/wooden-chest-close.ogg" ,
-			volume = 0.5
-		}
+		SISound.Base( "wooden-chest-close" , 0.5 )
 	} ,
 	working_sound =
 	{
 		sound =
 		{
-			{
-				filename = "__base__/sound/inserter-basic-1.ogg" ,
-				volume = 0.5
-			} ,
-			{
-				filename = "__base__/sound/inserter-basic-2.ogg" ,
-				volume = 0.5
-			} ,
-			{
-				filename = "__base__/sound/inserter-basic-3.ogg" ,
-				volume = 0.5
-			} ,
-			{
-				filename = "__base__/sound/inserter-basic-4.ogg" ,
-				volume = 0.5
-			} ,
-			{
-				filename = "__base__/sound/inserter-basic-5.ogg" ,
-				volume = 0.5
-			}
+			SISound.Base( "inserter-basic-1" , 0.5 ) ,
+			SISound.Base( "inserter-basic-2" , 0.5 ) ,
+			SISound.Base( "inserter-basic-3" , 0.5 ) ,
+			SISound.Base( "inserter-basic-4" , 0.5 ) ,
+			SISound.Base( "inserter-basic-5" , 0.5 )
 		} ,
 		match_progress_to_activity = true ,
 		audible_distance_modifier = 0.3
@@ -3943,140 +3607,50 @@ SIGen
 	} ,
 	mined_sound =
 	{
-		{
-			filename = "__base__/sound/deconstruct-bricks.ogg" ,
-			volume = 0.8
-		}
+		SISound.Base( "deconstruct-bricks" , 0.8 )
 	} ,
 	build_sound =
 	{
 		small =
 		{
-			{
-				filename = "__core__/sound/build-concrete-small.ogg" ,
-				volume = 0.4
-			} ,
-			{
-				filename = "__core__/sound/build-concrete-small-1.ogg" ,
-				volume = 0.4
-			} ,
-			{
-				filename = "__core__/sound/build-concrete-small-2.ogg" ,
-				volume = 0.4
-			} ,
-			{
-				filename = "__core__/sound/build-concrete-small-3.ogg" ,
-				volume = 0.4
-			} ,
-			{
-				filename = "__core__/sound/build-concrete-small-4.ogg" ,
-				volume = 0.4
-			} ,
-			{
-				filename = "__core__/sound/build-concrete-small-5.ogg" ,
-				volume = 0.4
-			}
+			SISound.Core( "build-concrete-small" , 0.4 ) ,
+			SISound.Core( "build-concrete-small-1" , 0.4 ) ,
+			SISound.Core( "build-concrete-small-2" , 0.4 ) ,
+			SISound.Core( "build-concrete-small-3" , 0.4 ) ,
+			SISound.Core( "build-concrete-small-4" , 0.4 ) ,
+			SISound.Core( "build-concrete-small-5" , 0.4 )
 		} ,
 		medium =
 		{
-			{
-				filename = "__core__/sound/build-concrete-medium.ogg" ,
-				volume = 0.5
-			} ,
-			{
-				filename = "__core__/sound/build-concrete-medium-1.ogg" ,
-				volume = 0.5
-			} ,
-			{
-				filename = "__core__/sound/build-concrete-medium-2.ogg" ,
-				volume = 0.5
-			} ,
-			{
-				filename = "__core__/sound/build-concrete-medium-3.ogg" ,
-				volume = 0.5
-			} ,
-			{
-				filename = "__core__/sound/build-concrete-medium-4.ogg" ,
-				volume = 0.5
-			} ,
-			{
-				filename = "__core__/sound/build-concrete-medium-5.ogg" ,
-				volume = 0.5
-			}
+			SISound.Core( "build-concrete-medium" , 0.4 ) ,
+			SISound.Core( "build-concrete-medium-1" , 0.4 ) ,
+			SISound.Core( "build-concrete-medium-2" , 0.4 ) ,
+			SISound.Core( "build-concrete-medium-3" , 0.4 ) ,
+			SISound.Core( "build-concrete-medium-4" , 0.4 ) ,
+			SISound.Core( "build-concrete-medium-5" , 0.4 )
 		} ,
 		large =
 		{
-			{
-				filename = "__core__/sound/build-concrete-large.ogg" ,
-				volume = 0.5
-			} ,
-			{
-				filename = "__core__/sound/build-concrete-large-1.ogg" ,
-				volume = 0.5
-			} ,
-			{
-				filename = "__core__/sound/build-concrete-large-2.ogg" ,
-				volume = 0.5
-			} ,
-			{
-				filename = "__core__/sound/build-concrete-large-3.ogg" ,
-				volume = 0.5
-			} ,
-			{
-				filename = "__core__/sound/build-concrete-large-4.ogg" ,
-				volume = 0.5
-			} ,
-			{
-				filename = "__core__/sound/build-concrete-large-5.ogg" ,
-				volume = 0.5
-			}
+			SISound.Core( "build-concrete-large" , 0.4 ) ,
+			SISound.Core( "build-concrete-large-1" , 0.4 ) ,
+			SISound.Core( "build-concrete-large-2" , 0.4 ) ,
+			SISound.Core( "build-concrete-large-3" , 0.4 ) ,
+			SISound.Core( "build-concrete-large-4" , 0.4 ) ,
+			SISound.Core( "build-concrete-large-5" , 0.4 )
 		}
 	} ,
 	walking_sound =
 	{
-		{
-			filename = "__base__/sound/walking/refined-concrete-01.ogg" ,
-			volume = 0.5
-		} ,
-		{
-			filename = "__base__/sound/walking/refined-concrete-02.ogg" ,
-			volume = 0.5
-		} ,
-		{
-			filename = "__base__/sound/walking/refined-concrete-03.ogg" ,
-			volume = 0.5
-		} ,
-		{
-			filename = "__base__/sound/walking/refined-concrete-04.ogg" ,
-			volume = 0.5
-		} ,
-		{
-			filename = "__base__/sound/walking/refined-concrete-05.ogg" ,
-			volume = 0.5
-		} ,
-		{
-			filename = "__base__/sound/walking/refined-concrete-06.ogg" ,
-			volume = 0.5
-		} ,
-		{
-			filename = "__base__/sound/walking/refined-concrete-07.ogg" ,
-			volume = 0.5
-		} ,
-		{
-			filename = "__base__/sound/walking/refined-concrete-08.ogg" ,
-			volume = 0.5
-		} ,
-		{
-			filename = "__base__/sound/walking/refined-concrete-09.ogg" ,
-			volume = 0.5
-		} ,
-		{
-			filename = "__base__/sound/walking/refined-concrete-10.ogg" ,
-			volume = 0.5
-		} ,
-		{
-			filename = "__base__/sound/walking/refined-concrete-11.ogg" ,
-			volume = 0.5
-		}
+		SISound.Base( "walking/refined-concrete-01" , 0.5 ) ,
+		SISound.Base( "walking/refined-concrete-02" , 0.5 ) ,
+		SISound.Base( "walking/refined-concrete-03" , 0.5 ) ,
+		SISound.Base( "walking/refined-concrete-04" , 0.5 ) ,
+		SISound.Base( "walking/refined-concrete-05" , 0.5 ) ,
+		SISound.Base( "walking/refined-concrete-06" , 0.5 ) ,
+		SISound.Base( "walking/refined-concrete-07" , 0.5 ) ,
+		SISound.Base( "walking/refined-concrete-08" , 0.5 ) ,
+		SISound.Base( "walking/refined-concrete-09" , 0.5 ) ,
+		SISound.Base( "walking/refined-concrete-10" , 0.5 ) ,
+		SISound.Base( "walking/refined-concrete-11" , 0.5 )
 	}
 }

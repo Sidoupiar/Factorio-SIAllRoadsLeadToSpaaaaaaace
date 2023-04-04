@@ -6,6 +6,19 @@ local LaserSmallDamage = 6
 local LaserLargeDamage = 10
 local LaserLargeDamageDirect = 14
 
+local maxHealth = 26000
+local defaultResistances =
+{
+	SITools.Resistance( "physical" , 10 , 25 ) ,
+	SITools.Resistance( "impact" , 0 , 98 ) ,
+	SITools.Resistance( "poison" , 0 , 100 ) ,
+	SITools.Resistance( "explosion" , 5 , 65 ) ,
+	SITools.Resistance( "fire" , 0 , 100 ) ,
+	SITools.Resistance( "laser" , 25 , 0 ) ,
+	SITools.Resistance( "acid" , 0 , 100 ) ,
+	SITools.Resistance( "electric" , 0 , 100 ) ,
+}
+
 SIGen
 .SetGroup( SIConstants_Core.raw.Groups.Hidden.Debug )
 -- ----------------------------------------
@@ -83,7 +96,7 @@ SIGen
 			}
 		}
 	} ,
-	max_health = 50 ,
+	max_health = 45 ,
 	corpse = "small-remnants" ,
 	dying_explosion = "nuke-explosion" ,
 	map_color = { r = 1.00 , g = 0.94 , b = 0.46 } ,
@@ -92,6 +105,7 @@ SIGen
 	alert_when_damaged = true ,
 	create_ghost_on_death = false ,
 	hide_resistances = true ,
+	resistances = defaultResistances ,
 	pictures =
 	{
 		{
@@ -118,54 +132,24 @@ SIGen
 	} ,
 	mined_sound =
 	{
-		{
-			filename = "__core__/sound/deconstruct-small.ogg" ,
-			volume = 1
-		}
+		SISound.Core( "deconstruct-small" , 1 )
 	} ,
 	vehicle_impact_sound =
 	{
-		{
-			filename = "__base__/sound/car-metal-impact.ogg" ,
-			volume = 1
-		}
+		SISound.Base( "car-metal-impact" , 1 )
 	} ,
 	repair_sound =
 	{
-		{
-			filename = "__base__/sound/manual-repair-simple-1.ogg" ,
-			volume = 0.5
-		} ,
-		{
-			filename = "__base__/sound/manual-repair-simple-2.ogg" ,
-			volume = 0.5
-		} ,
-		{
-			filename = "__base__/sound/manual-repair-simple-3.ogg" ,
-			volume = 0.5
-		} ,
-		{
-			filename = "__base__/sound/manual-repair-simple-4.ogg" ,
-			volume = 0.5
-		} ,
-		{
-			filename = "__base__/sound/manual-repair-simple-5.ogg" ,
-			volume = 0.5
-		}
+		SISound.Core( "manual-repair-advanced-1" , 0.5 ) ,
+		SISound.Core( "manual-repair-advanced-2" , 0.5 )
 	} ,
 	open_sound =
 	{
-		{
-			filename = "__base__/sound/machine-open.ogg" ,
-			volume = 0.5
-		}
+		SISound.Base( "machine-open" , 0.5 )
 	} ,
 	close_sound =
 	{
-		{
-			filename = "__base__/sound/machine-close.ogg" ,
-			volume = 0.5
-		}
+		SISound.Base( "machine-close" , 0.5 )
 	}
 }
 .New( SICommon.Types.Equipments.Battery , "Candy" , "量产之酥皮夹心糖果" ,
@@ -299,7 +283,7 @@ SIGen
 			}
 		}
 	} ,
-	max_health = 24000 ,
+	max_health = maxHealth ,
 	corpse = "nuclear-reactor-remnants" ,
 	dying_explosion = "nuke-explosion" ,
 	map_color = { r = 1.00 , g = 0.94 , b = 0.46 } ,
@@ -308,7 +292,7 @@ SIGen
 	alert_when_damaged = true ,
 	create_ghost_on_death = false ,
 	hide_resistances = true ,
-	resistances = nil ,
+	resistances = defaultResistances ,
 	damaged_trigger_effect =
 	{
 		type = "create-entity" ,
@@ -377,67 +361,31 @@ SIGen
 	idle_animation = nil ,
 	mined_sound =
 	{
-		{
-			filename = "__core__/sound/deconstruct-large.ogg" ,
-			volume = 1
-		}
+		SISound.Core( "deconstruct-large" , 1 )
 	} ,
 	vehicle_impact_sound =
 	{
-		{
-			filename = "__base__/sound/car-metal-impact.ogg" ,
-			volume = 1
-		}
+		SISound.Base( "car-metal-impact" , 1 )
 	} ,
 	repair_sound =
 	{
-		{
-			filename = "__base__/sound/manual-repair-simple-1.ogg" ,
-			volume = 0.5
-		} ,
-		{
-			filename = "__base__/sound/manual-repair-simple-2.ogg" ,
-			volume = 0.5
-		} ,
-		{
-			filename = "__base__/sound/manual-repair-simple-3.ogg" ,
-			volume = 0.5
-		} ,
-		{
-			filename = "__base__/sound/manual-repair-simple-4.ogg" ,
-			volume = 0.5
-		} ,
-		{
-			filename = "__base__/sound/manual-repair-simple-5.ogg" ,
-			volume = 0.5
-		}
+		SISound.Core( "manual-repair-advanced-1" , 0.5 ) ,
+		SISound.Core( "manual-repair-advanced-2" , 0.5 )
 	} ,
 	open_sound =
 	{
-		{
-			filename = "__base__/sound/machine-open.ogg" ,
-			volume = 0.5
-		}
+		SISound.Base( "machine-open" , 0.5 )
 	} ,
 	close_sound =
 	{
-		{
-			filename = "__base__/sound/machine-close.ogg" ,
-			volume = 0.5
-		}
+		SISound.Base( "machine-close" , 0.5 )
 	} ,
 	working_sound =
 	{
 		sound =
 		{
-			{
-				filename = "__base__/sound/nuclear-reactor-1.ogg" ,
-				volume = 0.55
-			} ,
-			{
-				filename = "__base__/sound/nuclear-reactor-2.ogg" ,
-				volume = 0.55
-			}
+			SISound.Base( "nuclear-reactor-1" , 0.65 ) ,
+			SISound.Base( "nuclear-reactor-2" , 0.65 )
 		} ,
 		max_sounds_per_type = 3 ,
 		fade_in_ticks = 4 ,
@@ -573,7 +521,7 @@ SIGen
 			}
 		}
 	} ,
-	max_health = 24000 ,
+	max_health = maxHealth ,
 	corpse = "beacon-remnants" ,
 	dying_explosion = "nuke-explosion" ,
 	map_color = { r = 1.00 , g = 0.94 , b = 0.46 } ,
@@ -582,7 +530,7 @@ SIGen
 	alert_when_damaged = true ,
 	create_ghost_on_death = false ,
 	hide_resistances = true ,
-	resistances = nil ,
+	resistances = defaultResistances ,
 	damaged_trigger_effect =
 	{
 		type = "create-entity" ,
@@ -906,67 +854,31 @@ SIGen
 	} ,
 	mined_sound =
 	{
-		{
-			filename = "__core__/sound/deconstruct-large.ogg" ,
-			volume = 1
-		}
+		SISound.Core( "deconstruct-large" , 1 )
 	} ,
 	vehicle_impact_sound =
 	{
-		{
-			filename = "__base__/sound/car-metal-impact.ogg" ,
-			volume = 1
-		}
+		SISound.Base( "car-metal-impact" , 1 )
 	} ,
 	repair_sound =
 	{
-		{
-			filename = "__base__/sound/manual-repair-simple-1.ogg" ,
-			volume = 0.5
-		} ,
-		{
-			filename = "__base__/sound/manual-repair-simple-2.ogg" ,
-			volume = 0.5
-		} ,
-		{
-			filename = "__base__/sound/manual-repair-simple-3.ogg" ,
-			volume = 0.5
-		} ,
-		{
-			filename = "__base__/sound/manual-repair-simple-4.ogg" ,
-			volume = 0.5
-		} ,
-		{
-			filename = "__base__/sound/manual-repair-simple-5.ogg" ,
-			volume = 0.5
-		}
+		SISound.Core( "manual-repair-advanced-1" , 0.5 ) ,
+		SISound.Core( "manual-repair-advanced-2" , 0.5 )
 	} ,
 	open_sound =
 	{
-		{
-			filename = "__base__/sound/machine-open.ogg" ,
-			volume = 0.5
-		}
+		SISound.Base( "machine-open" , 0.5 )
 	} ,
 	close_sound =
 	{
-		{
-			filename = "__base__/sound/machine-close.ogg" ,
-			volume = 0.5
-		}
+		SISound.Base( "machine-close" , 0.5 )
 	} ,
 	working_sound =
 	{
 		sound =
 		{
-			{
-				filename = "__base__/sound/beacon-1.ogg" ,
-				volume = 0.2
-			} ,
-			{
-				filename = "__base__/sound/beacon-2.ogg" ,
-				volume = 0.2
-			}
+			SISound.Base( "beacon-1" , 0.25 ) ,
+			SISound.Base( "beacon-2" , 0.25 )
 		} ,
 		audible_distance_modifier = 0.33 ,
 		max_sounds_per_type = 3
@@ -1085,7 +997,7 @@ SIGen
 			}
 		}
 	} ,
-	max_health = 24000 ,
+	max_health = maxHealth ,
 	corpse = "radar-remnants" ,
 	dying_explosion = "nuke-explosion" ,
 	map_color = { r = 1.00 , g = 0.94 , b = 0.46 } ,
@@ -1094,7 +1006,7 @@ SIGen
 	alert_when_damaged = true ,
 	create_ghost_on_death = false ,
 	hide_resistances = true ,
-	resistances = nil ,
+	resistances = defaultResistances ,
 	damaged_trigger_effect =
 	{
 		type = "create-entity" ,
@@ -1168,63 +1080,30 @@ SIGen
 	} ,
 	mined_sound =
 	{
-		{
-			filename = "__core__/sound/deconstruct-large.ogg" ,
-			volume = 1
-		}
+		SISound.Core( "deconstruct-large" , 1 )
 	} ,
 	vehicle_impact_sound =
 	{
-		{
-			filename = "__base__/sound/car-metal-impact.ogg" ,
-			volume = 1
-		}
+		SISound.Base( "car-metal-impact" , 1 )
 	} ,
 	repair_sound =
 	{
-		{
-			filename = "__base__/sound/manual-repair-simple-1.ogg" ,
-			volume = 0.5
-		} ,
-		{
-			filename = "__base__/sound/manual-repair-simple-2.ogg" ,
-			volume = 0.5
-		} ,
-		{
-			filename = "__base__/sound/manual-repair-simple-3.ogg" ,
-			volume = 0.5
-		} ,
-		{
-			filename = "__base__/sound/manual-repair-simple-4.ogg" ,
-			volume = 0.5
-		} ,
-		{
-			filename = "__base__/sound/manual-repair-simple-5.ogg" ,
-			volume = 0.5
-		}
+		SISound.Core( "manual-repair-advanced-1" , 0.5 ) ,
+		SISound.Core( "manual-repair-advanced-2" , 0.5 )
 	} ,
 	open_sound =
 	{
-		{
-			filename = "__base__/sound/machine-open.ogg" ,
-			volume = 0.5
-		}
+		SISound.Base( "machine-open" , 0.5 )
 	} ,
 	close_sound =
 	{
-		{
-			filename = "__base__/sound/machine-close.ogg" ,
-			volume = 0.5
-		}
+		SISound.Base( "machine-close" , 0.5 )
 	} ,
 	working_sound =
 	{
 		sound =
 		{
-			{
-				filename = "__base__/sound/radar.ogg" ,
-				volume = 0.8
-			}
+			SISound.Base( "radar" , 0.7 )
 		} ,
 		use_doppler_shift = false ,
 		max_sounds_per_type = 3
@@ -1277,17 +1156,11 @@ SIGen
 	} ,
 	activate_sound =
 	{
-		{
-			filename = "__base__/sound/nightvision-on.ogg" ,
-			volume = 0.5
-		}
+		SISound.Base( "nightvision-on" , 0.6 )
 	} ,
 	deactivate_sound =
 	{
-		{
-			filename = "__base__/sound/nightvision-off.ogg" ,
-			volume = 0.5
-		}
+		SISound.Base( "nightvision-off" , 0.6 )
 	}
 } )
 .MakeIcon( SICommon.Types.Items.Item , "洞察之一览无余雷达" , 64 , 4 )
@@ -1364,7 +1237,7 @@ SIGen
 			}
 		}
 	} ,
-	max_health = 24000 ,
+	max_health = maxHealth ,
 	corpse = "roboport-remnants" ,
 	dying_explosion = "nuke-explosion" ,
 	map_color = { r = 1.00 , g = 0.94 , b = 0.46 } ,
@@ -1373,7 +1246,7 @@ SIGen
 	alert_when_damaged = true ,
 	create_ghost_on_death = false ,
 	hide_resistances = true ,
-	resistances = nil ,
+	resistances = defaultResistances ,
 	damaged_trigger_effect =
 	{
 		type = "create-entity" ,
@@ -1425,10 +1298,7 @@ SIGen
 			type = "play-sound" ,
 			sound =
 			{
-				filename = "__base__/sound/roboport-door.ogg" ,
-				volume = 0.3 ,
-				min_speed = 1 ,
-				max_speed = 1.5
+				SISound.Base( "roboport-door" , 0.3 , 1 , 1.5 )
 			}
 		}
 	} ,
@@ -1438,10 +1308,7 @@ SIGen
 			type = "play-sound" ,
 			sound =
 			{
-				filename = "__base__/sound/roboport-door-close.ogg" ,
-				volume = 0.2 ,
-				min_speed = 1 ,
-				max_speed = 1.5
+				SISound.Base( "roboport-door-close" , 0.2 , 1 , 1.5 )
 			}
 		}
 	} ,
@@ -1562,63 +1429,30 @@ SIGen
 	} ,
 	mined_sound =
 	{
-		{
-			filename = "__core__/sound/deconstruct-large.ogg" ,
-			volume = 1
-		}
+		SISound.Core( "deconstruct-large" , 1 )
 	} ,
 	vehicle_impact_sound =
 	{
-		{
-			filename = "__base__/sound/car-metal-impact.ogg" ,
-			volume = 1
-		}
+		SISound.Base( "car-metal-impact" , 1 )
 	} ,
 	repair_sound =
 	{
-		{
-			filename = "__base__/sound/manual-repair-simple-1.ogg" ,
-			volume = 0.5
-		} ,
-		{
-			filename = "__base__/sound/manual-repair-simple-2.ogg" ,
-			volume = 0.5
-		} ,
-		{
-			filename = "__base__/sound/manual-repair-simple-3.ogg" ,
-			volume = 0.5
-		} ,
-		{
-			filename = "__base__/sound/manual-repair-simple-4.ogg" ,
-			volume = 0.5
-		} ,
-		{
-			filename = "__base__/sound/manual-repair-simple-5.ogg" ,
-			volume = 0.5
-		}
+		SISound.Core( "manual-repair-advanced-1" , 0.5 ) ,
+		SISound.Core( "manual-repair-advanced-2" , 0.5 )
 	} ,
 	open_sound =
 	{
-		{
-			filename = "__base__/sound/machine-open.ogg" ,
-			volume = 0.5
-		}
+		SISound.Base( "machine-open" , 0.5 )
 	} ,
 	close_sound =
 	{
-		{
-			filename = "__base__/sound/machine-close.ogg" ,
-			volume = 0.5
-		}
+		SISound.Base( "machine-close" , 0.5 )
 	} ,
 	working_sound =
 	{
 		sound =
 		{
-			{
-				filename = "__base__/sound/roboport-working.ogg" ,
-				volume = 0.4
-			}
+			SISound.Base( "roboport-working" , 0.4 )
 		} ,
 		max_sounds_per_type = 3 ,
 		audible_distance_modifier = 0.75
@@ -1778,7 +1612,7 @@ SIGen
 	collision_box = { { 0 , 0 } , { 0 , 0 } } ,
 	selection_box = { { -0.5 , -1.5 } , { 0.5 , -0.5 } } ,
 	hit_visualization_box = { { -0.1 , -1.1 } , { 0.1 , -1.0 } } ,
-	max_health = 24000 ,
+	max_health = maxHealth ,
 	corpse = nil ,
 	dying_explosion = "nuke-explosion" ,
 	map_color = { r = 1.00 , g = 0.94 , b = 0.46 } ,
@@ -1787,7 +1621,7 @@ SIGen
 	alert_when_damaged = true ,
 	create_ghost_on_death = false ,
 	hide_resistances = true ,
-	resistances = nil ,
+	resistances = defaultResistances ,
 	damaged_trigger_effect =
 	{
 		type = "create-entity" ,
@@ -1825,48 +1659,21 @@ SIGen
 			type = "play-sound" ,
 			sound =
 			{
-				{
-					filename = "__base__/sound/fight/robot-die-whoosh-01.ogg" ,
-					volume = 0.5
-				} ,
-				{
-					filename = "__base__/sound/fight/robot-die-whoosh-02.ogg" ,
-					volume = 0.5
-				} ,
-				{
-					filename = "__base__/sound/fight/robot-die-whoosh-03.ogg" ,
-					volume = 0.5
-				}
+				SISound.Base( "fight/robot-die-whoosh-01" , 0.5 ) ,
+				SISound.Base( "fight/robot-die-whoosh-02" , 0.5 ) ,
+				SISound.Base( "fight/robot-die-whoosh-03" , 0.5 )
 			}
 		} ,
 		{
 			type = "play-sound" ,
 			sound =
 			{
-				{
-					filename = "__base__/sound/fight/robot-die-vox-01.ogg" ,
-					volume = 0.5
-				} ,
-				{
-					filename = "__base__/sound/fight/robot-die-vox-02.ogg" ,
-					volume = 0.5
-				} ,
-				{
-					filename = "__base__/sound/fight/robot-die-vox-03.ogg" ,
-					volume = 0.5
-				} ,
-				{
-					filename = "__base__/sound/fight/robot-die-vox-04.ogg" ,
-					volume = 0.5
-				} ,
-				{
-					filename = "__base__/sound/fight/robot-die-vox-05.ogg" ,
-					volume = 0.5
-				} ,
-				{
-					filename = "__base__/sound/fight/robot-die-vox-06.ogg" ,
-					volume = 0.5
-				}
+				SISound.Base( "fight/robot-die-vox-01" , 0.5 ) ,
+				SISound.Base( "fight/robot-die-vox-02" , 0.5 ) ,
+				SISound.Base( "fight/robot-die-vox-03" , 0.5 ) ,
+				SISound.Base( "fight/robot-die-vox-04" , 0.5 ) ,
+				SISound.Base( "fight/robot-die-vox-05" , 0.5 ) ,
+				SISound.Base( "fight/robot-die-vox-06" , 0.5 )
 			}
 		}
 	} ,
@@ -2108,98 +1915,31 @@ SIGen
 	} ,
 	mined_sound =
 	{
-		{
-			filename = "__core__/sound/deconstruct-small.ogg" ,
-			volume = 1
-		}
+		SISound.Core( "deconstruct-small" , 1 )
 	} ,
-	repairing_sound =
+	repair_sound =
 	{
-		{
-			filename = "__base__/sound/robot-repair-1.ogg" ,
-			volume = 0.6
-		} ,
-		{
-			filename = "__base__/sound/robot-repair-2.ogg" ,
-			volume = 0.6
-		} ,
-		{
-			filename = "__base__/sound/robot-repair-3.ogg" ,
-			volume = 0.6
-		} ,
-		{
-			filename = "__base__/sound/robot-repair-4.ogg" ,
-			volume = 0.6
-		} ,
-		{
-			filename = "__base__/sound/robot-repair-5.ogg" ,
-			volume = 0.6
-		} ,
-		{
-			filename = "__base__/sound/robot-repair-6.ogg" ,
-			volume = 0.6
-		}
+		SISound.Core( "manual-repair-advanced-1" , 0.5 ) ,
+		SISound.Core( "manual-repair-advanced-2" , 0.5 )
 	} ,
 	working_sound =
 	{
 		sound =
 		{
-			{
-				filename = "__base__/sound/construction-robot-1.ogg" ,
-				volume = 0.47
-			} ,
-			{
-				filename = "__base__/sound/construction-robot-2.ogg" ,
-				volume = 0.47
-			} ,
-			{
-				filename = "__base__/sound/construction-robot-3.ogg" ,
-				volume = 0.47
-			} ,
-			{
-				filename = "__base__/sound/construction-robot-4.ogg" ,
-				volume = 0.47
-			} ,
-			{
-				filename = "__base__/sound/construction-robot-5.ogg" ,
-				volume = 0.47
-			} ,
-			{
-				filename = "__base__/sound/construction-robot-6.ogg" ,
-				volume = 0.47
-			} ,
-			{
-				filename = "__base__/sound/construction-robot-7.ogg" ,
-				volume = 0.47
-			} ,
-			{
-				filename = "__base__/sound/construction-robot-8.ogg" ,
-				volume = 0.47
-			} ,
-			{
-				filename = "__base__/sound/construction-robot-9.ogg" ,
-				volume = 0.47
-			} ,
-			{
-				filename = "__base__/sound/flying-robot-1.ogg" ,
-				volume = 0.43
-			} ,
-			{
-				filename = "__base__/sound/flying-robot-2.ogg" ,
-				volume = 0.43
-			} ,
-			{
-				filename = "__base__/sound/flying-robot-3.ogg" ,
-				volume = 0.43
-			} ,
-			{
-				filename = "__base__/sound/flying-robot-4.ogg" ,
-				volume = 0.43
-			} ,
-			{
-				filename = "__base__/sound/flying-robot-5.ogg" ,
-				volume = 0.43
-			}
+			SISound.Base( "construction-robot-1" , 0.42 ) ,
+			SISound.Base( "construction-robot-2" , 0.42 ) ,
+			SISound.Base( "construction-robot-3" , 0.42 ) ,
+			SISound.Base( "construction-robot-4" , 0.42 ) ,
+			SISound.Base( "construction-robot-5" , 0.42 ) ,
+			SISound.Base( "construction-robot-6" , 0.42 ) ,
+			SISound.Base( "construction-robot-7" , 0.42 ) ,
+			SISound.Base( "construction-robot-8" , 0.42 ) ,
+			SISound.Base( "construction-robot-9" , 0.42 ) ,
+			SISound.Base( "flying-robot-1" , 0.42 ) ,
+			SISound.Base( "flying-robot-2" , 0.42 ) ,
+			SISound.Base( "flying-robot-3" , 0.42 ) ,
+			SISound.Base( "flying-robot-4" , 0.42 ) ,
+			SISound.Base( "flying-robot-5" , 0.42 )
 		} ,
 		max_sounds_per_type = 20 ,
 		audible_distance_modifier = 1 ,
@@ -2323,7 +2063,7 @@ SIGen
 	collision_box = { { 0 , 0 } , { 0 , 0 } } ,
 	selection_box = { { -0.5 , -1.5 } , { 0.5 , -0.5 } } ,
 	hit_visualization_box = { { -0.1 , -1.1 } , { 0.1 , -1.0 } } ,
-	max_health = 24000 ,
+	max_health = maxHealth ,
 	corpse = nil ,
 	dying_explosion = "nuke-explosion" ,
 	map_color = { r = 1.00 , g = 0.94 , b = 0.46 } ,
@@ -2332,7 +2072,7 @@ SIGen
 	alert_when_damaged = true ,
 	create_ghost_on_death = false ,
 	hide_resistances = true ,
-	resistances = nil ,
+	resistances = defaultResistances ,
 	damaged_trigger_effect =
 	{
 		type = "create-entity" ,
@@ -2369,48 +2109,21 @@ SIGen
 			type = "play-sound" ,
 			sound =
 			{
-				{
-					filename = "__base__/sound/fight/robot-die-whoosh-01.ogg" ,
-					volume = 0.5
-				} ,
-				{
-					filename = "__base__/sound/fight/robot-die-whoosh-02.ogg" ,
-					volume = 0.5
-				} ,
-				{
-					filename = "__base__/sound/fight/robot-die-whoosh-03.ogg" ,
-					volume = 0.5
-				}
+				SISound.Base( "fight/robot-die-whoosh-01" , 0.5 ) ,
+				SISound.Base( "fight/robot-die-whoosh-02" , 0.5 ) ,
+				SISound.Base( "fight/robot-die-whoosh-03" , 0.5 )
 			}
 		} ,
 		{
 			type = "play-sound" ,
 			sound =
 			{
-				{
-					filename = "__base__/sound/fight/robot-die-vox-01.ogg" ,
-					volume = 0.5
-				} ,
-				{
-					filename = "__base__/sound/fight/robot-die-vox-02.ogg" ,
-					volume = 0.5
-				} ,
-				{
-					filename = "__base__/sound/fight/robot-die-vox-03.ogg" ,
-					volume = 0.5
-				} ,
-				{
-					filename = "__base__/sound/fight/robot-die-vox-04.ogg" ,
-					volume = 0.5
-				} ,
-				{
-					filename = "__base__/sound/fight/robot-die-vox-05.ogg" ,
-					volume = 0.5
-				} ,
-				{
-					filename = "__base__/sound/fight/robot-die-vox-06.ogg" ,
-					volume = 0.5
-				}
+				SISound.Base( "fight/robot-die-vox-01" , 0.5 ) ,
+				SISound.Base( "fight/robot-die-vox-02" , 0.5 ) ,
+				SISound.Base( "fight/robot-die-vox-03" , 0.5 ) ,
+				SISound.Base( "fight/robot-die-vox-04" , 0.5 ) ,
+				SISound.Base( "fight/robot-die-vox-05" , 0.5 ) ,
+				SISound.Base( "fight/robot-die-vox-06" , 0.5 )
 			}
 		}
 	} ,
@@ -2571,98 +2284,31 @@ SIGen
 	} ,
 	mined_sound =
 	{
-		{
-			filename = "__core__/sound/deconstruct-small.ogg" ,
-			volume = 1
-		}
+		SISound.Core( "deconstruct-small" , 1 )
 	} ,
-	repairing_sound =
+	repair_sound =
 	{
-		{
-			filename = "__base__/sound/robot-repair-1.ogg" ,
-			volume = 0.6
-		} ,
-		{
-			filename = "__base__/sound/robot-repair-2.ogg" ,
-			volume = 0.6
-		} ,
-		{
-			filename = "__base__/sound/robot-repair-3.ogg" ,
-			volume = 0.6
-		} ,
-		{
-			filename = "__base__/sound/robot-repair-4.ogg" ,
-			volume = 0.6
-		} ,
-		{
-			filename = "__base__/sound/robot-repair-5.ogg" ,
-			volume = 0.6
-		} ,
-		{
-			filename = "__base__/sound/robot-repair-6.ogg" ,
-			volume = 0.6
-		}
+		SISound.Core( "manual-repair-advanced-1" , 0.5 ) ,
+		SISound.Core( "manual-repair-advanced-2" , 0.5 )
 	} ,
 	working_sound =
 	{
 		sound =
 		{
-			{
-				filename = "__base__/sound/construction-robot-11.ogg" ,
-				volume = 0.48
-			} ,
-			{
-				filename = "__base__/sound/construction-robot-12.ogg" ,
-				volume = 0.48
-			} ,
-			{
-				filename = "__base__/sound/construction-robot-13.ogg" ,
-				volume = 0.48
-			} ,
-			{
-				filename = "__base__/sound/construction-robot-14.ogg" ,
-				volume = 0.48
-			} ,
-			{
-				filename = "__base__/sound/construction-robot-15.ogg" ,
-				volume = 0.48
-			} ,
-			{
-				filename = "__base__/sound/construction-robot-16.ogg" ,
-				volume = 0.48
-			} ,
-			{
-				filename = "__base__/sound/construction-robot-17.ogg" ,
-				volume = 0.48
-			} ,
-			{
-				filename = "__base__/sound/construction-robot-18.ogg" ,
-				volume = 0.48
-			} ,
-			{
-				filename = "__base__/sound/construction-robot-19.ogg" ,
-				volume = 0.48
-			} ,
-			{
-				filename = "__base__/sound/flying-robot-1.ogg" ,
-				volume = 0.43
-			} ,
-			{
-				filename = "__base__/sound/flying-robot-2.ogg" ,
-				volume = 0.43
-			} ,
-			{
-				filename = "__base__/sound/flying-robot-3.ogg" ,
-				volume = 0.43
-			} ,
-			{
-				filename = "__base__/sound/flying-robot-4.ogg" ,
-				volume = 0.43
-			} ,
-			{
-				filename = "__base__/sound/flying-robot-5.ogg" ,
-				volume = 0.43
-			}
+			SISound.Base( "construction-robot-11" , 0.42 ) ,
+			SISound.Base( "construction-robot-12" , 0.42 ) ,
+			SISound.Base( "construction-robot-13" , 0.42 ) ,
+			SISound.Base( "construction-robot-14" , 0.42 ) ,
+			SISound.Base( "construction-robot-15" , 0.42 ) ,
+			SISound.Base( "construction-robot-16" , 0.42 ) ,
+			SISound.Base( "construction-robot-17" , 0.42 ) ,
+			SISound.Base( "construction-robot-18" , 0.42 ) ,
+			SISound.Base( "construction-robot-19" , 0.42 ) ,
+			SISound.Base( "flying-robot-1" , 0.42 ) ,
+			SISound.Base( "flying-robot-2" , 0.42 ) ,
+			SISound.Base( "flying-robot-3" , 0.42 ) ,
+			SISound.Base( "flying-robot-4" , 0.42 ) ,
+			SISound.Base( "flying-robot-5" , 0.42 )
 		} ,
 		max_sounds_per_type = 20 ,
 		audible_distance_modifier = 1 ,
@@ -3648,8 +3294,7 @@ SIGen
 	{
 		sound =
 		{
-			filename = "__base__/sound/fight/laser-beam.ogg" ,
-			volume = 0.75
+			SISound.Base( "fight/laser-beam" , 0.75 )
 		} ,
 		max_sounds_per_type = 1
 	}
@@ -3673,7 +3318,7 @@ SIGen
 			}
 		}
 	} ,
-	max_health = 24000 ,
+	max_health = maxHealth ,
 	corpse = "laser-turret-remnants" ,
 	dying_explosion = "nuke-explosion" ,
 	map_color = { r = 1.00 , g = 0.94 , b = 0.46 } ,
@@ -3682,7 +3327,7 @@ SIGen
 	alert_when_damaged = true ,
 	create_ghost_on_death = false ,
 	hide_resistances = true ,
-	resistances = nil ,
+	resistances = defaultResistances ,
 	damaged_trigger_effect =
 	{
 		type = "create-entity" ,
@@ -3968,76 +3613,37 @@ SIGen
 	} ,
 	mined_sound =
 	{
-		{
-			filename = "__core__/sound/deconstruct-small.ogg" ,
-			volume = 1
-		}
+		SISound.Core( "deconstruct-small" , 1 )
 	} ,
 	vehicle_impact_sound =
 	{
-		{
-			filename = "__base__/sound/car-metal-impact.ogg" ,
-			volume = 1
-		}
+		SISound.Base( "car-metal-impact" , 1 )
 	} ,
 	repair_sound =
 	{
-		{
-			filename = "__core__/sound/manual-repair-advanced-1.ogg" ,
-			volume = 0.5
-		} ,
-		{
-			filename = "__core__/sound/manual-repair-advanced-2.ogg" ,
-			volume = 0.5
-		}
+		SISound.Core( "manual-repair-advanced-1" , 0.5 ) ,
+		SISound.Core( "manual-repair-advanced-2" , 0.5 )
 	} ,
 	open_sound =
 	{
-		{
-			filename = "__base__/sound/machine-open.ogg" ,
-			volume = 0.5
-		}
+		SISound.Base( "machine-open" , 0.5 )
 	} ,
 	close_sound =
 	{
-		{
-			filename = "__base__/sound/machine-close.ogg" ,
-			volume = 0.5
-		}
+		SISound.Base( "machine-close" , 0.5 )
 	} ,
 	preparing_sound =
 	{
-		{
-			filename = "__base__/sound/fight/laser-turret-activate-01.ogg" ,
-			volume = 0.3
-		} ,
-		{
-			filename = "__base__/sound/fight/laser-turret-activate-02.ogg" ,
-			volume = 0.3
-		} ,
-		{
-			filename = "__base__/sound/fight/laser-turret-activate-03.ogg" ,
-			volume = 0.3
-		}
+		SISound.Base( "fight/laser-turret-activate-01" , 0.3 ) ,
+		SISound.Base( "fight/laser-turret-activate-02" , 0.3 ) ,
+		SISound.Base( "fight/laser-turret-activate-03" , 0.3 )
 	} ,
 	folding_sound =
 	{
-		{
-			filename = "__base__/sound/fight/laser-turret-deactivate-01.ogg" ,
-			volume = 0.3
-		} ,
-		{
-			filename = "__base__/sound/fight/laser-turret-deactivate-02.ogg" ,
-			volume = 0.3
-		} ,
-		{
-			filename = "__base__/sound/fight/laser-turret-deactivate-03.ogg" ,
-			volume = 0.3
-		} ,
-		{
-			filename = "__base__/sound/fight/laser-turret-deactivate-04.ogg" ,
-			volume = 0.3
-		}
+		SISound.Base( "fight/laser-turret-deactivate-01" , 0.3 ) ,
+		SISound.Base( "fight/laser-turret-deactivate-02" , 0.3 ) ,
+		SISound.Base( "fight/laser-turret-deactivate-03" , 0.3 ) ,
+		SISound.Base( "fight/laser-turret-deactivate-04" , 0.3 )
 	}
 }
 .New( SICommon.Types.Equipments.ActiveDefense , "Laser" , "终末之横扫千军光束" ,
@@ -4112,3 +3718,6 @@ SIGen
 } )
 .MakeIcon( SICommon.Types.Items.Item , "终末之横扫千军光束" , 64 , 4 )
 .ReferenceEquipmentResult( SICommon.Types.Items.Item , SIConstants_Core.raw.Items.Laser )
+-- ----------------------------------------
+-- 超越之安如磐石战车
+-- ----------------------------------------

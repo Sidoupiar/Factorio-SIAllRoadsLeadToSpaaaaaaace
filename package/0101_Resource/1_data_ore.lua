@@ -180,89 +180,29 @@ SIGen
 	} ,
 	mining_sound =
 	{
-		{
-			filename = "__core__/sound/axe-mining-ore-1.ogg" ,
-			volume = 0.8
-		} ,
-		{
-			filename = "__core__/sound/axe-mining-ore-2.ogg" ,
-			volume = 0.8
-		} ,
-		{
-			filename = "__core__/sound/axe-mining-ore-3.ogg" ,
-			volume = 0.8
-		} ,
-		{
-			filename = "__core__/sound/axe-mining-ore-4.ogg" ,
-			volume = 0.8
-		} ,
-		{
-			filename = "__core__/sound/axe-mining-ore-5.ogg" ,
-			volume = 0.8
-		} ,
-		{
-			filename = "__core__/sound/axe-mining-ore-6.ogg" ,
-			volume = 0.8
-		} ,
-		{
-			filename = "__core__/sound/axe-mining-ore-7.ogg" ,
-			volume = 0.8
-		} ,
-		{
-			filename = "__core__/sound/axe-mining-ore-8.ogg" ,
-			volume = 0.8
-		} ,
-		{
-			filename = "__core__/sound/axe-mining-ore-9.ogg" ,
-			volume = 0.8
-		} ,
-		{
-			filename = "__core__/sound/axe-mining-ore-10.ogg" ,
-			volume = 0.8
-		}
+		SISound.Core( "axe-mining-ore-1" , 0.8 ) ,
+		SISound.Core( "axe-mining-ore-2" , 0.8 ) ,
+		SISound.Core( "axe-mining-ore-3" , 0.8 ) ,
+		SISound.Core( "axe-mining-ore-4" , 0.8 ) ,
+		SISound.Core( "axe-mining-ore-5" , 0.8 ) ,
+		SISound.Core( "axe-mining-ore-6" , 0.8 ) ,
+		SISound.Core( "axe-mining-ore-7" , 0.8 ) ,
+		SISound.Core( "axe-mining-ore-8" , 0.8 ) ,
+		SISound.Core( "axe-mining-ore-9" , 0.8 ) ,
+		SISound.Core( "axe-mining-ore-10" , 0.8 )
 	} ,
 	walking_sound =
 	{
-		{
-			filename = "__base__/sound/walking/resources/ore-01.ogg" ,
-			volume = 0.7
-		} ,
-		{
-			filename = "__base__/sound/walking/resources/ore-02.ogg" ,
-			volume = 0.7
-		} ,
-		{
-			filename = "__base__/sound/walking/resources/ore-03.ogg" ,
-			volume = 0.7
-		} ,
-		{
-			filename = "__base__/sound/walking/resources/ore-04.ogg" ,
-			volume = 0.7
-		} ,
-		{
-			filename = "__base__/sound/walking/resources/ore-05.ogg" ,
-			volume = 0.7
-		} ,
-		{
-			filename = "__base__/sound/walking/resources/ore-06.ogg" ,
-			volume = 0.7
-		} ,
-		{
-			filename = "__base__/sound/walking/resources/ore-07.ogg" ,
-			volume = 0.7
-		} ,
-		{
-			filename = "__base__/sound/walking/resources/ore-08.ogg" ,
-			volume = 0.7
-		} ,
-		{
-			filename = "__base__/sound/walking/resources/ore-09.ogg" ,
-			volume = 0.7
-		} ,
-		{
-			filename = "__base__/sound/walking/resources/ore-10.ogg" ,
-			volume = 0.7
-		}
+		SISound.Base( "resources/ore-01" , 0.7 ) ,
+		SISound.Base( "resources/ore-02" , 0.7 ) ,
+		SISound.Base( "resources/ore-03" , 0.7 ) ,
+		SISound.Base( "resources/ore-04" , 0.7 ) ,
+		SISound.Base( "resources/ore-05" , 0.7 ) ,
+		SISound.Base( "resources/ore-06" , 0.7 ) ,
+		SISound.Base( "resources/ore-07" , 0.7 ) ,
+		SISound.Base( "resources/ore-08" , 0.7 ) ,
+		SISound.Base( "resources/ore-09" , 0.7 ) ,
+		SISound.Base( "resources/ore-10" , 0.7 )
 	}
 }
 

@@ -395,10 +395,7 @@ SIGen
 	} ,
 	left_click_sound =
 	{
-		{
-			filename = "__core__/sound/gui-slider.ogg" ,
-			volume = 1
-		}
+		SISound.Core( "gui-slider" , 1 )
 	}
 } )
 .AddStyle( "Common_Slider" , "通用-滑块" ,
@@ -635,10 +632,7 @@ SIGen
 	-- 声音
 	left_click_sound =
 	{
-		{
-			filename = "__core__/sound/gui-tool-button.ogg" ,
-			volume = 1
-		}
+		SISound.Core( "gui-tool-button" , 1 )
 	}
 } )
 .AddStyle( "Common_Radio" , "通用-单选" ,
@@ -657,10 +651,7 @@ SIGen
 	-- 声音
 	left_click_sound =
 	{
-		{
-			filename = "__core__/sound/gui-radio-button.ogg" ,
-			volume = 1
-		}
+		SISound.Core( "gui-radio-button" , 1 )
 	}
 } )
 .AppendStyleData( SIStyle.RadioGraphics( 0 , 160 ) )
@@ -716,10 +707,7 @@ SIGen
 	-- 声音
 	left_click_sound =
 	{
-		{
-			filename = "__core__/sound/gui-checkbox-click.ogg" ,
-			volume = 1
-		}
+		SISound.Core( "gui-checkbox-click" , 1 )
 	}
 } )
 .AppendStyleData( SIStyle.CheckBoxGraphics( 0 , 132 ) )
@@ -799,10 +787,7 @@ SIGen
 	-- 声音
 	opened_sound =
 	{
-		{
-			filename = "__core__/sound/gui-dropdown-open.ogg" ,
-			volume = 1
-		}
+		SISound.Core( "gui-dropdown-open" , 1 )
 	}
 } )
 -- ----------------------------------------

@@ -650,6 +650,7 @@ function SIInit.AutoLoadState( StateCode )
 		end
 		SINeed( CorePath .. "/define/data/SIGen" , true )
 		SINeed( CorePath .. "/define/data/SIGraphics" , true )
+		SINeed( CorePath .. "/define/data/SISound" , true )
 		SINeed( CorePath .. "/define/data/SIStyle" , true )
 		--SINeed( CorePath .. "/define/data/SIAutoPlace" , true )
 		if not circuit_connector_definitions then
@@ -987,13 +988,8 @@ function SIInit.AutoLoad( ModName , CustomPackageConfig , ConstantsDataPrefix , 
 										table.insert( prototypes , damageType )
 									end
 									constantsData.raw.DamageTypes[damageTypeID] = realName
-									if resistanceValue and resistanceValue.Decrease or resistanceValue.Percent then
-										constantsData.raw.DamageTypeValues[damageTypeID] =
-										{
-											type = realName ,
-											decrease = resistanceValue.Decrease or 0 ,
-											percent = resistanceValue.Percent or 0
-										}
+									if resistanceValue and ( resistanceValue.Decrease or resistanceValue.Percent ) then
+										constantsData.raw.DamageTypeValues[damageTypeID] = SITools.Resistance( realName , resistanceValue.Decrease , resistanceValue.Percent )
 									else
 										constantsData.raw.DamageTypeValues[damageTypeID] = nil
 									end

@@ -61,6 +61,7 @@ for r = 0 , SIConstants_Colorful.ColorMax , SIConstants_Colorful.ColorStep do
 				alert_when_damaged = false ,
 				create_ghost_on_death = true ,
 				hide_resistances = true ,
+				resistances = nil ,
 				render_layer = SICommon.Flags.RenderLayer.FloorMechanics ,
 				pictures =
 				{
@@ -80,54 +81,24 @@ for r = 0 , SIConstants_Colorful.ColorMax , SIConstants_Colorful.ColorStep do
 				} ,
 				mined_sound =
 				{
-					{
-						filename = "__core__/sound/deconstruct-bricks.ogg" ,
-						volume = 1
-					}
+					SISound.Core( "deconstruct-small" , 1 )
 				} ,
 				vehicle_impact_sound =
 				{
-					{
-						filename = "__base__/sound/car-metal-impact.ogg" ,
-						volume = 1
-					}
+					SISound.Base( "car-metal-impact" , 1 )
 				} ,
 				repair_sound =
 				{
-					{
-						filename = "__base__/sound/manual-repair-simple-1.ogg" ,
-						volume = 0.5
-					} ,
-					{
-						filename = "__base__/sound/manual-repair-simple-2.ogg" ,
-						volume = 0.5
-					} ,
-					{
-						filename = "__base__/sound/manual-repair-simple-3.ogg" ,
-						volume = 0.5
-					} ,
-					{
-						filename = "__base__/sound/manual-repair-simple-4.ogg" ,
-						volume = 0.5
-					} ,
-					{
-						filename = "__base__/sound/manual-repair-simple-5.ogg" ,
-						volume = 0.5
-					}
+					SISound.Core( "manual-repair-advanced-1" , 0.5 ) ,
+					SISound.Core( "manual-repair-advanced-2" , 0.5 )
 				} ,
 				open_sound =
 				{
-					{
-						filename = "__base__/sound/machine-open.ogg" ,
-						volume = 0.5
-					}
+					SISound.Base( "machine-open" , 0.5 )
 				} ,
 				close_sound =
 				{
-					{
-						filename = "__base__/sound/machine-close.ogg" ,
-						volume = 0.5
-					}
+					SISound.Base( "machine-close" , 0.5 )
 				}
 			}
 		end

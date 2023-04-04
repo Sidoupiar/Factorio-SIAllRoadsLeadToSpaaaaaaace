@@ -487,10 +487,7 @@ SIGen
 	hide_resistances = true ,
 	resistances =
 	{
-		{
-			type = "acid" ,
-			percent = 25 ,
-		}
+		SITools.Resistance( "fire" , 0 , 25 )
 	} ,
 	damaged_trigger_effect =
 	{
@@ -636,51 +633,30 @@ SIGen
 	} ,
 	mined_sound =
 	{
-		{
-			filename = "__core__/sound/deconstruct-large.ogg" ,
-			volume = 1
-		}
+		SISound.Core( "deconstruct-large" , 1 )
 	} ,
 	vehicle_impact_sound =
 	{
-		{
-			filename = "__base__/sound/car-metal-impact.ogg" ,
-			volume = 1
-		}
+		SISound.Base( "car-metal-impact" , 1 )
 	} ,
 	repair_sound =
 	{
-		{
-			filename = "__core__/sound/manual-repair-advanced-1.ogg" ,
-			volume = 0.5
-		} ,
-		{
-			filename = "__core__/sound/manual-repair-advanced-2.ogg" ,
-			volume = 0.5
-		}
+		SISound.Core( "manual-repair-advanced-1" , 0.5 ) ,
+		SISound.Core( "manual-repair-advanced-2" , 0.5 )
 	} ,
 	open_sound =
 	{
-		{
-			filename = "__base__/sound/machine-open.ogg" ,
-			volume = 0.5
-		}
+		SISound.Base( "machine-open" , 0.5 )
 	} ,
 	close_sound =
 	{
-		{
-			filename = "__base__/sound/machine-close.ogg" ,
-			volume = 0.5
-		}
+		SISound.Base( "machine-close" , 0.5 )
 	} ,
 	working_sound =
 	{
 		sound =
 		{
-			{
-				filename = "__base__/sound/lab.ogg" ,
-				volume = 0.7
-			}
+			SISound.Base( "lab" , 0.7 )
 		} ,
 		audible_distance_modifier = 0.7 ,
 		fade_in_ticks = 4 ,

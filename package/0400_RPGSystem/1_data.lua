@@ -123,18 +123,9 @@ SIGen
 	hide_resistances = false ,
 	resistances =
 	{
-		{
-			type = "physical" ,
-			percent = 45
-		} ,
-		{
-			type = "impact" ,
-			percent = 45
-		} ,
-		{
-			type = "fire" ,
-			percent = 45
-		}
+		SITools.Resistance( "physical" , 0 , 45 ) ,
+		SITools.Resistance( "impact" , 0 , 45 ) ,
+		SITools.Resistance( "fire" , 0 , 45 )
 	} ,
 	damaged_trigger_effect =
 	{
@@ -173,42 +164,24 @@ SIGen
 	} ,
 	mined_sound =
 	{
-		{
-			filename = "__core__/sound/deconstruct-small.ogg" ,
-			volume = 1
-		}
+		SISound.Core( "deconstruct-small" , 1 )
 	} ,
 	vehicle_impact_sound =
 	{
-		{
-			filename = "__base__/sound/car-metal-impact.ogg" ,
-			volume = 1
-		}
+		SISound.Base( "car-metal-impact" , 1 )
 	} ,
 	repair_sound =
 	{
-		{
-			filename = "__core__/sound/manual-repair-advanced-1.ogg" ,
-			volume = 0.5
-		} ,
-		{
-			filename = "__core__/sound/manual-repair-advanced-2.ogg" ,
-			volume = 0.5
-		}
+		SISound.Core( "manual-repair-advanced-1" , 0.5 ) ,
+		SISound.Core( "manual-repair-advanced-2" , 0.5 )
 	} ,
 	open_sound =
 	{
-		{
-			filename = "__base__/sound/metallic-chest-open.ogg" ,
-			volume = 0.5
-		}
+		SISound.Base( "metallic-chest-open" , 0.5 )
 	} ,
 	close_sound =
 	{
-		{
-			filename = "__base__/sound/metallic-chest-close.ogg" ,
-			volume = 0.5
-		}
+		SISound.Base( "metallic-chest-close" , 0.5 )
 	}
 }
 

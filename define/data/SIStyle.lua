@@ -182,10 +182,7 @@ function SIStyle.ColorButton( location , dirt )
 		-- 声音
 		left_click_sound =
 		{
-			{
-				filename = "__core__/sound/gui-click.ogg" ,
-				volume = 1
-			}
+			SISound.Core( "gui-click" , 1 )
 		}
 	}
 end
