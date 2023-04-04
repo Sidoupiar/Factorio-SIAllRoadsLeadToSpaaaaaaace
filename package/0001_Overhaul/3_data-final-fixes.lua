@@ -10,6 +10,9 @@ local function ModifyBurnerSource( source , callBurner )
 			end
 		end
 		if source.type == SICommon.Flags.EnergySourceType.Burner then
+			if source.fuel_inventory_size and source.fuel_inventory_size < 2 then
+				source.fuel_inventory_size = 2
+			end
 			if not source.burnt_inventory_size or source.burnt_inventory_size < 1 then
 				source.burnt_inventory_size = 1
 			end
@@ -75,7 +78,7 @@ SIGen
 	end
 end )
 
--- 修改燃烧炉子的产物空间 , 以及燃料类型
+-- 修改燃烧炉子的燃料和产物空间 , 以及燃料类型
 -- 此项不可以禁用或删除
 .ForEachType( SICommon.Types.Entities , function( prototypeName , prototypeData )
 	if prototypeData then

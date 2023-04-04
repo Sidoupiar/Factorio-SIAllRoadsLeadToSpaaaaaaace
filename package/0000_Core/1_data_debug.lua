@@ -332,6 +332,13 @@ SIGen
 		render_no_network_icon = true ,
 		fuel_inventory_size = 3 ,
 		burnt_inventory_size = 3 ,
+		effectivity = 2.5 ,
+		fuel_categories =
+		{
+			"chemical" ,
+			"nuclear" ,
+			SIConstants_Core.raw.Categories.Fuel.Special
+		} ,
 		smoke =
 		{
 			{
@@ -343,12 +350,7 @@ SIGen
 				starting_frame_deviation = 60}
 			}
 		} ,
-		light_flicker = nil ,
-		effectivity = 2.5 ,
-		fuel_categories =
-		{
-			SIConstants_Core.raw.Categories.Fuel.Special
-		}
+		light_flicker = nil
 	} ,
 	animation =
 	{
@@ -4497,7 +4499,17 @@ SIGen
 		}
 	}
 }
-.New( SICommon.Types.Items.Item , "Tank" , "超越之安如磐石战车" )
+.New( SICommon.Types.EquipmentGrid , "Tank_Grid" , "超越之安如磐石战车-区域" ,
+{
+	width = 20 ,
+	height = 20 ,
+	equipment_categories =
+	{
+		"armor" ,
+		SIConstants_Core.raw.Categories.Equipment.Special
+	}
+} )
+.New( SICommon.Types.Items.ItemEntity , "Tank" , "超越之安如磐石战车" )
 .AutoIcon()
 .Append
 {
@@ -4549,7 +4561,7 @@ SIGen
 }
 .New( SICommon.Types.Entities.Car , "Tank" , "超越之安如磐石战车" )
 .AutoIcon()
-.ReferencePlaceResult( SICommon.Types.Items.Item , SIConstants_Core.raw.Items.Tank )
+.ReferencePlaceResult( SICommon.Types.Items.ItemEntity , SIConstants_Core.raw.Items.Tank )
 .Append
 {
 	flags = { SICommon.Flags.Entity.PlaceablePlayer , SICommon.Flags.Entity.PlayerCreation , SICommon.Flags.Entity.PlaceableOffGrid , SICommon.Flags.Entity.NotFlammable , SICommon.Flags.Entity.Hidden } ,
@@ -4589,7 +4601,7 @@ SIGen
 		offsets = { { 0 , 1 } } ,
 		damage_type_filters = "fire"
 	} ,
-	repair_speed_modifier = 12.0 ,
+	repair_speed_modifier = 24.0 ,
 	burner =
 	{
 		type = SICommon.Flags.EnergySourceType.Burner ,
@@ -4598,6 +4610,13 @@ SIGen
 		render_no_network_icon = true ,
 		fuel_inventory_size = 3 ,
 		burnt_inventory_size = 3 ,
+		effectivity = 1 ,
+		fuel_categories =
+		{
+			"chemical" ,
+			"nuclear" ,
+			SIConstants_Core.raw.Categories.Fuel.Special
+		} ,
 		smoke =
 		{
 			{
@@ -4609,19 +4628,14 @@ SIGen
 				starting_frame_deviation = 60}
 			}
 		} ,
-		light_flicker = nil ,
-		effectivity = 1 ,
-		fuel_categories =
-		{
-			SIConstants_Core.raw.Categories.Fuel.Special
-		}
+		light_flicker = nil
 	} ,
 	weight = 2000000000 ,
-	braking_power = "80TW" ,
+	braking_power = "150TW" ,
 	consumption = "2TW" ,
-	effectivity = 0.9 ,
+	effectivity = 1.0 ,
 	terrain_friction_modifier = 0.1 ,
-	friction = 0.001 ,
+	friction = 0.0001 ,
 	stop_trigger_speed = 0.1 ,
 	stop_trigger =
 	{
@@ -4635,9 +4649,11 @@ SIGen
 	} ,
 	tank_driving = true ,
 	energy_per_hit_point = 0 ,
+	has_belt_immunity = true ,
 	immune_to_tree_impacts = true ,
 	immune_to_rock_impacts = true ,
 	inventory_size = 200 ,
+	equipment_grid = SIConstants_Core.raw.EquipmentGrids.Tank_Grid ,
 	guns =
 	{
 		SIConstants_Core.raw.Items.Tank_Gun ,
@@ -4651,16 +4667,16 @@ SIGen
 	{
 
 	} ,
-	rotation_speed = 0.0075 ,
-	turret_rotation_speed = 0.35 / 60 ,
-	turret_return_timeout = 300 ,
+	rotation_speed = 0.012 ,
+	turret_rotation_speed = 0.02 ,
+	turret_return_timeout = 600 ,
 	alert_icon_shift = SIUtils.by_pixel( 0 , -13 ) ,
 	light =
 	{
 		{
 			type = "oriented" ,
-			minimum_darkness = 0.25 ,
-			size = 2 ,
+			minimum_darkness = 0.35 ,
+			size = 2.0 * tankSize ,
 			intensity = 0.8 ,
 			source_orientation_offset = -0.02 ,
 			shift = { -0.1 , -14 + tankShiftY / 32 } ,
@@ -4675,15 +4691,15 @@ SIGen
 						flags = { "light" } ,
 						width = 200 ,
 						height = 200 ,
-						scale = 0.5 * tankSize
+						scale = 2.0 * tankSize
 					}
 				}
 			}
 		} ,
 		{
 			type = "oriented" ,
-			minimum_darkness = 0.25 ,
-			size = 2 ,
+			minimum_darkness = 0.35 ,
+			size = 2.0 * tankSize ,
 			intensity = 0.8 ,
 			source_orientation_offset = 0.02 ,
 			shift = { 0.1 , -14 + tankShiftY / 32 } ,
@@ -4698,7 +4714,7 @@ SIGen
 						flags = { "light" } ,
 						width = 200 ,
 						height = 200 ,
-						scale = 0.5 * tankSize
+						scale = 2.0 * tankSize
 					}
 				}
 			}
@@ -4994,12 +5010,12 @@ SIGen
 	} ,
 	sprite =
 	{
-		filename = SIGen.MakePicturePath( SICommon.Types.Items.Item , "超越之安如磐石战车" .. SICommon.ShowNameSuffix.ICON ) ,
+		filename = SIGen.MakePicturePath( SICommon.Types.Items.ItemEntity , "超越之安如磐石战车" .. SICommon.ShowNameSuffix.ICON ) ,
 		priority = "medium" ,
 		width = 64 ,
 		height = 64 ,
 		scale = 1.0
 	}
 } )
-.MakeIcon( SICommon.Types.Items.Item , "超越之安如磐石战车" , 64 , 4 )
-.ReferenceEquipmentResult( SICommon.Types.Items.Item , SIConstants_Core.raw.Items.Tank )
+.MakeIcon( SICommon.Types.Items.ItemEntity , "超越之安如磐石战车" , 64 , 4 )
+.ReferenceEquipmentResult( SICommon.Types.Items.ItemEntity , SIConstants_Core.raw.Items.Tank )
