@@ -52,6 +52,7 @@ local function AppendFlag( prototypeData , newFlag )
 	end
 end
 
+local TankCollisionMaskLayer = SIUtils.CollisionMask.get_first_unused_layer()
 local NoCollisionType =
 {
 	[SICommon.Types.HealthEntities.Fish]           = true ,
@@ -63,6 +64,7 @@ local NoCollisionType =
 	[SICommon.Types.HealthEntities.RailStraight]   = true ,
 	[SICommon.Types.HealthEntities.RailCurved]     = true ,
 	[SICommon.Types.HealthEntities.SpiderVehicle]  = true ,
+	[SICommon.Types.HealthEntities.SpiderLeg]      = true ,
 	[SICommon.Types.HealthEntities.RobotConstruct] = true ,
 	[SICommon.Types.HealthEntities.RobotLogistic]  = true ,
 	[SICommon.Types.HealthEntities.RobotCombat]    = true ,
@@ -110,24 +112,6 @@ end )
 	end
 end )
 
--- 修改原版装卸机的标识
--- 此项不可以禁用或删除
-.Find( SICommon.Types.Entities.BeltLoader , "loader" , function( prototypeName , prototypeData )
-	if prototypeData then
-		AppendFlag( prototypeData , SICommon.Flags.Entity.PlaceablePlayer )
-	end
-end )
-.Find( SICommon.Types.Entities.BeltLoader , "fast-loader" , function( prototypeName , prototypeData )
-	if prototypeData then
-		AppendFlag( prototypeData , SICommon.Flags.Entity.PlaceablePlayer )
-	end
-end )
-.Find( SICommon.Types.Entities.BeltLoader , "express-loader" , function( prototypeName , prototypeData )
-	if prototypeData then
-		AppendFlag( prototypeData , SICommon.Flags.Entity.PlaceablePlayer )
-	end
-end )
-
 -- 给所有有生命值的实体添加特殊碰撞层
 -- 此项不可以禁用或删除
 .ForEachType( SICommon.Types.HealthEntities , function( prototypeName , prototypeData )
@@ -135,9 +119,10 @@ end )
 		local collisionMask = prototypeData.collision_mask
 		if not collisionMask then
 			collisionMask = SIUtils.CollisionMask.get_default_mask( prototypeData.type ) or {}
+			prototypeData.collision_mask = collisionMask
 		end
-		if not SITable.Has( collisionMask , SIConstants_Core.TankCollisionMaskLayer ) then
-			table.insert( collisionMask , SIConstants_Core.TankCollisionMaskLayer )
+		if not SITable.Has( collisionMask , TankCollisionMaskLayer ) then
+			table.insert( collisionMask , TankCollisionMaskLayer )
 		end
 	end
 end )

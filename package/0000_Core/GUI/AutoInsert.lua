@@ -102,7 +102,7 @@ SIAutoInsert =
 		} ,
 		{
 			filter = "flag" ,
-			flag = SICommon.Flags.Entity.PlaceablePlayer ,
+			flag = SICommon.Flags.Entity.PlayerCreation ,
 			mode = SICommon.Flags.Condition.AND ,
 		} ,
 		{
@@ -139,7 +139,7 @@ SIAutoInsert =
 		} ,
 		{
 			filter = "flag" ,
-			flag = SICommon.Flags.Entity.PlaceablePlayer ,
+			flag = SICommon.Flags.Entity.PlayerCreation ,
 			mode = SICommon.Flags.Condition.AND ,
 		} ,
 		{
@@ -165,7 +165,7 @@ SIAutoInsert =
 		} ,
 		{
 			filter = "flag" ,
-			flag = SICommon.Flags.Entity.PlaceablePlayer ,
+			flag = SICommon.Flags.Entity.PlayerCreation ,
 			mode = SICommon.Flags.Condition.AND ,
 		} ,
 		{
@@ -195,7 +195,7 @@ SIAutoInsert =
 		} ,
 		{
 			filter = "flag" ,
-			flag = SICommon.Flags.Entity.PlaceablePlayer ,
+			flag = SICommon.Flags.Entity.PlayerCreation ,
 			mode = SICommon.Flags.Condition.AND ,
 		} ,
 		{

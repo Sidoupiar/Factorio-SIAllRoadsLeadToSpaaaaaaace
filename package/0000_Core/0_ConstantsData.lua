@@ -55,7 +55,7 @@ local constantsData =
 	-- ----------------------------------------
 	FileList =
 	{
-		[SIInit.StateCodeDefine.Data]           = { "1_data_base" , "1_data_special" , "1_data_debug" , "1_data_gui" } ,
+		[SIInit.StateCodeDefine.Data]           = { "1_data_base" , "1_data_debug" , "1_data_special" , "1_data_gui" } ,
 		-- [SIInit.StateCodeDefine.DataUpdates]    = { "2_data-updates" } ,
 		-- [SIInit.StateCodeDefine.DataFinalFixes] = { "3_data-final-fixes" } ,
 		[SIInit.StateCodeDefine.Control]        = { "4_control" }
@@ -397,7 +397,6 @@ local constantsData =
 	-- ConstantsData 的属性不是固定的 , 可以自由添加其他属性<br>
 	-- 不过这些自定义的属性 , 框架是不会直接处理的 , 需要手动处理<br>
 	-- ----------------------------------------
-	TankCollisionMaskLayer = SIUtils.CollisionMask.get_first_unused_layer()
 }
 
 return constantsData

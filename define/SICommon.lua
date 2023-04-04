@@ -501,7 +501,7 @@ SICommon =
 			Capsule             = "capsule" ,
 			Gun                 = "gun" ,
 			Module              = "module" ,
-			--
+			-- 因为产物可以有流体 , 所以也把流体加在了这里
 			Fluid               = "fluid"
 		} ,
 		Entities =
@@ -563,6 +563,7 @@ SICommon =
 			Lamp                = "lamp" ,
 			Car                 = "car" ,
 			SpiderVehicle       = "spider-vehicle" ,
+			SpiderLeg           = "spider-leg" ,
 			WagonLocomotive     = "locomotive" ,
 			WagonCargo          = "cargo-wagon" ,
 			WagonFluid          = "fluid-wagon" ,
@@ -605,7 +606,7 @@ SICommon =
 		HealthEntities =
 		{
 			Tree                = "tree" ,
-			Player              = "player" ,
+			Character           = "character" ,
 			Fish                = "fish" ,
 			Unit                = "unit" ,
 			Spawner             = "unit-spawner" ,
@@ -650,6 +651,7 @@ SICommon =
 			Lamp                = "lamp" ,
 			Car                 = "car" ,
 			SpiderVehicle       = "spider-vehicle" ,
+			SpiderLeg           = "spider-leg" ,
 			WagonLocomotive     = "locomotive" ,
 			WagonCargo          = "cargo-wagon" ,
 			WagonFluid          = "fluid-wagon" ,
@@ -671,7 +673,10 @@ SICommon =
 			CombArithmetic      = "arithmetic-combinator" ,
 			CombDecider         = "decider-combinator" ,
 			CombConstant        = "constant-combinator" ,
-			Speaker             = "programmable-speaker"
+			Speaker             = "programmable-speaker" ,
+			SimpleEntity        = "simple-entity" ,
+			SimpleForce         = "simple-entity-with-force" ,
+			SimpleOwner         = "simple-entity-with-owner" ,
 		} ,
 		FreelocEntities =
 		{

@@ -57,7 +57,13 @@ for prefixID , prefixAlias in pairs
 											} ,
 											{
 												type = "play-sound" ,
-												sound = SITools.SoundList_Base( "eat" , 4 , 0.6 )
+												sound =
+												{
+													SISound.Base( "eat-1" , 0.6 ) ,
+													SISound.Base( "eat-2" , 0.6 ) ,
+													SISound.Base( "eat-3" , 0.6 ) ,
+													SISound.Base( "eat-4" , 0.6 )
+												}
 											}
 										}
 									}
