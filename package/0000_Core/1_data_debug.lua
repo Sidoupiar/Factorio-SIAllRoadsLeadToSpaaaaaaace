@@ -21,6 +21,7 @@ local defaultResistances =
 
 SIGen
 .SetGroup( SIConstants_Core.raw.Groups.Hidden.Debug )
+
 -- ----------------------------------------
 -- 量产之酥皮夹心糖果
 -- ----------------------------------------
@@ -191,6 +192,7 @@ SIGen
 } )
 .MakeIcon( SICommon.Types.Items.Tool , "量产之酥皮夹心糖果" , 64 , 4 )
 .ReferenceEquipmentResult( SICommon.Types.Items.Tool , SIConstants_Core.raw.Items.Candy )
+
 -- ----------------------------------------
 -- 璀璨之闪耀能量罐头
 -- ----------------------------------------
@@ -207,7 +209,7 @@ SIGen
 	fuel_top_speed_multiplier = 1.47 ,
 	fuel_emissions_multiplier = 1.18 ,
 	fuel_glow_color = { r = 1.00 , g = 0.94 , b = 0.46 } ,
-	burnt_result = "landfill" ,
+	burnt_result = SIConstants_Core.raw.Items.Candy ,
 	place_result = nil ,
 	placed_as_equipment_result = nil ,
 	rocket_launch_products =
@@ -433,6 +435,7 @@ SIGen
 } )
 .MakeIcon( SICommon.Types.Items.Item , "璀璨之闪耀能量罐头" , 64 , 4 )
 .ReferenceEquipmentResult( SICommon.Types.Items.Item , SIConstants_Core.raw.Items.BrightBar )
+
 -- ----------------------------------------
 -- 奇妙之双鱼螺旋插件
 -- ----------------------------------------
@@ -449,7 +452,7 @@ SIGen
 	fuel_top_speed_multiplier = 1.76 ,
 	fuel_emissions_multiplier = 74.45 ,
 	fuel_glow_color = { r = 1.00 , g = 0.94 , b = 0.46 } ,
-	burnt_result = "solar-panel" ,
+	burnt_result = SIConstants_Core.raw.Items.Candy ,
 	place_result = nil ,
 	placed_as_equipment_result = nil ,
 	rocket_launch_products =
@@ -925,6 +928,7 @@ SIGen
 } )
 .MakeIcon( SICommon.Types.Items.Module , "奇妙之双鱼螺旋插件" , 64 , 4 )
 .ReferenceEquipmentResult( SICommon.Types.Items.Module , SIConstants_Core.raw.Items.FishModule )
+
 -- ----------------------------------------
 -- 洞察之一览无余雷达
 -- ----------------------------------------
@@ -941,7 +945,7 @@ SIGen
 	fuel_top_speed_multiplier = 1.20 ,
 	fuel_emissions_multiplier = 85.55 ,
 	fuel_glow_color = { r = 1.00 , g = 0.94 , b = 0.46 } ,
-	burnt_result = "radar" ,
+	burnt_result = SIConstants_Core.raw.Items.Candy ,
 	place_result = nil ,
 	placed_as_equipment_result = nil ,
 	rocket_launch_products =
@@ -1165,6 +1169,7 @@ SIGen
 } )
 .MakeIcon( SICommon.Types.Items.Item , "洞察之一览无余雷达" , 64 , 4 )
 .ReferenceEquipmentResult( SICommon.Types.Items.Item , SIConstants_Core.raw.Items.LookRadar )
+
 -- ----------------------------------------
 -- 集成之指点江山平台
 -- ----------------------------------------
@@ -1181,7 +1186,7 @@ SIGen
 	fuel_top_speed_multiplier = 1.12 ,
 	fuel_emissions_multiplier = 99.99 ,
 	fuel_glow_color = { r = 1.00 , g = 0.94 , b = 0.46 } ,
-	burnt_result = "roboport" ,
+	burnt_result = SIConstants_Core.raw.Items.Candy ,
 	place_result = nil ,
 	placed_as_equipment_result = nil ,
 	rocket_launch_products =
@@ -1538,6 +1543,7 @@ SIGen
 } )
 .MakeIcon( SICommon.Types.Items.Item , "集成之指点江山平台" , 64 , 4 )
 .ReferenceEquipmentResult( SICommon.Types.Items.Item , SIConstants_Core.raw.Items.Roboport )
+
 -- ----------------------------------------
 -- 伟力之移山填海建设单元
 -- ----------------------------------------
@@ -1554,7 +1560,7 @@ SIGen
 	fuel_top_speed_multiplier = 1.05 ,
 	fuel_emissions_multiplier = 62.21 ,
 	fuel_glow_color = { r = 1.00 , g = 0.94 , b = 0.46 } ,
-	burnt_result = "construction-robot" ,
+	burnt_result = SIConstants_Core.raw.Items.Candy ,
 	place_result = nil ,
 	placed_as_equipment_result = nil ,
 	rocket_launch_products =
@@ -1989,6 +1995,7 @@ SIGen
 } )
 .MakeIcon( SICommon.Types.Items.Item , "伟力之移山填海建设单元" , 64 , 4 )
 .ReferenceEquipmentResult( SICommon.Types.Items.Item , SIConstants_Core.raw.Items.Construction )
+
 -- ----------------------------------------
 -- 伟力之移山填海物流单元
 -- ----------------------------------------
@@ -2005,7 +2012,7 @@ SIGen
 	fuel_top_speed_multiplier = 1.05 ,
 	fuel_emissions_multiplier = 62.21 ,
 	fuel_glow_color = { r = 1.00 , g = 0.94 , b = 0.46 } ,
-	burnt_result = "logistic-robot" ,
+	burnt_result = SIConstants_Core.raw.Items.Candy ,
 	place_result = nil ,
 	placed_as_equipment_result = nil ,
 	rocket_launch_products =
@@ -2357,59 +2364,10 @@ SIGen
 } )
 .MakeIcon( SICommon.Types.Items.Item , "伟力之移山填海物流单元" , 64 , 4 )
 .ReferenceEquipmentResult( SICommon.Types.Items.Item , SIConstants_Core.raw.Items.Logistic )
+
 -- ----------------------------------------
 -- 终末之横扫千军光束
 -- ----------------------------------------
-.New( SICommon.Types.Items.Item , "Laser" , "终末之横扫千军光束" )
-.AutoIcon()
-.Append
-{
-	flags = { SICommon.Flags.Item.Hidden } ,
-	stack_size = 10 ,
-	default_request_amount = 10 ,
-	fuel_category = SIConstants_Core.raw.Categories.Fuel.Special ,
-	fuel_value = "2MJ" ,
-	fuel_acceleration_multiplier = 1.32 ,
-	fuel_top_speed_multiplier = 1.24 ,
-	fuel_emissions_multiplier = 115.65 ,
-	fuel_glow_color = { r = 1.00 , g = 0.94 , b = 0.46 } ,
-	burnt_result = "laser-turret" ,
-	place_result = nil ,
-	placed_as_equipment_result = nil ,
-	rocket_launch_products =
-	{
-		{
-			type = SICommon.Types.Items.Item ,
-			name = SIConstants_Core.raw.Items.Candy ,
-			amount = 2 ,
-			catalyst_amount = 2
-		} ,
-		{
-			type = SICommon.Types.Items.Item ,
-			name = SIConstants_Core.raw.Items.Candy ,
-			probability = 0.2 ,
-			amount_min = 0 ,
-			amount_max = 20 ,
-			catalyst_amount = 20
-		} ,
-		{
-			type = SICommon.Types.Items.Item ,
-			name = SIConstants_Core.raw.Items.Candy ,
-			probability = 0.06 ,
-			amount_min = 0 ,
-			amount_max = 200 ,
-			catalyst_amount = 200
-		} ,
-		{
-			type = SICommon.Types.Items.Item ,
-			name = SIConstants_Core.raw.Items.Candy ,
-			probability = 0.02 ,
-			amount_min = 0 ,
-			amount_max = 2000 ,
-			catalyst_amount = 2000
-		}
-	}
-}
 .New( SICommon.Types.Entities.Beam , "Laser_BeamSmall" , "终末之横扫千军光束-激光细" )
 .Append
 {
@@ -3299,6 +3257,56 @@ SIGen
 		max_sounds_per_type = 1
 	}
 }
+.New( SICommon.Types.Items.Item , "Laser" , "终末之横扫千军光束" )
+.AutoIcon()
+.Append
+{
+	flags = { SICommon.Flags.Item.Hidden } ,
+	stack_size = 10 ,
+	default_request_amount = 10 ,
+	fuel_category = SIConstants_Core.raw.Categories.Fuel.Special ,
+	fuel_value = "2MJ" ,
+	fuel_acceleration_multiplier = 1.32 ,
+	fuel_top_speed_multiplier = 1.24 ,
+	fuel_emissions_multiplier = 115.65 ,
+	fuel_glow_color = { r = 1.00 , g = 0.94 , b = 0.46 } ,
+	burnt_result = SIConstants_Core.raw.Items.Candy ,
+	place_result = nil ,
+	placed_as_equipment_result = nil ,
+	rocket_launch_products =
+	{
+		{
+			type = SICommon.Types.Items.Item ,
+			name = SIConstants_Core.raw.Items.Candy ,
+			amount = 2 ,
+			catalyst_amount = 2
+		} ,
+		{
+			type = SICommon.Types.Items.Item ,
+			name = SIConstants_Core.raw.Items.Candy ,
+			probability = 0.2 ,
+			amount_min = 0 ,
+			amount_max = 20 ,
+			catalyst_amount = 20
+		} ,
+		{
+			type = SICommon.Types.Items.Item ,
+			name = SIConstants_Core.raw.Items.Candy ,
+			probability = 0.06 ,
+			amount_min = 0 ,
+			amount_max = 200 ,
+			catalyst_amount = 200
+		} ,
+		{
+			type = SICommon.Types.Items.Item ,
+			name = SIConstants_Core.raw.Items.Candy ,
+			probability = 0.02 ,
+			amount_min = 0 ,
+			amount_max = 2000 ,
+			catalyst_amount = 2000
+		}
+	}
+}
 .New( SICommon.Types.Entities.Turret , "Laser" , "终末之横扫千军光束" )
 .AutoIcon()
 .SetSize( 2 , 2 )
@@ -3718,6 +3726,864 @@ SIGen
 } )
 .MakeIcon( SICommon.Types.Items.Item , "终末之横扫千军光束" , 64 , 4 )
 .ReferenceEquipmentResult( SICommon.Types.Items.Item , SIConstants_Core.raw.Items.Laser )
+
 -- ----------------------------------------
 -- 超越之安如磐石战车
 -- ----------------------------------------
+.New( SICommon.Types.Items.Gun , "Tank_Gun" , "超越之安如磐石战车-机枪" )
+.AutoIcon()
+.Append
+{
+	flags = { SICommon.Flags.Item.Hidden } ,
+	stack_size = 1 ,
+	default_request_amount = 1 ,
+	fuel_category = SIConstants_Core.raw.Categories.Fuel.Special ,
+	fuel_value = "4MJ" ,
+	fuel_acceleration_multiplier = 2.65 ,
+	fuel_top_speed_multiplier = 1.14 ,
+	fuel_emissions_multiplier = 46.22 ,
+	fuel_glow_color = { r = 1.00 , g = 0.94 , b = 0.46 } ,
+	burnt_result = SIConstants_Core.raw.Items.Candy ,
+	rocket_launch_products =
+	{
+		{
+			type = SICommon.Types.Items.Item ,
+			name = SIConstants_Core.raw.Items.Candy ,
+			amount = 2 ,
+			catalyst_amount = 2
+		} ,
+		{
+			type = SICommon.Types.Items.Item ,
+			name = SIConstants_Core.raw.Items.Candy ,
+			probability = 0.2 ,
+			amount_min = 0 ,
+			amount_max = 20 ,
+			catalyst_amount = 20
+		} ,
+		{
+			type = SICommon.Types.Items.Item ,
+			name = SIConstants_Core.raw.Items.Candy ,
+			probability = 0.06 ,
+			amount_min = 0 ,
+			amount_max = 200 ,
+			catalyst_amount = 200
+		} ,
+		{
+			type = SICommon.Types.Items.Item ,
+			name = SIConstants_Core.raw.Items.Candy ,
+			probability = 0.02 ,
+			amount_min = 0 ,
+			amount_max = 2000 ,
+			catalyst_amount = 2000
+		}
+	} ,
+	attack_parameters =
+	{
+		type = "projectile" ,
+		cooldown = 4 ,
+		range = 60 ,
+		movement_slow_down_factor = 1.0 ,
+		projectile_creation_distance = 1 ,
+		projectile_center = { -0.15625 , -0.07812 } ,
+		ammo_categories =
+		{
+			"bullet"
+		} ,
+		shell_particle =
+		{
+			name = "shell-particle" ,
+			direction_deviation = 0.1 ,
+			speed = 0.1 ,
+			speed_deviation = 0.03 ,
+			center = { 0 , 0 } ,
+			creation_distance = -0.6875 ,
+			starting_frame_speed = 0.4 ,
+			starting_frame_speed_deviation = 0.1
+		} ,
+		sound =
+		{
+			SISound.Base( "fight/heavy-gunshot-1" , 0.4 ) ,
+			SISound.Base( "fight/heavy-gunshot-2" , 0.4 ) ,
+			SISound.Base( "fight/heavy-gunshot-3" , 0.4 ) ,
+			SISound.Base( "fight/heavy-gunshot-4" , 0.4 )
+		}
+	}
+}
+.New( SICommon.Types.Items.Gun , "Tank_Shut" , "超越之安如磐石战车-霰弹" )
+.AutoIcon()
+.Append
+{
+	flags = { SICommon.Flags.Item.Hidden } ,
+	stack_size = 1 ,
+	default_request_amount = 1 ,
+	fuel_category = SIConstants_Core.raw.Categories.Fuel.Special ,
+	fuel_value = "4MJ" ,
+	fuel_acceleration_multiplier = 2.65 ,
+	fuel_top_speed_multiplier = 1.14 ,
+	fuel_emissions_multiplier = 46.22 ,
+	fuel_glow_color = { r = 1.00 , g = 0.94 , b = 0.46 } ,
+	burnt_result = SIConstants_Core.raw.Items.Candy ,
+	rocket_launch_products =
+	{
+		{
+			type = SICommon.Types.Items.Item ,
+			name = SIConstants_Core.raw.Items.Candy ,
+			amount = 2 ,
+			catalyst_amount = 2
+		} ,
+		{
+			type = SICommon.Types.Items.Item ,
+			name = SIConstants_Core.raw.Items.Candy ,
+			probability = 0.2 ,
+			amount_min = 0 ,
+			amount_max = 20 ,
+			catalyst_amount = 20
+		} ,
+		{
+			type = SICommon.Types.Items.Item ,
+			name = SIConstants_Core.raw.Items.Candy ,
+			probability = 0.06 ,
+			amount_min = 0 ,
+			amount_max = 200 ,
+			catalyst_amount = 200
+		} ,
+		{
+			type = SICommon.Types.Items.Item ,
+			name = SIConstants_Core.raw.Items.Candy ,
+			probability = 0.02 ,
+			amount_min = 0 ,
+			amount_max = 2000 ,
+			catalyst_amount = 2000
+		}
+	} ,
+	attack_parameters =
+	{
+		type = "projectile" ,
+		cooldown = 10 ,
+		range = 60 ,
+		movement_slow_down_factor = 1.0 ,
+		projectile_creation_distance = 1.125 ,
+		projectile_center = { -0.15625 , -0.07812 } ,
+		ammo_categories =
+		{
+			"shotgun-shell"
+		} ,
+		shell_particle =
+		{
+			name = "shell-particle" ,
+			direction_deviation = 0.1 ,
+			speed = 0.1 ,
+			speed_deviation = 0.03 ,
+			center = { 0 , 0 } ,
+			creation_distance = -0.6875 ,
+			starting_frame_speed = 0.4 ,
+			starting_frame_speed_deviation = 0.1
+		} ,
+		sound =
+		{
+			SISound.Base( "fight/pump-shotgun-1" , 0.4 ) ,
+			SISound.Base( "fight/pump-shotgun-2" , 0.4 ) ,
+			SISound.Base( "fight/pump-shotgun-3" , 0.4 ) ,
+			SISound.Base( "fight/pump-shotgun-4" , 0.4 ) ,
+			SISound.Base( "fight/pump-shotgun-5" , 0.4 )
+		}
+	}
+}
+.New( SICommon.Types.Items.Gun , "Tank_Cannon" , "超越之安如磐石战车-炮塔" )
+.AutoIcon()
+.Append
+{
+	flags = { SICommon.Flags.Item.Hidden } ,
+	stack_size = 1 ,
+	default_request_amount = 1 ,
+	fuel_category = SIConstants_Core.raw.Categories.Fuel.Special ,
+	fuel_value = "4MJ" ,
+	fuel_acceleration_multiplier = 2.65 ,
+	fuel_top_speed_multiplier = 1.14 ,
+	fuel_emissions_multiplier = 46.22 ,
+	fuel_glow_color = { r = 1.00 , g = 0.94 , b = 0.46 } ,
+	burnt_result = SIConstants_Core.raw.Items.Candy ,
+	rocket_launch_products =
+	{
+		{
+			type = SICommon.Types.Items.Item ,
+			name = SIConstants_Core.raw.Items.Candy ,
+			amount = 2 ,
+			catalyst_amount = 2
+		} ,
+		{
+			type = SICommon.Types.Items.Item ,
+			name = SIConstants_Core.raw.Items.Candy ,
+			probability = 0.2 ,
+			amount_min = 0 ,
+			amount_max = 20 ,
+			catalyst_amount = 20
+		} ,
+		{
+			type = SICommon.Types.Items.Item ,
+			name = SIConstants_Core.raw.Items.Candy ,
+			probability = 0.06 ,
+			amount_min = 0 ,
+			amount_max = 200 ,
+			catalyst_amount = 200
+		} ,
+		{
+			type = SICommon.Types.Items.Item ,
+			name = SIConstants_Core.raw.Items.Candy ,
+			probability = 0.02 ,
+			amount_min = 0 ,
+			amount_max = 2000 ,
+			catalyst_amount = 2000
+		}
+	} ,
+	attack_parameters =
+	{
+		type = "projectile" ,
+		cooldown = 25 ,
+		range = 95 ,
+		movement_slow_down_factor = 1.0 ,
+		projectile_creation_distance = 1.6 ,
+		projectile_center = { -0.15625 , -0.07812 } ,
+		ammo_categories =
+		{
+			"cannon-shell"
+		} ,
+		shell_particle =
+		{
+			name = "shell-particle" ,
+			direction_deviation = 0.1 ,
+			speed = 0.1 ,
+			speed_deviation = 0.03 ,
+			center = { 0 , 0 } ,
+			creation_distance = -0.6875 ,
+			starting_frame_speed = 0.4 ,
+			starting_frame_speed_deviation = 0.1
+		} ,
+		sound =
+		{
+			SISound.Base( "fight/tank-cannon-1" , 0.6 ) ,
+			SISound.Base( "fight/tank-cannon-2" , 0.6 ) ,
+			SISound.Base( "fight/tank-cannon-3" , 0.6 ) ,
+			SISound.Base( "fight/tank-cannon-4" , 0.6 ) ,
+			SISound.Base( "fight/tank-cannon-5" , 0.6 )
+		}
+	}
+}
+.New( SICommon.Types.Items.Gun , "Tank_Rocket" , "超越之安如磐石战车-火箭" )
+.AutoIcon()
+.Append
+{
+	flags = { SICommon.Flags.Item.Hidden } ,
+	stack_size = 1 ,
+	default_request_amount = 1 ,
+	fuel_category = SIConstants_Core.raw.Categories.Fuel.Special ,
+	fuel_value = "4MJ" ,
+	fuel_acceleration_multiplier = 2.65 ,
+	fuel_top_speed_multiplier = 1.14 ,
+	fuel_emissions_multiplier = 46.22 ,
+	fuel_glow_color = { r = 1.00 , g = 0.94 , b = 0.46 } ,
+	burnt_result = SIConstants_Core.raw.Items.Candy ,
+	rocket_launch_products =
+	{
+		{
+			type = SICommon.Types.Items.Item ,
+			name = SIConstants_Core.raw.Items.Candy ,
+			amount = 2 ,
+			catalyst_amount = 2
+		} ,
+		{
+			type = SICommon.Types.Items.Item ,
+			name = SIConstants_Core.raw.Items.Candy ,
+			probability = 0.2 ,
+			amount_min = 0 ,
+			amount_max = 20 ,
+			catalyst_amount = 20
+		} ,
+		{
+			type = SICommon.Types.Items.Item ,
+			name = SIConstants_Core.raw.Items.Candy ,
+			probability = 0.06 ,
+			amount_min = 0 ,
+			amount_max = 200 ,
+			catalyst_amount = 200
+		} ,
+		{
+			type = SICommon.Types.Items.Item ,
+			name = SIConstants_Core.raw.Items.Candy ,
+			probability = 0.02 ,
+			amount_min = 0 ,
+			amount_max = 2000 ,
+			catalyst_amount = 2000
+		}
+	} ,
+	attack_parameters =
+	{
+		type = "projectile" ,
+		cooldown = 20 ,
+		range = 95 ,
+		movement_slow_down_factor = 1.0 ,
+		projectile_creation_distance = 0.5 ,
+		projectile_orientation_offset = -0.0625 ,
+		projectile_center = { -0.15625 , -0.07812 } ,
+		ammo_categories =
+		{
+			"rocket"
+		} ,
+		shell_particle =
+		{
+			name = "shell-particle" ,
+			direction_deviation = 0.1 ,
+			speed = 0.1 ,
+			speed_deviation = 0.03 ,
+			center = { 0 , 0 } ,
+			creation_distance = -0.6875 ,
+			starting_frame_speed = 0.4 ,
+			starting_frame_speed_deviation = 0.1
+		} ,
+		sound =
+		{
+			SISound.Base( "fight/rocket-launcher" , 0.7 )
+		}
+	}
+}
+.New( SICommon.Types.Items.Gun , "Tank_Flame" , "超越之安如磐石战车-喷火" )
+.AutoIcon()
+.Append
+{
+	flags = { SICommon.Flags.Item.Hidden } ,
+	stack_size = 1 ,
+	default_request_amount = 1 ,
+	fuel_category = SIConstants_Core.raw.Categories.Fuel.Special ,
+	fuel_value = "4MJ" ,
+	fuel_acceleration_multiplier = 2.65 ,
+	fuel_top_speed_multiplier = 1.14 ,
+	fuel_emissions_multiplier = 46.22 ,
+	fuel_glow_color = { r = 1.00 , g = 0.94 , b = 0.46 } ,
+	burnt_result = SIConstants_Core.raw.Items.Candy ,
+	rocket_launch_products =
+	{
+		{
+			type = SICommon.Types.Items.Item ,
+			name = SIConstants_Core.raw.Items.Candy ,
+			amount = 2 ,
+			catalyst_amount = 2
+		} ,
+		{
+			type = SICommon.Types.Items.Item ,
+			name = SIConstants_Core.raw.Items.Candy ,
+			probability = 0.2 ,
+			amount_min = 0 ,
+			amount_max = 20 ,
+			catalyst_amount = 20
+		} ,
+		{
+			type = SICommon.Types.Items.Item ,
+			name = SIConstants_Core.raw.Items.Candy ,
+			probability = 0.06 ,
+			amount_min = 0 ,
+			amount_max = 200 ,
+			catalyst_amount = 200
+		} ,
+		{
+			type = SICommon.Types.Items.Item ,
+			name = SIConstants_Core.raw.Items.Candy ,
+			probability = 0.02 ,
+			amount_min = 0 ,
+			amount_max = 2000 ,
+			catalyst_amount = 2000
+		}
+	} ,
+	attack_parameters =
+	{
+		type = "stream" ,
+		cooldown = 1 ,
+		range = 60 ,
+		min_range = 5 ,
+		movement_slow_down_factor = 1.0 ,
+		gun_barrel_length = 1.4 ,
+		gun_center_shift = { -0.17 , -1.15 } ,
+		ammo_categories =
+		{
+			"flamethrower"
+		} ,
+		cyclic_sound =
+		{
+			begin_sound =
+			{
+				SISound.Base( "fight/flamethrower-start" , 1 )
+			} ,
+			middle_sound =
+			{
+				SISound.Base( "fight/flamethrower-mid" , 1 )
+			} ,
+			end_sound =
+			{
+				SISound.Base( "fight/flamethrower-end" , 1 )
+			}
+		}
+	}
+}
+.New( SICommon.Types.Items.Gun , "Tank_Heavy" , "超越之安如磐石战车-重炮" )
+.AutoIcon()
+.Append
+{
+	flags = { SICommon.Flags.Item.Hidden } ,
+	stack_size = 1 ,
+	default_request_amount = 1 ,
+	fuel_category = SIConstants_Core.raw.Categories.Fuel.Special ,
+	fuel_value = "4MJ" ,
+	fuel_acceleration_multiplier = 2.65 ,
+	fuel_top_speed_multiplier = 1.14 ,
+	fuel_emissions_multiplier = 46.22 ,
+	fuel_glow_color = { r = 1.00 , g = 0.94 , b = 0.46 } ,
+	burnt_result = SIConstants_Core.raw.Items.Candy ,
+	rocket_launch_products =
+	{
+		{
+			type = SICommon.Types.Items.Item ,
+			name = SIConstants_Core.raw.Items.Candy ,
+			amount = 2 ,
+			catalyst_amount = 2
+		} ,
+		{
+			type = SICommon.Types.Items.Item ,
+			name = SIConstants_Core.raw.Items.Candy ,
+			probability = 0.2 ,
+			amount_min = 0 ,
+			amount_max = 20 ,
+			catalyst_amount = 20
+		} ,
+		{
+			type = SICommon.Types.Items.Item ,
+			name = SIConstants_Core.raw.Items.Candy ,
+			probability = 0.06 ,
+			amount_min = 0 ,
+			amount_max = 200 ,
+			catalyst_amount = 200
+		} ,
+		{
+			type = SICommon.Types.Items.Item ,
+			name = SIConstants_Core.raw.Items.Candy ,
+			probability = 0.02 ,
+			amount_min = 0 ,
+			amount_max = 2000 ,
+			catalyst_amount = 2000
+		}
+	} ,
+	attack_parameters =
+	{
+		type = "projectile" ,
+		cooldown = 120 ,
+		range = 288 , -- 9 * 32 格
+		min_range = 5 ,
+		movement_slow_down_factor = 1.0 ,
+		projectile_creation_distance = 1.6 ,
+		projectile_center = { -0.15625 , -0.07812 } ,
+		ammo_categories =
+		{
+			"artillery-shell"
+		} ,
+		projectile_creation_parameters =
+		{
+			{ 0.000 , SIUtils.by_pixel(    0.0 , -145.0 ) } ,
+			{ 0.004 , SIUtils.by_pixel(    3.5 , -144.5 ) } ,
+			{ 0.008 , SIUtils.by_pixel(    6.5 , -144.5 ) } ,
+			{ 0.012 , SIUtils.by_pixel(    9.5 , -144.5 ) } ,
+			{ 0.016 , SIUtils.by_pixel(   12.5 , -144.5 ) } ,
+			{ 0.019 , SIUtils.by_pixel(   15.5 , -144.0 ) } ,
+			{ 0.023 , SIUtils.by_pixel(   18.5 , -144.0 ) } ,
+			{ 0.027 , SIUtils.by_pixel(   21.5 , -143.5 ) } ,
+			{ 0.031 , SIUtils.by_pixel(   24.5 , -143.0 ) } ,
+			{ 0.034 , SIUtils.by_pixel(   27.5 , -142.5 ) } ,
+			{ 0.038 , SIUtils.by_pixel(   30.5 , -142.0 ) } ,
+			{ 0.042 , SIUtils.by_pixel(   33.5 , -141.5 ) } ,
+			{ 0.046 , SIUtils.by_pixel(   36.5 , -141.0 ) } ,
+			{ 0.049 , SIUtils.by_pixel(   39.5 , -140.0 ) } ,
+			{ 0.053 , SIUtils.by_pixel(   42.5 , -139.5 ) } ,
+			{ 0.057 , SIUtils.by_pixel(   45.5 , -138.5 ) } ,
+			{ 0.060 , SIUtils.by_pixel(   48.0 , -138.0 ) } ,
+			{ 0.064 , SIUtils.by_pixel(   51.0 , -137.0 ) } ,
+			{ 0.067 , SIUtils.by_pixel(   53.5 , -136.0 ) } ,
+			{ 0.071 , SIUtils.by_pixel(   56.5 , -135.0 ) } ,
+			{ 0.074 , SIUtils.by_pixel(   59.0 , -134.0 ) } ,
+			{ 0.078 , SIUtils.by_pixel(   62.0 , -133.0 ) } ,
+			{ 0.081 , SIUtils.by_pixel(   64.5 , -132.0 ) } ,
+			{ 0.085 , SIUtils.by_pixel(   67.0 , -131.0 ) } ,
+			{ 0.088 , SIUtils.by_pixel(   69.5 , -129.5 ) } ,
+			{ 0.091 , SIUtils.by_pixel(   72.5 , -128.5 ) } ,
+			{ 0.095 , SIUtils.by_pixel(   75.0 , -127.0 ) } ,
+			{ 0.098 , SIUtils.by_pixel(   77.0 , -126.0 ) } ,
+			{ 0.101 , SIUtils.by_pixel(   79.5 , -124.5 ) } ,
+			{ 0.104 , SIUtils.by_pixel(   82.0 , -123.0 ) } ,
+			{ 0.108 , SIUtils.by_pixel(   84.0 , -121.5 ) } ,
+			{ 0.111 , SIUtils.by_pixel(   86.5 , -120.0 ) } ,
+			{ 0.114 , SIUtils.by_pixel(   88.5 , -118.5 ) } ,
+			{ 0.117 , SIUtils.by_pixel(   91.0 , -117.0 ) } ,
+			{ 0.120 , SIUtils.by_pixel(   93.0 , -115.5 ) } ,
+			{ 0.123 , SIUtils.by_pixel(   95.0 , -114.0 ) } ,
+			{ 0.126 , SIUtils.by_pixel(   97.0 , -112.0 ) } ,
+			{ 0.129 , SIUtils.by_pixel(   99.0 , -110.5 ) } ,
+			{ 0.132 , SIUtils.by_pixel(  100.5 , -108.5 ) } ,
+			{ 0.135 , SIUtils.by_pixel(  102.5 , -107.0 ) } ,
+			{ 0.138 , SIUtils.by_pixel(  104.0 , -105.0 ) } ,
+			{ 0.141 , SIUtils.by_pixel(  106.0 , -103.5 ) } ,
+			{ 0.144 , SIUtils.by_pixel(  107.5 , -101.5 ) } ,
+			{ 0.146 , SIUtils.by_pixel(  109.0 ,  -99.5 ) } ,
+			{ 0.149 , SIUtils.by_pixel(  110.5 ,  -97.5 ) } ,
+			{ 0.152 , SIUtils.by_pixel(  112.0 ,  -95.5 ) } ,
+			{ 0.155 , SIUtils.by_pixel(  113.0 ,  -94.0 ) } ,
+			{ 0.157 , SIUtils.by_pixel(  114.5 ,  -92.0 ) } ,
+			{ 0.160 , SIUtils.by_pixel(  115.5 ,  -90.0 ) } ,
+			{ 0.163 , SIUtils.by_pixel(  117.0 ,  -88.0 ) } ,
+			{ 0.165 , SIUtils.by_pixel(  118.0 ,  -85.5 ) } ,
+			{ 0.168 , SIUtils.by_pixel(  119.0 ,  -83.5 ) } ,
+			{ 0.171 , SIUtils.by_pixel(  120.0 ,  -81.5 ) } ,
+			{ 0.173 , SIUtils.by_pixel(  120.5 ,  -79.5 ) } ,
+			{ 0.176 , SIUtils.by_pixel(  121.5 ,  -77.5 ) } ,
+			{ 0.179 , SIUtils.by_pixel(  122.0 ,  -75.5 ) } ,
+			{ 0.181 , SIUtils.by_pixel(  122.5 ,  -73.0 ) } ,
+			{ 0.184 , SIUtils.by_pixel(  123.5 ,  -71.0 ) } ,
+			{ 0.186 , SIUtils.by_pixel(  124.0 ,  -69.0 ) } ,
+			{ 0.189 , SIUtils.by_pixel(  124.0 ,  -66.5 ) } ,
+			{ 0.191 , SIUtils.by_pixel(  124.5 ,  -64.5 ) } ,
+			{ 0.194 , SIUtils.by_pixel(  124.5 ,  -62.5 ) } ,
+			{ 0.196 , SIUtils.by_pixel(  125.0 ,  -60.0 ) } ,
+			{ 0.199 , SIUtils.by_pixel(  125.0 ,  -58.0 ) } ,
+			{ 0.201 , SIUtils.by_pixel(  125.0 ,  -56.0 ) } ,
+			{ 0.204 , SIUtils.by_pixel(  125.0 ,  -53.5 ) } ,
+			{ 0.206 , SIUtils.by_pixel(  125.0 ,  -51.5 ) } ,
+			{ 0.209 , SIUtils.by_pixel(  124.5 ,  -49.5 ) } ,
+			{ 0.211 , SIUtils.by_pixel(  124.5 ,  -47.0 ) } ,
+			{ 0.214 , SIUtils.by_pixel(  124.0 ,  -45.0 ) } ,
+			{ 0.216 , SIUtils.by_pixel(  123.5 ,  -43.0 ) } ,
+			{ 0.219 , SIUtils.by_pixel(  123.0 ,  -40.5 ) } ,
+			{ 0.222 , SIUtils.by_pixel(  122.5 ,  -38.5 ) } ,
+			{ 0.224 , SIUtils.by_pixel(  122.0 ,  -36.5 ) } ,
+			{ 0.227 , SIUtils.by_pixel(  121.0 ,  -34.5 ) } ,
+			{ 0.229 , SIUtils.by_pixel(  120.5 ,  -32.0 ) } ,
+			{ 0.232 , SIUtils.by_pixel(  119.5 ,  -30.0 ) } ,
+			{ 0.234 , SIUtils.by_pixel(  118.5 ,  -28.0 ) } ,
+			{ 0.237 , SIUtils.by_pixel(  117.5 ,  -26.0 ) } ,
+			{ 0.240 , SIUtils.by_pixel(  116.5 ,  -24.0 ) } ,
+			{ 0.242 , SIUtils.by_pixel(  115.5 ,  -22.0 ) } ,
+			{ 0.245 , SIUtils.by_pixel(  114.0 ,  -20.0 ) } ,
+			{ 0.248 , SIUtils.by_pixel(  113.0 ,  -18.0 ) } ,
+			{ 0.250 , SIUtils.by_pixel(  111.5 ,  -16.0 ) } ,
+			{ 0.253 , SIUtils.by_pixel(  110.0 ,  -14.0 ) } ,
+			{ 0.256 , SIUtils.by_pixel(  108.5 ,  -12.0 ) } ,
+			{ 0.259 , SIUtils.by_pixel(  107.0 ,  -10.5 ) } ,
+			{ 0.262 , SIUtils.by_pixel(  105.5 ,   -8.5 ) } ,
+			{ 0.265 , SIUtils.by_pixel(  103.5 ,   -6.5 ) } ,
+			{ 0.268 , SIUtils.by_pixel(  102.0 ,   -5.0 ) } ,
+			{ 0.271 , SIUtils.by_pixel(  100.0 ,   -3.0 ) } ,
+			{ 0.274 , SIUtils.by_pixel(   98.0 ,   -1.5 ) } ,
+			{ 0.277 , SIUtils.by_pixel(   96.5 ,    0.0 ) } ,
+			{ 0.280 , SIUtils.by_pixel(   94.5 ,    1.5 ) } ,
+			{ 0.284 , SIUtils.by_pixel(   92.5 ,    3.0 ) } ,
+			{ 0.287 , SIUtils.by_pixel(   90.0 ,    4.5 ) } ,
+			{ 0.291 , SIUtils.by_pixel(   88.0 ,    6.0 ) } ,
+			{ 0.294 , SIUtils.by_pixel(   86.0 ,    7.5 ) } ,
+			{ 0.298 , SIUtils.by_pixel(   83.5 ,    9.0 ) } ,
+			{ 0.302 , SIUtils.by_pixel(   81.0 ,   10.5 ) } ,
+			{ 0.306 , SIUtils.by_pixel(   79.0 ,   12.0 ) } ,
+			{ 0.310 , SIUtils.by_pixel(   76.5 ,   13.5 ) } ,
+			{ 0.314 , SIUtils.by_pixel(   74.0 ,   14.5 ) } ,
+			{ 0.318 , SIUtils.by_pixel(   71.5 ,   16.0 ) } ,
+			{ 0.323 , SIUtils.by_pixel(   69.0 ,   17.0 ) } ,
+			{ 0.327 , SIUtils.by_pixel(   66.5 ,   18.5 ) } ,
+			{ 0.332 , SIUtils.by_pixel(   64.0 ,   19.5 ) } ,
+			{ 0.337 , SIUtils.by_pixel(   61.0 ,   20.5 ) } ,
+			{ 0.342 , SIUtils.by_pixel(   58.5 ,   21.5 ) } ,
+			{ 0.348 , SIUtils.by_pixel(   55.5 ,   22.5 ) } ,
+			{ 0.353 , SIUtils.by_pixel(   53.0 ,   23.5 ) } ,
+			{ 0.359 , SIUtils.by_pixel(   50.0 ,   24.5 ) } ,
+			{ 0.365 , SIUtils.by_pixel(   47.5 ,   25.5 ) } ,
+			{ 0.372 , SIUtils.by_pixel(   44.5 ,   26.0 ) } ,
+			{ 0.379 , SIUtils.by_pixel(   41.5 ,   27.0 ) } ,
+			{ 0.386 , SIUtils.by_pixel(   38.5 ,   27.5 ) } ,
+			{ 0.393 , SIUtils.by_pixel(   35.5 ,   28.0 ) } ,
+			{ 0.400 , SIUtils.by_pixel(   32.5 ,   29.0 ) } ,
+			{ 0.408 , SIUtils.by_pixel(   29.5 ,   29.5 ) } ,
+			{ 0.416 , SIUtils.by_pixel(   26.5 ,   30.0 ) } ,
+			{ 0.425 , SIUtils.by_pixel(   23.5 ,   30.5 ) } ,
+			{ 0.434 , SIUtils.by_pixel(   20.5 ,   30.5 ) } ,
+			{ 0.443 , SIUtils.by_pixel(   17.5 ,   31.0 ) } ,
+			{ 0.452 , SIUtils.by_pixel(   14.5 ,   31.5 ) } ,
+			{ 0.462 , SIUtils.by_pixel(   11.5 ,   31.5 ) } ,
+			{ 0.471 , SIUtils.by_pixel(    8.5 ,   31.5 ) } ,
+			{ 0.481 , SIUtils.by_pixel(    5.5 ,   32.0 ) } ,
+			{ 0.491 , SIUtils.by_pixel(    2.5 ,   32.0 ) } ,
+			{ 0.501 , SIUtils.by_pixel(    0.0 ,   32.0 ) } ,
+			{ 0.511 , SIUtils.by_pixel(   -3.5 ,   32.0 ) } ,
+			{ 0.521 , SIUtils.by_pixel(   -6.5 ,   32.0 ) } ,
+			{ 0.531 , SIUtils.by_pixel(   -9.5 ,   31.5 ) } ,
+			{ 0.541 , SIUtils.by_pixel(  -12.5 ,   31.5 ) } ,
+			{ 0.550 , SIUtils.by_pixel(  -15.5 ,   31.0 ) } ,
+			{ 0.559 , SIUtils.by_pixel(  -18.5 ,   31.0 ) } ,
+			{ 0.568 , SIUtils.by_pixel(  -21.5 ,   30.5 ) } ,
+			{ 0.577 , SIUtils.by_pixel(  -24.5 ,   30.0 ) } ,
+			{ 0.586 , SIUtils.by_pixel(  -27.5 ,   29.5 ) } ,
+			{ 0.594 , SIUtils.by_pixel(  -30.5 ,   29.0 ) } ,
+			{ 0.602 , SIUtils.by_pixel(  -33.5 ,   28.5 ) } ,
+			{ 0.609 , SIUtils.by_pixel(  -36.5 ,   28.0 ) } ,
+			{ 0.616 , SIUtils.by_pixel(  -39.5 ,   27.5 ) } ,
+			{ 0.623 , SIUtils.by_pixel(  -42.5 ,   26.5 ) } ,
+			{ 0.630 , SIUtils.by_pixel(  -45.5 ,   26.0 ) } ,
+			{ 0.636 , SIUtils.by_pixel(  -48.0 ,   25.0 ) } ,
+			{ 0.642 , SIUtils.by_pixel(  -51.0 ,   24.0 ) } ,
+			{ 0.648 , SIUtils.by_pixel(  -53.5 ,   23.5 ) } ,
+			{ 0.654 , SIUtils.by_pixel(  -56.5 ,   22.5 ) } ,
+			{ 0.659 , SIUtils.by_pixel(  -59.0 ,   21.5 ) } ,
+			{ 0.664 , SIUtils.by_pixel(  -62.0 ,   20.0 ) } ,
+			{ 0.669 , SIUtils.by_pixel(  -64.5 ,   19.0 ) } ,
+			{ 0.674 , SIUtils.by_pixel(  -67.0 ,   18.0 ) } ,
+			{ 0.678 , SIUtils.by_pixel(  -70.0 ,   17.0 ) } ,
+			{ 0.683 , SIUtils.by_pixel(  -72.5 ,   15.5 ) } ,
+			{ 0.687 , SIUtils.by_pixel(  -75.0 ,   14.5 ) } ,
+			{ 0.691 , SIUtils.by_pixel(  -77.0 ,   13.0 ) } ,
+			{ 0.695 , SIUtils.by_pixel(  -79.5 ,   11.5 ) } ,
+			{ 0.699 , SIUtils.by_pixel(  -82.0 ,   10.0 ) } ,
+			{ 0.703 , SIUtils.by_pixel(  -84.0 ,    8.5 ) } ,
+			{ 0.707 , SIUtils.by_pixel(  -86.5 ,    7.0 ) } ,
+			{ 0.710 , SIUtils.by_pixel(  -88.5 ,    5.5 ) } ,
+			{ 0.714 , SIUtils.by_pixel(  -91.0 ,    4.0 ) } ,
+			{ 0.717 , SIUtils.by_pixel(  -93.0 ,    2.5 ) } ,
+			{ 0.720 , SIUtils.by_pixel(  -95.0 ,    1.0 ) } ,
+			{ 0.724 , SIUtils.by_pixel(  -97.0 ,    0.0 ) } ,
+			{ 0.727 , SIUtils.by_pixel(  -99.0 ,   -2.0 ) } ,
+			{ 0.730 , SIUtils.by_pixel( -100.5 ,   -3.5 ) } ,
+			{ 0.733 , SIUtils.by_pixel( -102.5 ,   -5.5 ) } ,
+			{ 0.736 , SIUtils.by_pixel( -104.0 ,   -7.0 ) } ,
+			{ 0.739 , SIUtils.by_pixel( -106.0 ,   -9.0 ) } ,
+			{ 0.742 , SIUtils.by_pixel( -107.5 ,  -11.0 ) } ,
+			{ 0.745 , SIUtils.by_pixel( -109.0 ,  -13.0 ) } ,
+			{ 0.747 , SIUtils.by_pixel( -110.5 ,  -14.5 ) } ,
+			{ 0.750 , SIUtils.by_pixel( -112.0 ,  -16.5 ) } ,
+			{ 0.753 , SIUtils.by_pixel( -113.0 ,  -18.5 ) } ,
+			{ 0.756 , SIUtils.by_pixel( -114.5 ,  -20.5 ) } ,
+			{ 0.758 , SIUtils.by_pixel( -115.5 ,  -22.5 ) } ,
+			{ 0.761 , SIUtils.by_pixel( -117.0 ,  -24.5 ) } ,
+			{ 0.764 , SIUtils.by_pixel( -118.0 ,  -26.5 ) } ,
+			{ 0.766 , SIUtils.by_pixel( -119.0 ,  -28.5 ) } ,
+			{ 0.769 , SIUtils.by_pixel( -120.0 ,  -31.0 ) } ,
+			{ 0.771 , SIUtils.by_pixel( -120.5 ,  -33.0 ) } ,
+			{ 0.774 , SIUtils.by_pixel( -121.5 ,  -35.0 ) } ,
+			{ 0.777 , SIUtils.by_pixel( -122.0 ,  -37.0 ) } ,
+			{ 0.779 , SIUtils.by_pixel( -122.5 ,  -39.0 ) } ,
+			{ 0.782 , SIUtils.by_pixel( -123.5 ,  -41.5 ) } ,
+			{ 0.784 , SIUtils.by_pixel( -124.0 ,  -43.5 ) } ,
+			{ 0.787 , SIUtils.by_pixel( -124.0 ,  -45.5 ) } ,
+			{ 0.789 , SIUtils.by_pixel( -124.5 ,  -48.0 ) } ,
+			{ 0.792 , SIUtils.by_pixel( -124.5 ,  -50.0 ) } ,
+			{ 0.794 , SIUtils.by_pixel( -125.0 ,  -52.0 ) } ,
+			{ 0.797 , SIUtils.by_pixel( -125.0 ,  -54.5 ) } ,
+			{ 0.799 , SIUtils.by_pixel( -125.0 ,  -56.5 ) } ,
+			{ 0.802 , SIUtils.by_pixel( -125.0 ,  -58.5 ) } ,
+			{ 0.804 , SIUtils.by_pixel( -125.0 ,  -61.0 ) } ,
+			{ 0.807 , SIUtils.by_pixel( -124.5 ,  -63.0 ) } ,
+			{ 0.809 , SIUtils.by_pixel( -124.5 ,  -65.0 ) } ,
+			{ 0.812 , SIUtils.by_pixel( -124.0 ,  -67.5 ) } ,
+			{ 0.814 , SIUtils.by_pixel( -123.5 ,  -69.5 ) } ,
+			{ 0.817 , SIUtils.by_pixel( -123.0 ,  -71.5 ) } ,
+			{ 0.820 , SIUtils.by_pixel( -122.5 ,  -74.0 ) } ,
+			{ 0.822 , SIUtils.by_pixel( -122.0 ,  -76.0 ) } ,
+			{ 0.825 , SIUtils.by_pixel( -121.0 ,  -78.0 ) } ,
+			{ 0.827 , SIUtils.by_pixel( -120.5 ,  -80.0 ) } ,
+			{ 0.830 , SIUtils.by_pixel( -119.5 ,  -82.0 ) } ,
+			{ 0.833 , SIUtils.by_pixel( -118.5 ,  -84.5 ) } ,
+			{ 0.835 , SIUtils.by_pixel( -117.5 ,  -86.5 ) } ,
+			{ 0.838 , SIUtils.by_pixel( -116.5 ,  -88.5 ) } ,
+			{ 0.841 , SIUtils.by_pixel( -115.5 ,  -90.5 ) } ,
+			{ 0.843 , SIUtils.by_pixel( -114.0 ,  -92.5 ) } ,
+			{ 0.846 , SIUtils.by_pixel( -113.0 ,  -94.5 ) } ,
+			{ 0.849 , SIUtils.by_pixel( -111.5 ,  -96.5 ) } ,
+			{ 0.852 , SIUtils.by_pixel( -110.0 ,  -98.5 ) } ,
+			{ 0.854 , SIUtils.by_pixel( -108.5 , -100.0 ) } ,
+			{ 0.857 , SIUtils.by_pixel( -107.0 , -102.0 ) } ,
+			{ 0.860 , SIUtils.by_pixel( -105.5 , -104.0 ) } ,
+			{ 0.863 , SIUtils.by_pixel( -103.5 , -105.5 ) } ,
+			{ 0.866 , SIUtils.by_pixel( -102.0 , -107.5 ) } ,
+			{ 0.869 , SIUtils.by_pixel( -100.0 , -109.0 ) } ,
+			{ 0.872 , SIUtils.by_pixel(  -98.0 , -111.0 ) } ,
+			{ 0.875 , SIUtils.by_pixel(  -96.5 , -112.5 ) } ,
+			{ 0.878 , SIUtils.by_pixel(  -94.5 , -114.5 ) } ,
+			{ 0.881 , SIUtils.by_pixel(  -92.5 , -116.0 ) } ,
+			{ 0.884 , SIUtils.by_pixel(  -90.0 , -117.5 ) } ,
+			{ 0.887 , SIUtils.by_pixel(  -88.0 , -119.0 ) } ,
+			{ 0.890 , SIUtils.by_pixel(  -86.0 , -120.5 ) } ,
+			{ 0.893 , SIUtils.by_pixel(  -83.5 , -122.0 ) } ,
+			{ 0.896 , SIUtils.by_pixel(  -81.0 , -123.5 ) } ,
+			{ 0.900 , SIUtils.by_pixel(  -79.0 , -125.0 ) } ,
+			{ 0.903 , SIUtils.by_pixel(  -76.5 , -126.0 ) } ,
+			{ 0.906 , SIUtils.by_pixel(  -74.0 , -127.5 ) } ,
+			{ 0.910 , SIUtils.by_pixel(  -71.5 , -129.0 ) } ,
+			{ 0.913 , SIUtils.by_pixel(  -69.0 , -130.0 ) } ,
+			{ 0.916 , SIUtils.by_pixel(  -66.5 , -131.0 ) } ,
+			{ 0.920 , SIUtils.by_pixel(  -63.5 , -132.5 ) } ,
+			{ 0.923 , SIUtils.by_pixel(  -61.0 , -133.5 ) } ,
+			{ 0.927 , SIUtils.by_pixel(  -58.5 , -134.5 ) } ,
+			{ 0.930 , SIUtils.by_pixel(  -55.5 , -135.5 ) } ,
+			{ 0.934 , SIUtils.by_pixel(  -53.0 , -136.5 ) } ,
+			{ 0.937 , SIUtils.by_pixel(  -50.0 , -137.5 ) } ,
+			{ 0.941 , SIUtils.by_pixel(  -47.0 , -138.0 ) } ,
+			{ 0.944 , SIUtils.by_pixel(  -44.5 , -139.0 ) } ,
+			{ 0.948 , SIUtils.by_pixel(  -41.5 , -139.5 ) } ,
+			{ 0.952 , SIUtils.by_pixel(  -38.5 , -140.5 ) } ,
+			{ 0.955 , SIUtils.by_pixel(  -35.5 , -141.0 ) } ,
+			{ 0.959 , SIUtils.by_pixel(  -32.5 , -141.5 ) } ,
+			{ 0.963 , SIUtils.by_pixel(  -29.5 , -142.0 ) } ,
+			{ 0.967 , SIUtils.by_pixel(  -26.5 , -142.5 ) } ,
+			{ 0.970 , SIUtils.by_pixel(  -23.5 , -143.0 ) } ,
+			{ 0.974 , SIUtils.by_pixel(  -20.5 , -143.5 ) } ,
+			{ 0.978 , SIUtils.by_pixel(  -17.5 , -144.0 ) } ,
+			{ 0.982 , SIUtils.by_pixel(  -14.5 , -144.0 ) } ,
+			{ 0.985 , SIUtils.by_pixel(  -11.5 , -144.5 ) } ,
+			{ 0.989 , SIUtils.by_pixel(   -8.5 , -144.5 ) } ,
+			{ 0.993 , SIUtils.by_pixel(   -5.5 , -144.5 ) } ,
+			{ 0.997 , SIUtils.by_pixel(   -2.5 , -145.0 ) }
+		} ,
+		shell_particle =
+		{
+			name = "artillery-shell-particle" ,
+			direction_deviation = 0.05 ,
+			direction = 0.4 ,
+			speed = 0.10 ,
+			speed_deviation = 0.1 ,
+			vertical_speed = 0.05 ,
+			vertical_speed_deviation = 0.01 ,
+			center = { 0 , -0.5 } ,
+			creation_distance = 0.5 ,
+			creation_distance_orientation = 0.4 ,
+			starting_frame_speed = 0.5 ,
+			starting_frame_speed_deviation = 0.5 ,
+			use_source_position = true ,
+			height = 1
+		} ,
+		sound =
+		{
+			SISound.Base( "fight/artillery-shoots-1" , 0.7 )
+		}
+	}
+}
+.New( SICommon.Types.Items.Item , "Tank" , "超越之安如磐石战车" )
+.AutoIcon()
+.Append
+{
+	flags = { SICommon.Flags.Item.Hidden } ,
+	stack_size = 1 ,
+	default_request_amount = 1 ,
+	fuel_category = SIConstants_Core.raw.Categories.Fuel.Special ,
+	fuel_value = "15MJ" ,
+	fuel_acceleration_multiplier = 4.85 ,
+	fuel_top_speed_multiplier = 1.02 ,
+	fuel_emissions_multiplier = 175.65 ,
+	fuel_glow_color = { r = 1.00 , g = 0.94 , b = 0.46 } ,
+	burnt_result = SIConstants_Core.raw.Items.Candy ,
+	place_result = nil ,
+	placed_as_equipment_result = nil ,
+	rocket_launch_products =
+	{
+		{
+			type = SICommon.Types.Items.Item ,
+			name = SIConstants_Core.raw.Items.Candy ,
+			amount = 2 ,
+			catalyst_amount = 2
+		} ,
+		{
+			type = SICommon.Types.Items.Item ,
+			name = SIConstants_Core.raw.Items.Candy ,
+			probability = 0.2 ,
+			amount_min = 0 ,
+			amount_max = 20 ,
+			catalyst_amount = 20
+		} ,
+		{
+			type = SICommon.Types.Items.Item ,
+			name = SIConstants_Core.raw.Items.Candy ,
+			probability = 0.06 ,
+			amount_min = 0 ,
+			amount_max = 200 ,
+			catalyst_amount = 200
+		} ,
+		{
+			type = SICommon.Types.Items.Item ,
+			name = SIConstants_Core.raw.Items.Candy ,
+			probability = 0.02 ,
+			amount_min = 0 ,
+			amount_max = 2000 ,
+			catalyst_amount = 2000
+		}
+	}
+}
+.New( SICommon.Types.Equipments.ActiveDefense , "Tank" , "超越之安如磐石战车" ,
+{
+	take_result = SIConstants_Core.raw.Items.Tank ,
+	categories =
+	{
+		SIConstants_Core.raw.Categories.Equipment.Special
+	} ,
+	background_color = SICommon.Colors.Equipment.Attack ,
+	background_border_color = SICommon.Colors.Equipment.Border ,
+	grabbed_background_color = SICommon.Colors.Equipment.AttackHover ,
+	shape =
+	{
+		type = SICommon.Flags.EquipmentShapeType.Full ,
+		width = 2 ,
+		height = 2
+	} ,
+	energy_source =
+	{
+		type = SICommon.Flags.EnergySourceType.Electric ,
+		emissions_per_minute = 0 ,
+		render_no_power_icon = false ,
+		render_no_network_icon = false ,
+		usage_priority = SICommon.Flags.ElectricUsagePriority.InputSecondary ,
+		buffer_capacity = "50TJ" ,
+		input_flow_limit = "10TW" ,
+		output_flow_limit = "10TW" ,
+		drain = "0J"
+	} ,
+	automatic = true ,
+	attack_parameters =
+	{
+		type = "beam" ,
+		cooldown = 4 ,
+		range = 50 ,
+		damage_modifier = 1.5 ,
+		source_direction_count = 64 ,
+		source_offset = { 0 , -0.5 } ,
+		ammo_type =
+		{
+			category = SIConstants_Core.raw.Categories.Ammo.Special ,
+			energy_consumption = "60GJ" ,
+			action =
+			{
+				{
+					type = "direct" ,
+					force = "enemy" ,
+					action_delivery =
+					{
+						{
+							type = "beam" ,
+							beam = SIConstants_Core.raw.Entities.Laser_BeamSmall ,
+							max_length = 0 ,
+							duration = 4 ,
+							source_offset = { 0 , -1 } ,
+							add_to_shooter = true
+						}
+					}
+				}
+			}
+		}
+	} ,
+	sprite =
+	{
+		filename = SIGen.MakePicturePath( SICommon.Types.Items.Item , "超越之安如磐石战车" .. SICommon.ShowNameSuffix.ICON ) ,
+		priority = "medium" ,
+		width = 64 ,
+		height = 64 ,
+		scale = 1.0
+	}
+} )
+.MakeIcon( SICommon.Types.Items.Item , "超越之安如磐石战车" , 64 , 4 )
+.ReferenceEquipmentResult( SICommon.Types.Items.Item , SIConstants_Core.raw.Items.Tank )

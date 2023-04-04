@@ -1334,46 +1334,6 @@ CreateRuinBuildings( SICommon.Types.Entities.Turret , "RuinGunTurret" , "遗迹�
 -- 遗迹激光炮塔
 -- ----------------------------------------
 SIGen
-.New( SICommon.Types.Entities.Corpse , "RuinLaserTurretRemnants" , "遗迹激光炮塔-残骸" )
-.AutoIcon()
-.SetSizeScale( 2 , 2 , 0 )
-.Append
-{
-	flags = { SICommon.Flags.Entity.PlaceableNeutral , SICommon.Flags.Entity.NotOnMap , SICommon.Flags.Entity.Hidden } ,
-	time_before_removed = 54000 , -- 15 分钟
-	tile_width = 2 ,
-	tile_height = 2 ,
-	selectable_in_game = false ,
-	remove_on_tile_placement = false ,
-	final_render_layer = SICommon.Flags.RenderLayer.Remnants ,
-	animation = SIGraphics.MakeRemnantsAnimation( 3 ,
-	{
-		{
-			filename = SIGen.MakeSelfPicturePath( "遗迹激光炮塔-残骸" ) ,
-			priority = "extra-high" ,
-			width = 100 ,
-			height = 98 ,
-			frame_count = 1 ,
-			line_length = 1 ,
-			variation_count = 1 ,
-			direction_count = 1 ,
-			shift = SIUtils.by_pixel( 3 , -2 ) ,
-			axially_symmetrical = false
-		} ,
-		{
-			filename = SIGen.MakeSelfPicturePath( "遗迹激光炮塔-残骸-遮盖" ) ,
-			priority = "low" ,
-			width = 58 ,
-			height = 48 ,
-			frame_count = 1 ,
-			line_length = 1 ,
-			variation_count = 1 ,
-			direction_count = 1 ,
-			shift = SIUtils.by_pixel( 4 , -2 ) ,
-			apply_runtime_tint = true
-		}
-	} )
-}
 .New( SICommon.Types.Entities.Beam , "RuinLaserTurret_Beam" , "遗迹激光炮塔-激光" )
 .Append
 {
@@ -1581,6 +1541,46 @@ SIGen
 		} ,
 		max_sounds_per_type = 1
 	}
+}
+.New( SICommon.Types.Entities.Corpse , "RuinLaserTurretRemnants" , "遗迹激光炮塔-残骸" )
+.AutoIcon()
+.SetSizeScale( 2 , 2 , 0 )
+.Append
+{
+	flags = { SICommon.Flags.Entity.PlaceableNeutral , SICommon.Flags.Entity.NotOnMap , SICommon.Flags.Entity.Hidden } ,
+	time_before_removed = 54000 , -- 15 分钟
+	tile_width = 2 ,
+	tile_height = 2 ,
+	selectable_in_game = false ,
+	remove_on_tile_placement = false ,
+	final_render_layer = SICommon.Flags.RenderLayer.Remnants ,
+	animation = SIGraphics.MakeRemnantsAnimation( 3 ,
+	{
+		{
+			filename = SIGen.MakeSelfPicturePath( "遗迹激光炮塔-残骸" ) ,
+			priority = "extra-high" ,
+			width = 100 ,
+			height = 98 ,
+			frame_count = 1 ,
+			line_length = 1 ,
+			variation_count = 1 ,
+			direction_count = 1 ,
+			shift = SIUtils.by_pixel( 3 , -2 ) ,
+			axially_symmetrical = false
+		} ,
+		{
+			filename = SIGen.MakeSelfPicturePath( "遗迹激光炮塔-残骸-遮盖" ) ,
+			priority = "low" ,
+			width = 58 ,
+			height = 48 ,
+			frame_count = 1 ,
+			line_length = 1 ,
+			variation_count = 1 ,
+			direction_count = 1 ,
+			shift = SIUtils.by_pixel( 4 , -2 ) ,
+			apply_runtime_tint = true
+		}
+	} )
 }
 CreateRuinBuildings( SICommon.Types.Entities.Turret , "RuinLaserTurret" , "遗迹激光炮塔" , 2 , SIConstants_RuinControl.LevelValueList ,
 {
@@ -1930,52 +1930,6 @@ CreateRuinBuildings( SICommon.Types.Entities.Turret , "RuinLaserTurret" , "遗�
 -- ----------------------------------------
 -- 遗迹喷火炮塔
 -- ----------------------------------------
-SIGen
-.New( SICommon.Types.Entities.Corpse , "RuinFlameTurretRemnants" , "遗迹喷火炮塔-残骸" )
-.AutoIcon()
-.SetSizeScale( 2 , 2 , 0 )
-.Append
-{
-	flags = { SICommon.Flags.Entity.PlaceableNeutral , SICommon.Flags.Entity.NotOnMap , SICommon.Flags.Entity.Hidden } ,
-	time_before_removed = 54000 , -- 15 分钟
-	tile_width = 2 ,
-	tile_height = 2 ,
-	selectable_in_game = false ,
-	remove_on_tile_placement = false ,
-	final_render_layer = SICommon.Flags.RenderLayer.Remnants ,
-	animation =
-	{
-		{
-			layers =
-			{
-				{
-					filename = SIGen.MakeSelfPicturePath( "遗迹喷火炮塔-残骸" ) ,
-					priority = "extra-high" ,
-					width = 152 ,
-					height = 164 ,
-					frame_count = 1 ,
-					line_length = 1 ,
-					variation_count = 1 ,
-					direction_count = 4 ,
-					shift = SIUtils.by_pixel( -1 , -4 ) ,
-					axially_symmetrical = false
-				} ,
-				{
-					filename = SIGen.MakeSelfPicturePath( "遗迹喷火炮塔-残骸-遮盖" ) ,
-					priority = "low" ,
-					width = 82 ,
-					height = 82 ,
-					frame_count = 1 ,
-					line_length = 1 ,
-					variation_count = 1 ,
-					direction_count = 4 ,
-					shift = SIUtils.by_pixel( 0 , -4 ) ,
-					apply_runtime_tint = true
-				}
-			}
-		}
-	}
-}
 local function RuinFlameTurretGunAnimationSingle( shift , attacking )
 	local layers =
 	{
@@ -2132,6 +2086,52 @@ local function RuinFlameTurretExtensionAnimation( runMode , frameCount , lineLen
 		west = RuinFlameTurretExtensionAnimationSingle( runMode , frameCount , lineLength , 1 , SIUtils.by_pixel( -12 , 5.5 ) )
 	}
 end
+SIGen
+.New( SICommon.Types.Entities.Corpse , "RuinFlameTurretRemnants" , "遗迹喷火炮塔-残骸" )
+.AutoIcon()
+.SetSizeScale( 2 , 2 , 0 )
+.Append
+{
+	flags = { SICommon.Flags.Entity.PlaceableNeutral , SICommon.Flags.Entity.NotOnMap , SICommon.Flags.Entity.Hidden } ,
+	time_before_removed = 54000 , -- 15 分钟
+	tile_width = 2 ,
+	tile_height = 2 ,
+	selectable_in_game = false ,
+	remove_on_tile_placement = false ,
+	final_render_layer = SICommon.Flags.RenderLayer.Remnants ,
+	animation =
+	{
+		{
+			layers =
+			{
+				{
+					filename = SIGen.MakeSelfPicturePath( "遗迹喷火炮塔-残骸" ) ,
+					priority = "extra-high" ,
+					width = 152 ,
+					height = 164 ,
+					frame_count = 1 ,
+					line_length = 1 ,
+					variation_count = 1 ,
+					direction_count = 4 ,
+					shift = SIUtils.by_pixel( -1 , -4 ) ,
+					axially_symmetrical = false
+				} ,
+				{
+					filename = SIGen.MakeSelfPicturePath( "遗迹喷火炮塔-残骸-遮盖" ) ,
+					priority = "low" ,
+					width = 82 ,
+					height = 82 ,
+					frame_count = 1 ,
+					line_length = 1 ,
+					variation_count = 1 ,
+					direction_count = 4 ,
+					shift = SIUtils.by_pixel( 0 , -4 ) ,
+					apply_runtime_tint = true
+				}
+			}
+		}
+	}
+}
 CreateRuinBuildings( SICommon.Types.Entities.Turret , "RuinFlameTurret" , "遗迹喷火炮塔" , 2 , SIConstants_RuinControl.LevelValueList ,
 {
 	localised_name = SIGen.MakeLocalisedName( SICommon.Types.Entities.Turret , "遗迹喷火炮塔" ) ,

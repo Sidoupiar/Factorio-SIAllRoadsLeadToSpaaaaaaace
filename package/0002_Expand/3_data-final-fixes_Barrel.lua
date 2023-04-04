@@ -114,6 +114,7 @@ SIGen
 				icon_size = 64 ,
 				icon_mipmaps = 4 ,
 				stack_size = 100 ,
+				default_request_amount = 100 ,
 				place_result = nil
 			}
 			.New( SICommon.Types.Recipe , BarrelFullIDPrefix_1 .. fluidID , BarrelFullAliasPrefix_1 .. fluidID )
@@ -559,6 +560,7 @@ SIGen
 				icon_size = 64 ,
 				icon_mipmaps = 4 ,
 				stack_size = 100 ,
+				default_request_amount = 100 ,
 				place_result = nil
 			}
 			.New( SICommon.Types.Recipe , BarrelFullIDPrefix_2 .. fluidID , BarrelFullAliasPrefix_2 .. fluidID )
@@ -1071,7 +1073,9 @@ SIGen
 				} ,
 				icon_size = 64 ,
 				icon_mipmaps = 4 ,
-				stack_size = 100
+				stack_size = 100 ,
+				default_request_amount = 100 ,
+				place_result = nil
 			}
 			.AddFunction( function( prototypeName , prototypeData )
 				for index , icon in pairs( fluidIcons ) do

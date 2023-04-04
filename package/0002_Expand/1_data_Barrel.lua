@@ -16,6 +16,7 @@ SIGen
 .New( SICommon.Types.Items.Item , "WoodenBarrel" , "木桶" ,
 {
 	stack_size = 100 ,
+	default_request_amount = 100 ,
 	place_result = nil
 } )
 .AutoIcon()
@@ -150,7 +151,8 @@ SIGen
 }
 .New( SICommon.Types.Items.Item , "PlasticCapable" , "塑料胶囊" ,
 {
-	stack_size = 1000
+	stack_size = 1000 ,
+	default_request_amount = 1000
 } )
 .AutoIcon()
 .New( SICommon.Types.Recipe , "PlasticCapable" , "塑料胶囊" ,
@@ -346,6 +348,7 @@ SIGen
 .New( SICommon.Types.Items.Item , "BarrelMaker" , "灌装设备" ,
 {
 	stack_size = 100 ,
+	default_request_amount = 100 ,
 	place_result = nil
 } )
 .AutoIcon()
@@ -641,6 +644,7 @@ SIGen
 .New( SICommon.Types.Items.Item , "BarrelDropper" , "倾倒设备" ,
 {
 	stack_size = 100 ,
+	default_request_amount = 100 ,
 	place_result = nil
 } )
 .AutoIcon()

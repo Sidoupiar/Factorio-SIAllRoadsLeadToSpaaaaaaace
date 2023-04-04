@@ -7,6 +7,7 @@ SIGen
 .New( SICommon.Types.Items.Item , "Pixel" , "像素块母板" ,
 {
 	stack_size = 1000 ,
+	default_request_amount = 1000 ,
 	place_result = nil
 } )
 .AutoIcon()
@@ -119,12 +120,13 @@ SIGen
 {
 	flags = { SICommon.Flags.Item.NotStackable } ,
 	stack_size = 1 ,
+	default_request_amount = 1 ,
 	show_in_library = false ,
 	selection_color = { 0 , 0 , 0 } ,
-	selection_mode = { "any-entity" } ,
+	selection_mode = { "any-entity" , "same-force" } ,
 	selection_cursor_box_type = "copy" ,
 	alt_selection_color = { 1 , 1 , 1 } ,
-	alt_selection_mode = { "any-entity" } ,
+	alt_selection_mode = { "any-entity" , "same-force" } ,
 	alt_selection_cursor_box_type = "copy"
 } )
 .AutoIcon()

@@ -23,6 +23,7 @@ SIGen
 {
 	flags = { SICommon.Flags.Item.NotStackable , SICommon.Flags.Item.Hidden } ,
 	stack_size = 1 ,
+	default_request_amount = 1 ,
 	show_in_library = false ,
 	selection_color = { r = 0.90 , g = 0.06 , b = 0.53 } ,
 	selection_mode = { "any-entity" } ,
@@ -36,44 +37,40 @@ SIGen
 	fuel_top_speed_multiplier = 1.1 ,
 	fuel_emissions_multiplier = 452 ,
 	fuel_glow_color = { r = 0.90 , g = 0.06 , b = 0.53 } ,
-	burnt_result = "explosives" ,
+	burnt_result = SIConstants_Core.raw.Items.Candy ,
+	place_result = nil ,
 	placed_as_equipment_result = nil ,
 	rocket_launch_products =
 	{
 		{
 			type = SICommon.Types.Items.Item ,
-			name = "cluster-grenade" ,
-			amount_min = 0 ,
-			amount_max = 48 ,
-			catalyst_amount = 48
+			name = SIConstants_Core.raw.Items.Candy ,
+			amount = 2 ,
+			catalyst_amount = 2
 		} ,
 		{
 			type = SICommon.Types.Items.Item ,
-			name = "destroyer-capsule" ,
+			name = SIConstants_Core.raw.Items.Candy ,
+			probability = 0.2 ,
 			amount_min = 0 ,
-			amount_max = 48 ,
-			catalyst_amount = 48
+			amount_max = 20 ,
+			catalyst_amount = 20
 		} ,
 		{
 			type = SICommon.Types.Items.Item ,
-			name = "defender-capsule" ,
+			name = SIConstants_Core.raw.Items.Candy ,
+			probability = 0.06 ,
 			amount_min = 0 ,
-			amount_max = 48 ,
-			catalyst_amount = 48
+			amount_max = 200 ,
+			catalyst_amount = 200
 		} ,
 		{
 			type = SICommon.Types.Items.Item ,
-			name = "poison-capsule" ,
+			name = SIConstants_Core.raw.Items.Candy ,
+			probability = 0.02 ,
 			amount_min = 0 ,
-			amount_max = 48 ,
-			catalyst_amount = 48
-		} ,
-		{
-			type = SICommon.Types.Items.Item ,
-			name = "slowdown-capsule" ,
-			amount_min = 0 ,
-			amount_max = 48 ,
-			catalyst_amount = 48
+			amount_max = 2000 ,
+			catalyst_amount = 2000
 		}
 	}
 } )
@@ -122,6 +119,7 @@ SIGen
 {
 	flags = { SICommon.Flags.Item.NotStackable , SICommon.Flags.Item.Hidden } ,
 	stack_size = 1 ,
+	default_request_amount = 1 ,
 	show_in_library = false ,
 	selection_color = { r = 0.70 , g = 0.57 , b = 0.00 } ,
 	selection_mode = { "any-entity" } ,
@@ -135,49 +133,40 @@ SIGen
 	fuel_top_speed_multiplier = 1.1 ,
 	fuel_emissions_multiplier = 452 ,
 	fuel_glow_color = { r = 0.70 , g = 0.57 , b = 0.00 } ,
-	burnt_result = "stone-brick" ,
+	burnt_result = SIConstants_Core.raw.Items.Candy ,
+	place_result = nil ,
 	placed_as_equipment_result = nil ,
 	rocket_launch_products =
 	{
 		{
 			type = SICommon.Types.Items.Item ,
-			name = "iron-ore" ,
-			probability = 0.5 ,
-			amount_min = 0 ,
-			amount_max = 500 ,
-			catalyst_amount = 500
+			name = SIConstants_Core.raw.Items.Candy ,
+			amount = 2 ,
+			catalyst_amount = 2
 		} ,
 		{
 			type = SICommon.Types.Items.Item ,
-			name = "copper-ore" ,
-			probability = 0.5 ,
+			name = SIConstants_Core.raw.Items.Candy ,
+			probability = 0.2 ,
 			amount_min = 0 ,
-			amount_max = 500 ,
-			catalyst_amount = 500
+			amount_max = 20 ,
+			catalyst_amount = 20
 		} ,
 		{
 			type = SICommon.Types.Items.Item ,
-			name = "uranium-ore" ,
-			probability = 0.5 ,
+			name = SIConstants_Core.raw.Items.Candy ,
+			probability = 0.06 ,
 			amount_min = 0 ,
-			amount_max = 500 ,
-			catalyst_amount = 500
+			amount_max = 200 ,
+			catalyst_amount = 200
 		} ,
 		{
 			type = SICommon.Types.Items.Item ,
-			name = "stone" ,
-			probability = 0.5 ,
+			name = SIConstants_Core.raw.Items.Candy ,
+			probability = 0.02 ,
 			amount_min = 0 ,
-			amount_max = 500 ,
-			catalyst_amount = 500
-		} ,
-		{
-			type = SICommon.Types.Items.Item ,
-			name = "coal" ,
-			probability = 0.5 ,
-			amount_min = 0 ,
-			amount_max = 500 ,
-			catalyst_amount = 500
+			amount_max = 2000 ,
+			catalyst_amount = 2000
 		}
 	}
 } )
@@ -226,6 +215,7 @@ SIGen
 {
 	flags = { SICommon.Flags.Item.NotStackable , SICommon.Flags.Item.Hidden } ,
 	stack_size = 1 ,
+	default_request_amount = 1 ,
 	show_in_library = false ,
 	selection_color = { r = 0.84 , g = 0.06 , b = 0.92 } ,
 	selection_mode = { "any-entity" , "same-force" } ,
@@ -239,49 +229,40 @@ SIGen
 	fuel_top_speed_multiplier = 1.1 ,
 	fuel_emissions_multiplier = 452 ,
 	fuel_glow_color = { r = 0.70 , g = 0.57 , b = 0.00 } ,
-	burnt_result = "copper-cable" ,
+	burnt_result = SIConstants_Core.raw.Items.Candy ,
+	place_result = nil ,
 	placed_as_equipment_result = nil ,
 	rocket_launch_products =
 	{
 		{
 			type = SICommon.Types.Items.Item ,
-			name = "burner-inserter" ,
-			probability = 0.35 ,
-			amount_min = 0 ,
-			amount_max = 35 ,
-			catalyst_amount = 35
+			name = SIConstants_Core.raw.Items.Candy ,
+			amount = 2 ,
+			catalyst_amount = 2
 		} ,
 		{
 			type = SICommon.Types.Items.Item ,
-			name = "inserter" ,
-			probability = 0.35 ,
+			name = SIConstants_Core.raw.Items.Candy ,
+			probability = 0.2 ,
 			amount_min = 0 ,
-			amount_max = 35 ,
-			catalyst_amount = 35
+			amount_max = 20 ,
+			catalyst_amount = 20
 		} ,
 		{
 			type = SICommon.Types.Items.Item ,
-			name = "fast-inserter" ,
-			probability = 0.35 ,
+			name = SIConstants_Core.raw.Items.Candy ,
+			probability = 0.06 ,
 			amount_min = 0 ,
-			amount_max = 35 ,
-			catalyst_amount = 35
+			amount_max = 200 ,
+			catalyst_amount = 200
 		} ,
 		{
 			type = SICommon.Types.Items.Item ,
-			name = "filter-inserter" ,
-			probability = 0.35 ,
+			name = SIConstants_Core.raw.Items.Candy ,
+			probability = 0.02 ,
 			amount_min = 0 ,
-			amount_max = 35 ,
-			catalyst_amount = 35
-		} ,
-		{
-			type = SICommon.Types.Items.Item ,
-			name = "long-handed-inserter" ,
-			probability = 0.35 ,
-			amount_min = 0 ,
-			amount_max = 35 ,
-			catalyst_amount = 35
+			amount_max = 2000 ,
+			catalyst_amount = 2000
 		}
 	}
 } )

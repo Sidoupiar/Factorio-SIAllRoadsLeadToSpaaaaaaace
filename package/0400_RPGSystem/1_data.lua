@@ -25,6 +25,7 @@ for prefixID , prefixAlias in pairs
 		{
 			flags = { SICommon.Flags.Item.Hidden } ,
 			stack_size = 100 ,
+			default_request_amount = 100 ,
 			capsule_action =
 			{
 				type = "use-on-self" ,

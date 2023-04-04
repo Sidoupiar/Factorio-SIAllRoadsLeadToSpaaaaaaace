@@ -135,7 +135,8 @@ for oreID , oreAlias in pairs( oreList ) do
 		probability = 0.001 ,
 		amount_min = 0 ,
 		amount_max = 200 ,
-		catalyst_amount = 200
+		catalyst_amount = 200 ,
+		show_details_in_recipe_tooltip = false
 	} )
 end
 

@@ -11,6 +11,7 @@ SIGen
 .New( SICommon.Types.Items.Tool , "FirstPack" , "第一代产业研究包" ,
 {
 	stack_size = 1000 ,
+	default_request_amount = 1000 ,
 	durability = 1.0 ,
 	durability_description_key = SICommon.Flags.SciencePack.Key ,
 	durability_description_value = SICommon.Flags.SciencePack.Value
@@ -80,6 +81,7 @@ SIGen
 .New( SICommon.Types.Items.Tool , "SecondPack" , "第二代产业研究包" ,
 {
 	stack_size = 1000 ,
+	default_request_amount = 1000 ,
 	durability = 1.0 ,
 	durability_description_key = SICommon.Flags.SciencePack.Key ,
 	durability_description_value = SICommon.Flags.SciencePack.Value
@@ -149,6 +151,7 @@ SIGen
 .New( SICommon.Types.Items.Tool , "ThirdPack" , "第三代产业研究包" ,
 {
 	stack_size = 1000 ,
+	default_request_amount = 1000 ,
 	durability = 1.0 ,
 	durability_description_key = SICommon.Flags.SciencePack.Key ,
 	durability_description_value = SICommon.Flags.SciencePack.Value
@@ -218,6 +221,7 @@ SIGen
 .New( SICommon.Types.Items.Tool , "ForthPack" , "第四代产业研究包" ,
 {
 	stack_size = 1000 ,
+	default_request_amount = 1000 ,
 	durability = 1.0 ,
 	durability_description_key = SICommon.Flags.SciencePack.Key ,
 	durability_description_value = SICommon.Flags.SciencePack.Value
@@ -287,6 +291,7 @@ SIGen
 .New( SICommon.Types.Items.Tool , "FifthPack" , "第五代产业研究包" ,
 {
 	stack_size = 1000 ,
+	default_request_amount = 1000 ,
 	durability = 1.0 ,
 	durability_description_key = SICommon.Flags.SciencePack.Key ,
 	durability_description_value = SICommon.Flags.SciencePack.Value
@@ -360,6 +365,7 @@ SIGen
 .New( SICommon.Types.Items.Item , "Lab" , "无尽研究球" ,
 {
 	stack_size = 100 ,
+	default_request_amount = 100 ,
 	place_result = nil
 } )
 .AutoIcon()
