@@ -4663,10 +4663,7 @@ SIGen
 		SIConstants_Core.raw.Items.Tank_Flame ,
 		SIConstants_Core.raw.Items.Tank_Heavy
 	} ,
-	track_particle_triggers =
-	{
-
-	} ,
+	track_particle_triggers = SINeed( "Gen/TankTrack" ) ,
 	rotation_speed = 0.012 ,
 	turret_rotation_speed = 0.02 ,
 	turret_return_timeout = 600 ,
