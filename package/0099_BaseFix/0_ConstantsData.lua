@@ -4,10 +4,13 @@ local constantsData =
 	Name = "原版兼容修复" ,
 	FileList =
 	{
-		[SIInit.StateCodeDefine.Data]           = { "1_data" } ,
-		[SIInit.StateCodeDefine.DataFinalFixes] = { "3_data-final-fixes" } ,
-		[SIInit.StateCodeDefine.Control]        = { "4_control" }
-	}
+		[SIInit.StateCodeDefine.DataUpdates] = { "2_data-updates" } ,
+	} ,
+	AfterLoad = function( constantsData )
+		if SIModData.Loaded.base then
+			constantsData.FileList = nil
+		end
+	end ,
 }
 
 return constantsData

@@ -23,6 +23,7 @@ end
 SIUtils = require( "__core__/lualib/util" )
 require( CorePath .. "/define/SITools" )
 require( CorePath .. "/define/SICommon" )
+require( CorePath .. "/define/SIModData" )
 
 SIUtils.CollisionMask = require( "__core__/lualib/collision-mask-util" )
 SIUtils.Noise = require( "__core__/lualib/noise" )
