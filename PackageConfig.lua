@@ -653,31 +653,19 @@ local PackageConfig =
 	-- 书籍逻辑<br>
 	-- ----------------------------------------
 	{
-		PackageName = "0011_Bookshelf" ,
-		Requires =
-		{
-			"0000_Core"
-		}
+		PackageName = "0011_Bookshelf"
 	} ,
 	-- ----------------------------------------
 	-- 解锁逻辑<br>
 	-- ----------------------------------------
 	{
-		PackageName = "0012_Unlocker" ,
-		Requires =
-		{
-			"0000_Core"
-		}
+		PackageName = "0012_Unlocker"
 	} ,
 	-- ----------------------------------------
 	-- 建造限制<br>
 	-- ----------------------------------------
 	{
-		PackageName = "0013_BuildLimit" ,
-		Requires =
-		{
-			"0000_Core"
-		}
+		PackageName = "0013_BuildLimit"
 	} ,
 	-- ----------------------------------------
 	-- 世界上会出现各种遗迹<br>
