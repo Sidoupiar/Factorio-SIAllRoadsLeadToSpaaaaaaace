@@ -19,9 +19,9 @@ local defaultResistances =
 	SITools.Resistance( "electric" , 0 , 100 ) ,
 }
 
-local tankSize = 4.0
+local tankSize = SIConfigs.SICore.TankSize
+local tankScale = 0.5 * tankSize
 local tankShiftY = 6
-local tankShiftY2 = tankShiftY * 2
 
 SIGen
 .SetGroup( SIConstants_Core.raw.Groups.Hidden.Debug )
@@ -4324,7 +4324,7 @@ SIGen
 	collision_box = { { -0.9 * tankSize , -1.3 * tankSize } , { 0.9 * tankSize , 1.3 * tankSize } } ,
 	drawing_box = { { -1.8 * tankSize , -1.8 * tankSize } , { 1.8 * tankSize , 1.5 * tankSize } } ,
 	collision_mask = { SICommon.Flags.CollisionMask.ConsiderTileTransitions } ,
-	max_health = maxHealth * 10 ,
+	max_health = maxHealth * 20 ,
 	corpse = "tank-remnants" ,
 	dying_explosion = "nuke-explosion" ,
 	map_color = { r = 1.00 , g = 0.94 , b = 0.46 } ,
@@ -4334,8 +4334,18 @@ SIGen
 	allow_run_time_change_of_is_military_target = true ,
 	alert_when_damaged = true ,
 	create_ghost_on_death = false ,
-	hide_resistances = false ,
-	resistances = defaultResistances ,
+	hide_resistances = true ,
+	resistances =
+	{
+		SITools.Resistance( "physical" , 22 , 35 ) ,
+		SITools.Resistance( "impact" , 0 , 100 ) ,
+		SITools.Resistance( "poison" , 0 , 100 ) ,
+		SITools.Resistance( "explosion" , 0 , 100 ) ,
+		SITools.Resistance( "fire" , 0 , 96 ) ,
+		SITools.Resistance( "laser" , 22 , 35 ) ,
+		SITools.Resistance( "acid" , 4 , 90 ) ,
+		SITools.Resistance( "electric" , 4 , 96 ) ,
+	} ,
 	damaged_trigger_effect =
 	{
 		type = "create-entity" ,
@@ -4344,7 +4354,7 @@ SIGen
 		offsets = { { 0 , 1 } } ,
 		damage_type_filters = "fire"
 	} ,
-	repair_speed_modifier = 24.0 ,
+	repair_speed_modifier = 26.0 ,
 	burner =
 	{
 		type = SICommon.Flags.EnergySourceType.Burner ,
@@ -4374,8 +4384,8 @@ SIGen
 		light_flicker = nil
 	} ,
 	weight = 2000000000 ,
-	braking_power = "150TW" ,
-	consumption = "2TW" ,
+	braking_power = "200TW" ,
+	consumption = "3TW" ,
 	effectivity = 1.0 ,
 	terrain_friction_modifier = 0.1 ,
 	friction = 0.0001 ,
@@ -4416,7 +4426,7 @@ SIGen
 		{
 			type = "oriented" ,
 			minimum_darkness = 0.35 ,
-			size = 2.0 * tankSize ,
+			size = 5.0 ,
 			intensity = 0.8 ,
 			source_orientation_offset = -0.02 ,
 			shift = { -0.1 , -14 + tankShiftY / 32 } ,
@@ -4431,7 +4441,7 @@ SIGen
 						flags = { "light" } ,
 						width = 200 ,
 						height = 200 ,
-						scale = 2.0 * tankSize
+						scale = 5.0
 					}
 				}
 			}
@@ -4439,7 +4449,7 @@ SIGen
 		{
 			type = "oriented" ,
 			minimum_darkness = 0.35 ,
-			size = 2.0 * tankSize ,
+			size = 5.0 ,
 			intensity = 0.8 ,
 			source_orientation_offset = 0.02 ,
 			shift = { 0.1 , -14 + tankShiftY / 32 } ,
@@ -4454,7 +4464,7 @@ SIGen
 						flags = { "light" } ,
 						width = 200 ,
 						height = 200 ,
-						scale = 2.0 * tankSize
+						scale = 5.0
 					}
 				}
 			}
@@ -4474,8 +4484,8 @@ SIGen
 				repeat_count = 2 ,
 				line_length = 8 ,
 				direction_count = 64 ,
-				scale = 0.5 * tankSize ,
-				shift = SIUtils.by_pixel( -2 , -34 + tankShiftY2 ) ,
+				scale = tankScale ,
+				shift = SIUtils.by_pixel( -1 * tankSize , ( -17 + tankShiftY ) * tankSize ) ,
 				draw_as_glow = true
 			}
 		}
@@ -4485,7 +4495,7 @@ SIGen
 		layers =
 		{
 			{
-				stripes = SIUtils.multiplystripes( 2 ,
+				stripes =
 				{
 					{
 						filename = SIGen.MakeSelfPicturePath( "超越之安如磐石战车-1" ) ,
@@ -4507,17 +4517,16 @@ SIGen
 						width_in_frames = 2 ,
 						height_in_frames = 16
 					}
-				} ) ,
+				} ,
 				priority = "low" ,
 				width = 270 ,
 				height = 212 ,
 				frame_count = 2 ,
-				line_length = 1 ,
 				animation_speed = 8 ,
 				direction_count = 64 ,
 				max_advance = 1 ,
-				scale = 0.5 * tankSize ,
-				shift = SIUtils.by_pixel( 0 , -32 + tankShiftY2 )
+				scale = tankScale ,
+				shift = SIUtils.by_pixel( 0 * tankSize , ( -16 + tankShiftY ) * tankSize )
 			} ,
 			{
 				stripes = SIUtils.multiplystripes( 2 ,
@@ -4545,8 +4554,8 @@ SIGen
 				line_length = 2 ,
 				direction_count = 64 ,
 				max_advance = 1 ,
-				scale = 0.5 * tankSize ,
-				shift = SIUtils.by_pixel( 0 , -55 + tankShiftY2 ) ,
+				scale = tankScale ,
+				shift = SIUtils.by_pixel( 0 * tankSize , ( -22.5 + tankShiftY ) * tankSize ) ,
 				apply_runtime_tint = true
 			} ,
 			{
@@ -4577,11 +4586,10 @@ SIGen
 				width = 302 ,
 				height = 194 ,
 				frame_count = 2 ,
-				line_length = 1 ,
 				direction_count = 64 ,
 				max_advance = 1 ,
-				scale = 0.5 * tankSize ,
-				shift = SIUtils.by_pixel( 43 , 2 + tankShiftY2 ) ,
+				scale = tankScale ,
+				shift = SIUtils.by_pixel( 21.5 * tankSize , ( 1 + tankShiftY ) * tankSize ) ,
 				draw_as_shadow = true
 			}
 		}
@@ -4599,8 +4607,8 @@ SIGen
 				line_length = 8 ,
 				animation_speed = 8 ,
 				direction_count = 64 ,
-				scale = 0.5 * tankSize ,
-				shift = SIUtils.by_pixel( 0.5 , -81 + tankShiftY2 )
+				scale = tankScale ,
+				shift = SIUtils.by_pixel( 0.25 * tankSize , ( -40.5 + tankShiftY ) * tankSize )
 			} ,
 			{
 				filename = SIGen.MakeSelfPicturePath( "超越之安如磐石战车-炮塔-遮盖" ) ,
@@ -4610,8 +4618,8 @@ SIGen
 				frame_count = 1 ,
 				line_length = 8 ,
 				direction_count = 64 ,
-				scale = 0.5 * tankSize ,
-				shift = SIUtils.by_pixel( 0 , -83 + tankShiftY2 ) ,
+				scale = tankScale ,
+				shift = SIUtils.by_pixel( 0 * tankSize , ( -41.5 + tankShiftY ) * tankSize ) ,
 				apply_runtime_tint = true
 			} ,
 			{
@@ -4622,8 +4630,8 @@ SIGen
 				frame_count = 1 ,
 				line_length = 8 ,
 				direction_count = 64 ,
-				scale = 0.5 * tankSize ,
-				shift = SIUtils.by_pixel( 112.5 , 1 + tankShiftY2 ) ,
+				scale = tankScale ,
+				shift = SIUtils.by_pixel( 56.25 * tankSize , ( 0.5 + tankShiftY ) * tankSize ) ,
 				draw_as_shadow = true
 			}
 		}

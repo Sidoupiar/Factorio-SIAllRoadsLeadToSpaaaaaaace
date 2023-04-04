@@ -549,8 +549,8 @@ SIGen
 		SetStyleProperty( prototypeData.tooltip_label , "maximal_width" , 406 )
 		-- 修改插件槽列表的最大高度
 		SetStyleProperty( prototypeData.module_inventory_scroll_pane , "maximal_height" , 350 )
-		SetStyleProperty( prototypeData.horizontally_limited_equipment_grid_scroll_pane , "maximal_width" , 408 )
-		--SetStyleProperty( prototypeData.filter_group_tab , "minimal_width" , 32 )
+		-- 修改装甲模块区域的最大宽度
+		SetStyleProperty( prototypeData.horizontally_limited_equipment_grid_scroll_pane , "maximal_width" , 812 )
 	end
 end )
 
