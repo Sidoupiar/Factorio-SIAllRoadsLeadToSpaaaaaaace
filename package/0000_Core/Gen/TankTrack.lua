@@ -1,4 +1,4 @@
-return
+return SIModData.Loaded.base and
 {
 	{
 		tiles = { "water-shallow" } ,
@@ -1971,4 +1971,4 @@ return
 			}
 		}
 	}
-}
+} or nil
