@@ -4344,7 +4344,7 @@ SIGen
 		SITools.Resistance( "fire" , 0 , 96 ) ,
 		SITools.Resistance( "laser" , 22 , 35 ) ,
 		SITools.Resistance( "acid" , 4 , 90 ) ,
-		SITools.Resistance( "electric" , 4 , 96 ) ,
+		SITools.Resistance( "electric" , 4 , 96 )
 	} ,
 	damaged_trigger_effect =
 	{

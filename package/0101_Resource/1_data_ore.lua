@@ -2,6 +2,25 @@
 -- ------------ 矿物 ------------------------------------------------------------------------------
 -- ------------------------------------------------------------------------------------------------
 
+local miningResultList =
+{
+	-- 添加矿山石
+	{
+		type = SICommon.Types.Items.Item ,
+		name = SIConstants_Resource.raw.Items.RockBase ,
+		amount = 1 ,
+		catalyst_amount = 1
+	} ,
+	{
+		type = SICommon.Types.Items.Item ,
+		name = SIConstants_Resource.raw.Items.RockBase ,
+		probability = 0.02 ,
+		amount_min = 0 ,
+		amount_max = 50 ,
+		catalyst_amount = 50
+	}
+}
+
 local oreList =
 {
 	OreSky    = "蓝天岩" ,
@@ -15,7 +34,6 @@ local oreList =
 	OreFour   = "四彩金" ,
 	OreUpper  = "上界碤"
 }
-local miningResultList = {}
 
 SIGen.SetGroup( SIConstants_Resource.raw.Groups.Resource.Ore )
 for oreID , oreAlias in pairs( oreList ) do
@@ -132,10 +150,10 @@ for oreID , oreAlias in pairs( oreList ) do
 	{
 		type = SICommon.Types.Items.Item ,
 		name = SIConstants_Resource.raw.Items[oreID] ,
-		probability = 0.001 ,
+		probability = 0.0001 ,
 		amount_min = 0 ,
-		amount_max = 200 ,
-		catalyst_amount = 200 ,
+		amount_max = 3000 ,
+		catalyst_amount = 3000 ,
 		show_details_in_recipe_tooltip = false
 	} )
 end
