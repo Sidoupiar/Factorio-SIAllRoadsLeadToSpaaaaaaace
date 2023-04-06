@@ -2,6 +2,125 @@
 -- ----------- 矿山石 -----------------------------------------------------------------------------
 -- ------------------------------------------------------------------------------------------------
 
+local rockDataList =
+{
+	{ IDSuffix = "Base" , AliasSuffix = "" } ,
+	{ IDSuffix = "Hard" , AliasSuffix = "-致密" } ,
+	{ IDSuffix = "Soft" , AliasSuffix = "-多孔" } ,
+}
+
+for rockIndex , rockData in pairs( rockDataList ) do
+	SIGen
+	.New( SICommon.Types.Entities.Projectile , "Rock" .. rockData.IDSuffix , "扔出去的矿山石" .. rockData.AliasSuffix )
+	.MakeIcon( SICommon.Types.Items.Capsule , "矿山石" .. rockData.AliasSuffix )
+	.Append
+	{
+		flags = { SICommon.Flags.Entity.NotOnMap } ,
+		light =
+		{
+			intensity = 0.5 ,
+			size = 4
+		} ,
+		animation =
+		{
+			layers =
+			{
+				{
+					filename = SIGen.MakeSelfPicturePath( "扔出去的矿山石" .. rockData.AliasSuffix ) ,
+					priority = "high" ,
+					scale = 0.5 ,
+					draw_as_glow = true ,
+					frame_count = 1 ,
+					line_length = 1 ,
+					animation_speed = 1 ,
+					width = 64 ,
+					height = 64
+				}
+			}
+		} ,
+		acceleration = 0 ,
+		action =
+		{
+			{
+				type = "area" ,
+				radius = 1.6 ,
+				action_delivery =
+				{
+					{
+						type = "instant" ,
+						target_effects =
+						{
+							{
+								type = "damage" ,
+								damage =
+								{
+									type = "physical" ,
+									amount = 3
+								}
+							} ,
+							{
+								type = "create-particle" ,
+								particle_name = "stone-particle" ,
+								repeat_count = 5 ,
+								initial_height = 0.5 ,
+								initial_vertical_speed = 0.05 ,
+								initial_vertical_speed_deviation = 0.1 ,
+								speed_from_center = 0.05 ,
+								speed_from_center_deviation = 0.1 ,
+								offset_deviation = { { -0.8984 , -0.5 } , { 0.8984 , 0.5 } }
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+	.New( SICommon.Types.Items.Capsule , "Rock" .. rockData.IDSuffix , "矿山石" .. rockData.AliasSuffix ,
+	{
+		stack_size = 10000 ,
+		default_request_amount = 100 ,
+		capsule_action =
+		{
+			type = "throw" ,
+			uses_stack = true ,
+			attack_parameters =
+			{
+				type = "projectile" ,
+				range = 16.5 ,
+				cooldown = 42 ,
+				activation_type = "throw" ,
+				ammo_type =
+				{
+					category = "capsule" ,
+					target_type = "position" ,
+					action =
+					{
+						{
+							type = "direct" ,
+							action_delivery =
+							{
+								{
+									type = "projectile" ,
+									projectile = SIConstants_Resource.raw.Entities["Rock" .. rockData.IDSuffix] ,
+									starting_speed = 0.25 ,
+									target_effects =
+									{
+										{
+											type = "play-sound" ,
+											sound = SITools.SoundList_Base( "fight/throw-projectile" , 6 , 0.4 )
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	} )
+	.AutoIcon()
+end
+
 local stoneDataList =
 {
 	{
@@ -131,6 +250,24 @@ for stoneIndex , stoneData in pairs( stoneDataList ) do
 					amount_min = 0 ,
 					amount_max = 50 ,
 					catalyst_amount = 50
+				} ,
+				{
+					type = SICommon.Types.Items.Item ,
+					name = SIConstants_Resource.raw.Items.RockHard ,
+					probability = 0.1 ,
+					amount_min = 0 ,
+					amount_max = 5 ,
+					catalyst_amount = 5 ,
+					show_details_in_recipe_tooltip = false
+				} ,
+				{
+					type = SICommon.Types.Items.Item ,
+					name = SIConstants_Resource.raw.Items.RockHard ,
+					probability = 0.01 ,
+					amount_min = 0 ,
+					amount_max = 26 ,
+					catalyst_amount = 26 ,
+					show_details_in_recipe_tooltip = false
 				}
 			}
 		} ,
@@ -152,6 +289,20 @@ for stoneIndex , stoneData in pairs( stoneDataList ) do
 				probability = 0.02 ,
 				count_min = 0 ,
 				count_max = 50
+			} ,
+			{
+				name = SIConstants_Resource.raw.Items.RockSoft ,
+				probability = 0.1 ,
+				amount_min = 0 ,
+				amount_max = 4 ,
+				catalyst_amount = 4
+			} ,
+			{
+				name = SIConstants_Resource.raw.Items.RockSoft ,
+				probability = 0.01 ,
+				amount_min = 0 ,
+				amount_max = 22 ,
+				catalyst_amount = 22
 			}
 		} ,
 		max_health = 12000 ,
