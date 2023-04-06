@@ -156,8 +156,8 @@ SIRuinControl =
 					local itemData =
 					{
 						Item = itemDataData[1] ,
-						Min = itemDataData[2] * level ,
-						Max = itemDataData[3] * level
+						Min = itemDataData[2] * level ^ 1.4 ,
+						Max = itemDataData[3] * level ^ 2.2
 					}
 					table.insert( itemPack.Items , itemData )
 				end
