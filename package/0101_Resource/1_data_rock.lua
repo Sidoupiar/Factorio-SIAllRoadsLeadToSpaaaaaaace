@@ -7,6 +7,7 @@ local rockDataList =
 	{ IDSuffix = "Base" , AliasSuffix = "" } ,
 	{ IDSuffix = "Hard" , AliasSuffix = "-致密" } ,
 	{ IDSuffix = "Soft" , AliasSuffix = "-多孔" } ,
+	{ IDSuffix = "Life" , AliasSuffix = "-活性" }
 }
 
 SIGen.SetGroup( SIConstants_Resource.raw.Groups.Resource.Rock )
@@ -29,8 +30,8 @@ for rockIndex , rockData in pairs( rockDataList ) do
 				{
 					filename = SIGen.MakeSelfPicturePath( "扔出去的矿山石" .. rockData.AliasSuffix ) ,
 					priority = "high" ,
-					width = 64 ,
-					height = 64 ,
+					width = 32 ,
+					height = 32 ,
 					frame_count = 16 ,
 					line_length = 8 ,
 					animation_speed = 1 ,

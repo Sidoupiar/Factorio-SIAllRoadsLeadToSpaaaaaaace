@@ -55,10 +55,10 @@ for oreID , oreAlias in pairs( oreList ) do
 				{
 					filename = SIGen.MakeSelfPicturePath( "扔出去的" .. oreAlias ) ,
 					priority = "high" ,
-					width = 64 ,
-					height = 64 ,
-					frame_count = 1 ,
-					line_length = 1 ,
+					width = 32 ,
+					height = 32 ,
+					frame_count = 8 ,
+					line_length = 8 ,
 					animation_speed = 1 ,
 					scale = 0.5
 				}
@@ -158,7 +158,7 @@ for oreID , oreAlias in pairs( oreList ) do
 end
 
 SIGen
-.New( SICommon.Types.Entities.Resource , "OreBase" , "矿山岩" )
+.New( SICommon.Types.Entities.Resource , "OreStone" , "矿山岩" )
 .AutoIcon()
 .SetSize( 1 , 1 )
 .Append
