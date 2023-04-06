@@ -8,6 +8,11 @@ local constantsData =
 		[SIInit.StateCodeDefine.DataFinalFixes] = { "3_data-final-fixes" } ,
 		[SIInit.StateCodeDefine.Control]        = { "4_control" }
 	} ,
+	Path =
+	{
+		Picture = "__SIAllRoadsLeadToSpaaaaaaaceGraphics1__/package/0101_Resource/graphic" ,
+		Sound = "__SIAllRoadsLeadToSpaaaaaaaceGraphics1__/package/0101_Resource/sound"
+	} ,
 	Autoload =
 	{
 		Enable = true ,
@@ -25,7 +30,13 @@ local constantsData =
 				}
 			}
 		}
-	}
+	} ,
+	BeforeLoad = function( constantsData )
+		if not SIModData.Loaded.SIAllRoadsLeadToSpaaaaaaaceGraphics1 then
+			constantsData.FileList = nil
+			constantsData.Autoload = nil
+		end
+	end
 }
 
 return constantsData

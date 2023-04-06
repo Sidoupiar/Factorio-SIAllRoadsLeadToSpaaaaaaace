@@ -2,7 +2,8 @@ SIModData =
 {
 	List =
 	{
-		base = "基础游戏"
+		base = "基础游戏" ,
+		SIAllRoadsLeadToSpaaaaaaaceGraphics1 = "贴图包 1"
 	} ,
 	Loaded = {} ,
 	Data = {}
