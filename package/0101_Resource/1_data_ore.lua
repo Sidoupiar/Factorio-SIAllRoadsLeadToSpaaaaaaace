@@ -149,10 +149,10 @@ for oreID , oreAlias in pairs( oreList ) do
 	{
 		type = SICommon.Types.Items.Item ,
 		name = SIConstants_Resource.raw.Items[oreID] ,
-		probability = 0.0001 ,
+		probability = 0.00002 ,
 		amount_min = 0 ,
-		amount_max = 3000 ,
-		catalyst_amount = 3000 ,
+		amount_max = 10000 ,
+		catalyst_amount = 10000 ,
 		show_details_in_recipe_tooltip = false
 	} )
 end

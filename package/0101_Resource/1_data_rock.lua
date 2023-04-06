@@ -9,6 +9,7 @@ local rockDataList =
 	{ IDSuffix = "Soft" , AliasSuffix = "-多孔" } ,
 }
 
+SIGen.SetGroup( SIConstants_Resource.raw.Groups.Resource.Rock )
 for rockIndex , rockData in pairs( rockDataList ) do
 	SIGen
 	.New( SICommon.Types.Entities.Projectile , "Rock" .. rockData.IDSuffix , "扔出去的矿山石" .. rockData.AliasSuffix )
