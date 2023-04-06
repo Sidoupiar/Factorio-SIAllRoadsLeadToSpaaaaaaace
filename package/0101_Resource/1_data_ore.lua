@@ -55,13 +55,12 @@ for oreID , oreAlias in pairs( oreList ) do
 				{
 					filename = SIGen.MakeSelfPicturePath( "扔出去的" .. oreAlias ) ,
 					priority = "high" ,
-					scale = 0.5 ,
-					draw_as_glow = true ,
+					width = 64 ,
+					height = 64 ,
 					frame_count = 1 ,
 					line_length = 1 ,
 					animation_speed = 1 ,
-					width = 64 ,
-					height = 64
+					scale = 0.5
 				}
 			}
 		} ,

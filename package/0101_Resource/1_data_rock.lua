@@ -28,13 +28,12 @@ for rockIndex , rockData in pairs( rockDataList ) do
 				{
 					filename = SIGen.MakeSelfPicturePath( "扔出去的矿山石" .. rockData.AliasSuffix ) ,
 					priority = "high" ,
-					scale = 0.5 ,
-					draw_as_glow = true ,
-					frame_count = 1 ,
-					line_length = 1 ,
-					animation_speed = 1 ,
 					width = 64 ,
-					height = 64
+					height = 64 ,
+					frame_count = 16 ,
+					line_length = 8 ,
+					animation_speed = 1 ,
+					scale = 0.5
 				}
 			}
 		} ,
