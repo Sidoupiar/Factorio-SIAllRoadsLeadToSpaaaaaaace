@@ -134,7 +134,15 @@ for oreID , oreAlias in pairs( oreList ) do
 									{
 										{
 											type = "play-sound" ,
-											sound = SITools.SoundList_Base( "fight/throw-projectile" , 12 , 0.4 )
+											sound =
+											{
+												SISound.Base( "fight/throw-projectile-1" , 0.4 ) ,
+												SISound.Base( "fight/throw-projectile-2" , 0.4 ) ,
+												SISound.Base( "fight/throw-projectile-3" , 0.4 ) ,
+												SISound.Base( "fight/throw-projectile-4" , 0.4 ) ,
+												SISound.Base( "fight/throw-projectile-5" , 0.4 ) ,
+												SISound.Base( "fight/throw-projectile-6" , 0.4 )
+											}
 										}
 									}
 								}
@@ -212,16 +220,16 @@ SIGen
 	} ,
 	walking_sound =
 	{
-		SISound.Base( "resources/ore-01" , 0.7 ) ,
-		SISound.Base( "resources/ore-02" , 0.7 ) ,
-		SISound.Base( "resources/ore-03" , 0.7 ) ,
-		SISound.Base( "resources/ore-04" , 0.7 ) ,
-		SISound.Base( "resources/ore-05" , 0.7 ) ,
-		SISound.Base( "resources/ore-06" , 0.7 ) ,
-		SISound.Base( "resources/ore-07" , 0.7 ) ,
-		SISound.Base( "resources/ore-08" , 0.7 ) ,
-		SISound.Base( "resources/ore-09" , 0.7 ) ,
-		SISound.Base( "resources/ore-10" , 0.7 )
+		SISound.Base( "walking/resources/ore-01" , 0.7 ) ,
+		SISound.Base( "walking/resources/ore-02" , 0.7 ) ,
+		SISound.Base( "walking/resources/ore-03" , 0.7 ) ,
+		SISound.Base( "walking/resources/ore-04" , 0.7 ) ,
+		SISound.Base( "walking/resources/ore-05" , 0.7 ) ,
+		SISound.Base( "walking/resources/ore-06" , 0.7 ) ,
+		SISound.Base( "walking/resources/ore-07" , 0.7 ) ,
+		SISound.Base( "walking/resources/ore-08" , 0.7 ) ,
+		SISound.Base( "walking/resources/ore-09" , 0.7 ) ,
+		SISound.Base( "walking/resources/ore-10" , 0.7 )
 	}
 }
 

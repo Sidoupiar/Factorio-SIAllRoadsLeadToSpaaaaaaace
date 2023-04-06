@@ -110,7 +110,15 @@ for rockIndex , rockData in pairs( rockDataList ) do
 									{
 										{
 											type = "play-sound" ,
-											sound = SITools.SoundList_Base( "fight/throw-projectile" , 25 , 0.4 )
+											sound =
+											{
+												SISound.Base( "fight/throw-projectile-1" , 0.4 ) ,
+												SISound.Base( "fight/throw-projectile-2" , 0.4 ) ,
+												SISound.Base( "fight/throw-projectile-3" , 0.4 ) ,
+												SISound.Base( "fight/throw-projectile-4" , 0.4 ) ,
+												SISound.Base( "fight/throw-projectile-5" , 0.4 ) ,
+												SISound.Base( "fight/throw-projectile-6" , 0.4 )
+											}
 										}
 									}
 								}
@@ -277,35 +285,33 @@ for stoneIndex , stoneData in pairs( stoneDataList ) do
 		loot =
 		{
 			{
-				name = SIConstants_Resource.raw.Items.RockBase ,
+				item = SIConstants_Resource.raw.Items.RockBase ,
 				count_min = 1 ,
 				count_max = 1
 			} ,
 			{
-				name = SIConstants_Resource.raw.Items.RockBase ,
+				item = SIConstants_Resource.raw.Items.RockBase ,
 				probability = 0.1 ,
 				count_min = 0 ,
 				count_max = 20
 			} ,
 			{
-				name = SIConstants_Resource.raw.Items.RockBase ,
+				item = SIConstants_Resource.raw.Items.RockBase ,
 				probability = 0.02 ,
 				count_min = 0 ,
 				count_max = 50
 			} ,
 			{
-				name = SIConstants_Resource.raw.Items.RockSoft ,
+				item = SIConstants_Resource.raw.Items.RockSoft ,
 				probability = 0.1 ,
 				amount_min = 0 ,
-				amount_max = 4 ,
-				catalyst_amount = 4
+				amount_max = 4
 			} ,
 			{
-				name = SIConstants_Resource.raw.Items.RockSoft ,
+				item = SIConstants_Resource.raw.Items.RockSoft ,
 				probability = 0.01 ,
 				amount_min = 0 ,
-				amount_max = 22 ,
-				catalyst_amount = 22
+				amount_max = 22
 			}
 		} ,
 		max_health = 12000 ,

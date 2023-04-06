@@ -815,16 +815,16 @@ function SIInit.AutoLoad( ModName , CustomPackageConfig , ConstantsDataPrefix , 
 					-- 计算资源文件路径
 					if constantsData.Path then
 						if constantsData.Path.Resource then
-							constantsData.PicturePath = constantsData.Path.Resource:gsub( "." , "/" ) .. "/"
+							constantsData.PicturePath = constantsData.Path.Resource:gsub( "\\." , "/" ) .. "/"
 							constantsData.SoundPath = constantsData.PicturePath
 						else
 							if constantsData.Path.Picture then
-								constantsData.PicturePath = constantsData.Path.Picture:gsub( "." , "/" ) .. "/"
+								constantsData.PicturePath = constantsData.Path.Picture:gsub( "\\." , "/" ) .. "/"
 							else
 								constantsData.PicturePath = SIInit.ModPath .. "/package/" .. packageName .. "/graphic/"
 							end
 							if constantsData.Path.Sound then
-								constantsData.SoundPath = constantsData.Path.Sound:gsub( "." , "/" ) .. "/"
+								constantsData.SoundPath = constantsData.Path.Sound:gsub( "\\." , "/" ) .. "/"
 							else
 								constantsData.SoundPath = SIInit.ModPath .. "/package/" .. packageName .. "/sound/"
 							end
