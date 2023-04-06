@@ -7,7 +7,8 @@ local rockDataList =
 	{ IDSuffix = "Base" , AliasSuffix = "" } ,
 	{ IDSuffix = "Hard" , AliasSuffix = "-致密" } ,
 	{ IDSuffix = "Soft" , AliasSuffix = "-多孔" } ,
-	{ IDSuffix = "Life" , AliasSuffix = "-活性" }
+	{ IDSuffix = "Acti" , AliasSuffix = "-活性" } ,
+	{ IDSuffix = "Cata" , AliasSuffix = "-催化" }
 }
 
 SIGen.SetGroup( SIConstants_Resource.raw.Groups.Resource.Rock )
@@ -80,6 +81,7 @@ for rockIndex , rockData in pairs( rockDataList ) do
 	{
 		stack_size = 10000 ,
 		default_request_amount = 100 ,
+		radius_color = nil ,
 		capsule_action =
 		{
 			type = "throw" ,
@@ -87,7 +89,7 @@ for rockIndex , rockData in pairs( rockDataList ) do
 			attack_parameters =
 			{
 				type = "projectile" ,
-				range = 16.5 ,
+				range = 24.5 ,
 				cooldown = 42 ,
 				activation_type = "throw" ,
 				ammo_type =
@@ -108,7 +110,7 @@ for rockIndex , rockData in pairs( rockDataList ) do
 									{
 										{
 											type = "play-sound" ,
-											sound = SITools.SoundList_Base( "fight/throw-projectile" , 6 , 0.4 )
+											sound = SITools.SoundList_Base( "fight/throw-projectile" , 25 , 0.4 )
 										}
 									}
 								}

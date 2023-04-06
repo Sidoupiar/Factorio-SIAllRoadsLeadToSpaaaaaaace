@@ -105,6 +105,7 @@ for oreID , oreAlias in pairs( oreList ) do
 	{
 		stack_size = 10000 ,
 		default_request_amount = 100 ,
+		radius_color = nil ,
 		capsule_action =
 		{
 			type = "throw" ,
@@ -112,7 +113,7 @@ for oreID , oreAlias in pairs( oreList ) do
 			attack_parameters =
 			{
 				type = "projectile" ,
-				range = 16.5 ,
+				range = 18.2 ,
 				cooldown = 42 ,
 				activation_type = "throw" ,
 				ammo_type =
@@ -133,7 +134,7 @@ for oreID , oreAlias in pairs( oreList ) do
 									{
 										{
 											type = "play-sound" ,
-											sound = SITools.SoundList_Base( "fight/throw-projectile" , 6 , 0.4 )
+											sound = SITools.SoundList_Base( "fight/throw-projectile" , 12 , 0.4 )
 										}
 									}
 								}
