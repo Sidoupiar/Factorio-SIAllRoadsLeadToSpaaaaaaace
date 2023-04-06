@@ -19,6 +19,7 @@
 
 ##其他：
 * 如果你不慎关掉了左上角的面板，也不用慌，打开 ESC 界面，在模组设置中的个人设置页面，有个“显示操作面板”项目，勾选它后回到游戏中即可看到面板。
+* 一般情况下，为了防止剧透，在更新日志中不会提及具体核心流程的更新内容，而是使用类似于“更新了一些配方”、“修复了一些 bug”等的说明代替。
 
 --------------------------------------------------
 
@@ -29,6 +30,10 @@
 * Adds RPG property/skill system.
 * Modifies items' stack size, and fill barrels, infinite technologies.
 * Ruin buildings will be generated on surfaces.
+
+##Others :
+* If you hidde the panel in top-left corner, don't worry. Open the EXC interface, and checked the “显示操作面板” in personal settings page in the mod settings. Then back to the game, you will see the panel again.
+* In general, updates about core processes will not be mentioned in updates logs. Words like "updated some recipes", "fixed some bugs" will be used instead.
 
 Only support Chinese Language, English or any other languages are not support.
 You may need some language pack mod if you installed this mod.
