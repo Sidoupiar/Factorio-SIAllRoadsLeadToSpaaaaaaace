@@ -36,7 +36,7 @@ for rockIndex , rockData in pairs( rockDataList ) do
 					frame_count = 16 ,
 					line_length = 8 ,
 					animation_speed = 1 ,
-					scale = 0.5
+					scale = 0.4
 				}
 			}
 		} ,

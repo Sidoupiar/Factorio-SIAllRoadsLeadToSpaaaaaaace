@@ -60,7 +60,7 @@ for oreID , oreAlias in pairs( oreList ) do
 					frame_count = 8 ,
 					line_length = 8 ,
 					animation_speed = 1 ,
-					scale = 0.5
+					scale = 0.4
 				}
 			}
 		} ,
