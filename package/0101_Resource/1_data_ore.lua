@@ -81,7 +81,7 @@ for oreID , oreAlias in pairs( oreList ) do
 								damage =
 								{
 									type = "physical" ,
-									amount = 3
+									amount = 14
 								}
 							} ,
 							{
@@ -114,7 +114,7 @@ for oreID , oreAlias in pairs( oreList ) do
 			{
 				type = "projectile" ,
 				range = 18.2 ,
-				cooldown = 42 ,
+				cooldown = 65 ,
 				activation_type = "throw" ,
 				ammo_type =
 				{
@@ -129,7 +129,7 @@ for oreID , oreAlias in pairs( oreList ) do
 								{
 									type = "projectile" ,
 									projectile = SIConstants_Resource.raw.Entities[oreID] ,
-									starting_speed = 0.25 ,
+									starting_speed = 0.21 ,
 									target_effects =
 									{
 										{

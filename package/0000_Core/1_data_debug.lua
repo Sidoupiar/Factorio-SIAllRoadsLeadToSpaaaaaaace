@@ -2996,7 +2996,6 @@ SIGen
 			type = "direct" ,
 			force = "enemy" ,
 			ignore_collision_condition = true ,
-			show_in_tooltip = false ,
 			action_delivery =
 			{
 				{
@@ -3404,7 +3403,6 @@ SIGen
 				{
 					type = "direct" ,
 					force = "enemy" ,
-					show_in_tooltip = true ,
 					action_delivery =
 					{
 						{

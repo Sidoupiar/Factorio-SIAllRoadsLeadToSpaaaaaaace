@@ -4,15 +4,17 @@
 
 local rockDataList =
 {
-	{ IDSuffix = "Base" , AliasSuffix = "" } ,
-	{ IDSuffix = "Hard" , AliasSuffix = "-致密" } ,
-	{ IDSuffix = "Soft" , AliasSuffix = "-多孔" } ,
-	{ IDSuffix = "Acti" , AliasSuffix = "-活性" } ,
-	{ IDSuffix = "Cata" , AliasSuffix = "-催化" }
+	{ IDSuffix = "Base" , AliasSuffix = "" , Probability = 0.021 } ,
+	{ IDSuffix = "Hard" , AliasSuffix = "-致密" , Probability = 0.004 } ,
+	{ IDSuffix = "Soft" , AliasSuffix = "-多孔" , Probability = 0.082 } ,
+	{ IDSuffix = "Acti" , AliasSuffix = "-活性" , Probability = 0.014 } ,
+	{ IDSuffix = "Cata" , AliasSuffix = "-催化" , Probability = 0.036 }
 }
 
 SIGen.SetGroup( SIConstants_Resource.raw.Groups.Resource.Rock )
 for rockIndex , rockData in pairs( rockDataList ) do
+	local rockProjectile = nil
+	local pieceRockProjectile = nil
 	SIGen
 	.New( SICommon.Types.Entities.Projectile , "Rock" .. rockData.IDSuffix , "扔出去的矿山石" .. rockData.AliasSuffix )
 	.MakeIcon( SICommon.Types.Items.Capsule , "矿山石" .. rockData.AliasSuffix )
@@ -57,7 +59,7 @@ for rockIndex , rockData in pairs( rockDataList ) do
 								damage =
 								{
 									type = "physical" ,
-									amount = 3
+									amount = 21
 								}
 							} ,
 							{
@@ -77,6 +79,9 @@ for rockIndex , rockData in pairs( rockDataList ) do
 			}
 		}
 	}
+	.AddFunction( function( prototypeName , prototypeData )
+		rockProjectile = prototypeData
+	end )
 	.New( SICommon.Types.Items.Capsule , "Rock" .. rockData.IDSuffix , "矿山石" .. rockData.AliasSuffix ,
 	{
 		stack_size = 10000 ,
@@ -90,7 +95,7 @@ for rockIndex , rockData in pairs( rockDataList ) do
 			{
 				type = "projectile" ,
 				range = 24.5 ,
-				cooldown = 42 ,
+				cooldown = 65 ,
 				activation_type = "throw" ,
 				ammo_type =
 				{
@@ -130,6 +135,175 @@ for rockIndex , rockData in pairs( rockDataList ) do
 		}
 	} )
 	.AutoIcon()
+	.New( SICommon.Types.Entities.Projectile , "PieceRock" .. rockData.IDSuffix , "扔出去的碎裂的矿山石" .. rockData.AliasSuffix )
+	.MakeIcon( SICommon.Types.Items.Capsule , "碎裂的矿山石" .. rockData.AliasSuffix )
+	.Append
+	{
+		flags = { SICommon.Flags.Entity.NotOnMap } ,
+		light =
+		{
+			intensity = 0.5 ,
+			size = 4
+		} ,
+		animation =
+		{
+			layers =
+			{
+				{
+					filename = SIGen.MakeSelfPicturePath( "扔出去的碎裂的矿山石" .. rockData.AliasSuffix ) ,
+					priority = "high" ,
+					width = 32 ,
+					height = 32 ,
+					frame_count = 8 ,
+					line_length = 8 ,
+					animation_speed = 1 ,
+					scale = 0.4
+				}
+			}
+		} ,
+		acceleration = 0 ,
+		action =
+		{
+			{
+				type = "area" ,
+				radius = 1.6 ,
+				action_delivery =
+				{
+					{
+						type = "instant" ,
+						target_effects =
+						{
+							{
+								type = "damage" ,
+								damage =
+								{
+									type = "physical" ,
+									amount = 9.5
+								}
+							} ,
+							{
+								type = "create-particle" ,
+								particle_name = "stone-particle" ,
+								repeat_count = 5 ,
+								initial_height = 0.5 ,
+								initial_vertical_speed = 0.05 ,
+								initial_vertical_speed_deviation = 0.1 ,
+								speed_from_center = 0.05 ,
+								speed_from_center_deviation = 0.1 ,
+								offset_deviation = { { -0.8984 , -0.5 } , { 0.8984 , 0.5 } }
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+	.AddFunction( function( prototypeName , prototypeData )
+		pieceRockProjectile = prototypeData
+	end )
+	.New( SICommon.Types.Items.Capsule , "PieceRock" .. rockData.IDSuffix , "碎裂的矿山石" .. rockData.AliasSuffix ,
+	{
+		stack_size = 10000 ,
+		default_request_amount = 100 ,
+		radius_color = nil ,
+		capsule_action =
+		{
+			type = "throw" ,
+			uses_stack = true ,
+			attack_parameters =
+			{
+				type = "projectile" ,
+				range = 26.5 ,
+				cooldown = 55 ,
+				activation_type = "throw" ,
+				ammo_type =
+				{
+					category = "capsule" ,
+					target_type = "position" ,
+					action =
+					{
+						{
+							type = "direct" ,
+							action_delivery =
+							{
+								{
+									type = "projectile" ,
+									projectile = SIConstants_Resource.raw.Entities["PieceRock" .. rockData.IDSuffix] ,
+									starting_speed = 0.29 ,
+									target_effects =
+									{
+										{
+											type = "play-sound" ,
+											sound =
+											{
+												SISound.Base( "fight/throw-projectile-1" , 0.4 ) ,
+												SISound.Base( "fight/throw-projectile-2" , 0.4 ) ,
+												SISound.Base( "fight/throw-projectile-3" , 0.4 ) ,
+												SISound.Base( "fight/throw-projectile-4" , 0.4 ) ,
+												SISound.Base( "fight/throw-projectile-5" , 0.4 ) ,
+												SISound.Base( "fight/throw-projectile-6" , 0.4 )
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	} )
+	.AutoIcon()
+	table.insert( rockProjectile.action ,
+	{
+		type = "direct" ,
+		action_delivery =
+		{
+			{
+				type = "instant" ,
+				target_effects =
+				{
+					{
+						type = "insert-item" ,
+						item = SIConstants_Resource.raw.Items["Rock" .. rockData.IDSuffix] ,
+						count = 1 ,
+						repeat_count = 1 ,
+						probability = 0.38 ,
+						show_in_tooltip = false
+					} ,
+					{
+						type = "insert-item" ,
+						item = SIConstants_Resource.raw.Items["PieceRock" .. rockData.IDSuffix] ,
+						count = 1 ,
+						repeat_count = 4 ,
+						probability = rockData.Probability ,
+						show_in_tooltip = false
+					}
+				}
+			}
+		}
+	} )
+	table.insert( pieceRockProjectile.action ,
+	{
+		type = "direct" ,
+		action_delivery =
+		{
+			{
+				type = "instant" ,
+				target_effects =
+				{
+					{
+						type = "insert-item" ,
+						item = SIConstants_Resource.raw.Items["PieceRock" .. rockData.IDSuffix] ,
+						count = 1 ,
+						repeat_count = 1 ,
+						probability = 0.25 ,
+						show_in_tooltip = false
+					}
+				}
+			}
+		}
+	} )
 end
 
 local stoneDataList =
