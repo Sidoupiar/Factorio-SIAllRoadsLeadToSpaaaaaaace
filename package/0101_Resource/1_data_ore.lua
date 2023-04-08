@@ -81,7 +81,7 @@ for oreID , oreAlias in pairs( oreList ) do
 								damage =
 								{
 									type = "physical" ,
-									amount = 14
+									amount = 13.5
 								}
 							} ,
 							{
@@ -94,6 +94,14 @@ for oreID , oreAlias in pairs( oreList ) do
 								speed_from_center = 0.05 ,
 								speed_from_center_deviation = 0.1 ,
 								offset_deviation = { { -0.8984 , -0.5 } , { 0.8984 , 0.5 } }
+							} ,
+							{
+								type = "insert-item" ,
+								item = SIConstants_Resource.raw.Items[oreID] ,
+								count = 1 ,
+								repeat_count = 1 ,
+								probability = 0.42 ,
+								show_in_tooltip = false
 							}
 						}
 					}

@@ -7,7 +7,7 @@ local rockDataList =
 	{ IDSuffix = "Base" , AliasSuffix = "" , Probability = 0.021 } ,
 	{ IDSuffix = "Hard" , AliasSuffix = "-致密" , Probability = 0.004 } ,
 	{ IDSuffix = "Soft" , AliasSuffix = "-多孔" , Probability = 0.082 } ,
-	{ IDSuffix = "Acti" , AliasSuffix = "-活性" , Probability = 0.014 } ,
+	{ IDSuffix = "Acti" , AliasSuffix = "-活性" , Probability = 0.016 } ,
 	{ IDSuffix = "Cata" , AliasSuffix = "-催化" , Probability = 0.036 }
 }
 
