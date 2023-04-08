@@ -11,11 +11,11 @@ local rockDataList =
 	{ IDSuffix = "Cata" , AliasSuffix = "-催化" , Probability = 0.036 }
 }
 
-SIGen.SetGroup( SIConstants_Resource.raw.Groups.Resource.Rock )
 for rockIndex , rockData in pairs( rockDataList ) do
 	local rockProjectile = nil
 	local pieceRockProjectile = nil
 	SIGen
+	.SetGroup( SIConstants_Resource.raw.Groups.Resource.Rock )
 	.New( SICommon.Types.Entities.Projectile , "Rock" .. rockData.IDSuffix , "扔出去的矿山石" .. rockData.AliasSuffix )
 	.MakeIcon( SICommon.Types.Items.Capsule , "矿山石" .. rockData.AliasSuffix )
 	.Append
@@ -135,6 +135,7 @@ for rockIndex , rockData in pairs( rockDataList ) do
 		}
 	} )
 	.AutoIcon()
+	.SetGroup( SIConstants_Resource.raw.Groups.Resource.PieceRock )
 	.New( SICommon.Types.Entities.Projectile , "PieceRock" .. rockData.IDSuffix , "扔出去的碎裂的矿山石" .. rockData.AliasSuffix )
 	.MakeIcon( SICommon.Types.Items.Capsule , "碎裂的矿山石" .. rockData.AliasSuffix )
 	.Append
@@ -383,6 +384,7 @@ local stoneDataList =
 	}
 }
 
+SIGen.SetGroup( SIConstants_Resource.raw.Groups.Resource.StoneRock )
 for stoneIndex , stoneData in pairs( stoneDataList ) do
 	local pictureList = {}
 	for index = 1 , #stoneData.SizeList , 1 do

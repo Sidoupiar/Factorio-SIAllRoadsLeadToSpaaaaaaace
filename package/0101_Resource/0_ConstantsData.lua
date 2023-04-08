@@ -24,6 +24,8 @@ local constantsData =
 				Subgroups =
 				{
 					Rock = "矿山石" ,
+					PieceRock = "碎裂的矿山石" ,
+					StoneRock = "矿山磐石" ,
 					Ore = "矿石" ,
 					Crystal = "魔力结晶" ,
 					Dirt = "泥土"
