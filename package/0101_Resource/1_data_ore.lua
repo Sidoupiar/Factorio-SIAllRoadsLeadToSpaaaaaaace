@@ -37,6 +37,7 @@ local oreList =
 
 SIGen.SetGroup( SIConstants_Resource.raw.Groups.Resource.Ore )
 for oreID , oreAlias in pairs( oreList ) do
+	local oreProjectile = nil
 	SIGen
 	.New( SICommon.Types.Entities.Projectile , oreID , "扔出去的" .. oreAlias )
 	.MakeIcon( SICommon.Types.Items.Capsule , oreAlias )
@@ -94,14 +95,6 @@ for oreID , oreAlias in pairs( oreList ) do
 								speed_from_center = 0.05 ,
 								speed_from_center_deviation = 0.1 ,
 								offset_deviation = { { -0.8984 , -0.5 } , { 0.8984 , 0.5 } }
-							} ,
-							{
-								type = "insert-item" ,
-								item = SIConstants_Resource.raw.Items[oreID] ,
-								count = 1 ,
-								repeat_count = 1 ,
-								probability = 0.42 ,
-								show_in_tooltip = false
 							}
 						}
 					}
@@ -109,6 +102,9 @@ for oreID , oreAlias in pairs( oreList ) do
 			}
 		}
 	}
+	.AddFunction( function( prototypeName , prototypeData )
+		oreProjectile = prototypeData
+	end )
 	.New( SICommon.Types.Items.Capsule , oreID , oreAlias ,
 	{
 		stack_size = 10000 ,
@@ -162,6 +158,27 @@ for oreID , oreAlias in pairs( oreList ) do
 		}
 	} )
 	.AutoIcon()
+	table.insert( oreProjectile.action ,
+	{
+		type = "direct" ,
+		action_delivery =
+		{
+			{
+				type = "instant" ,
+				target_effects =
+				{
+					{
+						type = "insert-item" ,
+						item = SIConstants_Resource.raw.Items[oreID] ,
+						count = 1 ,
+						repeat_count = 1 ,
+						probability = 0.42 ,
+						show_in_tooltip = false
+					}
+				}
+			}
+		}
+	} )
 	table.insert( miningResultList ,
 	{
 		type = SICommon.Types.Items.Item ,
