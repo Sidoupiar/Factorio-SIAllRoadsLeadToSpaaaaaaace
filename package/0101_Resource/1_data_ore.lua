@@ -109,6 +109,53 @@ for oreID , oreAlias in pairs( oreList ) do
 	{
 		stack_size = 10000 ,
 		default_request_amount = 100 ,
+		pictures =
+		{
+			{
+				layers =
+				{
+					{
+						filename = SIGen.MakeSelfPicturePath( oreAlias .. "-1" ) ,
+						size = 64 ,
+						mipmap_count = 4 ,
+						scale = 0.25
+					}
+				}
+			} ,
+			{
+				layers =
+				{
+					{
+						filename = SIGen.MakeSelfPicturePath( oreAlias .. "-2" ) ,
+						size = 64 ,
+						mipmap_count = 4 ,
+						scale = 0.25
+					}
+				}
+			} ,
+			{
+				layers =
+				{
+					{
+						filename = SIGen.MakeSelfPicturePath( oreAlias .. "-3" ) ,
+						size = 64 ,
+						mipmap_count = 4 ,
+						scale = 0.25
+					}
+				}
+			} ,
+			{
+				layers =
+				{
+					{
+						filename = SIGen.MakeSelfPicturePath( oreAlias .. "-4" ) ,
+						size = 64 ,
+						mipmap_count = 4 ,
+						scale = 0.25
+					}
+				}
+			}
+		} ,
 		radius_color = nil ,
 		capsule_action =
 		{
