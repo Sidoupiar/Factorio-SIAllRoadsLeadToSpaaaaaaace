@@ -168,8 +168,8 @@ for oreID , oreAlias in pairs( oreList ) do
 		name = SIConstants_Resource.raw.Items[oreID] ,
 		probability = 0.00002 ,
 		amount_min = 0 ,
-		amount_max = 10000 ,
-		catalyst_amount = 10000 ,
+		amount_max = 15000 ,
+		catalyst_amount = 15000 ,
 		show_details_in_recipe_tooltip = false
 	} )
 end
