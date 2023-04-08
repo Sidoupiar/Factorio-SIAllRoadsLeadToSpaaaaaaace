@@ -105,7 +105,9 @@ for oreID , oreAlias in pairs( oreList ) do
 	.AddFunction( function( prototypeName , prototypeData )
 		oreProjectile = prototypeData
 	end )
-	.New( SICommon.Types.Items.Capsule , oreID , oreAlias ,
+	.New( SICommon.Types.Items.Capsule , oreID , oreAlias )
+	.AutoIcon()
+	.Append
 	{
 		stack_size = 10000 ,
 		default_request_amount = 100 ,
@@ -203,8 +205,7 @@ for oreID , oreAlias in pairs( oreList ) do
 				}
 			}
 		}
-	} )
-	.AutoIcon()
+	}
 	table.insert( oreProjectile.action ,
 	{
 		type = "direct" ,

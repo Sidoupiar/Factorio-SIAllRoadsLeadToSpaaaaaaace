@@ -82,10 +82,59 @@ for rockIndex , rockData in pairs( rockDataList ) do
 	.AddFunction( function( prototypeName , prototypeData )
 		rockProjectile = prototypeData
 	end )
-	.New( SICommon.Types.Items.Capsule , "Rock" .. rockData.IDSuffix , "矿山石" .. rockData.AliasSuffix ,
+	.New( SICommon.Types.Items.Capsule , "Rock" .. rockData.IDSuffix , "矿山石" .. rockData.AliasSuffix )
+	.AutoIcon()
+	.Append
 	{
 		stack_size = 10000 ,
 		default_request_amount = 100 ,
+		pictures =
+		{
+			{
+				layers =
+				{
+					{
+						filename = SIGen.MakeSelfPicturePath( "矿山石" .. rockData.AliasSuffix .. "-1" ) ,
+						size = 64 ,
+						mipmap_count = 4 ,
+						scale = 0.25
+					}
+				}
+			} ,
+			{
+				layers =
+				{
+					{
+						filename = SIGen.MakeSelfPicturePath( "矿山石" .. rockData.AliasSuffix .. "-2" ) ,
+						size = 64 ,
+						mipmap_count = 4 ,
+						scale = 0.25
+					}
+				}
+			} ,
+			{
+				layers =
+				{
+					{
+						filename = SIGen.MakeSelfPicturePath( "矿山石" .. rockData.AliasSuffix .. "-3" ) ,
+						size = 64 ,
+						mipmap_count = 4 ,
+						scale = 0.25
+					}
+				}
+			} ,
+			{
+				layers =
+				{
+					{
+						filename = SIGen.MakeSelfPicturePath( "矿山石" .. rockData.AliasSuffix .. "-4" ) ,
+						size = 64 ,
+						mipmap_count = 4 ,
+						scale = 0.25
+					}
+				}
+			}
+		} ,
 		radius_color = nil ,
 		capsule_action =
 		{
@@ -133,8 +182,7 @@ for rockIndex , rockData in pairs( rockDataList ) do
 				}
 			}
 		}
-	} )
-	.AutoIcon()
+	}
 	.SetGroup( SIConstants_Resource.raw.Groups.Resource.PieceRock )
 	.New( SICommon.Types.Entities.Projectile , "PieceRock" .. rockData.IDSuffix , "扔出去的碎裂的矿山石" .. rockData.AliasSuffix )
 	.MakeIcon( SICommon.Types.Items.Capsule , "碎裂的矿山石" .. rockData.AliasSuffix )
@@ -202,10 +250,59 @@ for rockIndex , rockData in pairs( rockDataList ) do
 	.AddFunction( function( prototypeName , prototypeData )
 		pieceRockProjectile = prototypeData
 	end )
-	.New( SICommon.Types.Items.Capsule , "PieceRock" .. rockData.IDSuffix , "碎裂的矿山石" .. rockData.AliasSuffix ,
+	.New( SICommon.Types.Items.Capsule , "PieceRock" .. rockData.IDSuffix , "碎裂的矿山石" .. rockData.AliasSuffix )
+	.AutoIcon()
+	.Append
 	{
 		stack_size = 10000 ,
 		default_request_amount = 100 ,
+		pictures =
+		{
+			{
+				layers =
+				{
+					{
+						filename = SIGen.MakeSelfPicturePath( "碎裂的矿山石" .. rockData.AliasSuffix .. "-1" ) ,
+						size = 64 ,
+						mipmap_count = 4 ,
+						scale = 0.25
+					}
+				}
+			} ,
+			{
+				layers =
+				{
+					{
+						filename = SIGen.MakeSelfPicturePath( "碎裂的矿山石" .. rockData.AliasSuffix .. "-2" ) ,
+						size = 64 ,
+						mipmap_count = 4 ,
+						scale = 0.25
+					}
+				}
+			} ,
+			{
+				layers =
+				{
+					{
+						filename = SIGen.MakeSelfPicturePath( "碎裂的矿山石" .. rockData.AliasSuffix .. "-3" ) ,
+						size = 64 ,
+						mipmap_count = 4 ,
+						scale = 0.25
+					}
+				}
+			} ,
+			{
+				layers =
+				{
+					{
+						filename = SIGen.MakeSelfPicturePath( "碎裂的矿山石" .. rockData.AliasSuffix .. "-4" ) ,
+						size = 64 ,
+						mipmap_count = 4 ,
+						scale = 0.25
+					}
+				}
+			}
+		} ,
 		radius_color = nil ,
 		capsule_action =
 		{
@@ -253,8 +350,7 @@ for rockIndex , rockData in pairs( rockDataList ) do
 				}
 			}
 		}
-	} )
-	.AutoIcon()
+	}
 	table.insert( rockProjectile.action ,
 	{
 		type = "direct" ,
