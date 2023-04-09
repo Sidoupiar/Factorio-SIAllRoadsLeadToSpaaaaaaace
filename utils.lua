@@ -15,6 +15,9 @@ end
 function GetCorePath()
 	return CorePath
 end
+function SIOrderPrefix()
+	return "zSIOrderT"
+end
 
 -- ------------------------------------------------------------------------------------------------
 -- ---------- 添加引用 ----------------------------------------------------------------------------
@@ -744,7 +747,7 @@ function SIInit.AutoLoad( ModName , CustomPackageConfig , ConstantsDataPrefix , 
 				constantsData.CodeName = ( constantsData.UseShowPrefix and ShowNamePrefix or "" ) .. constantsData.ID:gsub( "_" , "-" )
 				constantsData.ShowName = ( constantsData.UseShowPrefix and ShowNamePrefix or "" ) .. constantsData.Name:gsub( "_" , "-" )
 				constantsData.ShowNamePrefix = constantsData.ShowName .. "-"
-				constantsData.OrderPrefix = "zSIOrder[" .. constantsData.Order .. constantsData.CodeName .. "]-"
+				constantsData.OrderPrefix = SIOrderPrefix() .. "[" .. constantsData.Order .. constantsData.CodeName .. "]-"
 				constantsData.OrderCode = SIInit.OrderCode
 				constantsData.LocalisedName = { "ConstantsDataName." .. constantsData.CodeName }
 				constantsData.LocalisedDescription = { "ConstantsDataDescription." .. constantsData.CodeName }
@@ -754,7 +757,7 @@ function SIInit.AutoLoad( ModName , CustomPackageConfig , ConstantsDataPrefix , 
 				end
 				constantsData.GetOrderString = function()
 					constantsData.OrderCode = constantsData.OrderCode + 1
-					return constantsData.OrderPrefix .. constantsData.OrderCode
+					return constantsData.OrderPrefix .. constantsData.OrderCode .. "-"
 				end
 				if SIAPI[constantsData.CodeName] then
 					return CodeE( SIInit , "已存在的 ConstantsData.CodeName , CodeName=" .. constantsData.CodeName )
@@ -884,7 +887,7 @@ function SIInit.AutoLoad( ModName , CustomPackageConfig , ConstantsDataPrefix , 
 										groupData.Order = constantsData.Order
 									end
 									if autoload.Enable then
-										local groupOrderString = "zSIOrder[" .. groupData.Order .. constantsData.CodeName .. "]-" .. constantsData.GetNextOrderCode()
+										local groupOrderString = "zSIOrder[" .. groupData.Order .. constantsData.CodeName .. "]-" .. constantsData.GetNextOrderCode() .. "-"
 										local group =
 										{
 											type = SICommon.Types.Group ,
@@ -913,7 +916,7 @@ function SIInit.AutoLoad( ModName , CustomPackageConfig , ConstantsDataPrefix , 
 													localised_name = { constantsData.CodeName .. "Name." .. subgroupShowName } ,
 													localised_description = { constantsData.CodeName .. "Description." .. subgroupShowName } ,
 													group = groupRealName ,
-													order = "zSIOrder[" .. groupData.Order .. constantsData.CodeName .. "]-[" .. subOrder .. "]-" .. constantsData.GetNextOrderCode()
+													order = "zSIOrder[" .. groupData.Order .. constantsData.CodeName .. "]-[" .. subOrder .. "]-" .. constantsData.GetNextOrderCode() .. "-"
 												}
 												table.insert( prototypes , subgroup )
 											end
@@ -961,7 +964,7 @@ function SIInit.AutoLoad( ModName , CustomPackageConfig , ConstantsDataPrefix , 
 												localised_name = { constantsData.CodeName .. "Name." .. subgroupShowName } ,
 												localised_description = { constantsData.CodeName .. "Description." .. subgroupShowName } ,
 												group = aimGroupData.RealName ,
-												order = "zSIOrder[" .. aimGroupData.Order .. ConstantsDataCodeName .. "]-[" .. subOrder .. "]-" .. APIData.GetNextOrderCode()
+												order = "zSIOrder[" .. aimGroupData.Order .. ConstantsDataCodeName .. "]-[" .. subOrder .. "]-" .. APIData.GetNextOrderCode() .. "-"
 											}
 											table.insert( prototypes , subgroup )
 										end

@@ -713,6 +713,24 @@ function SIGen.SetSizeScale( width , height , scale )
 end
 
 -- ----------------------------------------
+-- 使用 SIGen 完善最新创建的原型数据<br>
+-- 给 order 属性添加后缀<br>
+-- order 属性最多可以有 200 个字符<br>
+-- ----------------------------------------
+-- suffix                = 后缀<br>
+-- ----------------------------------------
+function SIGen.SetOrderSuffix( suffix )
+	if not SIGen.CurrentPrototypeData then
+		return CodeE( SIGen , "需要先创建新的原型数据 , 之后才可以完善它" )
+	end
+	SIGen.CurrentPrototypeData.order = SIGen.CurrentPrototypeData.order:sub( 1 , SIGen.CurrentPrototypeData.order:FindLast( "-" ) ) .. suffix
+	if #SIGen.CurrentPrototypeData.order > 200 then
+		return CodeE( SIGen , "order 属性最多可以有 200 个字符 , 当前长度 = " .. #SIGen.CurrentPrototypeData.order .. " , 值 = " .. SIGen.CurrentPrototypeData.order )
+	end
+	return SIGen
+end
+
+-- ----------------------------------------
 -- 借助函数来使用 SIGen 完善最新创建的原型数据<br>
 -- 参数中的回调函数会立刻被调用<br>
 -- 这只是一种语法糖 , 并没有什么特别的含义<br>
