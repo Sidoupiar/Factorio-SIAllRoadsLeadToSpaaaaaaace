@@ -88,7 +88,7 @@ for oreID , oreAlias in pairs( oreList ) do
 							{
 								type = "create-particle" ,
 								particle_name = "stone-particle" ,
-								repeat_count = 5 ,
+								repeat_count = 6 ,
 								initial_height = 0.5 ,
 								initial_vertical_speed = 0.05 ,
 								initial_vertical_speed_deviation = 0.1 ,

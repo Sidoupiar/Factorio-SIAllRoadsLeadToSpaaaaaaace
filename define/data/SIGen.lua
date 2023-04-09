@@ -421,6 +421,11 @@ function SIGen.New( typeCode , prototypeID , aliasName , prototypeDataToCopy )
 		ShowName = showName ,
 		ShowNamePrefix = showNamePrefix
 	}
+	-- 添加堆叠信息
+	if SICommon.Types.StackableRawItems[typeCode] then
+		prototypeData.localised_description = { "SICommon.物品信息" , prototypeData.stack_size or 1 , prototypeData.localised_description }
+	end
+	-- 注册
 	SIGen.CurrentPrototypeData = prototypeData
 	if raw[typeCode] then
 		raw[typeCode][realName] = prototypeData

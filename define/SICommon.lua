@@ -480,6 +480,7 @@ SICommon =
 			Gun                 = "gun" ,
 			Module              = "module"
 		} ,
+		StackableRawItems = {} ,
 		UnstackableItems =
 		{
 			Armor               = "armor" ,
@@ -840,6 +841,14 @@ for type , real in pairs
 	SICommon.ShowName[type] = real
 	SICommon.ShowNamePrefix[type] = real .. "-"
 	SICommon.ShowNameSuffix[type] = "-" .. real
+end
+
+-- ------------------------------------------------------------------------------------------------
+-- --- 自动填充各种相关的数据 ---------------------------------------------------------------------
+-- ------------------------------------------------------------------------------------------------
+
+for typeID , typeCode in pairs( SICommon.Types.StackableItems ) do
+	SICommon.Types.StackableRawItems[typeCode] = true
 end
 
 -- ------------------------------------------------------------------------------------------------
