@@ -1080,7 +1080,7 @@ function SIGen.AutoIconItem( iconItemDataList )
 		SIGen
 		.New( SICommon.Types.Items.Item , itemID , alias ,
 		{
-			flags = { SICommon.Flags.Item.Hidden } ,
+			flags = { SICommon.Flags.Item.HideFromFuelTooltip , SICommon.Flags.Item.Hidden } ,
 			stack_size = 1000 ,
 			default_request_amount = 1000 ,
 			fuel_category = SIConstants_Core.raw.Categories.Fuel.Special ,
@@ -1089,7 +1089,7 @@ function SIGen.AutoIconItem( iconItemDataList )
 			fuel_top_speed_multiplier = 0.3 ,
 			fuel_emissions_multiplier = 9000 ,
 			fuel_glow_color = { 0.70 , 0.70 , 0.70 } ,
-			burnt_result = "wood" ,
+			burnt_result = SIConstants_Core.raw.Items.Candy ,
 			place_result = nil ,
 			placed_as_equipment_result = nil ,
 			rocket_launch_products =

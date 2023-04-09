@@ -21,7 +21,7 @@ SIGen
 -- 粉图
 .New( SICommon.Types.Items.SelectionTool , "DeleteMap" , "粉图" ,
 {
-	flags = { SICommon.Flags.Item.NotStackable , SICommon.Flags.Item.Hidden } ,
+	flags = { SICommon.Flags.Item.NotStackable , SICommon.Flags.Item.HideFromFuelTooltip , SICommon.Flags.Item.Hidden } ,
 	stack_size = 1 ,
 	default_request_amount = 1 ,
 	show_in_library = false ,
@@ -117,7 +117,7 @@ SIGen
 -- 黄图
 .New( SICommon.Types.Items.SelectionTool , "OreMap" , "黄图" ,
 {
-	flags = { SICommon.Flags.Item.NotStackable , SICommon.Flags.Item.Hidden } ,
+	flags = { SICommon.Flags.Item.NotStackable , SICommon.Flags.Item.HideFromFuelTooltip , SICommon.Flags.Item.Hidden } ,
 	stack_size = 1 ,
 	default_request_amount = 1 ,
 	show_in_library = false ,
@@ -213,7 +213,7 @@ SIGen
 -- 紫图
 .New( SICommon.Types.Items.SelectionTool , "RequestMap" , "紫图" ,
 {
-	flags = { SICommon.Flags.Item.NotStackable , SICommon.Flags.Item.Hidden } ,
+	flags = { SICommon.Flags.Item.NotStackable , SICommon.Flags.Item.HideFromFuelTooltip , SICommon.Flags.Item.Hidden } ,
 	stack_size = 1 ,
 	default_request_amount = 1 ,
 	show_in_library = false ,

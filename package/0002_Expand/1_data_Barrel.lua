@@ -17,6 +17,13 @@ SIGen
 {
 	stack_size = 100 ,
 	default_request_amount = 100 ,
+	fuel_category = "chemical" ,
+	fuel_value = "4.2MJ" ,
+	fuel_acceleration_multiplier = 1.0 ,
+	fuel_top_speed_multiplier = 1.0 ,
+	fuel_emissions_multiplier = 1.0 ,
+	fuel_glow_color = nil ,
+	burnt_result = nil ,
 	place_result = nil
 } )
 .AutoIcon()
@@ -154,7 +161,15 @@ SIGen
 .New( SICommon.Types.Items.Item , "PlasticCapable" , "塑料胶囊" ,
 {
 	stack_size = 1000 ,
-	default_request_amount = 1000
+	default_request_amount = 1000 ,
+	fuel_category = "chemical" ,
+	fuel_value = "120KJ" ,
+	fuel_acceleration_multiplier = 0.8 ,
+	fuel_top_speed_multiplier = 0.8 ,
+	fuel_emissions_multiplier = 0.8 ,
+	fuel_glow_color = nil ,
+	burnt_result = nil ,
+	place_result = nil
 } )
 .AutoIcon()
 .New( SICommon.Types.Recipe , "PlasticCapable" , "塑料胶囊" ,

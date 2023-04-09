@@ -135,8 +135,17 @@ SICommon =
 	{
 		Item =
 		{
-			NotStackable = "not-stackable" ,
-			Hidden = "hidden"
+			Hidden               = "hidden" ,
+			NotStackable         = "not-stackable" ,
+			DrawLogisticOverlay  = "draw-logistic-overlay" ,
+			AlwaysShow           = "always-show" ,
+			HideFromBonusGUI     = "hide-from-bonus-gui" ,
+			HideFromFuelTooltip  = "hide-from-fuel-tooltip" ,
+			CanExtendInventory   = "can-extend-inventory" ,
+			PrimaryPlaceResult   = "primary-place-result" ,
+			ModOpenable          = "mod-openable" ,
+			OnlyInCursor         = "only-in-cursor" ,
+			Spawnable            = "spawnable"
 		} ,
 		Entity =
 		{
@@ -464,6 +473,7 @@ SICommon =
 			BlueprintBook       = "blueprint-book" ,
 			Redprint            = "deconstruction-item" ,
 			SelectionTool       = "selection-tool" ,
+			CopyPasteTool       = "copy-paste-tool" ,
 			ItemTag             = "item-with-tags" ,
 			ItemLabel           = "item-with-label" ,
 			ItemInventory       = "item-with-inventory"
