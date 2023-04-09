@@ -531,6 +531,16 @@ if SIConfigs.SIOverhaul.ItemPropertyModify and SIConfigs.SIOverhaul.ItemProperty
 end
 
 -- ------------------------------------------------------------------------------------------------
+-- ------ 显示物品堆叠数量 ------------------------------------------------------------------------
+-- ------------------------------------------------------------------------------------------------
+
+SIGen.ForEachType( SICommon.Types.StackableItems , function( prototypeName , prototypeData )
+	if prototypeData then
+		prototypeData.localised_description = { "" , prototypeData.localised_description , "\n\n" , prototypeData.stack_size or 1 }
+	end
+end )
+
+-- ------------------------------------------------------------------------------------------------
 -- ------ 修改原版 UI 样式 ------------------------------------------------------------------------
 -- ------------------------------------------------------------------------------------------------
 
