@@ -15,7 +15,7 @@ SIEventBus
 		end
 		for subName , subTechnology in pairs( force.technologies ) do
 			local technologyPrototype = subTechnology.prototype
-			if not technologyPrototype.enabled and not technologyPrototype.visible_when_disabled and technologyPrototype.order:StartsWith( SIOrderPrefix() ) then
+			if not technologyPrototype.enabled and technologyPrototype.order:StartsWith( SIOrderPrefix() ) then
 				local enableFlag = true
 				for prerequisiteName , prerequisiteTechnology in pairs( subTechnology.prerequisites ) do
 					enableFlag = enableFlag and prerequisiteTechnology.researched
@@ -53,7 +53,7 @@ end )
 	-- 显示隐藏的科技
 	for subName , subTechnology in pairs( force.technologies ) do
 		local technologyPrototype = subTechnology.prototype
-		if not subTechnology.enabled and not technologyPrototype.enabled and not technologyPrototype.visible_when_disabled and technologyPrototype.order:StartsWith( SIOrderPrefix() ) then
+		if not subTechnology.enabled and not technologyPrototype.enabled and technologyPrototype.order:StartsWith( SIOrderPrefix() ) then
 			local enableFlag = true
 			for prerequisiteName , prerequisiteTechnology in pairs( subTechnology.prerequisites ) do
 				enableFlag = enableFlag and prerequisiteTechnology.researched
@@ -79,7 +79,7 @@ end )
 	-- 重新把科技隐藏
 	for subName , subTechnology in pairs( force.technologies ) do
 		local technologyPrototype = subTechnology.prototype
-		if subTechnology.enabled and not technologyPrototype.enabled and not technologyPrototype.visible_when_disabled and technologyPrototype.order:StartsWith( SIOrderPrefix() ) then
+		if subTechnology.enabled and not technologyPrototype.enabled and technologyPrototype.order:StartsWith( SIOrderPrefix() ) then
 			for prerequisiteName , prerequisiteTechnology in pairs( subTechnology.prerequisites ) do
 				if not prerequisiteTechnology.researched then
 					-- 科技变为隐藏
