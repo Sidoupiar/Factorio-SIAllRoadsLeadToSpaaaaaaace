@@ -626,7 +626,7 @@ SIInit =
 		ControlInstrument   = 104 ,
 	} ,
 	State = nil ,
-	OrderCode = 10000000 ,
+	OrderCode = 1000 ,
 	OrderStep = 1000 ,
 	ConstantsDataOrderCode = 1000 ,
 	ConstantsDataOrderStep = 1 ,
