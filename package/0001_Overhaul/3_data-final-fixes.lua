@@ -534,11 +534,19 @@ end
 -- ------ 显示物品堆叠数量 ------------------------------------------------------------------------
 -- ------------------------------------------------------------------------------------------------
 
-SIGen.ForEachType( SICommon.Types.StackableItems , function( prototypeName , prototypeData )
-	if prototypeData and prototypeName ~= "item-unknown" then
-		prototypeData.localised_description = { "" , prototypeData.localised_description , "\n\n" , prototypeData.stack_size or 1 }
-	end
-end )
+if SIConfigs.SIOverhaul.ShowItemStackData then
+	local forceFlag = SIConfigs.SIOverhaul.ShowItemStackDataForce
+	SIGen.ForEachType( SICommon.Types.StackableItems , function( prototypeName , prototypeData )
+		if prototypeData then
+			prototypeData.localised_description =
+			{
+				"SICommon.物品信息" ,
+				prototypeData.localised_description or forceFlag and { "SICommon.物品信息-无" } or { "item-description." .. prototypeName } ,
+				prototypeData.stack_size or 1
+			}
+		end
+	end )
+end
 
 -- ------------------------------------------------------------------------------------------------
 -- ------ 修改原版 UI 样式 ------------------------------------------------------------------------
