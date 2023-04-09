@@ -535,7 +535,7 @@ end
 -- ------------------------------------------------------------------------------------------------
 
 SIGen.ForEachType( SICommon.Types.StackableItems , function( prototypeName , prototypeData )
-	if prototypeData then
+	if prototypeData and prototypeName ~= "item-unknown" then
 		prototypeData.localised_description = { "" , prototypeData.localised_description , "\n\n" , prototypeData.stack_size or 1 }
 	end
 end )
