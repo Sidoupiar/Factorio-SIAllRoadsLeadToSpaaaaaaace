@@ -75,6 +75,7 @@ SIGen
 	}
 } )
 .AutoIcon()
+.SetItemIconSI()
 .New( SICommon.Types.Equipments.Battery , "DeleteMap" , "粉图" ,
 {
 	take_result = SIConstants_Core.raw.Items.DeleteMap ,
@@ -171,6 +172,7 @@ SIGen
 	}
 } )
 .AutoIcon()
+.SetItemIconSI()
 .New( SICommon.Types.Equipments.Battery , "OreMap" , "黄图" ,
 {
 	take_result = SIConstants_Core.raw.Items.OreMap ,
@@ -267,6 +269,7 @@ SIGen
 	}
 } )
 .AutoIcon()
+.SetItemIconSI()
 .New( SICommon.Types.Equipments.Battery , "RequestMap" , "紫图" ,
 {
 	take_result = SIConstants_Core.raw.Items.RequestMap ,

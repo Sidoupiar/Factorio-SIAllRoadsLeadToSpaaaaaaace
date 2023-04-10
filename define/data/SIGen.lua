@@ -600,7 +600,7 @@ end
 -- ----------------------------------------
 -- 使用 SIGen 完善最新创建的原型数据<br>
 -- 向此原型数据中添加图标代码 , 使用默认值<br>
--- icon                  = "[ PicturePath ][ 类型别名 ]-[ 别名或 ID ]-[ 类型别名 ICON 项 ].png"<br>
+-- icon = "[ PicturePath ][ 类型别名 ]-[ 别名或 ID ]-[ 类型别名 ICON 项 ].png"<br>
 -- ----------------------------------------
 function SIGen.AutoIcon()
 	if not SIGen.CurrentPrototypeData then
@@ -882,6 +882,51 @@ end
 -- ------------------------------------------------------------------------------------------------
 -- ---------- 辅助函数 ----------------------------------------------------------------------------
 -- ------------------------------------------------------------------------------------------------
+
+-- ----------------------------------------
+-- 使用 SIGen 完善最新创建的原型数据<br>
+-- 向此原型数据中添加一个特殊得图标代码<br>
+-- 只有物品类型的原型数据可以使用此函数<br>
+-- ----------------------------------------
+function SIGen.SetItemIconSI()
+	if not SIGen.CurrentPrototypeData then
+		return CodeE( SIGen , "需要先创建新的原型数据 , 之后才可以完善它" )
+	end
+	if not SIGen.CurrentPrototypeData.SIGenData then
+		return CodeE( SIGen , "只有通过 SIGen.New 函数创建的原型数据可以使用 SIGen.AddItemIconSI 函数" )
+	end
+	if not SITable.Has( SICommon.Types.Items , SIGen.CurrentPrototypeData.type ) then
+		return CodeE( SIGen , "只有物品类型的原型数据可以使用 SIGen.AddItemIconSI 函数 , 当前类型 = " .. tostring( SIGen.CurrentPrototypeData.type ) .. " , 原型名称 = " .. tostring( SIGen.CurrentPrototypeData.name ) )
+	end
+	if SIGen.CurrentPrototypeData.SIGenData.ItemIcon_SI then
+		return SIGen
+	end
+	SIGen.CurrentPrototypeData.SIGenData.ItemIcon_SI = true
+	if SIGen.CurrentPrototypeData.icon then
+		local oldIcon =
+		{
+			icon = SIGen.CurrentPrototypeData.icon ,
+			icon_size = SIGen.CurrentPrototypeData.icon_size ,
+			icon_mipmaps = SIGen.CurrentPrototypeData.icon_mipmaps
+		}
+		SIGen.CurrentPrototypeData.icon = nil
+		if SIGen.CurrentPrototypeData.icons then
+			table.insert( SIGen.CurrentPrototypeData.icons , oldIcon )
+		else
+			SIGen.CurrentPrototypeData.icons = { oldIcon }
+		end
+	end
+	local icon = SIGraphics.ItemIcon_SI()
+	if SIGen.CurrentPrototypeData.icons then
+		table.insert( SIGen.CurrentPrototypeData.icons , 1 , icon )
+	else
+		local iconSettings = SICommon.Numbers.IconSettings[SIGen.CurrentPrototypeData.type] or SICommon.Numbers.IconSettings.Default
+		SIGen.CurrentPrototypeData.icons = { icon }
+		SIGen.CurrentPrototypeData.icon_size = iconSettings.size
+		SIGen.CurrentPrototypeData.icon_mipmaps = iconSettings.mipmaps
+	end
+	return SIGen
+end
 
 -- ----------------------------------------
 -- 用于计算作为原型数据显示名称的本地化字符串<br>

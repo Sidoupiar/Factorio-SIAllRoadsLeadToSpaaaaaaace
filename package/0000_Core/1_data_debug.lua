@@ -33,7 +33,7 @@ SIGen
 .AutoIcon()
 .Append
 {
-	flags = { SICommon.Flags.Item.Hidden } ,
+	flags = { SICommon.Flags.Item.HideFromFuelTooltip , SICommon.Flags.Item.Hidden } ,
 	stack_size = 1000 ,
 	default_request_amount = 1000 ,
 	fuel_category = SIConstants_Core.raw.Categories.Fuel.Special ,
@@ -206,7 +206,7 @@ SIGen
 .AutoIcon()
 .Append
 {
-	flags = { SICommon.Flags.Item.Hidden } ,
+	flags = { SICommon.Flags.Item.HideFromFuelTooltip , SICommon.Flags.Item.Hidden } ,
 	stack_size = 100 ,
 	default_request_amount = 100 ,
 	fuel_category = SIConstants_Core.raw.Categories.Fuel.Special ,
@@ -466,7 +466,7 @@ SIGen
 .AutoIcon()
 .Append
 {
-	flags = { SICommon.Flags.Item.Hidden } ,
+	flags = { SICommon.Flags.Item.HideFromFuelTooltip , SICommon.Flags.Item.Hidden } ,
 	stack_size = 100 ,
 	default_request_amount = 100 ,
 	fuel_category = SIConstants_Core.raw.Categories.Fuel.Special ,
@@ -961,7 +961,7 @@ SIGen
 .AutoIcon()
 .Append
 {
-	flags = { SICommon.Flags.Item.Hidden } ,
+	flags = { SICommon.Flags.Item.HideFromFuelTooltip , SICommon.Flags.Item.Hidden } ,
 	stack_size = 100 ,
 	default_request_amount = 100 ,
 	fuel_category = SIConstants_Core.raw.Categories.Fuel.Special ,
@@ -1204,7 +1204,7 @@ SIGen
 .AutoIcon()
 .Append
 {
-	flags = { SICommon.Flags.Item.Hidden } ,
+	flags = { SICommon.Flags.Item.HideFromFuelTooltip , SICommon.Flags.Item.Hidden } ,
 	stack_size = 10 ,
 	default_request_amount = 10 ,
 	fuel_category = SIConstants_Core.raw.Categories.Fuel.Special ,
@@ -1580,7 +1580,7 @@ SIGen
 .AutoIcon()
 .Append
 {
-	flags = { SICommon.Flags.Item.Hidden } ,
+	flags = { SICommon.Flags.Item.HideFromFuelTooltip , SICommon.Flags.Item.Hidden } ,
 	stack_size = 100 ,
 	default_request_amount = 100 ,
 	fuel_category = SIConstants_Core.raw.Categories.Fuel.Special ,
@@ -2034,7 +2034,7 @@ SIGen
 .AutoIcon()
 .Append
 {
-	flags = { SICommon.Flags.Item.Hidden } ,
+	flags = { SICommon.Flags.Item.HideFromFuelTooltip , SICommon.Flags.Item.Hidden } ,
 	stack_size = 100 ,
 	default_request_amount = 100 ,
 	fuel_category = SIConstants_Core.raw.Categories.Fuel.Special ,
@@ -3293,7 +3293,7 @@ SIGen
 .AutoIcon()
 .Append
 {
-	flags = { SICommon.Flags.Item.Hidden } ,
+	flags = { SICommon.Flags.Item.HideFromFuelTooltip , SICommon.Flags.Item.Hidden } ,
 	stack_size = 10 ,
 	default_request_amount = 10 ,
 	fuel_category = SIConstants_Core.raw.Categories.Fuel.Special ,
@@ -3767,7 +3767,7 @@ SIGen
 .AutoIcon()
 .Append
 {
-	flags = { SICommon.Flags.Item.Hidden } ,
+	flags = { SICommon.Flags.Item.HideFromFuelTooltip , SICommon.Flags.Item.Hidden } ,
 	stack_size = 1 ,
 	default_request_amount = 1 ,
 	fuel_category = SIConstants_Core.raw.Categories.Fuel.Special ,
@@ -3846,7 +3846,7 @@ SIGen
 .AutoIcon()
 .Append
 {
-	flags = { SICommon.Flags.Item.Hidden } ,
+	flags = { SICommon.Flags.Item.HideFromFuelTooltip , SICommon.Flags.Item.Hidden } ,
 	stack_size = 1 ,
 	default_request_amount = 1 ,
 	fuel_category = SIConstants_Core.raw.Categories.Fuel.Special ,
@@ -3926,7 +3926,7 @@ SIGen
 .AutoIcon()
 .Append
 {
-	flags = { SICommon.Flags.Item.Hidden } ,
+	flags = { SICommon.Flags.Item.HideFromFuelTooltip , SICommon.Flags.Item.Hidden } ,
 	stack_size = 1 ,
 	default_request_amount = 1 ,
 	fuel_category = SIConstants_Core.raw.Categories.Fuel.Special ,
@@ -4006,7 +4006,7 @@ SIGen
 .AutoIcon()
 .Append
 {
-	flags = { SICommon.Flags.Item.Hidden } ,
+	flags = { SICommon.Flags.Item.HideFromFuelTooltip , SICommon.Flags.Item.Hidden } ,
 	stack_size = 1 ,
 	default_request_amount = 1 ,
 	fuel_category = SIConstants_Core.raw.Categories.Fuel.Special ,
@@ -4083,7 +4083,7 @@ SIGen
 .AutoIcon()
 .Append
 {
-	flags = { SICommon.Flags.Item.Hidden } ,
+	flags = { SICommon.Flags.Item.HideFromFuelTooltip , SICommon.Flags.Item.Hidden } ,
 	stack_size = 1 ,
 	default_request_amount = 1 ,
 	fuel_category = SIConstants_Core.raw.Categories.Fuel.Special ,
@@ -4160,7 +4160,7 @@ SIGen
 .AutoIcon()
 .Append
 {
-	flags = { SICommon.Flags.Item.Hidden } ,
+	flags = { SICommon.Flags.Item.HideFromFuelTooltip , SICommon.Flags.Item.Hidden } ,
 	stack_size = 1 ,
 	default_request_amount = 1 ,
 	fuel_category = SIConstants_Core.raw.Categories.Fuel.Special ,
@@ -4254,7 +4254,7 @@ SIGen
 .AutoIcon()
 .Append
 {
-	flags = { SICommon.Flags.Item.Hidden } ,
+	flags = { SICommon.Flags.Item.HideFromFuelTooltip , SICommon.Flags.Item.Hidden } ,
 	stack_size = 1 ,
 	default_request_amount = 1 ,
 	fuel_category = SIConstants_Core.raw.Categories.Fuel.Special ,
