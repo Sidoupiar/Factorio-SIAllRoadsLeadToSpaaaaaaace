@@ -1316,7 +1316,7 @@ end )
 			for index , tile in pairs( event.tiles ) do
 				if #surface.find_entities_filtered{ area = { { tile.position.x , tile.position.y } , { tile.position.x+1 , tile.position.y+1 } } } < 1 then
 					if surface.get_tile( tile.position.x , tile.position.y ).name ~= "deepwater" then
-						surface.set_tiles{ { name = "deepwater" , position = tile.position } , false , false , true , false }
+						surface.set_tiles( { { name = "deepwater" , position = tile.position } } , true , false , true , false )
 						if math.random() < 0.07 or index == totalCount then
 							table.insert( positionList , { tile.position.x + 0.5 , tile.position.y + 0.5 } )
 						end
@@ -1363,7 +1363,7 @@ end )
 		if SIPermission.HasPermission( SIPermission.PermissionIDs.DeleteMap , playerIndex ) then
 			local surface = game.get_player( playerIndex ).surface
 			for index , tile in pairs( event.tiles ) do
-				surface.set_tiles{ { name = "refined-concrete" , position = tile.position } , false , false , true , false }
+				surface.set_tiles( { { name = "refined-concrete" , position = tile.position } } , false , false , true , false )
 			end
 		else
 			SIPrint.Alert( playerIndex , SIPermission.GetPermissionMessage( SIPermission.PermissionIDs.DeleteMap ) )

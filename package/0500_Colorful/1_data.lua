@@ -124,12 +124,18 @@ SIGen
 	stack_size = 1 ,
 	default_request_amount = 1 ,
 	show_in_library = false ,
-	selection_color = { 0 , 0 , 0 } ,
+	selection_color = { r = 0.00 , g = 0.00 , b = 0.00 } ,
 	selection_mode = { "any-entity" , "same-force" } ,
 	selection_cursor_box_type = "copy" ,
-	alt_selection_color = { 1 , 1 , 1 } ,
+	reverse_selection_color = { r = 1.00 , g = 0.00 , b = 0.00 } ,
+	reverse_selection_mode = { "any-entity" , "same-force" } ,
+	reverse_selection_cursor_box_type = "copy" ,
+	alt_selection_color = { r = 1.00 , g = 1.00 , b = 1.00 } ,
 	alt_selection_mode = { "any-entity" , "same-force" } ,
-	alt_selection_cursor_box_type = "copy"
+	alt_selection_cursor_box_type = "copy" ,
+	alt_reverse_selection_color = { r = 1.00 , g = 0.00 , b = 0.00 } ,
+	alt_reverse_selection_mode = { "any-entity" , "same-force" } ,
+	alt_reverse_selection_cursor_box_type = "copy"
 } )
 .AutoIcon()
 
