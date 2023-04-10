@@ -1363,7 +1363,7 @@ end )
 		if SIPermission.HasPermission( SIPermission.PermissionIDs.DeleteMap , playerIndex ) then
 			local surface = game.get_player( playerIndex ).surface
 			for index , tile in pairs( event.tiles ) do
-				surface.set_tiles( { { name = "refined-concrete" , position = tile.position } } , false , false , true , false )
+				surface.set_tiles( { { name = "refined-concrete" , position = tile.position } } , true , false , true , false )
 			end
 		else
 			SIPrint.Alert( playerIndex , SIPermission.GetPermissionMessage( SIPermission.PermissionIDs.DeleteMap ) )
