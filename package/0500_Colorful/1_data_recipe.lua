@@ -98,7 +98,7 @@ SIGen
 		tertiary = { r = 0.95 , g = 0.95 , b = 0.95 } ,
 		quaternary = { r = 0.95 , g = 0.95 , b = 0.95 }
 	} ,
-	enabled = true ,
+	enabled = false ,
 	hidden = false ,
 	hide_from_stats = false ,
 	hide_from_player_crafting = false ,
