@@ -4,7 +4,7 @@ local constantsData =
 	Name = "多彩" ,
 	FileList =
 	{
-		[SIInit.StateCodeDefine.Data]    = { "1_data_building" , "1_data_recipe"} ,
+		[SIInit.StateCodeDefine.Data]    = { "1_data_building" , "1_data_recipe" , "1_data_style"} ,
 		[SIInit.StateCodeDefine.Control] = { "4_control" }
 	} ,
 	Autoload =

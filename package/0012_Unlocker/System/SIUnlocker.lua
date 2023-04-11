@@ -23,6 +23,8 @@ SIUnlocker =
 			Capsule = {}
 		}
 	} ,
+	DefaultMessage_AddRecipe = { "SIUnlocker.添加配方" } ,
+	DefaultMessage_AddTechnology = { "SIUnlocker.添加科技" } ,
 	-- ------------------------------------------------------------------------------------------------
 	-- ----------- 初始化 -----------------------------------------------------------------------------
 	-- ------------------------------------------------------------------------------------------------
@@ -169,10 +171,24 @@ SIUnlocker =
 					end
 				end
 			elseif resultType == SIUnlocker.ResultTypeID.MessageForce then
-				game.forces[forceIndex].print( result.Message )
+				local output = result.Message
+				if result.ShowTimeAndPlayer then
+					local player = game.get_player( playerIndex )
+					local playerName = player and player.name or { "SIUnlocker.显示玩家和时间-无玩家" }
+					local day , hour , minute , second = SIDate.FormatDateByTickReal( game.tick )
+					output = { "SIUnlocker.显示玩家和时间" , output , playerName , { "SICommon.实际日期" , day , hour , minute , second } }
+				end
+				game.forces[forceIndex].print( output )
 			elseif resultType == SIUnlocker.ResultTypeID.MessagePlayer then
 				if playerIndex then
-					game.get_player( playerIndex ).print( result.Message )
+					local output = result.Message
+					if result.ShowTimeAndPlayer then
+						local player = game.get_player( playerIndex )
+						local playerName = player and player.name or { "SIUnlocker.显示玩家和时间-无玩家" }
+						local day , hour , minute , second = SIDate.FormatDateByTickReal( game.tick )
+						output = { "SIUnlocker.显示玩家和时间" , output , playerName , { "SICommon.实际日期" , day , hour , minute , second } }
+					end
+					game.get_player( playerIndex ).print( output )
 				end
 			elseif resultType == SIUnlocker.ResultTypeID.Interface then
 				if remote.interfaces[result.RemoteInterfaceID] and remote.interfaces[result.RemoteInterfaceID][result.RemoteFunctionName] then
@@ -546,11 +562,13 @@ SIUnlocker.CountMode =
 --     } ,
 --     {
 --         Type = SIUnlocker.ResultTypeID.MessageForce , -- 向阵营所有玩家发送一个消息
---         Message = { "本地化字符串" }
+--         Message = { "本地化字符串" } ,
+--         ShowTimeAndPlayer = false
 --     } ,
 --     {
 --         Type = SIUnlocker.ResultTypeID.MessagePlayer , -- 向最终触发的玩家发送一个消息 , 如果玩家不存在则取消发送
---         Message = { "本地化字符串" }
+--         Message = { "本地化字符串" } ,
+--         ShowTimeAndPlayer = false
 --     } ,
 --     {
 --         Type = SIUnlocker.ResultTypeID.Interface , -- 执行 remote 接口函数 , 有五个参数 , 第 1 个参数是解锁数据的 ID , 第 2 个参数是保存在其中的数据包 , 第 3 个参数是触发的阵营编号 , 第 4 个参数是最终触发的玩家编号 , 可能为 nil , 第 5 个参数是触发的次数 , 第 6 个参数是当前游戏刻

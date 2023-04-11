@@ -8,9 +8,14 @@ SIControl.Init
 	{
 		ColorPanel = "多彩调色盘"
 	} ,
+	[SICommon.Types.Recipe] =
+	{
+		ColorPanel = "多彩调色盘"
+	} ,
 	[SICommon.Types.Entities.SimpleOwner] =
 	{
-		PixelPrefix = "像素块-"
+		PixelPrefix = "像素块-" ,
+		Pixel_256_256_256 = "像素块-256-256-256"
 	} ,
 	Styles =
 	{
@@ -30,7 +35,20 @@ SIControl.Init
 -- 初始化
 -- ----------------------------------------
 SINeed( "GUI/SIColorPanel" )
+SINeed( "Data/ColorfulRecipe" )
 SIGlobal.CreateSettings( SIColorPanel.Settings )
+
+-- ----------------------------------------
+-- 事件
+-- ----------------------------------------
+SIEventBus
+.Init( function( functionID )
+	SIUnlocker.AddUnlockDataList( SIColorfulRecipe )
+end )
+.ConfigurationChange( function( functionID )
+	SIUnlocker.AddUnlockDataList( SIColorfulRecipe )
+	SIUnlocker.FreshUnlockDataList( SIColorfulRecipe )
+end )
 
 -- ------------------------------------------------------------------------------------------------
 -- ---------- 图形界面 ----------------------------------------------------------------------------
