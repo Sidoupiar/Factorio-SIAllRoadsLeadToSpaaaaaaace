@@ -4,6 +4,7 @@
 
 SIGen
 .SetGroup( SIConstants_Colorful.raw.Groups.Colorful.Pixel )
+-- 像素块母板
 .New( SICommon.Types.Items.Item , "Pixel" , "像素块母板" ,
 {
 	stack_size = 1000 ,
@@ -11,6 +12,7 @@ SIGen
 	place_result = nil
 } )
 .AutoIcon()
+-- 各种像素块
 for r = 0 , SIConstants_Colorful.ColorMax , SIConstants_Colorful.ColorStep do
 	for g = 0 , SIConstants_Colorful.ColorMax , SIConstants_Colorful.ColorStep do
 		for b = 0 , SIConstants_Colorful.ColorMax , SIConstants_Colorful.ColorStep do
@@ -117,7 +119,7 @@ end )
 
 SIGen
 .SetGroup( SIConstants_Colorful.raw.Groups.Colorful.Tool )
--- 粉图
+-- 多彩调色盘
 .New( SICommon.Types.Items.SelectionTool , "ColorPanel" , "多彩调色盘" ,
 {
 	flags = { SICommon.Flags.Item.NotStackable } ,
