@@ -118,26 +118,36 @@ SIUnlocker =
 			if resultType == SIUnlocker.ResultTypeID.AddRecipe then
 				local force = game.forces[forceIndex]
 				for index , recipeName in pairs( result.Recipes ) do
-					force.recipes[recipeName].enabled = true
+					local recipe = force.recipes[recipeName]
+					if recipe then
+						recipe.enabled = true
+					end
 				end
 			elseif resultType == SIUnlocker.ResultTypeID.RemoveRecipe then
 				local force = game.forces[forceIndex]
 				for index , recipeName in pairs( result.Recipes ) do
-					force.recipes[recipeName].enabled = false
+					local recipe = force.recipes[recipeName]
+					if recipe then
+						recipe.enabled = false
+					end
 				end
 			elseif resultType == SIUnlocker.ResultTypeID.AddTechnology then
 				local force = game.forces[forceIndex]
 				for index , technologyName in pairs( result.Technologies ) do
 					local technology = force.technologies[technologyName]
-					technology.enabled = true
-					technology.visible_when_disabled = true
+					if technology then
+						technology.enabled = true
+						technology.visible_when_disabled = true
+					end
 				end
 			elseif resultType == SIUnlocker.ResultTypeID.RemoveTechnology then
 				local force = game.forces[forceIndex]
 				for index , technologyName in pairs( result.Technologies ) do
 					local technology = force.technologies[technologyName]
-					technology.enabled = false
-					technology.visible_when_disabled = false
+					if technology then
+						technology.enabled = false
+						technology.visible_when_disabled = false
+					end
 				end
 			elseif resultType == SIUnlocker.ResultTypeID.GiveItem then
 				local outItemStacks = {}
@@ -146,20 +156,25 @@ SIUnlocker =
 					player = game.get_player( playerIndex )
 					local inventory = player.get_main_inventory()
 					for itemName , count in pairs( result.Items ) do
-						local itemStack = { name = itemName , count = count }
-						if inventory and inventory.can_insert( itemStack ) then
-							local innerCount = inventory.insert( itemStack )
-							if innerCount < count then
-								table.insert( outItemStacks , { name = itemName , count = count - innerCount } )
+						local item = game.item_prototypes[itemName]
+						if item then
+							local itemStack = { name = itemName , count = count }
+							if inventory and inventory.can_insert( itemStack ) then
+								local innerCount = inventory.insert( itemStack )
+								if innerCount < count then
+									table.insert( outItemStacks , { name = itemName , count = count - innerCount } )
+								end
+							else
+								table.insert( outItemStacks , itemStack )
 							end
-						else
-							table.insert( outItemStacks , itemStack )
 						end
 					end
 				else
 					for itemName , count in pairs( result.Items ) do
-						local itemStack = { name = itemName , count = count }
-						table.insert( outItemStacks , itemStack )
+						local item = game.item_prototypes[itemName]
+						if item then
+							table.insert( outItemStacks , { name = itemName , count = count } )
+						end
 					end
 				end
 				if #outItemStacks > 0 then
