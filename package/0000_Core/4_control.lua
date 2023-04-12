@@ -809,29 +809,35 @@ end )
 	local name = element.name
 	local playerIndex = event.player_index
 	-- 紫图的管理窗口事件
-	if name:StartsWith( SIRequestMap.Names.MaxSlot_Count_Prefix ) then
-		SIRequestMap.Set_MaxSlot_Count( playerIndex , name , element )
-		return
-	end
-	if name:StartsWith( SIRequestMap.Names.InsertFuel_Count_Prefix ) then
-		SIRequestMap.Set_InsertFuel_Count( playerIndex , name , element )
-		return
-	end
-	if name:StartsWith( SIRequestMap.Names.InsertAmmo_Count_Prefix ) then
-		SIRequestMap.Set_InsertAmmo_Count( playerIndex , name , element )
+	if name:StartsWith( SIRequestMap.Names.Prefix ) then
+		if name:StartsWith( SIRequestMap.Names.MaxSlot_Count_Prefix ) then
+			SIRequestMap.Set_MaxSlot_Count( playerIndex , name , element )
+			return
+		end
+		if name:StartsWith( SIRequestMap.Names.InsertFuel_Count_Prefix ) then
+			SIRequestMap.Set_InsertFuel_Count( playerIndex , name , element )
+			return
+		end
+		if name:StartsWith( SIRequestMap.Names.InsertAmmo_Count_Prefix ) then
+			SIRequestMap.Set_InsertAmmo_Count( playerIndex , name , element )
+			return
+		end
 		return
 	end
 	-- 自动填充的管理窗口事件
-	if name:StartsWith( SIAutoInsert.Names.MaxSlot_Count_Prefix ) then
-		SIAutoInsert.Set_MaxSlot_Count( playerIndex , name , element )
-		return
-	end
-	if name:StartsWith( SIAutoInsert.Names.InsertFuel_Count_Prefix ) then
-		SIAutoInsert.Set_InsertFuel_Count( playerIndex , name , element )
-		return
-	end
-	if name:StartsWith( SIAutoInsert.Names.InsertAmmo_Count_Prefix ) then
-		SIAutoInsert.Set_InsertAmmo_Count( playerIndex , name , element )
+	if name:StartsWith( SIAutoInsert.Names.Prefix ) then
+		if name:StartsWith( SIAutoInsert.Names.MaxSlot_Count_Prefix ) then
+			SIAutoInsert.Set_MaxSlot_Count( playerIndex , name , element )
+			return
+		end
+		if name:StartsWith( SIAutoInsert.Names.InsertFuel_Count_Prefix ) then
+			SIAutoInsert.Set_InsertFuel_Count( playerIndex , name , element )
+			return
+		end
+		if name:StartsWith( SIAutoInsert.Names.InsertAmmo_Count_Prefix ) then
+			SIAutoInsert.Set_InsertAmmo_Count( playerIndex , name , element )
+			return
+		end
 		return
 	end
 end )
@@ -848,20 +854,23 @@ end )
 		return
 	end
 	-- 权限管理窗口事件
-	if name == SIPermission.Names.GlobalItemFindTextWhite then
-		SIPermission.FindAddGlobalItemWhite( playerIndex )
-		return
-	end
-	if name == SIPermission.Names.GlobalItemFindTextBlack then
-		SIPermission.FindAddGlobalItemBlack( playerIndex )
-		return
-	end
-	if name == SIPermission.Names.PlayerItemFindTextWhite then
-		SIPermission.FindAddPlayerItemWhite( playerIndex )
-		return
-	end
-	if name == SIPermission.Names.PlayerItemFindTextBlack then
-		SIPermission.FindAddPlayerItemBlack( playerIndex )
+	if name:StartsWith( SIPermission.Names.Prefix ) then
+		if name == SIPermission.Names.GlobalItemFindTextWhite then
+			SIPermission.FindAddGlobalItemWhite( playerIndex )
+			return
+		end
+		if name == SIPermission.Names.GlobalItemFindTextBlack then
+			SIPermission.FindAddGlobalItemBlack( playerIndex )
+			return
+		end
+		if name == SIPermission.Names.PlayerItemFindTextWhite then
+			SIPermission.FindAddPlayerItemWhite( playerIndex )
+			return
+		end
+		if name == SIPermission.Names.PlayerItemFindTextBlack then
+			SIPermission.FindAddPlayerItemBlack( playerIndex )
+			return
+		end
 		return
 	end
 	-- 紫图的管理窗口事件
@@ -883,55 +892,67 @@ end )
 	local name = element.name
 	local playerIndex = event.player_index
 	-- 主面板设置管理窗口事件
-	if name == SIMainbarSetting.Names.ImportPlayerData then
-		SIMainbarSetting.Set_ImportPlayerData( playerIndex , element )
-		return
-	end
-	if name == SIMainbarSetting.Names.ExportPlayerData then
-		SIMainbarSetting.Set_ExportPlayerData( playerIndex , element )
+	if name:StartsWith( SIMainbarSetting.Names.Prefix ) then
+		if name == SIMainbarSetting.Names.ImportPlayerData then
+			SIMainbarSetting.Set_ImportPlayerData( playerIndex , element )
+			return
+		end
+		if name == SIMainbarSetting.Names.ExportPlayerData then
+			SIMainbarSetting.Set_ExportPlayerData( playerIndex , element )
+			return
+		end
 		return
 	end
 	-- 权限管理窗口事件
-	if name:StartsWith( SIPermission.Names.GlobalRadioPrefix ) then
-		SIPermission.SwitchRadio_Global( playerIndex , name )
-		return
-	end
-	if name:StartsWith( SIPermission.Names.PlayerRadioPrefix ) then
-		SIPermission.SwitchRadio_Player( playerIndex , name )
-		return
-	end
-	if name:StartsWith( SIPermission.Names.CheckRadioPrefix ) then
-		SIPermission.SwitchRadio_Check( playerIndex , name )
+	if name:StartsWith( SIPermission.Names.Prefix ) then
+		if name:StartsWith( SIPermission.Names.GlobalRadioPrefix ) then
+			SIPermission.SwitchRadio_Global( playerIndex , name )
+			return
+		end
+		if name:StartsWith( SIPermission.Names.PlayerRadioPrefix ) then
+			SIPermission.SwitchRadio_Player( playerIndex , name )
+			return
+		end
+		if name:StartsWith( SIPermission.Names.CheckRadioPrefix ) then
+			SIPermission.SwitchRadio_Check( playerIndex , name )
+			return
+		end
 		return
 	end
 	-- 紫图的管理窗口事件
-	if name == SIRequestMap.Names.GreenToBlue_Check then
-		SIRequestMap.Set_GreenToBlue_Check( playerIndex , element )
-		return
-	end
-	if name == SIRequestMap.Names.SetModule_FromInventory then
-		SIRequestMap.Set_SetModule_FromInventory( playerIndex , element )
-		return
-	end
-	if name == SIRequestMap.Names.RemoveModule_ToInventory then
-		SIRequestMap.Set_RemoveModule_ToInventory( playerIndex , element )
-		return
-	end
-	if name == SIRequestMap.Names.RemoveModule_Invert then
-		SIRequestMap.Set_RemoveModule_Invert( playerIndex , element )
-		return
-	end
-	if name:StartsWith( SIRequestMap.Names.EnablePrefix ) then
-		SIRequestMap.EnableFunction( playerIndex , name , element )
+	if name:StartsWith( SIRequestMap.Names.Prefix ) then
+		if name == SIRequestMap.Names.GreenToBlue_Check then
+			SIRequestMap.Set_GreenToBlue_Check( playerIndex , element )
+			return
+		end
+		if name == SIRequestMap.Names.SetModule_FromInventory then
+			SIRequestMap.Set_SetModule_FromInventory( playerIndex , element )
+			return
+		end
+		if name == SIRequestMap.Names.RemoveModule_ToInventory then
+			SIRequestMap.Set_RemoveModule_ToInventory( playerIndex , element )
+			return
+		end
+		if name == SIRequestMap.Names.RemoveModule_Invert then
+			SIRequestMap.Set_RemoveModule_Invert( playerIndex , element )
+			return
+		end
+		if name:StartsWith( SIRequestMap.Names.EnablePrefix ) then
+			SIRequestMap.EnableFunction( playerIndex , name , element )
+			return
+		end
 		return
 	end
 	-- 自动填充的管理窗口事件
-	if name == SIAutoInsert.Names.GreenToBlue_Check then
-		SIAutoInsert.Set_GreenToBlue_Check( playerIndex , element )
-		return
-	end
-	if name:StartsWith( SIAutoInsert.Names.EnablePrefix ) then
-		SIAutoInsert.EnableFunction( playerIndex , name , element )
+	if name:StartsWith( SIAutoInsert.Names.Prefix ) then
+		if name == SIAutoInsert.Names.GreenToBlue_Check then
+			SIAutoInsert.Set_GreenToBlue_Check( playerIndex , element )
+			return
+		end
+		if name:StartsWith( SIAutoInsert.Names.EnablePrefix ) then
+			SIAutoInsert.EnableFunction( playerIndex , name , element )
+			return
+		end
 		return
 	end
 end )
@@ -953,16 +974,19 @@ end )
 		return
 	end
 	-- 紫图的管理窗口事件
-	if name == SIRequestMap.Names.DefaultIndex then
-		SIRequestMap.Set_DefaultIndex( playerIndex , element )
-		return
-	end
-	if name:StartsWith( SIRequestMap.Names.InsertFuel_Mode_Prefix ) then
-		SIRequestMap.Set_InsertFuel_Mode( playerIndex , name , element )
-		return
-	end
-	if name:StartsWith( SIRequestMap.Names.InsertAmmo_Mode_Prefix ) then
-		SIRequestMap.Set_InsertAmmo_Mode( playerIndex , name , element )
+	if name:StartsWith( SIRequestMap.Names.Prefix ) then
+		if name == SIRequestMap.Names.DefaultIndex then
+			SIRequestMap.Set_DefaultIndex( playerIndex , element )
+			return
+		end
+		if name:StartsWith( SIRequestMap.Names.InsertFuel_Mode_Prefix ) then
+			SIRequestMap.Set_InsertFuel_Mode( playerIndex , name , element )
+			return
+		end
+		if name:StartsWith( SIRequestMap.Names.InsertAmmo_Mode_Prefix ) then
+			SIRequestMap.Set_InsertAmmo_Mode( playerIndex , name , element )
+			return
+		end
 		return
 	end
 	-- 自动填充的管理窗口事件
