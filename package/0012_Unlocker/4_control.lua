@@ -23,6 +23,7 @@ end )
 .ConfigurationChange( function( functionID )
 	-- 初始化数据
 	SIUnlocker.InitData()
+	SIUnlocker.EffectOnConfigurationChange()
 end )
 
 -- ------------------------------------------------------------------------------------------------

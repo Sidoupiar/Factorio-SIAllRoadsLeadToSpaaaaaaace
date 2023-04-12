@@ -134,7 +134,7 @@ SIBuildLimit =
 		end
 		machine.active = true
 	end ,
-	EffectModule = function( globalSettings , entity )
+	EffectModule = function( globalSettings , playerIndex , entity )
 		local type = entity.type
 		if type == SICommon.Types.Entities.GhostEntity then
 			local limitDataIDList = globalSettings.Modules[entity.ghost_prototype.name]
@@ -151,10 +151,16 @@ SIBuildLimit =
 					local limitData = globalSettings.LimitData[limitDataID]
 					if moduleCount < limitData.MinModuleCount then
 						entity.item_requests = {}
+						if playerIndex then
+							SIPrint.Alert( playerIndex , { "SIBuildLimit.不支持的插件" } )
+						end
 						return
 					end
 					if moduleCount > limitData.MaxModuleCount then
 						entity.item_requests = {}
+						if playerIndex then
+							SIPrint.Alert( playerIndex , { "SIBuildLimit.不支持的插件" } )
+						end
 						return
 					end
 					if limitData.NeedModuleList then
@@ -162,6 +168,9 @@ SIBuildLimit =
 							local count = moduleCountList[moduleName] or 0
 							if count < needCount then
 								entity.item_requests = {}
+								if playerIndex then
+									SIPrint.Alert( playerIndex , { "SIBuildLimit.不支持的插件" } )
+								end
 								return
 							end
 						end
@@ -171,10 +180,16 @@ SIBuildLimit =
 						for moduleName , count in pairs( moduleCountList ) do
 							if not supportModuleList[moduleName] then
 								entity.item_requests = {}
+								if playerIndex then
+									SIPrint.Alert( playerIndex , { "SIBuildLimit.不支持的插件" } )
+								end
 								return
 							end
 							if count > supportModuleList[moduleName] then
 								entity.item_requests = {}
+								if playerIndex then
+									SIPrint.Alert( playerIndex , { "SIBuildLimit.不支持的插件" } )
+								end
 								return
 							end
 						end
@@ -214,11 +229,17 @@ SIBuildLimit =
 							for index , proxy in pairs( newProxyList ) do
 								proxy.item_requests = {}
 							end
+							if playerIndex then
+								SIPrint.Alert( playerIndex , { "SIBuildLimit.不支持的插件" } )
+							end
 							return
 						end
 						if moduleCount > limitData.MaxModuleCount then
 							for index , proxy in pairs( newProxyList ) do
 								proxy.item_requests = {}
+							end
+							if playerIndex then
+								SIPrint.Alert( playerIndex , { "SIBuildLimit.不支持的插件" } )
 							end
 							return
 						end
@@ -228,6 +249,9 @@ SIBuildLimit =
 								if count < needCount then
 									for index , proxy in pairs( newProxyList ) do
 										proxy.item_requests = {}
+									end
+									if playerIndex then
+										SIPrint.Alert( playerIndex , { "SIBuildLimit.不支持的插件" } )
 									end
 									return
 								end
@@ -240,11 +264,17 @@ SIBuildLimit =
 									for index , proxy in pairs( newProxyList ) do
 										proxy.item_requests = {}
 									end
+									if playerIndex then
+										SIPrint.Alert( playerIndex , { "SIBuildLimit.不支持的插件" } )
+									end
 									return
 								end
 								if count > supportModuleList[moduleName] then
 									for index , proxy in pairs( newProxyList ) do
 										proxy.item_requests = {}
+									end
+									if playerIndex then
+										SIPrint.Alert( playerIndex , { "SIBuildLimit.不支持的插件" } )
 									end
 									return
 								end
@@ -256,6 +286,16 @@ SIBuildLimit =
 		elseif SIBuildLimit.ModuleEntity[type] then
 			local limitDataIDList = globalSettings.Modules[entity.name]
 			if limitDataIDList then
+				-- 额外检测物品请求实体
+				local position = entity.position
+				local selectionBox = entity.prototype.selection_box
+				local proxyList = entity.surface.find_entities_filtered
+				{
+					type = SICommon.Types.Entities.ProxyItemRequest ,
+					area = { { selectionBox.left_top.x + position.x , selectionBox.left_top.y + position.y } , { selectionBox.right_bottom.x + position.x , selectionBox.right_bottom.y + position.y } }
+				}
+				local unit_number = entity.unit_number
+				local newProxyList = {}
 				-- 统计设备插件情况
 				local moduleCount = 0
 				local moduleCountList = {}
@@ -266,15 +306,42 @@ SIBuildLimit =
 						moduleCountList[itemName] = count
 					end
 				end
+				if #proxyList > 0 then
+					for index , proxy in pairs( proxyList ) do
+						if proxy.proxy_target.unit_number == unit_number then
+							for itemName , count in pairs( proxy.item_requests or {} ) do
+								moduleCount = moduleCount + count
+								moduleCountList[itemName] = ( moduleCountList[itemName] or 0 ) + count
+							end
+							table.insert( newProxyList , proxy )
+						end
+					end
+				end
 				-- 遍历建造限制数据包
 				for limitDataIDIndex , limitDataID in pairs( limitDataIDList ) do
 					local limitData = globalSettings.LimitData[limitDataID]
 					if moduleCount < limitData.MinModuleCount then
 						entity.active = false
+						if #newProxyList > 0 then
+							for index , proxy in pairs( newProxyList ) do
+								proxy.item_requests = {}
+							end
+							if playerIndex then
+								SIPrint.Alert( playerIndex , { "SIBuildLimit.不支持的插件" } )
+							end
+						end
 						return
 					end
 					if moduleCount > limitData.MaxModuleCount then
 						entity.active = false
+						if #newProxyList > 0 then
+							for index , proxy in pairs( newProxyList ) do
+								proxy.item_requests = {}
+							end
+							if playerIndex then
+								SIPrint.Alert( playerIndex , { "SIBuildLimit.不支持的插件" } )
+							end
+						end
 						return
 					end
 					if limitData.NeedModuleList then
@@ -282,6 +349,14 @@ SIBuildLimit =
 							local count = moduleCountList[moduleName] or 0
 							if count < needCount then
 								entity.active = false
+								if #newProxyList > 0 then
+									for index , proxy in pairs( newProxyList ) do
+										proxy.item_requests = {}
+									end
+									if playerIndex then
+										SIPrint.Alert( playerIndex , { "SIBuildLimit.不支持的插件" } )
+									end
+								end
 								return
 							end
 						end
@@ -291,78 +366,27 @@ SIBuildLimit =
 						for moduleName , count in pairs( moduleCountList ) do
 							if not supportModuleList[moduleName] then
 								entity.active = false
+								if #newProxyList > 0 then
+									for index , proxy in pairs( newProxyList ) do
+										proxy.item_requests = {}
+									end
+									if playerIndex then
+										SIPrint.Alert( playerIndex , { "SIBuildLimit.不支持的插件" } )
+									end
+								end
 								return
 							end
 							if count > supportModuleList[moduleName] then
 								entity.active = false
+								if #newProxyList > 0 then
+									for index , proxy in pairs( newProxyList ) do
+										proxy.item_requests = {}
+									end
+									if playerIndex then
+										SIPrint.Alert( playerIndex , { "SIBuildLimit.不支持的插件" } )
+									end
+								end
 								return
-							end
-						end
-					end
-				end
-				-- 额外检测物品请求实体
-				local position = entity.position
-				local selectionBox = entity.prototype.selection_box
-				local proxyList = entity.surface.find_entities_filtered
-				{
-					type = SICommon.Types.Entities.ProxyItemRequest ,
-					area = { { selectionBox.left_top.x + position.x , selectionBox.left_top.y + position.y } , { selectionBox.right_bottom.x + position.x , selectionBox.right_bottom.y + position.y } }
-				}
-				if #proxyList > 0 then
-					local unit_number = entity.unit_number
-					moduleCount = 0
-					moduleCountList = {}
-					local newProxyList = {}
-					for index , proxy in pairs( proxyList ) do
-						if proxy.proxy_target.unit_number == unit_number then
-							for itemName , count in pairs( proxy.item_requests or {} ) do
-								moduleCount = moduleCount + count
-								moduleCountList[itemName] = ( moduleCountList[itemName] or 0 ) + count
-								table.insert( newProxyList , proxy )
-							end
-						end
-					end
-					-- 额外遍历建造限制数据包来检测物品请求实体
-					for limitDataIDIndex , limitDataID in pairs( limitDataIDList ) do
-						local limitData = globalSettings.LimitData[limitDataID]
-						if moduleCount < limitData.MinModuleCount then
-							for index , proxy in pairs( newProxyList ) do
-								proxy.item_requests = {}
-							end
-							break
-						end
-						if moduleCount > limitData.MaxModuleCount then
-							for index , proxy in pairs( newProxyList ) do
-								proxy.item_requests = {}
-							end
-							break
-						end
-						if limitData.NeedModuleList then
-							for moduleName , needCount in pairs( limitData.NeedModuleList ) do
-								local count = moduleCountList[moduleName] or 0
-								if count < needCount then
-									for index , proxy in pairs( newProxyList ) do
-										proxy.item_requests = {}
-									end
-									break
-								end
-							end
-						end
-						local supportModuleList = limitData.SupportModuleList
-						if supportModuleList then
-							for moduleName , count in pairs( moduleCountList ) do
-								if not supportModuleList[moduleName] then
-									for index , proxy in pairs( newProxyList ) do
-										proxy.item_requests = {}
-									end
-									break
-								end
-								if count > supportModuleList[moduleName] then
-									for index , proxy in pairs( newProxyList ) do
-										proxy.item_requests = {}
-									end
-									break
-								end
 							end
 						end
 					end
@@ -374,38 +398,38 @@ SIBuildLimit =
 	-- ------------------------------------------------------------------------------------------------
 	-- ---------- 事件函数 ----------------------------------------------------------------------------
 	-- ------------------------------------------------------------------------------------------------
-	BuildEntity = function( entity )
+	BuildEntity = function( playerIndex , entity )
 		local globalSettings = SIGlobal.GetGlobalSettings( SIBuildLimit.Settings.Name )
 		local type = entity.type
 		if type == SICommon.Types.Entities.Beacon then
 			for index , machine in pairs( entity.get_beacon_effect_receivers() ) do
 				SIBuildLimit.EffectMachine( globalSettings , machine , nil )
 				if machine.active then
-					SIBuildLimit.EffectModule( globalSettings , machine )
+					SIBuildLimit.EffectModule( globalSettings , playerIndex , machine )
 				end
 			end
-			SIBuildLimit.EffectModule( globalSettings , entity )
+			SIBuildLimit.EffectModule( globalSettings , playerIndex , entity )
 		elseif SIBuildLimit.ModuleMachine[type] then
 			SIBuildLimit.EffectMachine( globalSettings , entity , nil )
 			if entity.active then
-				SIBuildLimit.EffectModule( globalSettings , entity )
+				SIBuildLimit.EffectModule( globalSettings , playerIndex , entity )
 			end
 		end
 	end ,
-	DestroyEntity = function( entity )
+	DestroyEntity = function( playerIndex , entity )
 		local globalSettings = SIGlobal.GetGlobalSettings( SIBuildLimit.Settings.Name )
 		if entity.type == SICommon.Types.Entities.Beacon then
 			for index , machine in pairs( entity.get_beacon_effect_receivers() ) do
 				SIBuildLimit.EffectMachine( globalSettings , machine , entity )
 				if machine.active then
-					SIBuildLimit.EffectModule( globalSettings , machine )
+					SIBuildLimit.EffectModule( globalSettings , playerIndex , machine )
 				end
 			end
 		end
 	end ,
-	CheckModule = function( entity )
+	CheckModule = function( playerIndex , entity )
 		local globalSettings = SIGlobal.GetGlobalSettings( SIBuildLimit.Settings.Name )
-		SIBuildLimit.EffectModule( globalSettings , entity )
+		SIBuildLimit.EffectModule( globalSettings , playerIndex , entity )
 		if entity.active and SIBuildLimit.ModuleMachine[entity.type] then
 			SIBuildLimit.EffectMachine( globalSettings , entity , nil )
 		end
@@ -420,7 +444,7 @@ SIBuildLimit =
 		local settings = SIGlobal.GetPlayerSettings( SIBuildLimit.Settings.Name , playerIndex )
 		settings.CurrentEntity = nil
 		local globalSettings = SIGlobal.GetGlobalSettings( SIBuildLimit.Settings.Name )
-		SIBuildLimit.EffectModule( globalSettings , entity )
+		SIBuildLimit.EffectModule( globalSettings , playerIndex , entity )
 		if entity.active and SIBuildLimit.ModuleMachine[entity.type] then
 			SIBuildLimit.EffectMachine( globalSettings , entity , nil )
 		end

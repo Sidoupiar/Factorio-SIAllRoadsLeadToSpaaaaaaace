@@ -38,10 +38,11 @@ SIEventBus
 	if not entity or not entity.valid then
 		return
 	end
+	local playerIndex = event.player_index
 	if entity.type == SICommon.Types.Entities.GhostEntity or entity.type == SICommon.Types.Entities.ProxyItemRequest then
-		SIBuildLimit.CheckModule( entity )
+		SIBuildLimit.CheckModule( playerIndex , entity )
 	else
-		SIBuildLimit.BuildEntity( entity )
+		SIBuildLimit.BuildEntity( playerIndex , entity )
 	end
 end )
 .Add( SIEvents.on_robot_built_entity , function( event , functionID )
@@ -50,9 +51,9 @@ end )
 		return
 	end
 	if entity.type == SICommon.Types.Entities.GhostEntity or entity.type == SICommon.Types.Entities.ProxyItemRequest then
-		SIBuildLimit.CheckModule( entity )
+		SIBuildLimit.CheckModule( nil , entity )
 	else
-		SIBuildLimit.BuildEntity( entity )
+		SIBuildLimit.BuildEntity( nil , entity )
 	end
 end )
 .Add( SIEvents.on_trigger_created_entity , function( event , functionID )
@@ -61,9 +62,9 @@ end )
 		return
 	end
 	if entity.type == SICommon.Types.Entities.GhostEntity or entity.type == SICommon.Types.Entities.ProxyItemRequest then
-		SIBuildLimit.CheckModule( entity )
+		SIBuildLimit.CheckModule( nil , entity )
 	else
-		SIBuildLimit.BuildEntity( entity )
+		SIBuildLimit.BuildEntity( nil , entity )
 	end
 end )
 .Add( SIEvents.script_raised_built , function( event , functionID )
@@ -72,9 +73,9 @@ end )
 		return
 	end
 	if entity.type == SICommon.Types.Entities.GhostEntity or entity.type == SICommon.Types.Entities.ProxyItemRequest then
-		SIBuildLimit.CheckModule( entity )
+		SIBuildLimit.CheckModule( nil , entity )
 	else
-		SIBuildLimit.BuildEntity( entity )
+		SIBuildLimit.BuildEntity( nil , entity )
 	end
 end )
 .Add( SIEvents.on_player_mined_entity , function( event , functionID )
@@ -82,34 +83,35 @@ end )
 	if not entity or not entity.valid then
 		return
 	end
-	SIBuildLimit.DestroyEntity( entity )
+	local playerIndex = event.player_index
+	SIBuildLimit.DestroyEntity( playerIndex , entity )
 end )
 .Add( SIEvents.on_robot_mined_entity , function( event , functionID )
 	local entity = event.entity
 	if not entity or not entity.valid then
 		return
 	end
-	SIBuildLimit.DestroyEntity( entity )
+	SIBuildLimit.DestroyEntity( nil , entity )
 end )
 .Add( SIEvents.on_entity_died , function( event , functionID )
 	local entity = event.entity
 	if not entity or not entity.valid then
 		return
 	end
-	SIBuildLimit.DestroyEntity( entity )
+	SIBuildLimit.DestroyEntity( nil , entity )
 end )
 .Add( SIEvents.script_raised_destroy , function( event , functionID )
 	local entity = event.entity
 	if not entity or not entity.valid then
 		return
 	end
-	SIBuildLimit.DestroyEntity( entity )
+	SIBuildLimit.DestroyEntity( nil , entity )
 end )
 .Add( SIEvents.on_tick , function( event , functionID )
 	for playerIndex , settings in pairs( SIGlobal.GetAllPlayerSettings( SIBuildLimit.Settings.Name ) ) do
 		local entity = settings.CurrentEntity
 		if entity then
-			SIBuildLimit.CheckModule( entity )
+			SIBuildLimit.CheckModule( playerIndex , entity )
 		end
 	end
 end )
@@ -118,7 +120,8 @@ end )
 	if not entity or not entity.valid then
 		return
 	end
-	SIBuildLimit.CheckModule( entity )
+	local playerIndex = event.player_index
+	SIBuildLimit.CheckModule( playerIndex , entity )
 end )
 
 -- ------------------------------------------------------------------------------------------------
@@ -144,6 +147,15 @@ end )
 	end
 	local playerIndex = event.player_index
 	SIBuildLimit.PlayerCloseEntity( playerIndex , entity )
+end )
+.Add( SIEvents.on_marked_for_upgrade , function( event , functionID )
+	local entity = event.entity
+	if not entity or not entity.valid then
+		return
+	end
+	local playerIndex = event.player_index
+	SIPrint.Print( entity.name )
+	SIBuildLimit.CheckModule( playerIndex , entity )
 end )
 
 -- ------------------------------------------------------------------------------------------------

@@ -8,7 +8,8 @@ SIUnlocker =
 		Name = "SIUnlocker" ,
 		DefaultGlobal =
 		{
-			UnlockData = {}
+			UnlockData = {} ,
+			SavedForceEffects = {}
 		} ,
 		DefaultForce =
 		{
@@ -112,6 +113,7 @@ SIUnlocker =
 			end
 		end
 		unlockData.FireCount = unlockData.FireCount + 1
+		local globalSettings = SIGlobal.GetGlobalSettings( SIUnlocker.Settings.Name )
 		local gameTick = game.tick
 		for resultIndex , result in pairs( unlockData.Results ) do
 			local resultType = result.Type
@@ -121,6 +123,14 @@ SIUnlocker =
 					local recipe = force.recipes[recipeName]
 					if recipe then
 						recipe.enabled = true
+					else
+						SIPrint.Debug{ "SIUnlocker.无效配方" , recipeName }
+						table.insert( globalSettings.SavedForceEffects ,
+						{
+							Type = SIUnlocker.ResultTypeID.AddRecipe ,
+							Force = forceIndex ,
+							Thing = recipeName
+						} )
 					end
 				end
 			elseif resultType == SIUnlocker.ResultTypeID.RemoveRecipe then
@@ -129,6 +139,14 @@ SIUnlocker =
 					local recipe = force.recipes[recipeName]
 					if recipe then
 						recipe.enabled = false
+					else
+						SIPrint.Debug{ "SIUnlocker.无效配方" , recipeName }
+						table.insert( globalSettings.SavedForceEffects ,
+						{
+							Type = SIUnlocker.ResultTypeID.RemoveRecipe ,
+							Force = forceIndex ,
+							Thing = recipeName
+						} )
 					end
 				end
 			elseif resultType == SIUnlocker.ResultTypeID.AddTechnology then
@@ -138,6 +156,14 @@ SIUnlocker =
 					if technology then
 						technology.enabled = true
 						technology.visible_when_disabled = true
+					else
+						SIPrint.Debug{ "SIUnlocker.无效科技" , technologyName }
+						table.insert( globalSettings.SavedForceEffects ,
+						{
+							Type = SIUnlocker.ResultTypeID.AddTechnology ,
+							Force = forceIndex ,
+							Thing = technologyName
+						} )
 					end
 				end
 			elseif resultType == SIUnlocker.ResultTypeID.RemoveTechnology then
@@ -147,6 +173,14 @@ SIUnlocker =
 					if technology then
 						technology.enabled = false
 						technology.visible_when_disabled = false
+					else
+						SIPrint.Debug{ "SIUnlocker.无效科技" , technologyName }
+						table.insert( globalSettings.SavedForceEffects ,
+						{
+							Type = SIUnlocker.ResultTypeID.RemoveTechnology ,
+							Force = forceIndex ,
+							Thing = technologyName
+						} )
 					end
 				end
 			elseif resultType == SIUnlocker.ResultTypeID.GiveItem then
@@ -211,6 +245,74 @@ SIUnlocker =
 				end
 			end
 		end
+	end ,
+	EffectOnConfigurationChange = function()
+		local globalSettings = SIGlobal.GetGlobalSettings( SIUnlocker.Settings.Name )
+		local newSavedForceEffects = {}
+		for index , effect in pairs( globalSettings.SavedForceEffects ) do
+			local forceIndex = effect.Force
+			local force = game.forces[forceIndex]
+			if force then
+				local effectType = effect.Type
+				local thingName = effect.Thing
+				if effectType == SIUnlocker.ResultTypeID.AddRecipe then
+					local recipe = force.recipes[thingName]
+					if recipe then
+						recipe.enabled = true
+					else
+						SIPrint.Debug{ "SIUnlocker.无效配方" , thingName }
+						table.insert( newSavedForceEffects ,
+						{
+							Type = SIUnlocker.ResultTypeID.AddRecipe ,
+							Force = forceIndex ,
+							Thing = thingName
+						} )
+					end
+				elseif effectType == SIUnlocker.ResultTypeID.RemoveRecipe then
+					local recipe = force.recipes[thingName]
+					if recipe then
+						recipe.enabled = false
+					else
+						SIPrint.Debug{ "SIUnlocker.无效配方" , thingName }
+						table.insert( globalSettings.SavedForceEffects ,
+						{
+							Type = SIUnlocker.ResultTypeID.RemoveRecipe ,
+							Force = forceIndex ,
+							Thing = thingName
+						} )
+					end
+				elseif effectType == SIUnlocker.ResultTypeID.AddTechnology then
+					local technology = force.technologies[thingName]
+					if technology then
+						technology.enabled = true
+						technology.visible_when_disabled = true
+					else
+						SIPrint.Debug{ "SIUnlocker.无效科技" , thingName }
+						table.insert( globalSettings.SavedForceEffects ,
+						{
+							Type = SIUnlocker.ResultTypeID.AddTechnology ,
+							Force = forceIndex ,
+							Thing = thingName
+						} )
+					end
+				elseif effectType == SIUnlocker.ResultTypeID.RemoveTechnology then
+					local technology = force.technologies[thingName]
+					if technology then
+						technology.enabled = false
+						technology.visible_when_disabled = false
+					else
+						SIPrint.Debug{ "SIUnlocker.无效科技" , thingName }
+						table.insert( globalSettings.SavedForceEffects ,
+						{
+							Type = SIUnlocker.ResultTypeID.RemoveTechnology ,
+							Force = forceIndex ,
+							Thing = thingName
+						} )
+					end
+				end
+			end
+		end
+		globalSettings.SavedForceEffects = newSavedForceEffects
 	end ,
 	-- ------------------------------------------------------------------------------------------------
 	-- ---------- 事件函数 ----------------------------------------------------------------------------
