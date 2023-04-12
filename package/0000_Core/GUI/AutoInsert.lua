@@ -13,8 +13,13 @@ SIAutoInsert =
 		TabPane = "SI核心-自动填充-分页面板" ,
 		TabSettingsName = "SI核心-自动填充-设置名称" ,
 		DefaultIndex = "SI核心-自动填充-默认选择" ,
+		GreenToBlue_Check = "SI核心-自动填充-绿箱向蓝箱供货-勾选" ,
 		ListButtonPrefix = "SI核心-自动填充-列表定位按钮-" ,
 		EnablePrefix = "SI核心-自动填充-启用功能-" ,
+		MaxSlot_Entity_Prefix = "SI核心-自动填充-最大格子-实体-" ,
+		MaxSlot_Count_Prefix = "SI核心-自动填充-最大格子-数量-" ,
+		SetModule_Entity_Prefix = "SI核心-自动填充-设置插件-实体-" ,
+		SetModule_Item_Prefix = "SI核心-自动填充-设置插件-物品-" ,
 		InsertFuel_Entity_Prefix = "SI核心-自动填充-插入燃料-实体-" ,
 		InsertFuel_Item_Prefix = "SI核心-自动填充-插入燃料-物品-" ,
 		InsertFuel_Count_Prefix = "SI核心-自动填充-插入燃料-数量-" ,
@@ -52,10 +57,29 @@ SIAutoInsert =
 			TabSettingsList = {}
 		}
 	} ,
+	ModuleEventID = script.generate_event_name() ,
 	TabSettingsMaxCount = 8 ,
 	DefaultTabSettings =
 	{
 		Name = nil ,
+		-- 最大格子
+		MaxSlot =
+		{
+			Enable = false ,
+			List = {} -- 键为选择的容器实体 , 值为限制的数量
+		} ,
+		-- 绿箱向蓝箱供货
+		GreenToBlue =
+		{
+			Enable = false ,
+			Check = true
+		} ,
+		-- 设置插件
+		SetModule =
+		{
+			Enable = false ,
+			List = {} -- 键为选择的设备实体 , 值为插件物品名称列表
+		} ,
 		-- 插入燃料
 		InsertFuel =
 		{
@@ -78,6 +102,126 @@ SIAutoInsert =
 	{
 		[1] = { "SICore.自动填充-窗口-选择-空" } ,
 		[2] = { "SICore.自动填充-窗口-选择-默认" }
+	} ,
+	MaxSlot_Entity_Filters =
+	{
+		{
+			filter = "type" ,
+			type =
+			{
+				SICommon.Types.Entities.Container ,
+				SICommon.Types.Entities.ContainerLogic ,
+				SICommon.Types.Entities.Car ,
+				SICommon.Types.Entities.SpiderVehicle ,
+				SICommon.Types.Entities.WagonCargo
+			} ,
+			mode = SICommon.Flags.Condition.OR
+		} ,
+		{
+			filter = "flag" ,
+			flag = SICommon.Flags.Entity.PlayerCreation ,
+			mode = SICommon.Flags.Condition.AND ,
+		} ,
+		{
+			filter = "hidden" ,
+			mode = SICommon.Flags.Condition.AND ,
+			invert = true
+		} ,
+		{
+			filter = "name" ,
+			name = SIConstants_Core.raw.Entities.IconEmpty ,
+			mode = SICommon.Flags.Condition.OR
+		}
+	} ,
+	MaxSlot_Entity_Filters_ShowHidden =
+	{
+		{
+			filter = "type" ,
+			type =
+			{
+				SICommon.Types.Entities.Container ,
+				SICommon.Types.Entities.ContainerLogic ,
+				SICommon.Types.Entities.Car ,
+				SICommon.Types.Entities.SpiderVehicle ,
+				SICommon.Types.Entities.WagonCargo
+			} ,
+			mode = SICommon.Flags.Condition.OR
+		} ,
+		{
+			filter = "flag" ,
+			flag = SICommon.Flags.Entity.PlayerCreation ,
+			mode = SICommon.Flags.Condition.AND ,
+		} ,
+		{
+			filter = "name" ,
+			name = SIConstants_Core.raw.Entities.IconEmpty ,
+			mode = SICommon.Flags.Condition.OR
+		}
+	} ,
+	SetModule_Entity_Filters =
+	{
+		{
+			filter = "type" ,
+			type =
+			{
+				SICommon.Types.Entities.Machine ,
+				SICommon.Types.Entities.Furnace ,
+				SICommon.Types.Entities.Lab ,
+				SICommon.Types.Entities.Mining ,
+				SICommon.Types.Entities.RocketSilo ,
+				SICommon.Types.Entities.Beacon
+			} ,
+			mode = SICommon.Flags.Condition.OR
+		} ,
+		{
+			filter = "flag" ,
+			flag = SICommon.Flags.Entity.PlayerCreation ,
+			mode = SICommon.Flags.Condition.AND ,
+		} ,
+		{
+			filter = "hidden" ,
+			mode = SICommon.Flags.Condition.AND ,
+			invert = true
+		} ,
+		{
+			filter = "name" ,
+			name = SIConstants_Core.raw.Entities.IconEmpty ,
+			mode = SICommon.Flags.Condition.OR
+		}
+	} ,
+	SetModule_Entity_Filters_ShowHidden =
+	{
+		{
+			filter = "type" ,
+			type =
+			{
+				SICommon.Types.Entities.Machine ,
+				SICommon.Types.Entities.Furnace ,
+				SICommon.Types.Entities.Lab ,
+				SICommon.Types.Entities.Mining ,
+				SICommon.Types.Entities.RocketSilo ,
+				SICommon.Types.Entities.Beacon
+			} ,
+			mode = SICommon.Flags.Condition.OR
+		} ,
+		{
+			filter = "flag" ,
+			flag = SICommon.Flags.Entity.PlayerCreation ,
+			mode = SICommon.Flags.Condition.AND ,
+		} ,
+		{
+			filter = "name" ,
+			name = SIConstants_Core.raw.Entities.IconEmpty ,
+			mode = SICommon.Flags.Condition.OR
+		}
+	} ,
+	SetModule_Item_Filters =
+	{
+		{
+			filter = "type" ,
+			type = SICommon.Types.Items.Module ,
+			mode = SICommon.Flags.Condition.OR
+		}
 	} ,
 	InsertFuel_Entity_Filters =
 	{
@@ -343,6 +487,27 @@ SIAutoInsert =
 		local list = scroll.add{ type = "table" , column_count = 1 , style = SIConstants_Core.raw.Styles.Common_List }
 		elements.Scroll = scroll
 		-- ----------------------------------------
+		-- 最大格子
+		-- ----------------------------------------
+		elements.MaxSlot_Enable = list.add{ type = "checkbox" , name = SIAutoInsert.Names.EnablePrefix .. "MaxSlot_Flow" , state = false , caption = { "SICore.自动填充-窗口-最大格子-启用" , { "SICore.自动填充-窗口-启用-未设置" } } , tooltip = { "SICore.自动填充-窗口-最大格子-启用-提示" } , style = SIConstants_Core.raw.Styles.RequestMap_ListCheck }
+		local MaxSlot_Flow = list.add{ type = "flow" , direction = "vertical" , style = SIConstants_Core.raw.Styles.RequestMap_ListPanelFlow }
+		elements.MaxSlot_Flow = MaxSlot_Flow
+		elements.MaxSlot_List = MaxSlot_Flow.add{ type = "table" , column_count = 2 , style = SIConstants_Core.raw.Styles.RequestMap_SubList }
+		-- ----------------------------------------
+		-- 绿箱向蓝箱供货
+		-- ----------------------------------------
+		elements.GreenToBlue_Enable = list.add{ type = "checkbox" , name = SIAutoInsert.Names.EnablePrefix .. "GreenToBlue_Flow" , state = false , caption = { "SICore.自动填充-窗口-绿箱向蓝箱供货-启用" , { "SICore.自动填充-窗口-启用-未设置" } } , tooltip = { "SICore.自动填充-窗口-绿箱向蓝箱供货-启用-提示" } , style = SIConstants_Core.raw.Styles.RequestMap_ListCheck }
+		local GreenToBlue_Flow = list.add{ type = "flow" , direction = "vertical" , style = SIConstants_Core.raw.Styles.RequestMap_ListPanelFlow }
+		elements.GreenToBlue_Flow = GreenToBlue_Flow
+		elements.GreenToBlue_Check = GreenToBlue_Flow.add{ type = "checkbox" , name = SIAutoInsert.Names.GreenToBlue_Check , state = false , caption = { "SICore.自动填充-窗口-绿箱向蓝箱供货-勾选" } , tooltip = { "SICore.自动填充-窗口-绿箱向蓝箱供货-勾选-提示" } , style = SIConstants_Core.raw.Styles.Common_CheckBox }
+		-- ----------------------------------------
+		-- 设置插件
+		-- ----------------------------------------
+		elements.SetModule_Enable = list.add{ type = "checkbox" , name = SIAutoInsert.Names.EnablePrefix .. "SetModule_Flow" , state = false , caption = { "SICore.自动填充-窗口-设置插件-启用" , { "SICore.自动填充-窗口-启用-未设置" } } , tooltip = { "SICore.自动填充-窗口-设置插件-启用-提示" } , style = SIConstants_Core.raw.Styles.RequestMap_ListCheck }
+		local SetModule_Flow = list.add{ type = "flow" , direction = "vertical" , style = SIConstants_Core.raw.Styles.RequestMap_ListPanelFlow }
+		elements.SetModule_Flow = SetModule_Flow
+		elements.SetModule_List = SetModule_Flow.add{ type = "table" , column_count = 3 , style = SIConstants_Core.raw.Styles.RequestMap_SubList }
+		-- ----------------------------------------
 		-- 插入燃料
 		-- ----------------------------------------
 		elements.InsertFuel_Enable = list.add{ type = "checkbox" , name = SIAutoInsert.Names.EnablePrefix .. "InsertFuel_Flow" , state = false , caption = { "SICore.自动填充-窗口-插入燃料-启用" , { "SICore.自动填充-窗口-启用-未设置" } } , tooltip = { "SICore.自动填充-窗口-插入燃料-启用-提示" } , style = SIConstants_Core.raw.Styles.AutoInsert_ListCheck }
@@ -385,6 +550,25 @@ SIAutoInsert =
 		-- ----------------------------------------
 		elements.DefaultIndex.selected_index = settings.defaultIndex == tabSettingsIndex and 2 or 1
 		-- ----------------------------------------
+		-- 最大格子
+		-- ----------------------------------------
+		elements.MaxSlot_Enable.state = tabSettings.MaxSlot.Enable
+		elements.MaxSlot_Flow.visible = tabSettings.MaxSlot.Enable
+		SIAutoInsert.FreshPage_MaxSlot( settings , tabSettings , elements )
+		-- ----------------------------------------
+		-- 绿箱向蓝箱供货
+		-- ----------------------------------------
+		elements.GreenToBlue_Enable.state = tabSettings.GreenToBlue.Enable
+		elements.GreenToBlue_Flow.visible = tabSettings.GreenToBlue.Enable
+		elements.GreenToBlue_Check.state = tabSettings.GreenToBlue.Check
+		SIAutoInsert.FreshPage_GreenToBlue( settings , tabSettings , elements )
+		-- ----------------------------------------
+		-- 设置插件
+		-- ----------------------------------------
+		elements.SetModule_Enable.state = tabSettings.SetModule.Enable
+		elements.SetModule_Flow.visible = tabSettings.SetModule.Enable
+		SIAutoInsert.FreshPage_SetModule( settings , tabSettings , elements )
+		-- ----------------------------------------
 		-- 插入燃料
 		-- ----------------------------------------
 		elements.InsertFuel_Enable.state = tabSettings.InsertFuel.Enable
@@ -396,6 +580,162 @@ SIAutoInsert =
 		elements.InsertAmmo_Enable.state = tabSettings.InsertAmmo.Enable
 		elements.InsertAmmo_Flow.visible = tabSettings.InsertAmmo.Enable
 		SIAutoInsert.FreshPage_InsertAmmo( settings , tabSettings , elements )
+	end ,
+	FreshPage_MaxSlot = function( settings , tabSettings , elements )
+		-- 更新说明
+		elements.MaxSlot_Enable.caption = { "SICore.自动填充-窗口-最大格子-启用" , { SITable.Size( tabSettings.MaxSlot.List ) > 0 and "SICore.自动填充-窗口-启用-已设置" or "SICore.自动填充-窗口-启用-未设置" } }
+		-- 清空列表
+		local list = elements.MaxSlot_List
+		list.clear()
+		-- 选择筛选器
+		local entityFilter = SISettings.PerUser.SICore.ShowHiddenEntity( settings.playerIndex ) and SIAutoInsert.MaxSlot_Entity_Filters_ShowHidden or SIAutoInsert.MaxSlot_Entity_Filters
+		-- 重建列表
+		for entityName , count in pairs( tabSettings.MaxSlot.List ) do
+			local entityPrototype = game.entity_prototypes[entityName]
+			local entityTooltip = nil
+			local entityNameSelected = entityName
+			local maxCount = 0
+			if entityPrototype then
+				entityTooltip = { "SICore.自动填充-窗口-最大格子-实体-提示" , entityPrototype.localised_name }
+				local type = entityPrototype.type
+				if type == SICommon.Types.Entities.Container or type == SICommon.Types.Entities.ContainerLogic then
+					maxCount = entityPrototype.get_inventory_size( defines.inventory.chest ) or 0
+				elseif type == SICommon.Types.Entities.Car then
+					maxCount = entityPrototype.get_inventory_size( defines.inventory.car_trunk ) or 0
+				elseif type == SICommon.Types.Entities.SpiderVehicle then
+					maxCount = entityPrototype.get_inventory_size( defines.inventory.spider_trunk ) or 0
+				elseif type == SICommon.Types.Entities.WagonCargo then
+					maxCount = entityPrototype.get_inventory_size( defines.inventory.cargo_wagon ) or 0
+				else
+					maxCount = 0
+				end
+			else
+				entityTooltip = { "SICore.自动填充-窗口-最大格子-实体-空-提示" , entityName }
+				entityNameSelected = SIConstants_Core.raw.Entities.IconEmpty
+				maxCount = 0
+			end
+			list.add
+			{
+				type = "choose-elem-button" ,
+				name = SIAutoInsert.Names.MaxSlot_Entity_Prefix .. entityName ,
+				tooltip = entityTooltip ,
+				elem_type = "entity" ,
+				entity = entityNameSelected ,
+				elem_filters = entityFilter ,
+				style = SIConstants_Core.raw.Styles.RequestMap_ListChooser
+			}
+			local flow = list.add{ type = "flow" , direction = "horizontal" , style = SIConstants_Core.raw.Styles.RequestMap_ListFlow }
+			flow.add{ type = "label" , caption = { "SICore.自动填充-窗口-最大格子-数量前缀" , maxCount } , tooltip = { "SICore.自动填充-窗口-最大格子-数量-提示" } , style = SIConstants_Core.raw.Styles.RequestMap_ListLabel }
+			flow.add{ type = "textfield" , name = SIAutoInsert.Names.MaxSlot_Count_Prefix .. entityName , text = tostring( count ) , numeric = true , tooltip = { "SICore.自动填充-窗口-最大格子-数量-提示" } , style = SIConstants_Core.raw.Styles.RequestMap_ListText }
+			flow.add{ type = "label" , caption = { "SICore.自动填充-窗口-最大格子-数量后缀" } , tooltip = { "SICore.自动填充-窗口-最大格子-数量-提示" } , style = SIConstants_Core.raw.Styles.RequestMap_ListLabel }
+		end
+		list.add
+		{
+			type = "choose-elem-button" ,
+			name = SIAutoInsert.Names.MaxSlot_Entity_Prefix ,
+			tooltip = { "SICore.自动填充-窗口-最大格子-实体-选择-提示" } ,
+			elem_type = "entity" ,
+			entity = nil ,
+			elem_filters = entityFilter ,
+			style = SIConstants_Core.raw.Styles.RequestMap_ListChooser
+		}
+	end ,
+	FreshPage_GreenToBlue = function( settings , tabSettings , elements )
+		-- 更新说明
+		elements.GreenToBlue_Enable.caption = { "SICore.自动填充-窗口-绿箱向蓝箱供货-启用" , { tabSettings.GreenToBlue.Check and "SICore.自动填充-窗口-启用-未设置" or "SICore.自动填充-窗口-启用-已设置" } }
+	end ,
+	FreshPage_SetModule = function( settings , tabSettings , elements )
+		-- 更新说明
+		SIAutoInsert.FreshPage_SetModule_Enable( settings , tabSettings , elements )
+		-- 清空列表
+		local list = elements.SetModule_List
+		list.clear()
+		-- 选择筛选器
+		local entityFilter = SISettings.PerUser.SICore.ShowHiddenEntity( settings.playerIndex ) and SIAutoInsert.SetModule_Entity_Filters_ShowHidden or SIAutoInsert.SetModule_Entity_Filters
+		-- 重建列表
+		for entityName , moduleList in pairs( tabSettings.SetModule.List ) do
+			local entityPrototype = game.entity_prototypes[entityName]
+			local entityTooltip = nil
+			local entityNameSelected = entityName
+			local maxSlot = 0
+			if entityPrototype then
+				entityTooltip = { "SICore.自动填充-窗口-设置插件-实体-提示" , entityPrototype.localised_name }
+				local type = entityPrototype.type
+				if type == SICommon.Types.Entities.Machine then
+					maxSlot = entityPrototype.get_inventory_size( defines.inventory.assembling_machine_modules ) or 0
+				elseif type == SICommon.Types.Entities.Furnace then
+					maxSlot = entityPrototype.get_inventory_size( defines.inventory.furnace_modules ) or 0
+				elseif type == SICommon.Types.Entities.Lab then
+					maxSlot = entityPrototype.get_inventory_size( defines.inventory.lab_modules ) or 0
+				elseif type == SICommon.Types.Entities.Mining then
+					maxSlot = entityPrototype.get_inventory_size( defines.inventory.mining_drill_modules ) or 0
+				elseif type == SICommon.Types.Entities.RocketSilo then
+					maxSlot = entityPrototype.get_inventory_size( defines.inventory.rocket_silo_modules ) or 0
+				elseif type == SICommon.Types.Entities.Beacon then
+					maxSlot = entityPrototype.get_inventory_size( defines.inventory.beacon_modules ) or 0
+				else
+					maxSlot = 0
+				end
+			else
+				entityTooltip = { "SICore.自动填充-窗口-设置插件-实体-空-提示" , entityName }
+				entityNameSelected = SIConstants_Core.raw.Entities.IconEmpty
+				for key , value in pairs( moduleList ) do
+					maxSlot = math.max( maxSlot , key )
+				end
+			end
+			list.add
+			{
+				type = "choose-elem-button" ,
+				name = SIAutoInsert.Names.SetModule_Entity_Prefix .. entityName ,
+				tooltip = entityTooltip ,
+				elem_type = "entity" ,
+				entity = entityNameSelected ,
+				elem_filters = entityFilter ,
+				style = SIConstants_Core.raw.Styles.RequestMap_ListChooser
+			}
+			local selectList1 = list.add{ type = "table" , column_count = 10 , style = SIConstants_Core.raw.Styles.RequestMap_SelectList }
+			local selectList2 = list.add{ type = "table" , column_count = 10 , style = SIConstants_Core.raw.Styles.RequestMap_SelectList }
+			for slotIndex = 1 , maxSlot , 1 do
+				local selectList = math.fmod( math.floor( ( slotIndex - 1 ) / 10 ) , 2 ) == 0 and selectList1 or selectList2
+				local itemTooltip = nil
+				local itemName = moduleList[slotIndex]
+				if itemName then
+					local itemPrototype = game.item_prototypes[itemName]
+					if itemPrototype then
+						itemTooltip = { "SICore.自动填充-窗口-设置插件-物品-提示" , itemPrototype.localised_name }
+					else
+						itemTooltip = { "SICore.自动填充-窗口-设置插件-物品-空-提示" , itemName }
+						itemName = SIConstants_Core.raw.Items.IconEmpty
+					end
+				else
+					itemTooltip = { "SICore.自动填充-窗口-设置插件-物品-选择-提示" }
+				end
+				selectList.add
+				{
+					type = "choose-elem-button" ,
+					name = SIAutoInsert.Names.SetModule_Item_Prefix .. slotIndex .. "_" .. entityName ,
+					tooltip = itemTooltip ,
+					elem_type = "item" ,
+					item = itemName ,
+					elem_filters = SIAutoInsert.SetModule_Item_Filters ,
+					style = SIConstants_Core.raw.Styles.RequestMap_ListChooser
+				}
+			end
+		end
+		list.add
+		{
+			type = "choose-elem-button" ,
+			name = SIAutoInsert.Names.SetModule_Entity_Prefix ,
+			tooltip = { "SICore.自动填充-窗口-设置插件-实体-选择-提示" } ,
+			elem_type = "entity" ,
+			entity = nil ,
+			elem_filters = entityFilter ,
+			style = SIConstants_Core.raw.Styles.RequestMap_ListChooser
+		}
+	end ,
+	FreshPage_SetModule_Enable = function( settings , tabSettings , elements )
+		-- 更新说明
+		elements.SetModule_Enable.caption = { "SICore.自动填充-窗口-设置插件-启用" , { SITable.Size( tabSettings.SetModule.List ) > 0 and "SICore.自动填充-窗口-启用-已设置" or "SICore.自动填充-窗口-启用-未设置" } }
 	end ,
 	FreshPage_InsertFuel = function( settings , tabSettings , elements )
 		-- 更新说明
@@ -738,16 +1078,145 @@ SIAutoInsert =
 			settings.defaultIndex4 = 0
 		end
 	end ,
+	-- ----------------------------------------
+	-- 这是一个内部函数 , 请勿外部调用<br>
+	-- ----------------------------------------
+	FireModuleEvent = function( playerIndex , entity )
+		local data =
+		{
+			name = SIAutoInsert.ModuleEventID ,
+			tick = game.tick ,
+			player_index = playerIndex ,
+			entity = entity
+		}
+		script.raise_event( SIAutoInsert.ModuleEventID , data )
+	end ,
 	EffectTabSettings = function( settings , tabSettingsIndex )
-		local player = game.get_player( settings.playerIndex )
+		local playerIndex = settings.playerIndex
+		local player = game.get_player( playerIndex )
 		local playerInventory = player.get_main_inventory()
 		local tabSettings = settings.TabSettingsList[tabSettingsIndex]
+		local greenToBlue = tabSettings.GreenToBlue.Check
 		for index , entity in pairs( settings.entities ) do
 			local force = entity.force
 			local surface = entity.surface
 			local entityName = entity.name
 			local entityPrototype = entity.prototype
 			local type = entityPrototype.type
+			local moduleFlag = false
+			-- ----------------------------------------
+			-- 最大格子
+			-- ----------------------------------------
+			if tabSettings.MaxSlot.Enable then
+				local maxSlotCount = tabSettings.MaxSlot.List[entityName]
+				if maxSlotCount then
+					maxSlotCount = maxSlotCount + 1 -- 因为实际是设置到此格子 , 而保存的值是空余这么多格子 , 所以此处的值要 + 1
+					if type == SICommon.Types.Entities.Container or type == SICommon.Types.Entities.ContainerLogic then
+						local inventory = entity.get_inventory( defines.inventory.chest )
+						if inventory and inventory.supports_bar() then
+							local inventorySize = #inventory
+							if maxSlotCount < inventorySize then
+								inventory.set_bar( maxSlotCount < 1 and nil or maxSlotCount )
+							end
+						end
+					elseif type == SICommon.Types.Entities.Car then
+						local inventory = entity.get_inventory( defines.inventory.car_trunk )
+						if inventory and inventory.supports_bar() then
+							local inventorySize = #inventory
+							if maxSlotCount < inventorySize then
+								inventory.set_bar( maxSlotCount < 1 and nil or maxSlotCount )
+							end
+						end
+					elseif type == SICommon.Types.Entities.SpiderVehicle then
+						local inventory = entity.get_inventory( defines.inventory.spider_trunk )
+						if inventory and inventory.supports_bar() then
+							local inventorySize = #inventory
+							if maxSlotCount < inventorySize then
+								inventory.set_bar( maxSlotCount < 1 and nil or maxSlotCount )
+							end
+						end
+					elseif type == SICommon.Types.Entities.WagonCargo then
+						local inventory = entity.get_inventory( defines.inventory.cargo_wagon )
+						if inventory and inventory.supports_bar() then
+							local inventorySize = #inventory
+							if maxSlotCount < inventorySize then
+								inventory.set_bar( maxSlotCount < 1 and nil or maxSlotCount )
+							end
+						end
+					end
+				end
+			end
+			-- ----------------------------------------
+			-- 绿箱向蓝箱供货
+			-- ----------------------------------------
+			if tabSettings.GreenToBlue.Enable then
+				if type == SICommon.Types.Entities.ContainerLogic then
+					local logisticMode = entityPrototype.logistic_mode
+					if logisticMode == SICommon.Flags.LogisticMode.Requester then
+						entity.request_from_buffers = greenToBlue
+					end
+				end
+			end
+			-- ----------------------------------------
+			-- 设置插件
+			-- ----------------------------------------
+			if tabSettings.SetModule.Enable then
+				local setModuleList = tabSettings.SetModule.List[entityName]
+				if setModuleList then
+					local inventory = entity.get_module_inventory()
+					if inventory then
+						for slotIndex = 1 , #inventory , 1 do
+							local itemName = setModuleList[slotIndex]
+							if itemName and game.item_prototypes[itemName] then
+								local currentItemStack = inventory[slotIndex]
+								if not currentItemStack.valid_for_read or currentItemStack.name ~= itemName then
+									if currentItemStack.valid_for_read and currentItemStack.name ~= itemName then
+										local dropItemFlag = true
+										local itemStack = { name = currentItemStack.name , count = 1 }
+										if playerInventory.can_insert( itemStack ) then
+											playerInventory.insert( itemStack )
+											dropItemFlag = false
+										end
+										if dropItemFlag then
+											surface.spill_item_stack( entity.position , { name = currentItemStack.name , count = 1 } , true , force , false )
+										end
+										currentItemStack.clear()
+										moduleFlag = true
+									end
+									local itemStack = { name = itemName , count = 1 }
+									if inventory.can_insert( itemStack ) then
+										local hasCount = playerInventory.get_item_count( itemName )
+										if hasCount > 0 then
+											currentItemStack.set_stack( itemStack )
+											playerInventory.remove{ name = itemName , count = 1 }
+											moduleFlag = true
+										end
+									end
+								end
+							else
+								local currentItemStack = inventory[slotIndex]
+								if currentItemStack.valid_for_read then
+									local dropItemFlag = true
+									local itemStack = { name = currentItemStack.name , count = 1 }
+									if playerInventory.can_insert( itemStack ) then
+										playerInventory.insert( itemStack )
+										dropItemFlag = false
+									end
+									if dropItemFlag then
+										surface.spill_item_stack( entity.position , { name = currentItemStack.name , count = 1 } , true , force , false )
+									end
+									currentItemStack.clear()
+									moduleFlag = true
+								end
+							end
+						end
+					end
+				end
+			end
+			-- 触发插件事件
+			if moduleFlag then
+				SIAutoInsert.FireModuleEvent( playerIndex , entity )
+			end
 			-- ----------------------------------------
 			-- 插入燃料
 			-- ----------------------------------------
@@ -914,6 +1383,139 @@ SIAutoInsert =
 			-- 设置新的默认选择值
 			if selectedIndex == 2 then
 				settings.defaultIndex = tabSettingsIndex
+			end
+		end
+	end ,
+	Set_MaxSlot_Entity = function( playerIndex , name , element )
+		local settings = SIGlobal.GetPlayerSettings( SIAutoInsert.Settings.Name , playerIndex )
+		if settings.frame and settings.frame.valid then
+			-- 保存 [最大格子-实体] 选择的实体
+			local selectEntityName = element.elem_value
+			local tabSettingsIndex = settings.tabSettingsIndex
+			local tabSettings = settings.TabSettingsList[tabSettingsIndex]
+			local countList = tabSettings.MaxSlot.List
+			local entityName = name:sub( SIAutoInsert.Names.MaxSlot_Entity_Position )
+			if countList[entityName] then
+				if entityName == selectEntityName then
+					return
+				else
+					if selectEntityName == nil then
+						countList[entityName] = nil
+					else
+						local newCountList = {}
+						for innerEntityName , count in pairs( countList ) do
+							if entityName == innerEntityName then
+								newCountList[selectEntityName] = 0
+							else
+								newCountList[innerEntityName] = count
+							end
+						end
+						tabSettings.MaxSlot.List = newCountList
+					end
+				end
+			else
+				if selectEntityName == nil then
+					return
+				end
+				if countList[selectEntityName] then
+					SIPrint.Warning( playerIndex , { "SICore.自动填充-提示-最大格子-已存在" , selectEntityName , game.entity_prototypes[selectEntityName].localised_name } )
+					element.elem_value = nil
+					return
+				end
+				countList[selectEntityName] = 0
+			end
+			SIAutoInsert.FreshPage_MaxSlot( settings , tabSettings , settings.Elements[tabSettingsIndex] )
+		end
+	end ,
+	Set_MaxSlot_Count = function( playerIndex , name , element )
+		local settings = SIGlobal.GetPlayerSettings( SIAutoInsert.Settings.Name , playerIndex )
+		if settings.frame and settings.frame.valid then
+			local count = math.floor( tonumber( element.text ) or 0 )
+			element.text = tostring( count )
+			-- 保存 [最大格子-数量] 填写的数量
+			local tabSettingsIndex = settings.tabSettingsIndex
+			local tabSettings = settings.TabSettingsList[tabSettingsIndex]
+			local countList = tabSettings.MaxSlot.List
+			local entityName = name:sub( SIAutoInsert.Names.MaxSlot_Count_Position )
+			countList[entityName] = count
+		end
+	end ,
+	Set_GreenToBlue_Check = function( playerIndex , element )
+		local settings = SIGlobal.GetPlayerSettings( SIAutoInsert.Settings.Name , playerIndex )
+		if settings.frame and settings.frame.valid then
+			-- 保存 [绿箱向蓝箱供货-勾选] 复选框的值
+			local tabSettingsIndex = settings.tabSettingsIndex
+			local tabSettings = settings.TabSettingsList[tabSettingsIndex]
+			tabSettings.GreenToBlue.Check = element.state
+			SIAutoInsert.FreshPage_GreenToBlue( settings , tabSettings , settings.Elements[tabSettingsIndex] )
+		end
+	end ,
+	Set_SetModule_FromInventory = function( playerIndex , element )
+		local settings = SIGlobal.GetPlayerSettings( SIAutoInsert.Settings.Name , playerIndex )
+		if settings.frame and settings.frame.valid then
+			-- 保存 [设置插件-从背包填充] 复选框的值
+			local tabSettingsIndex = settings.tabSettingsIndex
+			local tabSettings = settings.TabSettingsList[tabSettingsIndex]
+			tabSettings.SetModule.FromInventory = element.state
+			SIAutoInsert.FreshPage_SetModule_Enable( settings , tabSettings , settings.Elements[tabSettingsIndex] )
+		end
+	end ,
+	Set_SetModule_Entity = function( playerIndex , name , element )
+		local settings = SIGlobal.GetPlayerSettings( SIAutoInsert.Settings.Name , playerIndex )
+		if settings.frame and settings.frame.valid then
+			-- 保存 [设置插件-实体] 选择的实体
+			local selectEntityName = element.elem_value
+			local tabSettingsIndex = settings.tabSettingsIndex
+			local tabSettings = settings.TabSettingsList[tabSettingsIndex]
+			local moduleList = tabSettings.SetModule.List
+			local entityName = name:sub( SIAutoInsert.Names.SetModule_Entity_Position )
+			if moduleList[entityName] then
+				if entityName == selectEntityName then
+					return
+				else
+					if selectEntityName == nil then
+						moduleList[entityName] = nil
+					else
+						local newModuleList = {}
+						for innerEntityName , moduleData in pairs( moduleList ) do
+							if entityName == innerEntityName then
+								newModuleList[selectEntityName] = {}
+							else
+								newModuleList[innerEntityName] = moduleData
+							end
+						end
+						tabSettings.SetModule.List = newModuleList
+					end
+				end
+			else
+				if selectEntityName == nil then
+					return
+				end
+				if moduleList[selectEntityName] then
+					SIPrint.Warning( playerIndex , { "SICore.自动填充-提示-设置插件-已存在" , selectEntityName , game.entity_prototypes[selectEntityName].localised_name } )
+					element.elem_value = nil
+					return
+				end
+				moduleList[selectEntityName] = {}
+			end
+			SIAutoInsert.FreshPage_SetModule( settings , tabSettings , settings.Elements[tabSettingsIndex] )
+		end
+	end ,
+	Set_SetModule_Item = function( playerIndex , name , element )
+		local settings = SIGlobal.GetPlayerSettings( SIAutoInsert.Settings.Name , playerIndex )
+		if settings.frame and settings.frame.valid then
+			local selectItemName = element.elem_value
+			element.tooltip = selectItemName and { "SICore.自动填充-窗口-设置插件-物品-提示" , game.item_prototypes[selectItemName].localised_name } or { "SICore.自动填充-窗口-设置插件-物品-选择-提示" }
+			-- 保存 [设置插件-物品] 选择的物品
+			local key = name:sub( SIAutoInsert.Names.SetModule_Item_Position )
+			local location = key:find( "_" )
+			local slotIndex = tonumber( key:sub( 1 , location - 1 ) )
+			if slotIndex and slotIndex > 0 then
+				local entityName = key:sub( location + 1 )
+				local tabSettingsIndex = settings.tabSettingsIndex
+				local tabSettings = settings.TabSettingsList[tabSettingsIndex]
+				local moduleList = tabSettings.SetModule.List
+				moduleList[entityName][slotIndex] = selectItemName
 			end
 		end
 	end ,
@@ -1174,11 +1776,33 @@ SIAutoInsert =
 			defaultIndex = settings.defaultIndex ,
 			TabSettingsList = settings.TabSettingsList
 		}
+	end ,
+
+	-- ------------------------------------------------------------------------------------------------
+	-- ------ 接口函数 -- 事件 ------------------------------------------------------------------------
+	-- ------------------------------------------------------------------------------------------------
+
+	-- ----------------------------------------
+	-- 当一个玩家通过自动填充修改了实体的插件时 , 会触发此事件<br>
+	-- 事件会包含 4 个参数 :<br>
+	-- name          = 事件的 ID 值<br>
+	-- tick          = 当前游戏刻<br>
+	-- player_index  = 操作玩家的索引<br>
+	-- entity        = 被修改了插件的实体<br>
+	-- ----------------------------------------
+	-- 返回值 = 事件的 ID 值<br>
+	-- ----------------------------------------
+	GetModuleEventID = function()
+		return SIAutoInsert.ModuleEventID
 	end
 }
 
 SIAutoInsert.Names.ListButtonPosition = #SIAutoInsert.Names.ListButtonPrefix + 1
 SIAutoInsert.Names.EnablePosition = #SIAutoInsert.Names.EnablePrefix + 1
+SIAutoInsert.Names.MaxSlot_Entity_Position = #SIAutoInsert.Names.MaxSlot_Entity_Prefix + 1
+SIAutoInsert.Names.MaxSlot_Count_Position = #SIAutoInsert.Names.MaxSlot_Count_Prefix + 1
+SIAutoInsert.Names.SetModule_Entity_Position = #SIAutoInsert.Names.SetModule_Entity_Prefix + 1
+SIAutoInsert.Names.SetModule_Item_Position = #SIAutoInsert.Names.SetModule_Item_Prefix + 1
 SIAutoInsert.Names.InsertFuel_Entity_Position = #SIAutoInsert.Names.InsertFuel_Entity_Prefix + 1
 SIAutoInsert.Names.InsertFuel_Item_Position = #SIAutoInsert.Names.InsertFuel_Item_Prefix + 1
 SIAutoInsert.Names.InsertFuel_Count_Position = #SIAutoInsert.Names.InsertFuel_Count_Prefix + 1

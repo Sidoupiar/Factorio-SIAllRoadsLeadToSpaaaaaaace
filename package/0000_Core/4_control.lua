@@ -822,6 +822,10 @@ end )
 		return
 	end
 	-- 自动填充的管理窗口事件
+	if name:StartsWith( SIAutoInsert.Names.MaxSlot_Count_Prefix ) then
+		SIAutoInsert.Set_MaxSlot_Count( playerIndex , name , element )
+		return
+	end
 	if name:StartsWith( SIAutoInsert.Names.InsertFuel_Count_Prefix ) then
 		SIAutoInsert.Set_InsertFuel_Count( playerIndex , name , element )
 		return
@@ -922,6 +926,10 @@ end )
 		return
 	end
 	-- 自动填充的管理窗口事件
+	if name == SIAutoInsert.Names.GreenToBlue_Check then
+		SIAutoInsert.Set_GreenToBlue_Check( playerIndex , element )
+		return
+	end
 	if name:StartsWith( SIAutoInsert.Names.EnablePrefix ) then
 		SIAutoInsert.EnableFunction( playerIndex , name , element )
 		return
@@ -1045,6 +1053,18 @@ end )
 	end
 	-- 自动填充的管理窗口事件
 	if name:StartsWith( SIAutoInsert.Names.Prefix ) then
+		if name:StartsWith( SIAutoInsert.Names.MaxSlot_Entity_Prefix ) then
+			SIAutoInsert.Set_MaxSlot_Entity( playerIndex , name , element )
+			return
+		end
+		if name:StartsWith( SIAutoInsert.Names.SetModule_Entity_Prefix ) then
+			SIAutoInsert.Set_SetModule_Entity( playerIndex , name , element )
+			return
+		end
+		if name:StartsWith( SIAutoInsert.Names.SetModule_Item_Prefix ) then
+			SIAutoInsert.Set_SetModule_Item( playerIndex , name , element )
+			return
+		end
 		if name:StartsWith( SIAutoInsert.Names.InsertFuel_Entity_Prefix ) then
 			SIAutoInsert.Set_InsertFuel_Entity( playerIndex , name , element )
 			return
