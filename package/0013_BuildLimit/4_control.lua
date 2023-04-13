@@ -139,6 +139,14 @@ end )
 	local playerIndex = event.player_index
 	SIBuildLimit.CheckModule( playerIndex , entity )
 end )
+.Add( SIAutoInsert.GetModuleEventID() , function( event , functionID )
+	local entity = event.entity
+	if not entity or not entity.valid then
+		return
+	end
+	local playerIndex = event.player_index
+	SIBuildLimit.CheckModule( playerIndex , entity )
+end )
 
 -- ------------------------------------------------------------------------------------------------
 -- -------- 玩家操作事件 --------------------------------------------------------------------------

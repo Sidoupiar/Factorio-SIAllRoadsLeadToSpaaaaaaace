@@ -430,7 +430,10 @@ SIBuildLimit =
 				for limitDataIDIndex , limitDataID in pairs( limitDataIDList ) do
 					local limitData = globalSettings.LimitData[limitDataID]
 					if moduleCount < limitData.MinModuleCount then
-						entity.active = false
+						if moduleCountSelf < limitData.MinModuleCount then
+							entity.active = false
+							SIBuildLimit.CreateAlertModule( entity )
+						end
 						if #newProxyList > 0 then
 							for index , proxy in pairs( newProxyList ) do
 								proxy.item_requests = {}
@@ -438,14 +441,14 @@ SIBuildLimit =
 							if playerIndex then
 								SIPrint.Alert( playerIndex , { "SIBuildLimit.不支持的插件" } )
 							end
-						end
-						if moduleCountSelf < limitData.MinModuleCount then
-							SIBuildLimit.CreateAlertModule( entity )
 						end
 						return
 					end
 					if moduleCount > limitData.MaxModuleCount then
-						entity.active = false
+						if moduleCountSelf > limitData.MinModuleCount then
+							entity.active = false
+							SIBuildLimit.CreateAlertModule( entity )
+						end
 						if #newProxyList > 0 then
 							for index , proxy in pairs( newProxyList ) do
 								proxy.item_requests = {}
@@ -453,9 +456,6 @@ SIBuildLimit =
 							if playerIndex then
 								SIPrint.Alert( playerIndex , { "SIBuildLimit.不支持的插件" } )
 							end
-						end
-						if moduleCountSelf > limitData.MinModuleCount then
-							SIBuildLimit.CreateAlertModule( entity )
 						end
 						return
 					end
@@ -463,7 +463,11 @@ SIBuildLimit =
 						for moduleName , needCount in pairs( limitData.NeedModuleList ) do
 							local count = moduleCountList[moduleName] or 0
 							if count < needCount then
-								entity.active = false
+								local countSelf = moduleCountListSelf[moduleName] or 0
+								if countSelf < needCount then
+									entity.active = false
+									SIBuildLimit.CreateAlertModule( entity )
+								end
 								if #newProxyList > 0 then
 									for index , proxy in pairs( newProxyList ) do
 										proxy.item_requests = {}
@@ -471,10 +475,6 @@ SIBuildLimit =
 									if playerIndex then
 										SIPrint.Alert( playerIndex , { "SIBuildLimit.不支持的插件" } )
 									end
-								end
-								local countSelf = moduleCountListSelf[moduleName] or 0
-								if countSelf < needCount then
-									SIBuildLimit.CreateAlertModule( entity )
 								end
 								return
 							end
@@ -484,7 +484,10 @@ SIBuildLimit =
 					if supportModuleList then
 						for moduleName , count in pairs( moduleCountList ) do
 							if not supportModuleList[moduleName] then
-								entity.active = false
+								if moduleCountListSelf[moduleName] then
+									entity.active = false
+									SIBuildLimit.CreateAlertModule( entity )
+								end
 								if #newProxyList > 0 then
 									for index , proxy in pairs( newProxyList ) do
 										proxy.item_requests = {}
@@ -492,15 +495,16 @@ SIBuildLimit =
 									if playerIndex then
 										SIPrint.Alert( playerIndex , { "SIBuildLimit.不支持的插件" } )
 									end
-								end
-								if moduleCountListSelf[moduleName] then
-									SIBuildLimit.CreateAlertModule( entity )
 								end
 								return
 							end
 							local supportCount = supportModuleList[moduleName]
 							if count > supportCount then
-								entity.active = false
+								local countSelf = moduleCountListSelf[moduleName] or 0
+								if countSelf > supportCount then
+									entity.active = false
+									SIBuildLimit.CreateAlertModule( entity )
+								end
 								if #newProxyList > 0 then
 									for index , proxy in pairs( newProxyList ) do
 										proxy.item_requests = {}
@@ -508,10 +512,6 @@ SIBuildLimit =
 									if playerIndex then
 										SIPrint.Alert( playerIndex , { "SIBuildLimit.不支持的插件" } )
 									end
-								end
-								local countSelf = moduleCountListSelf[moduleName] or 0
-								if countSelf > supportCount then
-									SIBuildLimit.CreateAlertModule( entity )
 								end
 								return
 							end

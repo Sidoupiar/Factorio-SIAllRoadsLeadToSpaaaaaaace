@@ -152,5 +152,7 @@ SIInterface
 	CloseFrames = SIAutoInsert.CloseFrames ,
 	-- 导入导出
 	ImpoerSettingsData = SIAutoInsert.ImpoerSettingsData ,
-	ExportSettingsData = SIAutoInsert.ExportSettingsData
+	ExportSettingsData = SIAutoInsert.ExportSettingsData ,
+	-- 事件
+	GetModuleEventID = SIAutoInsert.GetModuleEventID
 } )
