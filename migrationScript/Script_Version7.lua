@@ -6,6 +6,11 @@
 local UnlockerGlobalSettings = SIGlobal.GetGlobalSettings( SIUnlocker.Settings.Name )
 UnlockerGlobalSettings.SavedForceEffects = {}
 
+-- 维护建造限制逻辑数据
+local BuildLImitGlobalSettings = SIGlobal.GetGlobalSettings( SIBuildLimit.Settings.Name )
+BuildLImitGlobalSettings.Icons = {}
+
+-- 维护自动填充数据
 for playerIndex , playerSettings in pairs( SIGlobal.GetAllPlayerSettings( SIAutoInsert.Settings.Name ) ) do
 	for index , tabSettings in pairs( playerSettings.TabSettingsList ) do
 		-- 最大格子

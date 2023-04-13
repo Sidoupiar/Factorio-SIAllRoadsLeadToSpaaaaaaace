@@ -11,7 +11,8 @@ SIBuildLimit =
 			LimitData = {} ,
 			Machines = {} ,
 			Beacons = {} ,
-			Modules = {}
+			Modules = {} ,
+			Icons = {} ,
 		} ,
 		DefaultPlayer =
 		{
@@ -43,6 +44,100 @@ SIBuildLimit =
 	-- ------------------------------------------------------------------------------------------------
 	-- ---------- 功能函数 ----------------------------------------------------------------------------
 	-- ------------------------------------------------------------------------------------------------
+	CreateAlertBeacon = function( entity )
+		local iconID = rendering.draw_sprite
+		{
+			sprite = SIConstants_BuildLimit.raw.Sprites.Beacon ,
+			orientation = 0 ,
+			x_scale = 1.0 ,
+			y_scale = 1.0 ,
+			tint = nil ,
+			render_layer = SICommon.Flags.RenderLayer.AirEntityInfoIcon ,
+			orientation_target = entity ,
+			orientation_target_offset = { 0 , 0 } ,
+			oriented_offset = { 0 , 0 } ,
+			target = entity ,
+			target_offset = { 0 , 0 } ,
+			surface = entity.surface ,
+			time_to_live = nil ,
+			forces = { entity.force } ,
+			players = nil ,
+			visible = true ,
+			only_in_alt_mode = false
+		}
+		local globalSettings = SIGlobal.GetGlobalSettings( SIBuildLimit.Settings.Name )
+		local unitNumber = entity.unit_number
+		local iconData = globalSettings.Icons[unitNumber]
+		if iconData then
+			if iconData.Beacon then
+				rendering.destroy( iconData.Beacon )
+			end
+			iconData.Beacon = iconID
+		else
+			globalSettings.Icons[unitNumber] = { Beacon = iconID }
+		end
+	end ,
+	CreateAlertModule = function( entity )
+		local iconID = rendering.draw_sprite
+		{
+			sprite = SIConstants_BuildLimit.raw.Sprites.Module ,
+			orientation = 0 ,
+			x_scale = 1.0 ,
+			y_scale = 1.0 ,
+			tint = nil ,
+			render_layer = SICommon.Flags.RenderLayer.AirEntityInfoIcon ,
+			orientation_target = entity ,
+			orientation_target_offset = { 0 , 0 } ,
+			oriented_offset = { 0 , 0 } ,
+			target = entity ,
+			target_offset = { 0 , 0 } ,
+			surface = entity.surface ,
+			time_to_live = nil ,
+			forces = { entity.force } ,
+			players = nil ,
+			visible = true ,
+			only_in_alt_mode = false
+		}
+		local globalSettings = SIGlobal.GetGlobalSettings( SIBuildLimit.Settings.Name )
+		local unitNumber = entity.unit_number
+		local iconData = globalSettings.Icons[unitNumber]
+		if iconData then
+			if iconData.Module then
+				rendering.destroy( iconData.Module )
+			end
+			iconData.Module = iconID
+		else
+			globalSettings.Icons[unitNumber] = { Module = iconID }
+		end
+	end ,
+	RemoveAlertBeacon = function( entity )
+		local globalSettings = SIGlobal.GetGlobalSettings( SIBuildLimit.Settings.Name )
+		local unitNumber = entity.unit_number
+		local iconData = globalSettings.Icons[unitNumber]
+		if iconData then
+			if iconData.Beacon then
+				rendering.destroy( iconData.Beacon )
+				iconData.Beacon = nil
+			end
+			if not iconData.Module then
+				globalSettings.Icons[unitNumber] = nil
+			end
+		end
+	end ,
+	RemoveAlertModule = function( entity )
+		local globalSettings = SIGlobal.GetGlobalSettings( SIBuildLimit.Settings.Name )
+		local unitNumber = entity.unit_number
+		local iconData = globalSettings.Icons[unitNumber]
+		if iconData then
+			if iconData.Module then
+				rendering.destroy( iconData.Module )
+				iconData.Module = nil
+			end
+			if not iconData.Beacon then
+				globalSettings.Icons[unitNumber] = nil
+			end
+		end
+	end ,
 	EffectMachine = function( globalSettings , machine , removedBeacon )
 		local name = machine.name
 		local removedBeaconNumber = removedBeacon and removedBeacon.unit_number or nil
@@ -72,21 +167,25 @@ SIBuildLimit =
 								local limitData = globalSettings.LimitData[limitDataID]
 								if beaconCount < limitData.MinBeaconCount then
 									machine.active = false
+									SIBuildLimit.CreateAlertBeacon( machine )
 									return
 								end
 								if beaconCount > limitData.MaxBeaconCount then
 									machine.active = false
+									SIBuildLimit.CreateAlertBeacon( machine )
 									return
 								end
 								local whiteList = limitData.WhiteList
 								if whiteList then
 									if not whiteList[name] then
 										machine.active = false
+										SIBuildLimit.CreateAlertBeacon( machine )
 										return
 									end
 									local count = beaconCountList[beaconName] or 0
 									if count > whiteList[name] then
 										machine.active = false
+										SIBuildLimit.CreateAlertBeacon( machine )
 										return
 									end
 								end
@@ -101,10 +200,12 @@ SIBuildLimit =
 					local limitData = globalSettings.LimitData[limitDataID]
 					if beaconCount < limitData.MinBeaconCount then
 						machine.active = false
+						SIBuildLimit.CreateAlertBeacon( machine )
 						return
 					end
 					if beaconCount > limitData.MaxBeaconCount then
 						machine.active = false
+						SIBuildLimit.CreateAlertBeacon( machine )
 						return
 					end
 					if limitData.RequireList then
@@ -112,6 +213,7 @@ SIBuildLimit =
 							local count = beaconCountList[beaconName] or 0
 							if count < requireCount then
 								machine.active = false
+								SIBuildLimit.CreateAlertBeacon( machine )
 								return
 							end
 						end
@@ -121,10 +223,12 @@ SIBuildLimit =
 						for beaconName , count in pairs( beaconCountList ) do
 							if not whiteList[beaconName] then
 								machine.active = false
+								SIBuildLimit.CreateAlertBeacon( machine )
 								return
 							end
 							if count > whiteList[beaconName] then
 								machine.active = false
+								SIBuildLimit.CreateAlertBeacon( machine )
 								return
 							end
 						end
@@ -133,6 +237,7 @@ SIBuildLimit =
 			end
 		end
 		machine.active = true
+		SIBuildLimit.RemoveAlertBeacon( machine )
 	end ,
 	EffectModule = function( globalSettings , playerIndex , entity )
 		local type = entity.type
@@ -208,13 +313,13 @@ SIBuildLimit =
 					area = { { selectionBox.left_top.x + position.x , selectionBox.left_top.y + position.y } , { selectionBox.right_bottom.x + position.x , selectionBox.right_bottom.y + position.y } }
 				}
 				if #proxyList > 0 then
-					local unit_number = targetEntity.unit_number
+					local unitNumber = targetEntity.unit_number
 					-- 统计设备插件情况
 					local moduleCount = 0
 					local moduleCountList = {}
 					local newProxyList = {}
 					for index , proxy in pairs( proxyList ) do
-						if proxy.proxy_target.unit_number == unit_number then
+						if proxy.proxy_target.unit_number == unitNumber then
 							for itemName , count in pairs( proxy.item_requests or {} ) do
 								moduleCount = moduleCount + count
 								moduleCountList[itemName] = ( moduleCountList[itemName] or 0 ) + count
@@ -294,21 +399,25 @@ SIBuildLimit =
 					type = SICommon.Types.Entities.ProxyItemRequest ,
 					area = { { selectionBox.left_top.x + position.x , selectionBox.left_top.y + position.y } , { selectionBox.right_bottom.x + position.x , selectionBox.right_bottom.y + position.y } }
 				}
-				local unit_number = entity.unit_number
+				local unitNumber = entity.unit_number
 				local newProxyList = {}
 				-- 统计设备插件情况
 				local moduleCount = 0
 				local moduleCountList = {}
+				local moduleCountSelf = 0
+				local moduleCountListSelf = {}
 				local moduleInventory = entity.get_module_inventory()
 				if moduleInventory then
 					for itemName , count in pairs( moduleInventory.get_contents() ) do
 						moduleCount = moduleCount + count
+						moduleCountSelf = moduleCountSelf + count
 						moduleCountList[itemName] = count
+						moduleCountListSelf[itemName] = count
 					end
 				end
 				if #proxyList > 0 then
 					for index , proxy in pairs( proxyList ) do
-						if proxy.proxy_target.unit_number == unit_number then
+						if proxy.proxy_target.unit_number == unitNumber then
 							for itemName , count in pairs( proxy.item_requests or {} ) do
 								moduleCount = moduleCount + count
 								moduleCountList[itemName] = ( moduleCountList[itemName] or 0 ) + count
@@ -330,6 +439,9 @@ SIBuildLimit =
 								SIPrint.Alert( playerIndex , { "SIBuildLimit.不支持的插件" } )
 							end
 						end
+						if moduleCountSelf < limitData.MinModuleCount then
+							SIBuildLimit.CreateAlertModule( entity )
+						end
 						return
 					end
 					if moduleCount > limitData.MaxModuleCount then
@@ -341,6 +453,9 @@ SIBuildLimit =
 							if playerIndex then
 								SIPrint.Alert( playerIndex , { "SIBuildLimit.不支持的插件" } )
 							end
+						end
+						if moduleCountSelf > limitData.MinModuleCount then
+							SIBuildLimit.CreateAlertModule( entity )
 						end
 						return
 					end
@@ -356,6 +471,10 @@ SIBuildLimit =
 									if playerIndex then
 										SIPrint.Alert( playerIndex , { "SIBuildLimit.不支持的插件" } )
 									end
+								end
+								local countSelf = moduleCountListSelf[moduleName] or 0
+								if countSelf < needCount then
+									SIBuildLimit.CreateAlertModule( entity )
 								end
 								return
 							end
@@ -374,9 +493,13 @@ SIBuildLimit =
 										SIPrint.Alert( playerIndex , { "SIBuildLimit.不支持的插件" } )
 									end
 								end
+								if moduleCountListSelf[moduleName] then
+									SIBuildLimit.CreateAlertModule( entity )
+								end
 								return
 							end
-							if count > supportModuleList[moduleName] then
+							local supportCount = supportModuleList[moduleName]
+							if count > supportCount then
 								entity.active = false
 								if #newProxyList > 0 then
 									for index , proxy in pairs( newProxyList ) do
@@ -386,6 +509,10 @@ SIBuildLimit =
 										SIPrint.Alert( playerIndex , { "SIBuildLimit.不支持的插件" } )
 									end
 								end
+								local countSelf = moduleCountListSelf[moduleName] or 0
+								if countSelf > supportCount then
+									SIBuildLimit.CreateAlertModule( entity )
+								end
 								return
 							end
 						end
@@ -393,6 +520,7 @@ SIBuildLimit =
 				end
 			end
 			entity.active = true
+			SIBuildLimit.RemoveAlertModule( entity )
 		end
 	end ,
 	-- ------------------------------------------------------------------------------------------------
@@ -426,6 +554,7 @@ SIBuildLimit =
 				end
 			end
 		end
+		SIBuildLimit.DestroyEntityIcons( entity.unit_number )
 	end ,
 	CheckModule = function( playerIndex , entity )
 		local globalSettings = SIGlobal.GetGlobalSettings( SIBuildLimit.Settings.Name )
@@ -447,6 +576,19 @@ SIBuildLimit =
 		SIBuildLimit.EffectModule( globalSettings , playerIndex , entity )
 		if entity.active and SIBuildLimit.ModuleMachine[entity.type] then
 			SIBuildLimit.EffectMachine( globalSettings , entity , nil )
+		end
+	end ,
+	DestroyEntityIcons = function( unitNumber )
+		local globalSettings = SIGlobal.GetGlobalSettings( SIBuildLimit.Settings.Name )
+		local iconData = globalSettings.Icons[unitNumber]
+		if iconData then
+			if iconData.Beacon then
+				rendering.destroy( iconData.Beacon )
+			end
+			if iconData.Module then
+				rendering.destroy( iconData.Module )
+			end
+			globalSettings.Icons[unitNumber] = nil
 		end
 	end ,
 	-- ------------------------------------------------------------------------------------------------

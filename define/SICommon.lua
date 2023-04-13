@@ -444,6 +444,7 @@ SICommon =
 		AmbientSound            = "ambient-sound" ,
 		Font                    = "font" ,
 		ControlAutoplace        = "autoplace-control" ,
+		Sprite                  = "sprite" ,
 		Style                   = "gui-style" ,
 		Constants               = "utility-constants" ,
 		-- 原型列表
@@ -823,6 +824,7 @@ for type , real in pairs
 	AmbientSound     = { "音乐" , "EmbientSounds"     } ,
 	Font             = { "字体" , "Fonts"             } ,
 	ControlAutoplace = { "放置" , "ControlAutoplaces" } ,
+	Sprite           = { "图片" , "Sprites"           } ,
 	Categories       = { "类别" , "Categories"        } ,
 	Items            = { "物品" , "Items"             } ,
 	Entities         = { "实体" , "Entities"          } ,

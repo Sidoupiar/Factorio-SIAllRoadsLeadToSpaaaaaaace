@@ -2,6 +2,15 @@
 -- ---------- 定义信息 ----------------------------------------------------------------------------
 -- ------------------------------------------------------------------------------------------------
 
+SIControl.Init
+{
+	[SICommon.Types.Sprite] =
+	{
+		Beacon = "提示插件塔过载" ,
+		Module = "提示插件过载"
+	}
+}
+
 -- ------------------------------------------------------------------------------------------------
 -- ---------- 基础数据 ----------------------------------------------------------------------------
 -- ------------------------------------------------------------------------------------------------
@@ -114,6 +123,13 @@ end )
 			SIBuildLimit.CheckModule( playerIndex , entity )
 		end
 	end
+end )
+.Add( SIEvents.on_entity_destroyed , function( event , functionID )
+	local unitNumber = event.unit_number
+	if not unitNumber then
+		return
+	end
+	SIBuildLimit.DestroyEntityIcons( unitNumber )
 end )
 .Add( SIRequestMap.GetModuleEventID() , function( event , functionID )
 	local entity = event.entity

@@ -205,7 +205,8 @@ local constantsData =
 					Base = "基础" ,
 					Debug = "调试物品" ,
 					Tool = "特殊工具" ,
-					Icon = "图标物品"
+					Icon = "图标物品" ,
+					Alert = "提示物品"
 				}
 			}
 		} ,

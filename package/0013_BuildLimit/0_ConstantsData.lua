@@ -4,6 +4,7 @@ local constantsData =
 	Name = "建造限制" ,
 	FileList =
 	{
+		[SIInit.StateCodeDefine.Data]    = { "1_data"    } ,
 		[SIInit.StateCodeDefine.Control] = { "4_control" }
 	}
 }
