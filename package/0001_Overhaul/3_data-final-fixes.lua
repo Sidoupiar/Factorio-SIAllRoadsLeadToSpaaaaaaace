@@ -70,6 +70,13 @@ local NoCollisionType =
 	[SICommon.Types.HealthEntities.RobotCombat]    = true ,
 	[SICommon.Types.HealthEntities.PlayerPort]     = true
 }
+local TrainType =
+{
+	SICommon.Types.Entities.WagonLocomotive ,
+	SICommon.Types.Entities.WagonCargo ,
+	SICommon.Types.Entities.WagonFluid ,
+	SICommon.Types.Entities.WagonArtillery
+}
 
 SIGen
 -- 修改水蒸气的最高温度
@@ -123,6 +130,16 @@ end )
 		end
 		if not SITable.Has( collisionMask , TankCollisionMaskLayer ) then
 			table.insert( collisionMask , TankCollisionMaskLayer )
+		end
+	end
+end )
+
+-- 由于添加了特殊的碰撞层 , 因此火车的各个组件需要更高的选择等级 , 不然会选择不到
+-- 此项不可以禁用或删除
+.ForEachType( TrainType , function( prototypeName , prototypeData )
+	if prototypeData then
+		if not prototypeData.selection_priority or prototypeData.selection_priority < SICommon.SelectPriority.Train then
+			prototypeData.selection_priority = SICommon.SelectPriority.Train
 		end
 	end
 end )

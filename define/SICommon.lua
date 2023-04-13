@@ -800,6 +800,10 @@ SICommon =
 		All = {} ,
 		Raw = {}
 	} ,
+	SelectPriority =
+	{
+		Train = 51
+	} ,
 	ShowName = {} ,
 	ShowNamePrefix = {} ,
 	ShowNameSuffix = {}

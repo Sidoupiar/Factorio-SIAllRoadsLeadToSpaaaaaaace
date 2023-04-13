@@ -13,6 +13,9 @@ SIOreMap =
 		Clean = "SI核心-黄图-清空" ,
 		Spawn = "SI核心-黄图-铺设" ,
 		Close = "SI核心-黄图-关闭" ,
+		AsDefault = "SI核心-黄图-设为默认" ,
+		TotalMode = "SI核心-黄图-总量模式" ,
+		Count = "SI核心-黄图-数量" ,
 		IconNamePrefix = "SI核心-黄图-矿物" ,
 	} ,
 	Settings =
@@ -67,18 +70,18 @@ SIOreMap =
 			flow2.add{ type = "label" , caption = { "SICore.黄图-窗口-设置" } , style = SIConstants_Core.raw.Styles.OreMap_LabelTop }
 			-- 第 2.1 层
 			local flow21 = flow2.add{ type = "flow" , direction = "horizontal" , style = SIConstants_Core.raw.Styles.Common_FlowCenterH }
-			settings.Elements.asDefault = flow21.add{ type = "checkbox" , state = settings.asDefault , caption = { "SICore.黄图-窗口-设置-设为默认" } , tooltip = { "SICore.黄图-窗口-设置-设为默认-提示" } , style = SIConstants_Core.raw.Styles.OreMap_Check }
+			settings.Elements.asDefault = flow21.add{ type = "checkbox" , name = SIOreMap.Names.AsDefault , state = settings.asDefault , caption = { "SICore.黄图-窗口-设置-设为默认" } , tooltip = { "SICore.黄图-窗口-设置-设为默认-提示" } , style = SIConstants_Core.raw.Styles.OreMap_Check }
 			flow21.add{ type = "sprite" , sprite = "info" , tooltip = { "SICore.黄图-窗口-设置-设为默认-提示" } }
 			-- 第 2.2 层
 			local flow22 = flow2.add{ type = "flow" , direction = "horizontal" , style = SIConstants_Core.raw.Styles.Common_FlowCenterH }
-			settings.Elements.totalMode = flow22.add{ type = "checkbox" , state = settings.totalMode , caption = { "SICore.黄图-窗口-设置-总量模式" } , tooltip = { "SICore.黄图-窗口-设置-总量模式-提示" } , style = SIConstants_Core.raw.Styles.OreMap_Check }
+			settings.Elements.totalMode = flow22.add{ type = "checkbox" , name = SIOreMap.Names.TotalMode , state = settings.totalMode , caption = { "SICore.黄图-窗口-设置-总量模式" } , tooltip = { "SICore.黄图-窗口-设置-总量模式-提示" } , style = SIConstants_Core.raw.Styles.OreMap_Check }
 			flow22.add{ type = "sprite" , sprite = "info" , tooltip = { "SICore.黄图-窗口-设置-总量模式-提示" } }
 			-- 第 2.3 层
 			local flow23 = flow2.add{ type = "flow" , direction = "horizontal" , style = SIConstants_Core.raw.Styles.Common_FlowCenterH }
 			local flow23Label = flow23.add{ type = "flow" , direction = "horizontal" , style = SIConstants_Core.raw.Styles.OreMap_FlowShort }
 			flow23Label.add{ type = "label" , caption = { "SICore.黄图-窗口-设置-数量" } , tooltip = { "SICore.黄图-窗口-设置-数量-提示" } , style = SIConstants_Core.raw.Styles.OreMap_LabelShort }
 			flow23Label.add{ type = "sprite" , sprite = "info" , tooltip = { "SICore.黄图-窗口-设置-数量-提示" } }
-			settings.Elements.count = flow23.add{ type = "textfield" , text = tostring( settings.count or 0 ) , numeric = true , tooltip = { "SICore.黄图-窗口-设置-数量-提示" } , style = SIConstants_Core.raw.Styles.OreMap_Number }
+			settings.Elements.count = flow23.add{ type = "textfield" , name = SIOreMap.Names.Count , text = tostring( settings.count or 0 ) , numeric = true , tooltip = { "SICore.黄图-窗口-设置-数量-提示" } , style = SIConstants_Core.raw.Styles.OreMap_Number }
 			-- 第 3 层
 			local flow3 = frame.add{ type = "flow" , direction = "vertical" , style = SIConstants_Core.raw.Styles.Common_FlowLeft }
 			flow3.add{ type = "line" , direction = "horizontal" }
@@ -118,14 +121,11 @@ SIOreMap =
 	CloseFrame = function( playerIndex )
 		local settings = SIGlobal.GetPlayerSettings( SIOreMap.Settings.Name , playerIndex )
 		if settings.frame and settings.frame.valid then
-			SIOreMap.Save( settings )
 			-- 清除临时数据
 			settings.tiles = nil
 			settings.frame.destroy()
 			settings.frame = nil
-			for key , element in pairs( settings.Elements ) do
-				settings.Elements[key] = nil
-			end
+			settings.Elements = {}
 		end
 	end ,
 	MoveFrame = function( playerIndex )
@@ -165,23 +165,6 @@ SIOreMap =
 	-- ------------------------------------------------------------------------------------------------
 	-- ---------- 功能函数 ----------------------------------------------------------------------------
 	-- ------------------------------------------------------------------------------------------------
-	Save = function( settings )
-		if settings.Elements.asDefault then
-			settings.asDefault = settings.Elements.asDefault.state
-		else
-			settings.asDefault = false
-		end
-		if settings.Elements.totalMode then
-			settings.totalMode = settings.Elements.totalMode.state
-		else
-			settings.totalMode = false
-		end
-		if settings.Elements.count then
-			settings.count = SITools.AsNumberInt( settings.Elements.count.text , 0 , SIOreMap.MaxCount )
-		else
-			settings.count = 0
-		end
-	end ,
 	SpawnOre = function( settings )
 		local player = game.get_player( settings.playerIndex )
 		if settings.count < 1 then
@@ -232,9 +215,32 @@ SIOreMap =
 	-- ------------------------------------------------------------------------------------------------
 	-- ---------- 事件函数 ----------------------------------------------------------------------------
 	-- ------------------------------------------------------------------------------------------------
+	Set_AsDefault = function( playerIndex , element )
+		local settings = SIGlobal.GetPlayerSettings( SIOreMap.Settings.Name , playerIndex )
+		if settings.frame and settings.frame.valid then
+			-- 保存 [设置默认] 复选框的值
+			settings.asDefault = element.state
+		end
+	end ,
+	Set_TotalMode = function( playerIndex , element )
+		local settings = SIGlobal.GetPlayerSettings( SIOreMap.Settings.Name , playerIndex )
+		if settings.frame and settings.frame.valid then
+			-- 保存 [总量模式] 复选框的值
+			settings.totalMode = element.state
+		end
+	end ,
+	Set_Count = function( playerIndex , element )
+		local settings = SIGlobal.GetPlayerSettings( SIOreMap.Settings.Name , playerIndex )
+		if settings.frame and settings.frame.valid then
+			local count = math.floor( tonumber( element.text ) or 0 )
+			element.text = tostring( count )
+			-- 保存 [数量] 填写的数量
+			settings.count = count
+		end
+	end ,
 	SortOreDataName = function( playerIndex )
 		local settings = SIGlobal.GetPlayerSettings( SIOreMap.Settings.Name , playerIndex )
-		if settings then
+		if settings.frame and settings.frame.valid then
 			local oreList = {}
 			for oreName , oreCount in pairs( settings.oreData ) do
 				table.insert( oreList , { name = oreName , localizedName = oreName } )
@@ -252,7 +258,7 @@ SIOreMap =
 	end ,
 	SortOreDataCount = function( playerIndex )
 		local settings = SIGlobal.GetPlayerSettings( SIOreMap.Settings.Name , playerIndex )
-		if settings then
+		if settings.frame and settings.frame.valid then
 			local oreList = {}
 			for oreName , oreCount in pairs( settings.oreData ) do
 				table.insert( oreList , { name = oreName , count = oreCount } )
@@ -270,7 +276,7 @@ SIOreMap =
 	end ,
 	CleanOreData = function( playerIndex )
 		local settings = SIGlobal.GetPlayerSettings( SIOreMap.Settings.Name , playerIndex )
-		if settings then
+		if settings.frame and settings.frame.valid then
 			for oreName , oreCount in pairs( settings.oreData ) do
 				if oreCount == 0 then
 					settings.oreData[oreName] = nil
@@ -281,12 +287,16 @@ SIOreMap =
 	end ,
 	Fresh = function( playerIndex )
 		local settings = SIGlobal.GetPlayerSettings( SIOreMap.Settings.Name , playerIndex )
-		SIOreMap.FreshList( settings )
+		if settings.frame and settings.frame.valid then
+			SIOreMap.FreshList( settings )
+		end
 	end ,
 	SelectOre = function( playerIndex , oreListItemName )
 		local settings = SIGlobal.GetPlayerSettings( SIOreMap.Settings.Name , playerIndex )
-		settings.selectedOreName = oreListItemName:sub( SIOreMap.Names.IconNamePosition )
-		SIOreMap.FreshList( settings )
+		if settings.frame and settings.frame.valid then
+			settings.selectedOreName = oreListItemName:sub( SIOreMap.Names.IconNamePosition )
+			SIOreMap.FreshList( settings )
+		end
 	end ,
 	SaveOre = function( playerIndex , entities )
 		local settings = SIGlobal.GetPlayerSettings( SIOreMap.Settings.Name , playerIndex )
@@ -307,7 +317,6 @@ SIOreMap =
 	end ,
 	CreateOre = function( playerIndex )
 		local settings = SIGlobal.GetPlayerSettings( SIOreMap.Settings.Name , playerIndex )
-		SIOreMap.Save( settings )
 		if SIOreMap.SpawnOre( settings ) then
 			SIOreMap.CloseFrame( playerIndex )
 		end

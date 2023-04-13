@@ -808,6 +808,14 @@ end )
 	end
 	local name = element.name
 	local playerIndex = event.player_index
+	-- 黄图的管理窗口事件
+	if name:StartsWith( SIOreMap.Names.Prefix ) then
+		if name == SIOreMap.Names.Count then
+			SIOreMap.Set_Count( playerIndex , element )
+			return
+		end
+		return
+	end
 	-- 紫图的管理窗口事件
 	if name:StartsWith( SIRequestMap.Names.Prefix ) then
 		if name:StartsWith( SIRequestMap.Names.MaxSlot_Count_Prefix ) then
@@ -915,6 +923,18 @@ end )
 		end
 		if name:StartsWith( SIPermission.Names.CheckRadioPrefix ) then
 			SIPermission.SwitchRadio_Check( playerIndex , name )
+			return
+		end
+		return
+	end
+	-- 黄图的管理窗口事件
+	if name:StartsWith( SIOreMap.Names.Prefix ) then
+		if name == SIOreMap.Names.AsDefault then
+			SIOreMap.Set_AsDefault( playerIndex , element )
+			return
+		end
+		if name == SIOreMap.Names.TotalMode then
+			SIOreMap.Set_TotalMode( playerIndex , element )
 			return
 		end
 		return

@@ -35,14 +35,36 @@ function SIFunctions.FlyingText( text , entity , height )
 	}
 end
 
-function SIFunctions.FlyingTextPlayer( text , player , createAtCursor )
+function SIFunctions.FlyingTextPlayer( text , player , height , createAtCursor )
 	player.create_local_flying_text
 	{
 		text = text ,
-		position = player.position ,
+		position = { x = player.position.x , y = player.position.y - height } ,
 		create_at_cursor = createAtCursor or false ,
 		color = { r = 1 , g = 1 , b = 1 , a = 1 } ,
 		time_to_live = 150 ,
 		speed = 0.03
 	}
+end
+
+function SIFunctions.FlyingTextForce( text , entity , height , force )
+	local textEntity = entity.surface.create_entity
+	{
+		name = SIConstants_Core.raw.Entities.FlyingText ,
+		text = text ,
+		position = { x = entity.position.x , y = entity.position.y - height } ,
+		color = { r = 1 , g = 1 , b = 1 , a = 1 }
+	}
+	textEntity.render_to_forces = { force }
+end
+
+function SIFunctions.FlyingTextForceList( text , entity , height , forceList )
+	local textEntity = entity.surface.create_entity
+	{
+		name = SIConstants_Core.raw.Entities.FlyingText ,
+		text = text ,
+		position = { x = entity.position.x , y = entity.position.y - height } ,
+		color = { r = 1 , g = 1 , b = 1 , a = 1 }
+	}
+	textEntity.render_to_forces = forceList
 end

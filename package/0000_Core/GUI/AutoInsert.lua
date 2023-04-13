@@ -41,6 +41,21 @@ SIAutoInsert =
 			Elements =
 			{
 				-- {
+				-- 	TabSettingsName = nil ,
+				-- 	DefaultIndex = nil ,
+				--	Scroll = nil ,
+				-- 	-- 最大格子
+				-- 	MaxSlot_Enable = nil ,
+				-- 	MaxSlot_Flow = nil ,
+				-- 	MaxSlot_List = nil ,
+				-- 	-- 绿箱向蓝箱供货
+				-- 	GreenToBlue_Enable = nil ,
+				-- 	GreenToBlue_Flow = nil ,
+				-- 	GreenToBlue_Check = nil ,
+				-- 	-- 设置插件
+				-- 	SetModule_Enable = nil ,
+				-- 	SetModule_Flow = nil ,
+				-- 	SetModule_List = nil ,
 				-- 	-- 插入燃料
 				-- 	InsertFuel_Enable = nil ,
 				-- 	InsertFuel_Flow = nil ,

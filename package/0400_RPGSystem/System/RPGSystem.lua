@@ -575,11 +575,12 @@ SIRPGSystem =
 		end
 		local settings = SIGlobal.GetPlayerSettings( SIRPGSystem.Settings.Name , playerIndex )
 		if settings.PlayerSetting.Base.showFlyingText then
-			SIFunctions.FlyingText( { isSpecial and "SIRPGSystem.获得经验-战斗-特殊" or "SIRPGSystem.获得经验-战斗-普通" , SITools.FormatNumber4( expCount ) } , game.get_player( playerIndex ) , 1 )
+			local player = game.get_player( playerIndex )
+			SIFunctions.FlyingTextPlayer( { isSpecial and "SIRPGSystem.获得经验-战斗-特殊" or "SIRPGSystem.获得经验-战斗-普通" , SITools.FormatNumber4( expCount ) } , player , 1 , false )
 			if levelCount == 1 then
-				SIFunctions.FlyingText( { "SIRPGSystem.提升等级-战斗-单次" } , game.get_player( playerIndex ) , 1.5 )
+				SIFunctions.FlyingTextPlayer( { "SIRPGSystem.提升等级-战斗-单次" } , player , 1.5 , false )
 			elseif levelCount > 1 then
-				SIFunctions.FlyingText( { "SIRPGSystem.提升等级-战斗-多次" , levelCount } , game.get_player( playerIndex ) , 1.5 )
+				SIFunctions.FlyingTextPlayer( { "SIRPGSystem.提升等级-战斗-多次" , levelCount } , player , 1.5 , false )
 			end
 		end
 	end ,
@@ -603,11 +604,12 @@ SIRPGSystem =
 		end
 		local settings = SIGlobal.GetPlayerSettings( SIRPGSystem.Settings.Name , playerIndex )
 		if settings.PlayerSetting.Base.showFlyingText then
-			SIFunctions.FlyingText( { isSpecial and "SIRPGSystem.获得经验-探索-特殊" or "SIRPGSystem.获得经验-探索-普通" , SITools.FormatNumber4( expCount ) } , game.get_player( playerIndex ) , 1 )
+			local player = game.get_player( playerIndex )
+			SIFunctions.FlyingTextPlayer( { isSpecial and "SIRPGSystem.获得经验-探索-特殊" or "SIRPGSystem.获得经验-探索-普通" , SITools.FormatNumber4( expCount ) } , player , 1 , false )
 			if levelCount == 1 then
-				SIFunctions.FlyingText( { "SIRPGSystem.提升等级-探索-单次" } , game.get_player( playerIndex ) , 1.5 )
+				SIFunctions.FlyingTextPlayer( { "SIRPGSystem.提升等级-探索-单次" } , player , 1.5 , false )
 			elseif levelCount > 1 then
-				SIFunctions.FlyingText( { "SIRPGSystem.提升等级-探索-多次" , levelCount } , game.get_player( playerIndex ) , 1.5 )
+				SIFunctions.FlyingTextPlayer( { "SIRPGSystem.提升等级-探索-多次" , levelCount } , player , 1.5 , false )
 			end
 		end
 	end ,
@@ -631,11 +633,12 @@ SIRPGSystem =
 		end
 		local settings = SIGlobal.GetPlayerSettings( SIRPGSystem.Settings.Name , playerIndex )
 		if settings.PlayerSetting.Base.showFlyingText then
-			SIFunctions.FlyingText( { isSpecial and "SIRPGSystem.获得经验-生存-特殊" or "SIRPGSystem.获得经验-生存-普通" , SITools.FormatNumber4( expCount ) } , game.get_player( playerIndex ) , 1 )
+			local player = game.get_player( playerIndex )
+			SIFunctions.FlyingTextPlayer( { isSpecial and "SIRPGSystem.获得经验-生存-特殊" or "SIRPGSystem.获得经验-生存-普通" , SITools.FormatNumber4( expCount ) } , player , 1 , false )
 			if levelCount == 1 then
-				SIFunctions.FlyingText( { "SIRPGSystem.提升等级-生存-单次" } , game.get_player( playerIndex ) , 1.5 )
+				SIFunctions.FlyingTextPlayer( { "SIRPGSystem.提升等级-生存-单次" } , player , 1.5 , false )
 			elseif levelCount > 1 then
-				SIFunctions.FlyingText( { "SIRPGSystem.提升等级-生存-多次" , levelCount } , game.get_player( playerIndex ) , 1.5 )
+				SIFunctions.FlyingTextPlayer( { "SIRPGSystem.提升等级-生存-多次" , levelCount } , player , 1.5 , false )
 			end
 		end
 	end ,

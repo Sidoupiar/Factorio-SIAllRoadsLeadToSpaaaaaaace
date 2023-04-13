@@ -45,69 +45,67 @@ SIBuildLimit =
 	-- ---------- 功能函数 ----------------------------------------------------------------------------
 	-- ------------------------------------------------------------------------------------------------
 	CreateAlertBeacon = function( entity )
-		local iconID = rendering.draw_sprite
-		{
-			sprite = SIConstants_BuildLimit.raw.Sprites.Beacon ,
-			orientation = 0 ,
-			x_scale = 1.0 ,
-			y_scale = 1.0 ,
-			tint = nil ,
-			render_layer = SICommon.Flags.RenderLayer.AirEntityInfoIcon ,
-			orientation_target = entity ,
-			orientation_target_offset = { 0 , 0 } ,
-			oriented_offset = { 0 , 0 } ,
-			target = entity ,
-			target_offset = { 0 , 0 } ,
-			surface = entity.surface ,
-			time_to_live = nil ,
-			forces = { entity.force } ,
-			players = nil ,
-			visible = true ,
-			only_in_alt_mode = false
-		}
 		local globalSettings = SIGlobal.GetGlobalSettings( SIBuildLimit.Settings.Name )
 		local unitNumber = entity.unit_number
 		local iconData = globalSettings.Icons[unitNumber]
-		if iconData then
-			if iconData.Beacon then
-				rendering.destroy( iconData.Beacon )
+		if not iconData or not iconData.Beacon then
+			local iconID = rendering.draw_sprite
+			{
+				sprite = SIConstants_BuildLimit.raw.Sprites.Beacon ,
+				orientation = 0 ,
+				x_scale = 1.0 ,
+				y_scale = 1.0 ,
+				tint = nil ,
+				render_layer = SICommon.Flags.RenderLayer.AirEntityInfoIcon ,
+				orientation_target = entity ,
+				orientation_target_offset = { 0 , 0 } ,
+				oriented_offset = { 0 , 0 } ,
+				target = entity ,
+				target_offset = { 0 , 0 } ,
+				surface = entity.surface ,
+				time_to_live = nil ,
+				forces = { entity.force } ,
+				players = nil ,
+				visible = true ,
+				only_in_alt_mode = false
+			}
+			if iconData then
+				iconData.Beacon = iconID
+			else
+				globalSettings.Icons[unitNumber] = { Beacon = iconID }
 			end
-			iconData.Beacon = iconID
-		else
-			globalSettings.Icons[unitNumber] = { Beacon = iconID }
 		end
 	end ,
 	CreateAlertModule = function( entity )
-		local iconID = rendering.draw_sprite
-		{
-			sprite = SIConstants_BuildLimit.raw.Sprites.Module ,
-			orientation = 0 ,
-			x_scale = 1.0 ,
-			y_scale = 1.0 ,
-			tint = nil ,
-			render_layer = SICommon.Flags.RenderLayer.AirEntityInfoIcon ,
-			orientation_target = entity ,
-			orientation_target_offset = { 0 , 0 } ,
-			oriented_offset = { 0 , 0 } ,
-			target = entity ,
-			target_offset = { 0 , 0 } ,
-			surface = entity.surface ,
-			time_to_live = nil ,
-			forces = { entity.force } ,
-			players = nil ,
-			visible = true ,
-			only_in_alt_mode = false
-		}
 		local globalSettings = SIGlobal.GetGlobalSettings( SIBuildLimit.Settings.Name )
 		local unitNumber = entity.unit_number
 		local iconData = globalSettings.Icons[unitNumber]
-		if iconData then
-			if iconData.Module then
-				rendering.destroy( iconData.Module )
+		if not iconData or not iconData.Module then
+			local iconID = rendering.draw_sprite
+			{
+				sprite = SIConstants_BuildLimit.raw.Sprites.Module ,
+				orientation = 0 ,
+				x_scale = 1.0 ,
+				y_scale = 1.0 ,
+				tint = nil ,
+				render_layer = SICommon.Flags.RenderLayer.AirEntityInfoIcon ,
+				orientation_target = entity ,
+				orientation_target_offset = { 0 , 0 } ,
+				oriented_offset = { 0 , 0 } ,
+				target = entity ,
+				target_offset = { 0 , 0 } ,
+				surface = entity.surface ,
+				time_to_live = nil ,
+				forces = { entity.force } ,
+				players = nil ,
+				visible = true ,
+				only_in_alt_mode = false
+			}
+			if iconData then
+				iconData.Module = iconID
+			else
+				globalSettings.Icons[unitNumber] = { Module = iconID }
 			end
-			iconData.Module = iconID
-		else
-			globalSettings.Icons[unitNumber] = { Module = iconID }
 		end
 	end ,
 	RemoveAlertBeacon = function( entity )
@@ -256,16 +254,12 @@ SIBuildLimit =
 					local limitData = globalSettings.LimitData[limitDataID]
 					if moduleCount < limitData.MinModuleCount then
 						entity.item_requests = {}
-						if playerIndex then
-							SIPrint.Alert( playerIndex , { "SIBuildLimit.不支持的插件" } )
-						end
+						SIFunctions.FlyingTextForce( { "SIBuildLimit.不支持的插件" } , entity , 1 , entity.force )
 						return
 					end
 					if moduleCount > limitData.MaxModuleCount then
 						entity.item_requests = {}
-						if playerIndex then
-							SIPrint.Alert( playerIndex , { "SIBuildLimit.不支持的插件" } )
-						end
+						SIFunctions.FlyingTextForce( { "SIBuildLimit.不支持的插件" } , entity , 1 , entity.force )
 						return
 					end
 					if limitData.NeedModuleList then
@@ -273,9 +267,7 @@ SIBuildLimit =
 							local count = moduleCountList[moduleName] or 0
 							if count < needCount then
 								entity.item_requests = {}
-								if playerIndex then
-									SIPrint.Alert( playerIndex , { "SIBuildLimit.不支持的插件" } )
-								end
+								SIFunctions.FlyingTextForce( { "SIBuildLimit.不支持的插件" } , entity , 1 , entity.force )
 								return
 							end
 						end
@@ -285,16 +277,12 @@ SIBuildLimit =
 						for moduleName , count in pairs( moduleCountList ) do
 							if not supportModuleList[moduleName] then
 								entity.item_requests = {}
-								if playerIndex then
-									SIPrint.Alert( playerIndex , { "SIBuildLimit.不支持的插件" } )
-								end
+								SIFunctions.FlyingTextForce( { "SIBuildLimit.不支持的插件" } , entity , 1 , entity.force )
 								return
 							end
 							if count > supportModuleList[moduleName] then
 								entity.item_requests = {}
-								if playerIndex then
-									SIPrint.Alert( playerIndex , { "SIBuildLimit.不支持的插件" } )
-								end
+								SIFunctions.FlyingTextForce( { "SIBuildLimit.不支持的插件" } , entity , 1 , entity.force )
 								return
 							end
 						end
@@ -334,18 +322,14 @@ SIBuildLimit =
 							for index , proxy in pairs( newProxyList ) do
 								proxy.item_requests = {}
 							end
-							if playerIndex then
-								SIPrint.Alert( playerIndex , { "SIBuildLimit.不支持的插件" } )
-							end
+							SIFunctions.FlyingTextForce( { "SIBuildLimit.不支持的插件" } , entity , 1 , entity.force )
 							return
 						end
 						if moduleCount > limitData.MaxModuleCount then
 							for index , proxy in pairs( newProxyList ) do
 								proxy.item_requests = {}
 							end
-							if playerIndex then
-								SIPrint.Alert( playerIndex , { "SIBuildLimit.不支持的插件" } )
-							end
+							SIFunctions.FlyingTextForce( { "SIBuildLimit.不支持的插件" } , entity , 1 , entity.force )
 							return
 						end
 						if limitData.NeedModuleList then
@@ -355,9 +339,7 @@ SIBuildLimit =
 									for index , proxy in pairs( newProxyList ) do
 										proxy.item_requests = {}
 									end
-									if playerIndex then
-										SIPrint.Alert( playerIndex , { "SIBuildLimit.不支持的插件" } )
-									end
+									SIFunctions.FlyingTextForce( { "SIBuildLimit.不支持的插件" } , entity , 1 , entity.force )
 									return
 								end
 							end
@@ -369,18 +351,14 @@ SIBuildLimit =
 									for index , proxy in pairs( newProxyList ) do
 										proxy.item_requests = {}
 									end
-									if playerIndex then
-										SIPrint.Alert( playerIndex , { "SIBuildLimit.不支持的插件" } )
-									end
+									SIFunctions.FlyingTextForce( { "SIBuildLimit.不支持的插件" } , entity , 1 , entity.force )
 									return
 								end
 								if count > supportModuleList[moduleName] then
 									for index , proxy in pairs( newProxyList ) do
 										proxy.item_requests = {}
 									end
-									if playerIndex then
-										SIPrint.Alert( playerIndex , { "SIBuildLimit.不支持的插件" } )
-									end
+									SIFunctions.FlyingTextForce( { "SIBuildLimit.不支持的插件" } , entity , 1 , entity.force )
 									return
 								end
 							end
@@ -438,10 +416,8 @@ SIBuildLimit =
 							for index , proxy in pairs( newProxyList ) do
 								proxy.item_requests = {}
 							end
-							if playerIndex then
-								SIPrint.Alert( playerIndex , { "SIBuildLimit.不支持的插件" } )
-							end
 						end
+						SIFunctions.FlyingTextForce( { "SIBuildLimit.不支持的插件" } , entity , 1 , entity.force )
 						return
 					end
 					if moduleCount > limitData.MaxModuleCount then
@@ -453,10 +429,8 @@ SIBuildLimit =
 							for index , proxy in pairs( newProxyList ) do
 								proxy.item_requests = {}
 							end
-							if playerIndex then
-								SIPrint.Alert( playerIndex , { "SIBuildLimit.不支持的插件" } )
-							end
 						end
+						SIFunctions.FlyingTextForce( { "SIBuildLimit.不支持的插件" } , entity , 1 , entity.force )
 						return
 					end
 					if limitData.NeedModuleList then
@@ -472,10 +446,8 @@ SIBuildLimit =
 									for index , proxy in pairs( newProxyList ) do
 										proxy.item_requests = {}
 									end
-									if playerIndex then
-										SIPrint.Alert( playerIndex , { "SIBuildLimit.不支持的插件" } )
-									end
 								end
+								SIFunctions.FlyingTextForce( { "SIBuildLimit.不支持的插件" } , entity , 1 , entity.force )
 								return
 							end
 						end
@@ -492,10 +464,8 @@ SIBuildLimit =
 									for index , proxy in pairs( newProxyList ) do
 										proxy.item_requests = {}
 									end
-									if playerIndex then
-										SIPrint.Alert( playerIndex , { "SIBuildLimit.不支持的插件" } )
-									end
 								end
+								SIFunctions.FlyingTextForce( { "SIBuildLimit.不支持的插件" } , entity , 1 , entity.force )
 								return
 							end
 							local supportCount = supportModuleList[moduleName]
@@ -509,10 +479,8 @@ SIBuildLimit =
 									for index , proxy in pairs( newProxyList ) do
 										proxy.item_requests = {}
 									end
-									if playerIndex then
-										SIPrint.Alert( playerIndex , { "SIBuildLimit.不支持的插件" } )
-									end
 								end
+								SIFunctions.FlyingTextForce( { "SIBuildLimit.不支持的插件" } , entity , 1 , entity.force )
 								return
 							end
 						end
