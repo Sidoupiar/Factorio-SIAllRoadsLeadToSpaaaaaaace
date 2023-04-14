@@ -31,6 +31,13 @@ local constantsData =
 					Dirt = "泥土"
 				}
 			}
+		} ,
+		Categories =
+		{
+			Recipe =
+			{
+				Dirt = "掘土"
+			}
 		}
 	} ,
 	BeforeLoad = function( constantsData )

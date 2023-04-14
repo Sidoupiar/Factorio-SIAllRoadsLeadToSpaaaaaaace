@@ -522,8 +522,8 @@ SIGen
 	} ,
 	beacon_tint =
 	{
-		primary = { 0.441 , 0.714 , 1 , 1 } ,
-		secondary = { 0.388 , 0.976 , 1 , 1 }
+		primary = { r = 0.44 , g = 0.71 , b = 1.00 , a = 1.00 } ,
+		secondary = { r = 0.39 , g = 0.98 , b = 1.00 , a = 1.00 }
 	} ,
 	art_style = "vanilla" ,
 	requires_beacon_alt_mode = false

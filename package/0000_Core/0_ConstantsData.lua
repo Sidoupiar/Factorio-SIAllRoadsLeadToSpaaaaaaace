@@ -335,7 +335,7 @@ local constantsData =
 			} ,
 			Fuel =
 			{
-				Special = "特殊燃料" ,
+				Special = "特殊燃料"
 			} ,
 			Module =
 			{
