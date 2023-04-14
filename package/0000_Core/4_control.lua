@@ -1262,6 +1262,10 @@ end )
 SIEventBus
 .Add( SIEvents.on_player_selected_area , function( event , functionID )
 	local itemName = event.item
+	local item = game.item_prototypes[itemName]
+	if not item or item.flags[SICommon.Flags.Item.OnlyInCursor] then
+		return
+	end
 	local playerIndex = event.player_index
 	-- 粉图
 	if itemName == SIConstants_Core.raw.Items.DeleteMap then
@@ -1328,6 +1332,10 @@ SIEventBus
 end )
 .Add( SIEvents.on_player_reverse_selected_area , function( event , functionID )
 	local itemName = event.item
+	local item = game.item_prototypes[itemName]
+	if not item or item.flags[SICommon.Flags.Item.OnlyInCursor] then
+		return
+	end
 	local playerIndex = event.player_index
 	-- 粉图
 	if itemName == SIConstants_Core.raw.Items.DeleteMap then
@@ -1367,6 +1375,10 @@ end )
 end )
 .Add( SIEvents.on_player_alt_selected_area , function( event , functionID )
 	local itemName = event.item
+	local item = game.item_prototypes[itemName]
+	if not item or item.flags[SICommon.Flags.Item.OnlyInCursor] then
+		return
+	end
 	local playerIndex = event.player_index
 	-- 粉图
 	if itemName == SIConstants_Core.raw.Items.DeleteMap then
@@ -1418,6 +1430,10 @@ end )
 end )
 .Add( SIEvents.on_player_alt_reverse_selected_area , function( event , functionID )
 	local itemName = event.item
+	local item = game.item_prototypes[itemName]
+	if not item or item.flags[SICommon.Flags.Item.OnlyInCursor] then
+		return
+	end
 	local playerIndex = event.player_index
 	-- 粉图
 	if itemName == SIConstants_Core.raw.Items.DeleteMap then
