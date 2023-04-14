@@ -22,13 +22,13 @@ SIFunctions =
 }
 
 -- ------------------------------------------------------------------------------------------------
--- ---------- 常用函数 ----------------------------------------------------------------------------
+-- ---------- 悬浮文字 ----------------------------------------------------------------------------
 -- ------------------------------------------------------------------------------------------------
 
 function SIFunctions.FlyingText( text , entity , height )
 	entity.surface.create_entity
 	{
-		name = SIConstants_Core.raw.Entities.FlyingText ,
+		name = SIConstants_Core and SIConstants_Core.raw.Entities.FlyingText or "tutorial-flying-text" ,
 		text = text ,
 		position = { x = entity.position.x , y = entity.position.y - height } ,
 		color = { r = 1 , g = 1 , b = 1 , a = 1 }
@@ -50,7 +50,7 @@ end
 function SIFunctions.FlyingTextForce( text , entity , height , force )
 	local textEntity = entity.surface.create_entity
 	{
-		name = SIConstants_Core.raw.Entities.FlyingText ,
+		name = SIConstants_Core and SIConstants_Core.raw.Entities.FlyingText or "tutorial-flying-text" ,
 		text = text ,
 		position = { x = entity.position.x , y = entity.position.y - height } ,
 		color = { r = 1 , g = 1 , b = 1 , a = 1 }
@@ -61,7 +61,7 @@ end
 function SIFunctions.FlyingTextForceList( text , entity , height , forceList )
 	local textEntity = entity.surface.create_entity
 	{
-		name = SIConstants_Core.raw.Entities.FlyingText ,
+		name = SIConstants_Core and SIConstants_Core.raw.Entities.FlyingText or "tutorial-flying-text" ,
 		text = text ,
 		position = { x = entity.position.x , y = entity.position.y - height } ,
 		color = { r = 1 , g = 1 , b = 1 , a = 1 }

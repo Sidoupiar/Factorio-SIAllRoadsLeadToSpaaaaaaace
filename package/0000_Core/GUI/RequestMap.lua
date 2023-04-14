@@ -2303,14 +2303,12 @@ SIRequestMap =
 	Set_MaxSlot_Count = function( playerIndex , name , element )
 		local settings = SIGlobal.GetPlayerSettings( SIRequestMap.Settings.Name , playerIndex )
 		if settings.frame and settings.frame.valid then
-			local count = math.floor( tonumber( element.text ) or 0 )
-			element.text = tostring( count )
 			-- 保存 [最大格子-数量] 填写的数量
 			local tabSettingsIndex = settings.tabSettingsIndex
 			local tabSettings = settings.TabSettingsList[tabSettingsIndex]
 			local countList = tabSettings.MaxSlot.List
 			local entityName = name:sub( SIRequestMap.Names.MaxSlot_Count_Position )
-			countList[entityName] = count
+			countList[entityName] = SIElements.GetInputNumber( element )
 		end
 	end ,
 	Set_GreenToBlue_Check = function( playerIndex , element )
@@ -2533,8 +2531,6 @@ SIRequestMap =
 	Set_InsertFuel_Count = function( playerIndex , name , element )
 		local settings = SIGlobal.GetPlayerSettings( SIRequestMap.Settings.Name , playerIndex )
 		if settings.frame and settings.frame.valid then
-			local count = math.floor( tonumber( element.text ) or 0 )
-			element.text = tostring( count )
 			-- 保存 [插入燃料-数量] 填写的数量
 			local key = name:sub( SIRequestMap.Names.InsertFuel_Count_Position )
 			local location = key:find( "_" )
@@ -2544,7 +2540,7 @@ SIRequestMap =
 				local tabSettingsIndex = settings.tabSettingsIndex
 				local tabSettings = settings.TabSettingsList[tabSettingsIndex]
 				local itemDataList = tabSettings.InsertFuel.List
-				itemDataList[entityName][itemDataIndex].Count = count
+				itemDataList[entityName][itemDataIndex].Count = SIElements.GetInputNumber( element )
 			end
 		end
 	end ,
@@ -2628,8 +2624,6 @@ SIRequestMap =
 	Set_InsertAmmo_Count = function( playerIndex , name , element )
 		local settings = SIGlobal.GetPlayerSettings( SIRequestMap.Settings.Name , playerIndex )
 		if settings.frame and settings.frame.valid then
-			local count = math.floor( tonumber( element.text ) or 0 )
-			element.text = tostring( count )
 			-- 保存 [插入弹药-数量] 填写的数量
 			local key = name:sub( SIRequestMap.Names.InsertAmmo_Count_Position )
 			local location = key:find( "_" )
@@ -2639,7 +2633,7 @@ SIRequestMap =
 				local tabSettingsIndex = settings.tabSettingsIndex
 				local tabSettings = settings.TabSettingsList[tabSettingsIndex]
 				local itemDataList = tabSettings.InsertAmmo.List
-				itemDataList[entityName][itemDataIndex].Count = count
+				itemDataList[entityName][itemDataIndex].Count = SIElements.GetInputNumber( element )
 			end
 		end
 	end ,

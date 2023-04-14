@@ -27,6 +27,7 @@ SIElements =
 -- ----------------------------------------
 -- 根据给定的参数创建窗口 , 并调整其位置<br>
 -- 之后把创建的窗口和它的位置保存进持久化数据中<br>
+-- 当没有加载 Core 功能包时 , 下列功能均失效 , 只会返回一个基础的窗口<br>
 -- ----------------------------------------
 -- player          = 要创建的窗口的玩家<br>
 -- settingsElement = 玩家持久化数据的对应部分表 , 用于同步窗口的位置信息 , 会占用 [ settingsElement.frame ] 和 [ settingsElement.frameLocation ] 属性<br>
@@ -60,6 +61,9 @@ SIElements =
 -- 创建的窗口的位置位于 [ settingsElement.frameLocation ] 属性中<br>
 -- ----------------------------------------
 function SIElements.CreateFrame( player , settingsElement , frameData )
+	if not SIConstants_Core then
+		return player.gui.screen.add{ type = "frame" , name = frameData.Name , direction = "vertical" , style = frameData.Style }
+	end
 	local locked = frameData.isLocked
 	local frame = player.gui.screen.add{ type = "frame" , name = frameData.Name , direction = "vertical" , style = frameData.Style }
 	local titleFlow = frame.add{ type = "flow" , direction = "horizontal" , style = SIConstants_Core.raw.Styles.Common_FlowTop }
@@ -154,4 +158,20 @@ function SIElements.GetRadioValue( radioList )
 			return index
 		end
 	end
+end
+
+-- ----------------------------------------
+-- 获取文本条中的字符并转化为数字<br>
+-- 如果文本条中的是无效数字 , 则会被重置为 0<br>
+-- 此函数会自动纠正输入的字符<br>
+-- ----------------------------------------
+-- textfield       = 文本条控件<br>
+-- ----------------------------------------
+-- 返回值 = 文本条中输入的数字 , 默认 0<br>
+-- ----------------------------------------
+function SIElements.GetInputNumber( textfield )
+	local inputText = textfield.text
+	local number = math.floor( tonumber( inputText:gsub( "^[0-9\\.]" , "" ) ) or 0 )
+	textfield.text = tostring( number )
+	return number
 end

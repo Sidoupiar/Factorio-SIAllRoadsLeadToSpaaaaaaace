@@ -232,10 +232,8 @@ SIOreMap =
 	Set_Count = function( playerIndex , element )
 		local settings = SIGlobal.GetPlayerSettings( SIOreMap.Settings.Name , playerIndex )
 		if settings.frame and settings.frame.valid then
-			local count = math.floor( tonumber( element.text ) or 0 )
-			element.text = tostring( count )
 			-- 保存 [数量] 填写的数量
-			settings.count = count
+			settings.count = SIElements.GetInputNumber( element )
 		end
 	end ,
 	SortOreDataName = function( playerIndex )

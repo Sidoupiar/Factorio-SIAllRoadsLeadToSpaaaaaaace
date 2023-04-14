@@ -667,6 +667,8 @@ function SIInit.AutoLoadState( StateCode )
 		SINeed( CorePath .. "/define/runtime/SIEventBus" , true )
 		SINeed( CorePath .. "/define/runtime/SIGlobal" , true )
 		SINeed( CorePath .. "/define/runtime/SIConfigManager" , true )
+		SINeed( CorePath .. "/define/runtime/SIElements" , true )
+		SINeed( CorePath .. "/define/runtime/SIFunctions" , true )
 		SIEventBus.InitSelf()
 	end
 	return SIInit
