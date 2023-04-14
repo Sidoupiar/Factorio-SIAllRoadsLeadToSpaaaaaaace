@@ -125,8 +125,8 @@ for dirtID , dirtAlias in pairs( dirtList ) do
 			icons = result.Icons ,
 			icon_size = iconSettings.size ,
 			icon_mipmaps = iconSettings.mipmaps ,
-			localised_name = SIGen.MakeSelfLocalisedName( result.Alias ) ,
-			localised_description = SIGen.MakeSelfLocalisedDescription( result.Alias ) ,
+			localised_name = SIGen.MakeSelfLocalisedName( dirtAlias ) ,
+			localised_description = SIGen.MakeSelfLocalisedDescription( dirtAlias ) ,
 			category = SIConstants_Resource.raw.Categories.Recipe.Dirt ,
 			crafting_machine_tint =
 			{
