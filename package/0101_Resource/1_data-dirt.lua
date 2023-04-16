@@ -6,6 +6,7 @@ local dirtList =
 {
 	DirtSoft   = "棉流土" ,
 	DirtHigh   = "高山土" ,
+	DirtNorth  = "北地土" ,
 	DirtWind   = "浊风土" ,
 	DirtWest   = "西锥土" ,
 	DirtFlat   = "平结土" ,
