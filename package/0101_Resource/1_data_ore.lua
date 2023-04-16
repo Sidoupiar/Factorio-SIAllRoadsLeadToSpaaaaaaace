@@ -16,8 +16,8 @@ local miningResultList =
 		name = SIConstants_Resource.raw.Items.RockBase ,
 		probability = 0.02 ,
 		amount_min = 0 ,
-		amount_max = 42 ,
-		catalyst_amount = 42
+		amount_max = 50 ,
+		catalyst_amount = 50
 	}
 }
 
