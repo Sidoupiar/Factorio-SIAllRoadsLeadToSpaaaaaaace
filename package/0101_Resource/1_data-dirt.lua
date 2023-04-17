@@ -5,12 +5,13 @@
 local dirtList =
 {
 	DirtSoft   = "棉流土" ,
-	DirtHigh   = "高山土" ,
-	DirtNorth  = "北地土" ,
+	DirtHigh   = "高地土" ,
+	DirtNorth  = "北山土" ,
 	DirtWind   = "浊风土" ,
 	DirtWest   = "西锥土" ,
 	DirtFlat   = "平结土" ,
-	DirtShadow = "影寂土"
+	DirtLight  = "辉振土" ,
+	DirtShadow = "影寐土"
 }
 
 SIGen.SetGroup( SIConstants_Resource.raw.Groups.Resource.Dirt )
