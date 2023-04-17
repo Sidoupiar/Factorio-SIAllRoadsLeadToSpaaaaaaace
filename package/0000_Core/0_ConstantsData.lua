@@ -57,7 +57,7 @@ local constantsData =
 	{
 		[SIInit.StateCodeDefine.Data]           = { "1_data_base" , "1_data_debug" , "1_data_special" , "1_data_gui" } ,
 		-- [SIInit.StateCodeDefine.DataUpdates]    = { "2_data-updates" } ,
-		-- [SIInit.StateCodeDefine.DataFinalFixes] = { "3_data-final-fixes" } ,
+		[SIInit.StateCodeDefine.DataFinalFixes] = { "3_data-final-fixes" } ,
 		[SIInit.StateCodeDefine.Control]        = { "4_control" }
 	} ,
 
