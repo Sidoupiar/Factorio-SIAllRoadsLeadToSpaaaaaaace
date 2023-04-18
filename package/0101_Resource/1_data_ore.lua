@@ -252,7 +252,7 @@ end
 SIGen
 .New( SICommon.Types.Entities.Resource , "OreStone" , "矿山岩" )
 .AutoIcon()
-.SetSize( 1 , 1 )
+.SetSizeScale( 1 , 1 , 0.5 )
 .Append
 {
 	flags = { SICommon.Flags.Entity.NotOnMap } ,
@@ -283,7 +283,8 @@ SIGen
 		{
 			filename = SIGen.MakeSelfPicturePath( "矿山岩" ) ,
 			priority = "extra-high" ,
-			size = 64 ,
+			width = 64 ,
+			height = 64 ,
 			frame_count = 8 ,
 			variation_count = 8
 		}

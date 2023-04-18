@@ -13,10 +13,11 @@ SIControl.Init
 	[SICommon.Types.Entities.Resource] =
 	{
 		OreStone = "矿山岩" ,
-		CrystalWater = "清水晶石" ,
-		CrystalFire = "火苗晶石" ,
-		CrystalOld = "悠远晶石" ,
-		CrystalQuiet = "宁寂晶石" ,
+		CrystalOreWater = "清水矿" ,
+		CrystalOreFire = "火苗矿" ,
+		CrystalOreAgent = "悠远矿" ,
+		CrystalOreQuiet = "宁寂矿" ,
+		CrystalOreQuietActive = "宁寂矿-活化" ,
 		CrystalHard = "黑硬的物质"
 	}
 }

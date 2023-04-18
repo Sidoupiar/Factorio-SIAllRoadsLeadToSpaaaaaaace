@@ -91,32 +91,7 @@ SICommon =
 			PURPLE          = { r = 0.90 , g = 0.50 , b = 0.90 , a = 0.50 } , -- 紫色
 			ORANGE          = { r = 0.90 , g = 0.55 , b = 0.35 , a = 0.50 } , -- 橙色
 			YELLOW          = { r = 0.90 , g = 0.85 , b = 0.35 , a = 0.50 }   -- 黄色
-		} ,
-		MakeColor = function( r , g , b , a )
-			return
-			{
-				r = r or 0.0 ,
-				g = g or 0.0 ,
-				b = b or 0.0 ,
-				a = a or 1.0
-			}
-		end ,
-		MakeColor256 = function( r , g , b , a )
-			return
-			{
-				r = r and math.max( math.min( r , 255 ) , 0 ) / 255.0 or 0.0 ,
-				g = g and math.max( math.min( g , 255 ) , 0 ) / 255.0 or 0.0 ,
-				b = b and math.max( math.min( b , 255 ) , 0 ) / 255.0 or 0.0 ,
-				a = a and math.max( math.min( a , 255 ) , 0 ) / 255.0 or 1.0 ,
-			}
-		end ,
-		MakeHex256 = function( r , g , b , a )
-			local red = r and SITools.NumberTo16( math.max( math.min( r , 255 ) , 0 ) , 2 ) or "00"
-			local green = g and SITools.NumberTo16( math.max( math.min( g , 255 ) , 0 ) , 2 ) or "00"
-			local blue = b and SITools.NumberTo16( math.max( math.min( b , 255 ) , 0 ) , 2 ) or "00"
-			local alpha = a and SITools.NumberTo16( math.max( math.min( a , 255 ) , 0 ) , 2 ) or ""
-			return alpha .. red .. green .. blue
-		end
+		}
 	} ,
 	SettingTypes =
 	{

@@ -90,6 +90,32 @@ SITools =
 		return type( data ) ~= "function"
 	end ,
 
+	MakeColor = function( red , green , blue , alpha )
+		return
+		{
+			r = red or 0.0 ,
+			g = green or 0.0 ,
+			b = blue or 0.0 ,
+			a = alpha or 1.0
+		}
+	end ,
+	MakeColor256 = function( red , green , blue , alpha )
+		return
+		{
+			r = red and math.max( math.min( red , 255 ) , 0 ) / 255.0 or 0.0 ,
+			g = green and math.max( math.min( green , 255 ) , 0 ) / 255.0 or 0.0 ,
+			b = blue and math.max( math.min( blue , 255 ) , 0 ) / 255.0 or 0.0 ,
+			a = alpha and math.max( math.min( alpha , 255 ) , 0 ) / 255.0 or 1.0 ,
+		}
+	end ,
+	MakeHex256 = function( red , green , blue , alpha )
+		local redString = red and SITools.NumberTo16( math.max( math.min( red , 255 ) , 0 ) , 2 ) or "00"
+		local greenString = green and SITools.NumberTo16( math.max( math.min( green , 255 ) , 0 ) , 2 ) or "00"
+		local blueString = blue and SITools.NumberTo16( math.max( math.min( blue , 255 ) , 0 ) , 2 ) or "00"
+		local alphaString = alpha and SITools.NumberTo16( math.max( math.min( alpha , 255 ) , 0 ) , 2 ) or ""
+		return alphaString .. redString .. greenString .. blueString
+	end ,
+
 	Icon = function( iconPath , tint , scale , shift , mipmaps , size )
 		local icon = {}
 		if iconPath then

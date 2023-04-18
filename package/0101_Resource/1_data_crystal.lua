@@ -4,12 +4,21 @@
 
 local crystalList =
 {
-	CrystalWater = { Alias = "清水石" , DamageType1 = SIConstants_Core.raw.DamageTypes.PhysicWater , DamageType2 = SIConstants_Core.raw.DamageTypes.MagicCorrosion } ,
-	CrystalFire  = { Alias = "火苗石" , DamageType1 = SIConstants_Core.raw.DamageTypes.PhysicRadiation , DamageType2 = SIConstants_Core.raw.DamageTypes.MagicPower } ,
-	CrystalAgent = { Alias = "悠远石" , DamageType1 = SIConstants_Core.raw.DamageTypes.PhysicCorrosion , DamageType2 = SIConstants_Core.raw.DamageTypes.MagicTwist } ,
-	CrystalQuiet = { Alias = "宁寂石" , DamageType1 = SIConstants_Core.raw.DamageTypes.PhysicEnergy , DamageType2 = SIConstants_Core.raw.DamageTypes.MagicVoid }
+	CrystalWater = { Alias = "清水石" , DamageType1 = SIConstants_Core.raw.DamageTypes.PhysicWater     , DamageType2 = SIConstants_Core.raw.DamageTypes.MagicCorrosion } ,
+	CrystalFire  = { Alias = "火苗石" , DamageType1 = SIConstants_Core.raw.DamageTypes.PhysicRadiation , DamageType2 = SIConstants_Core.raw.DamageTypes.MagicPower     } ,
+	CrystalAgent = { Alias = "悠远石" , DamageType1 = SIConstants_Core.raw.DamageTypes.PhysicCorrosion , DamageType2 = SIConstants_Core.raw.DamageTypes.MagicTwist     } ,
+	CrystalQuiet = { Alias = "宁寂石" , DamageType1 = SIConstants_Core.raw.DamageTypes.PhysicEnergy    , DamageType2 = SIConstants_Core.raw.DamageTypes.MagicVoid      }
 }
 local orderOffset = SITable.Size( crystalList ) * 3 + 5
+
+local crystalOreList =
+{
+	CrystalOreWater       = { Alias = "清水矿" , Item = "CrystalWater" , Color = SITools.MakeColor256( 31 , 173 , 225 ) , Autoplace = true } ,
+	CrystalOreFire        = { Alias = "火苗矿" , Item = "CrystalFire" , Color = SITools.MakeColor256( 237 , 111 , 8 ) , Autoplace = true } ,
+	CrystalOreAgent       = { Alias = "悠远矿" , Item = "CrystalAgent" , Color = SITools.MakeColor256( 240 , 36 , 129 ) , Autoplace = true } ,
+	CrystalOreQuiet       = { Alias = "宁寂矿" , Item = "CrystalQuiet" , Color = SITools.MakeColor256( 102 , 10 , 138 ) , Autoplace = true } ,
+	CrystalOreQuietActive = { Alias = "宁寂矿-活化" , Item = "CrystalQuiet" , Color = SITools.MakeColor256( 169 , 33 , 222 ) , Autoplace = false }
+}
 
 local sheelProjectile = nil
 local shellPartProjectile = nil
@@ -820,4 +829,120 @@ for crystalID , crystalData in pairs( crystalList ) do
 			}
 		}
 	} )
+end
+
+for crystalOreID , crystalOreData in pairs( crystalOreList ) do
+	SIGen
+	.New( SICommon.Types.Entities.Resource , crystalOreID , crystalOreData.Alias )
+	.AutoIcon()
+	.SetSizeScale( 1 , 1 , 0.5 )
+	.Append
+	{
+		flags = { SICommon.Flags.Entity.NotOnMap } ,
+		minable =
+		{
+			mining_time = 18.0 ,
+			mining_particle = "stone-particle" ,
+			results =
+			{
+				{
+					type = SICommon.Types.Items.Item ,
+					name = SIConstants_Resource.raw.Items.Shell ,
+					probability = 0.2 ,
+					amount_min = 0 ,
+					amount_max = 2 ,
+					catalyst_amount = 2
+				} ,
+				{
+					type = SICommon.Types.Items.Item ,
+					name = SIConstants_Resource.raw.Items.ShellPart ,
+					probability = 0.2 ,
+					amount_min = 0 ,
+					amount_max = 8 ,
+					catalyst_amount = 8
+				} ,
+				{
+					type = SICommon.Types.Items.Item ,
+					name = SIConstants_Resource.raw.Items[crystalOreData.Item] ,
+					probability = 0.02 ,
+					amount_min = 0 ,
+					amount_max = 70 ,
+					catalyst_amount = 70 ,
+					show_details_in_recipe_tooltip = false
+				}
+			}
+		} ,
+		map_color = crystalOreData.Color ,
+		friendly_map_color = crystalOreData.Color ,
+		enemy_map_color = crystalOreData.Color ,
+		mining_visualisation_tint = crystalOreData.Color ,
+		tree_removal_probability = 0.05 ,
+		tree_removal_max_distance = 0 ,
+		autoplace = crystalOreData.Autoplace and SIAutoPlace.Create
+		{
+			Name = "" ,
+			BaseDensity = 4 ,
+			RegularMultiplier = 1.0 ,
+			StartingMultiplier = 1.1 ,
+			HasStarting = false
+		} or nil ,
+		stage_counts = { 100000 , 33333 , 10000 , 3333 , 1000 , 333 , 100 , 33 } ,
+		stages =
+		{
+			sheet =
+			{
+				filename = SIGen.MakeSelfPicturePath( crystalOreData.Alias ) ,
+				priority = "extra-high" ,
+				width = 64 ,
+				height = 64 ,
+				frame_count = 8 ,
+				variation_count = 8
+			}
+		} ,
+		effect_animation_period = 5 ,
+		effect_animation_period_deviation = 1 ,
+		effect_darkness_multiplier = 3.6 ,
+		min_effect_alpha = 0.2 ,
+		max_effect_alpha = 0.3 ,
+		stages_effect =
+		{
+			sheet =
+			{
+				filename = SIGen.MakeSelfPicturePath( crystalOreData.Alias .. "-光效" ) ,
+				priority = "extra-high" ,
+				blend_mode = "additive" ,
+				flags = {" light" } ,
+				width = 64 ,
+				height = 64 ,
+				frame_count = 8 ,
+				variation_count = 8
+			}
+		} ,
+		mining_sound =
+		{
+			SISound.Core( "axe-mining-ore-1" , 0.8 ) ,
+			SISound.Core( "axe-mining-ore-2" , 0.8 ) ,
+			SISound.Core( "axe-mining-ore-3" , 0.8 ) ,
+			SISound.Core( "axe-mining-ore-4" , 0.8 ) ,
+			SISound.Core( "axe-mining-ore-5" , 0.8 ) ,
+			SISound.Core( "axe-mining-ore-6" , 0.8 ) ,
+			SISound.Core( "axe-mining-ore-7" , 0.8 ) ,
+			SISound.Core( "axe-mining-ore-8" , 0.8 ) ,
+			SISound.Core( "axe-mining-ore-9" , 0.8 ) ,
+			SISound.Core( "axe-mining-ore-10" , 0.8 )
+		} ,
+		walking_sound =
+		{
+			SISound.Base( "walking/resources/ore-01" , 0.7 ) ,
+			SISound.Base( "walking/resources/ore-02" , 0.7 ) ,
+			SISound.Base( "walking/resources/ore-03" , 0.7 ) ,
+			SISound.Base( "walking/resources/ore-04" , 0.7 ) ,
+			SISound.Base( "walking/resources/ore-05" , 0.7 ) ,
+			SISound.Base( "walking/resources/ore-06" , 0.7 ) ,
+			SISound.Base( "walking/resources/ore-07" , 0.7 ) ,
+			SISound.Base( "walking/resources/ore-08" , 0.7 ) ,
+			SISound.Base( "walking/resources/ore-09" , 0.7 ) ,
+			SISound.Base( "walking/resources/ore-10" , 0.7 )
+		}
+	}
 end
