@@ -889,14 +889,16 @@ for crystalOreID , crystalOreData in pairs( crystalOreList ) do
 		stage_counts = { 100000 , 33333 , 10000 , 3333 , 1000 , 333 , 100 , 33 } ,
 		stages =
 		{
-			sheet =
+			sheets =
 			{
-				filename = SIGen.MakeSelfPicturePath( crystalOreData.Alias ) ,
-				priority = "extra-high" ,
-				width = 64 ,
-				height = 64 ,
-				frame_count = 8 ,
-				variation_count = 8
+				{
+					filename = SIGen.MakeSelfPicturePath( crystalOreData.Alias ) ,
+					priority = "extra-high" ,
+					width = 64 ,
+					height = 64 ,
+					frame_count = 8 ,
+					variation_count = 8
+				}
 			}
 		} ,
 		effect_animation_period = 5 ,

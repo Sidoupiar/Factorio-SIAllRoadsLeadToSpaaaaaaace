@@ -279,14 +279,16 @@ SIGen
 	stage_counts = { 100000 , 33333 , 10000 , 3333 , 1000 , 333 , 100 , 33 } ,
 	stages =
 	{
-		sheet =
+		sheets =
 		{
-			filename = SIGen.MakeSelfPicturePath( "矿山岩" ) ,
-			priority = "extra-high" ,
-			width = 64 ,
-			height = 64 ,
-			frame_count = 8 ,
-			variation_count = 8
+			{
+				filename = SIGen.MakeSelfPicturePath( "矿山岩" ) ,
+				priority = "extra-high" ,
+				width = 64 ,
+				height = 64 ,
+				frame_count = 8 ,
+				variation_count = 8
+			}
 		}
 	} ,
 	mining_sound =

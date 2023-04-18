@@ -105,7 +105,21 @@ SIGen
 		line_length = 1 ,
 		variation_count = 1 ,
 		direction_count = 1 ,
-		shift = SIUtils.by_pixel( 12 , 0 )
+		scale = 1.0 ,
+		shift = SIUtils.by_pixel( 12 , 0 ) ,
+		hr_version =
+		{
+			filename = SIGen.MakeSelfPicturePathHr( "经验箱子-残骸" ) ,
+			priority = "extra-high" ,
+			width = 126 ,
+			height = 78 ,
+			frame_count = 1 ,
+			line_length = 1 ,
+			variation_count = 1 ,
+			direction_count = 1 ,
+			scale = 0.5 ,
+			shift = SIUtils.by_pixel( 12 , 0 )
+		}
 	}
 }
 .New( SICommon.Types.Entities.Container , "EXPChest" , "经验箱子" )
@@ -159,15 +173,36 @@ SIGen
 				priority = "extra-high" ,
 				width = 34 ,
 				height = 38 ,
-				shift = SIUtils.by_pixel( 0 , -0.5 )
+				scale = 1.0 ,
+				shift = SIUtils.by_pixel( 0 , -0.5 ) ,
+				hr_version =
+				{
+					filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Container , "经验箱子" ) ,
+					priority = "extra-high" ,
+					width = 66 ,
+					height = 76 ,
+					scale = 0.5 ,
+					shift = SIUtils.by_pixel( -0.5 , -0.5 )
+				}
 			} ,
 			{
 				filename = SIGen.MakePicturePath( SICommon.Types.Entities.Container , "经验箱子-影子" ) ,
 				priority = "extra-high" ,
 				width = 56 ,
 				height = 26 ,
+				scale = 1.0 ,
 				shift = SIUtils.by_pixel( 10 , 6.5 ) ,
-				draw_as_shadow = true
+				draw_as_shadow = true ,
+				hr_version =
+				{
+					filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Container , "经验箱子-影子" ) ,
+					priority = "extra-high" ,
+					width = 110 ,
+					height = 50 ,
+					scale = 0.5 ,
+					shift = SIUtils.by_pixel( 10.5 , 6 ) ,
+					draw_as_shadow = true
+				}
 			}
 		}
 	} ,

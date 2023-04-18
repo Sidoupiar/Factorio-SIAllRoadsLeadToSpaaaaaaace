@@ -826,7 +826,8 @@ end
 
 for type , real in pairs
 {
-	ICON = "图标"
+	ICON  = "图标" ,
+	HrVer = "高清"
 } do
 	SICommon.ShowName[type] = real
 	SICommon.ShowNamePrefix[type] = real .. "-"

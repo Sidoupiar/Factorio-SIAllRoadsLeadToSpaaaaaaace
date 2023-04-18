@@ -1068,6 +1068,52 @@ function SIGen.MakeRawPicturePath( pictureName )
 end
 
 -- ----------------------------------------
+-- 用于计算图片位置的函数 , 仅限高清图片<br>
+-- 此处的图片位置不会自动添加名称后缀 , 会自动添加文件扩展名 (.png)<br>
+-- 使用原型数据自己的 [ type ] 值进行计算<br>
+-- ----------------------------------------
+-- pictureName           = 图片名称 , 不需要添加扩展名<br>
+-- ----------------------------------------
+-- 返回值                 = 计算好的图片位置<br>
+-- ----------------------------------------
+function SIGen.MakeSelfPicturePathHr( pictureName )
+	if not SIGen.CurrentPrototypeData then
+		return CodeE( SIGen , "需要先创建新的原型数据 , 之后才可以使用 SIGen.GetPicturePath 函数" )
+	end
+	return ( SIGen.TempConstantsData or SIInit.CurrentConstantsData ).PicturePath .. SICommon.ShowNamePrefix.HrVer .. SIGen.CurrentPrototypeData.SIGenData.ShowNamePrefix .. pictureName .. ".png"
+end
+
+-- ----------------------------------------
+-- 用于计算图片位置的函数 , 仅限高清图片<br>
+-- 此处的图片位置不会自动添加名称后缀 , 会自动添加文件扩展名 (.png)<br>
+-- 根据给定的 [ type ] 值进行计算 , 而非使用原型数据自己的 [ type ] 值<br>
+-- ----------------------------------------
+-- typeCode              = 原型数据的 [ type ] 值<br>
+-- pictureName           = 图片名称 , 不需要添加扩展名<br>
+-- ----------------------------------------
+-- 返回值                 = 计算好的图片位置<br>
+-- ----------------------------------------
+function SIGen.MakePicturePathHr( typeCode , pictureName )
+	if not SICommon.ShowNamePrefix[typeCode] then
+		return CodeE( SIGen , "构造器无法操作不支持的类型的原型数据 , 当前类型 = " .. typeCode )
+	end
+	return ( SIGen.TempConstantsData or SIInit.CurrentConstantsData ).PicturePath .. SICommon.ShowNamePrefix.HrVer .. SICommon.ShowNamePrefix[typeCode] .. pictureName .. ".png"
+end
+
+-- ----------------------------------------
+-- 用于计算图片位置的函数 , 仅限高清图片<br>
+-- 此处的图片位置不会自动添加名称后缀 , 会自动添加文件扩展名 (.png)<br>
+-- 不使用 [ type ] 值进行计算<br>
+-- ----------------------------------------
+-- pictureName           = 图片名称 , 不需要添加扩展名<br>
+-- ----------------------------------------
+-- 返回值                 = 计算好的图片位置<br>
+-- ----------------------------------------
+function SIGen.MakeRawPicturePathHr( pictureName )
+	return ( SIGen.TempConstantsData or SIInit.CurrentConstantsData ).PicturePath .. SICommon.ShowNamePrefix.HrVer .. pictureName .. ".png"
+end
+
+-- ----------------------------------------
 -- 用于计算声音位置的函数<br>
 -- 此处的声音位置不会自动添加名称后缀 , 会自动添加文件扩展名 (.png)<br>
 -- 使用原型数据自己的 [ type ] 值进行计算<br>
