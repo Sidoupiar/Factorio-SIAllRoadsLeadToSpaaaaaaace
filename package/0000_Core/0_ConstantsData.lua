@@ -384,6 +384,7 @@ local constantsData =
 	-- PicturePath          = string   , 指向了当前功能包所使用的图片文件所在的文件夹位置 , 默认值 : __ModName__/package/[ PackageName ]/graphic/
 	-- SoundPath            = string   , 指向了当前功能包所使用的声音文件所在的文件夹位置 , 默认值 : __ModName__/package/[ PackageName ]/sound/
 	-- API                  = {}       , 包含了此 ConstantsData 的一些原始属性和自动生成的函数
+	-- OrderOffset          = {}       , 包含了所有的偏移的排序数据
 	-- raw                  = {}       , 包含了自动处理后的各种物品 , 实体 , 配方等的名称
 	--
 	-- API 中包含的属性 :

@@ -744,6 +744,7 @@ function SIInit.AutoLoad( ModName , CustomPackageConfig , ConstantsDataPrefix , 
 					PackageName = packageName ,
 					ClassName = className
 				}
+				constantsData.OrderOffset = {}
 				-- 添加基础数据
 				constantsData.ClassName = className
 				constantsData.CodeName = ( constantsData.UseShowPrefix and ShowNamePrefix or "" ) .. constantsData.ID:gsub( "_" , "-" )
@@ -754,12 +755,26 @@ function SIInit.AutoLoad( ModName , CustomPackageConfig , ConstantsDataPrefix , 
 				constantsData.LocalisedName = { "ConstantsDataName." .. constantsData.CodeName }
 				constantsData.LocalisedDescription = { "ConstantsDataDescription." .. constantsData.CodeName }
 				constantsData.GetNextOrderCode = function()
-					constantsData.OrderCode = constantsData.OrderCode + 1
+					local orderCode = constantsData.OrderCode + 1
+					while constantsData.OrderOffset[orderCode] do
+						orderCode = orderCode + 1
+					end
+					constantsData.OrderCode = orderCode
 					return constantsData.OrderCode
 				end
 				constantsData.GetOrderString = function()
-					constantsData.OrderCode = constantsData.OrderCode + 1
+					local orderCode = constantsData.OrderCode + 1
+					while constantsData.OrderOffset[orderCode] do
+						orderCode = orderCode + 1
+					end
+					constantsData.OrderCode = orderCode
 					return constantsData.OrderPrefix .. constantsData.OrderCode .. "-"
+				end
+				constantsData.GetOrderStringWithOffset = function( OrderOffset )
+					constantsData.OrderCode = constantsData.OrderCode + 1
+					local orderCode = constantsData.OrderCode + OrderOffset
+					constantsData.OrderOffset[orderCode] = constantsData.OrderCode
+					return constantsData.OrderPrefix .. orderCode .. "-"
 				end
 				if SIAPI[constantsData.CodeName] then
 					return CodeE( SIInit , "已存在的 ConstantsData.CodeName , CodeName=" .. constantsData.CodeName )
@@ -769,6 +784,7 @@ function SIInit.AutoLoad( ModName , CustomPackageConfig , ConstantsDataPrefix , 
 				constantsData.API.OrderPrefix = constantsData.OrderPrefix
 				constantsData.API.GetNextOrderCode = constantsData.GetNextOrderCode
 				constantsData.API.GetOrderString = constantsData.GetOrderString
+				constantsData.API.GetOrderStringWithOffset = constantsData.GetOrderStringWithOffset
 				-- 加载开始前回调
 				if constantsData.BeforeLoad then
 					constantsData.BeforeLoad( constantsData )

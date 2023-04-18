@@ -374,6 +374,9 @@ end
 -- aliasName             = 别名 , 和 ConstantsData.Autoload 中的别名一样 , 在计算 [ name ] 值时代替 ID 进行计算 , 影响本地化字符串 , 不影响 ConstantsData.raw 中的注册<br>
 -- prototypeDataToCopy   = 用来复制数据的原型数据<br>
 -- ----------------------------------------
+-- prototypeDataToCopy 中的特殊属性 :<br>
+-- OrderOffset           = 排序偏移 , 自动生成排序时 , 最终的排序会向后这么多位<br>
+-- ----------------------------------------
 function SIGen.New( typeCode , prototypeID , aliasName , prototypeDataToCopy )
 	if not typeCode then
 		return CodeE( SIGen , "创建原型数据时 , [ type ] 的值不能为空" )
@@ -404,6 +407,10 @@ function SIGen.New( typeCode , prototypeID , aliasName , prototypeDataToCopy )
 	if constantsData.raw[rawCode] and constantsData.raw[rawCode][prototypeID] then
 		return CodeE( SIGen , "同 ID 原型数据已存在 , prototypeID = " .. prototypeID )
 	end
+	-- 读取特殊属性
+	local OrderOffset = prototypeDataToCopy.OrderOffset
+	prototypeDataToCopy.OrderOffset = nil
+	-- 生成原型数据
 	local prototypeData = prototypeDataToCopy and SIUtils.table.deepcopy( prototypeDataToCopy ) or {}
 	prototypeData.type = typeCode
 	prototypeData.name = realName
@@ -415,7 +422,7 @@ function SIGen.New( typeCode , prototypeID , aliasName , prototypeDataToCopy )
 	end
 	prototypeData.group = SIGen.CurrentGroup
 	prototypeData.subgroup = SIGen.CurrentSubgroup
-	prototypeData.order = constantsData.GetOrderString()
+	prototypeData.order = OrderOffset and constantsData.GetOrderStringWithOffset( OrderOffset ) or constantsData.GetOrderString()
 	prototypeData.SIGenData =
 	{
 		ShowName = showName ,

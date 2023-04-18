@@ -2415,9 +2415,9 @@ SIGen
 	{
 		{
 			type = "area" ,
+			show_in_tooltip = true ,
 			force = "enemy" ,
 			ignore_collision_condition = true ,
-			show_in_tooltip = true ,
 			radius = 1.3 ,
 			trigger_from_target = false ,
 			target_entities = true ,
@@ -2431,6 +2431,9 @@ SIGen
 						{
 							type = "damage" ,
 							show_in_tooltip = true ,
+							lower_damage_modifier = 1.0 ,
+							upper_damage_modifier = 1.0 ,
+							apply_damage_to_trees = true ,
 							damage =
 							{
 								type = "physical" ,
@@ -2440,6 +2443,9 @@ SIGen
 						{
 							type = "damage" ,
 							show_in_tooltip = true ,
+							lower_damage_modifier = 1.0 ,
+							upper_damage_modifier = 1.0 ,
+							apply_damage_to_trees = true ,
 							damage =
 							{
 								type = "impact" ,
@@ -2449,6 +2455,9 @@ SIGen
 						{
 							type = "damage" ,
 							show_in_tooltip = true ,
+							lower_damage_modifier = 1.0 ,
+							upper_damage_modifier = 1.0 ,
+							apply_damage_to_trees = true ,
 							damage =
 							{
 								type = "poison" ,
@@ -2458,6 +2467,9 @@ SIGen
 						{
 							type = "damage" ,
 							show_in_tooltip = true ,
+							lower_damage_modifier = 1.0 ,
+							upper_damage_modifier = 1.0 ,
+							apply_damage_to_trees = true ,
 							damage =
 							{
 								type = "explosion" ,
@@ -2467,6 +2479,9 @@ SIGen
 						{
 							type = "damage" ,
 							show_in_tooltip = true ,
+							lower_damage_modifier = 1.0 ,
+							upper_damage_modifier = 1.0 ,
+							apply_damage_to_trees = true ,
 							damage =
 							{
 								type = "fire" ,
@@ -2476,6 +2491,9 @@ SIGen
 						{
 							type = "damage" ,
 							show_in_tooltip = true ,
+							lower_damage_modifier = 1.0 ,
+							upper_damage_modifier = 1.0 ,
+							apply_damage_to_trees = true ,
 							damage =
 							{
 								type = "laser" ,
@@ -2668,9 +2686,9 @@ SIGen
 	{
 		{
 			type = "area" ,
+			show_in_tooltip = true ,
 			force = "enemy" ,
 			ignore_collision_condition = true ,
-			show_in_tooltip = true ,
 			radius = 1.3 ,
 			trigger_from_target = false ,
 			target_entities = true ,
@@ -2684,6 +2702,9 @@ SIGen
 						{
 							type = "damage" ,
 							show_in_tooltip = true ,
+							lower_damage_modifier = 1.0 ,
+							upper_damage_modifier = 1.0 ,
+							apply_damage_to_trees = true ,
 							damage =
 							{
 								type = "physical" ,
@@ -2693,6 +2714,9 @@ SIGen
 						{
 							type = "damage" ,
 							show_in_tooltip = true ,
+							lower_damage_modifier = 1.0 ,
+							upper_damage_modifier = 1.0 ,
+							apply_damage_to_trees = true ,
 							damage =
 							{
 								type = "impact" ,
@@ -2702,6 +2726,9 @@ SIGen
 						{
 							type = "damage" ,
 							show_in_tooltip = true ,
+							lower_damage_modifier = 1.0 ,
+							upper_damage_modifier = 1.0 ,
+							apply_damage_to_trees = true ,
 							damage =
 							{
 								type = "poison" ,
@@ -2711,6 +2738,9 @@ SIGen
 						{
 							type = "damage" ,
 							show_in_tooltip = true ,
+							lower_damage_modifier = 1.0 ,
+							upper_damage_modifier = 1.0 ,
+							apply_damage_to_trees = true ,
 							damage =
 							{
 								type = "explosion" ,
@@ -2720,6 +2750,9 @@ SIGen
 						{
 							type = "damage" ,
 							show_in_tooltip = true ,
+							lower_damage_modifier = 1.0 ,
+							upper_damage_modifier = 1.0 ,
+							apply_damage_to_trees = true ,
 							damage =
 							{
 								type = "fire" ,
@@ -2729,6 +2762,9 @@ SIGen
 						{
 							type = "damage" ,
 							show_in_tooltip = true ,
+							lower_damage_modifier = 1.0 ,
+							upper_damage_modifier = 1.0 ,
+							apply_damage_to_trees = true ,
 							damage =
 							{
 								type = "laser" ,
@@ -2921,9 +2957,9 @@ SIGen
 	{
 		{
 			type = "area" ,
+			show_in_tooltip = true ,
 			force = "enemy" ,
 			ignore_collision_condition = true ,
-			show_in_tooltip = true ,
 			radius = 3.5 ,
 			trigger_from_target = false ,
 			target_entities = true ,
@@ -2937,6 +2973,9 @@ SIGen
 						{
 							type = "damage" ,
 							show_in_tooltip = true ,
+							lower_damage_modifier = 1.0 ,
+							upper_damage_modifier = 1.0 ,
+							apply_damage_to_trees = true ,
 							damage =
 							{
 								type = "physical" ,
@@ -2946,6 +2985,9 @@ SIGen
 						{
 							type = "damage" ,
 							show_in_tooltip = true ,
+							lower_damage_modifier = 1.0 ,
+							upper_damage_modifier = 1.0 ,
+							apply_damage_to_trees = true ,
 							damage =
 							{
 								type = "impact" ,
@@ -2955,6 +2997,9 @@ SIGen
 						{
 							type = "damage" ,
 							show_in_tooltip = true ,
+							lower_damage_modifier = 1.0 ,
+							upper_damage_modifier = 1.0 ,
+							apply_damage_to_trees = true ,
 							damage =
 							{
 								type = "poison" ,
@@ -2964,6 +3009,9 @@ SIGen
 						{
 							type = "damage" ,
 							show_in_tooltip = true ,
+							lower_damage_modifier = 1.0 ,
+							upper_damage_modifier = 1.0 ,
+							apply_damage_to_trees = true ,
 							damage =
 							{
 								type = "explosion" ,
@@ -2973,6 +3021,9 @@ SIGen
 						{
 							type = "damage" ,
 							show_in_tooltip = true ,
+							lower_damage_modifier = 1.0 ,
+							upper_damage_modifier = 1.0 ,
+							apply_damage_to_trees = true ,
 							damage =
 							{
 								type = "fire" ,
@@ -2982,6 +3033,9 @@ SIGen
 						{
 							type = "damage" ,
 							show_in_tooltip = true ,
+							lower_damage_modifier = 1.0 ,
+							upper_damage_modifier = 1.0 ,
+							apply_damage_to_trees = true ,
 							damage =
 							{
 								type = "laser" ,
@@ -3005,6 +3059,9 @@ SIGen
 						{
 							type = "damage" ,
 							show_in_tooltip = false ,
+							lower_damage_modifier = 1.0 ,
+							upper_damage_modifier = 1.0 ,
+							apply_damage_to_trees = true ,
 							damage =
 							{
 								type = "physical" ,
@@ -3014,6 +3071,9 @@ SIGen
 						{
 							type = "damage" ,
 							show_in_tooltip = false ,
+							lower_damage_modifier = 1.0 ,
+							upper_damage_modifier = 1.0 ,
+							apply_damage_to_trees = true ,
 							damage =
 							{
 								type = "impact" ,
@@ -3023,6 +3083,9 @@ SIGen
 						{
 							type = "damage" ,
 							show_in_tooltip = false ,
+							lower_damage_modifier = 1.0 ,
+							upper_damage_modifier = 1.0 ,
+							apply_damage_to_trees = true ,
 							damage =
 							{
 								type = "poison" ,
@@ -3032,6 +3095,9 @@ SIGen
 						{
 							type = "damage" ,
 							show_in_tooltip = false ,
+							lower_damage_modifier = 1.0 ,
+							upper_damage_modifier = 1.0 ,
+							apply_damage_to_trees = true ,
 							damage =
 							{
 								type = "explosion" ,
@@ -3041,6 +3107,9 @@ SIGen
 						{
 							type = "damage" ,
 							show_in_tooltip = false ,
+							lower_damage_modifier = 1.0 ,
+							upper_damage_modifier = 1.0 ,
+							apply_damage_to_trees = true ,
 							damage =
 							{
 								type = "fire" ,
@@ -3050,6 +3119,9 @@ SIGen
 						{
 							type = "damage" ,
 							show_in_tooltip = false ,
+							lower_damage_modifier = 1.0 ,
+							upper_damage_modifier = 1.0 ,
+							apply_damage_to_trees = true ,
 							damage =
 							{
 								type = "laser" ,
@@ -3062,9 +3134,9 @@ SIGen
 		} ,
 		{
 			type = "area" ,
+			show_in_tooltip = false ,
 			force = "enemy" ,
 			ignore_collision_condition = true ,
-			show_in_tooltip = false ,
 			radius = 24 ,
 			trigger_from_target = true ,
 			target_entities = true ,
@@ -3082,15 +3154,15 @@ SIGen
 					{
 						{
 							type = "nested-result" ,
+							show_in_tooltip = false ,
 							probability = 0.34 ,
-							show_in_tooltip = true ,
 							action =
 							{
 								{
 									type = "area" ,
+									show_in_tooltip = false ,
 									force = "enemy" ,
 									ignore_collision_condition = true ,
-									show_in_tooltip = false ,
 									radius = 15 ,
 									trigger_from_target = true ,
 									target_entities = false ,

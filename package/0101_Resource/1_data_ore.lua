@@ -41,11 +41,13 @@ for oreID , oreAlias in pairs( oreList ) do
 	SIGen
 	.New( SICommon.Types.Entities.Projectile , oreID , "扔出去的" .. oreAlias )
 	.MakeIcon( SICommon.Types.Items.Capsule , oreAlias )
+	.SetSize( 0.4 , 0.4 )
 	.Append
 	{
 		flags = { SICommon.Flags.Entity.NotOnMap } ,
 		light =
 		{
+			type = "basic" ,
 			intensity = 0.5 ,
 			size = 4
 		} ,
@@ -66,11 +68,14 @@ for oreID , oreAlias in pairs( oreList ) do
 			}
 		} ,
 		acceleration = 0 ,
+		height = 1 ,
+		piercing_damage = 0 ,
 		action =
 		{
 			{
 				type = "area" ,
-				radius = 1.6 ,
+				show_in_tooltip = true ,
+				radius = 1.5 ,
 				action_delivery =
 				{
 					{
@@ -79,6 +84,10 @@ for oreID , oreAlias in pairs( oreList ) do
 						{
 							{
 								type = "damage" ,
+								show_in_tooltip = true ,
+								lower_damage_modifier = 1.0 ,
+								upper_damage_modifier = 1.0 ,
+								apply_damage_to_trees = true ,
 								damage =
 								{
 									type = "physical" ,
@@ -100,7 +109,8 @@ for oreID , oreAlias in pairs( oreList ) do
 					}
 				}
 			}
-		}
+		} ,
+		final_action = nil
 	}
 	.AddFunction( function( prototypeName , prototypeData )
 		oreProjectile = prototypeData
@@ -217,11 +227,11 @@ for oreID , oreAlias in pairs( oreList ) do
 				{
 					{
 						type = "insert-item" ,
+						show_in_tooltip = false ,
 						item = SIConstants_Resource.raw.Items[oreID] ,
 						count = 1 ,
 						repeat_count = 1 ,
-						probability = 0.42 ,
-						show_in_tooltip = false
+						probability = 0.42
 					}
 				}
 			}

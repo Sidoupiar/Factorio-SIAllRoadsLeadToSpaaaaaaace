@@ -663,6 +663,7 @@ CreateRuinBuildings( SICommon.Types.Entities.LandMine , "RuinLandMine" , "遗迹
 							{
 								{
 									type = "area" ,
+									show_in_tooltip = true ,
 									radius = 6 ,
 									force = "enemy" ,
 									action_delivery =
@@ -673,6 +674,10 @@ CreateRuinBuildings( SICommon.Types.Entities.LandMine , "RuinLandMine" , "遗迹
 											{
 												{
 													type = "damage" ,
+													show_in_tooltip = true ,
+													lower_damage_modifier = 1.0 ,
+													upper_damage_modifier = 1.0 ,
+													apply_damage_to_trees = true ,
 													damage =
 													{
 														type = "explosion" ,
@@ -691,6 +696,10 @@ CreateRuinBuildings( SICommon.Types.Entities.LandMine , "RuinLandMine" , "遗迹
 						} ,
 						{
 							type = "damage" ,
+							show_in_tooltip = true ,
+							lower_damage_modifier = 1.0 ,
+							upper_damage_modifier = 1.0 ,
+							apply_damage_to_trees = true ,
 							damage =
 							{
 								type = "explosion" ,
@@ -876,6 +885,10 @@ CreateRuinBuildings( SICommon.Types.Entities.Turret , "RuinGunTurret" , "遗迹�
 								} ,
 								{
 									type = "damage" ,
+									show_in_tooltip = true ,
+									lower_damage_modifier = 1.0 ,
+									upper_damage_modifier = 1.0 ,
+									apply_damage_to_trees = true ,
 									damage =
 									{
 										type = "physical" ,
@@ -1362,6 +1375,10 @@ SIGen
 					{
 						{
 							type = "damage" ,
+							show_in_tooltip = true ,
+							lower_damage_modifier = 1.0 ,
+							upper_damage_modifier = 1.0 ,
+							apply_damage_to_trees = true ,
 							damage =
 							{
 								type = "laser" ,
@@ -3351,7 +3368,6 @@ SIGen
 			particle_name = "concrete-stone-particle-small" ,
 			tile_collision_mask = nil ,
 			affects_target = false ,
-			show_in_tooltip = false ,
 			probability = 1 ,
 			repeat_count = 20 ,
 			repeat_count_deviation = 5 ,
@@ -3371,7 +3387,6 @@ SIGen
 			particle_name = "concrete-stone-particle-medium" ,
 			tile_collision_mask = nil ,
 			affects_target = false ,
-			show_in_tooltip = false ,
 			probability = 1 ,
 			repeat_count = 7 ,
 			repeat_count_deviation = 2 ,
@@ -3391,7 +3406,6 @@ SIGen
 			particle_name = "concrete-stone-lower-particle-medium" ,
 			tile_collision_mask = nil ,
 			affects_target = false ,
-			show_in_tooltip = false ,
 			probability = 1 ,
 			repeat_count = 7 ,
 			repeat_count_deviation = 2 ,
@@ -3411,7 +3425,6 @@ SIGen
 			particle_name = "concrete-stone-particle-tiny" ,
 			tile_collision_mask = nil ,
 			affects_target = false ,
-			show_in_tooltip = false ,
 			probability = 1 ,
 			repeat_count = 15 ,
 			repeat_count_deviation = 4 ,

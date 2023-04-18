@@ -4,25 +4,28 @@
 
 local rockDataList =
 {
-	{ IDSuffix = "Base" , AliasSuffix = "" , Probability = 0.021 } ,
-	{ IDSuffix = "Hard" , AliasSuffix = "-致密" , Probability = 0.004 } ,
-	{ IDSuffix = "Soft" , AliasSuffix = "-多孔" , Probability = 0.082 } ,
-	{ IDSuffix = "Acti" , AliasSuffix = "-活性" , Probability = 0.016 } ,
-	{ IDSuffix = "Cata" , AliasSuffix = "-催化" , Probability = 0.036 }
+	RockBase = { Alias = "矿山石" , Probability = 0.021 } ,
+	RockHard = { Alias = "矿山石-致密" , Probability = 0.004 } ,
+	RockSoft = { Alias = "矿山石-多孔" , Probability = 0.082 } ,
+	RockActi = { Alias = "矿山石-活性" , Probability = 0.016 } ,
+	RockCata = { Alias = "矿山石-催化" , Probability = 0.036 }
 }
 
-for rockIndex , rockData in pairs( rockDataList ) do
+for rockID , rockData in pairs( rockDataList ) do
+	local rockAlias = rockData.Alias
 	local rockProjectile = nil
 	local pieceRockProjectile = nil
 	SIGen
 	.SetGroup( SIConstants_Resource.raw.Groups.Resource.Rock )
-	.New( SICommon.Types.Entities.Projectile , "Rock" .. rockData.IDSuffix , "扔出去的矿山石" .. rockData.AliasSuffix )
-	.MakeIcon( SICommon.Types.Items.Capsule , "矿山石" .. rockData.AliasSuffix )
+	.New( SICommon.Types.Entities.Projectile , rockID , "扔出去的" .. rockAlias )
+	.MakeIcon( SICommon.Types.Items.Capsule , rockAlias )
+	.SetSize( 0.4 , 0.4 )
 	.Append
 	{
 		flags = { SICommon.Flags.Entity.NotOnMap } ,
 		light =
 		{
+			type = "basic" ,
 			intensity = 0.5 ,
 			size = 4
 		} ,
@@ -31,7 +34,7 @@ for rockIndex , rockData in pairs( rockDataList ) do
 			layers =
 			{
 				{
-					filename = SIGen.MakeSelfPicturePath( "扔出去的矿山石" .. rockData.AliasSuffix ) ,
+					filename = SIGen.MakeSelfPicturePath( "扔出去的" .. rockAlias ) ,
 					priority = "high" ,
 					width = 32 ,
 					height = 32 ,
@@ -43,10 +46,13 @@ for rockIndex , rockData in pairs( rockDataList ) do
 			}
 		} ,
 		acceleration = 0 ,
+		height = 1 ,
+		piercing_damage = 0 ,
 		action =
 		{
 			{
 				type = "area" ,
+				show_in_tooltip = true ,
 				radius = 1.6 ,
 				action_delivery =
 				{
@@ -56,6 +62,10 @@ for rockIndex , rockData in pairs( rockDataList ) do
 						{
 							{
 								type = "damage" ,
+								show_in_tooltip = true ,
+								lower_damage_modifier = 1.0 ,
+								upper_damage_modifier = 1.0 ,
+								apply_damage_to_trees = true ,
 								damage =
 								{
 									type = "physical" ,
@@ -77,12 +87,13 @@ for rockIndex , rockData in pairs( rockDataList ) do
 					}
 				}
 			}
-		}
+		} ,
+		final_action = nil
 	}
 	.AddFunction( function( prototypeName , prototypeData )
 		rockProjectile = prototypeData
 	end )
-	.New( SICommon.Types.Items.Capsule , "Rock" .. rockData.IDSuffix , "矿山石" .. rockData.AliasSuffix )
+	.New( SICommon.Types.Items.Capsule , rockID , rockAlias )
 	.AutoIcon()
 	.Append
 	{
@@ -94,7 +105,7 @@ for rockIndex , rockData in pairs( rockDataList ) do
 				layers =
 				{
 					{
-						filename = SIGen.MakeSelfPicturePath( "矿山石" .. rockData.AliasSuffix .. "-1" ) ,
+						filename = SIGen.MakeSelfPicturePath( rockAlias .. "-1" ) ,
 						size = 64 ,
 						mipmap_count = 4 ,
 						scale = 0.25
@@ -105,7 +116,7 @@ for rockIndex , rockData in pairs( rockDataList ) do
 				layers =
 				{
 					{
-						filename = SIGen.MakeSelfPicturePath( "矿山石" .. rockData.AliasSuffix .. "-2" ) ,
+						filename = SIGen.MakeSelfPicturePath( rockAlias .. "-2" ) ,
 						size = 64 ,
 						mipmap_count = 4 ,
 						scale = 0.25
@@ -116,7 +127,7 @@ for rockIndex , rockData in pairs( rockDataList ) do
 				layers =
 				{
 					{
-						filename = SIGen.MakeSelfPicturePath( "矿山石" .. rockData.AliasSuffix .. "-3" ) ,
+						filename = SIGen.MakeSelfPicturePath( rockAlias .. "-3" ) ,
 						size = 64 ,
 						mipmap_count = 4 ,
 						scale = 0.25
@@ -127,7 +138,7 @@ for rockIndex , rockData in pairs( rockDataList ) do
 				layers =
 				{
 					{
-						filename = SIGen.MakeSelfPicturePath( "矿山石" .. rockData.AliasSuffix .. "-4" ) ,
+						filename = SIGen.MakeSelfPicturePath( rockAlias .. "-4" ) ,
 						size = 64 ,
 						mipmap_count = 4 ,
 						scale = 0.25
@@ -158,7 +169,7 @@ for rockIndex , rockData in pairs( rockDataList ) do
 							{
 								{
 									type = "projectile" ,
-									projectile = SIConstants_Resource.raw.Entities["Rock" .. rockData.IDSuffix] ,
+									projectile = SIConstants_Resource.raw.Entities[rockID] ,
 									starting_speed = 0.25 ,
 									target_effects =
 									{
@@ -184,13 +195,14 @@ for rockIndex , rockData in pairs( rockDataList ) do
 		}
 	}
 	.SetGroup( SIConstants_Resource.raw.Groups.Resource.PieceRock )
-	.New( SICommon.Types.Entities.Projectile , "PieceRock" .. rockData.IDSuffix , "扔出去的碎裂的矿山石" .. rockData.AliasSuffix )
-	.MakeIcon( SICommon.Types.Items.Capsule , "碎裂的矿山石" .. rockData.AliasSuffix )
+	.New( SICommon.Types.Entities.Projectile , "Piece" .. rockID , "扔出去的碎裂的" .. rockAlias )
+	.MakeIcon( SICommon.Types.Items.Capsule , "碎裂的" .. rockAlias )
 	.Append
 	{
 		flags = { SICommon.Flags.Entity.NotOnMap } ,
 		light =
 		{
+			type = "basic" ,
 			intensity = 0.5 ,
 			size = 4
 		} ,
@@ -199,7 +211,7 @@ for rockIndex , rockData in pairs( rockDataList ) do
 			layers =
 			{
 				{
-					filename = SIGen.MakeSelfPicturePath( "扔出去的碎裂的矿山石" .. rockData.AliasSuffix ) ,
+					filename = SIGen.MakeSelfPicturePath( "扔出去的碎裂的" .. rockAlias ) ,
 					priority = "high" ,
 					width = 32 ,
 					height = 32 ,
@@ -211,11 +223,14 @@ for rockIndex , rockData in pairs( rockDataList ) do
 			}
 		} ,
 		acceleration = 0 ,
+		height = 1 ,
+		piercing_damage = 0 ,
 		action =
 		{
 			{
 				type = "area" ,
-				radius = 1.6 ,
+				show_in_tooltip = true ,
+				radius = 1.7 ,
 				action_delivery =
 				{
 					{
@@ -224,6 +239,10 @@ for rockIndex , rockData in pairs( rockDataList ) do
 						{
 							{
 								type = "damage" ,
+								show_in_tooltip = true ,
+								lower_damage_modifier = 1.0 ,
+								upper_damage_modifier = 1.0 ,
+								apply_damage_to_trees = true ,
 								damage =
 								{
 									type = "physical" ,
@@ -245,12 +264,13 @@ for rockIndex , rockData in pairs( rockDataList ) do
 					}
 				}
 			}
-		}
+		} ,
+		final_action = nil
 	}
 	.AddFunction( function( prototypeName , prototypeData )
 		pieceRockProjectile = prototypeData
 	end )
-	.New( SICommon.Types.Items.Capsule , "PieceRock" .. rockData.IDSuffix , "碎裂的矿山石" .. rockData.AliasSuffix )
+	.New( SICommon.Types.Items.Capsule , "Piece" .. rockID , "碎裂的" .. rockAlias )
 	.AutoIcon()
 	.Append
 	{
@@ -262,7 +282,7 @@ for rockIndex , rockData in pairs( rockDataList ) do
 				layers =
 				{
 					{
-						filename = SIGen.MakeSelfPicturePath( "碎裂的矿山石" .. rockData.AliasSuffix .. "-1" ) ,
+						filename = SIGen.MakeSelfPicturePath( "碎裂的" .. rockAlias .. "-1" ) ,
 						size = 64 ,
 						mipmap_count = 4 ,
 						scale = 0.25
@@ -273,7 +293,7 @@ for rockIndex , rockData in pairs( rockDataList ) do
 				layers =
 				{
 					{
-						filename = SIGen.MakeSelfPicturePath( "碎裂的矿山石" .. rockData.AliasSuffix .. "-2" ) ,
+						filename = SIGen.MakeSelfPicturePath( "碎裂的" .. rockAlias .. "-2" ) ,
 						size = 64 ,
 						mipmap_count = 4 ,
 						scale = 0.25
@@ -284,7 +304,7 @@ for rockIndex , rockData in pairs( rockDataList ) do
 				layers =
 				{
 					{
-						filename = SIGen.MakeSelfPicturePath( "碎裂的矿山石" .. rockData.AliasSuffix .. "-3" ) ,
+						filename = SIGen.MakeSelfPicturePath( "碎裂的" .. rockAlias .. "-3" ) ,
 						size = 64 ,
 						mipmap_count = 4 ,
 						scale = 0.25
@@ -295,7 +315,7 @@ for rockIndex , rockData in pairs( rockDataList ) do
 				layers =
 				{
 					{
-						filename = SIGen.MakeSelfPicturePath( "碎裂的矿山石" .. rockData.AliasSuffix .. "-4" ) ,
+						filename = SIGen.MakeSelfPicturePath( "碎裂的" .. rockAlias .. "-4" ) ,
 						size = 64 ,
 						mipmap_count = 4 ,
 						scale = 0.25
@@ -326,7 +346,7 @@ for rockIndex , rockData in pairs( rockDataList ) do
 							{
 								{
 									type = "projectile" ,
-									projectile = SIConstants_Resource.raw.Entities["PieceRock" .. rockData.IDSuffix] ,
+									projectile = SIConstants_Resource.raw.Entities["Piece" .. rockID] ,
 									starting_speed = 0.29 ,
 									target_effects =
 									{
@@ -362,19 +382,19 @@ for rockIndex , rockData in pairs( rockDataList ) do
 				{
 					{
 						type = "insert-item" ,
-						item = SIConstants_Resource.raw.Items["Rock" .. rockData.IDSuffix] ,
+						show_in_tooltip = false ,
+						item = SIConstants_Resource.raw.Items[rockID] ,
 						count = 1 ,
 						repeat_count = 1 ,
-						probability = 0.38 ,
-						show_in_tooltip = false
+						probability = 0.38
 					} ,
 					{
 						type = "insert-item" ,
-						item = SIConstants_Resource.raw.Items["PieceRock" .. rockData.IDSuffix] ,
+						show_in_tooltip = false ,
+						item = SIConstants_Resource.raw.Items["Piece" .. rockID] ,
 						count = 1 ,
 						repeat_count = 4 ,
-						probability = rockData.Probability ,
-						show_in_tooltip = false
+						probability = rockData.Probability
 					}
 				}
 			}
@@ -391,11 +411,11 @@ for rockIndex , rockData in pairs( rockDataList ) do
 				{
 					{
 						type = "insert-item" ,
-						item = SIConstants_Resource.raw.Items["PieceRock" .. rockData.IDSuffix] ,
+						show_in_tooltip = false ,
+						item = SIConstants_Resource.raw.Items["Piece" .. rockID] ,
 						count = 1 ,
 						repeat_count = 1 ,
-						probability = 0.25 ,
-						show_in_tooltip = false
+						probability = 0.25
 					}
 				}
 			}
@@ -625,7 +645,6 @@ for stoneIndex , stoneData in pairs( stoneDataList ) do
 				repeat_count_deviation = 2 ,
 				probability = 1 ,
 				affects_target = false ,
-				show_in_tooltip = false ,
 				offsets = { { 0 , 0 } } ,
 				offset_deviation = { { -0.0789 , -0.1 } , { 0.0789 , 0.1 } } ,
 				tile_collision_mask = nil ,
@@ -645,7 +664,6 @@ for stoneIndex , stoneData in pairs( stoneDataList ) do
 				repeat_count_deviation = 3 ,
 				probability = 1 ,
 				affects_target = false ,
-				show_in_tooltip = false ,
 				offsets = { { 0 , 0 } } ,
 				offset_deviation = { { -0.0789 , -0.1 } , { 0.0789 , 0.1 } } ,
 				tile_collision_mask = nil ,
@@ -665,7 +683,6 @@ for stoneIndex , stoneData in pairs( stoneDataList ) do
 				repeat_count_deviation = 10 ,
 				probability = 1 ,
 				affects_target = false ,
-				show_in_tooltip = false ,
 				offsets = { { 0 , 0 } } ,
 				offset_deviation = { { -0.1 , -0.0789 } , { 0.1 , 0.0789 } } ,
 				tile_collision_mask = nil ,
@@ -685,7 +702,6 @@ for stoneIndex , stoneData in pairs( stoneDataList ) do
 				repeat_count_deviation = 10 ,
 				probability = 1 ,
 				affects_target = false ,
-				show_in_tooltip = false ,
 				offsets = { { 0 , 0 } } ,
 				offset_deviation = { { -0.1 , -0.0789 } , { 0.1 , 0.0789 } } ,
 				tile_collision_mask = nil ,
