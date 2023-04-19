@@ -458,6 +458,7 @@ SIGen
 			line_length = 1 ,
 			variation_count = 1 ,
 			direction_count = 1 ,
+			scale = 1.0 ,
 			shift = SIUtils.by_pixel( 7 , 6 ) ,
 			axially_symmetrical = false
 		}

@@ -226,7 +226,14 @@ CreateRuinBuildings( SICommon.Types.Entities.Wall , "RuinWall" , "遗迹围墙" 
 					shift = SIUtils.by_pixel( 0 , -6 ) ,
 					hr_version =
 					{
-
+						filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Wall , "遗迹围墙-独立" ) ,
+						priority = "extra-high" ,
+						width = 64 ,
+						height = 86 ,
+						line_length = 2 ,
+						variation_count = 2 ,
+						scale = 0.5 ,
+						shift = SIUtils.by_pixel( 0 , -5 )
 					}
 				} ,
 				{
@@ -240,7 +247,14 @@ CreateRuinBuildings( SICommon.Types.Entities.Wall , "RuinWall" , "遗迹围墙" 
 					draw_as_shadow = true ,
 					hr_version =
 					{
-						
+						filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Wall , "遗迹围墙-独立-影子" ) ,
+						priority = "extra-high" ,
+						width = 98 ,
+						height = 60 ,
+						repeat_count = 2 ,
+						scale = 0.5 ,
+						shift = SIUtils.by_pixel( 10 , 17 ) ,
+						draw_as_shadow = true
 					}
 				}
 			}
@@ -257,7 +271,18 @@ CreateRuinBuildings( SICommon.Types.Entities.Wall , "RuinWall" , "遗迹围墙" 
 					line_length = 6 ,
 					variation_count = 6 ,
 					scale = 1.0 ,
-					shift = SIUtils.by_pixel( 0 , -4 )
+					shift = SIUtils.by_pixel( 0 , -4 ) ,
+					hr_version =
+					{
+						filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Wall , "遗迹围墙-横向" ) ,
+						priority = "extra-high" ,
+						width = 64 ,
+						height = 92 ,
+						line_length = 6 ,
+						variation_count = 6 ,
+						scale = 0.5 ,
+						shift = SIUtils.by_pixel( 0 , -2 )
+					}
 				} ,
 				{
 					filename = SIGen.MakePicturePath( SICommon.Types.Entities.Wall , "遗迹围墙-横向-影子" ) ,
@@ -267,7 +292,18 @@ CreateRuinBuildings( SICommon.Types.Entities.Wall , "RuinWall" , "遗迹围墙" 
 					repeat_count = 6 ,
 					scale = 1.0 ,
 					shift = SIUtils.by_pixel( 14 , 14 ) ,
-					draw_as_shadow = true
+					draw_as_shadow = true ,
+					hr_version =
+					{
+						filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Wall , "遗迹围墙-横向-影子" ) ,
+						priority = "extra-high" ,
+						width = 124 ,
+						height = 68 ,
+						repeat_count = 6 ,
+						scale = 0.5 ,
+						shift = SIUtils.by_pixel( 14 , 15 ) ,
+						draw_as_shadow = true
+					}
 				}
 			}
 		} ,
@@ -283,7 +319,18 @@ CreateRuinBuildings( SICommon.Types.Entities.Wall , "RuinWall" , "遗迹围墙" 
 					line_length = 5 ,
 					variation_count = 5 ,
 					scale = 1.0 ,
-					shift = SIUtils.by_pixel( 0 , 8 )
+					shift = SIUtils.by_pixel( 0 , 8 ) ,
+					hr_version =
+					{
+						filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Wall , "遗迹围墙-纵向" ) ,
+						priority = "extra-high" ,
+						width = 64 ,
+						height = 134 ,
+						line_length = 5 ,
+						variation_count = 5 ,
+						scale = 0.5 ,
+						shift = SIUtils.by_pixel( 0 , 8 )
+					}
 				} ,
 				{
 					filename = SIGen.MakePicturePath( SICommon.Types.Entities.Wall , "遗迹围墙-纵向-影子" ) ,
@@ -293,7 +340,18 @@ CreateRuinBuildings( SICommon.Types.Entities.Wall , "RuinWall" , "遗迹围墙" 
 					repeat_count = 5 ,
 					scale = 1.0 ,
 					shift = SIUtils.by_pixel( 10 , 28 ) ,
-					draw_as_shadow = true
+					draw_as_shadow = true ,
+					hr_version =
+					{
+						filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Wall , "遗迹围墙-纵向-影子" ) ,
+						priority = "extra-high" ,
+						width = 98 ,
+						height = 110 ,
+						repeat_count = 5 ,
+						scale = 0.5 ,
+						shift = SIUtils.by_pixel( 10 , 29 ) ,
+						draw_as_shadow = true
+					}
 				}
 			}
 		} ,
@@ -309,7 +367,18 @@ CreateRuinBuildings( SICommon.Types.Entities.Wall , "RuinWall" , "遗迹围墙" 
 					line_length = 2 ,
 					variation_count = 2 ,
 					scale = 1.0 ,
-					shift = SIUtils.by_pixel( 0 , 6 )
+					shift = SIUtils.by_pixel( 0 , 6 ) ,
+					hr_version =
+					{
+						filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Wall , "遗迹围墙-拐角左" ) ,
+						priority = "extra-high" ,
+						width = 64 ,
+						height = 134 ,
+						line_length = 2 ,
+						variation_count = 2 ,
+						scale = 0.5 ,
+						shift = SIUtils.by_pixel( 0 , 7 )
+					}
 				} ,
 				{
 					filename = SIGen.MakePicturePath( SICommon.Types.Entities.Wall , "遗迹围墙-拐角左-影子" ) ,
@@ -319,7 +388,18 @@ CreateRuinBuildings( SICommon.Types.Entities.Wall , "RuinWall" , "遗迹围墙" 
 					repeat_count = 2 ,
 					scale = 1.0 ,
 					shift = SIUtils.by_pixel( 8 , 28 ) ,
-					draw_as_shadow = true
+					draw_as_shadow = true ,
+					hr_version =
+					{
+						filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Wall , "遗迹围墙-拐角左-影子" ) ,
+						priority = "extra-high" ,
+						width = 102 ,
+						height = 120 ,
+						repeat_count = 2 ,
+						scale = 0.5 ,
+						shift = SIUtils.by_pixel( 9 , 28 ) ,
+						draw_as_shadow = true
+					}
 				}
 			}
 		} ,
@@ -335,7 +415,18 @@ CreateRuinBuildings( SICommon.Types.Entities.Wall , "RuinWall" , "遗迹围墙" 
 					line_length = 2 ,
 					variation_count = 2 ,
 					scale = 1.0 ,
-					shift = SIUtils.by_pixel( 0 , 6 )
+					shift = SIUtils.by_pixel( 0 , 6 ) ,
+					hr_version =
+					{
+						filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Wall , "遗迹围墙-拐角右" ) ,
+						priority = "extra-high",
+						width = 64 ,
+						height = 128 ,
+						line_length = 2 ,
+						variation_count = 2 ,
+						scale = 0.5 ,
+						shift = SIUtils.by_pixel( 0 , 7 )
+					}
 				} ,
 				{
 					filename = SIGen.MakePicturePath( SICommon.Types.Entities.Wall , "遗迹围墙-拐角右-影子" ) ,
@@ -345,7 +436,18 @@ CreateRuinBuildings( SICommon.Types.Entities.Wall , "RuinWall" , "遗迹围墙" 
 					repeat_count = 2 ,
 					scale = 1.0 ,
 					shift = SIUtils.by_pixel( 14 , 28 ) ,
-					draw_as_shadow = true
+					draw_as_shadow = true ,
+					hr_version =
+					{
+						filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Wall , "遗迹围墙-拐角右-影子" ) ,
+						priority = "extra-high" ,
+						width = 124 ,
+						height = 120 ,
+						repeat_count = 2 ,
+						scale = 0.5 ,
+						shift = SIUtils.by_pixel( 17 , 28 ) ,
+						draw_as_shadow = true
+					}
 				}
 			}
 		} ,
@@ -361,7 +463,18 @@ CreateRuinBuildings( SICommon.Types.Entities.Wall , "RuinWall" , "遗迹围墙" 
 					line_length = 4 ,
 					variation_count = 4 ,
 					scale = 1.0 ,
-					shift = SIUtils.by_pixel( 0 , 6 )
+					shift = SIUtils.by_pixel( 0 , 6 ) ,
+					hr_version =
+					{
+						filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Wall , "遗迹围墙-中分" ) ,
+						priority = "extra-high" ,
+						width = 64 ,
+						height = 134 ,
+						line_length = 4 ,
+						variation_count = 4 ,
+						scale = 0.5 ,
+						shift = SIUtils.by_pixel( 0 , 7 )
+					}
 				} ,
 				{
 					filename = SIGen.MakePicturePath( SICommon.Types.Entities.Wall , "遗迹围墙-中分-影子" ) ,
@@ -371,7 +484,18 @@ CreateRuinBuildings( SICommon.Types.Entities.Wall , "RuinWall" , "遗迹围墙" 
 					repeat_count = 4 ,
 					scale = 1.0 ,
 					shift = SIUtils.by_pixel( 14 , 28 ) ,
-					draw_as_shadow = true
+					draw_as_shadow = true ,
+					hr_version =
+					{
+						filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Wall , "遗迹围墙-中分-影子" ) ,
+						priority = "extra-high" ,
+						width = 124 ,
+						height = 120 ,
+						repeat_count = 4 ,
+						scale = 0.5 ,
+						shift = SIUtils.by_pixel( 14 , 28 ) ,
+						draw_as_shadow = true
+					}
 				}
 			}
 		} ,
@@ -387,7 +511,18 @@ CreateRuinBuildings( SICommon.Types.Entities.Wall , "RuinWall" , "遗迹围墙" 
 					line_length = 2 ,
 					variation_count = 2 ,
 					scale = 1.0 ,
-					shift = SIUtils.by_pixel( 0 , -4 )
+					shift = SIUtils.by_pixel( 0 , -4 ) ,
+					hr_version =
+					{
+						filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Wall , "遗迹围墙-尽头左" ) ,
+						priority = "extra-high" ,
+						width = 64 ,
+						height = 92 ,
+						line_length = 2 ,
+						variation_count = 2 ,
+						scale = 0.5 ,
+						shift = SIUtils.by_pixel( 0 , -3 )
+					}
 				} ,
 				{
 					filename = SIGen.MakePicturePath( SICommon.Types.Entities.Wall , "遗迹围墙-尽头左-影子" ) ,
@@ -397,7 +532,18 @@ CreateRuinBuildings( SICommon.Types.Entities.Wall , "RuinWall" , "遗迹围墙" 
 					repeat_count = 2 ,
 					scale = 1.0 ,
 					shift = SIUtils.by_pixel( 8 , 14 ) ,
-					draw_as_shadow = true
+					draw_as_shadow = true ,
+					hr_version =
+					{
+						filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Wall , "遗迹围墙-尽头左-影子" ) ,
+						priority = "extra-high" ,
+						width = 102 ,
+						height = 68 ,
+						repeat_count = 2 ,
+						scale = 0.5 ,
+						shift = SIUtils.by_pixel( 9 , 15 ) ,
+						draw_as_shadow = true
+					}
 				}
 			}
 		} ,
@@ -413,7 +559,18 @@ CreateRuinBuildings( SICommon.Types.Entities.Wall , "RuinWall" , "遗迹围墙" 
 					line_length = 2 ,
 					variation_count = 2 ,
 					scale = 1.0 ,
-					shift = SIUtils.by_pixel( 0 , -4 )
+					shift = SIUtils.by_pixel( 0 , -4 ) ,
+					hr_version =
+					{
+						filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Wall , "遗迹围墙-尽头右" ) ,
+						priority = "extra-high" ,
+						width = 64 ,
+						height = 92 ,
+						line_length = 2 ,
+						variation_count = 2 ,
+						scale = 0.5 ,
+						shift = SIUtils.by_pixel( 0 , -3 )
+					}
 				} ,
 				{
 					filename = SIGen.MakePicturePath( SICommon.Types.Entities.Wall , "遗迹围墙-尽头右-影子" ) ,
@@ -423,7 +580,18 @@ CreateRuinBuildings( SICommon.Types.Entities.Wall , "RuinWall" , "遗迹围墙" 
 					repeat_count = 2 ,
 					scale = 1.0 ,
 					shift = SIUtils.by_pixel( 14 , 14 ) ,
-					draw_as_shadow = true
+					draw_as_shadow = true ,
+					hr_version =
+					{
+						filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Wall , "遗迹围墙-尽头右-影子" ) ,
+						priority = "extra-high" ,
+						width = 124 ,
+						height = 68 ,
+						repeat_count = 2 ,
+						scale = 0.5 ,
+						shift = SIUtils.by_pixel( 17 , 15 ) ,
+						draw_as_shadow = true
+					}
 				}
 			}
 		} ,
@@ -439,7 +607,18 @@ CreateRuinBuildings( SICommon.Types.Entities.Wall , "RuinWall" , "遗迹围墙" 
 					line_length = 8 ,
 					variation_count = 8 ,
 					scale = 1.0 ,
-					shift = SIUtils.by_pixel( 0 , -2 )
+					shift = SIUtils.by_pixel( 0 , -2 ) ,
+					hr_version =
+					{
+						filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Wall , "遗迹围墙-填充" ) ,
+						priority = "extra-high" ,
+						width = 48 ,
+						height = 56 ,
+						line_length = 8 ,
+						variation_count = 8 ,
+						scale = 0.5 ,
+						shift = SIUtils.by_pixel( 0 , -1 )
+					}
 				}
 			}
 		} ,
@@ -453,7 +632,16 @@ CreateRuinBuildings( SICommon.Types.Entities.Wall , "RuinWall" , "遗迹围墙" 
 					width = 58 ,
 					height = 64 ,
 					scale = 1.0 ,
-					shift = SIUtils.by_pixel( 0 , -2 )
+					shift = SIUtils.by_pixel( 0 , -2 ) ,
+					hr_version =
+					{
+						filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Wall , "遗迹围墙-拼接" ) ,
+						priority = "extra-high" ,
+						width = 116 ,
+						height = 128 ,
+						scale = 0.5 ,
+						shift = SIUtils.by_pixel( 0 , -2 )
+					}
 				} ,
 				{
 					filename = SIGen.MakePicturePath( SICommon.Types.Entities.Wall , "遗迹围墙-拼接-影子" ) ,
@@ -462,7 +650,17 @@ CreateRuinBuildings( SICommon.Types.Entities.Wall , "RuinWall" , "遗迹围墙" 
 					height = 52 ,
 					scale = 1.0 ,
 					shift = SIUtils.by_pixel( 8 , 14 ) ,
-					draw_as_shadow = true
+					draw_as_shadow = true ,
+					hr_version =
+					{
+						filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Wall , "遗迹围墙-拼接-影子" ) ,
+						priority = "extra-high" ,
+						width = 144 ,
+						height = 100 ,
+						scale = 0.5 ,
+						shift = SIUtils.by_pixel( 9 , 15 ) ,
+						draw_as_shadow = true
+					}
 				}
 			}
 		} ,
@@ -476,7 +674,16 @@ CreateRuinBuildings( SICommon.Types.Entities.Wall , "RuinWall" , "遗迹围墙" 
 					width = 42 ,
 					height = 56 ,
 					scale = 1.0 ,
-					shift = SIUtils.by_pixel( 0 , -8 )
+					shift = SIUtils.by_pixel( 0 , -8 ) ,
+					hr_version =
+					{
+						filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Wall , "遗迹围墙-闸门" ) ,
+						priority = "extra-high" ,
+						width = 82 ,
+						height = 108 ,
+						scale = 0.5 ,
+						shift = SIUtils.by_pixel( 0 , -7 )
+					}
 				} ,
 				{
 					filename = SIGen.MakePicturePath( SICommon.Types.Entities.Wall , "遗迹围墙-闸门-影子" ) ,
@@ -485,7 +692,17 @@ CreateRuinBuildings( SICommon.Types.Entities.Wall , "RuinWall" , "遗迹围墙" 
 					height = 40 ,
 					scale = 1.0 ,
 					shift = SIUtils.by_pixel( 14 , 18 ) ,
-					draw_as_shadow = true
+					draw_as_shadow = true ,
+					hr_version =
+					{
+						filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Wall , "遗迹围墙-闸门-影子" ) ,
+						priority = "extra-high" ,
+						width = 130 ,
+						height = 78 ,
+						scale = 0.5 ,
+						shift = SIUtils.by_pixel( 14 , 18 ) ,
+						draw_as_shadow = true
+					}
 				}
 			}
 		}
@@ -508,7 +725,17 @@ CreateRuinBuildings( SICommon.Types.Entities.Wall , "RuinWall" , "遗迹围墙" 
 			height = 24 ,
 			scale = 1.0 ,
 			shift = SIUtils.by_pixel( -2 , -24 ) ,
-			draw_as_glow = true
+			draw_as_glow = true ,
+			hr_version =
+			{
+				filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Wall , "遗迹围墙-信号灯-绿" ) ,
+				priority = "extra-high" ,
+				width = 72 ,
+				height = 44 ,
+				scale = 0.5 ,
+				shift = SIUtils.by_pixel( -1 , -23 ) ,
+				draw_as_glow = true
+			}
 		}
 	} ,
 	wall_diode_green_light_top =
@@ -553,7 +780,17 @@ CreateRuinBuildings( SICommon.Types.Entities.Wall , "RuinWall" , "遗迹围墙" 
 			height = 24 ,
 			scale = 1.0 ,
 			shift = SIUtils.by_pixel( -2 , -24 ) ,
-			draw_as_glow = true
+			draw_as_glow = true ,
+			hr_version =
+			{
+				filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Wall , "遗迹围墙-信号灯-红" ) ,
+				priority = "extra-high" ,
+				width = 72 ,
+				height = 44 ,
+				scale = 0.5 ,
+				shift = SIUtils.by_pixel( -1 , -23 ) ,
+				draw_as_glow = true
+			}
 		}
 	} ,
 	wall_diode_red_light_top =
@@ -643,8 +880,23 @@ SIGen
 			line_length = 1 ,
 			variation_count = 1 ,
 			direction_count = 1 ,
+			scale = 1.0 ,
 			shift = SIUtils.by_pixel( 2 , 5 ) ,
-			axially_symmetrical = false
+			axially_symmetrical = false ,
+			hr_version =
+			{
+				filename = SIGen.MakeSelfPicturePathHr( "遗迹地雷-残骸" ) ,
+				priority = "extra-high" ,
+				width = 68 ,
+				height = 66 ,
+				frame_count = 1 ,
+				line_length = 1 ,
+				variation_count = 1 ,
+				direction_count = 1 ,
+				scale = 0.5 ,
+				shift = SIUtils.by_pixel( 2 , 5 ) ,
+				axially_symmetrical = false
+			}
 		}
 	} )
 }
@@ -830,6 +1082,7 @@ SIGen
 			line_length = 1 ,
 			variation_count = 1 ,
 			direction_count = 1 ,
+			scale = 1.0 ,
 			shift = SIUtils.by_pixel( 3 , -1 ) ,
 			axially_symmetrical = false
 		} ,
@@ -842,6 +1095,7 @@ SIGen
 			line_length = 1 ,
 			variation_count = 1 ,
 			direction_count = 1 ,
+			scale = 1.0 ,
 			shift = SIUtils.by_pixel( -1 , -11 ) ,
 			apply_runtime_tint = true
 		}
@@ -977,6 +1231,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Turret , "RuinGunTurret" , "遗迹�
 				frame_count = 1 ,
 				line_length = 1 ,
 				direction_count = 1 ,
+				scale = 1.0 ,
 				shift = SIUtils.by_pixel( 1 , -1 ) ,
 				axially_symmetrical = false
 			} ,
@@ -989,6 +1244,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Turret , "RuinGunTurret" , "遗迹�
 				frame_count = 1 ,
 				line_length = 1 ,
 				direction_count = 1 ,
+				scale = 1.0 ,
 				shift = SIUtils.by_pixel( 0 , -4 ) ,
 				axially_symmetrical = false ,
 				apply_runtime_tint = true
@@ -1008,6 +1264,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Turret , "RuinGunTurret" , "遗迹�
 				frame_count = 5 ,
 				line_length = 5 ,
 				direction_count = 4 ,
+				scale = 1.0 ,
 				shift = SIUtils.by_pixel( 0 , -26 ) ,
 				axially_symmetrical = false
 			} ,
@@ -1021,6 +1278,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Turret , "RuinGunTurret" , "遗迹�
 				frame_count = 5 ,
 				line_length = 5 ,
 				direction_count = 4 ,
+				scale = 1.0 ,
 				shift = SIUtils.by_pixel( 0 , -28 ) ,
 				axially_symmetrical = false ,
 				apply_runtime_tint = true
@@ -1034,6 +1292,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Turret , "RuinGunTurret" , "遗迹�
 				frame_count = 5 ,
 				line_length = 5 ,
 				direction_count = 4 ,
+				scale = 1.0 ,
 				shift = SIUtils.by_pixel( 19 , 2 ) ,
 				draw_as_shadow = true ,
 				axially_symmetrical = false
@@ -1073,6 +1332,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Turret , "RuinGunTurret" , "遗迹�
 				height = 66 ,
 				frame_count = 1 ,
 				direction_count = 64 ,
+				scale = 1.0 ,
 				shift = SIUtils.by_pixel( 0 , -27 ) ,
 				axially_symmetrical = false
 			} ,
@@ -1107,6 +1367,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Turret , "RuinGunTurret" , "遗迹�
 				frame_count = 1 ,
 				line_length = 1 ,
 				direction_count = 64 ,
+				scale = 1.0 ,
 				shift = SIUtils.by_pixel( 0 , -32 ) ,
 				axially_symmetrical = false ,
 				apply_runtime_tint = true
@@ -1140,6 +1401,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Turret , "RuinGunTurret" , "遗迹�
 				height = 62 ,
 				frame_count = 1 ,
 				direction_count = 64 ,
+				scale = 1.0 ,
 				shift = SIUtils.by_pixel( 23 , 2 ) ,
 				draw_as_shadow = true ,
 				axially_symmetrical = false
@@ -1159,6 +1421,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Turret , "RuinGunTurret" , "遗迹�
 				frame_count = 5 ,
 				line_length = 5 ,
 				direction_count = 4 ,
+				scale = 1.0 ,
 				shift = SIUtils.by_pixel( 0 , -26 ) ,
 				axially_symmetrical = false
 			} ,
@@ -1172,6 +1435,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Turret , "RuinGunTurret" , "遗迹�
 				frame_count = 5 ,
 				line_length = 5 ,
 				direction_count = 4 ,
+				scale = 1.0 ,
 				shift = SIUtils.by_pixel( 0 , -28 ) ,
 				axially_symmetrical = false ,
 				apply_runtime_tint = true
@@ -1185,6 +1449,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Turret , "RuinGunTurret" , "遗迹�
 				frame_count = 5 ,
 				line_length = 5 ,
 				direction_count = 4 ,
+				scale = 1.0 ,
 				shift = SIUtils.by_pixel( 19 , 2 ) ,
 				draw_as_shadow = true ,
 				axially_symmetrical = false
@@ -1204,6 +1469,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Turret , "RuinGunTurret" , "遗迹�
 				frame_count = 1 ,
 				line_length = 1 ,
 				direction_count = 4 ,
+				scale = 1.0 ,
 				shift = SIUtils.by_pixel( 0 , -26 ) ,
 				axially_symmetrical = false
 			} ,
@@ -1217,6 +1483,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Turret , "RuinGunTurret" , "遗迹�
 				frame_count = 1 ,
 				line_length = 1 ,
 				direction_count = 4 ,
+				scale = 1.0 ,
 				shift = SIUtils.by_pixel( 0 , -28 ) ,
 				axially_symmetrical = false ,
 				apply_runtime_tint = true
@@ -1230,6 +1497,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Turret , "RuinGunTurret" , "遗迹�
 				frame_count = 1 ,
 				line_length = 1 ,
 				direction_count = 4 ,
+				scale = 1.0 ,
 				shift = SIUtils.by_pixel( 19 , 2 ) ,
 				draw_as_shadow = true ,
 				axially_symmetrical = false
@@ -1269,6 +1537,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Turret , "RuinGunTurret" , "遗迹�
 				height = 66 ,
 				frame_count = 2 ,
 				direction_count = 64 ,
+				scale = 1.0 ,
 				shift = SIUtils.by_pixel( 0 , -27 ) ,
 				axially_symmetrical = false
 			} ,
@@ -1303,6 +1572,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Turret , "RuinGunTurret" , "遗迹�
 				frame_count = 2 ,
 				line_length = 2 ,
 				direction_count = 64 ,
+				scale = 1.0 ,
 				shift = SIUtils.by_pixel( 0 , -32 ) ,
 				axially_symmetrical = false ,
 				apply_runtime_tint = true
@@ -1336,6 +1606,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Turret , "RuinGunTurret" , "遗迹�
 				height = 62 ,
 				frame_count = 2 ,
 				direction_count = 64 ,
+				scale = 1.0 ,
 				shift = SIUtils.by_pixel( 23 , 2 ) ,
 				draw_as_shadow = true ,
 				axially_symmetrical = false
@@ -1633,6 +1904,7 @@ SIGen
 			line_length = 1 ,
 			variation_count = 1 ,
 			direction_count = 1 ,
+			scale = 1.0 ,
 			shift = SIUtils.by_pixel( 3 , -2 ) ,
 			axially_symmetrical = false
 		} ,
@@ -1645,6 +1917,7 @@ SIGen
 			line_length = 1 ,
 			variation_count = 1 ,
 			direction_count = 1 ,
+			scale = 1.0 ,
 			shift = SIUtils.by_pixel( 4 , -2 ) ,
 			apply_runtime_tint = true
 		}
@@ -1739,6 +2012,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Turret , "RuinLaserTurret" , "遗�
 				frame_count = 1 ,
 				line_length = 1 ,
 				direction_count = 1 ,
+				scale = 1.0 ,
 				shift = SIUtils.by_pixel( 0 , 2 )
 			} ,
 			{
@@ -1749,6 +2023,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Turret , "RuinLaserTurret" , "遗�
 				frame_count = 1 ,
 				line_length = 1 ,
 				direction_count = 1 ,
+				scale = 1.0 ,
 				shift = SIUtils.by_pixel( 6 , 3 ) ,
 				draw_as_shadow = true
 			}
@@ -1767,6 +2042,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Turret , "RuinLaserTurret" , "遗�
 				frame_count = 15 ,
 				line_length = 15 ,
 				direction_count = 4 ,
+				scale = 1.0 ,
 				shift = SIUtils.by_pixel( 0 , -32 ) ,
 				axially_symmetrical = false
 			} ,
@@ -1780,6 +2056,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Turret , "RuinLaserTurret" , "遗�
 				frame_count = 15 ,
 				line_length = 15 ,
 				direction_count = 4 ,
+				scale = 1.0 ,
 				shift = SIUtils.by_pixel( 0 , -43 ) ,
 				axially_symmetrical = false ,
 				apply_runtime_tint = true
@@ -1793,6 +2070,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Turret , "RuinLaserTurret" , "遗�
 				frame_count = 15 ,
 				line_length = 15 ,
 				direction_count = 4 ,
+				scale = 1.0 ,
 				shift = SIUtils.by_pixel( 47 , 3 ) ,
 				draw_as_shadow = true ,
 				axially_symmetrical = false
@@ -1811,6 +2089,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Turret , "RuinLaserTurret" , "遗�
 				frame_count = 1 ,
 				line_length = 8 ,
 				direction_count = 64 ,
+				scale = 1.0 ,
 				shift = SIUtils.by_pixel( 0 , -35 )
 			} ,
 			{
@@ -1822,6 +2101,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Turret , "RuinLaserTurret" , "遗�
 				frame_count = 1 ,
 				line_length = 8 ,
 				direction_count = 64 ,
+				scale = 1.0 ,
 				shift = SIUtils.by_pixel( 0 , -43 ) ,
 				apply_runtime_tint = true
 			} ,
@@ -1833,6 +2113,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Turret , "RuinLaserTurret" , "遗�
 				frame_count = 1 ,
 				line_length = 8 ,
 				direction_count = 64 ,
+				scale = 1.0 ,
 				shift = SIUtils.by_pixel( 51 , 2 ) ,
 				draw_as_shadow = true
 			}
@@ -1851,6 +2132,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Turret , "RuinLaserTurret" , "遗�
 				frame_count = 15 ,
 				line_length = 15 ,
 				direction_count = 4 ,
+				scale = 1.0 ,
 				shift = SIUtils.by_pixel( 0 , -32 ) ,
 				axially_symmetrical = false
 			} ,
@@ -1864,6 +2146,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Turret , "RuinLaserTurret" , "遗�
 				frame_count = 15 ,
 				line_length = 15 ,
 				direction_count = 4 ,
+				scale = 1.0 ,
 				shift = SIUtils.by_pixel( 0 , -43 ) ,
 				axially_symmetrical = false ,
 				apply_runtime_tint = true
@@ -1877,6 +2160,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Turret , "RuinLaserTurret" , "遗�
 				frame_count = 15 ,
 				line_length = 15 ,
 				direction_count = 4 ,
+				scale = 1.0 ,
 				shift = SIUtils.by_pixel( 47 , 3 ) ,
 				draw_as_shadow = true ,
 				axially_symmetrical = false
@@ -1896,6 +2180,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Turret , "RuinLaserTurret" , "遗�
 				frame_count = 1 ,
 				line_length = 1 ,
 				direction_count = 4 ,
+				scale = 1.0 ,
 				shift = SIUtils.by_pixel( 0 , -32 ) ,
 				axially_symmetrical = false
 			} ,
@@ -1909,6 +2194,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Turret , "RuinLaserTurret" , "遗�
 				frame_count = 1 ,
 				line_length = 1 ,
 				direction_count = 4 ,
+				scale = 1.0 ,
 				shift = SIUtils.by_pixel( 0 , -43 ) ,
 				axially_symmetrical = false ,
 				apply_runtime_tint = true
@@ -1922,6 +2208,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Turret , "RuinLaserTurret" , "遗�
 				frame_count = 1 ,
 				line_length = 1 ,
 				direction_count = 4 ,
+				scale = 1.0 ,
 				shift = SIUtils.by_pixel( 47 , 3 ) ,
 				draw_as_shadow = true ,
 				axially_symmetrical = false
@@ -1942,6 +2229,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Turret , "RuinLaserTurret" , "遗�
 				frame_count = 1 ,
 				line_length = 8 ,
 				direction_count = 64 ,
+				scale = 1.0 ,
 				shift = SIUtils.by_pixel( 0 , -35 )
 			}
 		}
@@ -2011,6 +2299,7 @@ local function RuinFlameTurretGunAnimationSingle( shift , attacking )
 			frame_count = 1 ,
 			line_length = 8 ,
 			direction_count = 64 ,
+			scale = 1.0 ,
 			shift = SIUtils.by_pixel( -2 , -26 ) ,
 			axially_symmetrical = false ,
 			counterclockwise = true
@@ -2027,6 +2316,7 @@ local function RuinFlameTurretGunAnimationSingle( shift , attacking )
 			frame_count = 1 ,
 			line_length = 8 ,
 			direction_count = 64 ,
+			scale = 1.0 ,
 			tint = SIUtils.premul_color{ 1 , 1 , 1 , 0.5 } ,
 			shift = SIUtils.by_pixel( -2 , -26 ) ,
 			axially_symmetrical = false ,
@@ -2042,6 +2332,7 @@ local function RuinFlameTurretGunAnimationSingle( shift , attacking )
 			frame_count = 1 ,
 			line_length = 8 ,
 			direction_count = 64 ,
+			scale = 1.0 ,
 			tint = SIUtils.premul_color{ 1 , 1 , 1 , 0.5 } ,
 			shift = SIUtils.by_pixel( -2 , -26 ) ,
 			draw_as_light = true ,
@@ -2059,6 +2350,7 @@ local function RuinFlameTurretGunAnimationSingle( shift , attacking )
 		frame_count = 1 ,
 		line_length = 8 ,
 		direction_count = 64 ,
+		scale = 1.0 ,
 		shift = SIUtils.by_pixel( -2 , -28 ) ,
 		axially_symmetrical = false ,
 		apply_runtime_tint = true ,
@@ -2073,6 +2365,7 @@ local function RuinFlameTurretGunAnimationSingle( shift , attacking )
 		frame_count = 1 ,
 		line_length = 8 ,
 		direction_count = 64 ,
+		scale = 1.0 ,
 		shift = SIUtils.by_pixel( 32 , 0 ) ,
 		draw_as_shadow = true ,
 		axially_symmetrical = false ,
@@ -2107,6 +2400,7 @@ local function RuinFlameTurretExtensionAnimationSingle( runMode , frameCount , l
 			line_length = lineLength or 5 ,
 			direction_count = 1 ,
 			y = 192 * yCount ,
+			scale = 1.0 ,
 			shift = SIUtils.by_pixel( -2 , -26 ) ,
 			axially_symmetrical = false
 		} ,
@@ -2121,6 +2415,7 @@ local function RuinFlameTurretExtensionAnimationSingle( runMode , frameCount , l
 			line_length = lineLength or 5 ,
 			direction_count = 1 ,
 			y = 180 * yCount ,
+			scale = 1.0 ,
 			shift = SIUtils.by_pixel( -2 , -26 ) ,
 			axially_symmetrical = false ,
 			apply_runtime_tint = true
@@ -2135,6 +2430,7 @@ local function RuinFlameTurretExtensionAnimationSingle( runMode , frameCount , l
 			line_length = lineLength or 5 ,
 			direction_count = 1 ,
 			y = 180 * yCount ,
+			scale = 1.0 ,
 			shift = SIUtils.by_pixel( 32 , -2 ) ,
 			draw_as_shadow = true ,
 			axially_symmetrical = false
@@ -2183,6 +2479,7 @@ SIGen
 					line_length = 1 ,
 					variation_count = 1 ,
 					direction_count = 4 ,
+					scale = 1.0 ,
 					shift = SIUtils.by_pixel( -1 , -4 ) ,
 					axially_symmetrical = false
 				} ,
@@ -2195,6 +2492,7 @@ SIGen
 					line_length = 1 ,
 					variation_count = 1 ,
 					direction_count = 4 ,
+					scale = 1.0 ,
 					shift = SIUtils.by_pixel( 0 , -4 ) ,
 					apply_runtime_tint = true
 				}
@@ -2332,6 +2630,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Turret , "RuinFlameTurret" , "遗�
 					frame_count = 1 ,
 					line_length = 1 ,
 					direction_count = 1 ,
+					scale = 1.0 ,
 					shift = SIUtils.by_pixel( -2 , 14 ) ,
 					axially_symmetrical = false
 				} ,
@@ -2344,6 +2643,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Turret , "RuinFlameTurret" , "遗�
 					frame_count = 1 ,
 					line_length = 1 ,
 					direction_count = 1 ,
+					scale = 1.0 ,
 					shift = SIUtils.by_pixel( 0 , 32 ) ,
 					axially_symmetrical = false ,
 					apply_runtime_tint = true
@@ -2356,6 +2656,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Turret , "RuinFlameTurret" , "遗�
 					frame_count = 1 ,
 					line_length = 1 ,
 					direction_count = 1 ,
+					scale = 1.0 ,
 					shift = SIUtils.by_pixel( 2 , 14 ) ,
 					draw_as_shadow = true ,
 					axially_symmetrical = false
@@ -2374,6 +2675,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Turret , "RuinFlameTurret" , "遗�
 					frame_count = 1 ,
 					line_length = 1 ,
 					direction_count = 1 ,
+					scale = 1.0 ,
 					shift = SIUtils.by_pixel( -6 , 2 ) ,
 					axially_symmetrical = false
 				} ,
@@ -2386,6 +2688,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Turret , "RuinFlameTurret" , "遗�
 					frame_count = 1 ,
 					line_length = 1 ,
 					direction_count = 1 ,
+					scale = 1.0 ,
 					shift = SIUtils.by_pixel( -32 , 0 ) ,
 					axially_symmetrical = false ,
 					apply_runtime_tint = true
@@ -2398,6 +2701,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Turret , "RuinFlameTurret" , "遗�
 					frame_count = 1 ,
 					line_length = 1 ,
 					direction_count = 1 ,
+					scale = 1.0 ,
 					shift = SIUtils.by_pixel( 14 , 8 ) ,
 					draw_as_shadow = true ,
 					axially_symmetrical = false
@@ -2416,6 +2720,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Turret , "RuinFlameTurret" , "遗�
 					frame_count = 1 ,
 					line_length = 1 ,
 					direction_count = 1 ,
+					scale = 1.0 ,
 					shift = SIUtils.by_pixel( 0 , -8 ) ,
 					axially_symmetrical = false
 				} ,
@@ -2428,6 +2733,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Turret , "RuinFlameTurret" , "遗�
 					frame_count = 1 ,
 					line_length = 1 ,
 					direction_count = 1 ,
+					scale = 1.0 ,
 					shift = SIUtils.by_pixel( 0 , -32 ) ,
 					axially_symmetrical = false ,
 					apply_runtime_tint = true
@@ -2440,6 +2746,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Turret , "RuinFlameTurret" , "遗�
 					frame_count = 1 ,
 					line_length = 1 ,
 					direction_count = 1 ,
+					scale = 1.0 ,
 					shift = SIUtils.by_pixel( 2 , 8 ) ,
 					draw_as_shadow = true ,
 					axially_symmetrical = false
@@ -2458,6 +2765,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Turret , "RuinFlameTurret" , "遗�
 					frame_count = 1 ,
 					line_length = 1 ,
 					direction_count = 1 ,
+					scale = 1.0 ,
 					shift = SIUtils.by_pixel( 8 , -2 ) ,
 					axially_symmetrical = false
 				} ,
@@ -2470,6 +2778,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Turret , "RuinFlameTurret" , "遗�
 					frame_count = 1 ,
 					line_length = 1 ,
 					direction_count = 1 ,
+					scale = 1.0 ,
 					shift = SIUtils.by_pixel( 32 , -2 ) ,
 					axially_symmetrical = false ,
 					apply_runtime_tint = true
@@ -2482,6 +2791,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Turret , "RuinFlameTurret" , "遗�
 					frame_count = 1 ,
 					line_length = 1 ,
 					direction_count = 1 ,
+					scale = 1.0 ,
 					shift = SIUtils.by_pixel( 14 , 4 ) ,
 					draw_as_shadow = true ,
 					axially_symmetrical = false
@@ -2558,6 +2868,7 @@ SIGen
 		line_length = 1 ,
 		variation_count = 1 ,
 		direction_count = 1 ,
+		scale = 1.0 ,
 		shift = SIUtils.by_pixel( 8 , -1 )
 	}
 }
@@ -2616,6 +2927,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Container , "RuinChest" , "遗迹�
 				priority = "extra-high" ,
 				width = 32 ,
 				height = 36 ,
+				scale = 1.0 ,
 				shift = SIUtils.by_pixel( 0.5 , -2 )
 			} ,
 			{
@@ -2623,6 +2935,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Container , "RuinChest" , "遗迹�
 				priority = "extra-high" ,
 				width = 52 ,
 				height = 20 ,
+				scale = 1.0 ,
 				shift = SIUtils.by_pixel( 10 , 6.5 ) ,
 				draw_as_shadow = true
 			}
@@ -3175,6 +3488,7 @@ SIGen
 			line_length = 1 ,
 			variation_count = 1 ,
 			direction_count = 1 ,
+			scale = 1.0 ,
 			shift = SIUtils.by_pixel( 4 , -2 ) ,
 			axially_symmetrical = false
 		}
@@ -3250,6 +3564,7 @@ SIGen
 			priority = "extra-high" ,
 			width = 46 ,
 			height = 46 ,
+			scale = 1.0 ,
 			shift = { 0.09375 , 0 }
 		}
 	} ,
@@ -3258,42 +3573,48 @@ SIGen
 		filename = SIGen.MakeSelfPicturePath( "遗迹爪子-基础" ) ,
 		priority = "extra-high" ,
 		width = 8 ,
-		height = 33
+		height = 33 ,
+		scale = 1.0
 	} ,
 	hand_base_shadow =
 	{
 		filename = SIGen.MakeSelfPicturePath( "遗迹爪子-基础-影子" ) ,
 		priority = "extra-high" ,
 		width = 8 ,
-		height = 33
+		height = 33 ,
+		scale = 1.0
 	} ,
 	hand_open_picture =
 	{
 		filename = SIGen.MakeSelfPicturePath( "遗迹爪子-打开" ) ,
 		priority = "extra-high" ,
 		width = 18 ,
-		height = 41
+		height = 41 ,
+		scale = 1.0
 	} ,
 	hand_open_shadow =
 	{
 		filename = SIGen.MakeSelfPicturePath( "遗迹爪子-打开-影子" ) ,
 		priority = "extra-high" ,
 		width = 18 ,
-		height = 41
+		height = 41 ,
+		scale = 1.0
 	} ,
 	hand_closed_picture =
 	{
 		filename = SIGen.MakeSelfPicturePath( "遗迹爪子-关闭" ) ,
 		priority = "extra-high" ,
 		width = 18 ,
-		height = 41
+		height = 41 ,
+		scale = 1.0
 	} ,
 	hand_closed_shadow =
 	{
 		filename = SIGen.MakeSelfPicturePath( "遗迹爪子-关闭-影子" ) ,
 		priority = "extra-high" ,
 		width = 18 ,
-		height = 41
+		height = 41 ,
+		scale = 1.0
 	} ,
 	mined_sound =
 	{
