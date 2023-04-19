@@ -1010,27 +1010,58 @@ CreateRuinBuildings( SICommon.Types.Entities.LandMine , "RuinLandMine" , "遗迹
 	} ,
 	picture_safe =
 	{
-		filename = SIGen.MakePicturePath( SICommon.Types.Entities.Machine , "遗迹地雷" ) ,
-		priority = "medium" ,
-		width = 32 ,
-		height = 32 ,
-		scale = 1.0
+		layers =
+		{
+			{
+				filename = SIGen.MakePicturePath( SICommon.Types.Entities.LandMine , "遗迹地雷" ) ,
+				priority = "medium" ,
+				width = 32 ,
+				height = 32 ,
+				scale = 1.0 ,
+				hr_version =
+				{
+					ilename = SIGen.MakePicturePathHr( SICommon.Types.Entities.LandMine , "遗迹地雷" ) ,
+					priority = "medium" ,
+					width = 64 ,
+					height = 64 ,
+					scale = 0.5
+				}
+			}
+		}
 	} ,
 	picture_set =
 	{
-		filename = SIGen.MakePicturePath( SICommon.Types.Entities.Machine , "遗迹地雷-部署" ) ,
-		priority = "medium" ,
-		width = 32 ,
-		height = 32 ,
-		scale = 1.0
+		layers =
+		{
+			{
+				filename = SIGen.MakePicturePath( SICommon.Types.Entities.LandMine , "遗迹地雷-部署" ) ,
+				priority = "medium" ,
+				width = 32 ,
+				height = 32 ,
+				scale = 1.0 ,
+				hr_version =
+				{
+					filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.LandMine , "遗迹地雷-部署" ) ,
+					priority = "medium" ,
+					width = 64 ,
+					height = 64 ,
+					scale = 0.5
+				}
+			}
+		}
 	} ,
 	picture_set_enemy =
 	{
-		filename = SIGen.MakePicturePath( SICommon.Types.Entities.Machine , "遗迹地雷-部署敌对" ) ,
-		priority = "medium" ,
-		width = 32 ,
-		height = 32 ,
-		scale = 1.0
+		layers =
+		{
+			{
+				filename = SIGen.MakePicturePath( SICommon.Types.Entities.LandMine , "遗迹地雷-部署敌对" ) ,
+				priority = "medium" ,
+				width = 32 ,
+				height = 32 ,
+				scale = 1.0
+			}
+		}
 	} ,
 	mined_sound =
 	{

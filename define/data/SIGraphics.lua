@@ -232,13 +232,24 @@ function SIGraphics.MakeRemnantsAnimation( count , layers )
 	for index = 0 , count - 1 , 1 do
 		local animationLayers = {}
 		for layerIndex , layer in pairs( layers ) do
+			-- 普通贴图
 			local frameCount = layer.frame_count or 1
 			local lineLength = layer.line_length or frameCount
 			if lineLength < 1 then
 				lineLength = frameCount
 			end
 			local newLayer = SIUtils.table.deepcopy( layer )
-			newLayer.y = index * layer.height * ( frameCount * layer.direction_count + lineLength - 1 ) / lineLength
+			newLayer.y = index * layer.height * ( frameCount * ( layer.direction_count or 1 ) + lineLength - 1 ) / lineLength
+			-- 高清贴图
+			if layer.hr_version then
+				local frameCountHr = layer.hr_version.frame_count or 1
+				local lineLengthHr = layer.hr_version.line_length or frameCountHr
+				if lineLengthHr < 1 then
+					lineLengthHr = frameCountHr
+				end
+				newLayer.hr_version.y = index * layer.hr_version.height * ( frameCountHr * ( layer.hr_version.direction_count or 1 ) + lineLengthHr - 1 ) / lineLengthHr
+			end
+			-- 添加贴图数据
 			table.insert( animationLayers , newLayer )
 		end
 		table.insert( animations , { layers = animationLayers } )
