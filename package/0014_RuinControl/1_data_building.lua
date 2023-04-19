@@ -137,7 +137,21 @@ SIGen
 			line_length = 1 ,
 			variation_count = 1 ,
 			direction_count = 2 ,
-			shift = SIUtils.by_pixel( 3 , 7.5 )
+			scale = 1.0 ,
+			shift = SIUtils.by_pixel( 3 , 7.5 ) ,
+			hr_version =
+			{
+				filename = SIGen.MakeSelfPicturePathHr( "遗迹围墙-残骸" ) ,
+				priority = "extra-high" ,
+				width = 118 ,
+				height = 114 ,
+				frame_count = 1 ,
+				line_length = 1 ,
+				variation_count = 1 ,
+				direction_count = 2 ,
+				scale = 0.5 ,
+				shift = SIUtils.by_pixel( 3 , 7.5 )
+			}
 		}
 	} )
 }
@@ -208,7 +222,12 @@ CreateRuinBuildings( SICommon.Types.Entities.Wall , "RuinWall" , "遗迹围墙" 
 					height = 46 ,
 					line_length = 2 ,
 					variation_count = 2 ,
-					shift = SIUtils.by_pixel( 0 , -6 )
+					scale = 1.0 ,
+					shift = SIUtils.by_pixel( 0 , -6 ) ,
+					hr_version =
+					{
+
+					}
 				} ,
 				{
 					filename = SIGen.MakePicturePath( SICommon.Types.Entities.Wall , "遗迹围墙-独立-影子" ) ,
@@ -216,8 +235,13 @@ CreateRuinBuildings( SICommon.Types.Entities.Wall , "RuinWall" , "遗迹围墙" 
 					width = 50 ,
 					height = 32 ,
 					repeat_count = 2 ,
+					scale = 1.0 ,
 					shift = SIUtils.by_pixel( 10 , 16 ) ,
-					draw_as_shadow = true
+					draw_as_shadow = true ,
+					hr_version =
+					{
+						
+					}
 				}
 			}
 		} ,
@@ -232,6 +256,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Wall , "RuinWall" , "遗迹围墙" 
 					height = 50 ,
 					line_length = 6 ,
 					variation_count = 6 ,
+					scale = 1.0 ,
 					shift = SIUtils.by_pixel( 0 , -4 )
 				} ,
 				{
@@ -240,6 +265,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Wall , "RuinWall" , "遗迹围墙" 
 					width = 62 ,
 					height = 36 ,
 					repeat_count = 6 ,
+					scale = 1.0 ,
 					shift = SIUtils.by_pixel( 14 , 14 ) ,
 					draw_as_shadow = true
 				}
@@ -256,6 +282,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Wall , "RuinWall" , "遗迹围墙" 
 					height = 68 ,
 					line_length = 5 ,
 					variation_count = 5 ,
+					scale = 1.0 ,
 					shift = SIUtils.by_pixel( 0 , 8 )
 				} ,
 				{
@@ -264,6 +291,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Wall , "RuinWall" , "遗迹围墙" 
 					width = 50 ,
 					height = 58 ,
 					repeat_count = 5 ,
+					scale = 1.0 ,
 					shift = SIUtils.by_pixel( 10 , 28 ) ,
 					draw_as_shadow = true
 				}
@@ -280,6 +308,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Wall , "RuinWall" , "遗迹围墙" 
 					height = 68 ,
 					line_length = 2 ,
 					variation_count = 2 ,
+					scale = 1.0 ,
 					shift = SIUtils.by_pixel( 0 , 6 )
 				} ,
 				{
@@ -288,6 +317,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Wall , "RuinWall" , "遗迹围墙" 
 					width = 54 ,
 					height = 60 ,
 					repeat_count = 2 ,
+					scale = 1.0 ,
 					shift = SIUtils.by_pixel( 8 , 28 ) ,
 					draw_as_shadow = true
 				}
@@ -304,6 +334,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Wall , "RuinWall" , "遗迹围墙" 
 					height = 64 ,
 					line_length = 2 ,
 					variation_count = 2 ,
+					scale = 1.0 ,
 					shift = SIUtils.by_pixel( 0 , 6 )
 				} ,
 				{
@@ -312,6 +343,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Wall , "RuinWall" , "遗迹围墙" 
 					width = 62 ,
 					height = 60 ,
 					repeat_count = 2 ,
+					scale = 1.0 ,
 					shift = SIUtils.by_pixel( 14 , 28 ) ,
 					draw_as_shadow = true
 				}
@@ -328,6 +360,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Wall , "RuinWall" , "遗迹围墙" 
 					height = 68 ,
 					line_length = 4 ,
 					variation_count = 4 ,
+					scale = 1.0 ,
 					shift = SIUtils.by_pixel( 0 , 6 )
 				} ,
 				{
@@ -336,6 +369,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Wall , "RuinWall" , "遗迹围墙" 
 					width = 62 ,
 					height = 60 ,
 					repeat_count = 4 ,
+					scale = 1.0 ,
 					shift = SIUtils.by_pixel( 14 , 28 ) ,
 					draw_as_shadow = true
 				}
@@ -352,6 +386,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Wall , "RuinWall" , "遗迹围墙" 
 					height = 48 ,
 					line_length = 2 ,
 					variation_count = 2 ,
+					scale = 1.0 ,
 					shift = SIUtils.by_pixel( 0 , -4 )
 				} ,
 				{
@@ -360,6 +395,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Wall , "RuinWall" , "遗迹围墙" 
 					width = 54 ,
 					height = 36 ,
 					repeat_count = 2 ,
+					scale = 1.0 ,
 					shift = SIUtils.by_pixel( 8 , 14 ) ,
 					draw_as_shadow = true
 				}
@@ -376,6 +412,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Wall , "RuinWall" , "遗迹围墙" 
 					height = 48 ,
 					line_length = 2 ,
 					variation_count = 2 ,
+					scale = 1.0 ,
 					shift = SIUtils.by_pixel( 0 , -4 )
 				} ,
 				{
@@ -384,6 +421,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Wall , "RuinWall" , "遗迹围墙" 
 					width = 62 ,
 					height = 36 ,
 					repeat_count = 2 ,
+					scale = 1.0 ,
 					shift = SIUtils.by_pixel( 14 , 14 ) ,
 					draw_as_shadow = true
 				}
@@ -400,6 +438,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Wall , "RuinWall" , "遗迹围墙" 
 					height = 30 ,
 					line_length = 8 ,
 					variation_count = 8 ,
+					scale = 1.0 ,
 					shift = SIUtils.by_pixel( 0 , -2 )
 				}
 			}
@@ -413,6 +452,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Wall , "RuinWall" , "遗迹围墙" 
 					priority = "extra-high" ,
 					width = 58 ,
 					height = 64 ,
+					scale = 1.0 ,
 					shift = SIUtils.by_pixel( 0 , -2 )
 				} ,
 				{
@@ -420,6 +460,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Wall , "RuinWall" , "遗迹围墙" 
 					priority = "extra-high" ,
 					width = 74 ,
 					height = 52 ,
+					scale = 1.0 ,
 					shift = SIUtils.by_pixel( 8 , 14 ) ,
 					draw_as_shadow = true
 				}
@@ -434,6 +475,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Wall , "RuinWall" , "遗迹围墙" 
 					priority = "extra-high" ,
 					width = 42 ,
 					height = 56 ,
+					scale = 1.0 ,
 					shift = SIUtils.by_pixel( 0 , -8 )
 				} ,
 				{
@@ -441,6 +483,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Wall , "RuinWall" , "遗迹围墙" 
 					priority = "extra-high" ,
 					width = 66 ,
 					height = 40 ,
+					scale = 1.0 ,
 					shift = SIUtils.by_pixel( 14 , 18 ) ,
 					draw_as_shadow = true
 				}
@@ -463,6 +506,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Wall , "RuinWall" , "遗迹围墙" 
 			priority = "extra-high" ,
 			width = 38 ,
 			height = 24 ,
+			scale = 1.0 ,
 			shift = SIUtils.by_pixel( -2 , -24 ) ,
 			draw_as_glow = true
 		}
@@ -507,6 +551,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Wall , "RuinWall" , "遗迹围墙" 
 			priority = "extra-high" ,
 			width = 38 ,
 			height = 24 ,
+			scale = 1.0 ,
 			shift = SIUtils.by_pixel( -2 , -24 ) ,
 			draw_as_glow = true
 		}

@@ -1,5 +1,5 @@
 -- ------------------------------------------------------------------------------------------------
--- ----- 修改部分实体的属性 -----------------------------------------------------------------------
+-- - 修改炉子空间并添加燃料类型 --------------------------------------------------------------------
 -- ------------------------------------------------------------------------------------------------
 
 local function ModifyBurnerSource( source , callBurner )
@@ -41,8 +41,31 @@ local function ModifyBurnerSource( source , callBurner )
 	end
 end
 
+-- 修改燃烧炉子的燃料和产物空间 , 以及燃料类型
+SIGen.ForEachType( SICommon.Types.Entities , function( prototypeName , prototypeData )
+	if prototypeData then
+		ModifyBurnerSource( prototypeData.energy_source , false )
+		ModifyBurnerSource( prototypeData.burner , true )
+	end
+end )
+
+-- ------------------------------------------------------------------------------------------------
+-- -- 修改火箭发射井的产物空间 ---------------------------------------------------------------------
+-- ------------------------------------------------------------------------------------------------
+
+-- 修改火箭发射井的产出空间
+SIGen.ForEach( SICommon.Types.Entities.RocketSilo , function( prototypeName , prototypeData )
+	if prototypeData and prototypeData.rocket_result_inventory_size and prototypeData.rocket_result_inventory_size < 5 then
+		prototypeData.rocket_result_inventory_size = 5
+	end
+end )
+
+-- ------------------------------------------------------------------------------------------------
+-- ------- 添加特殊碰撞层 --------------------------------------------------------------------------
+-- ------------------------------------------------------------------------------------------------
+
 local TankCollisionMaskLayer = SIUtils.CollisionMask.get_first_unused_layer()
-local NoCollisionType =
+local NoCollisionTypeList =
 {
 	[SICommon.Types.HealthEntities.Fish]           = true ,
 	[SICommon.Types.HealthEntities.Market]         = true ,
@@ -59,7 +82,17 @@ local NoCollisionType =
 	[SICommon.Types.HealthEntities.RobotCombat]    = true ,
 	[SICommon.Types.HealthEntities.PlayerPort]     = true
 }
-local TrainType =
+local MustCollisionTypeList =
+{
+	SICommon.Types.Entities.WagonLocomotive ,
+	SICommon.Types.Entities.WagonCargo ,
+	SICommon.Types.Entities.WagonFluid ,
+	SICommon.Types.Entities.WagonArtillery ,
+	SICommon.Types.Entities.BeltLoader ,
+	SICommon.Types.Entities.BeltLoaderSmall ,
+	SICommon.Types.Entities.PipeHeat
+}
+local TrainTypeList =
 {
 	SICommon.Types.Entities.WagonLocomotive ,
 	SICommon.Types.Entities.WagonCargo ,
@@ -67,20 +100,15 @@ local TrainType =
 	SICommon.Types.Entities.WagonArtillery
 }
 
-SIGen
--- 修改燃烧炉子的燃料和产物空间 , 以及燃料类型
--- 此项不可以禁用或删除
-.ForEachType( SICommon.Types.Entities , function( prototypeName , prototypeData )
-	if prototypeData then
-		ModifyBurnerSource( prototypeData.energy_source , false )
-		ModifyBurnerSource( prototypeData.burner , true )
-	end
-end )
+-- 排除 MustCollisionTypeList 中的类型 , 它们会在下面独立添加碰撞层
+for index , typeCode in pairs( MustCollisionTypeList ) do
+	NoCollisionTypeList[typeCode] = true
+end
 
+SIGen
 -- 给所有有生命值的实体添加特殊碰撞层
--- 此项不可以禁用或删除
 .ForEachType( SICommon.Types.HealthEntities , function( prototypeName , prototypeData )
-	if prototypeData and not NoCollisionType[prototypeData.type] then
+	if prototypeData and not NoCollisionTypeList[prototypeData.type] then
 		local collisionMask = prototypeData.collision_mask
 		if not collisionMask then
 			collisionMask = SIUtils.CollisionMask.get_default_mask( prototypeData.type ) or {}
@@ -91,6 +119,20 @@ end )
 		end
 	end
 end )
+-- 给必须添加的实体添加特殊碰撞层
+.ForEachType( MustCollisionTypeList , function( prototypeName , prototypeData )
+	if prototypeData then
+		local collisionMask = prototypeData.collision_mask
+		if not collisionMask then
+			collisionMask = SIUtils.CollisionMask.get_default_mask( prototypeData.type ) or {}
+			prototypeData.collision_mask = collisionMask
+		end
+		if not SITable.Has( collisionMask , TankCollisionMaskLayer ) then
+			table.insert( collisionMask , TankCollisionMaskLayer )
+		end
+	end
+end )
+-- 给指定坦克实体添加特殊碰撞层
 .Find( SICommon.Types.Entities.Car , SIConstants_Core.raw.Entities.Tank , function( prototypeName , prototypeData )
 	if prototypeData then
 		local collisionMask = prototypeData.collision_mask
@@ -99,10 +141,8 @@ end )
 		end
 	end
 end )
-
 -- 由于添加了特殊的碰撞层 , 因此火车的各个组件需要更高的选择等级 , 不然会选择不到
--- 此项不可以禁用或删除
-.ForEachType( TrainType , function( prototypeName , prototypeData )
+.ForEachType( TrainTypeList , function( prototypeName , prototypeData )
 	if prototypeData then
 		if not prototypeData.selection_priority or prototypeData.selection_priority < SICommon.SelectPriority.Train then
 			prototypeData.selection_priority = SICommon.SelectPriority.Train
@@ -110,17 +150,12 @@ end )
 	end
 end )
 
--- 修改火箭发射井的产出空间
--- 此项不可以禁用或删除
-.ForEach( SICommon.Types.Entities.RocketSilo , function( prototypeName , prototypeData )
-	if prototypeData and prototypeData.rocket_result_inventory_size and prototypeData.rocket_result_inventory_size < 5 then
-		prototypeData.rocket_result_inventory_size = 5
-	end
-end )
+-- ------------------------------------------------------------------------------------------------
+-- ------ 添加特殊模块类型 -------------------------------------------------------------------------
+-- ------------------------------------------------------------------------------------------------
 
 -- 给所有模块区域添加支持的模块类型
--- 此项不可以禁用或删除
-.ForEach( SICommon.Types.EquipmentGrid , function( prototypeName , prototypeData )
+SIGen.ForEach( SICommon.Types.EquipmentGrid , function( prototypeName , prototypeData )
 	if prototypeData then
 		local equipmentCategories = prototypeData.equipment_categories
 		if equipmentCategories then
