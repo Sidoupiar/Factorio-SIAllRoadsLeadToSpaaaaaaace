@@ -256,3 +256,42 @@ function SIGraphics.MakeRemnantsAnimation( count , layers )
 	end
 	return animations
 end
+
+-- ------------------------------------------------------------------------------------------------
+-- ------ 自动创建高清图片 ------------------------------------------------------------------------
+-- ------------------------------------------------------------------------------------------------
+
+local function CreateHrVersionData( layer )
+	layer.hr_version = nil
+	local hrData = SIUtils.table.deepcopy( layer )
+	local pos = hrData.filename:FindLast( "/" )
+	hrData.filename = hrData.filename:sub( 1 , pos ) .. SICommon.ShowNamePrefix.HrVer .. hrData.filename:sub( pos )
+	if hrData.width then
+		hrData.width = hrData.width * 2
+	end
+	if hrData.height then
+		hrData.height = hrData.height * 2
+	end
+	if hrData.size then
+		hrData.size = hrData.size * 2
+	end
+	hrData.scale = ( hrData.scale or 1.0 ) * 0.5
+	layer.hr_version = hrData
+end
+
+function SIGraphics.MakeHrVersionData( graphicData )
+	if not SITools.IsTable( graphicData ) then
+		return
+	end
+	if graphicData.layers then
+		for index , layer in pairs( graphicData.layers ) do
+			CreateHrVersionData( layer )
+		end
+	elseif graphicData.filename then
+		CreateHrVersionData( graphicData )
+	else
+		for keyCode , subData in pairs( graphicData ) do
+			SIGraphics.MakeHrVersionData( subData )
+		end
+	end
+end

@@ -111,7 +111,7 @@ SIGen
 	resistances = nil ,
 	render_layer = SICommon.Flags.RenderLayer.Object ,
 	alert_icon_shift = { 0 , 0 } ,
-	pictures =
+	pictures = SIGraphics.MakeHrVersionData
 	{
 		{
 			layers =
@@ -251,7 +251,7 @@ SIGen
 	resistances = nil ,
 	render_layer = SICommon.Flags.RenderLayer.Object ,
 	alert_icon_shift = { 0 , 0 } ,
-	pictures =
+	pictures = SIGraphics.MakeHrVersionData
 	{
 		{
 			layers =
@@ -573,7 +573,7 @@ SIGen
 	show_recipe_icon_on_map = true ,
 	entity_info_icon_shift = { 0.0 , -0.2 } ,
 	alert_icon_shift = { 0 , 0 } ,
-	animation =
+	animation = SIGraphics.MakeHrVersionData
 	{
 		layers =
 		{
@@ -609,7 +609,7 @@ SIGen
 	{
 		{
 			apply_recipe_tint = "primary" ,
-			animation =
+			animation = SIGraphics.MakeHrVersionData
 			{
 				filename = SIGen.MakeSelfPicturePath( "灌装设备-罐子" ) ,
 				priority = "high" ,
@@ -871,7 +871,7 @@ SIGen
 	show_recipe_icon_on_map = true ,
 	entity_info_icon_shift = { 0.0 , -0.2 } ,
 	alert_icon_shift = { 0 , 0 } ,
-	animation =
+	animation = SIGraphics.MakeHrVersionData
 	{
 		layers =
 		{
@@ -907,7 +907,7 @@ SIGen
 	{
 		{
 			apply_recipe_tint = "primary" ,
-			animation =
+			animation = SIGraphics.MakeHrVersionData
 			{
 				filename = SIGen.MakeSelfPicturePath( "倾倒设备-罐子" ) ,
 				priority = "high" ,

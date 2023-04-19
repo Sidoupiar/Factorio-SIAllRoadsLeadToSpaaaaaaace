@@ -481,7 +481,7 @@ SIGen
 				resistances = nil ,
 				render_layer = SICommon.Flags.RenderLayer.Object ,
 				alert_icon_shift = { 0 , 0 } ,
-				pictures =
+				pictures = SIGraphics.MakeHrVersionData
 				{
 					{
 						layers =
@@ -917,7 +917,7 @@ SIGen
 				resistances = nil ,
 				render_layer = SICommon.Flags.RenderLayer.Object ,
 				alert_icon_shift = { 0 , 0 } ,
-				pictures =
+				pictures = SIGraphics.MakeHrVersionData
 				{
 					{
 						layers =

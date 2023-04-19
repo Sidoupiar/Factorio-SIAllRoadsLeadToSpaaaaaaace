@@ -460,7 +460,21 @@ SIGen
 			direction_count = 1 ,
 			scale = 1.0 ,
 			shift = SIUtils.by_pixel( 7 , 6 ) ,
-			axially_symmetrical = false
+			axially_symmetrical = false ,
+			hr_version =
+			{
+				filename = SIGen.MakeSelfPicturePathHr( "无尽研究球-残骸" ) ,
+				priority = "extra-high" ,
+				width = 266 ,
+				height = 196 ,
+				frame_count = 1 ,
+				line_length = 1 ,
+				variation_count = 1 ,
+				direction_count = 1 ,
+				scale = 0.5 ,
+				shift = SIUtils.by_pixel( 7 , 5.5 ) ,
+				axially_symmetrical = false
+			}
 		}
 	} )
 }
@@ -556,7 +570,19 @@ SIGen
 				line_length = 11 ,
 				animation_speed = 0.3333 ,
 				scale = 1.0 ,
-				shift = SIUtils.by_pixel( 0 , 1.5 )
+				shift = SIUtils.by_pixel( 0 , 1.5 ) ,
+				hr_version =
+				{
+					filename = SIGen.MakeSelfPicturePathHr( "无尽研究球" ) ,
+					priority = "extra-high" ,
+					width = 194 ,
+					height = 174 ,
+					frame_count = 33 ,
+					line_length = 11 ,
+					animation_speed = 0.3333 ,
+					scale = 0.5 ,
+					shift = SIUtils.by_pixel( 0 , 1.5 )
+				}
 			} ,
 			{
 				filename = SIGen.MakeSelfPicturePath( "无尽研究球-交互" ) ,
@@ -568,7 +594,20 @@ SIGen
 				repeat_count = 33 ,
 				animation_speed = 0.3333 ,
 				scale = 1.0 ,
-				shift = SIUtils.by_pixel( 0 , 15.5 )
+				shift = SIUtils.by_pixel( 0 , 15.5 ) ,
+				hr_version =
+				{
+					filename = SIGen.MakeSelfPicturePathHr( "无尽研究球-交互" ) ,
+					priority = "extra-high" ,
+					width = 242 ,
+					height = 162 ,
+					frame_count = 1 ,
+					line_length = 1 ,
+					repeat_count = 33 ,
+					animation_speed = 0.3333 ,
+					scale = 0.5 ,
+					shift = SIUtils.by_pixel( 0 , 15.5 )
+				}
 			} ,
 			{
 				filename = SIGen.MakeSelfPicturePath( "无尽研究球-灯光" ) ,
@@ -582,6 +621,20 @@ SIGen
 				scale = 1.0 ,
 				shift = SIUtils.by_pixel( -1 , 1 ) ,
 				draw_as_light = true ,
+				hr_version =
+				{
+					filename = SIGen.MakeSelfPicturePathHr( "无尽研究球-灯光" ) ,
+					priority = "extra-high" ,
+					blend_mode = "additive" ,
+					width = 216 ,
+					height = 194 ,
+					frame_count = 33 ,
+					line_length = 11 ,
+					animation_speed = 0.3333 ,
+					scale = 0.5 ,
+					shift = SIUtils.by_pixel( 0 , 0 ) ,
+					draw_as_light = true
+				}
 			} ,
 			{
 				filename = SIGen.MakeSelfPicturePath( "无尽研究球-影子" ) ,
@@ -594,7 +647,21 @@ SIGen
 				animation_speed = 0.3333 ,
 				scale = 1.0 ,
 				shift = SIUtils.by_pixel( 13 , 11 ) ,
-				draw_as_shadow = true
+				draw_as_shadow = true ,
+				hr_version =
+				{
+					filename = SIGen.MakeSelfPicturePathHr( "无尽研究球-影子" ) ,
+					priority = "extra-high" ,
+					width = 242 ,
+					height = 136 ,
+					frame_count = 1 ,
+					line_length = 1 ,
+					repeat_count = 33 ,
+					animation_speed = 0.3333 ,
+					scale = 0.5 ,
+					shift = SIUtils.by_pixel( 13 , 11 ) ,
+					draw_as_shadow = true
+				}
 			}
 		}
 	} ,
@@ -611,7 +678,19 @@ SIGen
 				line_length = 11 ,
 				animation_speed = 0.3333 ,
 				scale = 1.0 ,
-				shift = SIUtils.by_pixel( 0 , 1.5 )
+				shift = SIUtils.by_pixel( 0 , 1.5 ) ,
+				hr_version =
+				{
+					filename = SIGen.MakeSelfPicturePathHr( "无尽研究球" ) ,
+					priority = "extra-high" ,
+					width = 194 ,
+					height = 174 ,
+					frame_count = 33 ,
+					line_length = 11 ,
+					animation_speed = 0.3333 ,
+					scale = 0.5 ,
+					shift = SIUtils.by_pixel( 0 , 1.5 )
+				}
 			} ,
 			{
 				filename = SIGen.MakeSelfPicturePath( "无尽研究球-交互" ) ,
@@ -623,7 +702,20 @@ SIGen
 				repeat_count = 33 ,
 				animation_speed = 0.3333 ,
 				scale = 1.0 ,
-				shift = SIUtils.by_pixel( 0 , 15.5 )
+				shift = SIUtils.by_pixel( 0 , 15.5 ) ,
+				hr_version =
+				{
+					filename = SIGen.MakeSelfPicturePathHr( "无尽研究球-交互" ) ,
+					priority = "extra-high" ,
+					width = 242 ,
+					height = 162 ,
+					frame_count = 1 ,
+					line_length = 1 ,
+					repeat_count = 33 ,
+					animation_speed = 0.3333 ,
+					scale = 0.5 ,
+					shift = SIUtils.by_pixel( 0 , 15.5 )
+				}
 			} ,
 			{
 				filename = SIGen.MakeSelfPicturePath( "无尽研究球-影子" ) ,
@@ -636,7 +728,21 @@ SIGen
 				animation_speed = 0.3333 ,
 				scale = 1.0 ,
 				shift = SIUtils.by_pixel( 13 , 11 ) ,
-				draw_as_shadow = true
+				draw_as_shadow = true ,
+				hr_version =
+				{
+					filename = SIGen.MakeSelfPicturePathHr( "无尽研究球-影子" ) ,
+					priority = "extra-high" ,
+					width = 242 ,
+					height = 136 ,
+					frame_count = 1 ,
+					line_length = 1 ,
+					repeat_count = 33 ,
+					animation_speed = 0.3333 ,
+					scale = 0.5 ,
+					shift = SIUtils.by_pixel( 13 , 11 ) ,
+					draw_as_shadow = true
+				}
 			}
 		}
 	} ,
