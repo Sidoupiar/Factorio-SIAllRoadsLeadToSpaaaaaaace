@@ -97,28 +97,35 @@ SIGen
 	final_render_layer = SICommon.Flags.RenderLayer.Remnants ,
 	animation =
 	{
-		filename = SIGen.MakeSelfPicturePath( "经验箱子-残骸" ) ,
-		priority = "extra-high" ,
-		width = 64 ,
-		height = 40 ,
-		frame_count = 1 ,
-		line_length = 1 ,
-		variation_count = 1 ,
-		direction_count = 1 ,
-		scale = 1.0 ,
-		shift = SIUtils.by_pixel( 12 , 0 ) ,
-		hr_version =
 		{
-			filename = SIGen.MakeSelfPicturePathHr( "经验箱子-残骸" ) ,
-			priority = "extra-high" ,
-			width = 126 ,
-			height = 78 ,
-			frame_count = 1 ,
-			line_length = 1 ,
-			variation_count = 1 ,
-			direction_count = 1 ,
-			scale = 0.5 ,
-			shift = SIUtils.by_pixel( 12 , 0 )
+			layers =
+			{
+				{
+					filename = SIGen.MakeSelfPicturePath( "经验箱子-残骸" ) ,
+					priority = "extra-high" ,
+					width = 64 ,
+					height = 40 ,
+					frame_count = 1 ,
+					line_length = 1 ,
+					variation_count = 1 ,
+					direction_count = 1 ,
+					scale = 1.0 ,
+					shift = SIUtils.by_pixel( 12 , 0 ) ,
+					hr_version =
+					{
+						filename = SIGen.MakeSelfPicturePathHr( "经验箱子-残骸" ) ,
+						priority = "extra-high" ,
+						width = 126 ,
+						height = 78 ,
+						frame_count = 1 ,
+						line_length = 1 ,
+						variation_count = 1 ,
+						direction_count = 1 ,
+						scale = 0.5 ,
+						shift = SIUtils.by_pixel( 12 , 0 )
+					}
+				}
+			}
 		}
 	}
 }
