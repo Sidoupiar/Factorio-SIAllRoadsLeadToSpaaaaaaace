@@ -9,7 +9,7 @@ local crystalList =
 	CrystalAgent = { Alias = "悠远石" , DamageType1 = SIConstants_Core.raw.DamageTypes.PhysicCorrosion , DamageType2 = SIConstants_Core.raw.DamageTypes.MagicTwist     } ,
 	CrystalQuiet = { Alias = "宁寂石" , DamageType1 = SIConstants_Core.raw.DamageTypes.PhysicEnergy    , DamageType2 = SIConstants_Core.raw.DamageTypes.MagicVoid      }
 }
-local orderOffset = SITable.Size( crystalList ) * 3 + 5
+local orderOffset = SITable.Size( crystalList ) * 3 + 6
 
 local crystalOreList =
 {
@@ -306,6 +306,34 @@ end )
 		{
 			{
 				filename = SIGen.MakeSelfPicturePath( "晶石减速" ) ,
+				priority = "high" ,
+				width = 32 ,
+				height = 32 ,
+				frame_count = 16 ,
+				line_length = 8 ,
+				animation_speed = 1 ,
+				scale = 1.0
+			}
+		}
+	}
+}
+.New( SICommon.Types.Entities.Sticker , "QuietSlow" , "宁寂减速" )
+.Append
+{
+	flags = { SICommon.Flags.Entity.NotOnMap } ,
+	duration_in_ticks = 600 ,
+	target_movement_modifier_from = 0.85 ,
+	target_movement_modifier_to = 1 ,
+	vehicle_speed_modifier_from = 0.85 ,
+	vehicle_speed_modifier_to = 1 ,
+	vehicle_friction_modifier_from = 8.0 ,
+	vehicle_friction_modifier_to = 1 ,
+	animation =
+	{
+		layers =
+		{
+			{
+				filename = SIGen.MakeSelfPicturePath( "宁寂减速" ) ,
 				priority = "high" ,
 				width = 32 ,
 				height = 32 ,
