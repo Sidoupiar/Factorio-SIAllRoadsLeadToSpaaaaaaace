@@ -892,10 +892,10 @@ for crystalOreID , crystalOreData in pairs( crystalOreList ) do
 				{
 					type = SICommon.Types.Items.Item ,
 					name = SIConstants_Resource.raw.Items[crystalOreData.Item] ,
-					probability = 0.02 ,
+					probability = 0.05 ,
 					amount_min = 0 ,
-					amount_max = 50 ,
-					catalyst_amount = 50 ,
+					amount_max = 20 ,
+					catalyst_amount = 20 ,
 					show_details_in_recipe_tooltip = false
 				} ,
 				{
