@@ -894,8 +894,17 @@ for crystalOreID , crystalOreData in pairs( crystalOreList ) do
 					name = SIConstants_Resource.raw.Items[crystalOreData.Item] ,
 					probability = 0.02 ,
 					amount_min = 0 ,
-					amount_max = 70 ,
-					catalyst_amount = 70 ,
+					amount_max = 50 ,
+					catalyst_amount = 50 ,
+					show_details_in_recipe_tooltip = false
+				} ,
+				{
+					type = SICommon.Types.Items.Item ,
+					name = SIConstants_Resource.raw.Items[crystalOreData.Item] ,
+					probability = 0.0001 ,
+					amount_min = 0 ,
+					amount_max = 4000 ,
+					catalyst_amount = 4000 ,
 					show_details_in_recipe_tooltip = false
 				}
 			}
