@@ -1025,7 +1025,7 @@ SIGen
 		{
 			type = "area" ,
 			show_in_tooltip = true ,
-			radius = 1.6 ,
+			radius = 2.2 ,
 			action_delivery =
 			{
 				{
@@ -1041,7 +1041,7 @@ SIGen
 							damage =
 							{
 								type = "physical" ,
-								amount = 15.5
+								amount = 46
 							}
 						} ,
 						{
@@ -1126,7 +1126,7 @@ end )
 		attack_parameters =
 		{
 			type = "projectile" ,
-			range = 17.5 ,
+			range = 27.5 ,
 			cooldown = 65 ,
 			activation_type = "throw" ,
 			ammo_type =
@@ -1142,7 +1142,7 @@ end )
 							{
 								type = "projectile" ,
 								projectile = SIConstants_Resource.raw.Entities.BlackHard ,
-								starting_speed = 0.22 ,
+								starting_speed = 0.28 ,
 								target_effects =
 								{
 									{
@@ -1164,6 +1164,84 @@ end )
 				}
 			}
 		}
+	}
+}
+.New( SICommon.Types.Entities.Resource , "BlackHard" , "黑硬的物质" )
+.AutoIcon()
+.SetSizeScale( 1 , 1 , 0.5 )
+.Append
+{
+	flags = { SICommon.Flags.Entity.NotOnMap } ,
+	minable =
+	{
+		mining_time = 478.0 ,
+		mining_particle = "stone-particle" ,
+		results =
+		{
+			{
+				type = SICommon.Types.Items.Item ,
+				name = SIConstants_Resource.raw.Items.BlackHard ,
+				probability = 0.5 ,
+				amount_min = 0 ,
+				amount_max = 4 ,
+				catalyst_amount = 4
+			}
+		}
+	} ,
+	map_color = { r = 0.00 , g = 0.00 , b = 0.00 } ,
+	friendly_map_color = { r = 0.00 , g = 0.00 , b = 0.00 } ,
+	enemy_map_color = { r = 0.00 , g = 0.00 , b = 0.00 } ,
+	mining_visualisation_tint = { r = 0.00 , g = 0.00 , b = 0.00 } ,
+	tree_removal_probability = 1.0 ,
+	tree_removal_max_distance = 25 ,
+	autoplace = SIAutoPlace.Create
+	{
+		Name = "" ,
+		BaseDensity = 4 ,
+		RegularMultiplier = 1.0 ,
+		StartingMultiplier = 1.1 ,
+		HasStarting = false
+	} ,
+	stage_counts = { 100000 , 33333 , 10000 , 3333 , 1000 , 333 , 100 , 33 } ,
+	stages =
+	{
+		sheets =
+		{
+			{
+				filename = SIGen.MakeSelfPicturePath( "黑硬的物质" ) ,
+				priority = "extra-high" ,
+				width = 64 ,
+				height = 64 ,
+				frame_count = 8 ,
+				variation_count = 8
+			}
+		}
+	} ,
+	mining_sound =
+	{
+		SISound.Core( "axe-mining-ore-1" , 0.8 ) ,
+		SISound.Core( "axe-mining-ore-2" , 0.8 ) ,
+		SISound.Core( "axe-mining-ore-3" , 0.8 ) ,
+		SISound.Core( "axe-mining-ore-4" , 0.8 ) ,
+		SISound.Core( "axe-mining-ore-5" , 0.8 ) ,
+		SISound.Core( "axe-mining-ore-6" , 0.8 ) ,
+		SISound.Core( "axe-mining-ore-7" , 0.8 ) ,
+		SISound.Core( "axe-mining-ore-8" , 0.8 ) ,
+		SISound.Core( "axe-mining-ore-9" , 0.8 ) ,
+		SISound.Core( "axe-mining-ore-10" , 0.8 )
+	} ,
+	walking_sound =
+	{
+		SISound.Base( "walking/resources/ore-01" , 0.7 ) ,
+		SISound.Base( "walking/resources/ore-02" , 0.7 ) ,
+		SISound.Base( "walking/resources/ore-03" , 0.7 ) ,
+		SISound.Base( "walking/resources/ore-04" , 0.7 ) ,
+		SISound.Base( "walking/resources/ore-05" , 0.7 ) ,
+		SISound.Base( "walking/resources/ore-06" , 0.7 ) ,
+		SISound.Base( "walking/resources/ore-07" , 0.7 ) ,
+		SISound.Base( "walking/resources/ore-08" , 0.7 ) ,
+		SISound.Base( "walking/resources/ore-09" , 0.7 ) ,
+		SISound.Base( "walking/resources/ore-10" , 0.7 )
 	}
 }
 
