@@ -985,3 +985,206 @@ for crystalOreID , crystalOreData in pairs( crystalOreList ) do
 		}
 	}
 end
+
+local blackProjectile = nil
+
+SIGen
+.New( SICommon.Types.Entities.Projectile , "BlackHard" , "扔出去的黑硬的物质" )
+.MakeIcon( SICommon.Types.Items.Capsule , "BlackHard" )
+.SetSize( 0.4 , 0.4 )
+.Append
+{
+	flags = { SICommon.Flags.Entity.NotOnMap } ,
+	light =
+	{
+		type = "basic" ,
+		intensity = 0.5 ,
+		size = 4
+	} ,
+	animation =
+	{
+		layers =
+		{
+			{
+				filename = SIGen.MakeSelfPicturePath( "扔出去的黑硬的物质" ) ,
+				priority = "high" ,
+				width = 32 ,
+				height = 32 ,
+				frame_count = 16 ,
+				line_length = 8 ,
+				animation_speed = 1 ,
+				scale = 0.4
+			}
+		}
+	} ,
+	acceleration = 0 ,
+	height = 1 ,
+	piercing_damage = 0 ,
+	action =
+	{
+		{
+			type = "area" ,
+			show_in_tooltip = true ,
+			radius = 1.6 ,
+			action_delivery =
+			{
+				{
+					type = "instant" ,
+					target_effects =
+					{
+						{
+							type = "damage" ,
+							show_in_tooltip = true ,
+							lower_damage_modifier = 1.0 ,
+							upper_damage_modifier = 1.0 ,
+							apply_damage_to_trees = true ,
+							damage =
+							{
+								type = "physical" ,
+								amount = 15.5
+							}
+						} ,
+						{
+							type = "create-particle" ,
+							particle_name = "stone-particle" ,
+							repeat_count = 8 ,
+							initial_height = 0.5 ,
+							initial_vertical_speed = 0.05 ,
+							initial_vertical_speed_deviation = 0.1 ,
+							speed_from_center = 0.05 ,
+							speed_from_center_deviation = 0.1 ,
+							offset_deviation = { { -0.8984 , -0.5 } , { 0.8984 , 0.5 } }
+						}
+					}
+				}
+			}
+		}
+	} ,
+	final_action = nil
+}
+.AddFunction( function( prototypeName , prototypeData )
+	blackProjectile = prototypeData
+end )
+.New( SICommon.Types.Items.Capsule , "BlackHard" , "黑硬的物质" )
+.AutoIcon()
+.Append
+{
+	stack_size = 10000 ,
+	default_request_amount = 100 ,
+	pictures =
+	{
+		{
+			layers =
+			{
+				{
+					filename = SIGen.MakeSelfPicturePath( "黑硬的物质-1" ) ,
+					size = 64 ,
+					mipmap_count = 4 ,
+					scale = 0.25
+				}
+			}
+		} ,
+		{
+			layers =
+			{
+				{
+					filename = SIGen.MakeSelfPicturePath( "黑硬的物质-2" ) ,
+					size = 64 ,
+					mipmap_count = 4 ,
+					scale = 0.25
+				}
+			}
+		} ,
+		{
+			layers =
+			{
+				{
+					filename = SIGen.MakeSelfPicturePath( "黑硬的物质-3" ) ,
+					size = 64 ,
+					mipmap_count = 4 ,
+					scale = 0.25
+				}
+			}
+		} ,
+		{
+			layers =
+			{
+				{
+					filename = SIGen.MakeSelfPicturePath( "黑硬的物质-4" ) ,
+					size = 64 ,
+					mipmap_count = 4 ,
+					scale = 0.25
+				}
+			}
+		}
+	} ,
+	radius_color = nil ,
+	capsule_action =
+	{
+		type = "throw" ,
+		uses_stack = true ,
+		attack_parameters =
+		{
+			type = "projectile" ,
+			range = 17.5 ,
+			cooldown = 65 ,
+			activation_type = "throw" ,
+			ammo_type =
+			{
+				category = "capsule" ,
+				target_type = "position" ,
+				action =
+				{
+					{
+						type = "direct" ,
+						action_delivery =
+						{
+							{
+								type = "projectile" ,
+								projectile = SIConstants_Resource.raw.Entities.BlackHard ,
+								starting_speed = 0.22 ,
+								target_effects =
+								{
+									{
+										type = "play-sound" ,
+										sound =
+										{
+											SISound.Base( "fight/throw-projectile-1" , 0.4 ) ,
+											SISound.Base( "fight/throw-projectile-2" , 0.4 ) ,
+											SISound.Base( "fight/throw-projectile-3" , 0.4 ) ,
+											SISound.Base( "fight/throw-projectile-4" , 0.4 ) ,
+											SISound.Base( "fight/throw-projectile-5" , 0.4 ) ,
+											SISound.Base( "fight/throw-projectile-6" , 0.4 )
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+table.insert( blackProjectile.action ,
+{
+	type = "direct" ,
+	action_delivery =
+	{
+		{
+			type = "instant" ,
+			target_effects =
+			{
+				{
+					type = "insert-item" ,
+					show_in_tooltip = false ,
+					item = SIConstants_Resource.raw.Items.BlackHard ,
+					count = 1 ,
+					repeat_count = 1 ,
+					probability = 0.54
+				}
+			}
+		}
+	}
+} )
