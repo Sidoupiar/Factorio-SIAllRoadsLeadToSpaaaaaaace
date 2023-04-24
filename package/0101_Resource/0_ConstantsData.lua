@@ -28,6 +28,7 @@ local constantsData =
 					StoneRock = "矿山磐石" ,
 					Ore = "矿石" ,
 					Crystal = "魔力结晶" ,
+					CrystalMana = "魔力" ,
 					Dirt = "泥土"
 				}
 			}

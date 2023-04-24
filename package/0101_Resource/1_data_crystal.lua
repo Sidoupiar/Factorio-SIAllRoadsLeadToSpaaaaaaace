@@ -19,6 +19,13 @@ local crystalOreList =
 	CrystalOreQuiet       = { Alias = "宁寂矿" , Item = "CrystalQuiet" , Color = SITools.MakeColor256( 102 , 10 , 138 ) , Autoplace = true } ,
 	CrystalOreQuietActive = { Alias = "宁寂矿-活化" , Item = "CrystalQuiet" , Color = SITools.MakeColor256( 169 , 33 , 222 ) , Autoplace = false }
 }
+local crystalManaList =
+{
+	CrystalManaWater = { Alias = "清水" , Color = crystalOreList.CrystalOreWater.Color , FuelValue = nil     } ,
+	CrystalManaFire  = { Alias = "火苗" , Color = crystalOreList.CrystalOreFire.Color  , FuelValue = "115KJ" } ,
+	CrystalManaAgent = { Alias = "呼唤" , Color = crystalOreList.CrystalOreAgent.Color , FuelValue = nil     } ,
+	CrystalManaQuiet = { Alias = "安宁" , Color = crystalOreList.CrystalOreQuiet.Color , FuelValue = "4KJ"   }
+}
 
 local sheelProjectile = nil
 local shellPartProjectile = nil
@@ -1266,3 +1273,21 @@ table.insert( blackProjectile.action ,
 		}
 	}
 } )
+
+SIGen
+.SetGroup( SIConstants_Resource.raw.Groups.Resource.CrystalMana )
+for manaID , manaData in pairs( crystalManaList ) do
+	SIGen
+	.New( SICommon.Types.Fluid , manaID , manaData.Alias ,
+	{
+		default_temperature = 15 ,
+		max_temperature = 1000000000 ,
+		gas_temperature = 1000000000 ,
+		base_color = manaData.Color ,
+		flow_color = SITools.TransColor_Light( manaData.Color , 0.25 ) ,
+		heat_capacity = "10.5J" ,
+		fuel_value = manaData.FuelValue ,
+		emissions_multiplier = 1.4
+	} )
+	.AutoIcon()
+end

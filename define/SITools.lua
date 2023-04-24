@@ -115,6 +115,56 @@ SITools =
 		local alphaString = alpha and SITools.NumberTo16( math.max( math.min( alpha , 255 ) , 0 ) , 2 ) or ""
 		return alphaString .. redString .. greenString .. blueString
 	end ,
+	TransColor_Dark = function( color , dark )
+		local red = math.max( math.min( color.r or color[1] or 0 , 255 ) , 0 )
+		local green = math.max( math.min( color.g or color[2] or 0 , 255 ) , 0 )
+		local blue = math.max( math.min( color.b or color[3] or 0 , 255 ) , 0 )
+		local alpha = math.max( math.min( color.a or color[4] or 1 , 255 ) , 0 )
+		if red > 1 then
+			red = red / 255.0
+		end
+		if green > 1 then
+			green = green / 255.0
+		end
+		if blue > 1 then
+			blue = blue / 255.0
+		end
+		if alpha > 1 then
+			alpha = alpha / 255.0
+		end
+		return
+		{
+			r = red + ( 1.0 - dark ) ,
+			g = green + ( 1.0 - dark ) ,
+			b = blue + ( 1.0 - dark ) ,
+			a = alpha
+		}
+	end ,
+	TransColor_Light = function( color , light )
+		local red = math.max( math.min( color.r or color[1] or 0 , 255 ) , 0 )
+		local green = math.max( math.min( color.g or color[2] or 0 , 255 ) , 0 )
+		local blue = math.max( math.min( color.b or color[3] or 0 , 255 ) , 0 )
+		local alpha = math.max( math.min( color.a or color[4] or 1 , 255 ) , 0 )
+		if red > 1 then
+			red = red / 255.0
+		end
+		if green > 1 then
+			green = green / 255.0
+		end
+		if blue > 1 then
+			blue = blue / 255.0
+		end
+		if alpha > 1 then
+			alpha = alpha / 255.0
+		end
+		return
+		{
+			r = red + ( 1.0 - red ) * light ,
+			g = green + ( 1.0 - green ) * light ,
+			b = blue + ( 1.0 - blue ) * light ,
+			a = alpha
+		}
+	end ,
 
 	Icon = function( iconPath , tint , scale , shift , mipmaps , size )
 		local icon = {}
