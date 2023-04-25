@@ -21,10 +21,10 @@ local crystalOreList =
 }
 local crystalManaList =
 {
-	CrystalManaWater = { Alias = "清水" , Color = crystalOreList.CrystalOreWater.Color , FuelValue = nil     } ,
-	CrystalManaFire  = { Alias = "火苗" , Color = crystalOreList.CrystalOreFire.Color  , FuelValue = "115KJ" } ,
-	CrystalManaAgent = { Alias = "呼唤" , Color = crystalOreList.CrystalOreAgent.Color , FuelValue = nil     } ,
-	CrystalManaQuiet = { Alias = "安宁" , Color = crystalOreList.CrystalOreQuiet.Color , FuelValue = "4KJ"   }
+	CrystalManaWater = { Alias = "清水" , Color = crystalOreList.CrystalOreWater.Color , Heat = "700J" , FuelValue = nil     } ,
+	CrystalManaFire  = { Alias = "火苗" , Color = crystalOreList.CrystalOreFire.Color  , Heat = "100J" , FuelValue = "120KJ" } ,
+	CrystalManaAgent = { Alias = "呼唤" , Color = crystalOreList.CrystalOreAgent.Color , Heat = "200J" , FuelValue = nil     } ,
+	CrystalManaQuiet = { Alias = "安宁" , Color = crystalOreList.CrystalOreQuiet.Color , Heat = "400J" , FuelValue = "5KJ"   }
 }
 
 local sheelProjectile = nil
@@ -1285,9 +1285,11 @@ for manaID , manaData in pairs( crystalManaList ) do
 		gas_temperature = 1000000000 ,
 		base_color = manaData.Color ,
 		flow_color = SITools.TransColor_Light( manaData.Color , 0.25 ) ,
-		heat_capacity = "10.5J" ,
+		heat_capacity = manaData.Heat ,
 		fuel_value = manaData.FuelValue ,
-		emissions_multiplier = 1.4
+		emissions_multiplier = 1.4 ,
+		-- 不使用默认装桶
+		auto_barrel = false
 	} )
 	.AutoIcon()
 end
