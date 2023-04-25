@@ -1020,7 +1020,7 @@ CreateRuinBuildings( SICommon.Types.Entities.LandMine , "RuinLandMine" , "遗迹
 				scale = 1.0 ,
 				hr_version =
 				{
-					ilename = SIGen.MakePicturePathHr( SICommon.Types.Entities.LandMine , "遗迹地雷" ) ,
+					filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.LandMine , "遗迹地雷" ) ,
 					priority = "medium" ,
 					width = 64 ,
 					height = 64 ,

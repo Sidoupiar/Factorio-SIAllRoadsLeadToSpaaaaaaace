@@ -21,8 +21,6 @@ SIMainbarSetting =
 		ExportPlayerData = "SI核心-主面板设置管理-导出-玩家信息" ,
 		ExportType = "SI核心-主面板设置管理-导出-类型"
 	} ,
-	QuickBarMax = 100 ,
-	RequestBarMax = 100 ,
 	ExportType =
 	{
 		JSON = 1 ,
@@ -570,7 +568,7 @@ SIMainbarSetting =
 			local playerData = data.PlayerData
 			if playerData then
 				local player = game.get_player( playerIndex )
-				for slotIndex = 1 , SIMainbarSetting.QuickBarMax , 1 do
+				for slotIndex = 1 , SICommon.Numbers.PlayerQuickBarSlotCount , 1 do
 					local itemName = playerData.QuickBar[slotIndex] or playerData.QuickBar[tostring( slotIndex )]
 					if itemName and game.item_prototypes[itemName] then
 						player.set_quick_bar_slot( slotIndex , itemName )
@@ -578,7 +576,7 @@ SIMainbarSetting =
 						player.set_quick_bar_slot( slotIndex , nil )
 					end
 				end
-				for slotIndex = 1 , SIMainbarSetting.RequestBarMax , 1 do
+				for slotIndex = 1 , SICommon.Numbers.PlayerRequestBarSlotCount , 1 do
 					local requestData = playerData.RequestBar[slotIndex] or playerData.RequestBar[tostring( slotIndex )]
 					if requestData then
 						player.set_personal_logistic_slot( slotIndex , { name = requestData.ItemName , min = requestData.min , requestData.max } )
@@ -616,13 +614,13 @@ SIMainbarSetting =
 				QuickBar = {} ,
 				RequestBar = {}
 			}
-			for slotIndex = 1 , SIMainbarSetting.QuickBarMax , 1 do
+			for slotIndex = 1 , SICommon.Numbers.PlayerQuickBarSlotCount , 1 do
 				local itemPrototype = player.get_quick_bar_slot( slotIndex )
 				if itemPrototype then
 					playerData.QuickBar[slotIndex] = itemPrototype.name
 				end
 			end
-			for slotIndex = 1 , SIMainbarSetting.RequestBarMax , 1 do
+			for slotIndex = 1 , SICommon.Numbers.PlayerRequestBarSlotCount , 1 do
 				local requestData = player.get_personal_logistic_slot( slotIndex )
 				if requestData and requestData.name then
 					playerData.RequestBar[slotIndex] =

@@ -400,7 +400,11 @@ SICommon =
 		SpeedMax = 1000000000 ,
 		-- 距离
 		DistanceMin = 1 ,
-		DistanceMax = 1000000000
+		DistanceMax = 1000000000 ,
+		-- 一些原版的限制值
+		PlayerQuickBarSlotCount = 100 ,
+		PlayerRequestBarSlotCount = 100 ,
+		UpgradeMapSlotCount = 24
 	} ,
 	Types =
 	{

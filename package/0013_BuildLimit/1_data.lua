@@ -13,8 +13,8 @@ SIGen
 			filename = SIGen.MakeSelfPicturePath( "提示插件塔过载" ) ,
 			priority = "extra-high-no-scale" ,
 			flags = { "gui-icon" } ,
-			width = 32 ,
-			height = 32 ,
+			width = 64 ,
+			height = 64 ,
 			mipmap_count = 1 ,
 			scale = 1.0
 		}
@@ -29,8 +29,8 @@ SIGen
 			filename = SIGen.MakeSelfPicturePath( "提示插件过载" ) ,
 			priority = "extra-high-no-scale" ,
 			flags = { "gui-icon" } ,
-			width = 32 ,
-			height = 32 ,
+			width = 64 ,
+			height = 64 ,
 			mipmap_count = 1 ,
 			scale = 1.0
 		}

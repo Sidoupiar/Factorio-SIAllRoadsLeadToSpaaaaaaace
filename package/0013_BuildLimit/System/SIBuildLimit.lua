@@ -49,19 +49,20 @@ SIBuildLimit =
 		local unitNumber = entity.unit_number
 		local iconData = globalSettings.Icons[unitNumber]
 		if not iconData or not iconData.Beacon then
+			local prototype = entity.prototype
 			local iconID = rendering.draw_sprite
 			{
 				sprite = SIConstants_BuildLimit.raw.Sprites.Beacon ,
 				orientation = 0 ,
-				x_scale = 1.0 ,
-				y_scale = 1.0 ,
+				orientation_target = nil ,
+				orientation_target_offset = nil ,
+				oriented_offset = nil ,
+				x_scale = prototype.alert_icon_scale or 1.0 ,
+				y_scale = prototype.alert_icon_scale or 1.0 ,
 				tint = nil ,
 				render_layer = SICommon.Flags.RenderLayer.AirEntityInfoIcon ,
-				orientation_target = entity ,
-				orientation_target_offset = { 0 , 0 } ,
-				oriented_offset = { 0 , 0 } ,
 				target = entity ,
-				target_offset = { 0 , 0 } ,
+				target_offset = prototype.alert_icon_shift or { 0 , 0 } ,
 				surface = entity.surface ,
 				time_to_live = nil ,
 				forces = { entity.force } ,
@@ -81,19 +82,20 @@ SIBuildLimit =
 		local unitNumber = entity.unit_number
 		local iconData = globalSettings.Icons[unitNumber]
 		if not iconData or not iconData.Module then
+			local prototype = entity.prototype
 			local iconID = rendering.draw_sprite
 			{
 				sprite = SIConstants_BuildLimit.raw.Sprites.Module ,
 				orientation = 0 ,
-				x_scale = 1.0 ,
-				y_scale = 1.0 ,
+				orientation_target = nil ,
+				orientation_target_offset = nil ,
+				oriented_offset = nil ,
+				x_scale = prototype.alert_icon_scale or 1.0 ,
+				y_scale = prototype.alert_icon_scale or 1.0 ,
 				tint = nil ,
 				render_layer = SICommon.Flags.RenderLayer.AirEntityInfoIcon ,
-				orientation_target = entity ,
-				orientation_target_offset = { 0 , 0 } ,
-				oriented_offset = { 0 , 0 } ,
 				target = entity ,
-				target_offset = { 0 , 0 } ,
+				target_offset = prototype.alert_icon_shift or { 0 , 0 } ,
 				surface = entity.surface ,
 				time_to_live = nil ,
 				forces = { entity.force } ,
@@ -106,6 +108,16 @@ SIBuildLimit =
 			else
 				globalSettings.Icons[unitNumber] = { Module = iconID }
 			end
+		end
+	end ,
+	ShowFlyingText = function( entity , isInventory , realShow )
+		if not realShow then
+			return
+		end
+		if isInventory then
+			SIFunctions.FlyingTextForce( { "SIBuildLimit.不支持的插件-容器" } , entity , 1 , entity.force )
+		else
+			SIFunctions.FlyingTextForce( { "SIBuildLimit.不支持的插件-请求" } , entity , 1 , entity.force )
 		end
 	end ,
 	RemoveAlertBeacon = function( entity )
@@ -237,7 +249,7 @@ SIBuildLimit =
 		machine.active = true
 		SIBuildLimit.RemoveAlertBeacon( machine )
 	end ,
-	EffectModule = function( globalSettings , playerIndex , entity )
+	EffectModule = function( globalSettings , playerIndex , entity , showFlyingText )
 		local type = entity.type
 		if type == SICommon.Types.Entities.GhostEntity then
 			local limitDataIDList = globalSettings.Modules[entity.ghost_prototype.name]
@@ -254,12 +266,12 @@ SIBuildLimit =
 					local limitData = globalSettings.LimitData[limitDataID]
 					if moduleCount < limitData.MinModuleCount then
 						entity.item_requests = {}
-						SIFunctions.FlyingTextForce( { "SIBuildLimit.不支持的插件" } , entity , 1 , entity.force )
+						SIBuildLimit.ShowFlyingText( entity , false , showFlyingText )
 						return
 					end
 					if moduleCount > limitData.MaxModuleCount then
 						entity.item_requests = {}
-						SIFunctions.FlyingTextForce( { "SIBuildLimit.不支持的插件" } , entity , 1 , entity.force )
+						SIBuildLimit.ShowFlyingText( entity , false , showFlyingText )
 						return
 					end
 					if limitData.NeedModuleList then
@@ -267,7 +279,7 @@ SIBuildLimit =
 							local count = moduleCountList[moduleName] or 0
 							if count < needCount then
 								entity.item_requests = {}
-								SIFunctions.FlyingTextForce( { "SIBuildLimit.不支持的插件" } , entity , 1 , entity.force )
+								SIBuildLimit.ShowFlyingText( entity , false , showFlyingText )
 								return
 							end
 						end
@@ -277,12 +289,12 @@ SIBuildLimit =
 						for moduleName , count in pairs( moduleCountList ) do
 							if not supportModuleList[moduleName] then
 								entity.item_requests = {}
-								SIFunctions.FlyingTextForce( { "SIBuildLimit.不支持的插件" } , entity , 1 , entity.force )
+								SIBuildLimit.ShowFlyingText( entity , false , showFlyingText )
 								return
 							end
 							if count > supportModuleList[moduleName] then
 								entity.item_requests = {}
-								SIFunctions.FlyingTextForce( { "SIBuildLimit.不支持的插件" } , entity , 1 , entity.force )
+								SIBuildLimit.ShowFlyingText( entity , false , showFlyingText )
 								return
 							end
 						end
@@ -322,14 +334,14 @@ SIBuildLimit =
 							for index , proxy in pairs( newProxyList ) do
 								proxy.item_requests = {}
 							end
-							SIFunctions.FlyingTextForce( { "SIBuildLimit.不支持的插件" } , entity , 1 , entity.force )
+							SIBuildLimit.ShowFlyingText( entity , false , showFlyingText )
 							return
 						end
 						if moduleCount > limitData.MaxModuleCount then
 							for index , proxy in pairs( newProxyList ) do
 								proxy.item_requests = {}
 							end
-							SIFunctions.FlyingTextForce( { "SIBuildLimit.不支持的插件" } , entity , 1 , entity.force )
+							SIBuildLimit.ShowFlyingText( entity , false , showFlyingText )
 							return
 						end
 						if limitData.NeedModuleList then
@@ -339,7 +351,7 @@ SIBuildLimit =
 									for index , proxy in pairs( newProxyList ) do
 										proxy.item_requests = {}
 									end
-									SIFunctions.FlyingTextForce( { "SIBuildLimit.不支持的插件" } , entity , 1 , entity.force )
+									SIBuildLimit.ShowFlyingText( entity , false , showFlyingText )
 									return
 								end
 							end
@@ -351,14 +363,14 @@ SIBuildLimit =
 									for index , proxy in pairs( newProxyList ) do
 										proxy.item_requests = {}
 									end
-									SIFunctions.FlyingTextForce( { "SIBuildLimit.不支持的插件" } , entity , 1 , entity.force )
+									SIBuildLimit.ShowFlyingText( entity , false , showFlyingText )
 									return
 								end
 								if count > supportModuleList[moduleName] then
 									for index , proxy in pairs( newProxyList ) do
 										proxy.item_requests = {}
 									end
-									SIFunctions.FlyingTextForce( { "SIBuildLimit.不支持的插件" } , entity , 1 , entity.force )
+									SIBuildLimit.ShowFlyingText( entity , false , showFlyingText )
 									return
 								end
 							end
@@ -417,7 +429,7 @@ SIBuildLimit =
 								proxy.item_requests = {}
 							end
 						end
-						SIFunctions.FlyingTextForce( { "SIBuildLimit.不支持的插件" } , entity , 1 , entity.force )
+						SIBuildLimit.ShowFlyingText( entity , moduleCountSelf < limitData.MinModuleCount , showFlyingText )
 						return
 					end
 					if moduleCount > limitData.MaxModuleCount then
@@ -430,7 +442,7 @@ SIBuildLimit =
 								proxy.item_requests = {}
 							end
 						end
-						SIFunctions.FlyingTextForce( { "SIBuildLimit.不支持的插件" } , entity , 1 , entity.force )
+						SIBuildLimit.ShowFlyingText( entity , moduleCountSelf > limitData.MinModuleCount , showFlyingText )
 						return
 					end
 					if limitData.NeedModuleList then
@@ -447,7 +459,7 @@ SIBuildLimit =
 										proxy.item_requests = {}
 									end
 								end
-								SIFunctions.FlyingTextForce( { "SIBuildLimit.不支持的插件" } , entity , 1 , entity.force )
+								SIBuildLimit.ShowFlyingText( entity , countSelf < needCount , showFlyingText )
 								return
 							end
 						end
@@ -465,7 +477,7 @@ SIBuildLimit =
 										proxy.item_requests = {}
 									end
 								end
-								SIFunctions.FlyingTextForce( { "SIBuildLimit.不支持的插件" } , entity , 1 , entity.force )
+								SIBuildLimit.ShowFlyingText( entity , moduleCountListSelf[moduleName] , showFlyingText )
 								return
 							end
 							local supportCount = supportModuleList[moduleName]
@@ -480,7 +492,7 @@ SIBuildLimit =
 										proxy.item_requests = {}
 									end
 								end
-								SIFunctions.FlyingTextForce( { "SIBuildLimit.不支持的插件" } , entity , 1 , entity.force )
+								SIBuildLimit.ShowFlyingText( entity , countSelf > supportCount , showFlyingText )
 								return
 							end
 						end
@@ -501,14 +513,14 @@ SIBuildLimit =
 			for index , machine in pairs( entity.get_beacon_effect_receivers() ) do
 				SIBuildLimit.EffectMachine( globalSettings , machine , nil )
 				if machine.active then
-					SIBuildLimit.EffectModule( globalSettings , playerIndex , machine )
+					SIBuildLimit.EffectModule( globalSettings , playerIndex , machine , true )
 				end
 			end
-			SIBuildLimit.EffectModule( globalSettings , playerIndex , entity )
+			SIBuildLimit.EffectModule( globalSettings , playerIndex , entity , true )
 		elseif SIBuildLimit.ModuleMachine[type] then
 			SIBuildLimit.EffectMachine( globalSettings , entity , nil )
 			if entity.active then
-				SIBuildLimit.EffectModule( globalSettings , playerIndex , entity )
+				SIBuildLimit.EffectModule( globalSettings , playerIndex , entity , true )
 			end
 		end
 	end ,
@@ -518,15 +530,15 @@ SIBuildLimit =
 			for index , machine in pairs( entity.get_beacon_effect_receivers() ) do
 				SIBuildLimit.EffectMachine( globalSettings , machine , entity )
 				if machine.active then
-					SIBuildLimit.EffectModule( globalSettings , playerIndex , machine )
+					SIBuildLimit.EffectModule( globalSettings , playerIndex , machine , true )
 				end
 			end
 		end
 		SIBuildLimit.DestroyEntityIcons( entity.unit_number )
 	end ,
-	CheckModule = function( playerIndex , entity )
+	CheckModule = function( playerIndex , entity , showFlyingText )
 		local globalSettings = SIGlobal.GetGlobalSettings( SIBuildLimit.Settings.Name )
-		SIBuildLimit.EffectModule( globalSettings , playerIndex , entity )
+		SIBuildLimit.EffectModule( globalSettings , playerIndex , entity , showFlyingText )
 		if entity.active and SIBuildLimit.ModuleMachine[entity.type] then
 			SIBuildLimit.EffectMachine( globalSettings , entity , nil )
 		end
@@ -541,7 +553,7 @@ SIBuildLimit =
 		local settings = SIGlobal.GetPlayerSettings( SIBuildLimit.Settings.Name , playerIndex )
 		settings.CurrentEntity = nil
 		local globalSettings = SIGlobal.GetGlobalSettings( SIBuildLimit.Settings.Name )
-		SIBuildLimit.EffectModule( globalSettings , playerIndex , entity )
+		SIBuildLimit.EffectModule( globalSettings , playerIndex , entity , true )
 		if entity.active and SIBuildLimit.ModuleMachine[entity.type] then
 			SIBuildLimit.EffectMachine( globalSettings , entity , nil )
 		end

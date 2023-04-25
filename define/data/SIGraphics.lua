@@ -265,7 +265,11 @@ local function CreateHrVersionData( layer )
 	layer.hr_version = nil
 	local hrData = SIUtils.table.deepcopy( layer )
 	local pos = hrData.filename:FindLast( "/" )
-	hrData.filename = hrData.filename:sub( 1 , pos ) .. SICommon.ShowNamePrefix.HrVer .. hrData.filename:sub( pos )
+	if pos then
+		hrData.filename = hrData.filename:sub( 1 , pos ) .. SICommon.ShowNamePrefix.HrVer .. hrData.filename:sub( pos + 1 )
+	else
+		hrData.filename = SICommon.ShowNamePrefix.HrVer .. hrData.filename
+	end
 	if hrData.width then
 		hrData.width = hrData.width * 2
 	end
@@ -281,7 +285,7 @@ end
 
 function SIGraphics.MakeHrVersionData( graphicData )
 	if not SITools.IsTable( graphicData ) then
-		return
+		return graphicData
 	end
 	if graphicData.layers then
 		for index , layer in pairs( graphicData.layers ) do
@@ -294,4 +298,5 @@ function SIGraphics.MakeHrVersionData( graphicData )
 			SIGraphics.MakeHrVersionData( subData )
 		end
 	end
+	return graphicData
 end

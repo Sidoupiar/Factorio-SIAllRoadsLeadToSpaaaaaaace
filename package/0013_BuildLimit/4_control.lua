@@ -49,7 +49,7 @@ SIEventBus
 	end
 	local playerIndex = event.player_index
 	if entity.type == SICommon.Types.Entities.GhostEntity or entity.type == SICommon.Types.Entities.ProxyItemRequest then
-		SIBuildLimit.CheckModule( playerIndex , entity )
+		SIBuildLimit.CheckModule( playerIndex , entity , true )
 	else
 		SIBuildLimit.BuildEntity( playerIndex , entity )
 	end
@@ -60,7 +60,7 @@ end )
 		return
 	end
 	if entity.type == SICommon.Types.Entities.GhostEntity or entity.type == SICommon.Types.Entities.ProxyItemRequest then
-		SIBuildLimit.CheckModule( nil , entity )
+		SIBuildLimit.CheckModule( nil , entity , true )
 	else
 		SIBuildLimit.BuildEntity( nil , entity )
 	end
@@ -71,7 +71,7 @@ end )
 		return
 	end
 	if entity.type == SICommon.Types.Entities.GhostEntity or entity.type == SICommon.Types.Entities.ProxyItemRequest then
-		SIBuildLimit.CheckModule( nil , entity )
+		SIBuildLimit.CheckModule( nil , entity , true )
 	else
 		SIBuildLimit.BuildEntity( nil , entity )
 	end
@@ -82,7 +82,7 @@ end )
 		return
 	end
 	if entity.type == SICommon.Types.Entities.GhostEntity or entity.type == SICommon.Types.Entities.ProxyItemRequest then
-		SIBuildLimit.CheckModule( nil , entity )
+		SIBuildLimit.CheckModule( nil , entity , true )
 	else
 		SIBuildLimit.BuildEntity( nil , entity )
 	end
@@ -120,7 +120,7 @@ end )
 	for playerIndex , settings in pairs( SIGlobal.GetAllPlayerSettings( SIBuildLimit.Settings.Name ) ) do
 		local entity = settings.CurrentEntity
 		if entity then
-			SIBuildLimit.CheckModule( playerIndex , entity )
+			SIBuildLimit.CheckModule( playerIndex , entity , false )
 		end
 	end
 end )
@@ -137,7 +137,7 @@ end )
 		return
 	end
 	local playerIndex = event.player_index
-	SIBuildLimit.CheckModule( playerIndex , entity )
+	SIBuildLimit.CheckModule( playerIndex , entity , true )
 end )
 .Add( SIAutoInsert.GetModuleEventID() , function( event , functionID )
 	local entity = event.entity
@@ -145,7 +145,7 @@ end )
 		return
 	end
 	local playerIndex = event.player_index
-	SIBuildLimit.CheckModule( playerIndex , entity )
+	SIBuildLimit.CheckModule( playerIndex , entity , true )
 end )
 
 -- ------------------------------------------------------------------------------------------------
@@ -172,14 +172,56 @@ end )
 	local playerIndex = event.player_index
 	SIBuildLimit.PlayerCloseEntity( playerIndex , entity )
 end )
+.Add( SIEvents.on_player_main_inventory_changed , function( event , functionID )
+	local playerIndex = event.player_index
+	local player = game.get_player( playerIndex )
+	local entity = player.selected
+	if not entity or not entity.valid then
+		return
+	end
+	SIBuildLimit.CheckModule( playerIndex , entity , true )
+end )
+.Add( SIEvents.on_selected_entity_changed , function( event , functionID )
+	local entity = event.last_entity
+	if not entity or not entity.valid then
+		return
+	end
+	local playerIndex = event.player_index
+	SIBuildLimit.CheckModule( playerIndex , entity , true )
+end )
 .Add( SIEvents.on_marked_for_upgrade , function( event , functionID )
 	local entity = event.entity
 	if not entity or not entity.valid then
 		return
 	end
 	local playerIndex = event.player_index
-	SIPrint.Print( entity.name )
-	SIBuildLimit.CheckModule( playerIndex , entity )
+	SIBuildLimit.CheckModule( playerIndex , entity , true )
+end )
+-- ----------------------------------------
+-- 移除绿图中选择的插件
+-- 当前为硬限制
+-- 记录 : 与上方的事件重复定义 , 按需合并
+-- ----------------------------------------
+.Add( SIEvents.on_gui_closed , function( event , functionID )
+	local itemStack = event.item
+	if not itemStack or not itemStack.valid or not itemStack.valid_for_read or not itemStack.is_upgrade_item then
+		return
+	end
+	local showMessageFlag = false
+	for index = 1 , SICommon.Numbers.UpgradeMapSlotCount , 1 do
+		local filter = itemStack.get_mapper( index , "from" )
+		if filter and filter.type == "item" then
+			local itemPrototype = game.item_prototypes[filter.name]
+			if itemPrototype and itemPrototype.type == SICommon.Types.Items.Module then
+				itemStack.set_mapper( index , "from" , nil )
+				itemStack.set_mapper( index , "to" , nil )
+				showMessageFlag = true
+			end
+		end
+	end
+	if showMessageFlag then
+		SIPrint.Warning( event.player_index , { "SIBuildLimit.不能使用绿图更换插件" , itemStack.prototype.name } )
+	end
 end )
 
 -- ------------------------------------------------------------------------------------------------

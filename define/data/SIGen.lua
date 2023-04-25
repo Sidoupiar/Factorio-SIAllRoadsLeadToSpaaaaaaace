@@ -408,8 +408,11 @@ function SIGen.New( typeCode , prototypeID , aliasName , prototypeDataToCopy )
 		return CodeE( SIGen , "同 ID 原型数据已存在 , prototypeID = " .. prototypeID )
 	end
 	-- 读取特殊属性
-	local OrderOffset = prototypeDataToCopy.OrderOffset
-	prototypeDataToCopy.OrderOffset = nil
+	local OrderOffset = nil
+	if prototypeDataToCopy then
+		OrderOffset = prototypeDataToCopy.OrderOffset
+		prototypeDataToCopy.OrderOffset = nil
+	end
 	-- 生成原型数据
 	local prototypeData = prototypeDataToCopy and SIUtils.table.deepcopy( prototypeDataToCopy ) or {}
 	prototypeData.type = typeCode

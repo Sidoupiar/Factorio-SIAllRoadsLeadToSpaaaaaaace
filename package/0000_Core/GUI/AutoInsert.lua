@@ -110,6 +110,9 @@ SIAutoInsert =
 	} ,
 	ListButtonIcon =
 	{
+		MaxSlot      = SIConstants_Core.raw.Items.IconColorCopper ,
+		GreenToBlue  = SIConstants_Core.raw.Items.IconColorGrass ,
+		SetModule    = SIConstants_Core.raw.Items.IconColorDream ,
 		InsertFuel   = SIConstants_Core.raw.Items.IconColorMeat ,
 		InsertAmmo   = SIConstants_Core.raw.Items.IconColorRose
 	} ,

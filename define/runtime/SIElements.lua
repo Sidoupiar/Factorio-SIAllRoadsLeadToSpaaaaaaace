@@ -171,7 +171,7 @@ end
 -- ----------------------------------------
 function SIElements.GetInputNumber( textfield )
 	local inputText = textfield.text
-	local number = math.floor( tonumber( inputText:gsub( "^[0-9\\.]" , "" ) ) or 0 )
+	local number = math.floor( tonumber( inputText:gsub( "[^0-9\\.]" , "" ) , 10 ) or 0 )
 	textfield.text = tostring( number )
 	return number
 end
