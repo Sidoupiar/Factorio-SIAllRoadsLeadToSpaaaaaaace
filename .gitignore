@@ -43,3 +43,10 @@ luac.out
 */*.png
 *.ogg
 */*.ogg
+
+# Scripts
+*.ini
+*.bat
+*.cmd
+*.sh
+*.dat
