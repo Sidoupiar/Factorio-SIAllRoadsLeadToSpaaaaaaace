@@ -194,7 +194,7 @@ SIUnlocker =
 					player = game.get_player( playerIndex )
 					local inventory = player.get_main_inventory()
 					for itemName , count in pairs( result.Items ) do
-						local item = game.item_prototypes[itemName]
+						local item = prototypes.item[itemName]
 						if item then
 							local itemStack = { name = itemName , count = count }
 							if inventory and inventory.can_insert( itemStack ) then
@@ -209,7 +209,7 @@ SIUnlocker =
 					end
 				else
 					for itemName , count in pairs( result.Items ) do
-						local item = game.item_prototypes[itemName]
+						local item = prototypes.item[itemName]
 						if item then
 							table.insert( outItemStacks , { name = itemName , count = count } )
 						end

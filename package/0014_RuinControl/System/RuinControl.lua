@@ -285,7 +285,7 @@ SIRuinControl =
 			return nil
 		end
 		local floor = floorList[math.random( #floorList )]
-		if not game.tile_prototypes[floor] then
+		if not prototypes.tile[floor] then
 			SIPrint.Alert( nil , { "SIRuinControl.遗迹构建-错误-遗迹地板不存在" , ruinStyle.ID , ruinStrength , level , ruinCenter.x , ruinCenter.y , floor } )
 			return nil
 		end
@@ -297,7 +297,7 @@ SIRuinControl =
 			return nil
 		end
 		local wall = wallList[math.random( #wallList )]
-		if not game.entity_prototypes[wall] then
+		if not prototypes.entity[wall] then
 			SIPrint.Alert( nil , { "SIRuinControl.遗迹构建-错误-遗迹围墙不存在" , ruinStyle.ID , ruinStrength , level , ruinCenter.x , ruinCenter.y , wall } )
 			return nil
 		end
@@ -419,7 +419,7 @@ SIRuinControl =
 				local turretList = level > turretListLength and turretSet.List[turretListLength] or turretSet.List[level]
 				if #turretList > 0 then
 					local turret = turretList[math.random( #turretList )]
-					local turretPrototype = game.entity_prototypes[turret]
+					local turretPrototype = prototypes.entity[turret]
 					if turretPrototype then
 						local box = turretPrototype.collision_box
 						local turretSize = math.floor( - box.left_top.x + box.right_bottom.x + 0.99 )
@@ -515,7 +515,7 @@ SIRuinControl =
 			if #itemPackList > 0 then
 				local itemPack = itemPackList[math.random( #itemPackList )]
 				local chest = itemPack.Chest
-				if game.entity_prototypes[chest] then
+				if prototypes.entity[chest] then
 					-- 计算坐标
 					local itemPositionXFlag = itemPosition.x < 0
 					local itemPositionYFlag = itemPosition.y < 0
@@ -567,7 +567,7 @@ SIRuinControl =
 					local inventory = chestEntity.get_inventory( defines.inventory.chest )
 					if inventory then
 						for index , itemData in pairs( itemPack.Items ) do
-							if game.item_prototypes[itemData.Item] then
+							if prototypes.item[itemData.Item] then
 								local count = itemData.Min >= itemData.Max and itemData.Min or math.random( itemData.Min , itemData.Max )
 								if count > 0 then
 									local itemStack =
@@ -599,7 +599,7 @@ SIRuinControl =
 				if #machineDataList > 0 then
 					local machineData = machineDataList[math.random( #machineDataList )]
 					local machine = machineData.Machine
-					if game.entity_prototypes[machine] then
+					if prototypes.entity[machine] then
 						-- 计算坐标
 						local machinePositionXFlag = machinePosition.x < 0
 						local machinePositionYFlag = machinePosition.y < 0

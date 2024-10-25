@@ -468,22 +468,25 @@ SIMainbar =
 		settings.GameTime.view.tooltip = tooltip
 	end ,
 	FreshPanel_KillCount = function( settings )
-		local statistics = game.get_player( settings.playerIndex ).force.kill_count_statistics
 		local totalCount = 0
 		local bitCount = 0
 		local spawnerCount = 0
 		local turretCount = 0
-		for name , count in pairs( statistics.input_counts ) do
-			totalCount = totalCount + count
-		end
-		for name , data in pairs( game.get_filtered_entity_prototypes{ { filter = "type" , type = "unit" } } ) do
-			bitCount = bitCount + statistics.get_input_count( name )
-		end
-		for name , data in pairs( game.get_filtered_entity_prototypes{ { filter = "type" , type = "unit-spawner" } } ) do
-			spawnerCount = spawnerCount + statistics.get_input_count( name )
-		end
-		for name , data in pairs( game.get_filtered_entity_prototypes{ { filter = "type" , type = "turret" } } ) do
-			turretCount = turretCount + statistics.get_input_count( name )
+		local force = game.get_player( settings.playerIndex ).force
+		for index , surface in pairs( game.surfaces ) do
+			local statistics = force.get_kill_count_statistics( surface )
+			for name , count in pairs( statistics.input_counts ) do
+				totalCount = totalCount + count
+			end
+			for name , data in pairs( prototypes.get_entity_filtered{ { filter = "type" , type = "unit" } } ) do
+				bitCount = bitCount + statistics.get_input_count( name )
+			end
+			for name , data in pairs( prototypes.get_entity_filtered{ { filter = "type" , type = "unit-spawner" } } ) do
+				spawnerCount = spawnerCount + statistics.get_input_count( name )
+			end
+			for name , data in pairs( prototypes.get_entity_filtered{ { filter = "type" , type = "turret" } } ) do
+				turretCount = turretCount + statistics.get_input_count( name )
+			end
 		end
 		settings.KillCount.view.caption = { "SICore.主面板-击杀数量" , bitCount , spawnerCount , turretCount , totalCount-bitCount-spawnerCount-turretCount }
 	end ,
@@ -492,7 +495,7 @@ SIMainbar =
 		settings.Evolution.view.caption =
 		{
 			"SICore.主面板-进化因子" ,
-			SITools.FormatNumber4( game.forces.enemy.evolution_factor * 100 ) ,
+			SITools.FormatNumber4( game.forces.enemy.get_evolution_factor( player.surface ) * 100 ) ,
 			SITools.FormatNumber2( player.surface.get_pollution( player.position ) ) ,
 			SITools.FormatNumber2( player.surface.get_total_pollution() )
 		}

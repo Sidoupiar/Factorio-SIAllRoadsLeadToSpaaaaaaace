@@ -1268,7 +1268,7 @@ end )
 SIEventBus
 .Add( SIEvents.on_player_selected_area , function( event , functionID )
 	local itemName = event.item
-	local item = game.item_prototypes[itemName]
+	local item = prototypes.item[itemName]
 	if not item or item.flags[SICommon.Flags.Item.OnlyInCursor] then
 		return
 	end
@@ -1338,7 +1338,7 @@ SIEventBus
 end )
 .Add( SIEvents.on_player_reverse_selected_area , function( event , functionID )
 	local itemName = event.item
-	local item = game.item_prototypes[itemName]
+	local item = prototypes.item[itemName]
 	if not item or item.flags[SICommon.Flags.Item.OnlyInCursor] then
 		return
 	end
@@ -1381,7 +1381,7 @@ end )
 end )
 .Add( SIEvents.on_player_alt_selected_area , function( event , functionID )
 	local itemName = event.item
-	local item = game.item_prototypes[itemName]
+	local item = prototypes.item[itemName]
 	if not item or item.flags[SICommon.Flags.Item.OnlyInCursor] then
 		return
 	end
@@ -1436,7 +1436,7 @@ end )
 end )
 .Add( SIEvents.on_player_alt_reverse_selected_area , function( event , functionID )
 	local itemName = event.item
-	local item = game.item_prototypes[itemName]
+	local item = prototypes.item[itemName]
 	if not item or item.flags[SICommon.Flags.Item.OnlyInCursor] then
 		return
 	end

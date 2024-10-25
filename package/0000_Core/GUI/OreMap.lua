@@ -155,11 +155,11 @@ SIOreMap =
 					if oreName == settings.selectedOreName then
 						local button = list.add{ type = "sprite-button" , sprite = "entity/" .. oreName , tooltip = { "SICore.黄图-窗口-矿物-已选择-提示" } , style = SIConstants_Core.raw.Styles.OreMap_ListIcon }
 						button.enabled = false
-						list.add{ type = "label" , caption = { "SICore.黄图-窗口-矿物-选中" , game.entity_prototypes[oreName].localised_name } , style = SIConstants_Core.raw.Styles.OreMap_ListLabelLong }
+						list.add{ type = "label" , caption = { "SICore.黄图-窗口-矿物-选中" , prototypes.entity[oreName].localised_name } , style = SIConstants_Core.raw.Styles.OreMap_ListLabelLong }
 						list.add{ type = "label" , caption = { "SICore.黄图-窗口-矿物-选中" , { "SICore.黄图-窗口-矿物-数量" , oreCount } } , style = SIConstants_Core.raw.Styles.OreMap_ListLabelLong }
 					else
 						list.add{ type = "sprite-button" , name = SIOreMap.Names.IconNamePrefix .. oreName , sprite = "entity/" .. oreName , tooltip = { "SICore.黄图-窗口-矿物-未选择-提示" } , style = SIConstants_Core.raw.Styles.OreMap_ListIcon }
-						list.add{ type = "label" , caption = game.entity_prototypes[oreName].localised_name , style = SIConstants_Core.raw.Styles.OreMap_ListLabelLong }
+						list.add{ type = "label" , caption = prototypes.entity[oreName].localised_name , style = SIConstants_Core.raw.Styles.OreMap_ListLabelLong }
 						list.add{ type = "label" , caption = { "SICore.黄图-窗口-矿物-数量" , oreCount } , style = SIConstants_Core.raw.Styles.OreMap_ListLabelLong }
 					end
 				end

@@ -219,7 +219,7 @@ end )
 	for index = 1 , SICommon.Numbers.UpgradeMapSlotCount , 1 do
 		local filter = itemStack.get_mapper( index , "from" )
 		if filter and filter.type == "item" then
-			local itemPrototype = game.item_prototypes[filter.name]
+			local itemPrototype = prototypes.item[filter.name]
 			if itemPrototype and itemPrototype.type == SICommon.Types.Items.Module then
 				itemStack.set_mapper( index , "from" , nil )
 				itemStack.set_mapper( index , "to" , nil )

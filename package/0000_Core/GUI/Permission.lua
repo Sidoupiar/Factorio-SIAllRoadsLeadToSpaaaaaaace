@@ -202,7 +202,7 @@ SIPermission =
 					else
 						local subList = flow.add{ type = "table" , column_count = 14 , style = SIConstants_Core.raw.Styles.Permission_Look_ListSub }
 						for index , itemName in pairs( whiteList ) do
-							local item = game.item_prototypes[itemName]
+							local item = prototypes.item[itemName]
 							subList.add{ type = "sprite-button" , sprite = "item/" .. itemName , tooltip = item.localised_name , style = SIConstants_Core.raw.Styles.Permission_ItemIconGreen }
 						end
 					end
@@ -213,7 +213,7 @@ SIPermission =
 					else
 						local subList = flow.add{ type = "table" , column_count = 14 , style = SIConstants_Core.raw.Styles.Permission_Look_ListSub }
 						for index , itemName in pairs( blackList ) do
-							local item = game.item_prototypes[itemName]
+							local item = prototypes.item[itemName]
 							subList.add{ type = "sprite-button" , sprite = "item/" .. itemName , tooltip = item.localised_name , style = SIConstants_Core.raw.Styles.Permission_ItemIconRed }
 						end
 					end
@@ -316,11 +316,11 @@ SIPermission =
 			.add{ type = "scroll-pane" , horizontal_scroll_policy = "never" , vertical_scroll_policy = "auto-and-reserve-space" , style = SIConstants_Core.raw.Styles.Permission_Global_ItemListNow }
 			.add{ type = "table" , column_count = 6 , style = SIConstants_Core.raw.Styles.Permission_Global_ListSmall }
 			for index , itemName in pairs( playerGlobalSettings.DefaultLists.ItemWhiteList ) do
-				local item = game.item_prototypes[itemName]
+				local item = prototypes.item[itemName]
 				settings.data.global.items.listWhite.add{ type = "sprite-button" , name = SIPermission.Names.GlobalItemWhitePrefix .. itemName , sprite = "item/" .. itemName , tooltip = { "SICore.权限管理-窗口-全局-物品-移除" , item.localised_name } , style = SIConstants_Core.raw.Styles.Permission_ItemIconGreen }
 			end
 			for index , itemName in pairs( playerGlobalSettings.AddingLists.ItemWhiteList ) do
-				local item = game.item_prototypes[itemName]
+				local item = prototypes.item[itemName]
 				settings.data.global.items.listWhite.add{ type = "sprite-button" , name = SIPermission.Names.GlobalItemWhitePrefix .. itemName , sprite = "item/" .. itemName , tooltip = { "SICore.权限管理-窗口-全局-物品-移除" , item.localised_name } , style = SIConstants_Core.raw.Styles.Permission_ItemIconBlue }
 			end
 			-- 第 4.2 层
@@ -343,11 +343,11 @@ SIPermission =
 			.add{ type = "scroll-pane" , horizontal_scroll_policy = "never" , vertical_scroll_policy = "auto-and-reserve-space" , style = SIConstants_Core.raw.Styles.Permission_Global_ItemListNow }
 			.add{ type = "table" , column_count = 6 , style = SIConstants_Core.raw.Styles.Permission_Global_ListSmall }
 			for index , itemName in pairs( playerGlobalSettings.DefaultLists.ItemBlackList ) do
-				local item = game.item_prototypes[itemName]
+				local item = prototypes.item[itemName]
 				settings.data.global.items.listBlack.add{ type = "sprite-button" , name = SIPermission.Names.GlobalItemBlackPrefix .. itemName , sprite = "item/" .. itemName , tooltip = { "SICore.权限管理-窗口-全局-物品-移除" , item.localised_name } , style = SIConstants_Core.raw.Styles.Permission_ItemIconRed }
 			end
 			for index , itemName in pairs( playerGlobalSettings.AddingLists.ItemBlackList ) do
-				local item = game.item_prototypes[itemName]
+				local item = prototypes.item[itemName]
 				settings.data.global.items.listBlack.add{ type = "sprite-button" , name = SIPermission.Names.GlobalItemBlackPrefix .. itemName , sprite = "item/" .. itemName , tooltip = { "SICore.权限管理-窗口-全局-物品-移除" , item.localised_name } , style = SIConstants_Core.raw.Styles.Permission_ItemIconOrange }
 			end
 			-- 第 5 层 , 操作按钮
@@ -548,19 +548,19 @@ SIPermission =
 			end
 		end
 		for index , itemName in pairs( otherPlayerSettings.Lists.ItemWhiteList ) do
-			local item = game.item_prototypes[itemName]
+			local item = prototypes.item[itemName]
 			items.listWhite.add{ type = "sprite-button" , name = SIPermission.Names.PlayerItemWhitePrefix .. itemName , sprite = "item/" .. itemName , tooltip = { "SICore.权限管理-窗口-玩家-物品-移除" , item.localised_name } , style = SIConstants_Core.raw.Styles.Permission_ItemIconGreen }
 		end
 		for index , itemName in pairs( otherPlayerSettings.AddingLists.ItemWhiteList ) do
-			local item = game.item_prototypes[itemName]
+			local item = prototypes.item[itemName]
 			items.listWhite.add{ type = "sprite-button" , name = SIPermission.Names.PlayerItemWhitePrefix .. itemName , sprite = "item/" .. itemName , tooltip = { "SICore.权限管理-窗口-玩家-物品-移除" , item.localised_name } , style = SIConstants_Core.raw.Styles.Permission_ItemIconBlue }
 		end
 		for index , itemName in pairs( otherPlayerSettings.Lists.ItemBlackList ) do
-			local item = game.item_prototypes[itemName]
+			local item = prototypes.item[itemName]
 			items.listBlack.add{ type = "sprite-button" , name = SIPermission.Names.PlayerItemBlackPrefix .. itemName , sprite = "item/" .. itemName , tooltip = { "SICore.权限管理-窗口-玩家-物品-移除" , item.localised_name } , style = SIConstants_Core.raw.Styles.Permission_ItemIconRed }
 		end
 		for index , itemName in pairs( otherPlayerSettings.AddingLists.ItemBlackList ) do
-			local item = game.item_prototypes[itemName]
+			local item = prototypes.item[itemName]
 			items.listBlack.add{ type = "sprite-button" , name = SIPermission.Names.PlayerItemBlackPrefix .. itemName , sprite = "item/" .. itemName , tooltip = { "SICore.权限管理-窗口-玩家-物品-移除" , item.localised_name } , style = SIConstants_Core.raw.Styles.Permission_ItemIconOrange }
 		end
 	end ,
@@ -1046,11 +1046,11 @@ SIPermission =
 			local item = nil
 			if isChooser then
 				local itemName = name
-				item = itemName and game.item_prototypes[itemName] or nil
+				item = itemName and prototypes.item[itemName] or nil
 				element.elem_value = SIConstants_Core.raw.Items.IconFind
 			else
 				local itemName = name:sub( SIPermission.Names.GlobalItemBluePosition )
-				item = game.item_prototypes[itemName]
+				item = prototypes.item[itemName]
 			end
 			if item then
 				local playerGlobalSettings = settings.data.global.current
@@ -1079,11 +1079,11 @@ SIPermission =
 			local item = nil
 			if isChooser then
 				local itemName = name
-				item = itemName and game.item_prototypes[itemName] or nil
+				item = itemName and prototypes.item[itemName] or nil
 				element.elem_value = SIConstants_Core.raw.Items.IconFind
 			else
 				local itemName = name:sub( SIPermission.Names.GlobalItemOrangePosition )
-				item = game.item_prototypes[itemName]
+				item = prototypes.item[itemName]
 			end
 			if item then
 				local playerGlobalSettings = settings.data.global.current
@@ -1116,7 +1116,7 @@ SIPermission =
 			settings.data.global.items.findWhite.clear()
 			local playerGlobalSettings = settings.data.global.current
 			local flag = true
-			for itemName , item in pairs( game.item_prototypes ) do
+			for itemName , item in pairs( prototypes.item ) do
 				if itemName:find( text ) then
 					flag = false
 					local button = settings.data.global.items.findWhite.add{ type = "sprite-button" , name = SIPermission.Names.GlobalItemBluePrefix .. itemName , sprite = "item/" .. itemName , tooltip = { "SICore.权限管理-窗口-全局-物品-添加" , item.localised_name } , style = SIConstants_Core.raw.Styles.Permission_ItemIconBlue }
@@ -1142,7 +1142,7 @@ SIPermission =
 			settings.data.global.items.findBlack.clear()
 			local playerGlobalSettings = settings.data.global.current
 			local flag = true
-			for itemName , item in pairs( game.item_prototypes ) do
+			for itemName , item in pairs( prototypes.item ) do
 				if itemName:find( text ) then
 					flag = false
 					local button = settings.data.global.items.findBlack.add{ type = "sprite-button" , name = SIPermission.Names.GlobalItemOrangePrefix .. itemName , sprite = "item/" .. itemName , tooltip = { "SICore.权限管理-窗口-全局-物品-添加" , item.localised_name } , style = SIConstants_Core.raw.Styles.Permission_ItemIconOrange }
@@ -1194,11 +1194,11 @@ SIPermission =
 			local item = nil
 			if isChooser then
 				local itemName = name
-				item = itemName and game.item_prototypes[itemName] or nil
+				item = itemName and prototypes.item[itemName] or nil
 				element.elem_value = SIConstants_Core.raw.Items.IconFind
 			else
 				local itemName = name:sub( SIPermission.Names.PlayerItemBluePosition )
-				item = game.item_prototypes[itemName]
+				item = prototypes.item[itemName]
 			end
 			if item then
 				local otherPlayerSettings = settings.data.player.current
@@ -1227,11 +1227,11 @@ SIPermission =
 			local item = nil
 			if isChooser then
 				local itemName = name
-				item = itemName and game.item_prototypes[itemName] or nil
+				item = itemName and prototypes.item[itemName] or nil
 				element.elem_value = SIConstants_Core.raw.Items.IconFind
 			else
 				local itemName = name:sub( SIPermission.Names.PlayerItemOrangePosition )
-				item = game.item_prototypes[itemName]
+				item = prototypes.item[itemName]
 			end
 			if item then
 				local otherPlayerSettings = settings.data.player.current
@@ -1264,7 +1264,7 @@ SIPermission =
 			settings.data.player.items.findWhite.clear()
 			local otherPlayerSettings = settings.data.player.current
 			local flag = true
-			for itemName , item in pairs( game.item_prototypes ) do
+			for itemName , item in pairs( prototypes.item ) do
 				if itemName:find( text ) then
 					flag = false
 					local button = settings.data.player.items.findWhite.add{ type = "sprite-button" , name = SIPermission.Names.PlayerItemBluePrefix .. itemName , sprite = "item/" .. itemName , tooltip = { "SICore.权限管理-窗口-玩家-物品-添加" , item.localised_name } , style = SIConstants_Core.raw.Styles.Permission_ItemIconBlue }
@@ -1290,7 +1290,7 @@ SIPermission =
 			settings.data.player.items.findBlack.clear()
 			local otherPlayerSettings = settings.data.player.current
 			local flag = true
-			for itemName , item in pairs( game.item_prototypes ) do
+			for itemName , item in pairs( prototypes.item ) do
 				if itemName:find( text ) then
 					flag = false
 					local button = settings.data.player.items.findBlack.add{ type = "sprite-button" , name = SIPermission.Names.PlayerItemOrangePrefix .. itemName , sprite = "item/" .. itemName , tooltip = { "SICore.权限管理-窗口-玩家-物品-添加" , item.localised_name } , style = SIConstants_Core.raw.Styles.Permission_ItemIconOrange }

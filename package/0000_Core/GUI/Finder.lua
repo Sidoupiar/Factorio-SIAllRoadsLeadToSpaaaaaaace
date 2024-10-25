@@ -158,50 +158,50 @@ SIFinder =
 		local listTool = {}
 		if selectedIndex == SIFinder.DropDownTypes.Item then
 			local itemName = thingName
-			local item = itemName and game.item_prototypes[itemName] or nil
+			local item = itemName and prototypes.item[itemName] or nil
 			settings.chooserLabel.caption = { "SICore.信息查询-窗口-选择项目-标签" , item and item.localised_name or { "SICore.信息查询-窗口-选择项目-标签-无" } }
 			if itemName then
 				-- 输入列表
-				listInput.recipe = game.get_filtered_recipe_prototypes{ { filter = "has-ingredient-item" , elem_filters = { { filter = "name" , name = itemName } } } }
+				listInput.recipe = prototypes.get_recipe_filtered{ { filter = "has-ingredient-item" , elem_filters = { { filter = "name" , name = itemName } } } }
 				-- 输出列表
-				listOutput.recipe = game.get_filtered_recipe_prototypes{ { filter = "has-product-item" , elem_filters = { { filter = "name" , name = itemName } } } }
+				listOutput.recipe = prototypes.get_recipe_filtered{ { filter = "has-product-item" , elem_filters = { { filter = "name" , name = itemName } } } }
 				-- 工具列表
 			end
 		elseif selectedIndex == SIFinder.DropDownTypes.Fluid then
 			local fluidName = thingName
-			local fluid = fluidName and game.fluid_prototypes[fluidName] or nil
+			local fluid = fluidName and prototypes.fluid[fluidName] or nil
 			settings.chooserLabel.caption = { "SICore.信息查询-窗口-选择项目-标签" , fluid and fluid.localised_name or { "SICore.信息查询-窗口-选择项目-标签-无" } }
 			if fluidName then
 				-- 输入列表
-				listInput.recipe = game.get_filtered_recipe_prototypes{ { filter = "has-ingredient-fluid" , elem_filters = { { filter = "name" , name = fluidName } } } }
+				listInput.recipe = prototypes.get_recipe_filtered{ { filter = "has-ingredient-fluid" , elem_filters = { { filter = "name" , name = fluidName } } } }
 				-- 输出列表
-				listOutput.recipe = game.get_filtered_recipe_prototypes{ { filter = "has-product-fluid" , elem_filters = { { filter = "name" , name = fluidName } } } }
+				listOutput.recipe = prototypes.get_recipe_filtered{ { filter = "has-product-fluid" , elem_filters = { { filter = "name" , name = fluidName } } } }
 				-- 工具列表
 			end
 		elseif selectedIndex == SIFinder.DropDownTypes.Entity then
 			local entityName = thingName
-			local entity = entityName and game.entity_prototypes[entityName] or nil
+			local entity = entityName and prototypes.entity[entityName] or nil
 			settings.chooserLabel.caption = { "SICore.信息查询-窗口-选择项目-标签" , entity and entity.localised_name or { "SICore.信息查询-窗口-选择项目-标签-无" } }
 			-- 输入列表
 			-- 输出列表
 			-- 工具列表
 		elseif selectedIndex == SIFinder.DropDownTypes.Recipe then
 			local recipeName = thingName
-			local recipe = recipeName and game.recipe_prototypes[recipeName] or nil
+			local recipe = recipeName and prototypes.recipe[recipeName] or nil
 			settings.chooserLabel.caption = { "SICore.信息查询-窗口-选择项目-标签" , recipe and recipe.localised_name or { "SICore.信息查询-窗口-选择项目-标签-无" } }
 			-- 输入列表
 			-- 输出列表
 			-- 工具列表
 		elseif selectedIndex == SIFinder.DropDownTypes.Tile then
 			local tileName = thingName
-			local tile = tileName and game.tile_prototypes[tileName] or nil
+			local tile = tileName and prototypes.tile[tileName] or nil
 			settings.chooserLabel.caption = { "SICore.信息查询-窗口-选择项目-标签" , tile and tile.localised_name or { "SICore.信息查询-窗口-选择项目-标签-无" } }
 			-- 输入列表
 			-- 输出列表
 			-- 工具列表
 		elseif selectedIndex == SIFinder.DropDownTypes.Equipment then
 			local equipmentName = thingName
-			local equipment = equipmentName and game.equipment_prototypes[equipmentName] or nil
+			local equipment = equipmentName and prototypes.equipment[equipmentName] or nil
 			settings.chooserLabel.caption = { "SICore.信息查询-窗口-选择项目-标签" , equipment and equipment.localised_name or { "SICore.信息查询-窗口-选择项目-标签-无" } }
 			-- 输入列表
 			-- 输出列表

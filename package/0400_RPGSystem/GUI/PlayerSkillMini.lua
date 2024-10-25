@@ -188,7 +188,7 @@ SIRPGPlayerSkillMini =
 							end
 							if globalSkillData.Cost.Item then
 								for itemName , itemCount in pairs( globalSkillData.Cost.Item ) do
-									local item = game.item_prototypes[itemName]
+									local item = prototypes.item[itemName]
 									if item then
 										table.insert( costList , { "SIRPGSystem.玩家技能-消耗-物品" , itemName , item.localised_name , itemCount } )
 									else

@@ -613,7 +613,7 @@ SIAutoInsert =
 		local entityFilter = SISettings.PerUser.SICore.ShowHiddenEntity( settings.playerIndex ) and SIAutoInsert.MaxSlot_Entity_Filters_ShowHidden or SIAutoInsert.MaxSlot_Entity_Filters
 		-- 重建列表
 		for entityName , count in pairs( tabSettings.MaxSlot.List ) do
-			local entityPrototype = game.entity_prototypes[entityName]
+			local entityPrototype = prototypes.entity[entityName]
 			local entityTooltip = nil
 			local entityNameSelected = entityName
 			local maxCount = 0
@@ -676,7 +676,7 @@ SIAutoInsert =
 		local entityFilter = SISettings.PerUser.SICore.ShowHiddenEntity( settings.playerIndex ) and SIAutoInsert.SetModule_Entity_Filters_ShowHidden or SIAutoInsert.SetModule_Entity_Filters
 		-- 重建列表
 		for entityName , moduleList in pairs( tabSettings.SetModule.List ) do
-			local entityPrototype = game.entity_prototypes[entityName]
+			local entityPrototype = prototypes.entity[entityName]
 			local entityTooltip = nil
 			local entityNameSelected = entityName
 			local maxSlot = 0
@@ -722,7 +722,7 @@ SIAutoInsert =
 				local itemTooltip = nil
 				local itemName = moduleList[slotIndex]
 				if itemName then
-					local itemPrototype = game.item_prototypes[itemName]
+					local itemPrototype = prototypes.item[itemName]
 					if itemPrototype then
 						itemTooltip = { "SICore.自动填充-窗口-设置插件-物品-提示" , itemPrototype.localised_name }
 					else
@@ -769,7 +769,7 @@ SIAutoInsert =
 		local entityFilter = SISettings.PerUser.SICore.ShowHiddenEntity( settings.playerIndex ) and SIAutoInsert.InsertFuel_Entity_Filters_ShowHidden or SIAutoInsert.InsertFuel_Entity_Filters
 		-- 重建列表
 		for entityName , itemDataList in pairs( tabSettings.InsertFuel.List ) do
-			local entityPrototype = game.entity_prototypes[entityName]
+			local entityPrototype = prototypes.entity[entityName]
 			if entityPrototype then
 				list.add
 				{
@@ -801,7 +801,7 @@ SIAutoInsert =
 						local itemTooltip = nil
 						local itemName = itemData.ItemName
 						if itemName then
-							local itemPrototype = game.item_prototypes[itemName]
+							local itemPrototype = prototypes.item[itemName]
 							if itemPrototype then
 								itemTooltip = { "SICore.自动填充-窗口-插入燃料-物品-提示" , itemPrototype.localised_name }
 							else
@@ -850,7 +850,7 @@ SIAutoInsert =
 					local itemTooltip = nil
 					local itemName = itemData.ItemName
 					if itemName then
-						local itemPrototype = game.item_prototypes[itemName]
+						local itemPrototype = prototypes.item[itemName]
 						if itemPrototype then
 							itemTooltip = { "SICore.自动填充-窗口-插入燃料-物品-提示" , itemPrototype.localised_name }
 						else
@@ -898,7 +898,7 @@ SIAutoInsert =
 		local entityFilter = SISettings.PerUser.SICore.ShowHiddenEntity( settings.playerIndex ) and SIAutoInsert.InsertAmmo_Entity_Filters_ShowHidden or SIAutoInsert.InsertAmmo_Entity_Filters
 		-- 重建列表
 		for entityName , itemDataList in pairs( tabSettings.InsertAmmo.List ) do
-			local entityPrototype = game.entity_prototypes[entityName]
+			local entityPrototype = prototypes.entity[entityName]
 			if entityPrototype then
 				list.add
 				{
@@ -939,7 +939,7 @@ SIAutoInsert =
 							table.insert( ammoCategories , entityPrototype.attack_parameters.ammo_type.category )
 						end
 						weaponTooltip = { "SICore.自动填充-窗口-插入弹药-武器-提示" , entityPrototype.localised_name }
-						weapon = game.item_prototypes[entityName] and entityName or SIConstants_Core.raw.Items.IconEmpty
+						weapon = prototypes.item[entityName] and entityName or SIConstants_Core.raw.Items.IconEmpty
 					else
 						local weaponPrototype = entityPrototype.indexed_guns[itemDataIndex]
 						ammoCategories = weaponPrototype.attack_parameters.ammo_categories or {}
@@ -966,7 +966,7 @@ SIAutoInsert =
 					local itemTooltip = nil
 					local itemName = itemData.ItemName
 					if itemName then
-						local itemPrototype = game.item_prototypes[itemName]
+						local itemPrototype = prototypes.item[itemName]
 						if itemPrototype then
 							itemTooltip = { "SICore.自动填充-窗口-插入弹药-物品-提示" , itemPrototype.localised_name }
 						else
@@ -977,7 +977,7 @@ SIAutoInsert =
 						itemTooltip = { "SICore.自动填充-窗口-插入弹药-物品-选择-提示" }
 					end
 					local filter = SIUtils.table.deepcopy( SIAutoInsert.InsertAmmo_ItemNamed_Filters )
-					for ammoName , ammoPrototype in pairs( game.get_filtered_item_prototypes( SIAutoInsert.InsertAmmo_Item_Filters ) ) do
+					for ammoName , ammoPrototype in pairs( prototypes.get_item_filtered( SIAutoInsert.InsertAmmo_Item_Filters ) ) do
 						if SITable.Has( ammoCategories , ammoPrototype.get_ammo_type( "default" ).category ) then
 							table.insert( filter ,
 							{
@@ -1027,7 +1027,7 @@ SIAutoInsert =
 					local itemTooltip = nil
 					local itemName = itemData.ItemName
 					if itemName then
-						local itemPrototype = game.item_prototypes[itemName]
+						local itemPrototype = prototypes.item[itemName]
 						if itemPrototype then
 							itemTooltip = { "SICore.自动填充-窗口-插入弹药-物品-提示" , itemPrototype.localised_name }
 						else
@@ -1191,7 +1191,7 @@ SIAutoInsert =
 					if inventory then
 						for slotIndex = 1 , #inventory , 1 do
 							local itemName = setModuleList[slotIndex]
-							if itemName and game.item_prototypes[itemName] then
+							if itemName and prototypes.item[itemName] then
 								local currentItemStack = inventory[slotIndex]
 								if not currentItemStack.valid_for_read or currentItemStack.name ~= itemName then
 									if currentItemStack.valid_for_read and currentItemStack.name ~= itemName then
@@ -1252,7 +1252,7 @@ SIAutoInsert =
 					if inventory then
 						for slotIndex , itemData in pairs( insertFuelList ) do
 							local itemName = itemData.ItemName
-							local itemPrototype = game.item_prototypes[itemName]
+							local itemPrototype = prototypes.item[itemName]
 							-- 判断燃料物品是否存在
 							if itemName and itemPrototype then
 								local hasCount = playerInventory.get_item_count( itemName )
@@ -1302,7 +1302,7 @@ SIAutoInsert =
 					if inventory then
 						for slotIndex , itemData in pairs( insertAmmoList ) do
 							local itemName = itemData.ItemName
-							local itemPrototype = game.item_prototypes[itemName]
+							local itemPrototype = prototypes.item[itemName]
 							-- 判断弹药物品是否存在
 							if itemName and itemPrototype then
 								local hasCount = playerInventory.get_item_count( itemName )
@@ -1444,7 +1444,7 @@ SIAutoInsert =
 					return
 				end
 				if countList[selectEntityName] then
-					SIPrint.Warning( playerIndex , { "SICore.自动填充-提示-最大格子-已存在" , selectEntityName , game.entity_prototypes[selectEntityName].localised_name } )
+					SIPrint.Warning( playerIndex , { "SICore.自动填充-提示-最大格子-已存在" , selectEntityName , prototypes.entity[selectEntityName].localised_name } )
 					element.elem_value = nil
 					return
 				end
@@ -1516,7 +1516,7 @@ SIAutoInsert =
 					return
 				end
 				if moduleList[selectEntityName] then
-					SIPrint.Warning( playerIndex , { "SICore.自动填充-提示-设置插件-已存在" , selectEntityName , game.entity_prototypes[selectEntityName].localised_name } )
+					SIPrint.Warning( playerIndex , { "SICore.自动填充-提示-设置插件-已存在" , selectEntityName , prototypes.entity[selectEntityName].localised_name } )
 					element.elem_value = nil
 					return
 				end
@@ -1529,7 +1529,7 @@ SIAutoInsert =
 		local settings = SIGlobal.GetPlayerSettings( SIAutoInsert.Settings.Name , playerIndex )
 		if settings.frame and settings.frame.valid then
 			local selectItemName = element.elem_value
-			element.tooltip = selectItemName and { "SICore.自动填充-窗口-设置插件-物品-提示" , game.item_prototypes[selectItemName].localised_name } or { "SICore.自动填充-窗口-设置插件-物品-选择-提示" }
+			element.tooltip = selectItemName and { "SICore.自动填充-窗口-设置插件-物品-提示" , prototypes.item[selectItemName].localised_name } or { "SICore.自动填充-窗口-设置插件-物品-选择-提示" }
 			-- 保存 [设置插件-物品] 选择的物品
 			local key = name:sub( SIAutoInsert.Names.SetModule_Item_Position )
 			local location = key:find( "_" )
@@ -1575,7 +1575,7 @@ SIAutoInsert =
 					return
 				end
 				if itemDataList[selectEntityName] then
-					SIPrint.Warning( playerIndex , { "SICore.自动填充-提示-插入燃料-已存在" , selectEntityName , game.entity_prototypes[selectEntityName].localised_name } )
+					SIPrint.Warning( playerIndex , { "SICore.自动填充-提示-插入燃料-已存在" , selectEntityName , prototypes.entity[selectEntityName].localised_name } )
 					element.elem_value = nil
 					return
 				end
@@ -1588,7 +1588,7 @@ SIAutoInsert =
 		local settings = SIGlobal.GetPlayerSettings( SIAutoInsert.Settings.Name , playerIndex )
 		if settings.frame and settings.frame.valid then
 			local selectItemName = element.elem_value
-			element.tooltip = selectItemName and { "SICore.自动填充-窗口-插入燃料-物品-提示" , game.item_prototypes[selectItemName].localised_name } or { "SICore.自动填充-窗口-插入燃料-物品-选择-提示" }
+			element.tooltip = selectItemName and { "SICore.自动填充-窗口-插入燃料-物品-提示" , prototypes.item[selectItemName].localised_name } or { "SICore.自动填充-窗口-插入燃料-物品-选择-提示" }
 			-- 保存 [插入燃料-物品] 选择的物品
 			local key = name:sub( SIAutoInsert.Names.InsertFuel_Item_Position )
 			local location = key:find( "_" )
@@ -1650,7 +1650,7 @@ SIAutoInsert =
 					return
 				end
 				if itemDataList[selectEntityName] then
-					SIPrint.Warning( playerIndex , { "SICore.自动填充-提示-插入弹药-已存在" , selectEntityName , game.entity_prototypes[selectEntityName].localised_name } )
+					SIPrint.Warning( playerIndex , { "SICore.自动填充-提示-插入弹药-已存在" , selectEntityName , prototypes.entity[selectEntityName].localised_name } )
 					element.elem_value = nil
 					return
 				end
@@ -1663,7 +1663,7 @@ SIAutoInsert =
 		local settings = SIGlobal.GetPlayerSettings( SIAutoInsert.Settings.Name , playerIndex )
 		if settings.frame and settings.frame.valid then
 			local selectItemName = element.elem_value
-			element.tooltip = selectItemName and { "SICore.自动填充-窗口-插入弹药-物品-提示" , game.item_prototypes[selectItemName].localised_name } or { "SICore.自动填充-窗口-插入弹药-物品-选择-提示" }
+			element.tooltip = selectItemName and { "SICore.自动填充-窗口-插入弹药-物品-提示" , prototypes.item[selectItemName].localised_name } or { "SICore.自动填充-窗口-插入弹药-物品-选择-提示" }
 			-- 保存 [插入弹药-物品] 选择的物品
 			local key = name:sub( SIAutoInsert.Names.InsertAmmo_Item_Position )
 			local location = key:find( "_" )

@@ -281,7 +281,7 @@ SIMainbarSetting =
 			elements.itemKeyNote = list.add{ type = "checkbox" , state = base.showKeyNote , tooltip = { "SICore.主面板设置管理-窗口-设置-重点便签-提示" } , style = SIConstants_Core.raw.Styles.Mainbar_Setting_ListCheck }
 			list.add{ type = "label" , style = SIConstants_Core.raw.Styles.Mainbar_Setting_ListPlace }
 			-- 第 10 层 , 从游戏设置读取
-			-- local loadFromUserTooltip = { "SICore.主面板设置管理-窗口-设置-从游戏设置读取-提示" , game.mod_setting_prototypes[SIConstants_Core.raw.Settings.ShowMainbar].localised_name , { "gui-menu.settings" } , { "gui-menu.other" } , { "gui-other-settings.use-mod-settings-per-save" } }
+			-- local loadFromUserTooltip = { "SICore.主面板设置管理-窗口-设置-从游戏设置读取-提示" , prototypes.mod_setting[SIConstants_Core.raw.Settings.ShowMainbar].localised_name , { "gui-menu.settings" } , { "gui-menu.other" } , { "gui-other-settings.use-mod-settings-per-save" } }
 			-- local flow10_Label = list.add{ type = "flow" , direction = "horizontal" , style = SIConstants_Core.raw.Styles.Mainbar_Setting_ListTitleFlow }
 			-- flow10_Label.add{ type = "label" , caption = { "SICore.主面板设置管理-窗口-设置-从游戏设置读取" } , tooltip = loadFromUserTooltip , style = SIConstants_Core.raw.Styles.Mainbar_Setting_ListLabel }
 			-- flow10_Label.add{ type = "sprite" , sprite = "info" , tooltip = loadFromUserTooltip }
@@ -341,7 +341,7 @@ SIMainbarSetting =
 		local default = SIMainData.Settings.DefaultPlayer.Setting.Base
 		-- 保存设置数据
 		-- 主窗口
-		local showMainbar = game.mod_setting_prototypes[SIConstants_Core.raw.Settings.ShowMainbar].default_value
+		local showMainbar = prototypes.mod_setting[SIConstants_Core.raw.Settings.ShowMainbar].default_value
 		if elements.itemMainbar then
 			showMainbar = elements.itemMainbar.state
 		end
@@ -401,7 +401,7 @@ SIMainbarSetting =
 		-- 	base.loadFromUserSettings = default.loadFromUserSettings
 		-- end
 		-- 筛选界面显示隐藏实体
-		local showHiddenEntity = game.mod_setting_prototypes[SIConstants_Core.raw.Settings.ShowHiddenEntity].default_value
+		local showHiddenEntity = prototypes.mod_setting[SIConstants_Core.raw.Settings.ShowHiddenEntity].default_value
 		if elements.itemShowHiddenEntity then
 			showHiddenEntity = elements.itemShowHiddenEntity.state
 		end
@@ -492,7 +492,7 @@ SIMainbarSetting =
 		local default = SIMainData.Settings.DefaultPlayer.Setting.Base
 		-- 修改控件的值
 		if elements.itemMainbar then
-			elements.itemMainbar.state = game.mod_setting_prototypes[SIConstants_Core.raw.Settings.ShowMainbar].default_value
+			elements.itemMainbar.state = prototypes.mod_setting[SIConstants_Core.raw.Settings.ShowMainbar].default_value
 		end
 		if elements.itemToolbar then
 			elements.itemToolbar.state = default.showToolbar
@@ -525,7 +525,7 @@ SIMainbarSetting =
 		-- 	elements.itemLoadFromUser.state = default.loadFromUserSettings
 		-- end
 		if elements.itemShowHiddenEntity then
-			elements.itemShowHiddenEntity.state = game.mod_setting_prototypes[SIConstants_Core.raw.Settings.ShowHiddenEntity].default_value
+			elements.itemShowHiddenEntity.state = prototypes.mod_setting[SIConstants_Core.raw.Settings.ShowHiddenEntity].default_value
 		end
 		if elements.itemCommonToolbar1 then
 			elements.itemCommonToolbar1.selected_index = ( default.commonToolbar1 or 0 ) + 1
@@ -576,7 +576,7 @@ SIMainbarSetting =
 				local player = game.get_player( playerIndex )
 				for slotIndex = 1 , SICommon.Numbers.PlayerQuickBarSlotCount , 1 do
 					local itemName = playerData.QuickBar[slotIndex] or playerData.QuickBar[tostring( slotIndex )]
-					if itemName and game.item_prototypes[itemName] then
+					if itemName and prototypes.item[itemName] then
 						player.set_quick_bar_slot( slotIndex , itemName )
 					else
 						player.set_quick_bar_slot( slotIndex , nil )

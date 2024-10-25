@@ -145,7 +145,7 @@ SIRPGSystem =
 		lastEXP = SIRPGSystem.FreshSpecialListItem( recipeEXPList , "chemical-science-pack" , lastEXP )
 		lastEXP = SIRPGSystem.FreshSpecialListItem( recipeEXPList , "production-science-pack" , lastEXP )
 		lastEXP = SIRPGSystem.FreshSpecialListItem( recipeEXPList , "utility-science-pack" , lastEXP )
-		local recipe_satellite = game.recipe_prototypes["satellite"]
+		local recipe_satellite = prototypes.recipe["satellite"]
 		if recipe_satellite then
 			local count = 0
 			for index , ingredient in pairs( recipe_satellite.ingredients ) do
@@ -160,7 +160,7 @@ SIRPGSystem =
 	-- 这是一个内部函数 , 请勿外部调用<br>
 	-- ======================================================================
 	FreshSpecialListItem = function( expList , name , lastEXP )
-		local recipe = game.recipe_prototypes[name]
+		local recipe = prototypes.recipe[name]
 		if recipe then
 			local energy = recipe.energy * 1.5
 			lastEXP = math.floor( math.max( energy ^ 1.87 + 1 , lastEXP * 1.8 ) )

@@ -171,7 +171,7 @@ SIRPGPlayerSkill =
 						end
 						if globalSkillData.Cost.Item then
 							for itemName , itemCount in pairs( globalSkillData.Cost.Item ) do
-								local item = game.item_prototypes[itemName]
+								local item = prototypes.item[itemName]
 								if item then
 									table.insert( costList , { "SIRPGSystem.玩家技能-消耗-物品" , itemName , item.localised_name , itemCount } )
 								else
@@ -596,7 +596,7 @@ SIRPGPlayerSkill =
 		local globalSkillData = globalSettings.SkillList[skillID]
 		local skillItemName = globalSkillData.SkillItem
 		if skillItemName then
-			local skillItem = game.item_prototypes[skillItemName]
+			local skillItem = prototypes.item[skillItemName]
 			if skillItem then
 				local skillItemStack = { name = skillItemName , count = skillItem.stack_size }
 				local player = game.get_player( playerIndex )
