@@ -1071,7 +1071,7 @@ function SIGen.MakePicturePath( typeCode , pictureName )
 	return ( SIGen.TempConstantsData or SIInit.CurrentConstantsData ).PicturePath .. SICommon.ShowNamePrefix[typeCode] .. pictureName .. ".png"
 end
 
--- ----------------------------------------
+-- ======================================================================
 -- 用于计算图片位置的函数<br>
 -- 此处的图片位置不会自动添加名称后缀 , 会自动添加文件扩展名 (.png)<br>
 -- 不使用 [ type ] 值进行计算<br>

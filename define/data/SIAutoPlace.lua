@@ -77,7 +77,7 @@ end
 
 local onethird = tne( 1 ) / 3 -- Looks nicer in output than 0.333333
 
---- Creates and returns an AutoplaceSpecification that will generate spot-based ore patches.
+-- - Creates and returns an AutoplaceSpecification that will generate spot-based ore patches.
 -- Required parameters:
 -- - Name - name for the type, used as the default autoplace control name and patch set name
 --   (each of which can be overridden separately)

@@ -549,9 +549,11 @@ SIRequestMap =
 		}
 	} ,
 	InsertAmmo_ItemNamed_Filters = {} , -- 暂时不需要设置筛选器
-	-- ------------------------------------------------------------------------------------------------
-	-- ---------- 窗口函数 ----------------------------------------------------------------------------
-	-- ------------------------------------------------------------------------------------------------
+	-- ============================================================================================================================================
+	-- ============================================================================================================================================
+	-- ========== 窗口函数 ========================================================================================================================
+	-- ============================================================================================================================================
+	-- ============================================================================================================================================
 	OpenFrame = function( playerIndex )
 		local settings = SIGlobal.GetPlayerSettings( SIRequestMap.Settings.Name , playerIndex )
 
@@ -624,9 +626,11 @@ SIRequestMap =
 			SIElements.SaveFrameLocation( settings )
 		end
 	end ,
-	-- ------------------------------------------------------------------------------------------------
-	-- ---------- 控件函数 ----------------------------------------------------------------------------
-	-- ------------------------------------------------------------------------------------------------
+	-- ============================================================================================================================================
+	-- ============================================================================================================================================
+	-- ========== 控件函数 ========================================================================================================================
+	-- ============================================================================================================================================
+	-- ============================================================================================================================================
 	CreateTab = function( settings )
 		local tabPane = settings.tabPane
 		-- 清除已有分页
@@ -654,23 +658,23 @@ SIRequestMap =
 		settings.tabPane.selected_tab_index = settings.tabSettingsIndex
 		SIRequestMap.FreshPage( settings )
 	end ,
-	-- ----------------------------------------
+	-- ======================================================================
 	-- 这是一个内部函数 , 请勿外部调用<br>
-	-- ----------------------------------------
+	-- ======================================================================
 	CreatePage = function( settings , tabSettingsIndex )
 		local page = settings.tabPane.add{ type = "flow" , direction = "vertical" , style = SIConstants_Core.raw.Styles.Common_FlowLeft }
 		local elements = settings.Elements[tabSettingsIndex]
-		-- ----------------------------------------
+		-- ======================================================================
 		-- 设置名称
-		-- ----------------------------------------
+		-- ======================================================================
 		local nameFlow = page.add{ type = "flow" , direction = "horizontal" , style = SIConstants_Core.raw.Styles.Common_FlowCenterH }
 		nameFlow.add{ type = "label" , caption = { "SICore.紫图-窗口-名称" } , tooltip = { "SICore.紫图-窗口-名称-提示" } , style = SIConstants_Core.raw.Styles.RequestMap_Label }
 		elements.TabSettingsName = nameFlow.add{ type = "textfield" , name = SIRequestMap.Names.TabSettingsName , text = nil , tooltip = { "SICore.紫图-窗口-名称-提示" } , style = SIConstants_Core.raw.Styles.RequestMap_Text }
 		nameFlow.add{ type = "flow" , direction = "vertical" , style = SIConstants_Core.raw.Styles.RequestMap_EmptyFlow }
 		nameFlow.add{ type = "button" , name = SIRequestMap.Names.Delete , caption = { "SICore.紫图-窗口-删除" } , tooltip = { "SICore.紫图-窗口-删除-提示" } , style = SIConstants_Core.raw.Styles.Common_ButtonRed }
-		-- ----------------------------------------
+		-- ======================================================================
 		-- 默认选择
-		-- ----------------------------------------
+		-- ======================================================================
 		local defaultIndexFlow = page.add{ type = "flow" , direction = "horizontal" , style = SIConstants_Core.raw.Styles.Common_FlowCenterH }
 		defaultIndexFlow.add{ type = "label" , caption = { "SICore.紫图-窗口-默认选择" } , tooltip = { "SICore.紫图-窗口-默认选择-提示" } , style = SIConstants_Core.raw.Styles.RequestMap_Label }
 		elements.DefaultIndex = defaultIndexFlow.add
@@ -683,75 +687,75 @@ SIRequestMap =
 			selected_index = 1 ,
 			style = SIConstants_Core.raw.Styles.RequestMap_DropDown
 		}
-		-- ----------------------------------------
+		-- ======================================================================
 		-- 设置列表按钮
-		-- ----------------------------------------
+		-- ======================================================================
 		local listButtonFlow = page.add{ type = "flow" , direction = "horizontal" , style = SIConstants_Core.raw.Styles.RequestMap_ListButtonFlow }
-		-- ----------------------------------------
+		-- ======================================================================
 		-- 设置列表
-		-- ----------------------------------------
+		-- ======================================================================
 		local scroll = page.add{ type = "scroll-pane" , horizontal_scroll_policy = "never" , vertical_scroll_policy = "auto-and-reserve-space" , style = SIConstants_Core.raw.Styles.Common_ScrollPane }
 		local list = scroll.add{ type = "table" , column_count = 1 , style = SIConstants_Core.raw.Styles.Common_List }
 		elements.Scroll = scroll
-		-- ----------------------------------------
+		-- ======================================================================
 		-- 请求格子
-		-- ----------------------------------------
+		-- ======================================================================
 		elements.RequestSlot_Enable = list.add{ type = "checkbox" , name = SIRequestMap.Names.EnablePrefix .. "RequestSlot_Flow" , state = false , caption = { "SICore.紫图-窗口-请求格子-启用" , { "SICore.紫图-窗口-启用-未设置" } } , tooltip = { "SICore.紫图-窗口-请求格子-启用-提示" } , style = SIConstants_Core.raw.Styles.RequestMap_ListCheck }
 		local RequestSlot_Flow = list.add{ type = "flow" , direction = "vertical" , style = SIConstants_Core.raw.Styles.RequestMap_ListPanelFlow }
 		elements.RequestSlot_Flow = RequestSlot_Flow
 		elements.RequestSlot_List = RequestSlot_Flow.add{ type = "table" , column_count = 3 , style = SIConstants_Core.raw.Styles.RequestMap_SubList }
-		-- ----------------------------------------
+		-- ======================================================================
 		-- 最大格子
-		-- ----------------------------------------
+		-- ======================================================================
 		elements.MaxSlot_Enable = list.add{ type = "checkbox" , name = SIRequestMap.Names.EnablePrefix .. "MaxSlot_Flow" , state = false , caption = { "SICore.紫图-窗口-最大格子-启用" , { "SICore.紫图-窗口-启用-未设置" } } , tooltip = { "SICore.紫图-窗口-最大格子-启用-提示" } , style = SIConstants_Core.raw.Styles.RequestMap_ListCheck }
 		local MaxSlot_Flow = list.add{ type = "flow" , direction = "vertical" , style = SIConstants_Core.raw.Styles.RequestMap_ListPanelFlow }
 		elements.MaxSlot_Flow = MaxSlot_Flow
 		elements.MaxSlot_List = MaxSlot_Flow.add{ type = "table" , column_count = 2 , style = SIConstants_Core.raw.Styles.RequestMap_SubList }
-		-- ----------------------------------------
+		-- ======================================================================
 		-- 绿箱向蓝箱供货
-		-- ----------------------------------------
+		-- ======================================================================
 		elements.GreenToBlue_Enable = list.add{ type = "checkbox" , name = SIRequestMap.Names.EnablePrefix .. "GreenToBlue_Flow" , state = false , caption = { "SICore.紫图-窗口-绿箱向蓝箱供货-启用" , { "SICore.紫图-窗口-启用-未设置" } } , tooltip = { "SICore.紫图-窗口-绿箱向蓝箱供货-启用-提示" } , style = SIConstants_Core.raw.Styles.RequestMap_ListCheck }
 		local GreenToBlue_Flow = list.add{ type = "flow" , direction = "vertical" , style = SIConstants_Core.raw.Styles.RequestMap_ListPanelFlow }
 		elements.GreenToBlue_Flow = GreenToBlue_Flow
 		elements.GreenToBlue_Check = GreenToBlue_Flow.add{ type = "checkbox" , name = SIRequestMap.Names.GreenToBlue_Check , state = false , caption = { "SICore.紫图-窗口-绿箱向蓝箱供货-勾选" } , tooltip = { "SICore.紫图-窗口-绿箱向蓝箱供货-勾选-提示" } , style = SIConstants_Core.raw.Styles.Common_CheckBox }
-		-- ----------------------------------------
+		-- ======================================================================
 		-- 设置插件
-		-- ----------------------------------------
+		-- ======================================================================
 		elements.SetModule_Enable = list.add{ type = "checkbox" , name = SIRequestMap.Names.EnablePrefix .. "SetModule_Flow" , state = false , caption = { "SICore.紫图-窗口-设置插件-启用" , { "SICore.紫图-窗口-启用-未设置" } } , tooltip = { "SICore.紫图-窗口-设置插件-启用-提示" } , style = SIConstants_Core.raw.Styles.RequestMap_ListCheck }
 		local SetModule_Flow = list.add{ type = "flow" , direction = "vertical" , style = SIConstants_Core.raw.Styles.RequestMap_ListPanelFlow }
 		elements.SetModule_Flow = SetModule_Flow
 		elements.SetModule_FromInventory = SetModule_Flow.add{ type = "checkbox" , name = SIRequestMap.Names.SetModule_FromInventory , state = false , caption = { "SICore.紫图-窗口-设置插件-从背包填充" } , tooltip = { "SICore.紫图-窗口-设置插件-从背包填充-提示" } , style = SIConstants_Core.raw.Styles.Common_CheckBox }
 		elements.SetModule_List = SetModule_Flow.add{ type = "table" , column_count = 3 , style = SIConstants_Core.raw.Styles.RequestMap_SubList }
-		-- ----------------------------------------
+		-- ======================================================================
 		-- 移除插件
-		-- ----------------------------------------
+		-- ======================================================================
 		elements.RemoveModule_Enable = list.add{ type = "checkbox" , name = SIRequestMap.Names.EnablePrefix .. "RemoveModule_Flow" , state = false , caption = { "SICore.紫图-窗口-移除插件-启用" , { "SICore.紫图-窗口-启用-未设置" } } , tooltip = { "SICore.紫图-窗口-移除插件-启用-提示" } , style = SIConstants_Core.raw.Styles.RequestMap_ListCheck }
 		local RemoveModule_Flow = list.add{ type = "flow" , direction = "vertical" , style = SIConstants_Core.raw.Styles.RequestMap_ListPanelFlow }
 		elements.RemoveModule_Flow = RemoveModule_Flow
 		elements.RemoveModule_ToInventory = RemoveModule_Flow.add{ type = "checkbox" , name = SIRequestMap.Names.RemoveModule_ToInventory , state = false , caption = { "SICore.紫图-窗口-移除插件-进入背包" } , tooltip = { "SICore.紫图-窗口-移除插件-进入背包-提示" } , style = SIConstants_Core.raw.Styles.Common_CheckBox }
 		elements.RemoveModule_Invert = RemoveModule_Flow.add{ type = "checkbox" , name = SIRequestMap.Names.RemoveModule_Invert , state = false , caption = { "SICore.紫图-窗口-移除插件-条件反转" } , tooltip = { "SICore.紫图-窗口-移除插件-条件反转-提示" } , style = SIConstants_Core.raw.Styles.Common_CheckBox }
 		elements.RemoveModule_List = RemoveModule_Flow.add{ type = "table" , column_count = 3 , style = SIConstants_Core.raw.Styles.RequestMap_SubList }
-		-- ----------------------------------------
+		-- ======================================================================
 		-- 插入燃料
-		-- ----------------------------------------
+		-- ======================================================================
 		elements.InsertFuel_Enable = list.add{ type = "checkbox" , name = SIRequestMap.Names.EnablePrefix .. "InsertFuel_Flow" , state = false , caption = { "SICore.紫图-窗口-插入燃料-启用" , { "SICore.紫图-窗口-启用-未设置" } } , tooltip = { "SICore.紫图-窗口-插入燃料-启用-提示" } , style = SIConstants_Core.raw.Styles.RequestMap_ListCheck }
 		local InsertFuel_Flow = list.add{ type = "flow" , direction = "vertical" , style = SIConstants_Core.raw.Styles.RequestMap_ListPanelFlow }
 		elements.InsertFuel_Flow = InsertFuel_Flow
 		elements.InsertFuel_List = InsertFuel_Flow.add{ type = "table" , column_count = 2 , style = SIConstants_Core.raw.Styles.RequestMap_SubList }
-		-- ----------------------------------------
+		-- ======================================================================
 		-- 插入弹药
-		-- ----------------------------------------
+		-- ======================================================================
 		elements.InsertAmmo_Enable = list.add{ type = "checkbox" , name = SIRequestMap.Names.EnablePrefix .. "InsertAmmo_Flow" , state = false , caption = { "SICore.紫图-窗口-插入弹药-启用" , { "SICore.紫图-窗口-启用-未设置" } } , tooltip = { "SICore.紫图-窗口-插入弹药-启用-提示" } , style = SIConstants_Core.raw.Styles.RequestMap_ListCheck }
 		local InsertAmmo_Flow = list.add{ type = "flow" , direction = "vertical" , style = SIConstants_Core.raw.Styles.RequestMap_ListPanelFlow }
 		elements.InsertAmmo_Flow = InsertAmmo_Flow
 		elements.InsertAmmo_List = InsertAmmo_Flow.add{ type = "table" , column_count = 2 , style = SIConstants_Core.raw.Styles.RequestMap_SubList }
-		-- ----------------------------------------
+		-- ======================================================================
 		-- 插入空白区
-		-- ----------------------------------------
+		-- ======================================================================
 		list.add{ type = "flow" , direction = "vertical" , style = SIConstants_Core.raw.Styles.RequestMap_BlankFlow }
-		-- ----------------------------------------
+		-- ======================================================================
 		-- 创建滚动定位按钮
-		-- ----------------------------------------
+		-- ======================================================================
 		for key , value in pairs( SIRequestMap.DefaultTabSettings ) do
 			if key ~= "Name" then
 				local button = listButtonFlow.add{ type = "sprite-button" , name = SIRequestMap.Names.ListButtonPrefix .. key .. "_Enable" , sprite = "item/" .. SIRequestMap.ListButtonIcon[key] , tooltip = { "SICore.紫图-窗口-列表定位按钮-提示" , { elements[key .. "_Enable"].caption[1] , "" } } , style = SIConstants_Core.raw.Styles.RequestMap_ListButton }
@@ -765,13 +769,13 @@ SIRequestMap =
 		local tabSettingsIndex = settings.tabSettingsIndex
 		local tabSettings = settings.TabSettingsList[tabSettingsIndex]
 		local elements = settings.Elements[tabSettingsIndex]
-		-- ----------------------------------------
+		-- ======================================================================
 		-- 设置名称
-		-- ----------------------------------------
+		-- ======================================================================
 		elements.TabSettingsName.text = tabSettings.Name
-		-- ----------------------------------------
+		-- ======================================================================
 		-- 默认选择
-		-- ----------------------------------------
+		-- ======================================================================
 		if settings.defaultIndex1 == tabSettingsIndex then
 			elements.DefaultIndex.selected_index = 2
 		elseif settings.defaultIndex2 == tabSettingsIndex then
@@ -783,49 +787,49 @@ SIRequestMap =
 		else
 			elements.DefaultIndex.selected_index = 1
 		end
-		-- ----------------------------------------
+		-- ======================================================================
 		-- 请求格子
-		-- ----------------------------------------
+		-- ======================================================================
 		elements.RequestSlot_Enable.state = tabSettings.RequestSlot.Enable
 		elements.RequestSlot_Flow.visible = tabSettings.RequestSlot.Enable
 		SIRequestMap.FreshPage_RequestSlot( settings , tabSettings , elements )
-		-- ----------------------------------------
+		-- ======================================================================
 		-- 最大格子
-		-- ----------------------------------------
+		-- ======================================================================
 		elements.MaxSlot_Enable.state = tabSettings.MaxSlot.Enable
 		elements.MaxSlot_Flow.visible = tabSettings.MaxSlot.Enable
 		SIRequestMap.FreshPage_MaxSlot( settings , tabSettings , elements )
-		-- ----------------------------------------
+		-- ======================================================================
 		-- 绿箱向蓝箱供货
-		-- ----------------------------------------
+		-- ======================================================================
 		elements.GreenToBlue_Enable.state = tabSettings.GreenToBlue.Enable
 		elements.GreenToBlue_Flow.visible = tabSettings.GreenToBlue.Enable
 		elements.GreenToBlue_Check.state = tabSettings.GreenToBlue.Check
 		SIRequestMap.FreshPage_GreenToBlue( settings , tabSettings , elements )
-		-- ----------------------------------------
+		-- ======================================================================
 		-- 设置插件
-		-- ----------------------------------------
+		-- ======================================================================
 		elements.SetModule_Enable.state = tabSettings.SetModule.Enable
 		elements.SetModule_Flow.visible = tabSettings.SetModule.Enable
 		elements.SetModule_FromInventory.state = tabSettings.SetModule.FromInventory
 		SIRequestMap.FreshPage_SetModule( settings , tabSettings , elements )
-		-- ----------------------------------------
+		-- ======================================================================
 		-- 移除插件
-		-- ----------------------------------------
+		-- ======================================================================
 		elements.RemoveModule_Enable.state = tabSettings.RemoveModule.Enable
 		elements.RemoveModule_Flow.visible = tabSettings.RemoveModule.Enable
 		elements.RemoveModule_ToInventory.state = tabSettings.RemoveModule.ToInventory
 		elements.RemoveModule_Invert.state = tabSettings.RemoveModule.Invert
 		SIRequestMap.FreshPage_RemoveModule( settings , tabSettings , elements )
-		-- ----------------------------------------
+		-- ======================================================================
 		-- 插入燃料
-		-- ----------------------------------------
+		-- ======================================================================
 		elements.InsertFuel_Enable.state = tabSettings.InsertFuel.Enable
 		elements.InsertFuel_Flow.visible = tabSettings.InsertFuel.Enable
 		SIRequestMap.FreshPage_InsertFuel( settings , tabSettings , elements )
-		-- ----------------------------------------
+		-- ======================================================================
 		-- 插入弹药
-		-- ----------------------------------------
+		-- ======================================================================
 		elements.InsertAmmo_Enable.state = tabSettings.InsertAmmo.Enable
 		elements.InsertAmmo_Flow.visible = tabSettings.InsertAmmo.Enable
 		SIRequestMap.FreshPage_InsertAmmo( settings , tabSettings , elements )
@@ -1527,9 +1531,11 @@ SIRequestMap =
 			style = SIConstants_Core.raw.Styles.RequestMap_ListChooser
 		}
 	end ,
-	-- ------------------------------------------------------------------------------------------------
-	-- ---------- 功能函数 ----------------------------------------------------------------------------
-	-- ------------------------------------------------------------------------------------------------
+	-- ============================================================================================================================================
+	-- ============================================================================================================================================
+	-- ========== 功能函数 ========================================================================================================================
+	-- ============================================================================================================================================
+	-- ============================================================================================================================================
 	CreateTabSettings = function( settings )
 		local tabSettingsCount = #settings.TabSettingsList
 		if tabSettingsCount < SIRequestMap.TabSettingsMaxCount then
@@ -1562,9 +1568,9 @@ SIRequestMap =
 			settings.defaultIndex4 = 0
 		end
 	end ,
-	-- ----------------------------------------
+	-- ======================================================================
 	-- 这是一个内部函数 , 请勿外部调用<br>
-	-- ----------------------------------------
+	-- ======================================================================
 	FireModuleEvent = function( playerIndex , entity )
 		local data =
 		{
@@ -1596,9 +1602,9 @@ SIRequestMap =
 				local entityPrototype = entity.prototype
 				local type = entityPrototype.type
 				local moduleFlag = false
-				-- ----------------------------------------
+				-- ======================================================================
 				-- 请求格子
-				-- ----------------------------------------
+				-- ======================================================================
 				if tabSettings.RequestSlot.Enable then
 					local requestItemList = tabSettings.RequestSlot.List[entityName]
 					if requestItemList then
@@ -1674,9 +1680,9 @@ SIRequestMap =
 						end
 					end
 				end
-				-- ----------------------------------------
+				-- ======================================================================
 				-- 最大格子
-				-- ----------------------------------------
+				-- ======================================================================
 				if tabSettings.MaxSlot.Enable then
 					local maxSlotCount = tabSettings.MaxSlot.List[entityName]
 					if maxSlotCount then
@@ -1716,9 +1722,9 @@ SIRequestMap =
 						end
 					end
 				end
-				-- ----------------------------------------
+				-- ======================================================================
 				-- 绿箱向蓝箱供货
-				-- ----------------------------------------
+				-- ======================================================================
 				if tabSettings.GreenToBlue.Enable then
 					if type == SICommon.Types.Entities.ContainerLogic then
 						local logisticMode = entityPrototype.logistic_mode
@@ -1727,9 +1733,9 @@ SIRequestMap =
 						end
 					end
 				end
-				-- ----------------------------------------
+				-- ======================================================================
 				-- 设置插件
-				-- ----------------------------------------
+				-- ======================================================================
 				if tabSettings.SetModule.Enable then
 					local setModuleList = tabSettings.SetModule.List[entityName]
 					if setModuleList then
@@ -1820,9 +1826,9 @@ SIRequestMap =
 						end
 					end
 				end
-				-- ----------------------------------------
+				-- ======================================================================
 				-- 移除插件
-				-- ----------------------------------------
+				-- ======================================================================
 				if tabSettings.RemoveModule.Enable then
 					local removeModuleList = tabSettings.RemoveModule.List[entityName]
 					if removeModuleList then
@@ -1893,9 +1899,9 @@ SIRequestMap =
 				if moduleFlag then
 					SIRequestMap.FireModuleEvent( playerIndex , entity )
 				end
-				-- ----------------------------------------
+				-- ======================================================================
 				-- 插入燃料
-				-- ----------------------------------------
+				-- ======================================================================
 				if tabSettings.InsertFuel.Enable then
 					local insertFuelList = tabSettings.InsertFuel.List[entityName]
 					if insertFuelList then
@@ -1958,9 +1964,9 @@ SIRequestMap =
 						end
 					end
 				end
-				-- ----------------------------------------
+				-- ======================================================================
 				-- 插入弹药
-				-- ----------------------------------------
+				-- ======================================================================
 				if tabSettings.InsertAmmo.Enable then
 					local insertAmmoList = tabSettings.InsertAmmo.List[entityName]
 					if insertAmmoList then
@@ -2035,9 +2041,9 @@ SIRequestMap =
 				end
 			end
 		end
-		-- ----------------------------------------
+		-- ======================================================================
 		-- 插入燃料 , 整体计数
-		-- ----------------------------------------
+		-- ======================================================================
 		if tabSettings.InsertFuel.Enable then
 			for entityName , fuelEntityList in pairs( fuelTotalList ) do
 				for slotIndex , fuelList in pairs( fuelEntityList ) do
@@ -2066,9 +2072,9 @@ SIRequestMap =
 				end
 			end
 		end
-		-- ----------------------------------------
+		-- ======================================================================
 		-- 插入弹药 , 整体计数
-		-- ----------------------------------------
+		-- ======================================================================
 		if tabSettings.InsertAmmo.Enable then
 			for entityName , ammoEntityList in pairs( ammoTotalList ) do
 				for slotIndex , ammoList in pairs( ammoEntityList ) do
@@ -2098,9 +2104,11 @@ SIRequestMap =
 			end
 		end
 	end ,
-	-- ------------------------------------------------------------------------------------------------
-	-- ---------- 事件函数 ----------------------------------------------------------------------------
-	-- ------------------------------------------------------------------------------------------------
+	-- ============================================================================================================================================
+	-- ============================================================================================================================================
+	-- ========== 事件函数 ========================================================================================================================
+	-- ============================================================================================================================================
+	-- ============================================================================================================================================
 	Out_AddTabSettings = function( playerIndex )
 		local settings = SIGlobal.GetPlayerSettings( SIRequestMap.Settings.Name , playerIndex )
 		if settings.frame and settings.frame.valid then
@@ -2711,61 +2719,65 @@ SIRequestMap =
 			end
 		end
 	end ,
-	-- ------------------------------------------------------------------------------------------------
-	-- ------ 接口函数 -- 窗口 ------------------------------------------------------------------------
-	-- ------------------------------------------------------------------------------------------------
+	-- ============================================================================================================================================
+	-- ============================================================================================================================================
+	-- ========== 接口函数 - 窗口 =================================================================================================================
+	-- ============================================================================================================================================
+	-- ============================================================================================================================================
 
-	-- ----------------------------------------
+	-- ======================================================================
 	-- 打开指定玩家的紫图的管理窗口<br>
-	-- ----------------------------------------
+	-- ======================================================================
 	-- playerIndex = 玩家索引<br>
-	-- ----------------------------------------
+	-- ======================================================================
 	OpenFrameByPlayerIndex = function( playerIndex )
 		SIRequestMap.OpenFrame( playerIndex )
 	end ,
 
-	-- ----------------------------------------
+	-- ======================================================================
 	-- 关闭指定玩家的紫图的管理窗口<br>
-	-- ----------------------------------------
+	-- ======================================================================
 	-- playerIndex = 玩家索引<br>
-	-- ----------------------------------------
+	-- ======================================================================
 	CloseFrameByPlayerIndex = function( playerIndex )
 		SIRequestMap.CloseFrame( playerIndex )
 	end ,
 
-	-- ----------------------------------------
+	-- ======================================================================
 	-- 打开所有玩家的紫图的管理窗口<br>
-	-- ----------------------------------------
+	-- ======================================================================
 	-- 无参数<br>
-	-- ----------------------------------------
+	-- ======================================================================
 	OpenFrames = function()
 		for playerIndex , settings in pairs( SIGlobal.GetAllPlayerSettings( SIRequestMap.Settings.Name ) ) do
 			SIRequestMap.OpenFrame( playerIndex )
 		end
 	end ,
 
-	-- ----------------------------------------
+	-- ======================================================================
 	-- 关闭所有玩家的紫图的管理窗口<br>
-	-- ----------------------------------------
+	-- ======================================================================
 	-- 无参数<br>
-	-- ----------------------------------------
+	-- ======================================================================
 	CloseFrames = function()
 		for playerIndex , settings in pairs( SIGlobal.GetAllPlayerSettings( SIRequestMap.Settings.Name ) ) do
 			SIRequestMap.CloseFrame( playerIndex )
 		end
 	end ,
-	-- ------------------------------------------------------------------------------------------------
-	-- ---- 接口函数 -- 导入导出 ----------------------------------------------------------------------
-	-- ------------------------------------------------------------------------------------------------
+	-- ============================================================================================================================================
+	-- ============================================================================================================================================
+	-- ========== 接口函数 - 导入导出 =============================================================================================================
+	-- ============================================================================================================================================
+	-- ============================================================================================================================================
 
-	-- ----------------------------------------
+	-- ======================================================================
 	-- 导入数据<br>
-	-- ----------------------------------------
+	-- ======================================================================
 	-- playerIndex    = 点击按钮的玩家索引<br>
 	-- data           = 导出时保存的数据 , 根据导出时导出接口函数返回的数据 , 此参数可能为 nil<br>
 	-- settingsDataID = 导入导出设置数据包的 ID<br>
 	-- gameTick       = 导出数据时的游戏时间 , tick<br>
-	-- ----------------------------------------
+	-- ======================================================================
 	ImpoerSettingsData = function( playerIndex , data , settingsDataID , gameTick )
 		if not data then
 			return
@@ -2789,15 +2801,15 @@ SIRequestMap =
 		end
 	end ,
 
-	-- ----------------------------------------
+	-- ======================================================================
 	-- 导出数据<br>
-	-- ----------------------------------------
+	-- ======================================================================
 	-- playerIndex    = 点击按钮的玩家索引<br>
 	-- settingsDataID = 导入导出设置数据包的 ID<br>
 	-- gameTick       = 当前的游戏时间 , tick<br>
-	-- ----------------------------------------
+	-- ======================================================================
 	-- 返回值 = 导出的数据<br>
-	-- ----------------------------------------
+	-- ======================================================================
 	ExportSettingsData = function( playerIndex , settingsDataID , gameTick )
 		local settings = SIGlobal.GetPlayerSettings( SIRequestMap.Settings.Name , playerIndex )
 		return
@@ -2809,20 +2821,22 @@ SIRequestMap =
 			TabSettingsList = settings.TabSettingsList
 		}
 	end ,
-	-- ------------------------------------------------------------------------------------------------
-	-- ------ 接口函数 -- 事件 ------------------------------------------------------------------------
-	-- ------------------------------------------------------------------------------------------------
+	-- ============================================================================================================================================
+	-- ============================================================================================================================================
+	-- ========== 接口函数 - 事件 =================================================================================================================
+	-- ============================================================================================================================================
+	-- ============================================================================================================================================
 
-	-- ----------------------------------------
+	-- ======================================================================
 	-- 当一个玩家通过紫图修改了实体的插件时 , 会触发此事件<br>
 	-- 事件会包含 4 个参数 :<br>
 	-- name          = 事件的 ID 值<br>
 	-- tick          = 当前游戏刻<br>
 	-- player_index  = 操作玩家的索引<br>
 	-- entity        = 被修改了插件的实体<br>
-	-- ----------------------------------------
+	-- ======================================================================
 	-- 返回值 = 事件的 ID 值<br>
-	-- ----------------------------------------
+	-- ======================================================================
 	GetModuleEventID = function()
 		return SIRequestMap.ModuleEventID
 	end
