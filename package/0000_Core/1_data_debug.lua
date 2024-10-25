@@ -26,16 +26,16 @@ local tankScale = 0.5 * tankSize
 local tankShiftY = 6
 
 SIGen
-.SetGroup( SIConstants_Core.raw.Groups.Hidden.Debug )
+.SetGroup( SIConstants_Core.raw.Groups.Hidden.DebugItem )
 
 -- ======================================================================
 -- 量产之酥皮夹心糖果
 -- ======================================================================
-.New( SICommon.Types.Items.Tool , "Candy" , "量产之酥皮夹心糖果" )
+.New( SICommon.Types.Items.Tool , "SuperCandy" , "量产之酥皮夹心糖果" )
 .AutoIcon()
 .Append
 {
-	flags = { SICommon.Flags.Item.HideFromFuelTooltip , SICommon.Flags.Item.Hidden } ,
+	flags = { SICommon.Flags.Item.HideFromFuelTooltip } ,
 	stack_size = 1000 ,
 	default_request_amount = 1000 ,
 	fuel_category = SIConstants_Core.raw.Categories.Fuel.Special ,
@@ -44,20 +44,20 @@ SIGen
 	fuel_top_speed_multiplier = 1.00 ,
 	fuel_emissions_multiplier = 520.00 ,
 	fuel_glow_color = { r = 1.00 , g = 0.94 , b = 0.46 } ,
-	burnt_result = SIConstants_Core.raw.Items.Candy ,
+	burnt_result = SIConstants_Core.raw.Items.SuperCandy ,
 	place_result = nil ,
 	placed_as_equipment_result = nil ,
 	rocket_launch_products =
 	{
 		{
 			type = SICommon.Types.Items.Item ,
-			name = SIConstants_Core.raw.Items.Candy ,
+			name = SIConstants_Core.raw.Items.SuperCandy ,
 			amount = 2 ,
 			catalyst_amount = 2
 		} ,
 		{
 			type = SICommon.Types.Items.Item ,
-			name = SIConstants_Core.raw.Items.Candy ,
+			name = SIConstants_Core.raw.Items.SuperCandy ,
 			probability = 0.2 ,
 			amount_min = 0 ,
 			amount_max = 20 ,
@@ -65,7 +65,7 @@ SIGen
 		} ,
 		{
 			type = SICommon.Types.Items.Item ,
-			name = SIConstants_Core.raw.Items.Candy ,
+			name = SIConstants_Core.raw.Items.SuperCandy ,
 			probability = 0.06 ,
 			amount_min = 0 ,
 			amount_max = 200 ,
@@ -73,7 +73,7 @@ SIGen
 		} ,
 		{
 			type = SICommon.Types.Items.Item ,
-			name = SIConstants_Core.raw.Items.Candy ,
+			name = SIConstants_Core.raw.Items.SuperCandy ,
 			probability = 0.02 ,
 			amount_min = 0 ,
 			amount_max = 2000 ,
@@ -84,13 +84,13 @@ SIGen
 	durability_description_key = SICommon.Flags.SciencePack.Key ,
 	durability_description_value = SICommon.Flags.SciencePack.Value
 }
-.New( SICommon.Types.Entities.SimpleOwner , "Candy" , "量产之酥皮夹心糖果" )
+.New( SICommon.Types.Entities.SimpleOwner , "SuperCandy" , "量产之酥皮夹心糖果" )
 .AutoIcon()
 .SetSize( 1 , 1 )
-.ReferencePlaceResult( SICommon.Types.Items.Tool , SIConstants_Core.raw.Items.Candy )
+.ReferencePlaceResult( SICommon.Types.Items.Tool , SIConstants_Core.raw.Items.SuperCandy )
 .Append
 {
-	flags = { SICommon.Flags.Entity.PlaceablePlayer , SICommon.Flags.Entity.PlayerCreation , SICommon.Flags.Entity.HideAltInfo , SICommon.Flags.Entity.Hidden } ,
+	flags = { SICommon.Flags.Entity.PlaceablePlayer , SICommon.Flags.Entity.PlayerCreation , SICommon.Flags.Entity.HideAltInfo } ,
 	minable =
 	{
 		mining_time = 1.0 ,
@@ -98,7 +98,7 @@ SIGen
 		{
 			{
 				type = SICommon.Types.Items.Item ,
-				name = SIConstants_Core.raw.Items.Candy ,
+				name = SIConstants_Core.raw.Items.SuperCandy ,
 				amount = 1
 			}
 		}
@@ -161,9 +161,9 @@ SIGen
 		SISound.Base( "machine-close" , 0.5 )
 	}
 }
-.New( SICommon.Types.Equipments.Battery , "Candy" , "量产之酥皮夹心糖果" ,
+.New( SICommon.Types.Equipments.Battery , "SuperCandy" , "量产之酥皮夹心糖果" ,
 {
-	take_result = SIConstants_Core.raw.Items.Candy ,
+	take_result = SIConstants_Core.raw.Items.SuperCandy ,
 	categories =
 	{
 		SIConstants_Core.raw.Categories.Equipment.Special
@@ -180,7 +180,7 @@ SIGen
 	energy_source =
 	{
 		type = SICommon.Flags.EnergySourceType.Electric ,
-		emissions_per_minute = 0 ,
+		emissions_per_minute = { pollution = 0.0 } ,
 		render_no_power_icon = false ,
 		render_no_network_icon = false ,
 		usage_priority = SICommon.Flags.ElectricUsagePriority.Tertiary ,
@@ -199,16 +199,16 @@ SIGen
 	}
 } )
 .MakeIcon( SICommon.Types.Items.Tool , "量产之酥皮夹心糖果" , 64 , 4 )
-.ReferenceEquipmentResult( SICommon.Types.Items.Tool , SIConstants_Core.raw.Items.Candy )
+.ReferenceEquipmentResult( SICommon.Types.Items.Tool , SIConstants_Core.raw.Items.SuperCandy )
 
 -- ======================================================================
 -- 璀璨之闪耀能量罐头
 -- ======================================================================
-.New( SICommon.Types.Items.Item , "BrightBar" , "璀璨之闪耀能量罐头" )
+.New( SICommon.Types.Items.Item , "SuperBrightBar" , "璀璨之闪耀能量罐头" )
 .AutoIcon()
 .Append
 {
-	flags = { SICommon.Flags.Item.HideFromFuelTooltip , SICommon.Flags.Item.Hidden } ,
+	flags = { SICommon.Flags.Item.HideFromFuelTooltip } ,
 	stack_size = 100 ,
 	default_request_amount = 100 ,
 	fuel_category = SIConstants_Core.raw.Categories.Fuel.Special ,
@@ -217,20 +217,20 @@ SIGen
 	fuel_top_speed_multiplier = 1.47 ,
 	fuel_emissions_multiplier = 1.18 ,
 	fuel_glow_color = { r = 1.00 , g = 0.94 , b = 0.46 } ,
-	burnt_result = SIConstants_Core.raw.Items.Candy ,
+	burnt_result = SIConstants_Core.raw.Items.SuperCandy ,
 	place_result = nil ,
 	placed_as_equipment_result = nil ,
 	rocket_launch_products =
 	{
 		{
 			type = SICommon.Types.Items.Item ,
-			name = SIConstants_Core.raw.Items.Candy ,
+			name = SIConstants_Core.raw.Items.SuperCandy ,
 			amount = 2 ,
 			catalyst_amount = 2
 		} ,
 		{
 			type = SICommon.Types.Items.Item ,
-			name = SIConstants_Core.raw.Items.Candy ,
+			name = SIConstants_Core.raw.Items.SuperCandy ,
 			probability = 0.2 ,
 			amount_min = 0 ,
 			amount_max = 20 ,
@@ -238,7 +238,7 @@ SIGen
 		} ,
 		{
 			type = SICommon.Types.Items.Item ,
-			name = SIConstants_Core.raw.Items.Candy ,
+			name = SIConstants_Core.raw.Items.SuperCandy ,
 			probability = 0.06 ,
 			amount_min = 0 ,
 			amount_max = 200 ,
@@ -246,7 +246,7 @@ SIGen
 		} ,
 		{
 			type = SICommon.Types.Items.Item ,
-			name = SIConstants_Core.raw.Items.Candy ,
+			name = SIConstants_Core.raw.Items.SuperCandy ,
 			probability = 0.02 ,
 			amount_min = 0 ,
 			amount_max = 2000 ,
@@ -274,13 +274,13 @@ SIGen
 		}
 	}
 }
-.New( SICommon.Types.Entities.BurnerGenerator , "BrightBar" , "璀璨之闪耀能量罐头" )
+.New( SICommon.Types.Entities.BurnerGenerator , "SuperBrightBar" , "璀璨之闪耀能量罐头" )
 .AutoIcon()
 .SetSize( 5 , 5 )
-.ReferencePlaceResult( SICommon.Types.Items.Item , SIConstants_Core.raw.Items.BrightBar )
+.ReferencePlaceResult( SICommon.Types.Items.Item , SIConstants_Core.raw.Items.SuperBrightBar )
 .Append
 {
-	flags = { SICommon.Flags.Entity.PlaceablePlayer , SICommon.Flags.Entity.PlayerCreation , SICommon.Flags.Entity.HideAltInfo , SICommon.Flags.Entity.Hidden } ,
+	flags = { SICommon.Flags.Entity.PlaceablePlayer , SICommon.Flags.Entity.PlayerCreation , SICommon.Flags.Entity.HideAltInfo } ,
 	minable =
 	{
 		mining_time = 5.0 ,
@@ -288,7 +288,7 @@ SIGen
 		{
 			{
 				type = SICommon.Types.Items.Item ,
-				name = SIConstants_Core.raw.Items.BrightBar ,
+				name = SIConstants_Core.raw.Items.SuperBrightBar ,
 				amount = 1
 			}
 		}
@@ -317,7 +317,7 @@ SIGen
 	energy_source =
 	{
 		type = SICommon.Flags.EnergySourceType.Electric ,
-		emissions_per_minute = 10 ,
+		emissions_per_minute = { pollution = 10.0 } ,
 		render_no_power_icon = true ,
 		render_no_network_icon = true ,
 		usage_priority = SICommon.Flags.ElectricUsagePriority.OutputPrimary ,
@@ -330,7 +330,7 @@ SIGen
 	burner =
 	{
 		type = SICommon.Flags.EnergySourceType.Burner ,
-		emissions_per_minute = 10 ,
+		emissions_per_minute = { pollution = 10.0 } ,
 		render_no_power_icon = true ,
 		render_no_network_icon = true ,
 		fuel_inventory_size = 3 ,
@@ -419,9 +419,9 @@ SIGen
 		fade_out_ticks = 20
 	}
 }
-.New( SICommon.Types.Equipments.GeneratorEquip , "BrightBar" , "璀璨之闪耀能量罐头" ,
+.New( SICommon.Types.Equipments.GeneratorEquip , "SuperBrightBar" , "璀璨之闪耀能量罐头" ,
 {
-	take_result = SIConstants_Core.raw.Items.BrightBar ,
+	take_result = SIConstants_Core.raw.Items.SuperBrightBar ,
 	categories =
 	{
 		SIConstants_Core.raw.Categories.Equipment.Special
@@ -438,7 +438,7 @@ SIGen
 	energy_source =
 	{
 		type = SICommon.Flags.EnergySourceType.Electric ,
-		emissions_per_minute = 0 ,
+		emissions_per_minute = { pollution = 0.0 } ,
 		render_no_power_icon = false ,
 		render_no_network_icon = false ,
 		usage_priority = SICommon.Flags.ElectricUsagePriority.OutputPrimary ,
@@ -459,38 +459,38 @@ SIGen
 	}
 } )
 .MakeIcon( SICommon.Types.Items.Item , "璀璨之闪耀能量罐头" , 64 , 4 )
-.ReferenceEquipmentResult( SICommon.Types.Items.Item , SIConstants_Core.raw.Items.BrightBar )
+.ReferenceEquipmentResult( SICommon.Types.Items.Item , SIConstants_Core.raw.Items.SuperBrightBar )
 
 -- ======================================================================
 -- 奇妙之双鱼螺旋插件
 -- ======================================================================
-.New( SICommon.Types.Items.Module , "FishModule" , "奇妙之双鱼螺旋插件" )
+.New( SICommon.Types.Items.Module , "SuperFishModule" , "奇妙之双鱼螺旋插件" )
 .AutoIcon()
 .Append
 {
-	flags = { SICommon.Flags.Item.HideFromFuelTooltip , SICommon.Flags.Item.Hidden } ,
+	flags = { SICommon.Flags.Item.HideFromFuelTooltip } ,
 	stack_size = 100 ,
 	default_request_amount = 100 ,
 	fuel_category = SIConstants_Core.raw.Categories.Fuel.Special ,
-	fuel_value = "520KJ" ,
+	fuel_value = "520MJ" ,
 	fuel_acceleration_multiplier = 4.91 ,
 	fuel_top_speed_multiplier = 1.76 ,
 	fuel_emissions_multiplier = 74.45 ,
 	fuel_glow_color = { r = 1.00 , g = 0.94 , b = 0.46 } ,
-	burnt_result = SIConstants_Core.raw.Items.Candy ,
+	burnt_result = SIConstants_Core.raw.Items.SuperCandy ,
 	place_result = nil ,
 	placed_as_equipment_result = nil ,
 	rocket_launch_products =
 	{
 		{
 			type = SICommon.Types.Items.Item ,
-			name = SIConstants_Core.raw.Items.Candy ,
+			name = SIConstants_Core.raw.Items.SuperCandy ,
 			amount = 2 ,
 			catalyst_amount = 2
 		} ,
 		{
 			type = SICommon.Types.Items.Item ,
-			name = SIConstants_Core.raw.Items.Candy ,
+			name = SIConstants_Core.raw.Items.SuperCandy ,
 			probability = 0.2 ,
 			amount_min = 0 ,
 			amount_max = 20 ,
@@ -498,7 +498,7 @@ SIGen
 		} ,
 		{
 			type = SICommon.Types.Items.Item ,
-			name = SIConstants_Core.raw.Items.Candy ,
+			name = SIConstants_Core.raw.Items.SuperCandy ,
 			probability = 0.06 ,
 			amount_min = 0 ,
 			amount_max = 200 ,
@@ -506,7 +506,7 @@ SIGen
 		} ,
 		{
 			type = SICommon.Types.Items.Item ,
-			name = SIConstants_Core.raw.Items.Candy ,
+			name = SIConstants_Core.raw.Items.SuperCandy ,
 			probability = 0.02 ,
 			amount_min = 0 ,
 			amount_max = 2000 ,
@@ -517,10 +517,11 @@ SIGen
 	tier = 1 ,
 	effect =
 	{
-		speed = { bonus = 14 } ,
-		productivity = { bonus = 3 } ,
-		consumption = { bonus = -9 } ,
-		pollution = { bonus = -9 }
+		speed = 2.5 ,
+		productivity = 0.25 ,
+		consumption = -0.25 ,
+		pollution = -0.25 ,
+		quality = 0.1
 	} ,
 	beacon_tint =
 	{
@@ -530,13 +531,13 @@ SIGen
 	art_style = "vanilla" ,
 	requires_beacon_alt_mode = false
 }
-.New( SICommon.Types.Entities.Beacon , "FishModule" , "奇妙之双鱼螺旋插件" )
+.New( SICommon.Types.Entities.Beacon , "SuperFishModule" , "奇妙之双鱼螺旋插件" )
 .AutoIcon()
 .SetSize( 3 , 3 )
-.ReferencePlaceResult( SICommon.Types.Items.Module , SIConstants_Core.raw.Items.FishModule )
+.ReferencePlaceResult( SICommon.Types.Items.Module , SIConstants_Core.raw.Items.SuperFishModule )
 .Append
 {
-	flags = { SICommon.Flags.Entity.PlaceablePlayer , SICommon.Flags.Entity.PlayerCreation , SICommon.Flags.Entity.Hidden } ,
+	flags = { SICommon.Flags.Entity.PlaceablePlayer , SICommon.Flags.Entity.PlayerCreation } ,
 	minable =
 	{
 		mining_time = 5.0 ,
@@ -544,7 +545,7 @@ SIGen
 		{
 			{
 				type = SICommon.Types.Items.Item ,
-				name = SIConstants_Core.raw.Items.FishModule ,
+				name = SIConstants_Core.raw.Items.SuperFishModule ,
 				amount = 1
 			}
 		}
@@ -580,17 +581,24 @@ SIGen
 		"speed" ,
 		"productivity" ,
 		"consumption" ,
-		"pollution"
+		"pollution" ,
+		"quality"
 	} ,
-	module_specification =
-	{
-		module_slots = 105 , -- 插件槽界面每行 15 个 , 物品信息概要存储每行 7 个 , 取最小公约数 15 * 7 = 105 个
-		module_info_icon_shift = { 0.0 , 0.0 } ,
-		module_info_multi_row_initial_height_modifier = -0.3 ,
-		module_info_max_icons_per_row = 4
-	} ,
+	allowed_module_categories = nil ,
+--	module_specification =
+--	{
+--		module_slots = 105 ,
+--		module_info_icon_shift = { 0.0 , 0.0 } ,
+--		module_info_multi_row_initial_height_modifier = -0.3 ,
+--		module_info_max_icons_per_row = 4
+--	} ,
 	supply_area_distance = 64 ,
-	distribution_effectivity = 1.0 ,
+	module_slots = 15 , -- 插件槽界面每行 15 个 , 物品信息概要存储每行 7 个
+	distribution_effectivity = 2.0 ,
+	distribution_effectivity_bonus_per_quality_level = 0.5 ,
+	profile = { 1 , 0 } ,
+	beacon_counter = "same_type" ,
+	perceived_performance = nil ,
 	graphics_set =
 	{
 		module_icons_suppressed = true ,
@@ -914,9 +922,9 @@ SIGen
 		max_sounds_per_type = 3
 	}
 }
-.New( SICommon.Types.Equipments.Movement , "FishModule" , "奇妙之双鱼螺旋插件" ,
+.New( SICommon.Types.Equipments.Movement , "SuperFishModule" , "奇妙之双鱼螺旋插件" ,
 {
-	take_result = SIConstants_Core.raw.Items.FishModule ,
+	take_result = SIConstants_Core.raw.Items.SuperFishModule ,
 	categories =
 	{
 		SIConstants_Core.raw.Categories.Equipment.Special
@@ -933,7 +941,7 @@ SIGen
 	energy_source =
 	{
 		type = SICommon.Flags.EnergySourceType.Electric ,
-		emissions_per_minute = 0 ,
+		emissions_per_minute = { pollution = 0.0 } ,
 		render_no_power_icon = false ,
 		render_no_network_icon = false ,
 		usage_priority = SICommon.Flags.ElectricUsagePriority.InputSecondary ,
@@ -954,16 +962,16 @@ SIGen
 	}
 } )
 .MakeIcon( SICommon.Types.Items.Module , "奇妙之双鱼螺旋插件" , 64 , 4 )
-.ReferenceEquipmentResult( SICommon.Types.Items.Module , SIConstants_Core.raw.Items.FishModule )
+.ReferenceEquipmentResult( SICommon.Types.Items.Module , SIConstants_Core.raw.Items.SuperFishModule )
 
 -- ======================================================================
 -- 洞察之一览无余雷达
 -- ======================================================================
-.New( SICommon.Types.Items.Item , "LookRadar" , "洞察之一览无余雷达" )
+.New( SICommon.Types.Items.Item , "SuperLookRadar" , "洞察之一览无余雷达" )
 .AutoIcon()
 .Append
 {
-	flags = { SICommon.Flags.Item.HideFromFuelTooltip , SICommon.Flags.Item.Hidden } ,
+	flags = { SICommon.Flags.Item.HideFromFuelTooltip } ,
 	stack_size = 100 ,
 	default_request_amount = 100 ,
 	fuel_category = SIConstants_Core.raw.Categories.Fuel.Special ,
@@ -972,20 +980,20 @@ SIGen
 	fuel_top_speed_multiplier = 1.20 ,
 	fuel_emissions_multiplier = 85.55 ,
 	fuel_glow_color = { r = 1.00 , g = 0.94 , b = 0.46 } ,
-	burnt_result = SIConstants_Core.raw.Items.Candy ,
+	burnt_result = SIConstants_Core.raw.Items.SuperCandy ,
 	place_result = nil ,
 	placed_as_equipment_result = nil ,
 	rocket_launch_products =
 	{
 		{
 			type = SICommon.Types.Items.Item ,
-			name = SIConstants_Core.raw.Items.Candy ,
+			name = SIConstants_Core.raw.Items.SuperCandy ,
 			amount = 2 ,
 			catalyst_amount = 2
 		} ,
 		{
 			type = SICommon.Types.Items.Item ,
-			name = SIConstants_Core.raw.Items.Candy ,
+			name = SIConstants_Core.raw.Items.SuperCandy ,
 			probability = 0.2 ,
 			amount_min = 0 ,
 			amount_max = 20 ,
@@ -993,7 +1001,7 @@ SIGen
 		} ,
 		{
 			type = SICommon.Types.Items.Item ,
-			name = SIConstants_Core.raw.Items.Candy ,
+			name = SIConstants_Core.raw.Items.SuperCandy ,
 			probability = 0.06 ,
 			amount_min = 0 ,
 			amount_max = 200 ,
@@ -1001,7 +1009,7 @@ SIGen
 		} ,
 		{
 			type = SICommon.Types.Items.Item ,
-			name = SIConstants_Core.raw.Items.Candy ,
+			name = SIConstants_Core.raw.Items.SuperCandy ,
 			probability = 0.02 ,
 			amount_min = 0 ,
 			amount_max = 2000 ,
@@ -1009,13 +1017,13 @@ SIGen
 		}
 	}
 }
-.New( SICommon.Types.Entities.Radar , "LookRadar" , "洞察之一览无余雷达" )
+.New( SICommon.Types.Entities.Radar , "SuperLookRadar" , "洞察之一览无余雷达" )
 .AutoIcon()
 .SetSize( 4 , 4 )
-.ReferencePlaceResult( SICommon.Types.Items.Item , SIConstants_Core.raw.Items.LookRadar )
+.ReferencePlaceResult( SICommon.Types.Items.Item , SIConstants_Core.raw.Items.SuperLookRadar )
 .Append
 {
-	flags = { SICommon.Flags.Entity.PlaceablePlayer , SICommon.Flags.Entity.PlayerCreation , SICommon.Flags.Entity.Hidden } ,
+	flags = { SICommon.Flags.Entity.PlaceablePlayer , SICommon.Flags.Entity.PlayerCreation } ,
 	minable =
 	{
 		mining_time = 5.0 ,
@@ -1023,7 +1031,7 @@ SIGen
 		{
 			{
 				type = SICommon.Types.Items.Item ,
-				name = SIConstants_Core.raw.Items.LookRadar ,
+				name = SIConstants_Core.raw.Items.SuperLookRadar ,
 				amount = 1
 			}
 		}
@@ -1142,9 +1150,9 @@ SIGen
 		max_sounds_per_type = 3
 	}
 }
-.New( SICommon.Types.Equipments.Night , "LookRadar" , "洞察之一览无余雷达" ,
+.New( SICommon.Types.Equipments.Night , "SuperLookRadar" , "洞察之一览无余雷达" ,
 {
-	take_result = SIConstants_Core.raw.Items.LookRadar ,
+	take_result = SIConstants_Core.raw.Items.SuperLookRadar ,
 	categories =
 	{
 		SIConstants_Core.raw.Categories.Equipment.Special
@@ -1161,7 +1169,7 @@ SIGen
 	energy_source =
 	{
 		type = SICommon.Flags.EnergySourceType.Electric ,
-		emissions_per_minute = 0 ,
+		emissions_per_minute = { pollution = 0.0 } ,
 		render_no_power_icon = false ,
 		render_no_network_icon = false ,
 		usage_priority = SICommon.Flags.ElectricUsagePriority.InputSecondary ,
@@ -1197,16 +1205,16 @@ SIGen
 	}
 } )
 .MakeIcon( SICommon.Types.Items.Item , "洞察之一览无余雷达" , 64 , 4 )
-.ReferenceEquipmentResult( SICommon.Types.Items.Item , SIConstants_Core.raw.Items.LookRadar )
+.ReferenceEquipmentResult( SICommon.Types.Items.Item , SIConstants_Core.raw.Items.SuperLookRadar )
 
 -- ======================================================================
 -- 集成之指点江山平台
 -- ======================================================================
-.New( SICommon.Types.Items.Item , "Roboport" , "集成之指点江山平台" )
+.New( SICommon.Types.Items.Item , "SuperRoboport" , "集成之指点江山平台" )
 .AutoIcon()
 .Append
 {
-	flags = { SICommon.Flags.Item.HideFromFuelTooltip , SICommon.Flags.Item.Hidden } ,
+	flags = { SICommon.Flags.Item.HideFromFuelTooltip } ,
 	stack_size = 10 ,
 	default_request_amount = 10 ,
 	fuel_category = SIConstants_Core.raw.Categories.Fuel.Special ,
@@ -1215,20 +1223,20 @@ SIGen
 	fuel_top_speed_multiplier = 1.12 ,
 	fuel_emissions_multiplier = 99.99 ,
 	fuel_glow_color = { r = 1.00 , g = 0.94 , b = 0.46 } ,
-	burnt_result = SIConstants_Core.raw.Items.Candy ,
+	burnt_result = SIConstants_Core.raw.Items.SuperCandy ,
 	place_result = nil ,
 	placed_as_equipment_result = nil ,
 	rocket_launch_products =
 	{
 		{
 			type = SICommon.Types.Items.Item ,
-			name = SIConstants_Core.raw.Items.Candy ,
+			name = SIConstants_Core.raw.Items.SuperCandy ,
 			amount = 2 ,
 			catalyst_amount = 2
 		} ,
 		{
 			type = SICommon.Types.Items.Item ,
-			name = SIConstants_Core.raw.Items.Candy ,
+			name = SIConstants_Core.raw.Items.SuperCandy ,
 			probability = 0.2 ,
 			amount_min = 0 ,
 			amount_max = 20 ,
@@ -1236,7 +1244,7 @@ SIGen
 		} ,
 		{
 			type = SICommon.Types.Items.Item ,
-			name = SIConstants_Core.raw.Items.Candy ,
+			name = SIConstants_Core.raw.Items.SuperCandy ,
 			probability = 0.06 ,
 			amount_min = 0 ,
 			amount_max = 200 ,
@@ -1244,7 +1252,7 @@ SIGen
 		} ,
 		{
 			type = SICommon.Types.Items.Item ,
-			name = SIConstants_Core.raw.Items.Candy ,
+			name = SIConstants_Core.raw.Items.SuperCandy ,
 			probability = 0.02 ,
 			amount_min = 0 ,
 			amount_max = 2000 ,
@@ -1252,13 +1260,13 @@ SIGen
 		}
 	}
 }
-.New( SICommon.Types.Entities.Roboport , "Roboport" , "集成之指点江山平台" )
+.New( SICommon.Types.Entities.Roboport , "SuperRoboport" , "集成之指点江山平台" )
 .AutoIcon()
 .SetSize( 4 , 4 )
-.ReferencePlaceResult( SICommon.Types.Items.Item , SIConstants_Core.raw.Items.Roboport )
+.ReferencePlaceResult( SICommon.Types.Items.Item , SIConstants_Core.raw.Items.SuperRoboport )
 .Append
 {
-	flags = { SICommon.Flags.Entity.PlaceablePlayer , SICommon.Flags.Entity.PlayerCreation , SICommon.Flags.Entity.Hidden } ,
+	flags = { SICommon.Flags.Entity.PlaceablePlayer , SICommon.Flags.Entity.PlayerCreation } ,
 	minable =
 	{
 		mining_time = 5.0 ,
@@ -1266,7 +1274,7 @@ SIGen
 		{
 			{
 				type = SICommon.Types.Items.Item ,
-				name = SIConstants_Core.raw.Items.Roboport ,
+				name = SIConstants_Core.raw.Items.SuperRoboport ,
 				amount = 1
 			}
 		}
@@ -1494,9 +1502,9 @@ SIGen
 		audible_distance_modifier = 0.75
 	}
 }
-.New( SICommon.Types.Equipments.Roboport , "Roboport" , "集成之指点江山平台" ,
+.New( SICommon.Types.Equipments.Roboport , "SuperRoboport" , "集成之指点江山平台" ,
 {
-	take_result = SIConstants_Core.raw.Items.Roboport ,
+	take_result = SIConstants_Core.raw.Items.SuperRoboport ,
 	categories =
 	{
 		SIConstants_Core.raw.Categories.Equipment.Special
@@ -1513,7 +1521,7 @@ SIGen
 	energy_source =
 	{
 		type = SICommon.Flags.EnergySourceType.Electric ,
-		emissions_per_minute = 0 ,
+		emissions_per_minute = { pollution = 0.0 } ,
 		render_no_power_icon = false ,
 		render_no_network_icon = false ,
 		usage_priority = SICommon.Flags.ElectricUsagePriority.InputSecondary ,
@@ -1573,38 +1581,38 @@ SIGen
 	}
 } )
 .MakeIcon( SICommon.Types.Items.Item , "集成之指点江山平台" , 64 , 4 )
-.ReferenceEquipmentResult( SICommon.Types.Items.Item , SIConstants_Core.raw.Items.Roboport )
+.ReferenceEquipmentResult( SICommon.Types.Items.Item , SIConstants_Core.raw.Items.SuperRoboport )
 
 -- ======================================================================
 -- 伟力之移山填海建设单元
 -- ======================================================================
-.New( SICommon.Types.Items.Item , "Construction" , "伟力之移山填海建设单元" )
+.New( SICommon.Types.Items.Item , "SuperConstruction" , "伟力之移山填海建设单元" )
 .AutoIcon()
 .Append
 {
-	flags = { SICommon.Flags.Item.HideFromFuelTooltip , SICommon.Flags.Item.Hidden } ,
+	flags = { SICommon.Flags.Item.HideFromFuelTooltip } ,
 	stack_size = 100 ,
 	default_request_amount = 100 ,
 	fuel_category = SIConstants_Core.raw.Categories.Fuel.Special ,
-	fuel_value = "200KJ" ,
+	fuel_value = "20MJ" ,
 	fuel_acceleration_multiplier = 1.05 ,
 	fuel_top_speed_multiplier = 1.05 ,
 	fuel_emissions_multiplier = 62.21 ,
 	fuel_glow_color = { r = 1.00 , g = 0.94 , b = 0.46 } ,
-	burnt_result = SIConstants_Core.raw.Items.Candy ,
+	burnt_result = SIConstants_Core.raw.Items.SuperCandy ,
 	place_result = nil ,
 	placed_as_equipment_result = nil ,
 	rocket_launch_products =
 	{
 		{
 			type = SICommon.Types.Items.Item ,
-			name = SIConstants_Core.raw.Items.Candy ,
+			name = SIConstants_Core.raw.Items.SuperCandy ,
 			amount = 2 ,
 			catalyst_amount = 2
 		} ,
 		{
 			type = SICommon.Types.Items.Item ,
-			name = SIConstants_Core.raw.Items.Candy ,
+			name = SIConstants_Core.raw.Items.SuperCandy ,
 			probability = 0.2 ,
 			amount_min = 0 ,
 			amount_max = 20 ,
@@ -1612,7 +1620,7 @@ SIGen
 		} ,
 		{
 			type = SICommon.Types.Items.Item ,
-			name = SIConstants_Core.raw.Items.Candy ,
+			name = SIConstants_Core.raw.Items.SuperCandy ,
 			probability = 0.06 ,
 			amount_min = 0 ,
 			amount_max = 200 ,
@@ -1620,7 +1628,7 @@ SIGen
 		} ,
 		{
 			type = SICommon.Types.Items.Item ,
-			name = SIConstants_Core.raw.Items.Candy ,
+			name = SIConstants_Core.raw.Items.SuperCandy ,
 			probability = 0.02 ,
 			amount_min = 0 ,
 			amount_max = 2000 ,
@@ -1628,12 +1636,12 @@ SIGen
 		}
 	}
 }
-.New( SICommon.Types.Entities.RobotConstruct , "Construction" , "伟力之移山填海建设单元" )
+.New( SICommon.Types.Entities.RobotConstruct , "SuperConstruction" , "伟力之移山填海建设单元" )
 .AutoIcon()
-.ReferencePlaceResult( SICommon.Types.Items.Item , SIConstants_Core.raw.Items.Construction )
+.ReferencePlaceResult( SICommon.Types.Items.Item , SIConstants_Core.raw.Items.SuperConstruction )
 .Append
 {
-	flags = { SICommon.Flags.Entity.PlaceablePlayer , SICommon.Flags.Entity.PlayerCreation , SICommon.Flags.Entity.PlaceableOffGrid , SICommon.Flags.Entity.NotOnMap , SICommon.Flags.Entity.Hidden } ,
+	flags = { SICommon.Flags.Entity.PlaceablePlayer , SICommon.Flags.Entity.PlayerCreation , SICommon.Flags.Entity.PlaceableOffGrid , SICommon.Flags.Entity.NotOnMap } ,
 	minable =
 	{
 		mining_time = 5.0 ,
@@ -1641,7 +1649,7 @@ SIGen
 		{
 			{
 				type = SICommon.Types.Items.Item ,
-				name = SIConstants_Core.raw.Items.Construction ,
+				name = SIConstants_Core.raw.Items.SuperConstruction ,
 				amount = 1
 			}
 		}
@@ -1698,21 +1706,21 @@ SIGen
 			type = "play-sound" ,
 			sound =
 			{
-				SISound.Base( "fight/robot-die-whoosh-01" , 0.5 ) ,
-				SISound.Base( "fight/robot-die-whoosh-02" , 0.5 ) ,
-				SISound.Base( "fight/robot-die-whoosh-03" , 0.5 )
+				SISound.Base( "fight/robot-die-whoosh-1" , 0.5 ) ,
+				SISound.Base( "fight/robot-die-whoosh-2" , 0.5 ) ,
+				SISound.Base( "fight/robot-die-whoosh-3" , 0.5 )
 			}
 		} ,
 		{
 			type = "play-sound" ,
 			sound =
 			{
-				SISound.Base( "fight/robot-die-vox-01" , 0.5 ) ,
-				SISound.Base( "fight/robot-die-vox-02" , 0.5 ) ,
-				SISound.Base( "fight/robot-die-vox-03" , 0.5 ) ,
-				SISound.Base( "fight/robot-die-vox-04" , 0.5 ) ,
-				SISound.Base( "fight/robot-die-vox-05" , 0.5 ) ,
-				SISound.Base( "fight/robot-die-vox-06" , 0.5 )
+				SISound.Base( "fight/robot-die-vox-1" , 0.5 ) ,
+				SISound.Base( "fight/robot-die-vox-2" , 0.5 ) ,
+				SISound.Base( "fight/robot-die-vox-3" , 0.5 ) ,
+				SISound.Base( "fight/robot-die-vox-4" , 0.5 ) ,
+				SISound.Base( "fight/robot-die-vox-5" , 0.5 ) ,
+				SISound.Base( "fight/robot-die-vox-6" , 0.5 )
 			}
 		}
 	} ,
@@ -1987,9 +1995,9 @@ SIGen
 		probability = 1 / ( 10 * 60 )
 	}
 }
-.New( SICommon.Types.Equipments.Shield , "Construction" , "伟力之移山填海建设单元" ,
+.New( SICommon.Types.Equipments.Shield , "SuperConstruction" , "伟力之移山填海建设单元" ,
 {
-	take_result = SIConstants_Core.raw.Items.Construction ,
+	take_result = SIConstants_Core.raw.Items.SuperConstruction ,
 	categories =
 	{
 		SIConstants_Core.raw.Categories.Equipment.Special
@@ -2006,7 +2014,7 @@ SIGen
 	energy_source =
 	{
 		type = SICommon.Flags.EnergySourceType.Electric ,
-		emissions_per_minute = 0 ,
+		emissions_per_minute = { pollution = 0.0 } ,
 		render_no_power_icon = false ,
 		render_no_network_icon = false ,
 		usage_priority = SICommon.Flags.ElectricUsagePriority.InputSecondary ,
@@ -2027,38 +2035,38 @@ SIGen
 	}
 } )
 .MakeIcon( SICommon.Types.Items.Item , "伟力之移山填海建设单元" , 64 , 4 )
-.ReferenceEquipmentResult( SICommon.Types.Items.Item , SIConstants_Core.raw.Items.Construction )
+.ReferenceEquipmentResult( SICommon.Types.Items.Item , SIConstants_Core.raw.Items.SuperConstruction )
 
 -- ======================================================================
 -- 伟力之移山填海物流单元
 -- ======================================================================
-.New( SICommon.Types.Items.Item , "Logistic" , "伟力之移山填海物流单元" )
+.New( SICommon.Types.Items.Item , "SuperLogistic" , "伟力之移山填海物流单元" )
 .AutoIcon()
 .Append
 {
-	flags = { SICommon.Flags.Item.HideFromFuelTooltip , SICommon.Flags.Item.Hidden } ,
+	flags = { SICommon.Flags.Item.HideFromFuelTooltip } ,
 	stack_size = 100 ,
 	default_request_amount = 100 ,
 	fuel_category = SIConstants_Core.raw.Categories.Fuel.Special ,
-	fuel_value = "200KJ" ,
+	fuel_value = "20MJ" ,
 	fuel_acceleration_multiplier = 1.05 ,
 	fuel_top_speed_multiplier = 1.05 ,
 	fuel_emissions_multiplier = 62.21 ,
 	fuel_glow_color = { r = 1.00 , g = 0.94 , b = 0.46 } ,
-	burnt_result = SIConstants_Core.raw.Items.Candy ,
+	burnt_result = SIConstants_Core.raw.Items.SuperCandy ,
 	place_result = nil ,
 	placed_as_equipment_result = nil ,
 	rocket_launch_products =
 	{
 		{
 			type = SICommon.Types.Items.Item ,
-			name = SIConstants_Core.raw.Items.Candy ,
+			name = SIConstants_Core.raw.Items.SuperCandy ,
 			amount = 2 ,
 			catalyst_amount = 2
 		} ,
 		{
 			type = SICommon.Types.Items.Item ,
-			name = SIConstants_Core.raw.Items.Candy ,
+			name = SIConstants_Core.raw.Items.SuperCandy ,
 			probability = 0.2 ,
 			amount_min = 0 ,
 			amount_max = 20 ,
@@ -2066,7 +2074,7 @@ SIGen
 		} ,
 		{
 			type = SICommon.Types.Items.Item ,
-			name = SIConstants_Core.raw.Items.Candy ,
+			name = SIConstants_Core.raw.Items.SuperCandy ,
 			probability = 0.06 ,
 			amount_min = 0 ,
 			amount_max = 200 ,
@@ -2074,7 +2082,7 @@ SIGen
 		} ,
 		{
 			type = SICommon.Types.Items.Item ,
-			name = SIConstants_Core.raw.Items.Candy ,
+			name = SIConstants_Core.raw.Items.SuperCandy ,
 			probability = 0.02 ,
 			amount_min = 0 ,
 			amount_max = 2000 ,
@@ -2082,12 +2090,12 @@ SIGen
 		}
 	}
 }
-.New( SICommon.Types.Entities.RobotLogistic , "Logistic" , "伟力之移山填海物流单元" )
+.New( SICommon.Types.Entities.RobotLogistic , "SuperLogistic" , "伟力之移山填海物流单元" )
 .AutoIcon()
-.ReferencePlaceResult( SICommon.Types.Items.Item , SIConstants_Core.raw.Items.Logistic )
+.ReferencePlaceResult( SICommon.Types.Items.Item , SIConstants_Core.raw.Items.SuperLogistic )
 .Append
 {
-	flags = { SICommon.Flags.Entity.PlaceablePlayer , SICommon.Flags.Entity.PlayerCreation , SICommon.Flags.Entity.PlaceableOffGrid , SICommon.Flags.Entity.NotOnMap , SICommon.Flags.Entity.Hidden } ,
+	flags = { SICommon.Flags.Entity.PlaceablePlayer , SICommon.Flags.Entity.PlayerCreation , SICommon.Flags.Entity.PlaceableOffGrid , SICommon.Flags.Entity.NotOnMap } ,
 	minable =
 	{
 		mining_time = 5.0 ,
@@ -2095,7 +2103,7 @@ SIGen
 		{
 			{
 				type = SICommon.Types.Items.Item ,
-				name = SIConstants_Core.raw.Items.Logistic ,
+				name = SIConstants_Core.raw.Items.SuperLogistic ,
 				amount = 1
 			}
 		}
@@ -2151,21 +2159,21 @@ SIGen
 			type = "play-sound" ,
 			sound =
 			{
-				SISound.Base( "fight/robot-die-whoosh-01" , 0.5 ) ,
-				SISound.Base( "fight/robot-die-whoosh-02" , 0.5 ) ,
-				SISound.Base( "fight/robot-die-whoosh-03" , 0.5 )
+				SISound.Base( "fight/robot-die-whoosh-1" , 0.5 ) ,
+				SISound.Base( "fight/robot-die-whoosh-2" , 0.5 ) ,
+				SISound.Base( "fight/robot-die-whoosh-3" , 0.5 )
 			}
 		} ,
 		{
 			type = "play-sound" ,
 			sound =
 			{
-				SISound.Base( "fight/robot-die-vox-01" , 0.5 ) ,
-				SISound.Base( "fight/robot-die-vox-02" , 0.5 ) ,
-				SISound.Base( "fight/robot-die-vox-03" , 0.5 ) ,
-				SISound.Base( "fight/robot-die-vox-04" , 0.5 ) ,
-				SISound.Base( "fight/robot-die-vox-05" , 0.5 ) ,
-				SISound.Base( "fight/robot-die-vox-06" , 0.5 )
+				SISound.Base( "fight/robot-die-vox-1" , 0.5 ) ,
+				SISound.Base( "fight/robot-die-vox-2" , 0.5 ) ,
+				SISound.Base( "fight/robot-die-vox-3" , 0.5 ) ,
+				SISound.Base( "fight/robot-die-vox-4" , 0.5 ) ,
+				SISound.Base( "fight/robot-die-vox-5" , 0.5 ) ,
+				SISound.Base( "fight/robot-die-vox-6" , 0.5 )
 			}
 		}
 	} ,
@@ -2359,9 +2367,9 @@ SIGen
 		probability = 1 / ( 10 * 60 )
 	}
 }
-.New( SICommon.Types.Equipments.BeltImmunity , "Logistic" , "伟力之移山填海物流单元" ,
+.New( SICommon.Types.Equipments.BeltImmunity , "SuperLogistic" , "伟力之移山填海物流单元" ,
 {
-	take_result = SIConstants_Core.raw.Items.Logistic ,
+	take_result = SIConstants_Core.raw.Items.SuperLogistic ,
 	categories =
 	{
 		SIConstants_Core.raw.Categories.Equipment.Special
@@ -2378,7 +2386,7 @@ SIGen
 	energy_source =
 	{
 		type = SICommon.Flags.EnergySourceType.Electric ,
-		emissions_per_minute = 0 ,
+		emissions_per_minute = { pollution = 0.0 } ,
 		render_no_power_icon = false ,
 		render_no_network_icon = false ,
 		usage_priority = SICommon.Flags.ElectricUsagePriority.InputSecondary ,
@@ -2398,20 +2406,19 @@ SIGen
 	}
 } )
 .MakeIcon( SICommon.Types.Items.Item , "伟力之移山填海物流单元" , 64 , 4 )
-.ReferenceEquipmentResult( SICommon.Types.Items.Item , SIConstants_Core.raw.Items.Logistic )
+.ReferenceEquipmentResult( SICommon.Types.Items.Item , SIConstants_Core.raw.Items.SuperLogistic )
 
 -- ======================================================================
 -- 终末之横扫千军光束
 -- ======================================================================
-.New( SICommon.Types.Entities.Beam , "Laser_BeamSmall" , "终末之横扫千军光束-激光细" )
+.New( SICommon.Types.Entities.Beam , "SuperLaser_BeamSmall" , "终末之横扫千军光束-激光细" )
 .Append
 {
-	flags = { SICommon.Flags.Entity.NotOnMap , SICommon.Flags.Entity.Hidden } ,
+	flags = { SICommon.Flags.Entity.NotOnMap } ,
 	selectable_in_game = false ,
 	width = 2.5 ,
 	damage_interval = 4 ,
 	random_target_offset = false ,
-	transparent_start_end_animations = true ,
 	action_triggered_automatically = true ,
 	action =
 	{
@@ -2507,182 +2514,173 @@ SIGen
 			}
 		}
 	} ,
-	body =
+	graphics_set =
 	{
-		layers =
+		transparent_start_end_animations = true ,
+		beam =
 		{
+			body =
 			{
-				filename = SIGen.MakeSelfPicturePath( "终末之横扫千军光束-激光-身体" ) ,
-				priority = "medium" ,
-				blend_mode = "additive" ,
-				flags = { "trilinear-filtering" } ,
-				width = 64 ,
-				height = 12 ,
-				frame_count = 8 ,
-				line_length = 8 ,
-				animation_speed = 0.5 ,
-				scale = 0.5
-			}
-		}
-	} ,
-	head =
-	{
-		layers =
-		{
-			{
-				filename = SIGen.MakeSelfPicturePath( "终末之横扫千军光束-激光-身体" ) ,
-				priority = "medium" ,
-				blend_mode = "additive" ,
-				flags = { "trilinear-filtering" } ,
-				width = 64 ,
-				height = 12 ,
-				frame_count = 8 ,
-				line_length = 8 ,
-				animation_speed = 0.5 ,
-				scale = 0.5
-			}
-		}
-	} ,
-	tail =
-	{
-		layers =
-		{
-			{
-				filename = SIGen.MakeSelfPicturePath( "终末之横扫千军光束-激光-尾部" ) ,
-				priority = "medium" ,
-				blend_mode = "additive" ,
-				flags = { "trilinear-filtering" } ,
-				width = 110 ,
-				height = 62 ,
-				frame_count = 8 ,
-				line_length = 8 ,
-				animation_speed = 0.5 ,
-				scale = 0.5 ,
-				shift = SIUtils.by_pixel( 11.5 , 1 )
-			}
-		}
-	} ,
-	light_animations =
-	{
-		body =
-		{
-			layers =
-			{
+				layers =
 				{
-					filename = SIGen.MakeSelfPicturePath( "终末之横扫千军光束-激光-身体-光效" ) ,
-					priority = "medium" ,
-					width = 64 ,
-					height = 12 ,
-					frame_count = 8 ,
-					line_length = 8 ,
-					animation_speed = 0.5 ,
-					scale = 0.5
+					{
+						filename = SIGen.MakeSelfPicturePath( "终末之横扫千军光束-激光-身体" ) ,
+						priority = "medium" ,
+						blend_mode = "additive" ,
+						flags = { "trilinear-filtering" } ,
+						width = 64 ,
+						height = 12 ,
+						frame_count = 8 ,
+						line_length = 8 ,
+						animation_speed = 0.5 ,
+						scale = 0.5
+					} ,
+					{
+						filename = SIGen.MakeSelfPicturePath( "终末之横扫千军光束-激光-身体-光效" ) ,
+						priority = "medium" ,
+						draw_as_light = true ,
+              			flags = { "light" } ,
+						width = 64 ,
+						height = 12 ,
+						frame_count = 8 ,
+						line_length = 8 ,
+						animation_speed = 0.5 ,
+						scale = 0.5
+					}
+				}
+			} ,
+			head =
+			{
+				layers =
+				{
+					{
+						filename = SIGen.MakeSelfPicturePath( "终末之横扫千军光束-激光-身体" ) ,
+						priority = "medium" ,
+						blend_mode = "additive" ,
+						flags = { "trilinear-filtering" } ,
+						width = 64 ,
+						height = 12 ,
+						frame_count = 8 ,
+						line_length = 8 ,
+						animation_speed = 0.5 ,
+						scale = 0.5
+					} ,
+					{
+						filename = SIGen.MakeSelfPicturePath( "终末之横扫千军光束-激光-身体-光效" ) ,
+						priority = "medium" ,
+						draw_as_light = true ,
+              			flags = { "light" } ,
+						width = 64 ,
+						height = 12 ,
+						frame_count = 8 ,
+						line_length = 8 ,
+						animation_speed = 0.5 ,
+						scale = 0.5
+					}
+				}
+			} ,
+			tail =
+			{
+				layers =
+				{
+					{
+						filename = SIGen.MakeSelfPicturePath( "终末之横扫千军光束-激光-尾部" ) ,
+						priority = "medium" ,
+						blend_mode = "additive" ,
+						flags = { "trilinear-filtering" } ,
+						width = 110 ,
+						height = 62 ,
+						frame_count = 8 ,
+						line_length = 8 ,
+						animation_speed = 0.5 ,
+						scale = 0.5 ,
+						shift = SIUtils.by_pixel( 11.5 , 1 )
+					} ,
+					{
+						filename = SIGen.MakeSelfPicturePath( "终末之横扫千军光束-激光-尾部-光效" ) ,
+						priority = "medium" ,
+						draw_as_light = true ,
+              			flags = { "light" } ,
+						width = 110 ,
+						height = 62 ,
+						frame_count = 8 ,
+						line_length = 8 ,
+						animation_speed = 0.5 ,
+						scale = 0.5 ,
+						shift = SIUtils.by_pixel( 11.5 , 1 )
+					}
 				}
 			}
 		} ,
-		head =
+		ground =
 		{
-			layers =
+			body =
 			{
+				layers =
 				{
-					filename = SIGen.MakeSelfPicturePath( "终末之横扫千军光束-激光-身体-光效" ) ,
-					priority = "medium" ,
-					width = 64 ,
-					height = 12 ,
-					frame_count = 8 ,
-					line_length = 8 ,
-					animation_speed = 0.5 ,
-					scale = 0.5
+					{
+						filename = SIGen.MakeSelfPicturePath( "终末之横扫千军光束-激光-地面-身体" ) ,
+						priority = "medium" ,
+						width = 64 ,
+						height = 256 ,
+						frame_count = 1 ,
+						line_length = 1 ,
+						repeat_count = 8 ,
+						animation_speed = 0.5 ,
+						scale = 0.5 ,
+						tint = { r = 0.50 , g = 0.50 , b = 0.05 }
+					}
 				}
-			}
-		} ,
-		tail =
-		{
-			layers =
+			} ,
+			head =
 			{
+				layers =
 				{
-					filename = SIGen.MakeSelfPicturePath( "终末之横扫千军光束-激光-尾部-光效" ) ,
-					priority = "medium" ,
-					width = 110 ,
-					height = 62 ,
-					frame_count = 8 ,
-					line_length = 8 ,
-					animation_speed = 0.5 ,
-					scale = 0.5 ,
-					shift = SIUtils.by_pixel( 11.5 , 1 )
+					{
+						filename = SIGen.MakeSelfPicturePath( "终末之横扫千军光束-激光-地面-头部" ) ,
+						priority = "medium" ,
+						width = 256 ,
+						height = 256 ,
+						frame_count = 1 ,
+						line_length = 1 ,
+						repeat_count = 8 ,
+						animation_speed = 0.5 ,
+						scale = 0.5 ,
+						tint = { r = 0.50 , g = 0.50 , b = 0.05 } ,
+						shift = SIUtils.by_pixel( -32 , 0 )
+					}
 				}
-			}
-		}
-	} ,
-	ground_light_animations =
-	{
-		body =
-		{
-			layers =
+			} ,
+			tail =
 			{
+				layers =
 				{
-					filename = SIGen.MakeSelfPicturePath( "终末之横扫千军光束-激光-地面-身体" ) ,
-					priority = "medium" ,
-					width = 64 ,
-					height = 256 ,
-					frame_count = 1 ,
-					line_length = 1 ,
-					repeat_count = 8 ,
-					animation_speed = 0.5 ,
-					scale = 0.5 ,
-					tint = { r = 0.50 , g = 0.50 , b = 0.05 }
-				}
-			}
-		} ,
-		head =
-		{
-			layers =
-			{
-				{
-					filename = SIGen.MakeSelfPicturePath( "终末之横扫千军光束-激光-地面-头部" ) ,
-					priority = "medium" ,
-					width = 256 ,
-					height = 256 ,
-					frame_count = 1 ,
-					line_length = 1 ,
-					repeat_count = 8 ,
-					animation_speed = 0.5 ,
-					scale = 0.5 ,
-					tint = { r = 0.50 , g = 0.50 , b = 0.05 } ,
-					shift = SIUtils.by_pixel( -32 , 0 )
-				}
-			}
-		} ,
-		tail =
-		{
-			layers =
-			{
-				{
-					filename = SIGen.MakeSelfPicturePath( "终末之横扫千军光束-激光-地面-尾部" ) ,
-					priority = "medium" ,
-					width = 256 ,
-					height = 256 ,
-					frame_count = 1 ,
-					line_length = 1 ,
-					repeat_count = 8 ,
-					animation_speed = 0.5 ,
-					scale = 0.5 ,
-					tint = { r = 0.50 , g = 0.50 , b = 0.05 } ,
-					shift = SIUtils.by_pixel( 32 , 0 )
+					{
+						filename = SIGen.MakeSelfPicturePath( "终末之横扫千军光束-激光-地面-尾部" ) ,
+						priority = "medium" ,
+						width = 256 ,
+						height = 256 ,
+						frame_count = 1 ,
+						line_length = 1 ,
+						repeat_count = 8 ,
+						animation_speed = 0.5 ,
+						scale = 0.5 ,
+						tint = { r = 0.50 , g = 0.50 , b = 0.05 } ,
+						shift = SIUtils.by_pixel( 32 , 0 )
+					}
 				}
 			}
 		}
 	}
 }
-.New( SICommon.Types.Entities.Beam , "Laser_BeamMedium" , "终末之横扫千军光束-激光中" )
+.New( SICommon.Types.Entities.Beam , "SuperLaser_BeamMedium" , "终末之横扫千军光束-激光中" )
 .Append
 {
-	flags = { SICommon.Flags.Entity.NotOnMap , SICommon.Flags.Entity.Hidden } ,
+	flags = { SICommon.Flags.Entity.NotOnMap } ,
 	selectable_in_game = false ,
 	width = 2.5 ,
 	damage_interval = 4 ,
 	random_target_offset = false ,
-	transparent_start_end_animations = true ,
 	action_triggered_automatically = true ,
 	action =
 	{
@@ -2778,182 +2776,173 @@ SIGen
 			}
 		}
 	} ,
-	body =
+	graphics_set =
 	{
-		layers =
+		transparent_start_end_animations = true ,
+		beam =
 		{
+			body =
 			{
-				filename = SIGen.MakeSelfPicturePath( "终末之横扫千军光束-激光-身体" ) ,
-				priority = "medium" ,
-				blend_mode = "additive" ,
-				flags = { "trilinear-filtering" } ,
-				width = 64 ,
-				height = 12 ,
-				frame_count = 8 ,
-				line_length = 8 ,
-				animation_speed = 0.5 ,
-				scale = 0.9
-			}
-		}
-	} ,
-	head =
-	{
-		layers =
-		{
-			{
-				filename = SIGen.MakeSelfPicturePath( "终末之横扫千军光束-激光-身体" ) ,
-				priority = "medium" ,
-				blend_mode = "additive" ,
-				flags = { "trilinear-filtering" } ,
-				width = 64 ,
-				height = 12 ,
-				frame_count = 8 ,
-				line_length = 8 ,
-				animation_speed = 0.5 ,
-				scale = 0.9
-			}
-		}
-	} ,
-	tail =
-	{
-		layers =
-		{
-			{
-				filename = SIGen.MakeSelfPicturePath( "终末之横扫千军光束-激光-尾部" ) ,
-				priority = "medium" ,
-				blend_mode = "additive" ,
-				flags = { "trilinear-filtering" } ,
-				width = 110 ,
-				height = 62 ,
-				frame_count = 8 ,
-				line_length = 8 ,
-				animation_speed = 0.5 ,
-				scale = 0.9 ,
-				shift = SIUtils.by_pixel( 11.5 , 1 )
-			}
-		}
-	} ,
-	light_animations =
-	{
-		body =
-		{
-			layers =
-			{
+				layers =
 				{
-					filename = SIGen.MakeSelfPicturePath( "终末之横扫千军光束-激光-身体-光效" ) ,
-					priority = "medium" ,
-					width = 64 ,
-					height = 12 ,
-					frame_count = 8 ,
-					line_length = 8 ,
-					animation_speed = 0.5 ,
-					scale = 0.9
+					{
+						filename = SIGen.MakeSelfPicturePath( "终末之横扫千军光束-激光-身体" ) ,
+						priority = "medium" ,
+						blend_mode = "additive" ,
+						flags = { "trilinear-filtering" } ,
+						width = 64 ,
+						height = 12 ,
+						frame_count = 8 ,
+						line_length = 8 ,
+						animation_speed = 0.5 ,
+						scale = 0.9
+					} ,
+					{
+						filename = SIGen.MakeSelfPicturePath( "终末之横扫千军光束-激光-身体-光效" ) ,
+						priority = "medium" ,
+						draw_as_light = true ,
+              			flags = { "light" } ,
+						width = 64 ,
+						height = 12 ,
+						frame_count = 8 ,
+						line_length = 8 ,
+						animation_speed = 0.5 ,
+						scale = 0.9
+					}
+				}
+			} ,
+			head =
+			{
+				layers =
+				{
+					{
+						filename = SIGen.MakeSelfPicturePath( "终末之横扫千军光束-激光-身体" ) ,
+						priority = "medium" ,
+						blend_mode = "additive" ,
+						flags = { "trilinear-filtering" } ,
+						width = 64 ,
+						height = 12 ,
+						frame_count = 8 ,
+						line_length = 8 ,
+						animation_speed = 0.5 ,
+						scale = 0.9
+					} ,
+					{
+						filename = SIGen.MakeSelfPicturePath( "终末之横扫千军光束-激光-身体-光效" ) ,
+						priority = "medium" ,
+						draw_as_light = true ,
+              			flags = { "light" } ,
+						width = 64 ,
+						height = 12 ,
+						frame_count = 8 ,
+						line_length = 8 ,
+						animation_speed = 0.5 ,
+						scale = 0.9
+					}
+				}
+			} ,
+			tail =
+			{
+				layers =
+				{
+					{
+						filename = SIGen.MakeSelfPicturePath( "终末之横扫千军光束-激光-尾部" ) ,
+						priority = "medium" ,
+						blend_mode = "additive" ,
+						flags = { "trilinear-filtering" } ,
+						width = 110 ,
+						height = 62 ,
+						frame_count = 8 ,
+						line_length = 8 ,
+						animation_speed = 0.5 ,
+						scale = 0.9 ,
+						shift = SIUtils.by_pixel( 11.5 , 1 )
+					} ,
+					{
+						filename = SIGen.MakeSelfPicturePath( "终末之横扫千军光束-激光-尾部-光效" ) ,
+						priority = "medium" ,
+						draw_as_light = true ,
+              			flags = { "light" } ,
+						width = 110 ,
+						height = 62 ,
+						frame_count = 8 ,
+						line_length = 8 ,
+						animation_speed = 0.5 ,
+						scale = 0.9 ,
+						shift = SIUtils.by_pixel( 11.5 , 1 )
+					}
 				}
 			}
 		} ,
-		head =
+		ground =
 		{
-			layers =
+			body =
 			{
+				layers =
 				{
-					filename = SIGen.MakeSelfPicturePath( "终末之横扫千军光束-激光-身体-光效" ) ,
-					priority = "medium" ,
-					width = 64 ,
-					height = 12 ,
-					frame_count = 8 ,
-					line_length = 8 ,
-					animation_speed = 0.5 ,
-					scale = 0.9
+					{
+						filename = SIGen.MakeSelfPicturePath( "终末之横扫千军光束-激光-地面-身体" ) ,
+						priority = "medium" ,
+						width = 64 ,
+						height = 256 ,
+						frame_count = 1 ,
+						line_length = 1 ,
+						repeat_count = 8 ,
+						animation_speed = 0.5 ,
+						scale = 0.9 ,
+						tint = { r = 0.50 , g = 0.50 , b = 0.05 }
+					}
 				}
-			}
-		} ,
-		tail =
-		{
-			layers =
+			} ,
+			head =
 			{
+				layers =
 				{
-					filename = SIGen.MakeSelfPicturePath( "终末之横扫千军光束-激光-尾部-光效" ) ,
-					priority = "medium" ,
-					width = 110 ,
-					height = 62 ,
-					frame_count = 8 ,
-					line_length = 8 ,
-					animation_speed = 0.5 ,
-					scale = 0.9 ,
-					shift = SIUtils.by_pixel( 11.5 , 1 )
+					{
+						filename = SIGen.MakeSelfPicturePath( "终末之横扫千军光束-激光-地面-头部" ) ,
+						priority = "medium" ,
+						width = 256 ,
+						height = 256 ,
+						frame_count = 1 ,
+						line_length = 1 ,
+						repeat_count = 8 ,
+						animation_speed = 0.5 ,
+						scale = 0.9 ,
+						tint = { r = 0.50 , g = 0.50 , b = 0.05 } ,
+						shift = SIUtils.by_pixel( -32 , 0 )
+					}
 				}
-			}
-		}
-	} ,
-	ground_light_animations =
-	{
-		body =
-		{
-			layers =
+			} ,
+			tail =
 			{
+				layers =
 				{
-					filename = SIGen.MakeSelfPicturePath( "终末之横扫千军光束-激光-地面-身体" ) ,
-					priority = "medium" ,
-					width = 64 ,
-					height = 256 ,
-					frame_count = 1 ,
-					line_length = 1 ,
-					repeat_count = 8 ,
-					animation_speed = 0.5 ,
-					scale = 0.9 ,
-					tint = { r = 0.50 , g = 0.50 , b = 0.05 }
-				}
-			}
-		} ,
-		head =
-		{
-			layers =
-			{
-				{
-					filename = SIGen.MakeSelfPicturePath( "终末之横扫千军光束-激光-地面-头部" ) ,
-					priority = "medium" ,
-					width = 256 ,
-					height = 256 ,
-					frame_count = 1 ,
-					line_length = 1 ,
-					repeat_count = 8 ,
-					animation_speed = 0.5 ,
-					scale = 0.9 ,
-					tint = { r = 0.50 , g = 0.50 , b = 0.05 } ,
-					shift = SIUtils.by_pixel( -32 , 0 )
-				}
-			}
-		} ,
-		tail =
-		{
-			layers =
-			{
-				{
-					filename = SIGen.MakeSelfPicturePath( "终末之横扫千军光束-激光-地面-尾部" ) ,
-					priority = "medium" ,
-					width = 256 ,
-					height = 256 ,
-					frame_count = 1 ,
-					line_length = 1 ,
-					repeat_count = 8 ,
-					animation_speed = 0.5 ,
-					scale = 0.9 ,
-					tint = { r = 0.50 , g = 0.50 , b = 0.05 } ,
-					shift = SIUtils.by_pixel( 32 , 0 )
+					{
+						filename = SIGen.MakeSelfPicturePath( "终末之横扫千军光束-激光-地面-尾部" ) ,
+						priority = "medium" ,
+						width = 256 ,
+						height = 256 ,
+						frame_count = 1 ,
+						line_length = 1 ,
+						repeat_count = 8 ,
+						animation_speed = 0.5 ,
+						scale = 0.9 ,
+						tint = { r = 0.50 , g = 0.50 , b = 0.05 } ,
+						shift = SIUtils.by_pixel( 32 , 0 )
+					}
 				}
 			}
 		}
 	}
 }
-.New( SICommon.Types.Entities.Beam , "Laser_BeamLarge" , "终末之横扫千军光束-激光粗" )
+.New( SICommon.Types.Entities.Beam , "SuperLaser_BeamLarge" , "终末之横扫千军光束-激光粗" )
 .Append
 {
-	flags = { SICommon.Flags.Entity.NotOnMap , SICommon.Flags.Entity.Hidden } ,
+	flags = { SICommon.Flags.Entity.NotOnMap } ,
 	selectable_in_game = false ,
 	width = 2.5 ,
 	damage_interval = 4 ,
 	random_target_offset = false ,
-	transparent_start_end_animations = true ,
 	action_triggered_automatically = true ,
 	action =
 	{
@@ -3147,7 +3136,7 @@ SIGen
 			{
 				{
 					type = "beam" ,
-					beam = SIConstants_Core.raw.Entities.Laser_BeamMedium ,
+					beam = SIConstants_Core.raw.Entities.SuperLaser_BeamMedium ,
 					max_length = 0 ,
 					duration = 4 ,
 					source_offset = { 0 , 0 } ,
@@ -3173,7 +3162,7 @@ SIGen
 									{
 										{
 											type = "beam" ,
-											beam = SIConstants_Core.raw.Entities.Laser_BeamSmall ,
+											beam = SIConstants_Core.raw.Entities.SuperLaser_BeamSmall ,
 											max_length = 0 ,
 											duration = 12 ,
 											source_offset = { 0 , 0 } ,
@@ -3188,116 +3177,107 @@ SIGen
 			}
 		}
 	} ,
-	body =
+	graphics_set =
 	{
-		layers =
+		transparent_start_end_animations = true ,
+		beam =
 		{
+			body =
 			{
-				filename = SIGen.MakeSelfPicturePath( "终末之横扫千军光束-激光-身体" ) ,
-				priority = "medium" ,
-				blend_mode = "additive" ,
-				flags = { "trilinear-filtering" } ,
-				width = 64 ,
-				height = 12 ,
-				frame_count = 8 ,
-				line_length = 8 ,
-				animation_speed = 0.5 ,
-				scale = 1.5
-			}
-		}
-	} ,
-	head =
-	{
-		layers =
-		{
-			{
-				filename = SIGen.MakeSelfPicturePath( "终末之横扫千军光束-激光-身体" ) ,
-				priority = "medium" ,
-				blend_mode = "additive" ,
-				flags = { "trilinear-filtering" } ,
-				width = 64 ,
-				height = 12 ,
-				frame_count = 8 ,
-				line_length = 8 ,
-				animation_speed = 0.5 ,
-				scale = 1.5
-			}
-		}
-	} ,
-	tail =
-	{
-		layers =
-		{
-			{
-				filename = SIGen.MakeSelfPicturePath( "终末之横扫千军光束-激光-尾部" ) ,
-				priority = "medium" ,
-				blend_mode = "additive" ,
-				flags = { "trilinear-filtering" } ,
-				width = 110 ,
-				height = 62 ,
-				frame_count = 8 ,
-				line_length = 8 ,
-				animation_speed = 0.5 ,
-				scale = 1.5 ,
-				shift = SIUtils.by_pixel( 11.5 , 1 )
-			}
-		}
-	} ,
-	light_animations =
-	{
-		body =
-		{
-			layers =
-			{
+				layers =
 				{
-					filename = SIGen.MakeSelfPicturePath( "终末之横扫千军光束-激光-身体-光效" ) ,
-					priority = "medium" ,
-					width = 64 ,
-					height = 12 ,
-					frame_count = 8 ,
-					line_length = 8 ,
-					animation_speed = 0.5 ,
-					scale = 1.5
+					{
+						filename = SIGen.MakeSelfPicturePath( "终末之横扫千军光束-激光-身体" ) ,
+						priority = "medium" ,
+						blend_mode = "additive" ,
+						flags = { "trilinear-filtering" } ,
+						width = 64 ,
+						height = 12 ,
+						frame_count = 8 ,
+						line_length = 8 ,
+						animation_speed = 0.5 ,
+						scale = 1.5
+					} ,
+					{
+						filename = SIGen.MakeSelfPicturePath( "终末之横扫千军光束-激光-身体-光效" ) ,
+						priority = "medium" ,
+						draw_as_light = true ,
+              			flags = { "light" } ,
+						width = 64 ,
+						height = 12 ,
+						frame_count = 8 ,
+						line_length = 8 ,
+						animation_speed = 0.5 ,
+						scale = 1.5
+					}
+				}
+			} ,
+			head =
+			{
+				layers =
+				{
+					{
+						filename = SIGen.MakeSelfPicturePath( "终末之横扫千军光束-激光-身体" ) ,
+						priority = "medium" ,
+						blend_mode = "additive" ,
+						flags = { "trilinear-filtering" } ,
+						width = 64 ,
+						height = 12 ,
+						frame_count = 8 ,
+						line_length = 8 ,
+						animation_speed = 0.5 ,
+						scale = 1.5
+					} ,
+					{
+						filename = SIGen.MakeSelfPicturePath( "终末之横扫千军光束-激光-身体-光效" ) ,
+						priority = "medium" ,
+						draw_as_light = true ,
+              			flags = { "light" } ,
+						width = 64 ,
+						height = 12 ,
+						frame_count = 8 ,
+						line_length = 8 ,
+						animation_speed = 0.5 ,
+						scale = 1.5
+					}
+				}
+			} ,
+			tail =
+			{
+				layers =
+				{
+					{
+						filename = SIGen.MakeSelfPicturePath( "终末之横扫千军光束-激光-尾部" ) ,
+						priority = "medium" ,
+						blend_mode = "additive" ,
+						flags = { "trilinear-filtering" } ,
+						width = 110 ,
+						height = 62 ,
+						frame_count = 8 ,
+						line_length = 8 ,
+						animation_speed = 0.5 ,
+						scale = 1.5 ,
+						shift = SIUtils.by_pixel( 11.5 , 1 )
+					} ,
+					{
+						filename = SIGen.MakeSelfPicturePath( "终末之横扫千军光束-激光-尾部-光效" ) ,
+						priority = "medium" ,
+						draw_as_light = true ,
+              			flags = { "light" } ,
+						width = 110 ,
+						height = 62 ,
+						frame_count = 8 ,
+						line_length = 8 ,
+						animation_speed = 0.5 ,
+						scale = 1.5 ,
+						shift = SIUtils.by_pixel( 11.5 , 1 )
+					}
 				}
 			}
 		} ,
-		head =
+		ground =
 		{
-			layers =
-			{
-				{
-					filename = SIGen.MakeSelfPicturePath( "终末之横扫千军光束-激光-身体-光效" ) ,
-					priority = "medium" ,
-					width = 64 ,
-					height = 12 ,
-					frame_count = 8 ,
-					line_length = 8 ,
-					animation_speed = 0.5 ,
-					scale = 1.5
-				}
-			}
-		} ,
-		tail =
-		{
-			layers =
-			{
-				{
-					filename = SIGen.MakeSelfPicturePath( "终末之横扫千军光束-激光-尾部-光效" ) ,
-					priority = "medium" ,
-					width = 110 ,
-					height = 62 ,
-					frame_count = 8 ,
-					line_length = 8 ,
-					animation_speed = 0.5 ,
-					scale = 1.5 ,
-					shift = SIUtils.by_pixel( 11.5 , 1 )
-				}
-			}
-		}
-	} ,
-	ground_light_animations =
-	{
-		body =
+			body =
 		{
 			layers =
 			{
@@ -3353,6 +3333,7 @@ SIGen
 				}
 			}
 		}
+		}
 	} ,
 	working_sound =
 	{
@@ -3363,11 +3344,11 @@ SIGen
 		max_sounds_per_type = 1
 	}
 }
-.New( SICommon.Types.Items.Item , "Laser" , "终末之横扫千军光束" )
+.New( SICommon.Types.Items.Item , "SuperLaser" , "终末之横扫千军光束" )
 .AutoIcon()
 .Append
 {
-	flags = { SICommon.Flags.Item.HideFromFuelTooltip , SICommon.Flags.Item.Hidden } ,
+	flags = { SICommon.Flags.Item.HideFromFuelTooltip } ,
 	stack_size = 10 ,
 	default_request_amount = 10 ,
 	fuel_category = SIConstants_Core.raw.Categories.Fuel.Special ,
@@ -3376,20 +3357,20 @@ SIGen
 	fuel_top_speed_multiplier = 1.24 ,
 	fuel_emissions_multiplier = 115.65 ,
 	fuel_glow_color = { r = 1.00 , g = 0.94 , b = 0.46 } ,
-	burnt_result = SIConstants_Core.raw.Items.Candy ,
+	burnt_result = SIConstants_Core.raw.Items.SuperCandy ,
 	place_result = nil ,
 	placed_as_equipment_result = nil ,
 	rocket_launch_products =
 	{
 		{
 			type = SICommon.Types.Items.Item ,
-			name = SIConstants_Core.raw.Items.Candy ,
+			name = SIConstants_Core.raw.Items.SuperCandy ,
 			amount = 2 ,
 			catalyst_amount = 2
 		} ,
 		{
 			type = SICommon.Types.Items.Item ,
-			name = SIConstants_Core.raw.Items.Candy ,
+			name = SIConstants_Core.raw.Items.SuperCandy ,
 			probability = 0.2 ,
 			amount_min = 0 ,
 			amount_max = 20 ,
@@ -3397,7 +3378,7 @@ SIGen
 		} ,
 		{
 			type = SICommon.Types.Items.Item ,
-			name = SIConstants_Core.raw.Items.Candy ,
+			name = SIConstants_Core.raw.Items.SuperCandy ,
 			probability = 0.06 ,
 			amount_min = 0 ,
 			amount_max = 200 ,
@@ -3405,7 +3386,7 @@ SIGen
 		} ,
 		{
 			type = SICommon.Types.Items.Item ,
-			name = SIConstants_Core.raw.Items.Candy ,
+			name = SIConstants_Core.raw.Items.SuperCandy ,
 			probability = 0.02 ,
 			amount_min = 0 ,
 			amount_max = 2000 ,
@@ -3413,13 +3394,13 @@ SIGen
 		}
 	}
 }
-.New( SICommon.Types.Entities.Turret , "Laser" , "终末之横扫千军光束" )
+.New( SICommon.Types.Entities.Turret , "SuperLaser" , "终末之横扫千军光束" )
 .AutoIcon()
 .SetSize( 2 , 2 )
-.ReferencePlaceResult( SICommon.Types.Items.Item , SIConstants_Core.raw.Items.Laser )
+.ReferencePlaceResult( SICommon.Types.Items.Item , SIConstants_Core.raw.Items.SuperLaser )
 .Append
 {
-	flags = { SICommon.Flags.Entity.PlaceablePlayer , SICommon.Flags.Entity.PlayerCreation , SICommon.Flags.Entity.Hidden } ,
+	flags = { SICommon.Flags.Entity.PlaceablePlayer , SICommon.Flags.Entity.PlayerCreation } ,
 	minable =
 	{
 		mining_time = 5.0 ,
@@ -3427,7 +3408,7 @@ SIGen
 		{
 			{
 				type = SICommon.Types.Items.Item ,
-				name = SIConstants_Core.raw.Items.Laser ,
+				name = SIConstants_Core.raw.Items.SuperLaser ,
 				amount = 1
 			}
 		}
@@ -3468,9 +3449,9 @@ SIGen
 		movement_slow_down_factor = 0.5 ,
 		source_direction_count = 64 ,
 		source_offset = { 0 , -0.85587225 } ,
+		ammo_category = SIConstants_Core.raw.Categories.Ammo.Special,
 		ammo_type =
 		{
-			category = SIConstants_Core.raw.Categories.Ammo.Special ,
 			target_type = "entity" ,
 			action =
 			{
@@ -3481,7 +3462,7 @@ SIGen
 					{
 						{
 							type = "beam" ,
-							beam = SIConstants_Core.raw.Entities.Laser_BeamLarge ,
+							beam = SIConstants_Core.raw.Entities.SuperLaser_BeamLarge ,
 							max_length = 0 ,
 							duration = 4 ,
 							source_offset = { 0 , -1.31439 } ,
@@ -3492,32 +3473,38 @@ SIGen
 			}
 		}
 	} ,
-	base_picture =
+	graphics_set =
 	{
-		layers =
+		base_visualisation =
 		{
+			animation =
 			{
-				filename = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "终末之横扫千军光束" ) ,
-				priority = "high" ,
-				width = 70 ,
-				height = 52 ,
-				frame_count = 1 ,
-				line_length = 1 ,
-				direction_count = 1 ,
-				shift = SIUtils.by_pixel( 0 , 2 )
+				layers =
+				{
+					{
+						filename = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "终末之横扫千军光束" ) ,
+						priority = "high" ,
+						width = 70 ,
+						height = 52 ,
+						frame_count = 1 ,
+						line_length = 1 ,
+						direction_count = 1 ,
+						shift = SIUtils.by_pixel( 0 , 2 )
+					} ,
+					{
+						filename = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "终末之横扫千军光束-影子" ) ,
+						priority = "medium" ,
+						width = 66 ,
+						height = 42 ,
+						frame_count = 1 ,
+						line_length = 1 ,
+						direction_count = 1 ,
+						shift = SIUtils.by_pixel( 6 , 3 ) ,
+						draw_as_shadow = true
+					}
+				}
 			} ,
-			{
-				filename = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "终末之横扫千军光束-影子" ) ,
-				priority = "medium" ,
-				width = 66 ,
-				height = 42 ,
-				frame_count = 1 ,
-				line_length = 1 ,
-				direction_count = 1 ,
-				shift = SIUtils.by_pixel( 6 , 3 ) ,
-				draw_as_shadow = true
-			}
-		}
+		} ,
 	} ,
 	preparing_animation =
 	{
@@ -3749,21 +3736,21 @@ SIGen
 	} ,
 	preparing_sound =
 	{
-		SISound.Base( "fight/laser-turret-activate-01" , 0.3 ) ,
-		SISound.Base( "fight/laser-turret-activate-02" , 0.3 ) ,
-		SISound.Base( "fight/laser-turret-activate-03" , 0.3 )
+		SISound.Base( "fight/laser-turret-activate-1" , 0.3 ) ,
+		SISound.Base( "fight/laser-turret-activate-2" , 0.3 ) ,
+		SISound.Base( "fight/laser-turret-activate-3" , 0.3 )
 	} ,
 	folding_sound =
 	{
-		SISound.Base( "fight/laser-turret-deactivate-01" , 0.3 ) ,
-		SISound.Base( "fight/laser-turret-deactivate-02" , 0.3 ) ,
-		SISound.Base( "fight/laser-turret-deactivate-03" , 0.3 ) ,
-		SISound.Base( "fight/laser-turret-deactivate-04" , 0.3 )
+		SISound.Base( "fight/laser-turret-deactivate-1" , 0.3 ) ,
+		SISound.Base( "fight/laser-turret-deactivate-2" , 0.3 ) ,
+		SISound.Base( "fight/laser-turret-deactivate-3" , 0.3 ) ,
+		SISound.Base( "fight/laser-turret-deactivate-4" , 0.3 )
 	}
 }
-.New( SICommon.Types.Equipments.ActiveDefense , "Laser" , "终末之横扫千军光束" ,
+.New( SICommon.Types.Equipments.ActiveDefense , "SuperLaser" , "终末之横扫千军光束" ,
 {
-	take_result = SIConstants_Core.raw.Items.Laser ,
+	take_result = SIConstants_Core.raw.Items.SuperLaser ,
 	categories =
 	{
 		SIConstants_Core.raw.Categories.Equipment.Special
@@ -3780,7 +3767,7 @@ SIGen
 	energy_source =
 	{
 		type = SICommon.Flags.EnergySourceType.Electric ,
-		emissions_per_minute = 0 ,
+		emissions_per_minute = { pollution = 0.0 } ,
 		render_no_power_icon = false ,
 		render_no_network_icon = false ,
 		usage_priority = SICommon.Flags.ElectricUsagePriority.InputSecondary ,
@@ -3798,9 +3785,9 @@ SIGen
 		damage_modifier = 1.5 ,
 		source_direction_count = 64 ,
 		source_offset = { 0 , -0.5 } ,
+		ammo_category = SIConstants_Core.raw.Categories.Ammo.Special ,
 		ammo_type =
 		{
-			category = SIConstants_Core.raw.Categories.Ammo.Special ,
 			energy_consumption = "60GJ" ,
 			action =
 			{
@@ -3811,7 +3798,7 @@ SIGen
 					{
 						{
 							type = "beam" ,
-							beam = SIConstants_Core.raw.Entities.Laser_BeamSmall ,
+							beam = SIConstants_Core.raw.Entities.SuperLaser_BeamSmall ,
 							max_length = 0 ,
 							duration = 4 ,
 							source_offset = { 0 , -1 } ,
@@ -3832,16 +3819,16 @@ SIGen
 	}
 } )
 .MakeIcon( SICommon.Types.Items.Item , "终末之横扫千军光束" , 64 , 4 )
-.ReferenceEquipmentResult( SICommon.Types.Items.Item , SIConstants_Core.raw.Items.Laser )
+.ReferenceEquipmentResult( SICommon.Types.Items.Item , SIConstants_Core.raw.Items.SuperLaser )
 
 -- ======================================================================
 -- 超越之安如磐石战车
 -- ======================================================================
-.New( SICommon.Types.Items.Gun , "Tank_Gun" , "超越之安如磐石战车-机枪" )
+.New( SICommon.Types.Items.Gun , "SuperTank_Gun" , "超越之安如磐石战车-机枪" )
 .AutoIcon()
 .Append
 {
-	flags = { SICommon.Flags.Item.HideFromFuelTooltip , SICommon.Flags.Item.Hidden } ,
+	flags = { SICommon.Flags.Item.HideFromFuelTooltip } ,
 	stack_size = 1 ,
 	default_request_amount = 1 ,
 	fuel_category = SIConstants_Core.raw.Categories.Fuel.Special ,
@@ -3850,18 +3837,18 @@ SIGen
 	fuel_top_speed_multiplier = 1.14 ,
 	fuel_emissions_multiplier = 46.22 ,
 	fuel_glow_color = { r = 1.00 , g = 0.94 , b = 0.46 } ,
-	burnt_result = SIConstants_Core.raw.Items.Candy ,
+	burnt_result = SIConstants_Core.raw.Items.SuperCandy ,
 	rocket_launch_products =
 	{
 		{
 			type = SICommon.Types.Items.Item ,
-			name = SIConstants_Core.raw.Items.Candy ,
+			name = SIConstants_Core.raw.Items.SuperCandy ,
 			amount = 2 ,
 			catalyst_amount = 2
 		} ,
 		{
 			type = SICommon.Types.Items.Item ,
-			name = SIConstants_Core.raw.Items.Candy ,
+			name = SIConstants_Core.raw.Items.SuperCandy ,
 			probability = 0.2 ,
 			amount_min = 0 ,
 			amount_max = 20 ,
@@ -3869,7 +3856,7 @@ SIGen
 		} ,
 		{
 			type = SICommon.Types.Items.Item ,
-			name = SIConstants_Core.raw.Items.Candy ,
+			name = SIConstants_Core.raw.Items.SuperCandy ,
 			probability = 0.06 ,
 			amount_min = 0 ,
 			amount_max = 200 ,
@@ -3877,7 +3864,7 @@ SIGen
 		} ,
 		{
 			type = SICommon.Types.Items.Item ,
-			name = SIConstants_Core.raw.Items.Candy ,
+			name = SIConstants_Core.raw.Items.SuperCandy ,
 			probability = 0.02 ,
 			amount_min = 0 ,
 			amount_max = 2000 ,
@@ -3916,11 +3903,11 @@ SIGen
 		}
 	}
 }
-.New( SICommon.Types.Items.Gun , "Tank_Shut" , "超越之安如磐石战车-霰弹" )
+.New( SICommon.Types.Items.Gun , "SuperTank_Shut" , "超越之安如磐石战车-霰弹" )
 .AutoIcon()
 .Append
 {
-	flags = { SICommon.Flags.Item.HideFromFuelTooltip , SICommon.Flags.Item.Hidden } ,
+	flags = { SICommon.Flags.Item.HideFromFuelTooltip } ,
 	stack_size = 1 ,
 	default_request_amount = 1 ,
 	fuel_category = SIConstants_Core.raw.Categories.Fuel.Special ,
@@ -3929,18 +3916,18 @@ SIGen
 	fuel_top_speed_multiplier = 1.14 ,
 	fuel_emissions_multiplier = 46.22 ,
 	fuel_glow_color = { r = 1.00 , g = 0.94 , b = 0.46 } ,
-	burnt_result = SIConstants_Core.raw.Items.Candy ,
+	burnt_result = SIConstants_Core.raw.Items.SuperCandy ,
 	rocket_launch_products =
 	{
 		{
 			type = SICommon.Types.Items.Item ,
-			name = SIConstants_Core.raw.Items.Candy ,
+			name = SIConstants_Core.raw.Items.SuperCandy ,
 			amount = 2 ,
 			catalyst_amount = 2
 		} ,
 		{
 			type = SICommon.Types.Items.Item ,
-			name = SIConstants_Core.raw.Items.Candy ,
+			name = SIConstants_Core.raw.Items.SuperCandy ,
 			probability = 0.2 ,
 			amount_min = 0 ,
 			amount_max = 20 ,
@@ -3948,7 +3935,7 @@ SIGen
 		} ,
 		{
 			type = SICommon.Types.Items.Item ,
-			name = SIConstants_Core.raw.Items.Candy ,
+			name = SIConstants_Core.raw.Items.SuperCandy ,
 			probability = 0.06 ,
 			amount_min = 0 ,
 			amount_max = 200 ,
@@ -3956,7 +3943,7 @@ SIGen
 		} ,
 		{
 			type = SICommon.Types.Items.Item ,
-			name = SIConstants_Core.raw.Items.Candy ,
+			name = SIConstants_Core.raw.Items.SuperCandy ,
 			probability = 0.02 ,
 			amount_min = 0 ,
 			amount_max = 2000 ,
@@ -3996,11 +3983,11 @@ SIGen
 		}
 	}
 }
-.New( SICommon.Types.Items.Gun , "Tank_Cannon" , "超越之安如磐石战车-炮塔" )
+.New( SICommon.Types.Items.Gun , "SuperTank_Cannon" , "超越之安如磐石战车-炮塔" )
 .AutoIcon()
 .Append
 {
-	flags = { SICommon.Flags.Item.HideFromFuelTooltip , SICommon.Flags.Item.Hidden } ,
+	flags = { SICommon.Flags.Item.HideFromFuelTooltip } ,
 	stack_size = 1 ,
 	default_request_amount = 1 ,
 	fuel_category = SIConstants_Core.raw.Categories.Fuel.Special ,
@@ -4009,18 +3996,18 @@ SIGen
 	fuel_top_speed_multiplier = 1.14 ,
 	fuel_emissions_multiplier = 46.22 ,
 	fuel_glow_color = { r = 1.00 , g = 0.94 , b = 0.46 } ,
-	burnt_result = SIConstants_Core.raw.Items.Candy ,
+	burnt_result = SIConstants_Core.raw.Items.SuperCandy ,
 	rocket_launch_products =
 	{
 		{
 			type = SICommon.Types.Items.Item ,
-			name = SIConstants_Core.raw.Items.Candy ,
+			name = SIConstants_Core.raw.Items.SuperCandy ,
 			amount = 2 ,
 			catalyst_amount = 2
 		} ,
 		{
 			type = SICommon.Types.Items.Item ,
-			name = SIConstants_Core.raw.Items.Candy ,
+			name = SIConstants_Core.raw.Items.SuperCandy ,
 			probability = 0.2 ,
 			amount_min = 0 ,
 			amount_max = 20 ,
@@ -4028,7 +4015,7 @@ SIGen
 		} ,
 		{
 			type = SICommon.Types.Items.Item ,
-			name = SIConstants_Core.raw.Items.Candy ,
+			name = SIConstants_Core.raw.Items.SuperCandy ,
 			probability = 0.06 ,
 			amount_min = 0 ,
 			amount_max = 200 ,
@@ -4036,7 +4023,7 @@ SIGen
 		} ,
 		{
 			type = SICommon.Types.Items.Item ,
-			name = SIConstants_Core.raw.Items.Candy ,
+			name = SIConstants_Core.raw.Items.SuperCandy ,
 			probability = 0.02 ,
 			amount_min = 0 ,
 			amount_max = 2000 ,
@@ -4076,11 +4063,11 @@ SIGen
 		}
 	}
 }
-.New( SICommon.Types.Items.Gun , "Tank_Rocket" , "超越之安如磐石战车-火箭" )
+.New( SICommon.Types.Items.Gun , "SuperTank_Rocket" , "超越之安如磐石战车-火箭" )
 .AutoIcon()
 .Append
 {
-	flags = { SICommon.Flags.Item.HideFromFuelTooltip , SICommon.Flags.Item.Hidden } ,
+	flags = { SICommon.Flags.Item.HideFromFuelTooltip } ,
 	stack_size = 1 ,
 	default_request_amount = 1 ,
 	fuel_category = SIConstants_Core.raw.Categories.Fuel.Special ,
@@ -4089,18 +4076,18 @@ SIGen
 	fuel_top_speed_multiplier = 1.14 ,
 	fuel_emissions_multiplier = 46.22 ,
 	fuel_glow_color = { r = 1.00 , g = 0.94 , b = 0.46 } ,
-	burnt_result = SIConstants_Core.raw.Items.Candy ,
+	burnt_result = SIConstants_Core.raw.Items.SuperCandy ,
 	rocket_launch_products =
 	{
 		{
 			type = SICommon.Types.Items.Item ,
-			name = SIConstants_Core.raw.Items.Candy ,
+			name = SIConstants_Core.raw.Items.SuperCandy ,
 			amount = 2 ,
 			catalyst_amount = 2
 		} ,
 		{
 			type = SICommon.Types.Items.Item ,
-			name = SIConstants_Core.raw.Items.Candy ,
+			name = SIConstants_Core.raw.Items.SuperCandy ,
 			probability = 0.2 ,
 			amount_min = 0 ,
 			amount_max = 20 ,
@@ -4108,7 +4095,7 @@ SIGen
 		} ,
 		{
 			type = SICommon.Types.Items.Item ,
-			name = SIConstants_Core.raw.Items.Candy ,
+			name = SIConstants_Core.raw.Items.SuperCandy ,
 			probability = 0.06 ,
 			amount_min = 0 ,
 			amount_max = 200 ,
@@ -4116,7 +4103,7 @@ SIGen
 		} ,
 		{
 			type = SICommon.Types.Items.Item ,
-			name = SIConstants_Core.raw.Items.Candy ,
+			name = SIConstants_Core.raw.Items.SuperCandy ,
 			probability = 0.02 ,
 			amount_min = 0 ,
 			amount_max = 2000 ,
@@ -4153,11 +4140,11 @@ SIGen
 		}
 	}
 }
-.New( SICommon.Types.Items.Gun , "Tank_Flame" , "超越之安如磐石战车-喷火" )
+.New( SICommon.Types.Items.Gun , "SuperTank_Flame" , "超越之安如磐石战车-喷火" )
 .AutoIcon()
 .Append
 {
-	flags = { SICommon.Flags.Item.HideFromFuelTooltip , SICommon.Flags.Item.Hidden } ,
+	flags = { SICommon.Flags.Item.HideFromFuelTooltip } ,
 	stack_size = 1 ,
 	default_request_amount = 1 ,
 	fuel_category = SIConstants_Core.raw.Categories.Fuel.Special ,
@@ -4166,18 +4153,18 @@ SIGen
 	fuel_top_speed_multiplier = 1.14 ,
 	fuel_emissions_multiplier = 46.22 ,
 	fuel_glow_color = { r = 1.00 , g = 0.94 , b = 0.46 } ,
-	burnt_result = SIConstants_Core.raw.Items.Candy ,
+	burnt_result = SIConstants_Core.raw.Items.SuperCandy ,
 	rocket_launch_products =
 	{
 		{
 			type = SICommon.Types.Items.Item ,
-			name = SIConstants_Core.raw.Items.Candy ,
+			name = SIConstants_Core.raw.Items.SuperCandy ,
 			amount = 2 ,
 			catalyst_amount = 2
 		} ,
 		{
 			type = SICommon.Types.Items.Item ,
-			name = SIConstants_Core.raw.Items.Candy ,
+			name = SIConstants_Core.raw.Items.SuperCandy ,
 			probability = 0.2 ,
 			amount_min = 0 ,
 			amount_max = 20 ,
@@ -4185,7 +4172,7 @@ SIGen
 		} ,
 		{
 			type = SICommon.Types.Items.Item ,
-			name = SIConstants_Core.raw.Items.Candy ,
+			name = SIConstants_Core.raw.Items.SuperCandy ,
 			probability = 0.06 ,
 			amount_min = 0 ,
 			amount_max = 200 ,
@@ -4193,7 +4180,7 @@ SIGen
 		} ,
 		{
 			type = SICommon.Types.Items.Item ,
-			name = SIConstants_Core.raw.Items.Candy ,
+			name = SIConstants_Core.raw.Items.SuperCandy ,
 			probability = 0.02 ,
 			amount_min = 0 ,
 			amount_max = 2000 ,
@@ -4230,11 +4217,11 @@ SIGen
 		}
 	}
 }
-.New( SICommon.Types.Items.Gun , "Tank_Heavy" , "超越之安如磐石战车-重炮" )
+.New( SICommon.Types.Items.Gun , "SuperTank_Heavy" , "超越之安如磐石战车-重炮" )
 .AutoIcon()
 .Append
 {
-	flags = { SICommon.Flags.Item.HideFromFuelTooltip , SICommon.Flags.Item.Hidden } ,
+	flags = { SICommon.Flags.Item.HideFromFuelTooltip } ,
 	stack_size = 1 ,
 	default_request_amount = 1 ,
 	fuel_category = SIConstants_Core.raw.Categories.Fuel.Special ,
@@ -4243,18 +4230,18 @@ SIGen
 	fuel_top_speed_multiplier = 1.14 ,
 	fuel_emissions_multiplier = 46.22 ,
 	fuel_glow_color = { r = 1.00 , g = 0.94 , b = 0.46 } ,
-	burnt_result = SIConstants_Core.raw.Items.Candy ,
+	burnt_result = SIConstants_Core.raw.Items.SuperCandy ,
 	rocket_launch_products =
 	{
 		{
 			type = SICommon.Types.Items.Item ,
-			name = SIConstants_Core.raw.Items.Candy ,
+			name = SIConstants_Core.raw.Items.SuperCandy ,
 			amount = 2 ,
 			catalyst_amount = 2
 		} ,
 		{
 			type = SICommon.Types.Items.Item ,
-			name = SIConstants_Core.raw.Items.Candy ,
+			name = SIConstants_Core.raw.Items.SuperCandy ,
 			probability = 0.2 ,
 			amount_min = 0 ,
 			amount_max = 20 ,
@@ -4262,7 +4249,7 @@ SIGen
 		} ,
 		{
 			type = SICommon.Types.Items.Item ,
-			name = SIConstants_Core.raw.Items.Candy ,
+			name = SIConstants_Core.raw.Items.SuperCandy ,
 			probability = 0.06 ,
 			amount_min = 0 ,
 			amount_max = 200 ,
@@ -4270,7 +4257,7 @@ SIGen
 		} ,
 		{
 			type = SICommon.Types.Items.Item ,
-			name = SIConstants_Core.raw.Items.Candy ,
+			name = SIConstants_Core.raw.Items.SuperCandy ,
 			probability = 0.02 ,
 			amount_min = 0 ,
 			amount_max = 2000 ,
@@ -4314,7 +4301,7 @@ SIGen
 		}
 	}
 }
-.New( SICommon.Types.EquipmentGrid , "Tank_Grid" , "超越之安如磐石战车-区域" ,
+.New( SICommon.Types.EquipmentGrid , "SuperTank_Grid" , "超越之安如磐石战车-区域" ,
 {
 	width = 20 ,
 	height = 20 ,
@@ -4324,11 +4311,11 @@ SIGen
 		SIConstants_Core.raw.Categories.Equipment.Special
 	}
 } )
-.New( SICommon.Types.Items.ItemEntity , "Tank" , "超越之安如磐石战车" )
+.New( SICommon.Types.Items.ItemEntity , "SuperTank" , "超越之安如磐石战车" )
 .AutoIcon()
 .Append
 {
-	flags = { SICommon.Flags.Item.HideFromFuelTooltip , SICommon.Flags.Item.Hidden } ,
+	flags = { SICommon.Flags.Item.HideFromFuelTooltip } ,
 	stack_size = 1 ,
 	default_request_amount = 1 ,
 	fuel_category = SIConstants_Core.raw.Categories.Fuel.Special ,
@@ -4337,20 +4324,20 @@ SIGen
 	fuel_top_speed_multiplier = 1.02 ,
 	fuel_emissions_multiplier = 175.65 ,
 	fuel_glow_color = { r = 1.00 , g = 0.94 , b = 0.46 } ,
-	burnt_result = SIConstants_Core.raw.Items.Candy ,
+	burnt_result = SIConstants_Core.raw.Items.SuperCandy ,
 	place_result = nil ,
 	placed_as_equipment_result = nil ,
 	rocket_launch_products =
 	{
 		{
 			type = SICommon.Types.Items.Item ,
-			name = SIConstants_Core.raw.Items.Candy ,
+			name = SIConstants_Core.raw.Items.SuperCandy ,
 			amount = 2 ,
 			catalyst_amount = 2
 		} ,
 		{
 			type = SICommon.Types.Items.Item ,
-			name = SIConstants_Core.raw.Items.Candy ,
+			name = SIConstants_Core.raw.Items.SuperCandy ,
 			probability = 0.2 ,
 			amount_min = 0 ,
 			amount_max = 20 ,
@@ -4358,7 +4345,7 @@ SIGen
 		} ,
 		{
 			type = SICommon.Types.Items.Item ,
-			name = SIConstants_Core.raw.Items.Candy ,
+			name = SIConstants_Core.raw.Items.SuperCandy ,
 			probability = 0.06 ,
 			amount_min = 0 ,
 			amount_max = 200 ,
@@ -4366,7 +4353,7 @@ SIGen
 		} ,
 		{
 			type = SICommon.Types.Items.Item ,
-			name = SIConstants_Core.raw.Items.Candy ,
+			name = SIConstants_Core.raw.Items.SuperCandy ,
 			probability = 0.02 ,
 			amount_min = 0 ,
 			amount_max = 2000 ,
@@ -4374,12 +4361,12 @@ SIGen
 		}
 	}
 }
-.New( SICommon.Types.Entities.Car , "Tank" , "超越之安如磐石战车" )
+.New( SICommon.Types.Entities.Car , "SuperTank" , "超越之安如磐石战车" )
 .AutoIcon()
-.ReferencePlaceResult( SICommon.Types.Items.ItemEntity , SIConstants_Core.raw.Items.Tank )
+.ReferencePlaceResult( SICommon.Types.Items.ItemEntity , SIConstants_Core.raw.Items.SuperTank )
 .Append
 {
-	flags = { SICommon.Flags.Entity.PlaceablePlayer , SICommon.Flags.Entity.PlayerCreation , SICommon.Flags.Entity.PlaceableOffGrid , SICommon.Flags.Entity.NotFlammable , SICommon.Flags.Entity.Hidden } ,
+	flags = { SICommon.Flags.Entity.PlaceablePlayer , SICommon.Flags.Entity.PlayerCreation , SICommon.Flags.Entity.PlaceableOffGrid , SICommon.Flags.Entity.NotFlammable } ,
 	minable =
 	{
 		mining_time = 10.0 ,
@@ -4387,7 +4374,7 @@ SIGen
 		{
 			{
 				type = SICommon.Types.Items.Item ,
-				name = SIConstants_Core.raw.Items.Tank ,
+				name = SIConstants_Core.raw.Items.SuperTank ,
 				amount = 1
 			}
 		}
@@ -4395,7 +4382,13 @@ SIGen
 	selection_box = { { -0.9 * tankSize , -1.3 * tankSize } , { 0.9 * tankSize , 1.3 * tankSize } } ,
 	collision_box = { { -0.9 * tankSize , -1.3 * tankSize } , { 0.9 * tankSize , 1.3 * tankSize } } ,
 	drawing_box = { { -1.8 * tankSize , -1.8 * tankSize } , { 1.8 * tankSize , 1.5 * tankSize } } ,
-	collision_mask = { SICommon.Flags.CollisionMask.ConsiderTileTransitions } ,
+	collision_mask =
+	{
+		not_colliding_with_itself = false ,
+		consider_tile_transitions = true ,
+		colliding_with_tiles_only = false ,
+		layers = {}
+	} ,
 	max_health = maxHealth * 20 ,
 	corpse = "tank-remnants" ,
 	dying_explosion = "nuke-explosion" ,
@@ -4427,10 +4420,10 @@ SIGen
 		damage_type_filters = "fire"
 	} ,
 	repair_speed_modifier = 26.0 ,
-	burner =
+	energy_source =
 	{
 		type = SICommon.Flags.EnergySourceType.Burner ,
-		emissions_per_minute = 10 ,
+		emissions_per_minute = { pollution = 10.0 } ,
 		render_no_power_icon = true ,
 		render_no_network_icon = true ,
 		fuel_inventory_size = 3 ,
@@ -4481,12 +4474,12 @@ SIGen
 	equipment_grid = SIConstants_Core.raw.EquipmentGrids.Tank_Grid ,
 	guns =
 	{
-		SIConstants_Core.raw.Items.Tank_Gun ,
-		SIConstants_Core.raw.Items.Tank_Shut ,
-		SIConstants_Core.raw.Items.Tank_Cannon ,
-		SIConstants_Core.raw.Items.Tank_Rocket ,
-		SIConstants_Core.raw.Items.Tank_Flame ,
-		SIConstants_Core.raw.Items.Tank_Heavy
+		SIConstants_Core.raw.Items.SuperTank_Gun ,
+		SIConstants_Core.raw.Items.SuperTank_Shut ,
+		SIConstants_Core.raw.Items.SuperTank_Cannon ,
+		SIConstants_Core.raw.Items.SuperTank_Rocket ,
+		SIConstants_Core.raw.Items.SuperTank_Flame ,
+		SIConstants_Core.raw.Items.SuperTank_Heavy
 	} ,
 	track_particle_triggers = SINeed( "Gen/TankTrack" ) ,
 	rotation_speed = 0.012 ,
@@ -4767,9 +4760,9 @@ SIGen
 		match_speed_to_activity = true
 	}
 }
-.New( SICommon.Types.Equipments.ActiveDefense , "Tank" , "超越之安如磐石战车" ,
+.New( SICommon.Types.Equipments.ActiveDefense , "SuperTank" , "超越之安如磐石战车" ,
 {
-	take_result = SIConstants_Core.raw.Items.Tank ,
+	take_result = SIConstants_Core.raw.Items.SuperTank ,
 	categories =
 	{
 		SIConstants_Core.raw.Categories.Equipment.Special
@@ -4786,7 +4779,7 @@ SIGen
 	energy_source =
 	{
 		type = SICommon.Flags.EnergySourceType.Electric ,
-		emissions_per_minute = 0 ,
+		emissions_per_minute = { pollution = 0.0 } ,
 		render_no_power_icon = false ,
 		render_no_network_icon = false ,
 		usage_priority = SICommon.Flags.ElectricUsagePriority.InputSecondary ,
@@ -4804,9 +4797,9 @@ SIGen
 		damage_modifier = 1.5 ,
 		source_direction_count = 64 ,
 		source_offset = { 0 , -0.5 } ,
+		ammo_category = SIConstants_Core.raw.Categories.Ammo.Special ,
 		ammo_type =
 		{
-			category = SIConstants_Core.raw.Categories.Ammo.Special ,
 			energy_consumption = "60GJ" ,
 			action =
 			{
@@ -4817,7 +4810,7 @@ SIGen
 					{
 						{
 							type = "beam" ,
-							beam = SIConstants_Core.raw.Entities.Laser_BeamSmall ,
+							beam = SIConstants_Core.raw.Entities.SuperLaser_BeamSmall ,
 							max_length = 0 ,
 							duration = 4 ,
 							source_offset = { 0 , -1 } ,
@@ -4838,4 +4831,4 @@ SIGen
 	}
 } )
 .MakeIcon( SICommon.Types.Items.ItemEntity , "超越之安如磐石战车" , 64 , 4 )
-.ReferenceEquipmentResult( SICommon.Types.Items.ItemEntity , SIConstants_Core.raw.Items.Tank )
+.ReferenceEquipmentResult( SICommon.Types.Items.ItemEntity , SIConstants_Core.raw.Items.SuperTank )

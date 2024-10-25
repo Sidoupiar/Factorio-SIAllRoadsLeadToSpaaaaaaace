@@ -8,7 +8,8 @@ SIGen =
 {
 	-- 固定属性
 	ID = "SIGen" ,
-	Name = "构造器" ,
+	Code = "SIGen" ,
+	Show = "构造器" ,
 	StylePath = GetCorePath() .. "/define/data/graphic/控件贴图.png" ,
 	-- 动态属性
 	CurrentPrototypeData = nil ,
@@ -395,7 +396,7 @@ function SIGen.New( typeCode , prototypeID , aliasName , prototypeDataToCopy )
 	if not SIGen.CurrentSubgroup then
 		return CodeE( SIGen , "创建原型数据时 , 需要先通过 SIGen.SetGroup 函数设置一个可用的子分组" )
 	end
-	if not SICommon.ShowNamePrefix[typeCode] then
+	if not SICommon.CodeNamePrefix[typeCode] or not SICommon.ShowNamePrefix[typeCode] then
 		return CodeE( SIGen , "构造器无法创建不支持的类型的原型数据 , 当前类型 = " .. typeCode )
 	end
 	if typeCode == SICommon.Types.Group or typeCode == SICommon.Types.Subgroup then
@@ -405,9 +406,11 @@ function SIGen.New( typeCode , prototypeID , aliasName , prototypeDataToCopy )
 		return CodeE( SIGen , "流程已经结束 , 无法使用 SIGen.New 函数" )
 	end
 	local constantsData = SIGen.TempConstantsData or SIInit.CurrentConstantsData
+	local codeNamePrefix = SICommon.CodeNamePrefix[typeCode]
 	local showNamePrefix = SICommon.ShowNamePrefix[typeCode]
+	local codeName = codeNamePrefix .. prototypeID:gsub( "_" , "-" )
 	local showName = showNamePrefix .. ( aliasName or prototypeID ):gsub( "_" , "-" )
-	local realName = constantsData.ShowNamePrefix .. showName
+	local realName = constantsData.CodeNamePrefix .. codeName
 	if raw[typeCode] and raw[typeCode][realName] then
 		return CodeE( SIGen , "同名原型数据已存在 , prototypeName = " .. realName )
 	end
@@ -436,6 +439,8 @@ function SIGen.New( typeCode , prototypeID , aliasName , prototypeDataToCopy )
 	prototypeData.order = OrderOffset and constantsData.GetOrderStringWithOffset( OrderOffset ) or constantsData.GetOrderString()
 	prototypeData.SIGenData =
 	{
+		CodeName = codeName ,
+		CodeNamePrefix = codeNamePrefix ,
 		ShowName = showName ,
 		ShowNamePrefix = showNamePrefix
 	}
@@ -1195,11 +1200,11 @@ function SIGen.AutoIconItem( iconItemDataList )
 		SIGen
 		.New( SICommon.Types.Items.Item , itemID , alias ,
 		{
-			flags = { SICommon.Flags.Item.HideFromFuelTooltip , SICommon.Flags.Item.Hidden } ,
+			flags = { SICommon.Flags.Item.HideFromFuelTooltip } ,
 			stack_size = 1000 ,
 			default_request_amount = 1000 ,
 			fuel_category = SIConstants_Core.raw.Categories.Fuel.Special ,
-			fuel_value = "1KJ" ,
+			fuel_value = "1J" ,
 			fuel_acceleration_multiplier = 0.3 ,
 			fuel_top_speed_multiplier = 0.3 ,
 			fuel_emissions_multiplier = 9000 ,
@@ -1231,7 +1236,7 @@ function SIGen.AutoIconItem( iconItemDataList )
 		end )
 		.New( SICommon.Types.Entities.SimpleOwner , itemID , alias ,
 		{
-			flags = { SICommon.Flags.Entity.PlaceablePlayer , SICommon.Flags.Entity.PlayerCreation , SICommon.Flags.Entity.HideAltInfo , SICommon.Flags.Entity.Hidden } ,
+			flags = { SICommon.Flags.Entity.PlaceablePlayer , SICommon.Flags.Entity.PlayerCreation , SICommon.Flags.Entity.HideAltInfo } ,
 			minable =
 			{
 				mining_time = 1.0 ,
@@ -1331,7 +1336,7 @@ function SIGen.AutoIconItem( iconItemDataList )
 			energy_source =
 			{
 				type = SICommon.Flags.EnergySourceType.Electric ,
-				emissions_per_minute = 0 ,
+				emissions_per_minute = { pollution = 0.0 } ,
 				render_no_power_icon = false ,
 				render_no_network_icon = false ,
 				usage_priority = SICommon.Flags.ElectricUsagePriority.Tertiary ,

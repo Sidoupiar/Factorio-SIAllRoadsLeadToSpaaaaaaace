@@ -121,7 +121,7 @@ SIGen
 .SetSizeScale( 1 , 1 , 0 )
 .Append
 {
-	flags = { SICommon.Flags.Entity.PlaceableNeutral , SICommon.Flags.Entity.NotOnMap , SICommon.Flags.Entity.Hidden } ,
+	flags = { SICommon.Flags.Entity.PlaceableNeutral , SICommon.Flags.Entity.NotOnMap } ,
 	time_before_removed = 54000 , -- 15 分钟
 	tile_width = 1 ,
 	tile_height = 1 ,
@@ -171,7 +171,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Wall , "RuinWall" , "遗迹围墙" 
 	} ,
 	icon_size = 64 ,
 	icon_mipmaps = 4 ,
-	flags = { SICommon.Flags.Entity.PlaceableEnemy , SICommon.Flags.Entity.Hidden } ,
+	flags = { SICommon.Flags.Entity.PlaceableEnemy } ,
 	minable =
 	{
 		mining_time = 6000.0 ,
@@ -864,7 +864,7 @@ SIGen
 .SetSizeScale( 1 , 1 , 0 )
 .Append
 {
-	flags = { SICommon.Flags.Entity.PlaceableNeutral , SICommon.Flags.Entity.NotOnMap , SICommon.Flags.Entity.Hidden } ,
+	flags = { SICommon.Flags.Entity.PlaceableNeutral , SICommon.Flags.Entity.NotOnMap } ,
 	time_before_removed = 54000 , -- 15 分钟
 	tile_width = 1 ,
 	tile_height = 1 ,
@@ -916,7 +916,7 @@ CreateRuinBuildings( SICommon.Types.Entities.LandMine , "RuinLandMine" , "遗迹
 	} ,
 	icon_size = 64 ,
 	icon_mipmaps = 4 ,
-	flags = { SICommon.Flags.Entity.PlaceableEnemy , SICommon.Flags.Entity.NotOnMap , SICommon.Flags.Entity.Hidden } ,
+	flags = { SICommon.Flags.Entity.PlaceableEnemy , SICommon.Flags.Entity.NotOnMap } ,
 	minable =
 	{
 		mining_time = 6000.0 ,
@@ -1097,7 +1097,7 @@ SIGen
 .SetSizeScale( 2 , 2 , 0 )
 .Append
 {
-	flags = { SICommon.Flags.Entity.PlaceableNeutral , SICommon.Flags.Entity.NotOnMap , SICommon.Flags.Entity.Hidden } ,
+	flags = { SICommon.Flags.Entity.PlaceableNeutral , SICommon.Flags.Entity.NotOnMap } ,
 	time_before_removed = 54000 , -- 15 分钟
 	tile_width = 2 ,
 	tile_height = 2 ,
@@ -1176,7 +1176,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Turret , "RuinGunTurret" , "遗迹�
 	} ,
 	icon_size = 64 ,
 	icon_mipmaps = 4 ,
-	flags = { SICommon.Flags.Entity.PlaceableEnemy , SICommon.Flags.Entity.Hidden } ,
+	flags = { SICommon.Flags.Entity.PlaceableEnemy } ,
 	minable =
 	{
 		mining_time = 6000.0 ,
@@ -2108,7 +2108,7 @@ SIGen
 .New( SICommon.Types.Entities.Beam , "RuinLaserTurret_Beam" , "遗迹激光炮塔-激光" )
 .Append
 {
-	flags = { SICommon.Flags.Entity.NotOnMap , SICommon.Flags.Entity.Hidden } ,
+	flags = { SICommon.Flags.Entity.NotOnMap } ,
 	selectable_in_game = false ,
 	width = 2.5 ,
 	damage_interval = 15 ,
@@ -2322,7 +2322,7 @@ SIGen
 .SetSizeScale( 2 , 2 , 0 )
 .Append
 {
-	flags = { SICommon.Flags.Entity.PlaceableNeutral , SICommon.Flags.Entity.NotOnMap , SICommon.Flags.Entity.Hidden } ,
+	flags = { SICommon.Flags.Entity.PlaceableNeutral , SICommon.Flags.Entity.NotOnMap } ,
 	time_before_removed = 54000 , -- 15 分钟
 	tile_width = 2 ,
 	tile_height = 2 ,
@@ -2401,7 +2401,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Turret , "RuinLaserTurret" , "遗�
 	} ,
 	icon_size = 64 ,
 	icon_mipmaps = 4 ,
-	flags = { SICommon.Flags.Entity.PlaceableEnemy , SICommon.Flags.Entity.Hidden } ,
+	flags = { SICommon.Flags.Entity.PlaceableEnemy } ,
 	minable =
 	{
 		mining_time = 6000.0 ,
@@ -3260,7 +3260,7 @@ SIGen
 .SetSizeScale( 2 , 2 , 0 )
 .Append
 {
-	flags = { SICommon.Flags.Entity.PlaceableNeutral , SICommon.Flags.Entity.NotOnMap , SICommon.Flags.Entity.Hidden } ,
+	flags = { SICommon.Flags.Entity.PlaceableNeutral , SICommon.Flags.Entity.NotOnMap } ,
 	time_before_removed = 54000 , -- 15 分钟
 	tile_width = 2 ,
 	tile_height = 2 ,
@@ -3344,7 +3344,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Turret , "RuinFlameTurret" , "遗�
 	} ,
 	icon_size = 64 ,
 	icon_mipmaps = 4 ,
-	flags = { SICommon.Flags.Entity.PlaceableEnemy , SICommon.Flags.Entity.Hidden } ,
+	flags = { SICommon.Flags.Entity.PlaceableEnemy } ,
 	minable =
 	{
 		mining_time = 6000.0 ,
@@ -3849,7 +3849,7 @@ SIGen
 .SetSizeScale( 1 , 1 , 0 )
 .Append
 {
-	flags = { SICommon.Flags.Entity.PlaceableNeutral , SICommon.Flags.Entity.Building8Way , SICommon.Flags.Entity.NotOnMap , SICommon.Flags.Entity.Hidden } ,
+	flags = { SICommon.Flags.Entity.PlaceableNeutral , SICommon.Flags.Entity.Building8Way , SICommon.Flags.Entity.NotOnMap } ,
 	time_before_removed = 54000 , -- 15 分钟
 	tile_width = 1 ,
 	tile_height = 1 ,
@@ -3904,7 +3904,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Container , "RuinChest" , "遗迹�
 	} ,
 	icon_size = 64 ,
 	icon_mipmaps = 4 ,
-	flags = { SICommon.Flags.Entity.PlaceableEnemy , SICommon.Flags.Entity.NotOnMap , SICommon.Flags.Entity.Hidden } ,
+	flags = { SICommon.Flags.Entity.PlaceableEnemy , SICommon.Flags.Entity.NotOnMap } ,
 	minable =
 	{
 		mining_time = 6000.0 ,
@@ -4014,7 +4014,7 @@ SIGen
 .SetSizeScale( 2 , 2 , 0 )
 .Append
 {
-	flags = { SICommon.Flags.Entity.PlaceableNeutral , SICommon.Flags.Entity.NotOnMap , SICommon.Flags.Entity.Hidden } ,
+	flags = { SICommon.Flags.Entity.PlaceableNeutral , SICommon.Flags.Entity.NotOnMap } ,
 	time_before_removed = 54000 , -- 15 分钟
 	tile_width = 3 ,
 	tile_height = 3 ,
@@ -4066,7 +4066,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Machine , "RuinMachine" , "遗迹�
 	} ,
 	icon_size = 64 ,
 	icon_mipmaps = 4 ,
-	flags = { SICommon.Flags.Entity.PlaceableEnemy , SICommon.Flags.Entity.NotOnMap , SICommon.Flags.Entity.Hidden } ,
+	flags = { SICommon.Flags.Entity.PlaceableEnemy , SICommon.Flags.Entity.NotOnMap } ,
 	minable =
 	{
 		mining_time = 6000.0 ,
@@ -4752,7 +4752,7 @@ SIGen
 .SetSizeScale( 1 , 1 , 0 )
 .Append
 {
-	flags = { SICommon.Flags.Entity.PlaceableNeutral , SICommon.Flags.Entity.NotOnMap , SICommon.Flags.Entity.Hidden } ,
+	flags = { SICommon.Flags.Entity.PlaceableNeutral , SICommon.Flags.Entity.NotOnMap } ,
 	time_before_removed = 54000 , -- 15 分钟
 	tile_width = 1 ,
 	tile_height = 1 ,
@@ -4795,7 +4795,7 @@ SIGen
 .SetSize( 1 , 1 )
 .Append
 {
-	flags = { SICommon.Flags.Entity.PlaceableEnemy , SICommon.Flags.Entity.NotOnMap , SICommon.Flags.Entity.Hidden } ,
+	flags = { SICommon.Flags.Entity.PlaceableEnemy , SICommon.Flags.Entity.NotOnMap } ,
 	minable =
 	{
 		mining_time = 6000.0 ,

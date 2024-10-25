@@ -100,10 +100,6 @@ SIControl.Init
 		OreMap     = "黄图" ,
 		RequestMap = "紫图"
 	} ,
-	[SICommon.Types.Entities.FlyingText] =
-	{
-		FlyingText = "飞行文字"
-	} ,
 	[SICommon.Types.Input] =
 	{
 		OreMapFrame = "黄图窗口" ,

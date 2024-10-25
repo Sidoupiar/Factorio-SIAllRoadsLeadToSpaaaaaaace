@@ -22,7 +22,8 @@
 SIFunctions =
 {
 	ID = "SIFunctions" ,
-	Name = "常用函数"
+	Code = "SIFunctions" ,
+	Show = "常用函数"
 }
 
 -- ============================================================================================================================================
@@ -37,7 +38,7 @@ function SIFunctions.FlyingText( text , entity , height )
 		name = SIConstants_Core and SIConstants_Core.raw.Entities.FlyingText or "tutorial-flying-text" ,
 		text = text ,
 		position = { x = entity.position.x , y = entity.position.y - height } ,
-		color = { r = 1 , g = 1 , b = 1 , a = 1 }
+		color = { r = 1.00 , g = 1.00 , b = 1.00 , a = 1.00 }
 	}
 end
 
@@ -47,7 +48,7 @@ function SIFunctions.FlyingTextPlayer( text , player , height , createAtCursor )
 		text = text ,
 		position = { x = player.position.x , y = player.position.y - height } ,
 		create_at_cursor = createAtCursor or false ,
-		color = { r = 1 , g = 1 , b = 1 , a = 1 } ,
+		color = { r = 1.00 , g = 1.00 , b = 1.00 , a = 1.00 } ,
 		time_to_live = 150 ,
 		speed = 0.03
 	}
@@ -59,7 +60,7 @@ function SIFunctions.FlyingTextForce( text , entity , height , force )
 		name = SIConstants_Core and SIConstants_Core.raw.Entities.FlyingText or "tutorial-flying-text" ,
 		text = text ,
 		position = { x = entity.position.x , y = entity.position.y - height } ,
-		color = { r = 1 , g = 1 , b = 1 , a = 1 }
+		color = { r = 1.00 , g = 1.00 , b = 1.00 , a = 1.00 }
 	}
 	textEntity.render_to_forces = { force }
 end
@@ -70,7 +71,7 @@ function SIFunctions.FlyingTextForceList( text , entity , height , forceList )
 		name = SIConstants_Core and SIConstants_Core.raw.Entities.FlyingText or "tutorial-flying-text" ,
 		text = text ,
 		position = { x = entity.position.x , y = entity.position.y - height } ,
-		color = { r = 1 , g = 1 , b = 1 , a = 1 }
+		color = { r = 1.00 , g = 1.00 , b = 1.00 , a = 1.00 }
 	}
 	textEntity.render_to_forces = forceList
 end

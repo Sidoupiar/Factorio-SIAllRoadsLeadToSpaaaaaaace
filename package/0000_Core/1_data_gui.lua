@@ -15,7 +15,7 @@ SIGen
 -- ============================================================================================================================================
 
 SIGen
-.SetGroup( SIConstants_Core.raw.Groups.Hidden.Icon )
+.SetGroup( SIConstants_Core.raw.Groups.Hidden.IconItem )
 .AutoIconItem
 {
 	IconEmpty = "图标空的" ,
@@ -1089,7 +1089,7 @@ SIGen
 	-- 标签本体
 	tab_container =
 	{
-		type = "horizontal_flow_style" ,
+		type = "table_style" ,
 		-- 偏移
 		right_padding = 12 ,
 		left_padding = 12 ,
@@ -1562,7 +1562,7 @@ SIGen
 	-- 标签本体
 	tab_container =
 	{
-		type = "horizontal_flow_style" ,
+		type = "table_style" ,
 		-- 偏移
 		right_padding = 12 ,
 		left_padding = 12 ,
@@ -2256,7 +2256,7 @@ SIGen
 	-- 标签本体
 	tab_container =
 	{
-		type = "horizontal_flow_style" ,
+		type = "table_style" ,
 		-- 偏移
 		right_padding = 12 ,
 		left_padding = 12 ,
@@ -2472,7 +2472,7 @@ SIGen
 	-- 标签本体
 	tab_container =
 	{
-		type = "horizontal_flow_style" ,
+		type = "table_style" ,
 		-- 偏移
 		right_padding = 12 ,
 		left_padding = 12 ,

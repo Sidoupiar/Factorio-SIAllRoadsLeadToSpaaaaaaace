@@ -13,22 +13,34 @@ local constantsData =
 	ID = "Core" ,
 
 	-- ======================================================================
+	-- 此 ConstantsData 的代码名称<br>
+	-- 没有此属性会被自动添加 , 默认 : [ ConstantsData.ID ]<br>
+	-- ======================================================================
+	Code = "Core" ,
+	
+	-- ======================================================================
 	-- 此 ConstantsData 的显示名称<br>
 	-- 没有此属性会被自动添加 , 默认 : [ ConstantsData.ID ]<br>
 	-- ======================================================================
-	Name = "核心" ,
+	Show = "核心" ,
 
 	-- ======================================================================
-	-- 决定根据此 [ ConstantsData.ID ] 生成的注册名 [ ClassName ] 是否使用前缀 , 前缀主要是为了防止重名<br>
+	-- 决定根据此 ConstantsData 生成的注册名 [ ClassName ] 是否使用前缀 , 前缀主要是为了防止重名<br>
 	-- 因为上面的 [ ClassName ] 会被注册进各种结构中 , 包括一个以 [ ClassName ] 为名称的全局变量<br>
 	-- 没有此属性会被自动添加 , 默认 : true<br>
 	-- ======================================================================
 	UseClassPrefix = true ,
 
 	-- ======================================================================
-	-- 决定根据此 [ ConstantsData.ID ] 生成的注册名 [ ShowName ] 是否使用前缀 , 前缀主要是为了防止重名<br>
-	-- 在注册新物品 , 新实体 , 新配方等时 , 它们的 [ name ] 中会添加 [ ShowName ] 前缀 , 不影响本地化翻译项目<br>
-	-- 在日志或调试信息中输出中也会使用 [ ShowName ] 属性<br>
+	-- 决定根据此 ConstantsData 生成的注册名 [ CodeName ] 是否使用前缀 , 前缀主要是为了防止重名<br>
+	-- 在注册新物品 , 新实体 , 新配方等时 , 它们的 [ name ] 中会添加 [ CodeName ] 前缀 , 不影响本地化翻译项目<br>
+	-- 没有此属性会被自动添加 , 默认 : true<br>
+	-- ======================================================================
+	UseCodePrefix = true ,
+	
+	-- ======================================================================
+	-- 决定根据此 ConstantsData 生成的注册名 [ ShowName ] 是否使用前缀 , 前缀主要是为了防止重名<br>
+	-- 在日志或调试信息输出中会使用 [ ShowName ] 属性<br>
 	-- 没有此属性会被自动添加 , 默认 : true<br>
 	-- ======================================================================
 	UseShowPrefix = true ,
@@ -58,8 +70,8 @@ local constantsData =
 	FileList =
 	{
 		[SIInit.StateCodeDefine.Data]           = { "1_data_base" , "1_data_debug" , "1_data_special" , "1_data_gui" } ,
-		-- [SIInit.StateCodeDefine.DataUpdates]    = { "2_data-updates" } ,
-		[SIInit.StateCodeDefine.DataFinalFixes] = { "3_data-final-fixes" } ,
+		--[SIInit.StateCodeDefine.DataUpdates]    = { "2_data-updates" } ,
+		--[SIInit.StateCodeDefine.DataFinalFixes] = { "3_data-final-fixes" } ,
 		[SIInit.StateCodeDefine.Control]        = { "4_control" }
 	} ,
 
@@ -154,24 +166,25 @@ local constantsData =
 		-- ======================================================================
 		-- 自动创建分组 , [ ConstantsData.Autoload.Enable ] 为 true 时才会自动创建<br>
 		-- <br>
-		-- 每个分组都是由键值对组成 , 键为分组的 ID , 进而计算成实际的 [ name ] 值 , 而值是一个数组 , 其中包含了这个分组的别名和所有子分组的 ID 和别名<br>
+		-- 每个分组都是由键值对组成 , 键为分组的 ID , 进而计算成实际的 [ name ] 值 , 而值是一个数组 , 其中包含了这个分组的 Code , Show 和所有子分组的 ID , Code 和 Show<br>
 		-- 值的结构如下 :<br>
 		-- {<br>
-		--     Name =  别名 , 在计算 [ name ] 值时代替 ID 进行计算<br>
+		--     Code =  代码名称 , 在计算 [ name ] 值时代替 ID 进行计算<br>
+		--     Show =  显示名称 , 在计算 [ localised ] 值时代替 ID 进行计算<br>
 		--     Order = 排序编号 , 效果等于 [ ConstantsData.Order ] , 只不过它仅在创建分组的时候代替 [ ConstantsData.Order ] 使用<br>
 		--     SubOrder = 子分组的排序编号 , 默认 "0"<br>
 		--     Subgroups =<br>
 		--     {<br>
-		--         子分组id1 = 子分组别名1 , 不想写别名就写个布尔型的 false 就行了<br>
-		--         子分组id2 = 子分组别名2<br>
+		--         子分组id1 = { Code = "Code1" , Show = "Show1" }<br>
+		--         子分组id2 = { Code = "Code2" , Show = "Show2" }<br>
 		--         ...<br>
 		--     }<br>
 		-- }<br>
 		-- <br>
 		-- 自动创建的分组类型会自动创建属性 :<br>
-		-- localised_name        = { "[ CodeName ]Name.[ 类型别名 ]-[ 别名或 ID ]" } , 子分组就时子分组的别名和 ID<br>
-		-- localised_description = { "[ CodeName ]Description.[ 类型别名 ]-[ 别名或 ID ]" } , 子分组就时子分组的别名和 ID<br>
-		-- icon                  = "[ PicturePath ][ 类型别名 ]-[ 别名或 ID ]-[ 类型别名 ICON 项 ].png" , 子分组没有图标 , 默认 : size = 64 , mipmaps = 0<br>
+		-- localised_name        = { "[ CodeName ]Name.[ 类型别名 ]-[ Show 或 ID ]" } , 子分组就时子分组的 Show 和 ID<br>
+		-- localised_description = { "[ CodeName ]Description.[ 类型别名 ]-[ Show 或 ID ]" } , 子分组就时子分组的 Show 和 ID<br>
+		-- icon                  = "[ PicturePath ][ 类型别名 ]-[ Show 或 Code ]-[ 类型别名 ICON 项 ].png" , 子分组没有图标 , 默认 : size = 64 , mipmaps = 0<br>
 		-- order 会被自动补充<br>
 		-- [ 类型别名 ] 请见 SICommon.ShowNamePrefix 表<br>
 		-- ======================================================================
@@ -179,36 +192,39 @@ local constantsData =
 		{
 			Expand =
 			{
-				Name = "扩展" ,
+				Code = "Expand" ,
+				Show = "扩展" ,
 				Order = "9997" ,
 				SubOrder = "0" ,
 				Subgroups =
 				{
-					Misc = "杂项"
+					Misc = { Code = "Misc" , Show = "杂项" }
 				}
 			} ,
 			Other =
 			{
-				Name = "杂项" ,
+				Code = "Other" ,
+				Show = "杂项" ,
 				Order = "9998" ,
 				SubOrder = "0" ,
 				Subgroups =
 				{
-					Misc = "杂项"
+					Misc = { Code = "Misc" , Show = "杂项" }
 				}
 			} ,
 			Hidden =
 			{
-				Name = "隐藏" ,
+				Code = "Hidden" ,
+				Show = "隐藏" ,
 				Order = "9999" ,
 				SubOrder = "0" ,
 				Subgroups =
 				{
-					Base = "基础" ,
-					Debug = "调试物品" ,
-					Tool = "特殊工具" ,
-					Icon = "图标物品" ,
-					Alert = "提示物品"
+					Base = { Code = "Base" , Show = "基础" } ,
+					DebugItem = { Code = "DebugItem" , Show = "调试物品" } ,
+					SpecialTool = { Code = "SpecialTool" , Show = "特殊工具" } ,
+					IconItem = { Code = "IconItem" , Show = "图标物品" } ,
+					AlertItem = { Code = "AlertItem" , Show = "提示物品" }
 				}
 			}
 		} ,
@@ -227,15 +243,15 @@ local constantsData =
 		--     SubOrder = 子分组的排序编号 , 默认 "0"<br>
 		--     Subgroups =<br>
 		--     {<br>
-		--         子分组id1 = 子分组别名1 , 不想写别名就写个布尔型的 false 就行了<br>
-		--         子分组id2 = 子分组别名2<br>
+		--         子分组id1 = { Code = "Code1" , Show = "Show1" }<br>
+		--         子分组id2 = { Code = "Code2" , Show = "Show2" }<br>
 		--         ...<br>
 		--     }<br>
 		-- }<br>
 		-- <br>
-		-- 自动创建的子分组类型会自动创建属性 :<br>
-		-- localised_name        = { "[ CodeName ]Name.[ 类型别名 ]-[ 别名或 ID ]" } , 子分组就时子分组的别名和 ID<br>
-		-- localised_description = { "[ CodeName ]Description.[ 类型别名 ]-[ 别名或 ID ]" } , 子分组就时子分组的别名和 ID<br>
+		-- 自动创建的分组类型会自动创建属性 :<br>
+		-- localised_name        = { "[ CodeName ]Name.[ 类型别名 ]-[ Show 或 ID ]" } , 子分组就时子分组的 Show 和 ID<br>
+		-- localised_description = { "[ CodeName ]Description.[ 类型别名 ]-[ Show 或 ID ]" } , 子分组就时子分组的 Show 和 ID<br>
 		-- order 会被自动补充<br>
 		-- [ 类型别名 ] 请见 SICommon.ShowNamePrefix 表<br>
 		-- 属性值全部取自当前 ConstantsData 的属性 , 而非目标 ConstantsData 的属性
@@ -256,72 +272,78 @@ local constantsData =
 		-- ======================================================================
 		-- 自动创建伤害类型 , [ ConstantsData.Autoload.Enable ] 为 true 时才会自动创建<br>
 		-- <br>
-		-- 每个伤害类型都是由键值对组成 , 键为伤害类型的 ID , 进而计算成实际的 [ name ] 值 , 而值是一个表 , 其中包含了这个伤害类型的别名和默认抗性<br>
+		-- 每个伤害类型都是由键值对组成 , 键为伤害类型的 ID , 进而计算成实际的 [ name ] 值 , 而值是一个表 , 其中包含了这个伤害类型的 Code , Show 和默认抗性<br>
 		-- 值的结构如下 :<br>
 		-- {<br>
-		--     Name = 别名 , 在计算 [ name ] 值时代替 ID 进行计算<br>
+		--     Code =  代码名称 , 在计算 [ name ] 值时代替 ID 进行计算<br>
+		--     Show =  显示名称 , 在计算 [ localised ] 值时代替 ID 进行计算<br>
 		--     Decrease = 伤害减少数值量<br>
 		--     Percent = 伤害百分比减少量<br>
 		-- }<br>
 		-- 默认抗性在 data-final-fixes 阶段才会被处理<br>
 		-- <br>
 		-- 自动创建的伤害类型会自动创建属性 :<br>
-		-- localised_name        = { "[ CodeName ]Name.[ 类型别名 ]-[ 别名或 ID ]" }<br>
-		-- localised_description = { "[ CodeName ]Description.[ 类型别名 ]-[ 别名或 ID ]" }<br>
+		-- localised_name        = { "[ CodeName ]Name.[ 类型别名 ]-[ Show 或 ID ]" }<br>
+		-- localised_description = { "[ CodeName ]Description.[ 类型别名 ]-[ Show 或 ID ]" }<br>
 		-- order 会被自动补充<br>
 		-- [ 类型别名 ] 请见 SICommon.ShowNamePrefix 表<br>
 		-- ======================================================================
 		DamageTypes =
 		{
 			-- 物理伤害
-			PhysicWater     = { Name = "潮湿" } ,
-			PhysicDry       = { Name = "干燥" } ,
-			PhysicIce       = { Name = "冰冻" } ,
-			PhysicRadiation	= { Name = "辐射" } ,
-			PhysicCorrosion = { Name = "腐蚀" } ,
-			PhysicSound     = { Name = "声波" } ,
-			PhysicEnergy    = { Name = "能量" } ,
-			PhysicGravity   = { Name = "重力" } ,
+			PhysicWater     = { Code = "PhysicWater"     , Show = "潮湿" } ,
+			PhysicDry       = { Code = "PhysicDry"       , Show = "干燥" } ,
+			PhysicIce       = { Code = "PhysicIce"       , Show = "冰冻" } ,
+			PhysicRadiation	= { Code = "PhysicRadiation" , Show = "辐射" } ,
+			PhysicCorrosion = { Code = "PhysicCorrosion" , Show = "腐蚀" } ,
+			PhysicSound     = { Code = "PhysicSound"     , Show = "声波" } ,
+			PhysicEnergy    = { Code = "PhysicEnergy"    , Show = "能量" } ,
+			PhysicGravity   = { Code = "PhysicGravity"   , Show = "重力" } ,
 			-- 魔法伤害
-			MagicPower      = { Name = "力量" } ,
-			MagicSpirit     = { Name = "意念" } ,
-			MagicBlood      = { Name = "献祭" } ,
-			MagicDisease    = { Name = "瘟疫" } ,
-			MagicFear       = { Name = "恐惧" } ,
-			MagicTwist      = { Name = "扭曲" } ,
-			MagicCorrosion  = { Name = "侵蚀" } ,
-			MagicVoid       = { Name = "虚空" } ,
+			MagicPower      = { Code = "MagicPower"      , Show = "力量" } ,
+			MagicSpirit     = { Code = "MagicSpirit"     , Show = "意念" } ,
+			MagicBlood      = { Code = "MagicBlood"      , Show = "献祭" } ,
+			MagicDisease    = { Code = "MagicDisease"    , Show = "瘟疫" } ,
+			MagicFear       = { Code = "MagicFear"       , Show = "恐惧" } ,
+			MagicTwist      = { Code = "MagicTwist"      , Show = "扭曲" } ,
+			MagicCorrosion  = { Code = "MagicCorrosion"  , Show = "侵蚀" } ,
+			MagicVoid       = { Code = "MagicVoid"       , Show = "虚空" } ,
 			-- 元素伤害
-			ElementCut      = { Name = "割元素" } ,
-			ElementHeat     = { Name = "炎元素" } ,
-			ElementGround   = { Name = "固元素" } ,
-			ElementWater    = { Name = "流元素" } ,
-			ElementWind     = { Name = "气元素" } ,
-			ElementLife     = { Name = "命元素" } ,
-			ElementSound    = { Name = "音元素" } ,
-			ElementElectric = { Name = "电元素" } ,
-			ElementLight    = { Name = "光元素" } ,
-			ElementDary     = { Name = "影元素" } ,
-			ElementEnergy   = { Name = "能元素" } ,
-			ElementHeavy    = { Name = "质元素" } ,
-			ElementFull     = { Name = "盈元素" } ,
-			ElementVoid     = { Name = "虚元素" } ,
-			ElementSkill    = { Name = "技元素" } ,
+			ElementCut      = { Code = "ElementCut"      , Show = "割元素" } ,
+			ElementHeat     = { Code = "ElementHeat"     , Show = "炎元素" } ,
+			ElementGround   = { Code = "ElementGround"   , Show = "固元素" } ,
+			ElementWater    = { Code = "ElementWater"    , Show = "流元素" } ,
+			ElementWind     = { Code = "ElementWind"     , Show = "气元素" } ,
+			ElementLife     = { Code = "ElementLife"     , Show = "命元素" } ,
+			ElementSound    = { Code = "ElementSound"    , Show = "音元素" } ,
+			ElementElectric = { Code = "ElementElectric" , Show = "电元素" } ,
+			ElementLight    = { Code = "ElementLight"    , Show = "光元素" } ,
+			ElementDary     = { Code = "ElementDary"     , Show = "影元素" } ,
+			ElementEnergy   = { Code = "ElementEnergy"   , Show = "能元素" } ,
+			ElementHeavy    = { Code = "ElementHeavy"    , Show = "质元素" } ,
+			ElementFull     = { Code = "ElementFull"     , Show = "盈元素" } ,
+			ElementVoid     = { Code = "ElementVoid"     , Show = "虚元素" } ,
+			ElementSkill    = { Code = "ElementSkill"    , Show = "技元素" } ,
 			-- 其他伤害
-			DamageSpace     = { Name = "空间" } ,
-			DamageThought   = { Name = "精神" } ,
-			DamageSoul      = { Name = "灵魂" }
+			DamageSpace     = { Code = "DamageSpace"     , Show = "空间" } ,
+			DamageThought   = { Code = "DamageThought"   , Show = "精神" } ,
+			DamageSoul      = { Code = "DamageSoul"      , Show = "灵魂" }
 		} ,
 
 		-- ======================================================================
 		-- 自动创建分类类型 , [ ConstantsData.Autoload.Enable ] 为 true 时才会自动创建<br>
 		-- <br>
 		-- 每个分类类型都是由键值对组成 , 键为 ID , ID 等于 SICommon.Types.Categories 下的类型的键的值<br>
-		-- 值是一个数组 , 数组的每一个键值对就是一个实际的分类类型 , 键是分类类型的 ID , 进而计算成实际的 [ name ] 值 , 值是别名 , 在计算 [ name ] 值时代替 ID 进行计算<br>
+		-- 值是一个数组 , 数组的每一个键值对就是一个实际的分类类型 , 键是分类类型的 ID , 进而计算成实际的 [ name ] 值 , 值是而值是一个表 , 其中包含了这个分类类型的 Code , Show<br>
+		-- 值的结构如下 :<br>
+		-- {<br>
+		--     Code =  代码名称 , 在计算 [ name ] 值时代替 ID 进行计算<br>
+		--     Show =  显示名称 , 在计算 [ localised ] 值时代替 ID 进行计算<br>
+		-- }<br>
 		-- <br>
 		-- 自动创建的分类类型会自动创建属性 :<br>
-		-- localised_name        = { "[ CodeName ]Name.[ 类型别名 ]-[ 别名或 ID ]" }<br>
-		-- localised_description = { "[ CodeName ]Description.[ 类型别名 ]-[ 别名或 ID ]" }<br>
+		-- localised_name        = { "[ CodeName ]Name.[ 类型别名 ]-[ Show 或 ID ]" }<br>
+		-- localised_description = { "[ CodeName ]Description.[ 类型别名 ]-[ Show 或 ID ]" }<br>
 		-- order 会被自动补充<br>
 		-- [ 类型别名 ] 请见 SICommon.ShowNamePrefix 表<br>
 		-- ======================================================================
@@ -329,19 +351,19 @@ local constantsData =
 		{
 			Ammo =
 			{
-				Special = "特殊弹药"
+				Special = { Code = "Special" , Show = "特殊弹药" }
 			} ,
 			Equipment =
 			{
-				Special = "特殊模块"
+				Special = { Code = "Special" , Show = "特殊模块" }
 			} ,
 			Fuel =
 			{
-				Special = "特殊燃料"
+				Special = { Code = "Special" , Show = "特殊燃料" }
 			} ,
 			Module =
 			{
-				FishModule = "双鱼插件"
+				FishModule = { Code = "FishModule" , Show = "双鱼插件" }
 			}
 		}
 	} ,
@@ -380,8 +402,9 @@ local constantsData =
 	-- 自动生成的属性 , 其中的值请勿手动修改
 	-- ClassName            = string   , 全局变量名称
 	-- CodeName             = string   , 在本地化字符串中用作分组标签 , 以及作为注册名
+	-- CodeNamePrefix       = string   , 物品 , 实体 , 配方等的 [ name ] 中会添加此前缀
 	-- ShowName             = string   , 在日志或调试信息中输出使用的名称
-	-- ShowNamePrefix       = string   , 物品 , 实体 , 配方等的 [ name ] 中会添加此前缀 , 不影响本地化翻译项目
+	-- ShowNamePrefix       = string   , 物品 , 实体 , 配方等的 [ localised ] 中会添加此前缀
 	-- OrderPrefix          = string   , 物品 , 实体 , 配方等的排序字符串的前缀
 	-- OrderCode            = int      , 物品 , 实体 , 配方等的排序编号 , 一直递增 , 上限 10000
 	-- LocalisedName        = {}       , 此 ConstantsData 的本地化名称 , 值为 "ConstantsDataName.[ CodeName ]" , 其中的所有 "_" 都会被替换成 "-"

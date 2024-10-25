@@ -39,7 +39,7 @@ local function LoadSettings( list )
 	for index , setting in pairs( list ) do
 		setting.localised_name = { "SISettingName." .. setting.name }
 		setting.localised_description = { "SICommon.SettingsDescription" , { "SIUtils.SIUtils-MainSettings" } , { "SISettingDescription." .. setting.name } , SIPrint.ToShow( setting.default_value ) }
-		setting.order = index
+		setting.order = "" .. index
 	end
 	data:extend( list )
 end

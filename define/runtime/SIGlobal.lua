@@ -27,7 +27,8 @@
 SIGlobal =
 {
 	ID = "SIGlobal" ,
-	Name = "全局持久化" ,
+	Code = "SIGlobal" ,
+	Show = "全局持久化" ,
 	SettingTypeDefine =
 	{
 		Global = 0 ,
@@ -62,7 +63,7 @@ end
 -- data          = 值<br>
 -- ======================================================================
 function SIGlobal.Set( name , data )
-	global[name] = data
+	storage[name] = data
 	return SIGlobal
 end
 
@@ -72,7 +73,7 @@ end
 -- name          = 键<br>
 -- ======================================================================
 function SIGlobal.Get( name )
-	return global[name]
+	return storage[name]
 end
 
 -- ============================================================================================================================================

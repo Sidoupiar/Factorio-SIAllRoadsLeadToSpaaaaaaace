@@ -22,7 +22,8 @@
 SIInterface =
 {
 	ID = "SIInterface" ,
-	Name = "接口管理" ,
+	Code = "SIInterface" ,
+	Show = "接口管理" ,
 	InterfaceID = "SIInterface" ,
 	Interfaces = {}
 }

@@ -15,17 +15,22 @@ end
 -- {<br>
 --     [SICommon.Types.类型1] =<br>
 --     {<br>
---         原型数据ID1 = "原型数据别名1" ,<br>
---         原型数据ID2 = "原型数据别名2" ,<br>
+--         原型数据ID1 = "原型数据Show1" ,<br>
+--         原型数据ID2 = "原型数据Show2" ,<br>
 --         ...<br>
 --     } ,<br>
 --     [SICommon.Types.类型2] =<br>
 --     {<br>
---         原型数据ID1 = "原型数据别名1" ,<br>
---         原型数据ID2 = "原型数据别名2" ,<br>
+--         原型数据ID1 = "原型数据Show1" ,<br>
+--         原型数据ID2 = "原型数据Show2" ,<br>
 --         ...<br>
 --     } ,<br>
 --     ...<br>
+--     Styles =<br>
+--     {<br>
+--         GUI元素ID1 = "GUI元素Show1" ,<br>
+--         GUI元素ID2 = "GUI元素Show2" ,<br>
+--     }<br>
 -- }<br>
 -- 因为有些时候 , 一个功能包下的新增原型数据还是挺多的 , 而且大部分在 control 阶段都用不到 , 所以才把 [ name ] 属性的值的计算独立了出来<br>
 -- 在这个函数中 , 默认使用 SIInit.CurrentConstantsData , 不建议在同一个功能包内多次使用 SIControl.Init 函数并混用多个 ConstantsData<br>
@@ -59,7 +64,7 @@ SIControl =
 					end
 					if prototypeNameList then
 						for prototypeID , prototypeName in pairs( prototypeNameList ) do
-							list[prototypeID] = SIInit.CurrentConstantsData.ShowNamePrefix .. SICommon.ShowNamePrefix[typeCode] .. prototypeName:gsub( "_" , "-" )
+							list[prototypeID] = SIInit.CurrentConstantsData.CodeNamePrefix .. SICommon.CodeNamePrefix[typeCode] .. prototypeID:gsub( "_" , "-" )
 						end
 					end
 				end

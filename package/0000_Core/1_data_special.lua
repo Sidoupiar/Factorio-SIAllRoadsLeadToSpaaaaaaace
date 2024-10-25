@@ -4,16 +4,6 @@
 -- ============================================================================================================================================
 -- ============================================================================================================================================
 
-SIGen
-.SetGroup( SIConstants_Core.raw.Groups.Hidden.Debug )
-.New( SICommon.Types.Entities.FlyingText , "FlyingText" , "飞行文字" ,
-{
-	flags = { SICommon.Flags.Entity.NotOnMap , SICommon.Flags.Entity.PlaceableOffGrid } ,
-	speed = 0.03 ,
-	time_to_live = 170 ,
-	text_alignment = "center"
-} )
-
 -- ============================================================================================================================================
 -- ============================================================================================================================================
 -- ========== 创建特殊工具 ====================================================================================================================
@@ -21,46 +11,77 @@ SIGen
 -- ============================================================================================================================================
 
 SIGen
-.SetGroup( SIConstants_Core.raw.Groups.Hidden.Tool )
+.SetGroup( SIConstants_Core.raw.Groups.Hidden.SpecialTool )
 -- 粉图
 .New( SICommon.Types.Items.SelectionTool , "DeleteMap" , "粉图" ,
 {
-	flags = { SICommon.Flags.Item.NotStackable , SICommon.Flags.Item.HideFromFuelTooltip , SICommon.Flags.Item.Hidden } ,
+	flags = { SICommon.Flags.Item.NotStackable , SICommon.Flags.Item.HideFromFuelTooltip } ,
 	stack_size = 1 ,
 	default_request_amount = 1 ,
 	show_in_library = false ,
-	selection_color = { r = 0.90 , g = 0.06 , b = 0.53 } ,
-	selection_mode = { "any-entity" } ,
-	selection_cursor_box_type = "copy" ,
-	reverse_selection_color = { r = 0.90 , g = 0.06 , b = 0.53 } ,
-	reverse_selection_mode = { "any-entity" } ,
-	reverse_selection_cursor_box_type = "copy" ,
-	alt_selection_color = { r = 0.55 , g = 0.27 , b = 0.41 } ,
-	alt_selection_mode = { "any-tile" } ,
-	alt_selection_cursor_box_type = "copy" ,
-	alt_reverse_selection_color = { r = 0.55 , g = 0.27 , b = 0.41 } ,
-	alt_reverse_selection_mode = { "any-tile" } ,
-	alt_reverse_selection_cursor_box_type = "copy" ,
+	skip_fog_of_war = true ,
+	always_include_tiles = false ,
+	mouse_cursor = "selection-tool-cursor" ,
+	select =
+	{
+		border_color = { r = 0.90 , g = 0.06 , b = 0.53 } ,
+		count_button_color = { r = 0.90 , g = 0.06 , b = 0.53 } ,
+		chart_color = { r = 0.90 , g = 0.06 , b = 0.53 } ,
+		cursor_box_type = "copy" ,
+		mode = { "any-entity" }
+	} ,
+	alt_select =
+	{
+		border_color = { r = 0.90 , g = 0.06 , b = 0.53 } ,
+		count_button_color = { r = 0.90 , g = 0.06 , b = 0.53 } ,
+		chart_color = { r = 0.90 , g = 0.06 , b = 0.53 } ,
+		cursor_box_type = "copy" ,
+		mode = { "any-entity" }
+	} ,
+	reverse_select =
+	{
+		border_color = { r = 0.55 , g = 0.27 , b = 0.41 } ,
+		count_button_color = { r = 0.55 , g = 0.27 , b = 0.41 } ,
+		chart_color = { r = 0.55 , g = 0.27 , b = 0.41 } ,
+		cursor_box_type = "copy" ,
+		mode = { "any-tile" }
+	} ,
+	alt_reverse_select =
+	{
+		border_color = { r = 0.55 , g = 0.27 , b = 0.41 } ,
+		count_button_color = { r = 0.55 , g = 0.27 , b = 0.41 } ,
+		chart_color = { r = 0.55 , g = 0.27 , b = 0.41 } ,
+		cursor_box_type = "copy" ,
+		mode = { "any-tile" }
+	} ,
+--	super_forced_select =
+--	{
+--		border_color = { r = 0.55 , g = 0.27 , b = 0.41 } ,
+--		count_button_color = { r = 0.55 , g = 0.27 , b = 0.41 } ,
+--		chart_color = { r = 0.55 , g = 0.27 , b = 0.41 } ,
+--		cursor_box_type = "copy" ,
+--		mode = { "any-tile" }
+--	} ,
 	fuel_category = SIConstants_Core.raw.Categories.Fuel.Special ,
-	fuel_value = "12KJ" ,
+	fuel_value = "120J" ,
 	fuel_acceleration_multiplier = 1.1 ,
 	fuel_top_speed_multiplier = 1.1 ,
 	fuel_emissions_multiplier = 452 ,
 	fuel_glow_color = { r = 0.90 , g = 0.06 , b = 0.53 } ,
-	burnt_result = SIConstants_Core.raw.Items.Candy ,
+	burnt_result = SIConstants_Core.raw.Items.SuperCandy ,
 	place_result = nil ,
 	placed_as_equipment_result = nil ,
 	rocket_launch_products =
 	{
 		{
 			type = SICommon.Types.Items.Item ,
-			name = SIConstants_Core.raw.Items.Candy ,
+			name = SIConstants_Core.raw.Items.SuperCandy ,
 			amount = 2 ,
 			catalyst_amount = 2
 		} ,
 		{
 			type = SICommon.Types.Items.Item ,
-			name = SIConstants_Core.raw.Items.Candy ,
+			name = SIConstants_Core.raw.Items.SuperCandy ,
 			probability = 0.2 ,
 			amount_min = 0 ,
 			amount_max = 20 ,
@@ -68,7 +89,7 @@ SIGen
 		} ,
 		{
 			type = SICommon.Types.Items.Item ,
-			name = SIConstants_Core.raw.Items.Candy ,
+			name = SIConstants_Core.raw.Items.SuperCandy ,
 			probability = 0.06 ,
 			amount_min = 0 ,
 			amount_max = 200 ,
@@ -76,7 +97,7 @@ SIGen
 		} ,
 		{
 			type = SICommon.Types.Items.Item ,
-			name = SIConstants_Core.raw.Items.Candy ,
+			name = SIConstants_Core.raw.Items.SuperCandy ,
 			probability = 0.02 ,
 			amount_min = 0 ,
 			amount_max = 2000 ,
@@ -105,7 +126,7 @@ SIGen
 	energy_source =
 	{
 		type = SICommon.Flags.EnergySourceType.Electric ,
-		emissions_per_minute = 0 ,
+		emissions_per_minute = { pollution = 0.0 } ,
 		render_no_power_icon = false ,
 		render_no_network_icon = false ,
 		usage_priority = SICommon.Flags.ElectricUsagePriority.Tertiary ,
@@ -128,36 +149,73 @@ SIGen
 -- 黄图
 .New( SICommon.Types.Items.SelectionTool , "OreMap" , "黄图" ,
 {
-	flags = { SICommon.Flags.Item.NotStackable , SICommon.Flags.Item.HideFromFuelTooltip , SICommon.Flags.Item.Hidden } ,
+	flags = { SICommon.Flags.Item.NotStackable , SICommon.Flags.Item.HideFromFuelTooltip } ,
 	stack_size = 1 ,
 	default_request_amount = 1 ,
 	show_in_library = false ,
-	selection_color = { r = 0.70 , g = 0.57 , b = 0.00 } ,
-	selection_mode = { "any-entity" } ,
-	selection_cursor_box_type = "copy" ,
-	alt_selection_color = { r = 1.00 , g = 0.82 , b = 0.00 } ,
-	alt_selection_mode = { "any-tile" } ,
-	alt_selection_cursor_box_type = "copy" ,
+	skip_fog_of_war = true ,
+	always_include_tiles = false ,
+	mouse_cursor = "selection-tool-cursor" ,
+	select =
+	{
+		border_color = { r = 0.70 , g = 0.57 , b = 0.00 } ,
+		count_button_color = { r = 0.70 , g = 0.57 , b = 0.00 } ,
+		chart_color = { r = 0.70 , g = 0.57 , b = 0.00 } ,
+		cursor_box_type = "copy" ,
+		mode = { "any-entity" }
+	} ,
+	alt_select =
+	{
+		border_color = { r = 1.00 , g = 0.82 , b = 0.00 } ,
+		count_button_color = { r = 1.00 , g = 0.82 , b = 0.00 } ,
+		chart_color = { r = 1.00 , g = 0.82 , b = 0.00 } ,
+		cursor_box_type = "copy" ,
+		mode = { "any-tile" }
+	} ,
+--	reverse_select =
+--	{
+--		border_color = { r = 0.55 , g = 0.27 , b = 0.41 } ,
+--		count_button_color = { r = 0.55 , g = 0.27 , b = 0.41 } ,
+--		chart_color = { r = 0.55 , g = 0.27 , b = 0.41 } ,
+--		cursor_box_type = "copy" ,
+--		mode = { "any-tile" }
+--	} ,
+--	alt_reverse_select =
+--	{
+--		border_color = { r = 0.55 , g = 0.27 , b = 0.41 } ,
+--		count_button_color = { r = 0.55 , g = 0.27 , b = 0.41 } ,
+--		chart_color = { r = 0.55 , g = 0.27 , b = 0.41 } ,
+--		cursor_box_type = "copy" ,
+--		mode = { "any-tile" }
+--	} ,
+--	super_forced_select =
+--	{
+--		border_color = { r = 0.55 , g = 0.27 , b = 0.41 } ,
+--		count_button_color = { r = 0.55 , g = 0.27 , b = 0.41 } ,
+--		chart_color = { r = 0.55 , g = 0.27 , b = 0.41 } ,
+--		cursor_box_type = "copy" ,
+--		mode = { "any-tile" }
+--	} ,
 	fuel_category = SIConstants_Core.raw.Categories.Fuel.Special ,
-	fuel_value = "12KJ" ,
+	fuel_value = "120J" ,
 	fuel_acceleration_multiplier = 1.1 ,
 	fuel_top_speed_multiplier = 1.1 ,
 	fuel_emissions_multiplier = 452 ,
 	fuel_glow_color = { r = 0.70 , g = 0.57 , b = 0.00 } ,
-	burnt_result = SIConstants_Core.raw.Items.Candy ,
+	burnt_result = SIConstants_Core.raw.Items.SuperCandy ,
 	place_result = nil ,
 	placed_as_equipment_result = nil ,
 	rocket_launch_products =
 	{
 		{
 			type = SICommon.Types.Items.Item ,
-			name = SIConstants_Core.raw.Items.Candy ,
+			name = SIConstants_Core.raw.Items.SuperCandy ,
 			amount = 2 ,
 			catalyst_amount = 2
 		} ,
 		{
 			type = SICommon.Types.Items.Item ,
-			name = SIConstants_Core.raw.Items.Candy ,
+			name = SIConstants_Core.raw.Items.SuperCandy ,
 			probability = 0.2 ,
 			amount_min = 0 ,
 			amount_max = 20 ,
@@ -165,7 +223,7 @@ SIGen
 		} ,
 		{
 			type = SICommon.Types.Items.Item ,
-			name = SIConstants_Core.raw.Items.Candy ,
+			name = SIConstants_Core.raw.Items.SuperCandy ,
 			probability = 0.06 ,
 			amount_min = 0 ,
 			amount_max = 200 ,
@@ -173,7 +231,7 @@ SIGen
 		} ,
 		{
 			type = SICommon.Types.Items.Item ,
-			name = SIConstants_Core.raw.Items.Candy ,
+			name = SIConstants_Core.raw.Items.SuperCandy ,
 			probability = 0.02 ,
 			amount_min = 0 ,
 			amount_max = 2000 ,
@@ -202,7 +260,7 @@ SIGen
 	energy_source =
 	{
 		type = SICommon.Flags.EnergySourceType.Electric ,
-		emissions_per_minute = 0 ,
+		emissions_per_minute = { pollution = 0.0 } ,
 		render_no_power_icon = false ,
 		render_no_network_icon = false ,
 		usage_priority = SICommon.Flags.ElectricUsagePriority.Tertiary ,
@@ -225,42 +283,73 @@ SIGen
 -- 紫图
 .New( SICommon.Types.Items.SelectionTool , "RequestMap" , "紫图" ,
 {
-	flags = { SICommon.Flags.Item.NotStackable , SICommon.Flags.Item.HideFromFuelTooltip , SICommon.Flags.Item.Hidden } ,
+	flags = { SICommon.Flags.Item.NotStackable , SICommon.Flags.Item.HideFromFuelTooltip } ,
 	stack_size = 1 ,
 	default_request_amount = 1 ,
 	show_in_library = false ,
-	selection_color = { r = 0.84 , g = 0.06 , b = 0.92 } ,
-	selection_mode = { "any-entity" , "same-force" } ,
-	selection_cursor_box_type = "copy" ,
-	reverse_selection_color = { r = 0.84 , g = 0.06 , b = 0.92 } ,
-	reverse_selection_mode = { "any-entity" , "same-force" } ,
-	reverse_selection_cursor_box_type = "copy" ,
-	alt_selection_color = { r = 0.51 , g = 0.03 , b = 0.55 } ,
-	alt_selection_mode = { "any-entity" , "same-force" } ,
-	alt_selection_cursor_box_type = "copy" ,
-	alt_reverse_selection_color = { r = 0.51 , g = 0.03 , b = 0.55 } ,
-	alt_reverse_selection_mode = { "any-entity" , "same-force" } ,
-	alt_reverse_selection_cursor_box_type = "copy" ,
+	skip_fog_of_war = true ,
+	always_include_tiles = false ,
+	mouse_cursor = "selection-tool-cursor" ,
+	select =
+	{
+		border_color = { r = 0.84 , g = 0.06 , b = 0.92 } ,
+		count_button_color = { r = 0.84 , g = 0.06 , b = 0.92 } ,
+		chart_color = { r = 0.84 , g = 0.06 , b = 0.92 } ,
+		cursor_box_type = "copy" ,
+		mode = { "any-entity" , "same-force" }
+	} ,
+	alt_select =
+	{
+		border_color = { r = 0.51 , g = 0.03 , b = 0.55 } ,
+		count_button_color = { r = 0.51 , g = 0.03 , b = 0.55 } ,
+		chart_color = { r = 0.51 , g = 0.03 , b = 0.55 } ,
+		cursor_box_type = "copy" ,
+		mode = { "any-entity" , "same-force" }
+	} ,
+	reverse_select =
+	{
+		border_color = { r = 0.84 , g = 0.06 , b = 0.92 } ,
+		count_button_color = { r = 0.84 , g = 0.06 , b = 0.92 } ,
+		chart_color = { r = 0.84 , g = 0.06 , b = 0.92 } ,
+		cursor_box_type = "copy" ,
+		mode = { "any-entity" , "same-force" }
+	} ,
+	alt_reverse_select =
+	{
+		border_color = { r = 0.51 , g = 0.03 , b = 0.55 } ,
+		count_button_color = { r = 0.51 , g = 0.03 , b = 0.55 } ,
+		chart_color = { r = 0.51 , g = 0.03 , b = 0.55 } ,
+		cursor_box_type = "copy" ,
+		mode = { "any-entity" , "same-force" }
+	} ,
+--	super_forced_select =
+--	{
+--		border_color = { r = 0.55 , g = 0.27 , b = 0.41 } ,
+--		count_button_color = { r = 0.55 , g = 0.27 , b = 0.41 } ,
+--		chart_color = { r = 0.55 , g = 0.27 , b = 0.41 } ,
+--		cursor_box_type = "copy" ,
+--		mode = { "any-tile" }
+--	} ,
 	fuel_category = SIConstants_Core.raw.Categories.Fuel.Special ,
-	fuel_value = "12KJ" ,
+	fuel_value = "120J" ,
 	fuel_acceleration_multiplier = 1.1 ,
 	fuel_top_speed_multiplier = 1.1 ,
 	fuel_emissions_multiplier = 452 ,
 	fuel_glow_color = { r = 0.70 , g = 0.57 , b = 0.00 } ,
-	burnt_result = SIConstants_Core.raw.Items.Candy ,
+	burnt_result = SIConstants_Core.raw.Items.SuperCandy ,
 	place_result = nil ,
 	placed_as_equipment_result = nil ,
 	rocket_launch_products =
 	{
 		{
 			type = SICommon.Types.Items.Item ,
-			name = SIConstants_Core.raw.Items.Candy ,
+			name = SIConstants_Core.raw.Items.SuperCandy ,
 			amount = 2 ,
 			catalyst_amount = 2
 		} ,
 		{
 			type = SICommon.Types.Items.Item ,
-			name = SIConstants_Core.raw.Items.Candy ,
+			name = SIConstants_Core.raw.Items.SuperCandy ,
 			probability = 0.2 ,
 			amount_min = 0 ,
 			amount_max = 20 ,
@@ -268,7 +357,7 @@ SIGen
 		} ,
 		{
 			type = SICommon.Types.Items.Item ,
-			name = SIConstants_Core.raw.Items.Candy ,
+			name = SIConstants_Core.raw.Items.SuperCandy ,
 			probability = 0.06 ,
 			amount_min = 0 ,
 			amount_max = 200 ,
@@ -276,7 +365,7 @@ SIGen
 		} ,
 		{
 			type = SICommon.Types.Items.Item ,
-			name = SIConstants_Core.raw.Items.Candy ,
+			name = SIConstants_Core.raw.Items.SuperCandy ,
 			probability = 0.02 ,
 			amount_min = 0 ,
 			amount_max = 2000 ,
@@ -305,7 +394,7 @@ SIGen
 	energy_source =
 	{
 		type = SICommon.Flags.EnergySourceType.Electric ,
-		emissions_per_minute = 0 ,
+		emissions_per_minute = { pollution = 0.0 } ,
 		render_no_power_icon = false ,
 		render_no_network_icon = false ,
 		usage_priority = SICommon.Flags.ElectricUsagePriority.Tertiary ,

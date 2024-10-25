@@ -22,7 +22,8 @@
 SIEventBus =
 {
 	ID = "SIEventBus" ,
-	Name = "事件总线" ,
+	Code = "SIEventBus" ,
+	Show = "事件总线" ,
 	Order = 1 ,
 	InitFunctions = 
 	{

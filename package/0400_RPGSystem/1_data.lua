@@ -25,7 +25,6 @@ for prefixID , prefixAlias in pairs
 		SIGen
 		.New( SICommon.Types.Items.Capsule , "EXP_" .. prefixID .. suffixID , "经验" .. prefixAlias .. suffixAlias ,
 		{
-			flags = { SICommon.Flags.Item.Hidden } ,
 			stack_size = 100 ,
 			default_request_amount = 100 ,
 			capsule_action =

@@ -112,40 +112,50 @@ SICommon =
 	{
 		Item =
 		{
-			Hidden               = "hidden" ,
-			NotStackable         = "not-stackable" ,
-			DrawLogisticOverlay  = "draw-logistic-overlay" ,
-			AlwaysShow           = "always-show" ,
-			HideFromBonusGUI     = "hide-from-bonus-gui" ,
-			HideFromFuelTooltip  = "hide-from-fuel-tooltip" ,
-			CanExtendInventory   = "can-extend-inventory" ,
-			PrimaryPlaceResult   = "primary-place-result" ,
-			ModOpenable          = "mod-openable" ,
-			OnlyInCursor         = "only-in-cursor" ,
-			Spawnable            = "spawnable"
+			NotStackable                  = "not-stackable" ,
+			DrawLogisticOverlay           = "draw-logistic-overlay" ,
+			AlwaysShow                    = "always-show" ,
+			HideFromBonusGUI              = "hide-from-bonus-gui" ,
+			HideFromFuelTooltip           = "hide-from-fuel-tooltip" ,
+			PrimaryPlaceResult            = "primary-place-result" ,
+			ModOpenable                   = "mod-openable" ,
+			OnlyInCursor                  = "only-in-cursor" ,
+			Spawnable                     = "spawnable" ,
+			ExcludedFromTrashUnrequested  = "excluded-from-trash-unrequested" ,
+			SpoilResult                   = "spoil-result" ,
+			IgnoreSpoilTimeModifier       = "ignore-spoil-time-modifier"
 		} ,
 		Entity =
 		{
-			Hidden               = "hidden" ,
-			NoGapFill            = "no-gap-fill-while-building" ,
-			NotOnMap             = "not-on-map" ,
-			NotFlammable         = "not-flammable" ,
-			NotRotatable         = "not-rotatable" ,
-			NotRepairable        = "not-repairable" ,
-			NotBlueprintable     = "not-blueprintable" ,
-			NotDeconstructable   = "not-deconstructable" ,
-			PlaceableEnemy       = "placeable-enemy" ,
-			PlaceablePlayer      = "placeable-player" ,
-			PlaceableNeutral     = "placeable-neutral" ,
-			PlaceableOffGrid     = "placeable-off-grid" ,
-			HideAltInfo          = "hide-alt-info" ,
-			HideFromBonus        = "hide-from-bonus-gui" ,
-			FastReplaceableBuild = "fast-replaceable-no-build-while-moving" ,
-			FastReplaceableCross = "fast-replaceable-no-cross-type-while-moving" ,
-			Building8Way         = "building-direction-8-way" ,
-			BreathsAir           = "breaths-air" ,
-			PlayerCreation       = "player-creation" ,
-			FilterDirections     = "filter-directions"
+			NoCopyPaste                   = "no-copy-paste" ,
+			NoGapFill                     = "no-gap-fill-while-building" ,
+			NoAutomatedItemRemoval        = "no-automated-item-removal" ,
+			NoAutomatedItemInsertion      = "no-automated-item-insertion" ,
+			NotOnMap                      = "not-on-map" ,
+			NotInMadeIn                   = "not-in-made-in" ,
+			NotFlammable                  = "not-flammable" ,
+			NotRotatable                  = "not-rotatable" ,
+			NotRepairable                 = "not-repairable" ,
+			NotBlueprintable              = "not-blueprintable" ,
+			NotDeconstructable            = "not-deconstructable" ,
+			NotUpgradable                 = "not-upgradable" ,
+			NotSelectableInGame           = "not-selectable-in-game" ,
+			NotInKillStatistics           = "not-in-kill-statistics" ,
+			PlaceableEnemy                = "placeable-enemy" ,
+			PlaceablePlayer               = "placeable-player" ,
+			PlaceableNeutral              = "placeable-neutral" ,
+			PlaceableOffGrid              = "placeable-off-grid" ,
+			HideAltInfo                   = "hide-alt-info" ,
+			HideFromBonus                 = "hide-from-bonus-gui" ,
+			FastReplaceableBuild          = "fast-replaceable-no-build-while-moving" ,
+			FastReplaceableCross          = "fast-replaceable-no-cross-type-while-moving" ,
+			Building8Way                  = "building-direction-8-way" ,
+			BuildingDirection16Way        = "building-direction-16-way" ,
+			BreathsAir                    = "breaths-air" ,
+			PlayerCreation                = "player-creation" ,
+			FilterDirections              = "filter-directions" ,
+			GetByUnitNumber               = "get-by-unit-number" ,
+			SnapToRailSupportSpot         = "snap-to-rail-support-spot"
 		} ,
 		Direction =
 		{
@@ -153,67 +163,6 @@ SICommon =
 			East  = "east" ,
 			South = "south" ,
 			West  = "west"
-		} ,
-		CollisionMask =
-		{
-			Ground        = "ground-tile" ,
-			Water         = "water-tile" ,
-			Resource      = "resource-layer" ,
-			Doodad        = "doodad-layer" ,
-			Floor         = "floor-layer" ,
-			Item          = "item-layer" ,
-			Ghost         = "ghost-layer" ,
-			Object        = "object-layer" ,
-			Player        = "player-layer" ,
-			Train         = "train-layer" ,
-			Rail          = "rail-layer" ,
-			TransportBelt = "transport-belt-layer" ,
-			_13           = "layer-13" ,
-			_14           = "layer-14" ,
-			_15           = "layer-15" ,
-			_16           = "layer-16" ,
-			_17           = "layer-17" ,
-			_18           = "layer-18" ,
-			_19           = "layer-19" ,
-			_20           = "layer-20" ,
-			_21           = "layer-21" ,
-			_22           = "layer-22" ,
-			_23           = "layer-23" ,
-			_24           = "layer-24" ,
-			_25           = "layer-25" ,
-			_26           = "layer-26" ,
-			_27           = "layer-27" ,
-			_28           = "layer-28" ,
-			_29           = "layer-29" ,
-			_30           = "layer-30" ,
-			_31           = "layer-31" ,
-			_32           = "layer-32" ,
-			_33           = "layer-33" ,
-			_34           = "layer-34" ,
-			_35           = "layer-35" ,
-			_36           = "layer-36" ,
-			_37           = "layer-37" ,
-			_38           = "layer-38" ,
-			_39           = "layer-39" ,
-			_40           = "layer-40" ,
-			_41           = "layer-41" ,
-			_42           = "layer-42" ,
-			_43           = "layer-43" ,
-			_44           = "layer-44" ,
-			_45           = "layer-45" ,
-			_46           = "layer-46" ,
-			_47           = "layer-47" ,
-			_48           = "layer-48" ,
-			_49           = "layer-49" ,
-			_50           = "layer-50" ,
-			_51           = "layer-51" ,
-			_52           = "layer-52" ,
-			_53           = "layer-53" ,
-			_54           = "layer-54" ,
-			_55           = "layer-55" ,
-			NotCollidingWithItself  = "not-colliding-with-itself" ,
-			ConsiderTileTransitions = "consider-tile-transitions" ,
-			CollidingWithTilesOnly  = "colliding-with-tiles-only"
 		} ,
 		RenderLayer =
 		{
@@ -583,7 +532,6 @@ SICommon =
 			SimpleEntity        = "simple-entity" ,
 			SimpleForce         = "simple-entity-with-force" ,
 			SimpleOwner         = "simple-entity-with-owner" ,
-			FlyingText          = "flying-text" ,
 			SpeechBubble        = "speech-bubble" ,
 			GhostEntity         = "entity-ghost" ,
 			GhostTile           = "tile-ghost" ,
@@ -785,6 +733,9 @@ SICommon =
 	{
 		Train = 51
 	} ,
+	CodeName = {} ,
+	CodeNamePrefix = {} ,
+	CodeNameSuffix = {} ,
 	ShowName = {} ,
 	ShowNamePrefix = {} ,
 	ShowNameSuffix = {}
@@ -821,12 +772,16 @@ for type , real in pairs
 		for key , value in pairs( SICommon.Types[type] ) do
 			SICommon.Types.All[key] = value
 			SICommon.Types.Raw[value] = real[2]
+			SICommon.CodeName[value] = real[2]
+			SICommon.CodeNamePrefix[value] = real[2] .. "-"
 			SICommon.ShowName[value] = real[1]
 			SICommon.ShowNamePrefix[value] = real[1] .. "-"
 		end
 	else
 		SICommon.Types.All[type] = SICommon.Types[type]
 		SICommon.Types.Raw[SICommon.Types[type]] = real[2]
+		SICommon.CodeName[SICommon.Types[type]] = real[2]
+		SICommon.CodeNamePrefix[SICommon.Types[type]] = real[2] .. "-"
 		SICommon.ShowName[SICommon.Types[type]] = real[1]
 		SICommon.ShowNamePrefix[SICommon.Types[type]] = real[1] .. "-"
 	end
@@ -834,12 +789,15 @@ end
 
 for type , real in pairs
 {
-	ICON  = "图标" ,
-	HrVer = "高清"
+	ICON  = { "图标" , "icon" } ,
+	HrVer = { "高清" , "hr"   }
 } do
-	SICommon.ShowName[type] = real
-	SICommon.ShowNamePrefix[type] = real .. "-"
-	SICommon.ShowNameSuffix[type] = "-" .. real
+	SICommon.CodeName[type] = real[2]
+	SICommon.CodeNamePrefix[type] = real[2] .. "-"
+	SICommon.CodeNameSuffix[type] = "-" .. real[2]
+	SICommon.ShowName[type] = real[1]
+	SICommon.ShowNamePrefix[type] = real[1] .. "-"
+	SICommon.ShowNameSuffix[type] = "-" .. real[1]
 end
 
 -- ============================================================================================================================================

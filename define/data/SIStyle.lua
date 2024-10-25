@@ -8,7 +8,8 @@ SIStyle =
 {
 	-- 固定属性
 	ID = "SIStyle" ,
-	Name = "控件样式" ,
+	Code = "SIStyle" ,
+	Show = "控件样式" ,
 	-- 颜色数据
 	DirtColor =
 	{

@@ -264,7 +264,7 @@ SIRPGSystem =
 		local technologyName = technology.name
 		local specialBonus = globalSettings.EXP.SpecialTechnologyList[technologyName]
 		if specialBonus then
-			specialBonus = specialBonus * global.Settings.CraftExpMultiplier
+			specialBonus = specialBonus * globalSettings.Setting.CraftExpMultiplier
 			for index , player in pairs( force.players ) do
 				SIRPGSystem.MakeCraftExp( player.index , specialBonus , true )
 			end

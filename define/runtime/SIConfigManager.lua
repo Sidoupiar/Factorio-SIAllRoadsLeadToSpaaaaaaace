@@ -21,7 +21,8 @@
 SIConfigManager =
 {
 	ID = "SIConfigManager" ,
-	Name = "配置管理" ,
+	Code = "SIConfigManager" ,
+	Show = "配置管理" ,
 	InterfaceID = "SIConfigManager"
 }
 

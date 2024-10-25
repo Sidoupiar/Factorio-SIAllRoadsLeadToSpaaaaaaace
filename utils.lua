@@ -33,8 +33,6 @@ require( CorePath .. "/define/SICommon" )
 require( CorePath .. "/define/SIModData" )
 
 SIUtils.CollisionMask = require( "__core__/lualib/collision-mask-util" )
-SIUtils.Noise = require( "__core__/lualib/noise" )
-SIUtils.NoiseMath = require( "__core__/lualib/noise/expression-to-ascii-math" )
 SIUtils.Settings =
 {
 	ShowPatreon = function()
@@ -194,9 +192,17 @@ SITable =
 		end
 		return nil , 0
 	end ,
-	GetWithName = function( data , name )
+	GetWithCode = function( data , code )
 		for key , value in pairs( data ) do
-			if SITools.IsTable( value ) and value.Name == name then
+			if SITools.IsTable( value ) and value.Code == code then
+				return value , key
+			end
+		end
+		return nil , 0
+	end ,
+	GetWithName = function( data , show )
+		for key , value in pairs( data ) do
+			if SITools.IsTable( value ) and value.Show == show then
 				return value , key
 			end
 		end
@@ -440,7 +446,7 @@ function E( message )
 end
 
 function CodeE( Structure , message )
-	E( Structure.Name .. " [ " .. Structure.ID .. " ] : " .. message )
+	E( Structure.Show .. " [ " .. Structure.ID .. " ] : " .. message )
 	return Structure
 end
 
@@ -624,7 +630,8 @@ SISettings =
 SIInit =
 {
 	ID = "SIInit" ,
-	Name = "初始化" ,
+	Code = "SIInit" ,
+	Show = "初始化" ,
 	StateCodeDefine =
 	{
 		Data                = 1 ,
@@ -699,9 +706,10 @@ end
 -- ModName = 调用此函数的 MOD 的名称 , 要使用代码名称而不是显示名称<br>
 -- CustomPackageConfig = 功能包的配置信息数组 , 如果值为 nil , 则会尝试加载 MOD 文件夹下的 PackageConfig.lua 文件 , 文件不存在则会报错<br>
 -- ConstantsDataPrefix = ConstantsData 在代码的各种位置中进行注册时使用的名称前缀 , 防止重名 , 不影响注册的原型数据<br>
+-- CodeNamePrefix      = ConstantsData 在代码的各种位置中进行显示时使用的名称前缀 , 防止重名 , 影响注册的原型数据的 name 属性<br>
 -- ShowNamePrefix      = ConstantsData 在代码的各种位置中进行显示时使用的名称前缀 , 防止重名 , 影响注册的原型数据和本地化字符串 , 生成原型数据名称时此前缀也会被包含进去<br>
 -- ======================================================================
-function SIInit.AutoLoad( ModName , CustomPackageConfig , ConstantsDataPrefix , ShowNamePrefix )
+function SIInit.AutoLoad( ModName , CustomPackageConfig , ConstantsDataPrefix , CodeNamePrefix , ShowNamePrefix )
 	if not ModName then
 		ModName = CoreName
 		SIInit.ModName = CoreName
@@ -713,6 +721,7 @@ function SIInit.AutoLoad( ModName , CustomPackageConfig , ConstantsDataPrefix , 
 	CustomPackagePrefix = "SIPackage_"
 	CustomPackageConfig = CustomPackageConfig or SINeed( SIInit.ModPath .. "/PackageConfig" , true )
 	ConstantsDataPrefix = ConstantsDataPrefix or "SIConstants_"
+	CodeNamePrefix = CodeNamePrefix or "SI"
 	ShowNamePrefix = ShowNamePrefix or "SI"
 	if SIInit.State == SIInit.StateCodeDefine.Data or SIInit.State == SIInit.StateCodeDefine.Control then
 		for packageIndex , packageConfig in pairs( CustomPackageConfig ) do
@@ -763,8 +772,11 @@ function SIInit.AutoLoad( ModName , CustomPackageConfig , ConstantsDataPrefix , 
 					SIInit.OrderCode = SIInit.OrderCode + SIInit.OrderStep
 					SIInit.ConstantsDataOrderCode = SIInit.ConstantsDataOrderCode + SIInit.ConstantsDataOrderStep
 					-- 补全属性
-					if not constantsData.Name then
-						constantsData.Name = constantsData.ID
+					if not constantsData.Code then
+						constantsData.Code = constantsData.ID
+					end
+					if not constantsData.Show then
+						constantsData.Show = constantsData.ID
 					end
 					if constantsData.UseClassPrefix == nil then
 						constantsData.UseClassPrefix = true
@@ -795,8 +807,9 @@ function SIInit.AutoLoad( ModName , CustomPackageConfig , ConstantsDataPrefix , 
 					constantsData.OrderOffset = {}
 					-- 添加基础数据
 					constantsData.ClassName = className
-					constantsData.CodeName = ( constantsData.UseShowPrefix and ShowNamePrefix or "" ) .. constantsData.ID:gsub( "_" , "-" )
-					constantsData.ShowName = ( constantsData.UseShowPrefix and ShowNamePrefix or "" ) .. constantsData.Name:gsub( "_" , "-" )
+					constantsData.CodeName = ( constantsData.UseCodePrefix and CodeNamePrefix or "" ) .. constantsData.Code:gsub( "_" , "-" )
+					constantsData.ShowName = ( constantsData.UseShowPrefix and ShowNamePrefix or "" ) .. constantsData.Show:gsub( "_" , "-" )
+					constantsData.CodeNamePrefix = constantsData.CodeName .. "-"
 					constantsData.ShowNamePrefix = constantsData.ShowName .. "-"
 					constantsData.OrderPrefix = SIOrderPrefix() .. "[" .. constantsData.Order .. constantsData.CodeName .. "]-"
 					constantsData.OrderCode = SIInit.OrderCode
@@ -858,7 +871,7 @@ function SIInit.AutoLoad( ModName , CustomPackageConfig , ConstantsDataPrefix , 
 						if constantsData.Autoload.Enable and constantsData.Autoload.Settings then
 							local settings = {}
 							for settingID , settingValues in pairs( constantsData.Autoload.Settings ) do
-								local realName = constantsData.ShowNamePrefix .. settingID:gsub( "_" , "-" )
+								local realName = constantsData.CodeNamePrefix .. settingID:gsub( "_" , "-" )
 								local settingType = settingValues[1]
 								local settingItem =
 								{
@@ -929,7 +942,7 @@ function SIInit.AutoLoad( ModName , CustomPackageConfig , ConstantsDataPrefix , 
 								local runtimeChangeList = {}
 								local perUserChangeList = {}
 								for settingID , settingValues in pairs( autoload.Settings ) do
-									local realName = constantsData.ShowNamePrefix .. settingID:gsub( "_" , "-" )
+									local realName = constantsData.CodeNamePrefix .. settingID:gsub( "_" , "-" )
 									constantsData.raw.Settings[settingID] = realName
 									if settingValues[2] == SICommon.SettingAffectTypes.StartUp then
 										startupList[settingID] = function()
@@ -962,8 +975,9 @@ function SIInit.AutoLoad( ModName , CustomPackageConfig , ConstantsDataPrefix , 
 								if autoload.Groups then
 									constantsData.raw.Groups = {}
 									for groupID , groupData in pairs( autoload.Groups ) do
-										local groupShowName = SICommon.ShowNamePrefix[SICommon.Types.Group] .. ( groupData and groupData.Name or groupID ):gsub( "_" , "-" )
-										local groupRealName = constantsData.ShowNamePrefix .. groupShowName
+										local groupCodeName = SICommon.CodeNamePrefix[SICommon.Types.Group] .. ( groupData and groupData.Code or groupID ):gsub( "_" , "-" )
+										local groupShowName = SICommon.ShowNamePrefix[SICommon.Types.Group] .. ( groupData and groupData.Show or groupID ):gsub( "_" , "-" )
+										local groupRealName = constantsData.CodeNamePrefix .. groupCodeName
 										if not groupData.Order then
 											groupData.Order = constantsData.Order
 										end
@@ -986,9 +1000,10 @@ function SIInit.AutoLoad( ModName , CustomPackageConfig , ConstantsDataPrefix , 
 										constantsData.raw.Groups[groupID] = {}
 										if groupData.Subgroups then
 											local subOrder = groupData.SubOrder or "0"
-											for subgroupID , subgroupUseName in pairs( groupData.Subgroups ) do
-												local subgroupShowName = groupShowName .. "-" .. ( subgroupUseName or subgroupID ):gsub( "_" , "-" )
-												local subgroupRealName = constantsData.ShowNamePrefix .. subgroupShowName
+											for subgroupID , subgroupData in pairs( groupData.Subgroups ) do
+												local subgroupCodeName = groupCodeName .. "-" .. ( subgroupData and subgroupData.Code or subgroupID ):gsub( "_" , "-" )
+												local subgroupShowName = groupShowName .. "-" .. ( subgroupData and subgroupData.Show or subgroupID ):gsub( "_" , "-" )
+												local subgroupRealName = constantsData.CodeNamePrefix .. subgroupCodeName
 												if autoload.Enable then
 													local subgroup =
 													{
@@ -1005,6 +1020,7 @@ function SIInit.AutoLoad( ModName , CustomPackageConfig , ConstantsDataPrefix , 
 											end
 										end
 										groupData.Subgroups = nil
+										groupData.CodeName = groupCodeName
 										groupData.ShowName = groupShowName
 										groupData.RealName = groupRealName
 									end
@@ -1034,9 +1050,10 @@ function SIInit.AutoLoad( ModName , CustomPackageConfig , ConstantsDataPrefix , 
 										end
 										local aimGroupData = APIData.Groups[groupID]
 										local subOrder = groupData.SubOrder or "0"
-										for subgroupID , subgroupUseName in pairs( groupData.Subgroups ) do
-											local subgroupShowName = aimGroupData.ShowName .. "-" .. ( subgroupUseName or subgroupID ):gsub( "_" , "-" )
-											local subgroupRealName = constantsData.ShowNamePrefix .. subgroupShowName
+										for subgroupID , subgroupData in pairs( groupData.Subgroups ) do
+											local subgroupCodeName = aimGroupData.CodeName .. "-" .. ( subgroupData and subgroupData.Code or subgroupID ):gsub( "_" , "-" )
+											local subgroupShowName = aimGroupData.ShowName .. "-" .. ( subgroupData and subgroupData.Show or subgroupID ):gsub( "_" , "-" )
+											local subgroupRealName = constantsData.CodeNamePrefix .. subgroupCodeName
 											if autoload.Enable then
 												local subgroup =
 												{
@@ -1056,9 +1073,10 @@ function SIInit.AutoLoad( ModName , CustomPackageConfig , ConstantsDataPrefix , 
 								if autoload.DamageTypes then
 									constantsData.raw.DamageTypes = {}
 									constantsData.raw.DamageTypeValues = {}
-									for damageTypeID , resistanceValue in pairs( autoload.DamageTypes ) do
-										local showName = SICommon.ShowNamePrefix[SICommon.Types.DamageType] .. ( resistanceValue and resistanceValue.Name or damageTypeID ):gsub( "_" , "-" )
-										local realName = constantsData.ShowNamePrefix .. showName
+									for damageTypeID , resistanceData in pairs( autoload.DamageTypes ) do
+										local codeName = SICommon.CodeNamePrefix[SICommon.Types.DamageType] .. ( resistanceData and resistanceData.Code or damageTypeID ):gsub( "_" , "-" )
+										local showName = SICommon.ShowNamePrefix[SICommon.Types.DamageType] .. ( resistanceData and resistanceData.Show or damageTypeID ):gsub( "_" , "-" )
+										local realName = constantsData.CodeNamePrefix .. codeName
 										if autoload.Enable then
 											local damageType =
 											{
@@ -1072,8 +1090,8 @@ function SIInit.AutoLoad( ModName , CustomPackageConfig , ConstantsDataPrefix , 
 											table.insert( prototypes , damageType )
 										end
 										constantsData.raw.DamageTypes[damageTypeID] = realName
-										if resistanceValue and ( resistanceValue.Decrease or resistanceValue.Percent ) then
-											constantsData.raw.DamageTypeValues[damageTypeID] = SITools.Resistance( realName , resistanceValue.Decrease , resistanceValue.Percent )
+										if resistanceData and ( resistanceData.Decrease or resistanceData.Percent ) then
+											constantsData.raw.DamageTypeValues[damageTypeID] = SITools.Resistance( realName , resistanceData.Decrease , resistanceData.Percent )
 										else
 											constantsData.raw.DamageTypeValues[damageTypeID] = nil
 										end
@@ -1084,9 +1102,10 @@ function SIInit.AutoLoad( ModName , CustomPackageConfig , ConstantsDataPrefix , 
 									for categoryCode , categroyList in pairs( autoload.Categories ) do
 										local typeCode = SICommon.Types.Categories[categoryCode]
 										constantsData.raw.Categories[categoryCode] = {}
-										for categoryID , categoryUseName in pairs( categroyList ) do
-											local showName = SICommon.ShowNamePrefix[typeCode] .. ( categoryUseName or categoryID ):gsub( "_" , "-" )
-											local realName = constantsData.ShowNamePrefix .. showName
+										for categoryID , categoryData in pairs( categroyList ) do
+											local codeName = SICommon.CodeNamePrefix[typeCode] .. ( categoryData and categoryData.Code or categoryID ):gsub( "_" , "-" )
+											local showName = SICommon.ShowNamePrefix[typeCode] .. ( categoryData and categoryData.Show or categoryID ):gsub( "_" , "-" )
+											local realName = constantsData.CodeNamePrefix .. codeName
 											if autoload.Enable then
 												local category =
 												{

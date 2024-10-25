@@ -15,8 +15,8 @@ local rockDataList =
 
 for rockID , rockData in pairs( rockDataList ) do
 	local rockAlias = rockData.Alias
-	local rockProjectile = nil
-	local pieceRockProjectile = nil
+	local rockProjectile = {}
+	local pieceRockProjectile = {}
 	SIGen
 	.SetGroup( SIConstants_Resource.raw.Groups.Resource.Rock )
 	.New( SICommon.Types.Entities.Projectile , rockID , "扔出去的" .. rockAlias )
@@ -528,7 +528,7 @@ for stoneIndex , stoneData in pairs( stoneDataList ) do
 	.SetSize( stoneData.X , stoneData.Y )
 	.Append
 	{
-		flags = { SICommon.Flags.Entity.PlaceableNeutral , SICommon.Flags.Entity.PlaceableOffGrid , SICommon.Flags.Entity.NotOnMap , SICommon.Flags.Entity.HideAltInfo , SICommon.Flags.Entity.Hidden } ,
+		flags = { SICommon.Flags.Entity.PlaceableNeutral , SICommon.Flags.Entity.PlaceableOffGrid , SICommon.Flags.Entity.NotOnMap , SICommon.Flags.Entity.HideAltInfo } ,
 		minable =
 		{
 			mining_time = 12.0 ,
