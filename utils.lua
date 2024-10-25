@@ -614,6 +614,7 @@ SIAPI = {}
 SIConfigs = {}
 SISettings =
 {
+	Package = {} ,
 	Startup = {} ,
 	Runtime = {} ,
 	PerUser = {} ,
@@ -709,236 +710,332 @@ function SIInit.AutoLoad( ModName , CustomPackageConfig , ConstantsDataPrefix , 
 		SIInit.ModName = ModName
 		SIInit.ModPath = "__" .. ModName .. "__"
 	end
+	CustomPackagePrefix = "SIPackage_"
 	CustomPackageConfig = CustomPackageConfig or SINeed( SIInit.ModPath .. "/PackageConfig" , true )
 	ConstantsDataPrefix = ConstantsDataPrefix or "SIConstants_"
 	ShowNamePrefix = ShowNamePrefix or "SI"
+	if SIInit.State == SIInit.StateCodeDefine.Data or SIInit.State == SIInit.StateCodeDefine.Control then
+		for packageIndex , packageConfig in pairs( CustomPackageConfig ) do
+			local packageName = packageConfig.PackageName
+			if packageName == "0000_Core" then
+				SISettings.Package[packageName] = function()
+					return true
+				end
+			else
+				SISettings.Package[packageName] = function()
+					return settings.startup[CustomPackagePrefix .. packageName].value
+				end
+			end
+		end
+	end
 	if SIInit.State == SIInit.StateCodeDefine.Settings or SIInit.State == SIInit.StateCodeDefine.Data or SIInit.State == SIInit.StateCodeDefine.Control then
 		for packageIndex , packageConfig in pairs( CustomPackageConfig ) do
 			local packageName = packageConfig.PackageName
-			if packageConfig.Requires then
-				for requireIndex , requirePackageName in pairs( packageConfig.Requires ) do
-					if not SIInit.ConstantsDataList[ModName .. "_" .. requirePackageName] then
-						return CodeE( SIInit , "模块缺少强制依赖 , Package=\"" .. packageName .. "\" , Require=\"" .. requirePackageName .. "\"" )
+			local packageLoadFlag = false
+			if SIInit.State == SIInit.StateCodeDefine.Settings then
+				-- Settings 阶段不需要判断数据包是否启用
+				if packageConfig.Requires then
+					for requireIndex , requirePackageName in pairs( packageConfig.Requires ) do
+						if not SIInit.ConstantsDataList[ModName .. "_" .. requirePackageName] then
+							return CodeE( SIInit , "模块缺少强制依赖 , Package=\"" .. packageName .. "\" , Require=\"" .. requirePackageName .. "\"" )
+						end
 					end
+				end
+				packageLoadFlag = true
+			else
+				-- Data 和 Control 阶段需要判断数据包是否启用
+				if SISettings.Package[packageName]() then
+					if packageConfig.Requires then
+						for requireIndex , requirePackageName in pairs( packageConfig.Requires ) do
+							if not SISettings.Package[requirePackageName]() or not SIInit.ConstantsDataList[ModName .. "_" .. requirePackageName] then
+								return CodeE( SIInit , "模块缺少强制依赖 , Package=\"" .. packageName .. "\" , Require=\"" .. requirePackageName .. "\"" )
+							end
+						end
+					end
+					packageLoadFlag = true
 				end
 			end
-			local packagePath = SIInit.ModPath .. "/package/" .. packageName .. "/"
-			local constantsData = SINeed( packagePath .. "0_ConstantsData" , true )
-			if constantsData and constantsData.ID then
-				SIInit.ConstantsDataList[ModName .. "_" .. packageName] = constantsData
-				SIInit.OrderCode = SIInit.OrderCode + SIInit.OrderStep
-				SIInit.ConstantsDataOrderCode = SIInit.ConstantsDataOrderCode + SIInit.ConstantsDataOrderStep
-				-- 补全属性
-				if not constantsData.Name then
-					constantsData.Name = constantsData.ID
-				end
-				if constantsData.UseClassPrefix == nil then
-					constantsData.UseClassPrefix = true
-				end
-				if constantsData.UseShowPrefix == nil then
-					constantsData.UseShowPrefix = true
-				end
-				if constantsData.Order == nil then
-					constantsData.Order = tostring( SIInit.ConstantsDataOrderCode )
-				end
-				if not constantsData.Autoload then
-					constantsData.Autoload = {}
-				end
-				if constantsData.Autoload.Enable == nil then
-					constantsData.Autoload.Enable = true
-				end
-				local className = ( constantsData.UseClassPrefix and ConstantsDataPrefix or "" ) .. constantsData.ID:gsub( "-" , "_" )
-				if _G[className] then
-					return CodeE( SIInit , "已存在的 ConstantsData.ClassName , ClassName=" .. className )
-				end
-				_G[className] = constantsData
-				constantsData.API =
-				{
-					ID = constantsData.ID ,
-					PackageName = packageName ,
-					ClassName = className
-				}
-				constantsData.OrderOffset = {}
-				-- 添加基础数据
-				constantsData.ClassName = className
-				constantsData.CodeName = ( constantsData.UseShowPrefix and ShowNamePrefix or "" ) .. constantsData.ID:gsub( "_" , "-" )
-				constantsData.ShowName = ( constantsData.UseShowPrefix and ShowNamePrefix or "" ) .. constantsData.Name:gsub( "_" , "-" )
-				constantsData.ShowNamePrefix = constantsData.ShowName .. "-"
-				constantsData.OrderPrefix = SIOrderPrefix() .. "[" .. constantsData.Order .. constantsData.CodeName .. "]-"
-				constantsData.OrderCode = SIInit.OrderCode
-				constantsData.LocalisedName = { "ConstantsDataName." .. constantsData.CodeName }
-				constantsData.LocalisedDescription = { "ConstantsDataDescription." .. constantsData.CodeName }
-				constantsData.GetNextOrderCode = function()
-					local orderCode = constantsData.OrderCode + 1
-					while constantsData.OrderOffset[orderCode] do
-						orderCode = orderCode + 1
+			if packageLoadFlag then
+				local packagePath = SIInit.ModPath .. "/package/" .. packageName .. "/"
+				local constantsData = SINeed( packagePath .. "0_ConstantsData" , true )
+				if constantsData and constantsData.ID then
+					SIInit.ConstantsDataList[ModName .. "_" .. packageName] = constantsData
+					SIInit.OrderCode = SIInit.OrderCode + SIInit.OrderStep
+					SIInit.ConstantsDataOrderCode = SIInit.ConstantsDataOrderCode + SIInit.ConstantsDataOrderStep
+					-- 补全属性
+					if not constantsData.Name then
+						constantsData.Name = constantsData.ID
 					end
-					constantsData.OrderCode = orderCode
-					return constantsData.OrderCode
-				end
-				constantsData.GetOrderString = function()
-					local orderCode = constantsData.OrderCode + 1
-					while constantsData.OrderOffset[orderCode] do
-						orderCode = orderCode + 1
+					if constantsData.UseClassPrefix == nil then
+						constantsData.UseClassPrefix = true
 					end
-					constantsData.OrderCode = orderCode
-					return constantsData.OrderPrefix .. constantsData.OrderCode .. "-"
-				end
-				constantsData.GetOrderStringWithOffset = function( OrderOffset )
-					constantsData.OrderCode = constantsData.OrderCode + 1
-					local orderCode = constantsData.OrderCode + OrderOffset
-					constantsData.OrderOffset[orderCode] = constantsData.OrderCode
-					return constantsData.OrderPrefix .. orderCode .. "-"
-				end
-				if SIAPI[constantsData.CodeName] then
-					return CodeE( SIInit , "已存在的 ConstantsData.CodeName , CodeName=" .. constantsData.CodeName )
-				end
-				SIAPI[constantsData.CodeName] = constantsData.API
-				constantsData.API.CodeName = constantsData.CodeName
-				constantsData.API.OrderPrefix = constantsData.OrderPrefix
-				constantsData.API.GetNextOrderCode = constantsData.GetNextOrderCode
-				constantsData.API.GetOrderString = constantsData.GetOrderString
-				constantsData.API.GetOrderStringWithOffset = constantsData.GetOrderStringWithOffset
-				-- 加载开始前回调
-				if constantsData.BeforeLoad then
-					constantsData.BeforeLoad( constantsData )
-				end
-				-- 按阶段生成属性
-				if SIInit.State == SIInit.StateCodeDefine.Settings then
-					-- 自动创建设置
-					if constantsData.Autoload.Enable and constantsData.Autoload.Settings then
-						local settings = {}
-						for settingID , settingValues in pairs( constantsData.Autoload.Settings ) do
-							local realName = constantsData.ShowNamePrefix .. settingID:gsub( "_" , "-" )
-							local settingType = settingValues[1]
-							local settingItem =
+					if constantsData.UseShowPrefix == nil then
+						constantsData.UseShowPrefix = true
+					end
+					if constantsData.Order == nil then
+						constantsData.Order = tostring( SIInit.ConstantsDataOrderCode )
+					end
+					if not constantsData.Autoload then
+						constantsData.Autoload = {}
+					end
+					if constantsData.Autoload.Enable == nil then
+						constantsData.Autoload.Enable = true
+					end
+					local className = ( constantsData.UseClassPrefix and ConstantsDataPrefix or "" ) .. constantsData.ID:gsub( "-" , "_" )
+					if _G[className] then
+						return CodeE( SIInit , "已存在的 ConstantsData.ClassName , ClassName=" .. className )
+					end
+					_G[className] = constantsData
+					constantsData.API =
+					{
+						ID = constantsData.ID ,
+						PackageName = packageName ,
+						ClassName = className
+					}
+					constantsData.OrderOffset = {}
+					-- 添加基础数据
+					constantsData.ClassName = className
+					constantsData.CodeName = ( constantsData.UseShowPrefix and ShowNamePrefix or "" ) .. constantsData.ID:gsub( "_" , "-" )
+					constantsData.ShowName = ( constantsData.UseShowPrefix and ShowNamePrefix or "" ) .. constantsData.Name:gsub( "_" , "-" )
+					constantsData.ShowNamePrefix = constantsData.ShowName .. "-"
+					constantsData.OrderPrefix = SIOrderPrefix() .. "[" .. constantsData.Order .. constantsData.CodeName .. "]-"
+					constantsData.OrderCode = SIInit.OrderCode
+					constantsData.LocalisedName = { "ConstantsDataName." .. constantsData.CodeName }
+					constantsData.LocalisedDescription = { "ConstantsDataDescription." .. constantsData.CodeName }
+					constantsData.GetNextOrderCode = function()
+						local orderCode = constantsData.OrderCode + 1
+						while constantsData.OrderOffset[orderCode] do
+							orderCode = orderCode + 1
+						end
+						constantsData.OrderCode = orderCode
+						return constantsData.OrderCode
+					end
+					constantsData.GetOrderString = function()
+						local orderCode = constantsData.OrderCode + 1
+						while constantsData.OrderOffset[orderCode] do
+							orderCode = orderCode + 1
+						end
+						constantsData.OrderCode = orderCode
+						return constantsData.OrderPrefix .. constantsData.OrderCode .. "-"
+					end
+					constantsData.GetOrderStringWithOffset = function( OrderOffset )
+						constantsData.OrderCode = constantsData.OrderCode + 1
+						local orderCode = constantsData.OrderCode + OrderOffset
+						constantsData.OrderOffset[orderCode] = constantsData.OrderCode
+						return constantsData.OrderPrefix .. orderCode .. "-"
+					end
+					if SIAPI[constantsData.CodeName] then
+						return CodeE( SIInit , "已存在的 ConstantsData.CodeName , CodeName=" .. constantsData.CodeName )
+					end
+					SIAPI[constantsData.CodeName] = constantsData.API
+					constantsData.API.CodeName = constantsData.CodeName
+					constantsData.API.OrderPrefix = constantsData.OrderPrefix
+					constantsData.API.GetNextOrderCode = constantsData.GetNextOrderCode
+					constantsData.API.GetOrderString = constantsData.GetOrderString
+					constantsData.API.GetOrderStringWithOffset = constantsData.GetOrderStringWithOffset
+					-- 加载开始前回调
+					if constantsData.BeforeLoad then
+						constantsData.BeforeLoad( constantsData )
+					end
+					-- 按阶段生成属性
+					if SIInit.State == SIInit.StateCodeDefine.Settings then
+						-- 创建数据包设置
+						if packageName ~= "0000_Core" then
+							local packageSettingItem =
 							{
-								type = settingType .. "-setting" ,
-								setting_type = settingValues[2] ,
-								name = realName ,
-								default_value = settingValues[3] ,
+								type = SICommon.SettingTypes.BOOL .. "-setting" ,
+								setting_type = SICommon.SettingAffectTypes.StartUp ,
+								name = CustomPackagePrefix .. packageName ,
+								localised_name = { "SICommon.EnablePackageName" , { "SIPackageName." .. packageName } } ,
+								localised_description = { "SICommon.EnablePackageDescription" , { "SIPackageName." .. packageName } , { "SICommon.Show-TrueValue" } } ,
+								default_value = true ,
 								order = constantsData.GetOrderString() ,
 								hidden = false
 							}
-							if settingType == SICommon.SettingTypes.BOOL then
-								settingItem.localised_name = settingValues[4] or { "SISettingName."..realName }
-								settingItem.localised_description = settingValues[5] or { "SICommon.SettingsDescription" , constantsData.LocalisedName , { "SISettingDescription."..realName } , SIPrint.ToShow( settingValues[3] ) }
-								settingItem.forced_value = false
-							elseif settingType == SICommon.SettingTypes.INT or settingType == SICommon.SettingTypes.DOUBLE then
-								settingItem.minimum_value = settingValues[4]
-								settingItem.maximum_value = settingValues[5]
-								settingItem.allowed_values = settingValues[6]
-								settingItem.localised_name = settingValues[7] or { "SISettingName."..realName }
-								settingItem.localised_description = settingValues[8] or { "SICommon.SettingsDescription" , constantsData.LocalisedName , { "SISettingDescription."..realName } , SIPrint.ToShow( settingValues[3] ) }
-							elseif settingType == SICommon.SettingTypes.STRING then
-								settingItem.allow_blank = settingValues[4] or false
-								settingItem.allowed_values = settingValues[5]
-								settingItem.localised_name = settingValues[6] or { "SISettingName."..realName }
-								settingItem.localised_description = settingValues[7] or { "SICommon.SettingsDescription" , constantsData.LocalisedName , { "SISettingDescription."..realName } , SIPrint.ToShow( settingValues[3] ) }
-								settingItem.auto_trim = true
-							end
-							table.insert( settings , settingItem )
+							data:extend( { packageSettingItem } )
 						end
-						if #settings > 0 then
-							data:extend( settings )
-						end
-						constantsData.Autoload = nil
-					end
-				else
-					-- 补充属性
-					constantsData.raw = {}
-					-- 计算资源文件路径
-					if constantsData.Path then
-						if constantsData.Path.Resource then
-							constantsData.PicturePath = constantsData.Path.Resource:gsub( "\\." , "/" ) .. "/"
-							constantsData.SoundPath = constantsData.PicturePath
-						else
-							if constantsData.Path.Picture then
-								constantsData.PicturePath = constantsData.Path.Picture:gsub( "\\." , "/" ) .. "/"
-							else
-								constantsData.PicturePath = SIInit.ModPath .. "/package/" .. packageName .. "/graphic/"
-							end
-							if constantsData.Path.Sound then
-								constantsData.SoundPath = constantsData.Path.Sound:gsub( "\\." , "/" ) .. "/"
-							else
-								constantsData.SoundPath = SIInit.ModPath .. "/package/" .. packageName .. "/sound/"
-							end
-						end
-						constantsData.Path = nil
-					else
-						constantsData.PicturePath = SIInit.ModPath .. "/package/" .. packageName .. "/graphic/"
-						constantsData.PoundPath = SIInit.ModPath .. "/package/" .. packageName .. "/sound/"
-					end
-					-- 创建设置引用 , 注册分组 , 伤害类型和其他类型
-					local autoload = constantsData.Autoload
-					if autoload.Enable then
-						if autoload.Settings then
-							constantsData.raw.Settings = {}
-							local startupList = {}
-							local runtimeList = {}
-							local perUserList = {}
-							local runtimeChangeList = {}
-							local perUserChangeList = {}
-							for settingID , settingValues in pairs( autoload.Settings ) do
+						-- 自动创建设置
+						if constantsData.Autoload.Enable and constantsData.Autoload.Settings then
+							local settings = {}
+							for settingID , settingValues in pairs( constantsData.Autoload.Settings ) do
 								local realName = constantsData.ShowNamePrefix .. settingID:gsub( "_" , "-" )
-								constantsData.raw.Settings[settingID] = realName
-								if settingValues[2] == SICommon.SettingAffectTypes.StartUp then
-									startupList[settingID] = function()
-										return settings.startup[realName].value
-									end
-								elseif settingValues[2] == SICommon.SettingAffectTypes.Runtime then
-									runtimeList[settingID] = function()
-										return settings.global[realName].value
-									end
-									runtimeChangeList[settingID] = function( value )
-										settings.global[realName] = { value = value }
-									end
-								elseif settingValues[2] == SICommon.SettingAffectTypes.PerUser then
-									perUserList[settingID] = function( playerOrIndex )
-										return settings.get_player_settings( playerOrIndex )[realName].value
-									end
-									perUserChangeList[settingID] = function( playerOrIndex , value )
-										settings.get_player_settings( playerOrIndex )[realName] = { value = value }
-									end
+								local settingType = settingValues[1]
+								local settingItem =
+								{
+									type = settingType .. "-setting" ,
+									setting_type = settingValues[2] ,
+									name = realName ,
+									default_value = settingValues[3] ,
+									order = constantsData.GetOrderString() ,
+									hidden = false
+								}
+								if settingType == SICommon.SettingTypes.BOOL then
+									settingItem.localised_name = settingValues[4] or { "SISettingName."..realName }
+									settingItem.localised_description = settingValues[5] or { "SICommon.SettingsDescription" , constantsData.LocalisedName , { "SISettingDescription."..realName } , SIPrint.ToShow( settingValues[3] ) }
+									settingItem.forced_value = false
+								elseif settingType == SICommon.SettingTypes.INT or settingType == SICommon.SettingTypes.DOUBLE then
+									settingItem.minimum_value = settingValues[4]
+									settingItem.maximum_value = settingValues[5]
+									settingItem.allowed_values = settingValues[6]
+									settingItem.localised_name = settingValues[7] or { "SISettingName."..realName }
+									settingItem.localised_description = settingValues[8] or { "SICommon.SettingsDescription" , constantsData.LocalisedName , { "SISettingDescription."..realName } , SIPrint.ToShow( settingValues[3] ) }
+								elseif settingType == SICommon.SettingTypes.STRING then
+									settingItem.allow_blank = settingValues[4] or false
+									settingItem.allowed_values = settingValues[5]
+									settingItem.localised_name = settingValues[6] or { "SISettingName."..realName }
+									settingItem.localised_description = settingValues[7] or { "SICommon.SettingsDescription" , constantsData.LocalisedName , { "SISettingDescription."..realName } , SIPrint.ToShow( settingValues[3] ) }
+									settingItem.auto_trim = true
+								end
+								table.insert( settings , settingItem )
+							end
+							if #settings > 0 then
+								data:extend( settings )
+							end
+							constantsData.Autoload = nil
+						end
+					else
+						-- 补充属性
+						constantsData.raw = {}
+						-- 计算资源文件路径
+						if constantsData.Path then
+							if constantsData.Path.Resource then
+								constantsData.PicturePath = constantsData.Path.Resource:gsub( "\\." , "/" ) .. "/"
+								constantsData.SoundPath = constantsData.PicturePath
+							else
+								if constantsData.Path.Picture then
+									constantsData.PicturePath = constantsData.Path.Picture:gsub( "\\." , "/" ) .. "/"
+								else
+									constantsData.PicturePath = SIInit.ModPath .. "/package/" .. packageName .. "/graphic/"
+								end
+								if constantsData.Path.Sound then
+									constantsData.SoundPath = constantsData.Path.Sound:gsub( "\\." , "/" ) .. "/"
+								else
+									constantsData.SoundPath = SIInit.ModPath .. "/package/" .. packageName .. "/sound/"
 								end
 							end
-							SISettings.Startup[constantsData.CodeName] = startupList
-							SISettings.Runtime[constantsData.CodeName] = runtimeList
-							SISettings.PerUser[constantsData.CodeName] = perUserList
-							SISettings.RuntimeChange[constantsData.CodeName] = runtimeChangeList
-							SISettings.PerUserChange[constantsData.CodeName] = perUserChangeList
+							constantsData.Path = nil
+						else
+							constantsData.PicturePath = SIInit.ModPath .. "/package/" .. packageName .. "/graphic/"
+							constantsData.PoundPath = SIInit.ModPath .. "/package/" .. packageName .. "/sound/"
 						end
-						if SIInit.State == SIInit.StateCodeDefine.Data then
-							local prototypes = {}
-							if autoload.Groups then
-								constantsData.raw.Groups = {}
-								for groupID , groupData in pairs( autoload.Groups ) do
-									local groupShowName = SICommon.ShowNamePrefix[SICommon.Types.Group] .. ( groupData and groupData.Name or groupID ):gsub( "_" , "-" )
-									local groupRealName = constantsData.ShowNamePrefix .. groupShowName
-									if not groupData.Order then
-										groupData.Order = constantsData.Order
+						-- 创建设置引用 , 注册分组 , 伤害类型和其他类型
+						local autoload = constantsData.Autoload
+						if autoload.Enable then
+							if autoload.Settings then
+								constantsData.raw.Settings = {}
+								local startupList = {}
+								local runtimeList = {}
+								local perUserList = {}
+								local runtimeChangeList = {}
+								local perUserChangeList = {}
+								for settingID , settingValues in pairs( autoload.Settings ) do
+									local realName = constantsData.ShowNamePrefix .. settingID:gsub( "_" , "-" )
+									constantsData.raw.Settings[settingID] = realName
+									if settingValues[2] == SICommon.SettingAffectTypes.StartUp then
+										startupList[settingID] = function()
+											return settings.startup[realName].value
+										end
+									elseif settingValues[2] == SICommon.SettingAffectTypes.Runtime then
+										runtimeList[settingID] = function()
+											return settings.global[realName].value
+										end
+										runtimeChangeList[settingID] = function( value )
+											settings.global[realName] = { value = value }
+										end
+									elseif settingValues[2] == SICommon.SettingAffectTypes.PerUser then
+										perUserList[settingID] = function( playerOrIndex )
+											return settings.get_player_settings( playerOrIndex )[realName].value
+										end
+										perUserChangeList[settingID] = function( playerOrIndex , value )
+											settings.get_player_settings( playerOrIndex )[realName] = { value = value }
+										end
 									end
-									if autoload.Enable then
-										local groupOrderString = "zSIOrder[" .. groupData.Order .. constantsData.CodeName .. "]-" .. constantsData.GetNextOrderCode() .. "-"
-										local group =
-										{
-											type = SICommon.Types.Group ,
-											name = groupRealName ,
-											localised_name = { constantsData.CodeName .. "Name." .. groupShowName } ,
-											localised_description = { constantsData.CodeName .. "Description." .. groupShowName } ,
-											icon = constantsData.PicturePath .. groupShowName .. SICommon.ShowNameSuffix.ICON .. ".png" ,
-											icon_size = 64 ,
-											icon_mipmaps = 0 ,
-											order = groupOrderString ,
-											order_in_recipe = groupOrderString
-										}
-										table.insert( prototypes , group )
+								end
+								SISettings.Startup[constantsData.CodeName] = startupList
+								SISettings.Runtime[constantsData.CodeName] = runtimeList
+								SISettings.PerUser[constantsData.CodeName] = perUserList
+								SISettings.RuntimeChange[constantsData.CodeName] = runtimeChangeList
+								SISettings.PerUserChange[constantsData.CodeName] = perUserChangeList
+							end
+							if SIInit.State == SIInit.StateCodeDefine.Data then
+								local prototypes = {}
+								if autoload.Groups then
+									constantsData.raw.Groups = {}
+									for groupID , groupData in pairs( autoload.Groups ) do
+										local groupShowName = SICommon.ShowNamePrefix[SICommon.Types.Group] .. ( groupData and groupData.Name or groupID ):gsub( "_" , "-" )
+										local groupRealName = constantsData.ShowNamePrefix .. groupShowName
+										if not groupData.Order then
+											groupData.Order = constantsData.Order
+										end
+										if autoload.Enable then
+											local groupOrderString = "zSIOrder[" .. groupData.Order .. constantsData.CodeName .. "]-" .. constantsData.GetNextOrderCode() .. "-"
+											local group =
+											{
+												type = SICommon.Types.Group ,
+												name = groupRealName ,
+												localised_name = { constantsData.CodeName .. "Name." .. groupShowName } ,
+												localised_description = { constantsData.CodeName .. "Description." .. groupShowName } ,
+												icon = constantsData.PicturePath .. groupShowName .. SICommon.ShowNameSuffix.ICON .. ".png" ,
+												icon_size = 64 ,
+												icon_mipmaps = 0 ,
+												order = groupOrderString ,
+												order_in_recipe = groupOrderString
+											}
+											table.insert( prototypes , group )
+										end
+										constantsData.raw.Groups[groupID] = {}
+										if groupData.Subgroups then
+											local subOrder = groupData.SubOrder or "0"
+											for subgroupID , subgroupUseName in pairs( groupData.Subgroups ) do
+												local subgroupShowName = groupShowName .. "-" .. ( subgroupUseName or subgroupID ):gsub( "_" , "-" )
+												local subgroupRealName = constantsData.ShowNamePrefix .. subgroupShowName
+												if autoload.Enable then
+													local subgroup =
+													{
+														type = SICommon.Types.Subgroup ,
+														name = subgroupRealName ,
+														localised_name = { constantsData.CodeName .. "Name." .. subgroupShowName } ,
+														localised_description = { constantsData.CodeName .. "Description." .. subgroupShowName } ,
+														group = groupRealName ,
+														order = "zSIOrder[" .. groupData.Order .. constantsData.CodeName .. "]-[" .. subOrder .. "]-" .. constantsData.GetNextOrderCode() .. "-"
+													}
+													table.insert( prototypes , subgroup )
+												end
+												constantsData.raw.Groups[groupID][subgroupID] = subgroupRealName
+											end
+										end
+										groupData.Subgroups = nil
+										groupData.ShowName = groupShowName
+										groupData.RealName = groupRealName
 									end
-									constantsData.raw.Groups[groupID] = {}
-									if groupData.Subgroups then
+									constantsData.API.Groups = SIUtils.table.deepcopy( autoload.Groups )
+								end
+								if autoload.GroupsAppend then
+									if not constantsData.raw.Groups then
+										constantsData.raw.Groups = {}
+									end
+									for groupID , groupData in pairs( autoload.GroupsAppend ) do
+										local ConstantsDataCodeName = groupData.ConstantsDataCodeName
+										if not ConstantsDataCodeName then
+											return CodeE( SIInit , "自动创建子分组并添加至指定分组时 , 分组数据的 ConstantsDataCodeName 属性不能为空 , ConstantsData=" .. constantsData.ShowName .. " , GroupID=" .. groupID )
+										end
+										if not groupData.Subgroups then
+											return CodeE( SIInit , "自动创建子分组并添加至指定分组时 , 分组数据的 Subgroups 属性不能为空" )
+										end
+										local APIData = SIAPI[ConstantsDataCodeName]
+										if not APIData then
+											return CodeE( SIInit , "自动创建子分组并添加至指定分组时 , 分组数据的 ConstantsDataCodeName 必须指向已经加载完成或正在加载的 ConstantsData , ConstantsData=" .. constantsData.ShowName .. " , GroupID=" .. groupID )
+										end
+										if not APIData.Groups or not APIData.Groups[groupID] then
+											return CodeE( SIInit , "自动创建子分组并添加至指定分组时 , 分组数据的 ConstantsDataCodeName 指向的 ConstantsData 中必须包含指定分组 , ConstantsData=" .. constantsData.ShowName .. " , GroupID=" .. groupID )
+										end
+										if not constantsData.raw.Groups[groupID] then
+											constantsData.raw.Groups[groupID] = {}
+										end
+										local aimGroupData = APIData.Groups[groupID]
 										local subOrder = groupData.SubOrder or "0"
 										for subgroupID , subgroupUseName in pairs( groupData.Subgroups ) do
-											local subgroupShowName = groupShowName .. "-" .. ( subgroupUseName or subgroupID ):gsub( "_" , "-" )
+											local subgroupShowName = aimGroupData.ShowName .. "-" .. ( subgroupUseName or subgroupID ):gsub( "_" , "-" )
 											local subgroupRealName = constantsData.ShowNamePrefix .. subgroupShowName
 											if autoload.Enable then
 												local subgroup =
@@ -947,124 +1044,77 @@ function SIInit.AutoLoad( ModName , CustomPackageConfig , ConstantsDataPrefix , 
 													name = subgroupRealName ,
 													localised_name = { constantsData.CodeName .. "Name." .. subgroupShowName } ,
 													localised_description = { constantsData.CodeName .. "Description." .. subgroupShowName } ,
-													group = groupRealName ,
-													order = "zSIOrder[" .. groupData.Order .. constantsData.CodeName .. "]-[" .. subOrder .. "]-" .. constantsData.GetNextOrderCode() .. "-"
+													group = aimGroupData.RealName ,
+													order = "zSIOrder[" .. aimGroupData.Order .. ConstantsDataCodeName .. "]-[" .. subOrder .. "]-" .. APIData.GetNextOrderCode() .. "-"
 												}
 												table.insert( prototypes , subgroup )
 											end
 											constantsData.raw.Groups[groupID][subgroupID] = subgroupRealName
 										end
 									end
-									groupData.Subgroups = nil
-									groupData.ShowName = groupShowName
-									groupData.RealName = groupRealName
 								end
-								constantsData.API.Groups = SIUtils.table.deepcopy( autoload.Groups )
-							end
-							if autoload.GroupsAppend then
-								if not constantsData.raw.Groups then
-									constantsData.raw.Groups = {}
-								end
-								for groupID , groupData in pairs( autoload.GroupsAppend ) do
-									local ConstantsDataCodeName = groupData.ConstantsDataCodeName
-									if not ConstantsDataCodeName then
-										return CodeE( SIInit , "自动创建子分组并添加至指定分组时 , 分组数据的 ConstantsDataCodeName 属性不能为空 , ConstantsData=" .. constantsData.ShowName .. " , GroupID=" .. groupID )
-									end
-									if not groupData.Subgroups then
-										return CodeE( SIInit , "自动创建子分组并添加至指定分组时 , 分组数据的 Subgroups 属性不能为空" )
-									end
-									local APIData = SIAPI[ConstantsDataCodeName]
-									if not APIData then
-										return CodeE( SIInit , "自动创建子分组并添加至指定分组时 , 分组数据的 ConstantsDataCodeName 必须指向已经加载完成或正在加载的 ConstantsData , ConstantsData=" .. constantsData.ShowName .. " , GroupID=" .. groupID )
-									end
-									if not APIData.Groups or not APIData.Groups[groupID] then
-										return CodeE( SIInit , "自动创建子分组并添加至指定分组时 , 分组数据的 ConstantsDataCodeName 指向的 ConstantsData 中必须包含指定分组 , ConstantsData=" .. constantsData.ShowName .. " , GroupID=" .. groupID )
-									end
-									if not constantsData.raw.Groups[groupID] then
-										constantsData.raw.Groups[groupID] = {}
-									end
-									local aimGroupData = APIData.Groups[groupID]
-									local subOrder = groupData.SubOrder or "0"
-									for subgroupID , subgroupUseName in pairs( groupData.Subgroups ) do
-										local subgroupShowName = aimGroupData.ShowName .. "-" .. ( subgroupUseName or subgroupID ):gsub( "_" , "-" )
-										local subgroupRealName = constantsData.ShowNamePrefix .. subgroupShowName
-										if autoload.Enable then
-											local subgroup =
-											{
-												type = SICommon.Types.Subgroup ,
-												name = subgroupRealName ,
-												localised_name = { constantsData.CodeName .. "Name." .. subgroupShowName } ,
-												localised_description = { constantsData.CodeName .. "Description." .. subgroupShowName } ,
-												group = aimGroupData.RealName ,
-												order = "zSIOrder[" .. aimGroupData.Order .. ConstantsDataCodeName .. "]-[" .. subOrder .. "]-" .. APIData.GetNextOrderCode() .. "-"
-											}
-											table.insert( prototypes , subgroup )
-										end
-										constantsData.raw.Groups[groupID][subgroupID] = subgroupRealName
-									end
-								end
-							end
-							if autoload.DamageTypes then
-								constantsData.raw.DamageTypes = {}
-								constantsData.raw.DamageTypeValues = {}
-								for damageTypeID , resistanceValue in pairs( autoload.DamageTypes ) do
-									local showName = SICommon.ShowNamePrefix[SICommon.Types.DamageType] .. ( resistanceValue and resistanceValue.Name or damageTypeID ):gsub( "_" , "-" )
-									local realName = constantsData.ShowNamePrefix .. showName
-									if autoload.Enable then
-										local damageType =
-										{
-											type = SICommon.Types.DamageType ,
-											name = realName ,
-											localised_name = { constantsData.CodeName .. "Name." .. showName } ,
-											localised_description = { constantsData.CodeName .. "Description." .. showName } ,
-											order = constantsData.GetOrderString() ,
-											hidden = false
-										}
-										table.insert( prototypes , damageType )
-									end
-									constantsData.raw.DamageTypes[damageTypeID] = realName
-									if resistanceValue and ( resistanceValue.Decrease or resistanceValue.Percent ) then
-										constantsData.raw.DamageTypeValues[damageTypeID] = SITools.Resistance( realName , resistanceValue.Decrease , resistanceValue.Percent )
-									else
-										constantsData.raw.DamageTypeValues[damageTypeID] = nil
-									end
-								end
-							end
-							if autoload.Categories then
-								constantsData.raw.Categories = {}
-								for categoryCode , categroyList in pairs( autoload.Categories ) do
-									local typeCode = SICommon.Types.Categories[categoryCode]
-									constantsData.raw.Categories[categoryCode] = {}
-									for categoryID , categoryUseName in pairs( categroyList ) do
-										local showName = SICommon.ShowNamePrefix[typeCode] .. ( categoryUseName or categoryID ):gsub( "_" , "-" )
+								if autoload.DamageTypes then
+									constantsData.raw.DamageTypes = {}
+									constantsData.raw.DamageTypeValues = {}
+									for damageTypeID , resistanceValue in pairs( autoload.DamageTypes ) do
+										local showName = SICommon.ShowNamePrefix[SICommon.Types.DamageType] .. ( resistanceValue and resistanceValue.Name or damageTypeID ):gsub( "_" , "-" )
 										local realName = constantsData.ShowNamePrefix .. showName
 										if autoload.Enable then
-											local category =
+											local damageType =
 											{
-												type = typeCode ,
+												type = SICommon.Types.DamageType ,
 												name = realName ,
 												localised_name = { constantsData.CodeName .. "Name." .. showName } ,
 												localised_description = { constantsData.CodeName .. "Description." .. showName } ,
-												order = constantsData.GetOrderString()
+												order = constantsData.GetOrderString() ,
+												hidden = false
 											}
-											table.insert( prototypes , category )
+											table.insert( prototypes , damageType )
 										end
-										constantsData.raw.Categories[categoryCode][categoryID] = realName
+										constantsData.raw.DamageTypes[damageTypeID] = realName
+										if resistanceValue and ( resistanceValue.Decrease or resistanceValue.Percent ) then
+											constantsData.raw.DamageTypeValues[damageTypeID] = SITools.Resistance( realName , resistanceValue.Decrease , resistanceValue.Percent )
+										else
+											constantsData.raw.DamageTypeValues[damageTypeID] = nil
+										end
 									end
 								end
+								if autoload.Categories then
+									constantsData.raw.Categories = {}
+									for categoryCode , categroyList in pairs( autoload.Categories ) do
+										local typeCode = SICommon.Types.Categories[categoryCode]
+										constantsData.raw.Categories[categoryCode] = {}
+										for categoryID , categoryUseName in pairs( categroyList ) do
+											local showName = SICommon.ShowNamePrefix[typeCode] .. ( categoryUseName or categoryID ):gsub( "_" , "-" )
+											local realName = constantsData.ShowNamePrefix .. showName
+											if autoload.Enable then
+												local category =
+												{
+													type = typeCode ,
+													name = realName ,
+													localised_name = { constantsData.CodeName .. "Name." .. showName } ,
+													localised_description = { constantsData.CodeName .. "Description." .. showName } ,
+													order = constantsData.GetOrderString()
+												}
+												table.insert( prototypes , category )
+											end
+											constantsData.raw.Categories[categoryCode][categoryID] = realName
+										end
+									end
+								end
+								if SIGen then
+									SIGen.Extend( prototypes )
+								end
 							end
-							if SIGen then
-								SIGen.Extend( prototypes )
-							end
+							constantsData.Autoload = nil
 						end
-						constantsData.Autoload = nil
 					end
-				end
-				-- 注册功能包配置
-				SIConfigs[constantsData.CodeName] = packageConfig.Configs or {}
-				-- 加载完毕后回调
-				if constantsData.AfterLoad then
-					constantsData.AfterLoad( constantsData )
+					-- 注册功能包配置
+					SIConfigs[constantsData.CodeName] = packageConfig.Configs or {}
+					-- 加载完毕后回调
+					if constantsData.AfterLoad then
+						constantsData.AfterLoad( constantsData )
+					end
 				end
 			end
 		end
