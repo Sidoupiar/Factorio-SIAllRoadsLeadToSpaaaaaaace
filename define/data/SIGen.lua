@@ -1191,7 +1191,7 @@ function SIGen.AutoIconItem( iconItemDataList )
 		return SIGen
 	end
 	for itemID , alias in pairs( iconItemDataList ) do
-		local itemPrototypeData = nil
+		local itemPrototypeData = {}
 		SIGen
 		.New( SICommon.Types.Items.Item , itemID , alias ,
 		{

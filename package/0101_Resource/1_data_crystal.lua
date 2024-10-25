@@ -29,8 +29,8 @@ local crystalManaList =
 	CrystalManaQuiet = { Alias = "安宁" , Color = crystalOreList.CrystalOreQuiet.Color , Heat = "400J" , FuelValue = "5KJ"   }
 }
 
-local sheelProjectile = nil
-local shellPartProjectile = nil
+local sheelProjectile = {}
+local shellPartProjectile = {}
 
 SIGen
 .SetGroup( SIConstants_Resource.raw.Groups.Resource.Crystal )
@@ -408,7 +408,7 @@ table.insert( shellPartProjectile.action ,
 
 for crystalID , crystalData in pairs( crystalList ) do
 	local crystalAlias = crystalData.Alias
-	local crystalProjectile = nil
+	local crystalProjectile = {}
 	SIGen
 	.New( SICommon.Types.Entities.Projectile , crystalID , "扔出去的" .. crystalAlias )
 	.MakeIcon( SICommon.Types.Items.Capsule , crystalID )
@@ -995,7 +995,7 @@ for crystalOreID , crystalOreData in pairs( crystalOreList ) do
 	}
 end
 
-local blackProjectile = nil
+local blackProjectile = {}
 
 SIGen
 .New( SICommon.Types.Entities.Projectile , "BlackHard" , "扔出去的黑硬的物质" )
