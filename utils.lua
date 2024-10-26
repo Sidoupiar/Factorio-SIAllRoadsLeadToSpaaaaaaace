@@ -872,7 +872,7 @@ function SIInit.AutoLoad( ModName , CustomPackageConfig , ConstantsDataPrefix , 
 								name = CustomPackagePrefix .. packageName ,
 								localised_name = { "SICommon.EnablePackageName" , { "SIPackageName." .. packageName } } ,
 								localised_description = { "SICommon.EnablePackageDescription" , { "SIPackageName." .. packageName } , { "SIPackageDescription." .. packageName } , { "SICommon.Show-TrueValue" } } ,
-								default_value = true ,
+								default_value = packageConfig.Enabled == nil or packageConfig.Enabled ,
 								order = constantsData.GetOrderString() ,
 								hidden = false
 							}

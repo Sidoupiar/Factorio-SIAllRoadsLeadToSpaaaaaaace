@@ -37,7 +37,7 @@ SIGen
 .Append
 {
 	hidden = true ,
-	flags = { SICommon.Flags.Items.HideFromBonusGUI , SICommon.Flags.Item.HideFromFuelTooltip } ,
+	flags = { SICommon.Flags.Item.HideFromBonusGUI , SICommon.Flags.Item.HideFromFuelTooltip } ,
 	stack_size = 1000 ,
 	default_request_amount = 1000 ,
 	fuel_category = SIConstants_DebugItem.raw.Categories.Fuel.DebugItem ,
@@ -93,7 +93,7 @@ SIGen
 .Append
 {
 	hidden = true ,
-	flags = { SICommon.Flags.Entity.PlaceablePlayer , SICommon.Flags.Entity.PlayerCreation , SICommon.Flags.Entity.HideAltInfo , SICommon.Flags.Entity.HideFromBonus } ,
+	flags = { SICommon.Flags.Entity.PlaceablePlayer , SICommon.Flags.Entity.PlayerCreation , SICommon.Flags.Entity.HideAltInfo } ,
 	minable =
 	{
 		mining_time = 1.0 ,
@@ -213,7 +213,7 @@ SIGen
 .Append
 {
 	hidden = true ,
-	flags = { SICommon.Flags.Items.HideFromBonusGUI , SICommon.Flags.Item.HideFromFuelTooltip } ,
+	flags = { SICommon.Flags.Item.HideFromBonusGUI , SICommon.Flags.Item.HideFromFuelTooltip } ,
 	stack_size = 100 ,
 	default_request_amount = 100 ,
 	fuel_category = SIConstants_DebugItem.raw.Categories.Fuel.DebugItem ,
@@ -286,7 +286,7 @@ SIGen
 .Append
 {
 	hidden = true ,
-	flags = { SICommon.Flags.Entity.PlaceablePlayer , SICommon.Flags.Entity.PlayerCreation , SICommon.Flags.Entity.HideAltInfo , SICommon.Flags.Entity.HideFromBonus } ,
+	flags = { SICommon.Flags.Entity.PlaceablePlayer , SICommon.Flags.Entity.PlayerCreation , SICommon.Flags.Entity.HideAltInfo } ,
 	minable =
 	{
 		mining_time = 5.0 ,
@@ -476,7 +476,7 @@ SIGen
 .Append
 {
 	hidden = true ,
-	flags = { SICommon.Flags.Items.HideFromBonusGUI , SICommon.Flags.Item.HideFromFuelTooltip } ,
+	flags = { SICommon.Flags.Item.HideFromBonusGUI , SICommon.Flags.Item.HideFromFuelTooltip } ,
 	stack_size = 100 ,
 	default_request_amount = 100 ,
 	fuel_category = SIConstants_DebugItem.raw.Categories.Fuel.DebugItem ,
@@ -546,7 +546,7 @@ SIGen
 .Append
 {
 	hidden = true ,
-	flags = { SICommon.Flags.Entity.PlaceablePlayer , SICommon.Flags.Entity.PlayerCreation , SICommon.Flags.Entity.HideFromBonus } ,
+	flags = { SICommon.Flags.Entity.PlaceablePlayer , SICommon.Flags.Entity.PlayerCreation } ,
 	minable =
 	{
 		mining_time = 5.0 ,
@@ -982,7 +982,7 @@ SIGen
 .Append
 {
 	hidden = true ,
-	flags = { SICommon.Flags.Items.HideFromBonusGUI , SICommon.Flags.Item.HideFromFuelTooltip } ,
+	flags = { SICommon.Flags.Item.HideFromBonusGUI , SICommon.Flags.Item.HideFromFuelTooltip } ,
 	stack_size = 100 ,
 	default_request_amount = 100 ,
 	fuel_category = SIConstants_DebugItem.raw.Categories.Fuel.DebugItem ,
@@ -1035,7 +1035,7 @@ SIGen
 .Append
 {
 	hidden = true ,
-	flags = { SICommon.Flags.Entity.PlaceablePlayer , SICommon.Flags.Entity.PlayerCreation , SICommon.Flags.Entity.HideFromBonus } ,
+	flags = { SICommon.Flags.Entity.PlaceablePlayer , SICommon.Flags.Entity.PlayerCreation } ,
 	minable =
 	{
 		mining_time = 5.0 ,
@@ -1228,7 +1228,7 @@ SIGen
 .Append
 {
 	hidden = true ,
-	flags = { SICommon.Flags.Items.HideFromBonusGUI , SICommon.Flags.Item.HideFromFuelTooltip } ,
+	flags = { SICommon.Flags.Item.HideFromBonusGUI , SICommon.Flags.Item.HideFromFuelTooltip } ,
 	stack_size = 10 ,
 	default_request_amount = 10 ,
 	fuel_category = SIConstants_DebugItem.raw.Categories.Fuel.DebugItem ,
@@ -1281,7 +1281,7 @@ SIGen
 .Append
 {
 	hidden = true ,
-	flags = { SICommon.Flags.Entity.PlaceablePlayer , SICommon.Flags.Entity.PlayerCreation , SICommon.Flags.Entity.HideFromBonus } ,
+	flags = { SICommon.Flags.Entity.PlaceablePlayer , SICommon.Flags.Entity.PlayerCreation } ,
 	minable =
 	{
 		mining_time = 5.0 ,
@@ -1607,7 +1607,7 @@ SIGen
 .Append
 {
 	hidden = true ,
-	flags = { SICommon.Flags.Items.HideFromBonusGUI , SICommon.Flags.Item.HideFromFuelTooltip } ,
+	flags = { SICommon.Flags.Item.HideFromBonusGUI , SICommon.Flags.Item.HideFromFuelTooltip } ,
 	stack_size = 100 ,
 	default_request_amount = 100 ,
 	fuel_category = SIConstants_DebugItem.raw.Categories.Fuel.DebugItem ,
@@ -1659,7 +1659,7 @@ SIGen
 .Append
 {
 	hidden = true ,
-	flags = { SICommon.Flags.Entity.PlaceablePlayer , SICommon.Flags.Entity.PlayerCreation , SICommon.Flags.Entity.PlaceableOffGrid , SICommon.Flags.Entity.NotOnMap , SICommon.Flags.Entity.HideFromBonus } ,
+	flags = { SICommon.Flags.Entity.PlaceablePlayer , SICommon.Flags.Entity.PlayerCreation , SICommon.Flags.Entity.PlaceableOffGrid , SICommon.Flags.Entity.NotOnMap } ,
 	minable =
 	{
 		mining_time = 5.0 ,
@@ -2064,7 +2064,7 @@ SIGen
 .Append
 {
 	hidden = true ,
-	flags = { SICommon.Flags.Items.HideFromBonusGUI , SICommon.Flags.Item.HideFromFuelTooltip } ,
+	flags = { SICommon.Flags.Item.HideFromBonusGUI , SICommon.Flags.Item.HideFromFuelTooltip } ,
 	stack_size = 100 ,
 	default_request_amount = 100 ,
 	fuel_category = SIConstants_DebugItem.raw.Categories.Fuel.DebugItem ,
@@ -2116,7 +2116,7 @@ SIGen
 .Append
 {
 	hidden = true ,
-	flags = { SICommon.Flags.Entity.PlaceablePlayer , SICommon.Flags.Entity.PlayerCreation , SICommon.Flags.Entity.PlaceableOffGrid , SICommon.Flags.Entity.NotOnMap , SICommon.Flags.Entity.HideFromBonus } ,
+	flags = { SICommon.Flags.Entity.PlaceablePlayer , SICommon.Flags.Entity.PlayerCreation , SICommon.Flags.Entity.PlaceableOffGrid , SICommon.Flags.Entity.NotOnMap } ,
 	minable =
 	{
 		mining_time = 5.0 ,
@@ -2437,7 +2437,7 @@ SIGen
 .Append
 {
 	hidden = true ,
-	flags = { SICommon.Flags.Entity.NotOnMap , SICommon.Flags.Entity.HideAltInfo , SICommon.Flags.Entity.HideFromBonus } ,
+	flags = { SICommon.Flags.Entity.NotOnMap , SICommon.Flags.Entity.HideAltInfo } ,
 	selectable_in_game = false ,
 	width = 2.5 ,
 	damage_interval = 4 ,
@@ -2700,7 +2700,7 @@ SIGen
 .Append
 {
 	hidden = true ,
-	flags = { SICommon.Flags.Entity.NotOnMap , SICommon.Flags.Entity.HideAltInfo , SICommon.Flags.Entity.HideFromBonus } ,
+	flags = { SICommon.Flags.Entity.NotOnMap , SICommon.Flags.Entity.HideAltInfo } ,
 	selectable_in_game = false ,
 	width = 2.5 ,
 	damage_interval = 4 ,
@@ -2963,7 +2963,7 @@ SIGen
 .Append
 {
 	hidden = true ,
-	flags = { SICommon.Flags.Entity.NotOnMap , SICommon.Flags.Entity.HideAltInfo , SICommon.Flags.Entity.HideFromBonus } ,
+	flags = { SICommon.Flags.Entity.NotOnMap , SICommon.Flags.Entity.HideAltInfo } ,
 	selectable_in_game = false ,
 	width = 2.5 ,
 	damage_interval = 4 ,
@@ -3374,7 +3374,7 @@ SIGen
 .Append
 {
 	hidden = true ,
-	flags = { SICommon.Flags.Items.HideFromBonusGUI , SICommon.Flags.Item.HideFromFuelTooltip } ,
+	flags = { SICommon.Flags.Item.HideFromBonusGUI , SICommon.Flags.Item.HideFromFuelTooltip } ,
 	stack_size = 10 ,
 	default_request_amount = 10 ,
 	fuel_category = SIConstants_DebugItem.raw.Categories.Fuel.DebugItem ,
@@ -3427,7 +3427,7 @@ SIGen
 .Append
 {
 	hidden = true ,
-	flags = { SICommon.Flags.Entity.PlaceablePlayer , SICommon.Flags.Entity.PlayerCreation , SICommon.Flags.Entity.HideFromBonus } ,
+	flags = { SICommon.Flags.Entity.PlaceablePlayer , SICommon.Flags.Entity.PlayerCreation } ,
 	minable =
 	{
 		mining_time = 5.0 ,
@@ -3857,7 +3857,7 @@ SIGen
 .Append
 {
 	hidden = true ,
-	flags = { SICommon.Flags.Items.HideFromBonusGUI , SICommon.Flags.Item.HideFromFuelTooltip } ,
+	flags = { SICommon.Flags.Item.HideFromBonusGUI , SICommon.Flags.Item.HideFromFuelTooltip } ,
 	stack_size = 1 ,
 	default_request_amount = 1 ,
 	fuel_category = SIConstants_DebugItem.raw.Categories.Fuel.DebugItem ,
@@ -3937,7 +3937,7 @@ SIGen
 .Append
 {
 	hidden = true ,
-	flags = { SICommon.Flags.Items.HideFromBonusGUI , SICommon.Flags.Item.HideFromFuelTooltip } ,
+	flags = { SICommon.Flags.Item.HideFromBonusGUI , SICommon.Flags.Item.HideFromFuelTooltip } ,
 	stack_size = 1 ,
 	default_request_amount = 1 ,
 	fuel_category = SIConstants_DebugItem.raw.Categories.Fuel.DebugItem ,
@@ -4018,7 +4018,7 @@ SIGen
 .Append
 {
 	hidden = true ,
-	flags = { SICommon.Flags.Items.HideFromBonusGUI , SICommon.Flags.Item.HideFromFuelTooltip } ,
+	flags = { SICommon.Flags.Item.HideFromBonusGUI , SICommon.Flags.Item.HideFromFuelTooltip } ,
 	stack_size = 1 ,
 	default_request_amount = 1 ,
 	fuel_category = SIConstants_DebugItem.raw.Categories.Fuel.DebugItem ,
@@ -4099,7 +4099,7 @@ SIGen
 .Append
 {
 	hidden = true ,
-	flags = { SICommon.Flags.Items.HideFromBonusGUI , SICommon.Flags.Item.HideFromFuelTooltip } ,
+	flags = { SICommon.Flags.Item.HideFromBonusGUI , SICommon.Flags.Item.HideFromFuelTooltip } ,
 	stack_size = 1 ,
 	default_request_amount = 1 ,
 	fuel_category = SIConstants_DebugItem.raw.Categories.Fuel.DebugItem ,
@@ -4177,7 +4177,7 @@ SIGen
 .Append
 {
 	hidden = true ,
-	flags = { SICommon.Flags.Items.HideFromBonusGUI , SICommon.Flags.Item.HideFromFuelTooltip } ,
+	flags = { SICommon.Flags.Item.HideFromBonusGUI , SICommon.Flags.Item.HideFromFuelTooltip } ,
 	stack_size = 1 ,
 	default_request_amount = 1 ,
 	fuel_category = SIConstants_DebugItem.raw.Categories.Fuel.DebugItem ,
@@ -4255,7 +4255,7 @@ SIGen
 .Append
 {
 	hidden = true ,
-	flags = { SICommon.Flags.Items.HideFromBonusGUI , SICommon.Flags.Item.HideFromFuelTooltip } ,
+	flags = { SICommon.Flags.Item.HideFromBonusGUI , SICommon.Flags.Item.HideFromFuelTooltip } ,
 	stack_size = 1 ,
 	default_request_amount = 1 ,
 	fuel_category = SIConstants_DebugItem.raw.Categories.Fuel.DebugItem ,
@@ -4350,7 +4350,7 @@ SIGen
 .Append
 {
 	hidden = true ,
-	flags = { SICommon.Flags.Items.HideFromBonusGUI , SICommon.Flags.Item.HideFromFuelTooltip } ,
+	flags = { SICommon.Flags.Item.HideFromBonusGUI , SICommon.Flags.Item.HideFromFuelTooltip } ,
 	stack_size = 1 ,
 	default_request_amount = 1 ,
 	fuel_category = SIConstants_DebugItem.raw.Categories.Fuel.DebugItem ,
@@ -4402,7 +4402,7 @@ SIGen
 .Append
 {
 	hidden = true ,
-	flags = { SICommon.Flags.Entity.PlaceablePlayer , SICommon.Flags.Entity.PlayerCreation , SICommon.Flags.Entity.PlaceableOffGrid , SICommon.Flags.Entity.NotFlammable , SICommon.Flags.Entity.HideFromBonus } ,
+	flags = { SICommon.Flags.Entity.PlaceablePlayer , SICommon.Flags.Entity.PlayerCreation , SICommon.Flags.Entity.PlaceableOffGrid , SICommon.Flags.Entity.NotFlammable } ,
 	minable =
 	{
 		mining_time = 10.0 ,

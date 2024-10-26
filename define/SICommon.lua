@@ -146,7 +146,6 @@ SICommon =
 			PlaceableNeutral              = "placeable-neutral" ,
 			PlaceableOffGrid              = "placeable-off-grid" ,
 			HideAltInfo                   = "hide-alt-info" ,
-			HideFromBonus                 = "hide-from-bonus-gui" ,
 			FastReplaceableBuild          = "fast-replaceable-no-build-while-moving" ,
 			FastReplaceableCross          = "fast-replaceable-no-cross-type-while-moving" ,
 			Building8Way                  = "building-direction-8-way" ,

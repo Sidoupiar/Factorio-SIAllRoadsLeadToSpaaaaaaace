@@ -1084,23 +1084,16 @@ SIAutoInsert =
 		if tabSettingsCount > 0 then
 			local tabSettingsIndex = SITools.AsNumberInt( settings.tabSettingsIndex , 1 , SIAutoInsert.TabSettingsMaxCount )
 			table.remove( settings.TabSettingsList , tabSettingsIndex )
-			tabSettingsCount = #settings.TabSettingsList
-			if tabSettingsCount < 1 then
+			if #settings.TabSettingsList < 1 then
 				SIAutoInsert.CreateTabSettings( settings )
 				tabSettingsCount = #settings.TabSettingsList
 			end
 			settings.tabSettingsIndex = SITools.AsNumberInt( tabSettingsIndex , 1 , tabSettingsCount )
-			settings.defaultIndex1 = tabSettingsIndex == settings.defaultIndex1 and 0 or tabSettingsIndex < settings.defaultIndex1 and SITools.AsNumberInt( settings.defaultIndex1 - 1 , 1 , tabSettingsCount ) or settings.defaultIndex1
-			settings.defaultIndex2 = tabSettingsIndex == settings.defaultIndex2 and 0 or tabSettingsIndex < settings.defaultIndex2 and SITools.AsNumberInt( settings.defaultIndex2 - 1 , 1 , tabSettingsCount ) or settings.defaultIndex2
-			settings.defaultIndex3 = tabSettingsIndex == settings.defaultIndex3 and 0 or tabSettingsIndex < settings.defaultIndex3 and SITools.AsNumberInt( settings.defaultIndex3 - 1 , 1 , tabSettingsCount ) or settings.defaultIndex3
-			settings.defaultIndex4 = tabSettingsIndex == settings.defaultIndex4 and 0 or tabSettingsIndex < settings.defaultIndex4 and SITools.AsNumberInt( settings.defaultIndex4 - 1 , 1 , tabSettingsCount ) or settings.defaultIndex4
+			settings.defaultIndex = tabSettingsIndex == settings.defaultIndex and 0 or tabSettingsIndex < settings.defaultIndex and SITools.AsNumberInt( settings.defaultIndex - 1 , 1 , tabSettingsCount ) or settings.defaultIndex
 		else
 			SIAutoInsert.CreateTabSettings( settings )
 			settings.tabSettingsIndex = 1
-			settings.defaultIndex1 = 0
-			settings.defaultIndex2 = 0
-			settings.defaultIndex3 = 0
-			settings.defaultIndex4 = 0
+			settings.defaultIndex = 0
 		end
 	end ,
 	-- ======================================================================
