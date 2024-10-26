@@ -704,7 +704,7 @@ end
 -- 更多信息请见 data.lua 中的相关注释<br>
 -- ======================================================================
 -- ModName = 调用此函数的 MOD 的名称 , 要使用代码名称而不是显示名称<br>
--- CustomPackageConfig = 功能包的配置信息数组 , 如果值为 nil , 则会尝试加载 MOD 文件夹下的 PackageConfig.lua 文件 , 文件不存在则会报错<br>
+-- CustomPackageConfig = 功能模块的配置信息数组 , 如果值为 nil , 则会尝试加载 MOD 文件夹下的 PackageConfig.lua 文件 , 文件不存在则会报错<br>
 -- ConstantsDataPrefix = ConstantsData 在代码的各种位置中进行注册时使用的名称前缀 , 防止重名 , 不影响注册的原型数据<br>
 -- CodeNamePrefix      = ConstantsData 在代码的各种位置中进行显示时使用的名称前缀 , 防止重名 , 影响注册的原型数据的 name 属性<br>
 -- ShowNamePrefix      = ConstantsData 在代码的各种位置中进行显示时使用的名称前缀 , 防止重名 , 影响注册的原型数据和本地化字符串 , 生成原型数据名称时此前缀也会被包含进去<br>
@@ -742,7 +742,7 @@ function SIInit.AutoLoad( ModName , CustomPackageConfig , ConstantsDataPrefix , 
 			local packageName = packageConfig.PackageName
 			local packageLoadFlag = false
 			if SIInit.State == SIInit.StateCodeDefine.Settings then
-				-- Settings 阶段不需要判断数据包是否启用
+				-- Settings 阶段不需要判断功能模块是否启用
 				if packageConfig.Requires then
 					for requireIndex , requirePackageName in pairs( packageConfig.Requires ) do
 						if not SIInit.ConstantsDataList[ModName .. "_" .. requirePackageName] then
@@ -752,7 +752,7 @@ function SIInit.AutoLoad( ModName , CustomPackageConfig , ConstantsDataPrefix , 
 				end
 				packageLoadFlag = true
 			else
-				-- Data 和 Control 阶段需要判断数据包是否启用
+				-- Data 和 Control 阶段需要判断功能模块是否启用
 				if SISettings.Package[packageName]() then
 					if packageConfig.Requires then
 						for requireIndex , requirePackageName in pairs( packageConfig.Requires ) do
@@ -852,7 +852,7 @@ function SIInit.AutoLoad( ModName , CustomPackageConfig , ConstantsDataPrefix , 
 					end
 					-- 按阶段生成属性
 					if SIInit.State == SIInit.StateCodeDefine.Settings then
-						-- 创建数据包设置
+						-- 创建功能模块启用设置
 						if packageName ~= "0000_Core" then
 							local packageSettingItem =
 							{
@@ -860,7 +860,7 @@ function SIInit.AutoLoad( ModName , CustomPackageConfig , ConstantsDataPrefix , 
 								setting_type = SICommon.SettingAffectTypes.StartUp ,
 								name = CustomPackagePrefix .. packageName ,
 								localised_name = { "SICommon.EnablePackageName" , { "SIPackageName." .. packageName } } ,
-								localised_description = { "SICommon.EnablePackageDescription" , { "SIPackageName." .. packageName } , { "SICommon.Show-TrueValue" } } ,
+								localised_description = { "SICommon.EnablePackageDescription" , { "SIPackageName." .. packageName } , { "SIPackageDescription." .. packageName } , { "SICommon.Show-TrueValue" } } ,
 								default_value = true ,
 								order = constantsData.GetOrderString() ,
 								hidden = false
@@ -1128,7 +1128,7 @@ function SIInit.AutoLoad( ModName , CustomPackageConfig , ConstantsDataPrefix , 
 							constantsData.Autoload = nil
 						end
 					end
-					-- 注册功能包配置
+					-- 注册功能模块配置
 					SIConfigs[constantsData.CodeName] = packageConfig.Configs or {}
 					-- 加载完毕后回调
 					if constantsData.AfterLoad then

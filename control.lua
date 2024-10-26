@@ -32,8 +32,8 @@ end
 --         GUI元素ID2 = "GUI元素Show2" ,<br>
 --     }<br>
 -- }<br>
--- 因为有些时候 , 一个功能包下的新增原型数据还是挺多的 , 而且大部分在 control 阶段都用不到 , 所以才把 [ name ] 属性的值的计算独立了出来<br>
--- 在这个函数中 , 默认使用 SIInit.CurrentConstantsData , 不建议在同一个功能包内多次使用 SIControl.Init 函数并混用多个 ConstantsData<br>
+-- 因为有些时候 , 一个功能模块下的新增原型数据还是挺多的 , 而且大部分在 control 阶段都用不到 , 所以才把 [ name ] 属性的值的计算独立了出来<br>
+-- 在这个函数中 , 默认使用 SIInit.CurrentConstantsData , 不建议在同一个功能模块内多次使用 SIControl.Init 函数并混用多个 ConstantsData<br>
 -- 如果原型数据没有别名 , 则都写成原型数据的 ID 即可<br>
 -- ======================================================================
 SIControl =

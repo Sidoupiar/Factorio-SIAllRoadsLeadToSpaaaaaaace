@@ -21,7 +21,7 @@ local defaultResistances =
 	SITools.Resistance( "electric" , 0 , 100 ) ,
 }
 
-local tankSize = SIConfigs.SICore.TankSize
+local tankSize = 8.0 -- SIConfigs.SIDebugItem.TankSize
 local tankScale = 0.5 * tankSize
 local tankShiftY = 6
 

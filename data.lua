@@ -14,13 +14,13 @@ SIInit
 -- 如果你想在附属 MOD 中使用这个框架 , 则仅需在 settings.lua , data.lua , control.lua 中使用 SIInit.AutoLoad 函数即可 ( 不要在其他文件中使用 )
 -- 使用方法可以参考我做的其他附属 MOD
 --
--- 定义 : package 中的每个文件夹都可以看作是一个 "功能包"
+-- 定义 : package 中的每个文件夹都可以看作是一个 "功能模块"
 --
 -- 函数 SIInit.AutoLoad( ModName , CustomPackageConfig , ConstantsDataPrefix , ShowNamePrefix ) 说明
 -- 这个函数拥有 4 个参数 :
 -- 参数 1 : MOD 的名称 , 即 info.json 中的 "name" 值
--- 参数 2 : MOD 内的 package 文件夹中的功能包设置数组 , 具体结构请见本 MOD 的 package 文件夹的结构和 PackageConfig.lua 文件
---         每个功能包都应该包含着此功能相关的所有实体 , 原型和逻辑相关的代码 ( 和资源 )
+-- 参数 2 : MOD 内的 package 文件夹中的功能模块设置数组 , 具体结构请见本 MOD 的 package 文件夹的结构和 PackageConfig.lua 文件
+--         每个功能模块都应该包含着此功能相关的所有实体 , 原型和逻辑相关的代码 ( 和资源 )
 --         其中的 0_ConstantsData.lua 为保留名称 , 其结构含义请见 package/0000_core/0_ConstantsData.lua 中的注释
 --         数据结构是 package 文件夹中这些的文件夹的名称字符串组成的数组
 -- 参数 3 : MOD 中加载的 ConstantsData 在作为全局变量时添加的前缀 , 防止重名 , 不影响注册的原型数据

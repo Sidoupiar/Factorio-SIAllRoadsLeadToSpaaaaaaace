@@ -8,7 +8,7 @@ local constantsData =
 
 	-- ======================================================================
 	-- 此 ConstantsData 的名称<br>
-	-- 没有此属性会放弃加载 , 同时放弃自动载入此功能包下的其他 lua 文件<br>
+	-- 没有此属性会放弃加载 , 同时放弃自动载入此功能模块下的其他 lua 文件<br>
 	-- ======================================================================
 	ID = "Core" ,
 
@@ -59,7 +59,7 @@ local constantsData =
 	--     data.lua 阶段会加载 [SIInit.StateCodeDefine.Data] 所对应的数组中的文件名称<br>
 	--     control.lua 阶段会加载 [SIInit.StateCodeDefine.Control] 所对应的数组中的文件名称<br>
 	--     以此类推<br>
-	-- 这些加载的文件均位于当前功能包内 , 加载时会自动添加路径前缀 "__ModName__/package/功能包文件夹名称/" , lua 文件不需要写扩展名<br>
+	-- 这些加载的文件均位于当前功能模块内 , 加载时会自动添加路径前缀 "__ModName__/package/功能模块文件夹名称/" , lua 文件不需要写扩展名<br>
 	-- <br>
 	-- 另外 :<br>
 	-- SIInit.StateCodeDefine.Data 往下排是从 1 开始的 , 因此如果每个部分都有对应的文件的话子表中的键可以省略<br>
@@ -76,7 +76,7 @@ local constantsData =
 	} ,
 
 	-- ======================================================================
-	-- 资源文件夹位置 , 决定此功能包所使用的图片文件和声音文件所在的文件夹的位置<br>
+	-- 资源文件夹位置 , 决定此功能模块所使用的图片文件和声音文件所在的文件夹的位置<br>
 	-- 会在自动生成 [ PicturePath ] 和 [ SoundPath ] , 它们指向图片文件夹和声音文件夹 , 它们的默认值见下方自动生成的属性部分<br>
 	-- 文件夹指向完毕后 , 此属性会被删除<br>
 	-- 没有此属性时会使用默认值<br>
@@ -410,15 +410,15 @@ local constantsData =
 	-- LocalisedName        = {}       , 此 ConstantsData 的本地化名称 , 值为 "ConstantsDataName.[ CodeName ]" , 其中的所有 "_" 都会被替换成 "-"
 	-- LocalisedDescription = {}       , 此 ConstantsData 的本地化描述 , 值为 "ConstantsDataDescription.[ CodeName ]" , 其中的所有 "_" 都会被替换成 "-"
 	-- GetOrderString       = function , 是个无参数的函数 , 返回下一个此 ConstantsData 的排序字符串
-	-- PicturePath          = string   , 指向了当前功能包所使用的图片文件所在的文件夹位置 , 默认值 : __ModName__/package/[ PackageName ]/graphic/
-	-- SoundPath            = string   , 指向了当前功能包所使用的声音文件所在的文件夹位置 , 默认值 : __ModName__/package/[ PackageName ]/sound/
+	-- PicturePath          = string   , 指向了当前功能模块所使用的图片文件所在的文件夹位置 , 默认值 : __ModName__/package/[ PackageName ]/graphic/
+	-- SoundPath            = string   , 指向了当前功能模块所使用的声音文件所在的文件夹位置 , 默认值 : __ModName__/package/[ PackageName ]/sound/
 	-- API                  = {}       , 包含了此 ConstantsData 的一些原始属性和自动生成的函数
 	-- OrderOffset          = {}       , 包含了所有的偏移的排序数据
 	-- raw                  = {}       , 包含了自动处理后的各种物品 , 实体 , 配方等的名称
 	--
 	-- API 中包含的属性 :
 	-- API.ID               = string   , 等于此 [ ConstantsData.ID ] 的值
-	-- API.PackageName      = string   , 此 ConstantsData 所在的功能包的文件夹名称
+	-- API.PackageName      = string   , 此 ConstantsData 所在的功能模块的文件夹名称
 	-- API.ClassName        = string   , 等于此 [ CnstantsData.ClassName ] 的值
 	-- API.OrderPrefix      = string   , 等于此 [ CnstantsData.OrderPrefix ] 的值
 	-- API.GetOrderString   = function , 等于此 [ CnstantsData.GetOrderString ] 的值 , 是个无参数的函数 , 返回下一个此 ConstantsData 的排序字符串
