@@ -1,7 +1,8 @@
 SIRPGSkillUI_OverView =
 {
 	ID = "RPGSkillUI_OverView" ,
-	Name = "RPG技能面板-洞察" ,
+	Code = "RPGSkillUI_OverView" ,
+	Show = "RPG技能面板-洞察" ,
 	InterfaceID = "SIRPGSystem-SkillUI-OverView" ,
 	Names =
 	{

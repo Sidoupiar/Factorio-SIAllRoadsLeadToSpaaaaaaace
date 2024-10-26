@@ -8,19 +8,19 @@ SIGen
 .SetGroup( SIConstants_RPGSystem.raw.Groups.Hidden.EXP )
 for prefixID , prefixAlias in pairs
 {
-	Attack = "-战斗" ,
+	Attack    = "-战斗" ,
 	Adventure = "-探索" ,
-	Craft = "-生存"
+	Craft     = "-生存"
 } do
 	for suffixID , suffixAlias in pairs
 	{
-		_1 = "-1" ,
-		_100 = "-100" ,
-		_1W = "-1W" ,
+		_1    = "-1" ,
+		_100  = "-100" ,
+		_1W   = "-1W" ,
 		_100W = "-100W" ,
-		_1E = "-1E" ,
+		_1E   = "-1E" ,
 		_100E = "-100E" ,
-		_1WE = "-1WE" ,
+		_1WE  = "-1WE" ,
 	} do
 		SIGen
 		.New( SICommon.Types.Items.Capsule , "EXP_" .. prefixID .. suffixID , "经验" .. prefixAlias .. suffixAlias ,
@@ -40,7 +40,6 @@ for prefixID , prefixAlias in pairs
 					ammo_category = "capsule" ,
 					ammo_type =
 					{
-						category = "capsule" ,
 						target_type = "position" ,
 						action =
 						{

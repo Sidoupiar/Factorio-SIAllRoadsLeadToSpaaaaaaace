@@ -1,7 +1,8 @@
 local constantsData =
 {
 	ID = "RPGSystem" ,
-	Name = "RPG系统" ,
+	Code = "RPGSystem" ,
+	Show = "RPG系统" ,
 	FileList =
 	{
 		[SIInit.StateCodeDefine.Data]    = { "1_data"    } ,
@@ -22,11 +23,6 @@ local constantsData =
 			}
 		}
 	} ,
-	AfterLoad = function( constantsData )
-		if not SIConfigs.SIRPGSystem.Enable then
-			constantsData.FileList = nil
-		end
-	end ,
 	ExpTrigger =
 	{
 		Attack_1 = "SIRPGSystem-EXP-Attack-1" ,

@@ -1,7 +1,8 @@
 SIRPGPlayerStatusMini =
 {
 	ID = "RPGPlayerStatusMini" ,
-	Name = "RPG玩家属性迷你" ,
+	Code = "RPGPlayerStatusMini" ,
+	Show = "RPG玩家属性迷你" ,
 	Names =
 	{
 		Prefix = "SIRPG系统-玩家属性迷你-" ,

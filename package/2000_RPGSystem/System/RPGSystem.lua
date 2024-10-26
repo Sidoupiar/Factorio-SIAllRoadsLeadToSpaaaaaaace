@@ -1,7 +1,8 @@
 SIRPGSystem =
 {
 	ID = "RPGSystem" ,
-	Name = "RPG系统" ,
+	Code = "RPGSystem" ,
+	Show = "RPG系统" ,
 	InterfaceID = "SIRPGSystem-System" ,
 	PointIDs =
 	{

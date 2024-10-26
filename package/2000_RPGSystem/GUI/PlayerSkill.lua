@@ -1,7 +1,8 @@
 SIRPGPlayerSkill =
 {
 	ID = "RPGPlayerSkill" ,
-	Name = "RPG玩家技能" ,
+	Code = "RPGPlayerSkill" ,
+	Show = "RPG玩家技能" ,
 	Names =
 	{
 		Prefix = "SIRPG系统-玩家技能-" ,

@@ -1,7 +1,8 @@
 SIRPGPlayerSkillMini =
 {
 	ID = "RPGPlayerSkillMini" ,
-	Name = "RPG玩家技能迷你" ,
+	Code = "RPGPlayerSkillMini" ,
+	Show = "RPG玩家技能迷你" ,
 	Names =
 	{
 		Prefix = "SIRPG系统-玩家技能迷你-" ,

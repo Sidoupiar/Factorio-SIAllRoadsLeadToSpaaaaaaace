@@ -1,7 +1,8 @@
 SIRPGPlayerSetting =
 {
 	ID = "RPGPlayerSetting" ,
-	Name = "RPG玩家设置" ,
+	Code = "RPGPlayerSetting" ,
+	Show = "RPG玩家设置" ,
 	InterfaceID = "SIRPGSystem-PlayerSetting" ,
 	Names =
 	{

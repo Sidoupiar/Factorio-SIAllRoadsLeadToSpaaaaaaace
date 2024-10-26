@@ -14,7 +14,7 @@ SIControl.Init
 	} ,
 	[SICommon.Types.Input] =
 	{
-		OreMapFrame = "黄图窗口" ,
+		OreMapFrame     = "黄图窗口" ,
 		RequestMapFrame = "紫图窗口"
 	} ,
 	Styles =

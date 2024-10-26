@@ -1,7 +1,8 @@
 SIRPGPlayerStatus =
 {
 	ID = "RPGPlayerStatus" ,
-	Name = "RPG玩家属性" ,
+	Code = "RPGPlayerStatus" ,
+	Show = "RPG玩家属性" ,
 	InterfaceID = "SIRPGSystem-PlayerStatus" ,
 	Names =
 	{

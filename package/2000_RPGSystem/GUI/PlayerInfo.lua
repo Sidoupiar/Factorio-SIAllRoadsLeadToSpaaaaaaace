@@ -1,7 +1,8 @@
 SIRPGPlayerInfo =
 {
 	ID = "RPGPlayerInfo" ,
-	Name = "RPG玩家信息" ,
+	Code = "RPGPlayerInfo" ,
+	Show = "RPG玩家信息" ,
 	Names =
 	{
 		Prefix = "SIRPG系统-玩家信息-" ,

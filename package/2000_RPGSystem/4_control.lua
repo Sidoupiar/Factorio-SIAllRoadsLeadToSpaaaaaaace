@@ -7,19 +7,19 @@
 local EXPItemList = {}
 for prefixID , prefixAlias in pairs
 {
-	Attack = "-战斗" ,
+	Attack    = "-战斗" ,
 	Adventure = "-探索" ,
-	Craft = "-生存"
+	Craft     = "-生存"
 } do
 	for suffixID , suffixAlias in pairs
 	{
-		_1 = "-1" ,
-		_100 = "-100" ,
-		_1W = "-1W" ,
+		_1    = "-1" ,
+		_100  = "-100" ,
+		_1W   = "-1W" ,
 		_100W = "-100W" ,
-		_1E = "-1E" ,
+		_1E   = "-1E" ,
 		_100E = "-100E" ,
-		_1WE = "-1WE" ,
+		_1WE  = "-1WE" ,
 	} do
 		EXPItemList["EXP_" .. prefixID .. suffixID] = "经验" .. prefixAlias .. suffixAlias
 	end
@@ -29,10 +29,10 @@ SIControl.Init
 {
 	[SICommon.Types.Items.Item] =
 	{
-		IconRPG = "图标RPG" ,
-		IconAddRed = "图标添加-红" ,
+		IconRPG      = "图标RPG" ,
+		IconAddRed   = "图标添加-红" ,
 		IconAddGreen = "图标添加-绿" ,
-		IconAddCyan = "图标添加-青"
+		IconAddCyan  = "图标添加-青"
 	} ,
 	[SICommon.Types.Items.Capsule] = EXPItemList ,
 	[SICommon.Types.Entities.Container] =
