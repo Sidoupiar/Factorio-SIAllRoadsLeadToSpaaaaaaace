@@ -247,27 +247,7 @@ SIControl.Init
 		Finder_Flow = "信息查询-布局" ,
 		Finder_Chooser = "信息查询-选择" ,
 		Finder_Label = "信息查询-选择标签" ,
-		Finder_ListLabel = "信息查询-列表标签" ,
-		-- 自动填充控件样式
-		AutoInsert_Frame = "自动填充-窗口" ,
-		AutoInsert_TabPane = "自动填充-分页面板" ,
-		AutoInsert_Label = "自动填充-标签" ,
-		AutoInsert_Text = "自动填充-文本条" ,
-		AutoInsert_EmptyFlow = "自动填充-空布局" ,
-		AutoInsert_DropDown = "自动填充-下拉列表" ,
-		AutoInsert_ListButtonFlow = "自动填充-列表定位按钮布局" ,
-		AutoInsert_ListButton = "自动填充-列表定位按钮" ,
-		AutoInsert_BlankFlow = "自动填充-空白区" ,
-		AutoInsert_ListCheck = "自动填充-列表复选" ,
-		AutoInsert_ListPanelFlow = "自动填充-列表面板布局" ,
-		AutoInsert_SubList = "自动填充-子列表" ,
-		AutoInsert_SelectList = "自动填充-选择列表" ,
-		AutoInsert_ListChooser = "自动填充-列表选择" ,
-		AutoInsert_ListFlow = "自动填充-列表布局" ,
-		AutoInsert_ListLabel = "自动填充-列表标签" ,
-		AutoInsert_ListText = "自动填充-列表文本条" ,
-		AutoInsert_ListDropDown = "自动填充-列表下拉列表" ,
-		AutoInsert_ListEmptyFlow = "自动填充-列表占位布局"
+		Finder_ListLabel = "信息查询-列表标签"
 	}
 }
 
@@ -287,11 +267,9 @@ SINeed( "GUI/MainbarNote" )
 SINeed( "GUI/MainbarMessage" )
 SINeed( "GUI/Permission" )
 SINeed( "GUI/Finder" )
-SINeed( "GUI/AutoInsert" )
 SIGlobal.CreateSettings( SIMainData.Settings )
 SIGlobal.CreateSettings( SIPermission.Settings )
 SIGlobal.CreateSettings( SIFinder.Settings )
-SIGlobal.CreateSettings( SIAutoInsert.Settings )
 
 -- ======================================================================
 -- 事件
@@ -321,22 +299,12 @@ SIEventBus
 	for playerIndex , player in pairs( game.players ) do
 		SIMainbar.OpenFrame( playerIndex )
 	end
-	-- 权限管理窗口事件
-	SIMainbar.RegisterToolbarButton( SIPermission.Toolbar )
 	-- 信息查询窗口事件
 	SIMainbar.RegisterToolbarButton( SIFinder.Toolbar )
-	-- 自动填充的管理窗口事件
-	SIMainbar.RegisterToolbarButton( SIAutoInsert.Toolbar )
-	SIMainbarSetting.RegisterSettingsData( SIAutoInsert.SettingsData )
 end )
 .Load( function( functionID )
-	-- 权限管理窗口事件
-	SIMainbar.RegisterToolbarButton( SIPermission.Toolbar )
 	-- 信息查询窗口事件
 	SIMainbar.RegisterToolbarButton( SIFinder.Toolbar )
-	-- 自动填充的管理窗口事件
-	SIMainbar.RegisterToolbarButton( SIAutoInsert.Toolbar )
-	SIMainbarSetting.RegisterSettingsData( SIAutoInsert.SettingsData )
 end )
 .AddNth( 60 , function( event , functionID )
 	-- 主面板事件
@@ -359,12 +327,8 @@ end )
 	SIMainbarNote.CloseFrame( playerIndex )
 	-- 主面板消息管理窗口事件
 	SIMainbarMessage.CloseFrame( playerIndex )
-	-- 权限管理窗口事件
-	SIPermission.CloseFrame( playerIndex )
 	-- 信息查询窗口事件
 	SIFinder.CloseFrame( playerIndex )
-	-- 自动填充的管理窗口事件
-	SIAutoInsert.CloseFrame( playerIndex )
 end )
 .Add( SIEvents.on_runtime_mod_setting_changed , function( event , functionID )
 	local playerIndex = event.player_index
@@ -544,114 +508,10 @@ end )
 		end
 		return
 	end
-	-- 权限管理窗口事件
-	if name:StartsWith( SIPermission.Names.Prefix ) then
-		if name == SIPermission.Names.Close then
-			SIPermission.CloseFrame( playerIndex )
-			return
-		end
-		if name == SIPermission.Names.GlobalSave then
-			SIPermission.SaveSettings_Global( playerIndex )
-			return
-		end
-		if name == SIPermission.Names.GlobalBack then
-			SIPermission.BackSettings_Global( playerIndex )
-			return
-		end
-		if name == SIPermission.Names.GlobalReset then
-			SIPermission.ResetSettings_Global( playerIndex )
-			return
-		end
-		if name == SIPermission.Names.PlayerSave then
-			SIPermission.SaveSettings_Player( playerIndex )
-			return
-		end
-		if name == SIPermission.Names.PlayerBack then
-			SIPermission.BackSettings_Player( playerIndex )
-			return
-		end
-		if name == SIPermission.Names.PlayerClear then
-			SIPermission.ClearSettings_Player( playerIndex )
-			return
-		end
-		if name == SIPermission.Names.CheckSave then
-			SIPermission.SaveSettings_Check( playerIndex )
-			return
-		end
-		if name == SIPermission.Names.CheckBack then
-			SIPermission.BackSettings_Check( playerIndex )
-			return
-		end
-		if name == SIPermission.Names.CheckClear then
-			SIPermission.ClearSettings_Check( playerIndex )
-			return
-		end
-		if name:StartsWith( SIPermission.Names.GlobalItemWhitePrefix ) then
-			SIPermission.DeleteGlobalItemWhite( playerIndex , name , element )
-			return
-		end
-		if name:StartsWith( SIPermission.Names.GlobalItemBlackPrefix ) then
-			SIPermission.DeleteGlobalItemBlack( playerIndex , name , element )
-			return
-		end
-		if name:StartsWith( SIPermission.Names.GlobalItemBluePrefix ) then
-			SIPermission.AddGlobalItemWhite( playerIndex , name , element )
-			return
-		end
-		if name:StartsWith( SIPermission.Names.GlobalItemOrangePrefix ) then
-			SIPermission.AddGlobalItemBlack( playerIndex , name , element )
-			return
-		end
-		if name:StartsWith( SIPermission.Names.PlayerItemPrefix ) then
-			SIPermission.SelectPlayer( playerIndex , name )
-			return
-		end
-		if name:StartsWith( SIPermission.Names.PlayerItemWhitePrefix ) then
-			SIPermission.DeletePlayerItemWhite( playerIndex , name , element )
-			return
-		end
-		if name:StartsWith( SIPermission.Names.PlayerItemBlackPrefix ) then
-			SIPermission.DeletePlayerItemBlack( playerIndex , name , element )
-			return
-		end
-		if name:StartsWith( SIPermission.Names.PlayerItemBluePrefix ) then
-			SIPermission.AddPlayerItemWhite( playerIndex , name , element )
-			return
-		end
-		if name:StartsWith( SIPermission.Names.PlayerItemOrangePrefix ) then
-			SIPermission.AddPlayerItemBlack( playerIndex , name , element )
-			return
-		end
-		if name:StartsWith( SIPermission.Names.CheckItemPrefix ) then
-			SIPermission.SelectCheck( playerIndex , name )
-			return
-		end
-		return
-	end
 	-- 信息查询窗口事件
 	if name:StartsWith( SIFinder.Names.Prefix ) then
 		if name == SIFinder.Names.Close then
 			SIFinder.CloseFrame( playerIndex )
-			return
-		end
-		return
-	end
-	-- 自动填充的管理窗口事件
-	if name:StartsWith( SIAutoInsert.Names.Prefix ) then
-		if name == SIAutoInsert.Names.Close then
-			SIAutoInsert.CloseFrame( playerIndex )
-			return
-		end
-		if name == SIAutoInsert.Names.Add then
-			SIAutoInsert.Out_AddTabSettings( playerIndex )
-			return
-		end
-		if name == SIAutoInsert.Names.Delete then
-			SIAutoInsert.Out_DeleteTabSettings( playerIndex )
-			return
-		end
-		if name:StartsWith( SIAutoInsert.Names.ListButtonPrefix ) then
-			SIAutoInsert.ListScroll( playerIndex , name )
 			return
 		end
 		return
@@ -670,30 +530,6 @@ end )
 		return
 	end
 end )
-.Add( SIEvents.on_gui_text_changed , function( event , functionID )
-	local element = event.element
-	if not element.valid then
-		return
-	end
-	local name = element.name
-	local playerIndex = event.player_index
-	-- 自动填充的管理窗口事件
-	if name:StartsWith( SIAutoInsert.Names.Prefix ) then
-		if name:StartsWith( SIAutoInsert.Names.MaxSlot_Count_Prefix ) then
-			SIAutoInsert.Set_MaxSlot_Count( playerIndex , name , element )
-			return
-		end
-		if name:StartsWith( SIAutoInsert.Names.InsertFuel_Count_Prefix ) then
-			SIAutoInsert.Set_InsertFuel_Count( playerIndex , name , element )
-			return
-		end
-		if name:StartsWith( SIAutoInsert.Names.InsertAmmo_Count_Prefix ) then
-			SIAutoInsert.Set_InsertAmmo_Count( playerIndex , name , element )
-			return
-		end
-		return
-	end
-end )
 .Add( SIEvents.on_gui_confirmed , function( event , functionID )
 	local element = event.element
 	if not element.valid then
@@ -704,31 +540,6 @@ end )
 	-- 主面板设置管理窗口事件
 	if name == SIMainbarSetting.Names.ToolbarColumnText then
 		SIMainbarSetting.ChangeToolbarColumnText( playerIndex )
-		return
-	end
-	-- 权限管理窗口事件
-	if name:StartsWith( SIPermission.Names.Prefix ) then
-		if name == SIPermission.Names.GlobalItemFindTextWhite then
-			SIPermission.FindAddGlobalItemWhite( playerIndex )
-			return
-		end
-		if name == SIPermission.Names.GlobalItemFindTextBlack then
-			SIPermission.FindAddGlobalItemBlack( playerIndex )
-			return
-		end
-		if name == SIPermission.Names.PlayerItemFindTextWhite then
-			SIPermission.FindAddPlayerItemWhite( playerIndex )
-			return
-		end
-		if name == SIPermission.Names.PlayerItemFindTextBlack then
-			SIPermission.FindAddPlayerItemBlack( playerIndex )
-			return
-		end
-		return
-	end
-	-- 自动填充的管理窗口事件
-	if name == SIAutoInsert.Names.TabSettingsName then
-		SIAutoInsert.Set_TabSettingsName( playerIndex , element )
 		return
 	end
 end )
@@ -751,34 +562,6 @@ end )
 		end
 		return
 	end
-	-- 权限管理窗口事件
-	if name:StartsWith( SIPermission.Names.Prefix ) then
-		if name:StartsWith( SIPermission.Names.GlobalRadioPrefix ) then
-			SIPermission.SwitchRadio_Global( playerIndex , name )
-			return
-		end
-		if name:StartsWith( SIPermission.Names.PlayerRadioPrefix ) then
-			SIPermission.SwitchRadio_Player( playerIndex , name )
-			return
-		end
-		if name:StartsWith( SIPermission.Names.CheckRadioPrefix ) then
-			SIPermission.SwitchRadio_Check( playerIndex , name )
-			return
-		end
-		return
-	end
-	-- 自动填充的管理窗口事件
-	if name:StartsWith( SIAutoInsert.Names.Prefix ) then
-		if name == SIAutoInsert.Names.GreenToBlue_Check then
-			SIAutoInsert.Set_GreenToBlue_Check( playerIndex , element )
-			return
-		end
-		if name:StartsWith( SIAutoInsert.Names.EnablePrefix ) then
-			SIAutoInsert.EnableFunction( playerIndex , name , element )
-			return
-		end
-		return
-	end
 end )
 .Add( SIEvents.on_gui_selection_state_changed , function( event , functionID )
 	local element = event.element
@@ -797,11 +580,6 @@ end )
 		SIFinder.SelectElementType( playerIndex , element.selected_index )
 		return
 	end
-	-- 自动填充的管理窗口事件
-	if name == SIAutoInsert.Names.DefaultIndex then
-		SIAutoInsert.Set_DefaultIndex( playerIndex , element )
-		return
-	end
 end )
 .Add( SIEvents.on_gui_elem_changed , function( event , functionID )
 	local element = event.element
@@ -810,74 +588,9 @@ end )
 	end
 	local name = element.name
 	local playerIndex = event.player_index
-	-- 权限管理窗口事件
-	if name:StartsWith( SIPermission.Names.Prefix ) then
-		if name == SIPermission.Names.GlobalItemFindWhite then
-			SIPermission.AddGlobalItemWhite( playerIndex , element.elem_value , element , true )
-			return
-		end
-		if name == SIPermission.Names.GlobalItemFindBlack then
-			SIPermission.AddGlobalItemBlack( playerIndex , element.elem_value , element , true )
-			return
-		end
-		if name == SIPermission.Names.PlayerItemFindWhite then
-			SIPermission.AddPlayerItemWhite( playerIndex , element.elem_value , element , true )
-			return
-		end
-		if name == SIPermission.Names.PlayerItemFindBlack then
-			SIPermission.AddPlayerItemBlack( playerIndex , element.elem_value , element , true )
-			return
-		end
-		return
-	end
 	-- 信息查询窗口事件
 	if name:StartsWith( SIFinder.Names.ChooserPrefix ) then
 		SIFinder.FreshFrame( playerIndex , element.elem_value )
-		return
-	end
-	-- 自动填充的管理窗口事件
-	if name:StartsWith( SIAutoInsert.Names.Prefix ) then
-		if name:StartsWith( SIAutoInsert.Names.MaxSlot_Entity_Prefix ) then
-			SIAutoInsert.Set_MaxSlot_Entity( playerIndex , name , element )
-			return
-		end
-		if name:StartsWith( SIAutoInsert.Names.SetModule_Entity_Prefix ) then
-			SIAutoInsert.Set_SetModule_Entity( playerIndex , name , element )
-			return
-		end
-		if name:StartsWith( SIAutoInsert.Names.SetModule_Item_Prefix ) then
-			SIAutoInsert.Set_SetModule_Item( playerIndex , name , element )
-			return
-		end
-		if name:StartsWith( SIAutoInsert.Names.InsertFuel_Entity_Prefix ) then
-			SIAutoInsert.Set_InsertFuel_Entity( playerIndex , name , element )
-			return
-		end
-		if name:StartsWith( SIAutoInsert.Names.InsertFuel_Item_Prefix ) then
-			SIAutoInsert.Set_InsertFuel_Item( playerIndex , name , element )
-			return
-		end
-		if name:StartsWith( SIAutoInsert.Names.InsertAmmo_Entity_Prefix ) then
-			SIAutoInsert.Set_InsertAmmo_Entity( playerIndex , name , element )
-			return
-		end
-		if name:StartsWith( SIAutoInsert.Names.InsertAmmo_Item_Prefix ) then
-			SIAutoInsert.Set_InsertAmmo_Item( playerIndex , name , element )
-			return
-		end
-		return
-	end
-end )
-.Add( SIEvents.on_gui_selected_tab_changed , function( event , functionID )
-	local element = event.element
-	if not element.valid then
-		return
-	end
-	local name = element.name
-	local playerIndex = event.player_index
-	-- 自动填充的管理窗口事件
-	if name == SIAutoInsert.Names.TabPane then
-		SIAutoInsert.SwitchTab( playerIndex )
 		return
 	end
 end )
@@ -903,19 +616,9 @@ end )
 		SIMainbarMessage.MoveFrame( playerIndex )
 		return
 	end
-	-- 权限管理窗口事件
-	if name == SIPermission.Names.Frame then
-		SIPermission.MoveFrame( playerIndex )
-		return
-	end
 	-- 信息查询窗口事件
 	if name == SIFinder.Names.Frame then
 		SIFinder.MoveFrame( playerIndex )
-		return
-	end
-	-- 自动填充的管理窗口事件
-	if name == SIAutoInsert.Names.Frame then
-		SIAutoInsert.MoveFrame( playerIndex )
 		return
 	end
 end )
@@ -961,17 +664,6 @@ end )
 	local oldName = event.old_name
 	-- 主面板窗口事件
 	SIMainbar.ChangeSurfaceTime( surfaceIndex , oldName )
-end )
-.Add( SIEvents.on_built_entity , function( event , functionID )
-	local entity = event.created_entity
-	if not entity.valid then
-		return
-	end
-	local playerIndex = event.player_index
-	-- 自动填充的管理窗口事件
-	if SIPermission.HasPermission( SIPermission.PermissionIDs.AutoInsert , playerIndex ) then
-		SIAutoInsert.EffectSelect( playerIndex , entity )
-	end
 end )
 .Add( SIPermission.EventID , function( event , functionID )
 	local playerIndex = event.player_index

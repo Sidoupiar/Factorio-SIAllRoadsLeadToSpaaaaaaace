@@ -1,7 +1,8 @@
 SIFinder =
 {
 	ID = "Finder" ,
-	Name = "信息查询" ,
+	Code = "Finder" ,
+	Show = "信息查询" ,
 	InterfaceID = "SICore-Finder" ,
 	Names =
 	{

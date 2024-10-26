@@ -200,9 +200,17 @@ SITable =
 		end
 		return nil , 0
 	end ,
-	GetWithName = function( data , show )
+	GetWithShow = function( data , show )
 		for key , value in pairs( data ) do
 			if SITools.IsTable( value ) and value.Show == show then
+				return value , key
+			end
+		end
+		return nil , 0
+	end ,
+	GetWithName = function( data , name )
+		for key , value in pairs( data ) do
+			if SITools.IsTable( value ) and value.Name == name then
 				return value , key
 			end
 		end
@@ -781,6 +789,9 @@ function SIInit.AutoLoad( ModName , CustomPackageConfig , ConstantsDataPrefix , 
 					if constantsData.UseClassPrefix == nil then
 						constantsData.UseClassPrefix = true
 					end
+					if constantsData.UseCodePrefix == nil then
+						constantsData.UseCodePrefix = true
+					end
 					if constantsData.UseShowPrefix == nil then
 						constantsData.UseShowPrefix = true
 					end
@@ -883,19 +894,31 @@ function SIInit.AutoLoad( ModName , CustomPackageConfig , ConstantsDataPrefix , 
 									hidden = false
 								}
 								if settingType == SICommon.SettingTypes.BOOL then
-									settingItem.localised_name = settingValues[4] or { "SISettingName."..realName }
+									if settingValues[2] == SICommon.SettingAffectTypes.StartUp then
+										settingItem.localised_name = { "SICommon.SettingsStartUp" , settingValues[4] or { "SISettingName."..realName } }
+									else
+										settingItem.localised_name = settingValues[4] or { "SISettingName."..realName }
+									end
 									settingItem.localised_description = settingValues[5] or { "SICommon.SettingsDescription" , constantsData.LocalisedName , { "SISettingDescription."..realName } , SIPrint.ToShow( settingValues[3] ) }
 									settingItem.forced_value = false
 								elseif settingType == SICommon.SettingTypes.INT or settingType == SICommon.SettingTypes.DOUBLE then
 									settingItem.minimum_value = settingValues[4]
 									settingItem.maximum_value = settingValues[5]
 									settingItem.allowed_values = settingValues[6]
-									settingItem.localised_name = settingValues[7] or { "SISettingName."..realName }
+									if settingValues[2] == SICommon.SettingAffectTypes.StartUp then
+										settingItem.localised_name = { "SICommon.SettingsStartUp" , settingValues[7] or { "SISettingName."..realName } }
+									else
+										settingItem.localised_name = settingValues[7] or { "SISettingName."..realName }
+									end
 									settingItem.localised_description = settingValues[8] or { "SICommon.SettingsDescription" , constantsData.LocalisedName , { "SISettingDescription."..realName } , SIPrint.ToShow( settingValues[3] ) }
 								elseif settingType == SICommon.SettingTypes.STRING then
 									settingItem.allow_blank = settingValues[4] or false
 									settingItem.allowed_values = settingValues[5]
-									settingItem.localised_name = settingValues[6] or { "SISettingName."..realName }
+									if settingValues[2] == SICommon.SettingAffectTypes.StartUp then
+										settingItem.localised_name = { "SICommon.SettingsStartUp" , settingValues[6] or { "SISettingName."..realName } }
+									else
+										settingItem.localised_name = settingValues[6] or { "SISettingName."..realName }
+									end
 									settingItem.localised_description = settingValues[7] or { "SICommon.SettingsDescription" , constantsData.LocalisedName , { "SISettingDescription."..realName } , SIPrint.ToShow( settingValues[3] ) }
 									settingItem.auto_trim = true
 								end

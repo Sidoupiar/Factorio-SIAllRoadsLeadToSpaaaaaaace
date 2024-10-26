@@ -1,7 +1,8 @@
 SIMainbarNote =
 {
 	ID = "MainbarNote" ,
-	Name = "主面板便签管理" ,
+	Code = "MainbarNote" ,
+	Show = "主面板便签管理" ,
 	InterfaceID = "SICore-MainbarNote" ,
 	Names =
 	{

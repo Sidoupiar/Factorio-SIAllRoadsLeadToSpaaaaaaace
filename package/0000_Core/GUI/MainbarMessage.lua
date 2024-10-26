@@ -1,7 +1,8 @@
 SIMainbarMessage =
 {
 	ID = "MainbarMessage" ,
-	Name = "主面板消息管理" ,
+	Code = "MainbarMessage" ,
+	Show = "主面板消息管理" ,
 	InterfaceID = "SICore-MainbarMessage" ,
 	Names =
 	{

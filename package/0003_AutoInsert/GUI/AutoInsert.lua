@@ -1,31 +1,32 @@
 SIAutoInsert =
 {
 	ID = "AutoInsert" ,
-	Name = "自动填充" ,
+	Code = "AutoInsert" ,
+	Show = "自动填充" ,
 	InterfaceID = "SICore-AutoInsert" ,
 	Names =
 	{
-		Prefix = "SI核心-自动填充-" ,
-		Frame = "SI核心-自动填充-窗口" ,
-		Close = "SI核心-自动填充-关闭" ,
-		Add = "SI核心-自动填充-添加" ,
-		Delete = "SI核心-自动填充-删除" ,
-		TabPane = "SI核心-自动填充-分页面板" ,
-		TabSettingsName = "SI核心-自动填充-设置名称" ,
-		DefaultIndex = "SI核心-自动填充-默认选择" ,
-		GreenToBlue_Check = "SI核心-自动填充-绿箱向蓝箱供货-勾选" ,
-		ListButtonPrefix = "SI核心-自动填充-列表定位按钮-" ,
-		EnablePrefix = "SI核心-自动填充-启用功能-" ,
-		MaxSlot_Entity_Prefix = "SI核心-自动填充-最大格子-实体-" ,
-		MaxSlot_Count_Prefix = "SI核心-自动填充-最大格子-数量-" ,
-		SetModule_Entity_Prefix = "SI核心-自动填充-设置插件-实体-" ,
-		SetModule_Item_Prefix = "SI核心-自动填充-设置插件-物品-" ,
-		InsertFuel_Entity_Prefix = "SI核心-自动填充-插入燃料-实体-" ,
-		InsertFuel_Item_Prefix = "SI核心-自动填充-插入燃料-物品-" ,
-		InsertFuel_Count_Prefix = "SI核心-自动填充-插入燃料-数量-" ,
-		InsertAmmo_Entity_Prefix = "SI核心-自动填充-插入弹药-实体-" ,
-		InsertAmmo_Item_Prefix = "SI核心-自动填充-插入弹药-物品-" ,
-		InsertAmmo_Count_Prefix = "SI核心-自动填充-插入弹药-数量-"
+		Prefix = "SI自动填充-" ,
+		Frame = "SI自动填充-窗口" ,
+		Close = "SI自动填充-关闭" ,
+		Add = "SI自动填充-添加" ,
+		Delete = "SI自动填充-删除" ,
+		TabPane = "SI自动填充-分页面板" ,
+		TabSettingsName = "SI自动填充-设置名称" ,
+		DefaultIndex = "SI自动填充-默认选择" ,
+		GreenToBlue_Check = "SI自动填充-绿箱向蓝箱供货-勾选" ,
+		ListButtonPrefix = "SI自动填充-列表定位按钮-" ,
+		EnablePrefix = "SI自动填充-启用功能-" ,
+		MaxSlot_Entity_Prefix = "SI自动填充-最大格子-实体-" ,
+		MaxSlot_Count_Prefix = "SI自动填充-最大格子-数量-" ,
+		SetModule_Entity_Prefix = "SI自动填充-设置插件-实体-" ,
+		SetModule_Item_Prefix = "SI自动填充-设置插件-物品-" ,
+		InsertFuel_Entity_Prefix = "SI自动填充-插入燃料-实体-" ,
+		InsertFuel_Item_Prefix = "SI自动填充-插入燃料-物品-" ,
+		InsertFuel_Count_Prefix = "SI自动填充-插入燃料-数量-" ,
+		InsertAmmo_Entity_Prefix = "SI自动填充-插入弹药-实体-" ,
+		InsertAmmo_Item_Prefix = "SI自动填充-插入弹药-物品-" ,
+		InsertAmmo_Count_Prefix = "SI自动填充-插入弹药-数量-"
 	} ,
 	Settings =
 	{
@@ -118,8 +119,8 @@ SIAutoInsert =
 	} ,
 	DefaultIndexText =
 	{
-		[1] = { "SICore.自动填充-窗口-选择-空" } ,
-		[2] = { "SICore.自动填充-窗口-选择-默认" }
+		[1] = { "SIAutoInsert.自动填充-窗口-选择-空" } ,
+		[2] = { "SIAutoInsert.自动填充-窗口-选择-默认" }
 	} ,
 	MaxSlot_Entity_Filters =
 	{
@@ -391,17 +392,17 @@ SIAutoInsert =
 			{
 				Name         = SIAutoInsert.Names.Frame ,
 				Close        = SIAutoInsert.Names.Close ,
-				Style        = SIConstants_Core.raw.Styles.AutoInsert_Frame ,
-				Title        = { "SICore.自动填充-窗口-标题" } ,
-				TitleTooltip = { "SICore.自动填充-窗口-标题-提示" } ,
-				UseTooltip   = { "SICore.自动填充-窗口-使用-提示" } ,
-				CloseTooltip = { "SICore.自动填充-窗口-关闭-提示" } ,
+				Style        = SIConstants_AutoInsert.raw.Styles.AutoInsert_Frame ,
+				Title        = { "SIAutoInsert.自动填充-窗口-标题" } ,
+				TitleTooltip = { "SIAutoInsert.自动填充-窗口-标题-提示" } ,
+				UseTooltip   = { "SIAutoInsert.自动填充-窗口-使用-提示" } ,
+				CloseTooltip = { "SIAutoInsert.自动填充-窗口-关闭-提示" } ,
 				OtherButtons =
 				{
 					{
 						Name = SIAutoInsert.Names.Add ,
 						Item = SIConstants_Core.raw.Items.IconAdd ,
-						Tooltip = { "SICore.自动填充-窗口-新增-提示" , SIAutoInsert.TabSettingsMaxCount }
+						Tooltip = { "SIAutoInsert.自动填充-窗口-新增-提示" , SIAutoInsert.TabSettingsMaxCount }
 					}
 				}
 			} )
@@ -413,7 +414,7 @@ SIAutoInsert =
 			end
 			settings.tabSettingsIndex = SITools.AsNumberInt( settings.tabSettingsIndex , 1 , tabSettingsCount )
 			-- 第 1 层
-			settings.tabPane = frame.add{ type = "tabbed-pane" , name = SIAutoInsert.Names.TabPane , style = SIConstants_Core.raw.Styles.AutoInsert_TabPane }
+			settings.tabPane = frame.add{ type = "tabbed-pane" , name = SIAutoInsert.Names.TabPane , style = SIConstants_AutoInsert.raw.Styles.AutoInsert_TabPane }
 			-- 根据设置更新控件
 			SIAutoInsert.CreateTab( settings )
 		end
@@ -458,7 +459,7 @@ SIAutoInsert =
 			-- 添加控件集合
 			table.insert( settings.Elements , {} )
 			-- 创建分页
-			local tab = tabPane.add{ type = "tab" , caption = { "SICore.自动填充-窗口-分页标题" , tabSettings.Name } , tooltip = { "SICore.自动填充-窗口-分页标题-提示" , SIAutoInsert.TabSettingsMaxCount } }
+			local tab = tabPane.add{ type = "tab" , caption = { "SIAutoInsert.自动填充-窗口-分页标题" , tabSettings.Name } , tooltip = { "SIAutoInsert.自动填充-窗口-分页标题-提示" , SIAutoInsert.TabSettingsMaxCount } }
 			local page = SIAutoInsert.CreatePage( settings , index )
 			tabPane.add_tab( tab , page )
 			-- 保存信息
@@ -479,29 +480,29 @@ SIAutoInsert =
 		-- 设置名称
 		-- ======================================================================
 		local nameFlow = page.add{ type = "flow" , direction = "horizontal" , style = SIConstants_Core.raw.Styles.Common_FlowCenterH }
-		nameFlow.add{ type = "label" , caption = { "SICore.自动填充-窗口-名称" } , tooltip = { "SICore.自动填充-窗口-名称-提示" } , style = SIConstants_Core.raw.Styles.AutoInsert_Label }
-		elements.TabSettingsName = nameFlow.add{ type = "textfield" , name = SIAutoInsert.Names.TabSettingsName , text = nil , tooltip = { "SICore.自动填充-窗口-名称-提示" } , style = SIConstants_Core.raw.Styles.AutoInsert_Text }
-		nameFlow.add{ type = "flow" , direction = "vertical" , style = SIConstants_Core.raw.Styles.AutoInsert_EmptyFlow }
-		nameFlow.add{ type = "button" , name = SIAutoInsert.Names.Delete , caption = { "SICore.自动填充-窗口-删除" } , tooltip = { "SICore.自动填充-窗口-删除-提示" } , style = SIConstants_Core.raw.Styles.Common_ButtonRed }
+		nameFlow.add{ type = "label" , caption = { "SIAutoInsert.自动填充-窗口-名称" } , tooltip = { "SIAutoInsert.自动填充-窗口-名称-提示" } , style = SIConstants_AutoInsert.raw.Styles.AutoInsert_Label }
+		elements.TabSettingsName = nameFlow.add{ type = "textfield" , name = SIAutoInsert.Names.TabSettingsName , text = nil , tooltip = { "SIAutoInsert.自动填充-窗口-名称-提示" } , style = SIConstants_AutoInsert.raw.Styles.AutoInsert_Text }
+		nameFlow.add{ type = "flow" , direction = "vertical" , style = SIConstants_AutoInsert.raw.Styles.AutoInsert_EmptyFlow }
+		nameFlow.add{ type = "button" , name = SIAutoInsert.Names.Delete , caption = { "SIAutoInsert.自动填充-窗口-删除" } , tooltip = { "SIAutoInsert.自动填充-窗口-删除-提示" } , style = SIConstants_Core.raw.Styles.Common_ButtonRed }
 		-- ======================================================================
 		-- 默认选择
 		-- ======================================================================
 		local defaultIndexFlow = page.add{ type = "flow" , direction = "horizontal" , style = SIConstants_Core.raw.Styles.Common_FlowCenterH }
-		defaultIndexFlow.add{ type = "label" , caption = { "SICore.自动填充-窗口-默认选择" } , tooltip = { "SICore.自动填充-窗口-默认选择-提示" } , style = SIConstants_Core.raw.Styles.AutoInsert_Label }
+		defaultIndexFlow.add{ type = "label" , caption = { "SIAutoInsert.自动填充-窗口-默认选择" } , tooltip = { "SIAutoInsert.自动填充-窗口-默认选择-提示" } , style = SIConstants_AutoInsert.raw.Styles.AutoInsert_Label }
 		elements.DefaultIndex = defaultIndexFlow.add
 		{
 			type = "drop-down" ,
 			name = SIAutoInsert.Names.DefaultIndex ,
-			caption = { "SICore.自动填充-窗口-默认选择" } ,
-			tooltip = { "SICore.自动填充-窗口-默认选择-提示" } ,
+			caption = { "SIAutoInsert.自动填充-窗口-默认选择" } ,
+			tooltip = { "SIAutoInsert.自动填充-窗口-默认选择-提示" } ,
 			items = SIAutoInsert.DefaultIndexText ,
 			selected_index = 1 ,
-			style = SIConstants_Core.raw.Styles.AutoInsert_DropDown
+			style = SIConstants_AutoInsert.raw.Styles.AutoInsert_DropDown
 		}
 		-- ======================================================================
 		-- 设置列表按钮
 		-- ======================================================================
-		local listButtonFlow = page.add{ type = "flow" , direction = "horizontal" , style = SIConstants_Core.raw.Styles.AutoInsert_ListButtonFlow }
+		local listButtonFlow = page.add{ type = "flow" , direction = "horizontal" , style = SIConstants_AutoInsert.raw.Styles.AutoInsert_ListButtonFlow }
 		-- ======================================================================
 		-- 设置列表
 		-- ======================================================================
@@ -511,48 +512,48 @@ SIAutoInsert =
 		-- ======================================================================
 		-- 最大格子
 		-- ======================================================================
-		elements.MaxSlot_Enable = list.add{ type = "checkbox" , name = SIAutoInsert.Names.EnablePrefix .. "MaxSlot_Flow" , state = false , caption = { "SICore.自动填充-窗口-最大格子-启用" , { "SICore.自动填充-窗口-启用-未设置" } } , tooltip = { "SICore.自动填充-窗口-最大格子-启用-提示" } , style = SIConstants_Core.raw.Styles.RequestMap_ListCheck }
-		local MaxSlot_Flow = list.add{ type = "flow" , direction = "vertical" , style = SIConstants_Core.raw.Styles.RequestMap_ListPanelFlow }
+		elements.MaxSlot_Enable = list.add{ type = "checkbox" , name = SIAutoInsert.Names.EnablePrefix .. "MaxSlot_Flow" , state = false , caption = { "SIAutoInsert.自动填充-窗口-最大格子-启用" , { "SIAutoInsert.自动填充-窗口-启用-未设置" } } , tooltip = { "SIAutoInsert.自动填充-窗口-最大格子-启用-提示" } , style = SIConstants_AutoInsert.raw.Styles.AutoInsert_ListCheck }
+		local MaxSlot_Flow = list.add{ type = "flow" , direction = "vertical" , style = SIConstants_AutoInsert.raw.Styles.AutoInsert_ListPanelFlow }
 		elements.MaxSlot_Flow = MaxSlot_Flow
-		elements.MaxSlot_List = MaxSlot_Flow.add{ type = "table" , column_count = 2 , style = SIConstants_Core.raw.Styles.RequestMap_SubList }
+		elements.MaxSlot_List = MaxSlot_Flow.add{ type = "table" , column_count = 2 , style = SIConstants_AutoInsert.raw.Styles.AutoInsert_SubList }
 		-- ======================================================================
 		-- 绿箱向蓝箱供货
 		-- ======================================================================
-		elements.GreenToBlue_Enable = list.add{ type = "checkbox" , name = SIAutoInsert.Names.EnablePrefix .. "GreenToBlue_Flow" , state = false , caption = { "SICore.自动填充-窗口-绿箱向蓝箱供货-启用" , { "SICore.自动填充-窗口-启用-未设置" } } , tooltip = { "SICore.自动填充-窗口-绿箱向蓝箱供货-启用-提示" } , style = SIConstants_Core.raw.Styles.RequestMap_ListCheck }
-		local GreenToBlue_Flow = list.add{ type = "flow" , direction = "vertical" , style = SIConstants_Core.raw.Styles.RequestMap_ListPanelFlow }
+		elements.GreenToBlue_Enable = list.add{ type = "checkbox" , name = SIAutoInsert.Names.EnablePrefix .. "GreenToBlue_Flow" , state = false , caption = { "SIAutoInsert.自动填充-窗口-绿箱向蓝箱供货-启用" , { "SIAutoInsert.自动填充-窗口-启用-未设置" } } , tooltip = { "SIAutoInsert.自动填充-窗口-绿箱向蓝箱供货-启用-提示" } , style = SIConstants_AutoInsert.raw.Styles.AutoInsert_ListCheck }
+		local GreenToBlue_Flow = list.add{ type = "flow" , direction = "vertical" , style = SIConstants_AutoInsert.raw.Styles.AutoInsert_ListPanelFlow }
 		elements.GreenToBlue_Flow = GreenToBlue_Flow
-		elements.GreenToBlue_Check = GreenToBlue_Flow.add{ type = "checkbox" , name = SIAutoInsert.Names.GreenToBlue_Check , state = false , caption = { "SICore.自动填充-窗口-绿箱向蓝箱供货-勾选" } , tooltip = { "SICore.自动填充-窗口-绿箱向蓝箱供货-勾选-提示" } , style = SIConstants_Core.raw.Styles.Common_CheckBox }
+		elements.GreenToBlue_Check = GreenToBlue_Flow.add{ type = "checkbox" , name = SIAutoInsert.Names.GreenToBlue_Check , state = false , caption = { "SIAutoInsert.自动填充-窗口-绿箱向蓝箱供货-勾选" } , tooltip = { "SIAutoInsert.自动填充-窗口-绿箱向蓝箱供货-勾选-提示" } , style = SIConstants_Core.raw.Styles.Common_CheckBox }
 		-- ======================================================================
 		-- 设置插件
 		-- ======================================================================
-		elements.SetModule_Enable = list.add{ type = "checkbox" , name = SIAutoInsert.Names.EnablePrefix .. "SetModule_Flow" , state = false , caption = { "SICore.自动填充-窗口-设置插件-启用" , { "SICore.自动填充-窗口-启用-未设置" } } , tooltip = { "SICore.自动填充-窗口-设置插件-启用-提示" } , style = SIConstants_Core.raw.Styles.RequestMap_ListCheck }
-		local SetModule_Flow = list.add{ type = "flow" , direction = "vertical" , style = SIConstants_Core.raw.Styles.RequestMap_ListPanelFlow }
+		elements.SetModule_Enable = list.add{ type = "checkbox" , name = SIAutoInsert.Names.EnablePrefix .. "SetModule_Flow" , state = false , caption = { "SIAutoInsert.自动填充-窗口-设置插件-启用" , { "SIAutoInsert.自动填充-窗口-启用-未设置" } } , tooltip = { "SIAutoInsert.自动填充-窗口-设置插件-启用-提示" } , style = SIConstants_AutoInsert.raw.Styles.AutoInsert_ListCheck }
+		local SetModule_Flow = list.add{ type = "flow" , direction = "vertical" , style = SIConstants_AutoInsert.raw.Styles.AutoInsert_ListPanelFlow }
 		elements.SetModule_Flow = SetModule_Flow
-		elements.SetModule_List = SetModule_Flow.add{ type = "table" , column_count = 3 , style = SIConstants_Core.raw.Styles.RequestMap_SubList }
+		elements.SetModule_List = SetModule_Flow.add{ type = "table" , column_count = 3 , style = SIConstants_AutoInsert.raw.Styles.AutoInsert_SubList }
 		-- ======================================================================
 		-- 插入燃料
 		-- ======================================================================
-		elements.InsertFuel_Enable = list.add{ type = "checkbox" , name = SIAutoInsert.Names.EnablePrefix .. "InsertFuel_Flow" , state = false , caption = { "SICore.自动填充-窗口-插入燃料-启用" , { "SICore.自动填充-窗口-启用-未设置" } } , tooltip = { "SICore.自动填充-窗口-插入燃料-启用-提示" } , style = SIConstants_Core.raw.Styles.AutoInsert_ListCheck }
-		local InsertFuel_Flow = list.add{ type = "flow" , direction = "vertical" , style = SIConstants_Core.raw.Styles.AutoInsert_ListPanelFlow }
+		elements.InsertFuel_Enable = list.add{ type = "checkbox" , name = SIAutoInsert.Names.EnablePrefix .. "InsertFuel_Flow" , state = false , caption = { "SIAutoInsert.自动填充-窗口-插入燃料-启用" , { "SIAutoInsert.自动填充-窗口-启用-未设置" } } , tooltip = { "SIAutoInsert.自动填充-窗口-插入燃料-启用-提示" } , style = SIConstants_AutoInsert.raw.Styles.AutoInsert_ListCheck }
+		local InsertFuel_Flow = list.add{ type = "flow" , direction = "vertical" , style = SIConstants_AutoInsert.raw.Styles.AutoInsert_ListPanelFlow }
 		elements.InsertFuel_Flow = InsertFuel_Flow
-		elements.InsertFuel_List = InsertFuel_Flow.add{ type = "table" , column_count = 2 , style = SIConstants_Core.raw.Styles.AutoInsert_SubList }
+		elements.InsertFuel_List = InsertFuel_Flow.add{ type = "table" , column_count = 2 , style = SIConstants_AutoInsert.raw.Styles.AutoInsert_SubList }
 		-- ======================================================================
 		-- 插入弹药
 		-- ======================================================================
-		elements.InsertAmmo_Enable = list.add{ type = "checkbox" , name = SIAutoInsert.Names.EnablePrefix .. "InsertAmmo_Flow" , state = false , caption = { "SICore.自动填充-窗口-插入弹药-启用" , { "SICore.自动填充-窗口-启用-未设置" } } , tooltip = { "SICore.自动填充-窗口-插入弹药-启用-提示" } , style = SIConstants_Core.raw.Styles.AutoInsert_ListCheck }
-		local InsertAmmo_Flow = list.add{ type = "flow" , direction = "vertical" , style = SIConstants_Core.raw.Styles.AutoInsert_ListPanelFlow }
+		elements.InsertAmmo_Enable = list.add{ type = "checkbox" , name = SIAutoInsert.Names.EnablePrefix .. "InsertAmmo_Flow" , state = false , caption = { "SIAutoInsert.自动填充-窗口-插入弹药-启用" , { "SIAutoInsert.自动填充-窗口-启用-未设置" } } , tooltip = { "SIAutoInsert.自动填充-窗口-插入弹药-启用-提示" } , style = SIConstants_AutoInsert.raw.Styles.AutoInsert_ListCheck }
+		local InsertAmmo_Flow = list.add{ type = "flow" , direction = "vertical" , style = SIConstants_AutoInsert.raw.Styles.AutoInsert_ListPanelFlow }
 		elements.InsertAmmo_Flow = InsertAmmo_Flow
-		elements.InsertAmmo_List = InsertAmmo_Flow.add{ type = "table" , column_count = 2 , style = SIConstants_Core.raw.Styles.AutoInsert_SubList }
+		elements.InsertAmmo_List = InsertAmmo_Flow.add{ type = "table" , column_count = 2 , style = SIConstants_AutoInsert.raw.Styles.AutoInsert_SubList }
 		-- ======================================================================
 		-- 插入空白区
 		-- ======================================================================
-		list.add{ type = "flow" , direction = "vertical" , style = SIConstants_Core.raw.Styles.AutoInsert_BlankFlow }
+		list.add{ type = "flow" , direction = "vertical" , style = SIConstants_AutoInsert.raw.Styles.AutoInsert_BlankFlow }
 		-- ======================================================================
 		-- 创建滚动定位按钮
 		-- ======================================================================
 		for key , value in pairs( SIAutoInsert.DefaultTabSettings ) do
 			if key ~= "Name" then
-				local button = listButtonFlow.add{ type = "sprite-button" , name = SIAutoInsert.Names.ListButtonPrefix .. key .. "_Enable" , sprite = "item/" .. SIAutoInsert.ListButtonIcon[key] , tooltip = { "SICore.自动填充-窗口-列表定位按钮-提示" , { elements[key .. "_Enable"].caption[1] , "" } } , style = SIConstants_Core.raw.Styles.AutoInsert_ListButton }
+				local button = listButtonFlow.add{ type = "sprite-button" , name = SIAutoInsert.Names.ListButtonPrefix .. key .. "_Enable" , sprite = "item/" .. SIAutoInsert.ListButtonIcon[key] , tooltip = { "SIAutoInsert.自动填充-窗口-列表定位按钮-提示" , { elements[key .. "_Enable"].caption[1] , "" } } , style = SIConstants_AutoInsert.raw.Styles.AutoInsert_ListButton }
 				settings.ListButtons[key] = button
 			end
 		end
@@ -605,7 +606,7 @@ SIAutoInsert =
 	end ,
 	FreshPage_MaxSlot = function( settings , tabSettings , elements )
 		-- 更新说明
-		elements.MaxSlot_Enable.caption = { "SICore.自动填充-窗口-最大格子-启用" , { SITable.Size( tabSettings.MaxSlot.List ) > 0 and "SICore.自动填充-窗口-启用-已设置" or "SICore.自动填充-窗口-启用-未设置" } }
+		elements.MaxSlot_Enable.caption = { "SIAutoInsert.自动填充-窗口-最大格子-启用" , { SITable.Size( tabSettings.MaxSlot.List ) > 0 and "SIAutoInsert.自动填充-窗口-启用-已设置" or "SIAutoInsert.自动填充-窗口-启用-未设置" } }
 		-- 清空列表
 		local list = elements.MaxSlot_List
 		list.clear()
@@ -618,7 +619,7 @@ SIAutoInsert =
 			local entityNameSelected = entityName
 			local maxCount = 0
 			if entityPrototype then
-				entityTooltip = { "SICore.自动填充-窗口-最大格子-实体-提示" , entityPrototype.localised_name }
+				entityTooltip = { "SIAutoInsert.自动填充-窗口-最大格子-实体-提示" , entityPrototype.localised_name }
 				local type = entityPrototype.type
 				if type == SICommon.Types.Entities.Container or type == SICommon.Types.Entities.ContainerLogic then
 					maxCount = entityPrototype.get_inventory_size( defines.inventory.chest ) or 0
@@ -632,7 +633,7 @@ SIAutoInsert =
 					maxCount = 0
 				end
 			else
-				entityTooltip = { "SICore.自动填充-窗口-最大格子-实体-空-提示" , entityName }
+				entityTooltip = { "SIAutoInsert.自动填充-窗口-最大格子-实体-空-提示" , entityName }
 				entityNameSelected = SIConstants_Core.raw.Entities.IconEmpty
 				maxCount = 0
 			end
@@ -644,27 +645,27 @@ SIAutoInsert =
 				elem_type = "entity" ,
 				entity = entityNameSelected ,
 				elem_filters = entityFilter ,
-				style = SIConstants_Core.raw.Styles.RequestMap_ListChooser
+				style = SIConstants_AutoInsert.raw.Styles.AutoInsert_ListChooser
 			}
-			local flow = list.add{ type = "flow" , direction = "horizontal" , style = SIConstants_Core.raw.Styles.RequestMap_ListFlow }
-			flow.add{ type = "label" , caption = { "SICore.自动填充-窗口-最大格子-数量前缀" , maxCount } , tooltip = { "SICore.自动填充-窗口-最大格子-数量-提示" } , style = SIConstants_Core.raw.Styles.RequestMap_ListLabel }
-			flow.add{ type = "textfield" , name = SIAutoInsert.Names.MaxSlot_Count_Prefix .. entityName , text = tostring( count ) , numeric = true , tooltip = { "SICore.自动填充-窗口-最大格子-数量-提示" } , style = SIConstants_Core.raw.Styles.RequestMap_ListText }
-			flow.add{ type = "label" , caption = { "SICore.自动填充-窗口-最大格子-数量后缀" } , tooltip = { "SICore.自动填充-窗口-最大格子-数量-提示" } , style = SIConstants_Core.raw.Styles.RequestMap_ListLabel }
+			local flow = list.add{ type = "flow" , direction = "horizontal" , style = SIConstants_AutoInsert.raw.Styles.AutoInsert_ListFlow }
+			flow.add{ type = "label" , caption = { "SIAutoInsert.自动填充-窗口-最大格子-数量前缀" , maxCount } , tooltip = { "SIAutoInsert.自动填充-窗口-最大格子-数量-提示" } , style = SIConstants_AutoInsert.raw.Styles.AutoInsert_ListLabel }
+			flow.add{ type = "textfield" , name = SIAutoInsert.Names.MaxSlot_Count_Prefix .. entityName , text = tostring( count ) , numeric = true , tooltip = { "SIAutoInsert.自动填充-窗口-最大格子-数量-提示" } , style = SIConstants_AutoInsert.raw.Styles.AutoInsert_ListText }
+			flow.add{ type = "label" , caption = { "SIAutoInsert.自动填充-窗口-最大格子-数量后缀" } , tooltip = { "SIAutoInsert.自动填充-窗口-最大格子-数量-提示" } , style = SIConstants_AutoInsert.raw.Styles.AutoInsert_ListLabel }
 		end
 		list.add
 		{
 			type = "choose-elem-button" ,
 			name = SIAutoInsert.Names.MaxSlot_Entity_Prefix ,
-			tooltip = { "SICore.自动填充-窗口-最大格子-实体-选择-提示" } ,
+			tooltip = { "SIAutoInsert.自动填充-窗口-最大格子-实体-选择-提示" } ,
 			elem_type = "entity" ,
 			entity = nil ,
 			elem_filters = entityFilter ,
-			style = SIConstants_Core.raw.Styles.RequestMap_ListChooser
+			style = SIConstants_AutoInsert.raw.Styles.AutoInsert_ListChooser
 		}
 	end ,
 	FreshPage_GreenToBlue = function( settings , tabSettings , elements )
 		-- 更新说明
-		elements.GreenToBlue_Enable.caption = { "SICore.自动填充-窗口-绿箱向蓝箱供货-启用" , { tabSettings.GreenToBlue.Check and "SICore.自动填充-窗口-启用-未设置" or "SICore.自动填充-窗口-启用-已设置" } }
+		elements.GreenToBlue_Enable.caption = { "SIAutoInsert.自动填充-窗口-绿箱向蓝箱供货-启用" , { tabSettings.GreenToBlue.Check and "SIAutoInsert.自动填充-窗口-启用-未设置" or "SIAutoInsert.自动填充-窗口-启用-已设置" } }
 	end ,
 	FreshPage_SetModule = function( settings , tabSettings , elements )
 		-- 更新说明
@@ -681,7 +682,7 @@ SIAutoInsert =
 			local entityNameSelected = entityName
 			local maxSlot = 0
 			if entityPrototype then
-				entityTooltip = { "SICore.自动填充-窗口-设置插件-实体-提示" , entityPrototype.localised_name }
+				entityTooltip = { "SIAutoInsert.自动填充-窗口-设置插件-实体-提示" , entityPrototype.localised_name }
 				local type = entityPrototype.type
 				if type == SICommon.Types.Entities.Machine then
 					maxSlot = entityPrototype.get_inventory_size( defines.inventory.assembling_machine_modules ) or 0
@@ -699,7 +700,7 @@ SIAutoInsert =
 					maxSlot = 0
 				end
 			else
-				entityTooltip = { "SICore.自动填充-窗口-设置插件-实体-空-提示" , entityName }
+				entityTooltip = { "SIAutoInsert.自动填充-窗口-设置插件-实体-空-提示" , entityName }
 				entityNameSelected = SIConstants_Core.raw.Entities.IconEmpty
 				for key , value in pairs( moduleList ) do
 					maxSlot = math.max( maxSlot , key )
@@ -713,10 +714,10 @@ SIAutoInsert =
 				elem_type = "entity" ,
 				entity = entityNameSelected ,
 				elem_filters = entityFilter ,
-				style = SIConstants_Core.raw.Styles.RequestMap_ListChooser
+				style = SIConstants_AutoInsert.raw.Styles.AutoInsert_ListChooser
 			}
-			local selectList1 = list.add{ type = "table" , column_count = 10 , style = SIConstants_Core.raw.Styles.RequestMap_SelectList }
-			local selectList2 = list.add{ type = "table" , column_count = 10 , style = SIConstants_Core.raw.Styles.RequestMap_SelectList }
+			local selectList1 = list.add{ type = "table" , column_count = 10 , style = SIConstants_AutoInsert.raw.Styles.AutoInsert_SelectList }
+			local selectList2 = list.add{ type = "table" , column_count = 10 , style = SIConstants_AutoInsert.raw.Styles.AutoInsert_SelectList }
 			for slotIndex = 1 , maxSlot , 1 do
 				local selectList = math.fmod( math.floor( ( slotIndex - 1 ) / 10 ) , 2 ) == 0 and selectList1 or selectList2
 				local itemTooltip = nil
@@ -724,13 +725,13 @@ SIAutoInsert =
 				if itemName then
 					local itemPrototype = prototypes.item[itemName]
 					if itemPrototype then
-						itemTooltip = { "SICore.自动填充-窗口-设置插件-物品-提示" , itemPrototype.localised_name }
+						itemTooltip = { "SIAutoInsert.自动填充-窗口-设置插件-物品-提示" , itemPrototype.localised_name }
 					else
-						itemTooltip = { "SICore.自动填充-窗口-设置插件-物品-空-提示" , itemName }
+						itemTooltip = { "SIAutoInsert.自动填充-窗口-设置插件-物品-空-提示" , itemName }
 						itemName = SIConstants_Core.raw.Items.IconEmpty
 					end
 				else
-					itemTooltip = { "SICore.自动填充-窗口-设置插件-物品-选择-提示" }
+					itemTooltip = { "SIAutoInsert.自动填充-窗口-设置插件-物品-选择-提示" }
 				end
 				selectList.add
 				{
@@ -740,7 +741,7 @@ SIAutoInsert =
 					elem_type = "item" ,
 					item = itemName ,
 					elem_filters = SIAutoInsert.SetModule_Item_Filters ,
-					style = SIConstants_Core.raw.Styles.RequestMap_ListChooser
+					style = SIConstants_AutoInsert.raw.Styles.AutoInsert_ListChooser
 				}
 			end
 		end
@@ -748,20 +749,20 @@ SIAutoInsert =
 		{
 			type = "choose-elem-button" ,
 			name = SIAutoInsert.Names.SetModule_Entity_Prefix ,
-			tooltip = { "SICore.自动填充-窗口-设置插件-实体-选择-提示" } ,
+			tooltip = { "SIAutoInsert.自动填充-窗口-设置插件-实体-选择-提示" } ,
 			elem_type = "entity" ,
 			entity = nil ,
 			elem_filters = entityFilter ,
-			style = SIConstants_Core.raw.Styles.RequestMap_ListChooser
+			style = SIConstants_AutoInsert.raw.Styles.AutoInsert_ListChooser
 		}
 	end ,
 	FreshPage_SetModule_Enable = function( settings , tabSettings , elements )
 		-- 更新说明
-		elements.SetModule_Enable.caption = { "SICore.自动填充-窗口-设置插件-启用" , { SITable.Size( tabSettings.SetModule.List ) > 0 and "SICore.自动填充-窗口-启用-已设置" or "SICore.自动填充-窗口-启用-未设置" } }
+		elements.SetModule_Enable.caption = { "SIAutoInsert.自动填充-窗口-设置插件-启用" , { SITable.Size( tabSettings.SetModule.List ) > 0 and "SIAutoInsert.自动填充-窗口-启用-已设置" or "SIAutoInsert.自动填充-窗口-启用-未设置" } }
 	end ,
 	FreshPage_InsertFuel = function( settings , tabSettings , elements )
 		-- 更新说明
-		elements.InsertFuel_Enable.caption = { "SICore.自动填充-窗口-插入燃料-启用" , { SITable.Size( tabSettings.InsertFuel.List ) > 0 and "SICore.自动填充-窗口-启用-已设置" or "SICore.自动填充-窗口-启用-未设置" } }
+		elements.InsertFuel_Enable.caption = { "SIAutoInsert.自动填充-窗口-插入燃料-启用" , { SITable.Size( tabSettings.InsertFuel.List ) > 0 and "SIAutoInsert.自动填充-窗口-启用-已设置" or "SIAutoInsert.自动填充-窗口-启用-未设置" } }
 		-- 清空列表
 		local list = elements.InsertFuel_List
 		list.clear()
@@ -775,13 +776,13 @@ SIAutoInsert =
 				{
 					type = "choose-elem-button" ,
 					name = SIAutoInsert.Names.InsertFuel_Entity_Prefix .. entityName ,
-					tooltip = { "SICore.自动填充-窗口-插入燃料-实体-提示" , entityPrototype.localised_name } ,
+					tooltip = { "SIAutoInsert.自动填充-窗口-插入燃料-实体-提示" , entityPrototype.localised_name } ,
 					elem_type = "entity" ,
 					entity = entityName ,
 					elem_filters = entityFilter ,
-					style = SIConstants_Core.raw.Styles.AutoInsert_ListChooser
+					style = SIConstants_AutoInsert.raw.Styles.AutoInsert_ListChooser
 				}
-				local subList = list.add{ type = "table" , column_count = 5 , style = SIConstants_Core.raw.Styles.AutoInsert_SelectList }
+				local subList = list.add{ type = "table" , column_count = 5 , style = SIConstants_AutoInsert.raw.Styles.AutoInsert_SelectList }
 				if entityPrototype.burner_prototype then
 					local fuelFilter = SIUtils.table.deepcopy( SIAutoInsert.InsertFuel_Item_Filters )
 					for categoryName , value in pairs( entityPrototype.burner_prototype.fuel_categories ) do
@@ -803,13 +804,13 @@ SIAutoInsert =
 						if itemName then
 							local itemPrototype = prototypes.item[itemName]
 							if itemPrototype then
-								itemTooltip = { "SICore.自动填充-窗口-插入燃料-物品-提示" , itemPrototype.localised_name }
+								itemTooltip = { "SIAutoInsert.自动填充-窗口-插入燃料-物品-提示" , itemPrototype.localised_name }
 							else
-								itemTooltip = { "SICore.自动填充-窗口-插入燃料-物品-空-提示" , itemName }
+								itemTooltip = { "SIAutoInsert.自动填充-窗口-插入燃料-物品-空-提示" , itemName }
 								itemName = SIConstants_Core.raw.Items.IconEmpty
 							end
 						else
-							itemTooltip = { "SICore.自动填充-窗口-插入燃料-物品-选择-提示" }
+							itemTooltip = { "SIAutoInsert.自动填充-窗口-插入燃料-物品-选择-提示" }
 						end
 						subList.add
 						{
@@ -819,12 +820,12 @@ SIAutoInsert =
 							elem_type = "item" ,
 							item = itemName ,
 							elem_filters = fuelFilter ,
-							style = SIConstants_Core.raw.Styles.AutoInsert_ListChooser
+							style = SIConstants_AutoInsert.raw.Styles.AutoInsert_ListChooser
 						}
-						subList.add{ type = "flow" , direction = "horizontal" , style = SIConstants_Core.raw.Styles.AutoInsert_ListEmptyFlow }
-						subList.add{ type = "label" , caption = { "SICore.自动填充-窗口-插入燃料-数量" } , tooltip = { "SICore.自动填充-窗口-插入燃料-数量-提示" } , style = SIConstants_Core.raw.Styles.AutoInsert_ListLabel }
-						subList.add{ type = "textfield" , name = SIAutoInsert.Names.InsertFuel_Count_Prefix .. itemDataIndex .. "_" .. entityName , text = tostring( itemData.Count or 1 ) , numeric = true , tooltip = { "SICore.自动填充-窗口-插入燃料-数量-提示" } , style = SIConstants_Core.raw.Styles.AutoInsert_ListText }
-						subList.add{ type = "flow" , direction = "horizontal" , style = SIConstants_Core.raw.Styles.AutoInsert_ListEmptyFlow }
+						subList.add{ type = "flow" , direction = "horizontal" , style = SIConstants_AutoInsert.raw.Styles.AutoInsert_ListEmptyFlow }
+						subList.add{ type = "label" , caption = { "SIAutoInsert.自动填充-窗口-插入燃料-数量" } , tooltip = { "SIAutoInsert.自动填充-窗口-插入燃料-数量-提示" } , style = SIConstants_AutoInsert.raw.Styles.AutoInsert_ListLabel }
+						subList.add{ type = "textfield" , name = SIAutoInsert.Names.InsertFuel_Count_Prefix .. itemDataIndex .. "_" .. entityName , text = tostring( itemData.Count or 1 ) , numeric = true , tooltip = { "SIAutoInsert.自动填充-窗口-插入燃料-数量-提示" } , style = SIConstants_AutoInsert.raw.Styles.AutoInsert_ListText }
+						subList.add{ type = "flow" , direction = "horizontal" , style = SIConstants_AutoInsert.raw.Styles.AutoInsert_ListEmptyFlow }
 					end
 				end
 			else
@@ -832,13 +833,13 @@ SIAutoInsert =
 				{
 					type = "choose-elem-button" ,
 					name = SIAutoInsert.Names.InsertFuel_Entity_Prefix .. entityName ,
-					tooltip = { "SICore.自动填充-窗口-插入燃料-实体-空-提示" , entityName } ,
+					tooltip = { "SIAutoInsert.自动填充-窗口-插入燃料-实体-空-提示" , entityName } ,
 					elem_type = "entity" ,
 					entity = SIConstants_Core.raw.Entities.IconEmpty ,
 					elem_filters = entityFilter ,
-					style = SIConstants_Core.raw.Styles.AutoInsert_ListChooser
+					style = SIConstants_AutoInsert.raw.Styles.AutoInsert_ListChooser
 				}
-				local subList = list.add{ type = "table" , column_count = 5 , style = SIConstants_Core.raw.Styles.AutoInsert_SelectList }
+				local subList = list.add{ type = "table" , column_count = 5 , style = SIConstants_AutoInsert.raw.Styles.AutoInsert_SelectList }
 				local fuelFilter = SIUtils.table.deepcopy( SIAutoInsert.InsertFuel_Item_Filters )
 				table.insert( fuelFilter ,
 				{
@@ -852,13 +853,13 @@ SIAutoInsert =
 					if itemName then
 						local itemPrototype = prototypes.item[itemName]
 						if itemPrototype then
-							itemTooltip = { "SICore.自动填充-窗口-插入燃料-物品-提示" , itemPrototype.localised_name }
+							itemTooltip = { "SIAutoInsert.自动填充-窗口-插入燃料-物品-提示" , itemPrototype.localised_name }
 						else
-							itemTooltip = { "SICore.自动填充-窗口-插入燃料-物品-空-提示" , itemName }
+							itemTooltip = { "SIAutoInsert.自动填充-窗口-插入燃料-物品-空-提示" , itemName }
 							itemName = SIConstants_Core.raw.Items.IconEmpty
 						end
 					else
-						itemTooltip = { "SICore.自动填充-窗口-插入燃料-物品-选择-提示" }
+						itemTooltip = { "SIAutoInsert.自动填充-窗口-插入燃料-物品-选择-提示" }
 					end
 					subList.add
 					{
@@ -868,12 +869,12 @@ SIAutoInsert =
 						elem_type = "item" ,
 						item = itemName ,
 						elem_filters = fuelFilter ,
-						style = SIConstants_Core.raw.Styles.AutoInsert_ListChooser
+						style = SIConstants_AutoInsert.raw.Styles.AutoInsert_ListChooser
 					}
-					subList.add{ type = "flow" , direction = "horizontal" , style = SIConstants_Core.raw.Styles.AutoInsert_ListEmptyFlow }
-					subList.add{ type = "label" , caption = { "SICore.自动填充-窗口-插入燃料-数量" } , tooltip = { "SICore.自动填充-窗口-插入燃料-数量-提示" } , style = SIConstants_Core.raw.Styles.AutoInsert_ListLabel }
-					subList.add{ type = "textfield" , name = SIAutoInsert.Names.InsertFuel_Count_Prefix .. itemDataIndex .. "_" .. entityName , text = tostring( itemData.Count or 1 ) , numeric = true , tooltip = { "SICore.自动填充-窗口-插入燃料-数量-提示" } , style = SIConstants_Core.raw.Styles.AutoInsert_ListText }
-					subList.add{ type = "flow" , direction = "horizontal" , style = SIConstants_Core.raw.Styles.AutoInsert_ListEmptyFlow }
+					subList.add{ type = "flow" , direction = "horizontal" , style = SIConstants_AutoInsert.raw.Styles.AutoInsert_ListEmptyFlow }
+					subList.add{ type = "label" , caption = { "SIAutoInsert.自动填充-窗口-插入燃料-数量" } , tooltip = { "SIAutoInsert.自动填充-窗口-插入燃料-数量-提示" } , style = SIConstants_AutoInsert.raw.Styles.AutoInsert_ListLabel }
+					subList.add{ type = "textfield" , name = SIAutoInsert.Names.InsertFuel_Count_Prefix .. itemDataIndex .. "_" .. entityName , text = tostring( itemData.Count or 1 ) , numeric = true , tooltip = { "SIAutoInsert.自动填充-窗口-插入燃料-数量-提示" } , style = SIConstants_AutoInsert.raw.Styles.AutoInsert_ListText }
+					subList.add{ type = "flow" , direction = "horizontal" , style = SIConstants_AutoInsert.raw.Styles.AutoInsert_ListEmptyFlow }
 				end
 			end
 		end
@@ -881,16 +882,16 @@ SIAutoInsert =
 		{
 			type = "choose-elem-button" ,
 			name = SIAutoInsert.Names.InsertFuel_Entity_Prefix ,
-			tooltip = { "SICore.自动填充-窗口-插入燃料-实体-选择-提示" } ,
+			tooltip = { "SIAutoInsert.自动填充-窗口-插入燃料-实体-选择-提示" } ,
 			elem_type = "entity" ,
 			entity = nil ,
 			elem_filters = entityFilter ,
-			style = SIConstants_Core.raw.Styles.AutoInsert_ListChooser
+			style = SIConstants_AutoInsert.raw.Styles.AutoInsert_ListChooser
 		}
 	end ,
 	FreshPage_InsertAmmo = function( settings , tabSettings , elements )
 		-- 更新说明
-		elements.InsertAmmo_Enable.caption = { "SICore.自动填充-窗口-插入弹药-启用" , { SITable.Size( tabSettings.InsertAmmo.List ) > 0 and "SICore.自动填充-窗口-启用-已设置" or "SICore.自动填充-窗口-启用-未设置" } }
+		elements.InsertAmmo_Enable.caption = { "SIAutoInsert.自动填充-窗口-插入弹药-启用" , { SITable.Size( tabSettings.InsertAmmo.List ) > 0 and "SIAutoInsert.自动填充-窗口-启用-已设置" or "SIAutoInsert.自动填充-窗口-启用-未设置" } }
 		-- 清空列表
 		local list = elements.InsertAmmo_List
 		list.clear()
@@ -904,11 +905,11 @@ SIAutoInsert =
 				{
 					type = "choose-elem-button" ,
 					name = SIAutoInsert.Names.InsertAmmo_Entity_Prefix .. entityName ,
-					tooltip = { "SICore.自动填充-窗口-插入弹药-实体-提示" , entityPrototype.localised_name } ,
+					tooltip = { "SIAutoInsert.自动填充-窗口-插入弹药-实体-提示" , entityPrototype.localised_name } ,
 					elem_type = "entity" ,
 					entity = entityName ,
 					elem_filters = entityFilter ,
-					style = SIConstants_Core.raw.Styles.AutoInsert_ListChooser
+					style = SIConstants_AutoInsert.raw.Styles.AutoInsert_ListChooser
 				}
 				local type = entityPrototype.type
 				local maxAmmoSize = 0
@@ -923,7 +924,7 @@ SIAutoInsert =
 				elseif type == SICommon.Types.Entities.WagonArtillery then
 					maxAmmoSize = entityPrototype.get_inventory_size( defines.inventory.artillery_wagon_ammo )
 				end
-				local subList = list.add{ type = "table" , column_count = 6 , style = SIConstants_Core.raw.Styles.AutoInsert_SelectList }
+				local subList = list.add{ type = "table" , column_count = 6 , style = SIConstants_AutoInsert.raw.Styles.AutoInsert_SelectList }
 				for itemDataIndex = 1 , maxAmmoSize , 1 do
 					local itemData = itemDataList[itemDataIndex]
 					if not itemData then
@@ -938,7 +939,7 @@ SIAutoInsert =
 						if entityPrototype.attack_parameters.ammo_type and entityPrototype.attack_parameters.ammo_type.category then
 							table.insert( ammoCategories , entityPrototype.attack_parameters.ammo_type.category )
 						end
-						weaponTooltip = { "SICore.自动填充-窗口-插入弹药-武器-提示" , entityPrototype.localised_name }
+						weaponTooltip = { "SIAutoInsert.自动填充-窗口-插入弹药-武器-提示" , entityPrototype.localised_name }
 						weapon = prototypes.item[entityName] and entityName or SIConstants_Core.raw.Items.IconEmpty
 					else
 						local weaponPrototype = entityPrototype.indexed_guns[itemDataIndex]
@@ -947,10 +948,10 @@ SIAutoInsert =
 							table.insert( ammoCategories , weaponPrototype.attack_parameters.ammo_type.category )
 						end
 						if not weaponPrototype.name then
-							weaponTooltip = { "SICore.自动填充-窗口-插入弹药-武器-提示" , entityPrototype.localised_name }
+							weaponTooltip = { "SIAutoInsert.自动填充-窗口-插入弹药-武器-提示" , entityPrototype.localised_name }
 							weapon = SIConstants_Core.raw.Items.IconEmpty
 						else
-							weaponTooltip = { "SICore.自动填充-窗口-插入弹药-武器-提示" , weaponPrototype.localised_name }
+							weaponTooltip = { "SIAutoInsert.自动填充-窗口-插入弹药-武器-提示" , weaponPrototype.localised_name }
 							weapon = weaponPrototype.name
 						end
 					end
@@ -960,7 +961,7 @@ SIAutoInsert =
 						tooltip = weaponTooltip ,
 						elem_type = "item" ,
 						item = weapon ,
-						style = SIConstants_Core.raw.Styles.AutoInsert_ListChooser
+						style = SIConstants_AutoInsert.raw.Styles.AutoInsert_ListChooser
 					}
 					weaponChooser.enabled = false
 					local itemTooltip = nil
@@ -968,13 +969,13 @@ SIAutoInsert =
 					if itemName then
 						local itemPrototype = prototypes.item[itemName]
 						if itemPrototype then
-							itemTooltip = { "SICore.自动填充-窗口-插入弹药-物品-提示" , itemPrototype.localised_name }
+							itemTooltip = { "SIAutoInsert.自动填充-窗口-插入弹药-物品-提示" , itemPrototype.localised_name }
 						else
-							itemTooltip = { "SICore.自动填充-窗口-插入弹药-物品-空-提示" , itemName }
+							itemTooltip = { "SIAutoInsert.自动填充-窗口-插入弹药-物品-空-提示" , itemName }
 							itemName = SIConstants_Core.raw.Items.IconEmpty
 						end
 					else
-						itemTooltip = { "SICore.自动填充-窗口-插入弹药-物品-选择-提示" }
+						itemTooltip = { "SIAutoInsert.自动填充-窗口-插入弹药-物品-选择-提示" }
 					end
 					local filter = SIUtils.table.deepcopy( SIAutoInsert.InsertAmmo_ItemNamed_Filters )
 					for ammoName , ammoPrototype in pairs( prototypes.get_item_filtered( SIAutoInsert.InsertAmmo_Item_Filters ) ) do
@@ -995,33 +996,33 @@ SIAutoInsert =
 						elem_type = "item" ,
 						item = itemName ,
 						elem_filters = filter ,
-						style = SIConstants_Core.raw.Styles.AutoInsert_ListChooser
+						style = SIConstants_AutoInsert.raw.Styles.AutoInsert_ListChooser
 					}
-					subList.add{ type = "flow" , direction = "horizontal" , style = SIConstants_Core.raw.Styles.AutoInsert_ListEmptyFlow }
-					subList.add{ type = "label" , caption = { "SICore.自动填充-窗口-插入弹药-数量" } , tooltip = { "SICore.自动填充-窗口-插入弹药-数量-提示" } , style = SIConstants_Core.raw.Styles.AutoInsert_ListLabel }
-					subList.add{ type = "textfield" , name = SIAutoInsert.Names.InsertAmmo_Count_Prefix .. itemDataIndex .. "_" .. entityName , text = tostring( itemData.Count or 1 ) , numeric = true , tooltip = { "SICore.自动填充-窗口-插入弹药-数量-提示" } , style = SIConstants_Core.raw.Styles.AutoInsert_ListText }
-					subList.add{ type = "flow" , direction = "horizontal" , style = SIConstants_Core.raw.Styles.AutoInsert_ListEmptyFlow }
+					subList.add{ type = "flow" , direction = "horizontal" , style = SIConstants_AutoInsert.raw.Styles.AutoInsert_ListEmptyFlow }
+					subList.add{ type = "label" , caption = { "SIAutoInsert.自动填充-窗口-插入弹药-数量" } , tooltip = { "SIAutoInsert.自动填充-窗口-插入弹药-数量-提示" } , style = SIConstants_AutoInsert.raw.Styles.AutoInsert_ListLabel }
+					subList.add{ type = "textfield" , name = SIAutoInsert.Names.InsertAmmo_Count_Prefix .. itemDataIndex .. "_" .. entityName , text = tostring( itemData.Count or 1 ) , numeric = true , tooltip = { "SIAutoInsert.自动填充-窗口-插入弹药-数量-提示" } , style = SIConstants_AutoInsert.raw.Styles.AutoInsert_ListText }
+					subList.add{ type = "flow" , direction = "horizontal" , style = SIConstants_AutoInsert.raw.Styles.AutoInsert_ListEmptyFlow }
 				end
 			else
 				list.add
 				{
 					type = "choose-elem-button" ,
 					name = SIAutoInsert.Names.InsertAmmo_Entity_Prefix .. entityName ,
-					tooltip = { "SICore.自动填充-窗口-插入弹药-实体-空-提示" , entityName } ,
+					tooltip = { "SIAutoInsert.自动填充-窗口-插入弹药-实体-空-提示" , entityName } ,
 					elem_type = "entity" ,
 					entity = SIConstants_Core.raw.Entities.IconEmpty ,
 					elem_filters = entityFilter ,
-					style = SIConstants_Core.raw.Styles.AutoInsert_ListChooser
+					style = SIConstants_AutoInsert.raw.Styles.AutoInsert_ListChooser
 				}
-				local subList = list.add{ type = "table" , column_count = 6 , style = SIConstants_Core.raw.Styles.AutoInsert_SelectList }
+				local subList = list.add{ type = "table" , column_count = 6 , style = SIConstants_AutoInsert.raw.Styles.AutoInsert_SelectList }
 				for itemDataIndex , itemData in pairs( itemDataList ) do
 					local weaponChooser = subList.add
 					{
 						type = "choose-elem-button" ,
-						tooltip = { "SICore.自动填充-窗口-插入弹药-武器-空-提示" , entityName } ,
+						tooltip = { "SIAutoInsert.自动填充-窗口-插入弹药-武器-空-提示" , entityName } ,
 						elem_type = "item" ,
 						item = SIConstants_Core.raw.Items.IconEmpty ,
-						style = SIConstants_Core.raw.Styles.AutoInsert_ListChooser
+						style = SIConstants_AutoInsert.raw.Styles.AutoInsert_ListChooser
 					}
 					weaponChooser.enabled = false
 					local itemTooltip = nil
@@ -1029,13 +1030,13 @@ SIAutoInsert =
 					if itemName then
 						local itemPrototype = prototypes.item[itemName]
 						if itemPrototype then
-							itemTooltip = { "SICore.自动填充-窗口-插入弹药-物品-提示" , itemPrototype.localised_name }
+							itemTooltip = { "SIAutoInsert.自动填充-窗口-插入弹药-物品-提示" , itemPrototype.localised_name }
 						else
-							itemTooltip = { "SICore.自动填充-窗口-插入弹药-物品-空-提示" , itemName }
+							itemTooltip = { "SIAutoInsert.自动填充-窗口-插入弹药-物品-空-提示" , itemName }
 							itemName = SIConstants_Core.raw.Items.IconEmpty
 						end
 					else
-						itemTooltip = { "SICore.自动填充-窗口-插入弹药-物品-选择-提示" }
+						itemTooltip = { "SIAutoInsert.自动填充-窗口-插入弹药-物品-选择-提示" }
 					end
 					subList.add
 					{
@@ -1045,12 +1046,12 @@ SIAutoInsert =
 						elem_type = "item" ,
 						item = itemName ,
 						elem_filters = SIAutoInsert.InsertAmmo_Item_Filters ,
-						style = SIConstants_Core.raw.Styles.AutoInsert_ListChooser
+						style = SIConstants_AutoInsert.raw.Styles.AutoInsert_ListChooser
 					}
-					subList.add{ type = "flow" , direction = "horizontal" , style = SIConstants_Core.raw.Styles.AutoInsert_ListEmptyFlow }
-					subList.add{ type = "label" , caption = { "SICore.自动填充-窗口-插入弹药-数量" } , tooltip = { "SICore.自动填充-窗口-插入弹药-数量-提示" } , style = SIConstants_Core.raw.Styles.AutoInsert_ListLabel }
-					subList.add{ type = "textfield" , name = SIAutoInsert.Names.InsertAmmo_Count_Prefix .. itemDataIndex .. "_" .. entityName , text = tostring( itemData.Count or 1 ) , numeric = true , tooltip = { "SICore.自动填充-窗口-插入弹药-数量-提示" } , style = SIConstants_Core.raw.Styles.AutoInsert_ListText }
-					subList.add{ type = "flow" , direction = "horizontal" , style = SIConstants_Core.raw.Styles.AutoInsert_ListEmptyFlow }
+					subList.add{ type = "flow" , direction = "horizontal" , style = SIConstants_AutoInsert.raw.Styles.AutoInsert_ListEmptyFlow }
+					subList.add{ type = "label" , caption = { "SIAutoInsert.自动填充-窗口-插入弹药-数量" } , tooltip = { "SIAutoInsert.自动填充-窗口-插入弹药-数量-提示" } , style = SIConstants_AutoInsert.raw.Styles.AutoInsert_ListLabel }
+					subList.add{ type = "textfield" , name = SIAutoInsert.Names.InsertAmmo_Count_Prefix .. itemDataIndex .. "_" .. entityName , text = tostring( itemData.Count or 1 ) , numeric = true , tooltip = { "SIAutoInsert.自动填充-窗口-插入弹药-数量-提示" } , style = SIConstants_AutoInsert.raw.Styles.AutoInsert_ListText }
+					subList.add{ type = "flow" , direction = "horizontal" , style = SIConstants_AutoInsert.raw.Styles.AutoInsert_ListEmptyFlow }
 				end
 			end
 		end
@@ -1058,11 +1059,11 @@ SIAutoInsert =
 		{
 			type = "choose-elem-button" ,
 			name = SIAutoInsert.Names.InsertAmmo_Entity_Prefix ,
-			tooltip = { "SICore.自动填充-窗口-插入弹药-实体-选择-提示" } ,
+			tooltip = { "SIAutoInsert.自动填充-窗口-插入弹药-实体-选择-提示" } ,
 			elem_type = "entity" ,
 			entity = nil ,
 			elem_filters = entityFilter ,
-			style = SIConstants_Core.raw.Styles.AutoInsert_ListChooser
+			style = SIConstants_AutoInsert.raw.Styles.AutoInsert_ListChooser
 		}
 	end ,
 	-- ============================================================================================================================================
@@ -1387,7 +1388,7 @@ SIAutoInsert =
 		local settings = SIGlobal.GetPlayerSettings( SIAutoInsert.Settings.Name , playerIndex )
 		if settings.frame and settings.frame.valid then
 			local tabSettingsIndex = settings.tabSettingsIndex
-			settings.TabList[tabSettingsIndex].caption = { "SICore.自动填充-窗口-分页标题" , element.text }
+			settings.TabList[tabSettingsIndex].caption = { "SIAutoInsert.自动填充-窗口-分页标题" , element.text }
 			-- 保存 [设置名称] 复选框的值
 			local tabSettings = settings.TabSettingsList[tabSettingsIndex]
 			tabSettings.Name = element.text
@@ -1444,7 +1445,7 @@ SIAutoInsert =
 					return
 				end
 				if countList[selectEntityName] then
-					SIPrint.Warning( playerIndex , { "SICore.自动填充-提示-最大格子-已存在" , selectEntityName , prototypes.entity[selectEntityName].localised_name } )
+					SIPrint.Warning( playerIndex , { "SIAutoInsert.自动填充-提示-最大格子-已存在" , selectEntityName , prototypes.entity[selectEntityName].localised_name } )
 					element.elem_value = nil
 					return
 				end
@@ -1516,7 +1517,7 @@ SIAutoInsert =
 					return
 				end
 				if moduleList[selectEntityName] then
-					SIPrint.Warning( playerIndex , { "SICore.自动填充-提示-设置插件-已存在" , selectEntityName , prototypes.entity[selectEntityName].localised_name } )
+					SIPrint.Warning( playerIndex , { "SIAutoInsert.自动填充-提示-设置插件-已存在" , selectEntityName , prototypes.entity[selectEntityName].localised_name } )
 					element.elem_value = nil
 					return
 				end
@@ -1529,7 +1530,7 @@ SIAutoInsert =
 		local settings = SIGlobal.GetPlayerSettings( SIAutoInsert.Settings.Name , playerIndex )
 		if settings.frame and settings.frame.valid then
 			local selectItemName = element.elem_value
-			element.tooltip = selectItemName and { "SICore.自动填充-窗口-设置插件-物品-提示" , prototypes.item[selectItemName].localised_name } or { "SICore.自动填充-窗口-设置插件-物品-选择-提示" }
+			element.tooltip = selectItemName and { "SIAutoInsert.自动填充-窗口-设置插件-物品-提示" , prototypes.item[selectItemName].localised_name } or { "SIAutoInsert.自动填充-窗口-设置插件-物品-选择-提示" }
 			-- 保存 [设置插件-物品] 选择的物品
 			local key = name:sub( SIAutoInsert.Names.SetModule_Item_Position )
 			local location = key:find( "_" )
@@ -1575,7 +1576,7 @@ SIAutoInsert =
 					return
 				end
 				if itemDataList[selectEntityName] then
-					SIPrint.Warning( playerIndex , { "SICore.自动填充-提示-插入燃料-已存在" , selectEntityName , prototypes.entity[selectEntityName].localised_name } )
+					SIPrint.Warning( playerIndex , { "SIAutoInsert.自动填充-提示-插入燃料-已存在" , selectEntityName , prototypes.entity[selectEntityName].localised_name } )
 					element.elem_value = nil
 					return
 				end
@@ -1588,7 +1589,7 @@ SIAutoInsert =
 		local settings = SIGlobal.GetPlayerSettings( SIAutoInsert.Settings.Name , playerIndex )
 		if settings.frame and settings.frame.valid then
 			local selectItemName = element.elem_value
-			element.tooltip = selectItemName and { "SICore.自动填充-窗口-插入燃料-物品-提示" , prototypes.item[selectItemName].localised_name } or { "SICore.自动填充-窗口-插入燃料-物品-选择-提示" }
+			element.tooltip = selectItemName and { "SIAutoInsert.自动填充-窗口-插入燃料-物品-提示" , prototypes.item[selectItemName].localised_name } or { "SIAutoInsert.自动填充-窗口-插入燃料-物品-选择-提示" }
 			-- 保存 [插入燃料-物品] 选择的物品
 			local key = name:sub( SIAutoInsert.Names.InsertFuel_Item_Position )
 			local location = key:find( "_" )
@@ -1650,7 +1651,7 @@ SIAutoInsert =
 					return
 				end
 				if itemDataList[selectEntityName] then
-					SIPrint.Warning( playerIndex , { "SICore.自动填充-提示-插入弹药-已存在" , selectEntityName , prototypes.entity[selectEntityName].localised_name } )
+					SIPrint.Warning( playerIndex , { "SIAutoInsert.自动填充-提示-插入弹药-已存在" , selectEntityName , prototypes.entity[selectEntityName].localised_name } )
 					element.elem_value = nil
 					return
 				end
@@ -1663,7 +1664,7 @@ SIAutoInsert =
 		local settings = SIGlobal.GetPlayerSettings( SIAutoInsert.Settings.Name , playerIndex )
 		if settings.frame and settings.frame.valid then
 			local selectItemName = element.elem_value
-			element.tooltip = selectItemName and { "SICore.自动填充-窗口-插入弹药-物品-提示" , prototypes.item[selectItemName].localised_name } or { "SICore.自动填充-窗口-插入弹药-物品-选择-提示" }
+			element.tooltip = selectItemName and { "SIAutoInsert.自动填充-窗口-插入弹药-物品-提示" , prototypes.item[selectItemName].localised_name } or { "SIAutoInsert.自动填充-窗口-插入弹药-物品-选择-提示" }
 			-- 保存 [插入弹药-物品] 选择的物品
 			local key = name:sub( SIAutoInsert.Names.InsertAmmo_Item_Position )
 			local location = key:find( "_" )
@@ -1841,8 +1842,8 @@ SIAutoInsert.Toolbar =
 	ID = "SI核心-自动填充" ,
 	Name = "自动填充" ,
 	IconItemName = SIConstants_Core.raw.Items.IconAuto ,
-	LocalizedName = { "SICore.自动填充-工具栏-按钮" } ,
-	LocalizedDescription = { "SICore.自动填充-工具栏-提示" } ,
+	LocalizedName = { "SIAutoInsert.自动填充-工具栏-按钮" } ,
+	LocalizedDescription = { "SIAutoInsert.自动填充-工具栏-提示" } ,
 	ActionRemoteInterfaceID = SIAutoInsert.InterfaceID ,
 	ActionRemoteFunctionName = "OpenFrameByPlayerIndex" ,
 	Permission = SIPermission.PermissionIDs.AutoInsert ,
@@ -1851,7 +1852,7 @@ SIAutoInsert.Toolbar =
 SIAutoInsert.SettingsData =
 {
 	ID = "SI核心-自动填充" ,
-	Tooltip = { "SICore.自动填充-导出设置-提示" } ,
+	Tooltip = { "SIAutoInsert.自动填充-导出设置-提示" } ,
 	ImportRemoteInterfaceID = SIAutoInsert.InterfaceID ,
 	ImportRemoteFunctionName = "ImpoerSettingsData" ,
 	ExportRemoteInterfaceID = SIAutoInsert.InterfaceID ,

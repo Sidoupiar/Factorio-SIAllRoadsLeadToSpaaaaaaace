@@ -94,6 +94,7 @@ end
 -- DefaultPlayer  = 玩家设置使用的默认数据 , 此属性存在时忽略 Default 属性
 -- DefaultForce   = 阵营设置使用的默认数据 , 此属性存在时忽略 Default 属性
 -- InitFunction   = 初始化函数 , 并非是初始化设置时使用的函数 , 而是在 script.on_init 过程中调用的函数 , 有 1 个参数 , 参数 1 = 新创建的数据本体<br>
+-- ModifyFunction = 修改函数 , 并非是更改数据时使用的函数 , 而是在 script.on_configuration_changed 过程中调用的函数 , 有 1 个参数 , 参数 1 = 新创建的数据本体<br>
 -- CreateFunction = 每次根据给定的参数和默认数据初始化设置数据时 , 会调用一次 , 有 3 个参数 , 参数 1 = 设置的引用名称 , 参数 2 = 刚创建的设置数据子表 , 参数 3 = 1 为玩家设置 , 2 为阵营设置 , 0 为全局设置<br>
 -- ======================================================================
 function SIGlobal.CreateSettings( settingData )
@@ -104,6 +105,7 @@ function SIGlobal.CreateSettings( settingData )
 	if SIGlobal.NotAdd then
 		SIGlobal.NotAdd = false
 		SIEventBus.Init( SIGlobal.CreateOnInit )
+		SIEventBus.ConfigurationChange( SIGlobal.ModifyOnChange )
 	end
 	return SIGlobal
 end
@@ -355,6 +357,16 @@ end
 
 -- ======================================================================
 -- 框架内部函数 , 请勿在外部调用<br>
+-- 在 on_configuration_changed 时修改 global 的数据<br>
+-- ======================================================================
+function SIGlobal.ModifyOnChange()
+	for settingName , settingData in pairs( SIGlobal.SettingDataList ) do
+		SIGlobal.ModifyData( settingData )
+	end
+end
+
+-- ======================================================================
+-- 框架内部函数 , 请勿在外部调用<br>
 -- 在数据迁移时重新初始化 global 的数据时使用<br>
 -- ======================================================================
 function SIGlobal.CreateOnMigration()
@@ -381,6 +393,22 @@ function SIGlobal.InitData( settingData )
 		SIGlobal.Set( settingData.Name , settings )
 		if settingData.InitFunction then
 			settingData.InitFunction( settings )
+		end
+	end
+end
+
+-- ======================================================================
+-- 框架内部函数<br>
+-- 请勿在外部调用<br>
+-- 修改 setting 数据<br>
+-- ======================================================================
+-- settingData   = 设置数据<br>
+-- ======================================================================
+function SIGlobal.ModifyData( settingData )
+	if settingData.ModifyFunction then
+		local settings = SIGlobal.Get( settingData.Name )
+		if settings then
+			settingData.ModifyFunction( settings )
 		end
 	end
 end

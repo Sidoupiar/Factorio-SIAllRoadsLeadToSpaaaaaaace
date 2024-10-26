@@ -1,7 +1,8 @@
 SIMainbarSetting =
 {
 	ID = "MainbarSetting" ,
-	Name = "主面板设置管理" ,
+	Code = "MainbarSetting" ,
+	Show = "主面板设置管理" ,
 	InterfaceID = "SICore-MainbarSetting" ,
 	Names =
 	{

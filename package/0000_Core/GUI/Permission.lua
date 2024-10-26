@@ -1,7 +1,8 @@
 SIPermission =
 {
 	ID = "Permission" ,
-	Name = "权限管理" ,
+	Code = "Permission" ,
+	Show = "权限管理" ,
 	InterfaceID = "SICore-Permission" ,
 	Names =
 	{
@@ -184,41 +185,44 @@ SIPermission =
 		local lookList = lookView
 		.add{ type = "scroll-pane" , horizontal_scroll_policy = "never" , vertical_scroll_policy = "auto-and-reserve-space" , style = SIConstants_Core.raw.Styles.Common_ScrollPane }
 		.add{ type = "table" , column_count = 2 , style = SIConstants_Core.raw.Styles.Permission_Look_List }
-		for permissionID , permissionCode in pairs( globalSettings.DefaultPermissions ) do
-			if isMaster or permissionID ~= SIPermission.PermissionIDs.Master then
-				lookList.add{ type = "label" , caption = globalSettings.DefaultNames[permissionID] , style = SIConstants_Core.raw.Styles.Permission_Look_ListLabel }
-				local playerPermissionCode = settings.Permissions[permissionID]
-				local code = playerPermissionCode or permissionCode
-				local caption = code == SIPermission.PermissionCode.TRUE and { "SICore.权限管理-权限-有权限" } or { "SICore.权限管理-权限-无权限" }
-				local flow = lookList
-				.add{ type = "flow" , direction = "vertical" , style = SIConstants_Core.raw.Styles.Permission_Look_ListFlow }
-				.add{ type = "flow" , direction = "horizontal" , style = SIConstants_Core.raw.Styles.Permission_Look_ListFlowH }
-				flow.add{ type = "label" , caption = caption , style = SIConstants_Core.raw.Styles.Permission_Look_ListItem }
-				-- 绘制 物品白名单 和 物品黑名单
-				if permissionID == SIPermission.PermissionIDs.OutWhite then
-					local whiteList = settings.Lists.ItemWhiteList or globalSettings.DefaultLists.ItemWhiteList
-					if #whiteList < 1 then
-						flow.add{ type = "label" , caption = { "SICore.权限管理-权限-物品-无" } , style = SIConstants_Core.raw.Styles.Permission_Look_ListItemLong }
-					else
-						local subList = flow.add{ type = "table" , column_count = 14 , style = SIConstants_Core.raw.Styles.Permission_Look_ListSub }
-						for index , itemName in pairs( whiteList ) do
-							local item = prototypes.item[itemName]
-							subList.add{ type = "sprite-button" , sprite = "item/" .. itemName , tooltip = item.localised_name , style = SIConstants_Core.raw.Styles.Permission_ItemIconGreen }
+		for permissionID , permissionEnabled in pairs( globalSettings.EnabledPermissions ) do
+			if permissionEnabled == SIPermission.PermissionCode.TRUE then
+				if isMaster or permissionID ~= SIPermission.PermissionIDs.Master then
+					local permissionCode = globalSettings.DefaultPermissions[permissionID]
+					lookList.add{ type = "label" , caption = globalSettings.DefaultNames[permissionID] , style = SIConstants_Core.raw.Styles.Permission_Look_ListLabel }
+					local playerPermissionCode = settings.Permissions[permissionID]
+					local code = playerPermissionCode or permissionCode
+					local caption = code == SIPermission.PermissionCode.TRUE and { "SICore.权限管理-权限-有权限" } or { "SICore.权限管理-权限-无权限" }
+					local flow = lookList
+					.add{ type = "flow" , direction = "vertical" , style = SIConstants_Core.raw.Styles.Permission_Look_ListFlow }
+					.add{ type = "flow" , direction = "horizontal" , style = SIConstants_Core.raw.Styles.Permission_Look_ListFlowH }
+					flow.add{ type = "label" , caption = caption , style = SIConstants_Core.raw.Styles.Permission_Look_ListItem }
+					-- 绘制 物品白名单 和 物品黑名单
+					if permissionID == SIPermission.PermissionIDs.OutWhite then
+						local whiteList = settings.Lists.ItemWhiteList or globalSettings.DefaultLists.ItemWhiteList
+						if #whiteList < 1 then
+							flow.add{ type = "label" , caption = { "SICore.权限管理-权限-物品-无" } , style = SIConstants_Core.raw.Styles.Permission_Look_ListItemLong }
+						else
+							local subList = flow.add{ type = "table" , column_count = 14 , style = SIConstants_Core.raw.Styles.Permission_Look_ListSub }
+							for index , itemName in pairs( whiteList ) do
+								local item = prototypes.item[itemName]
+								subList.add{ type = "sprite-button" , sprite = "item/" .. itemName , tooltip = item.localised_name , style = SIConstants_Core.raw.Styles.Permission_ItemIconGreen }
+							end
 						end
-					end
-				elseif permissionID == SIPermission.PermissionIDs.OutBlack then
-					local blackList = settings.Lists.ItemBlackList or globalSettings.DefaultLists.ItemBlackList
-					if #blackList < 1 then
-						flow.add{ type = "label" , caption = { "SICore.权限管理-权限-物品-无" } , style = SIConstants_Core.raw.Styles.Permission_Look_ListItemLong }
-					else
-						local subList = flow.add{ type = "table" , column_count = 14 , style = SIConstants_Core.raw.Styles.Permission_Look_ListSub }
-						for index , itemName in pairs( blackList ) do
-							local item = prototypes.item[itemName]
-							subList.add{ type = "sprite-button" , sprite = "item/" .. itemName , tooltip = item.localised_name , style = SIConstants_Core.raw.Styles.Permission_ItemIconRed }
+					elseif permissionID == SIPermission.PermissionIDs.OutBlack then
+						local blackList = settings.Lists.ItemBlackList or globalSettings.DefaultLists.ItemBlackList
+						if #blackList < 1 then
+							flow.add{ type = "label" , caption = { "SICore.权限管理-权限-物品-无" } , style = SIConstants_Core.raw.Styles.Permission_Look_ListItemLong }
+						else
+							local subList = flow.add{ type = "table" , column_count = 14 , style = SIConstants_Core.raw.Styles.Permission_Look_ListSub }
+							for index , itemName in pairs( blackList ) do
+								local item = prototypes.item[itemName]
+								subList.add{ type = "sprite-button" , sprite = "item/" .. itemName , tooltip = item.localised_name , style = SIConstants_Core.raw.Styles.Permission_ItemIconRed }
+							end
 						end
+					elseif isAdmin then
+						flow.add{ type = "label" , caption = { playerPermissionCode and "SICore.权限管理-权限-使用设定值" or "SICore.权限管理-权限-使用默认值" } , style = SIConstants_Core.raw.Styles.Permission_Look_ListItemLong }
 					end
-				elseif isAdmin then
-					flow.add{ type = "label" , caption = { playerPermissionCode and "SICore.权限管理-权限-使用设定值" or "SICore.权限管理-权限-使用默认值" } , style = SIConstants_Core.raw.Styles.Permission_Look_ListItemLong }
 				end
 			end
 		end
@@ -251,46 +255,49 @@ SIPermission =
 			local globalList = globalFlow
 			.add{ type = "scroll-pane" , horizontal_scroll_policy = "never" , vertical_scroll_policy = "auto-and-reserve-space" , style = SIConstants_Core.raw.Styles.Common_ScrollPane }
 			.add{ type = "table" , column_count = 7 , style = SIConstants_Core.raw.Styles.Permission_Global_List }
-			for permissionID , permissionCode in pairs( globalSettings.DefaultPermissions ) do
-				if isMaster or permissionID ~= SIPermission.PermissionIDs.Master then
-					local isBasePermissionID = SIPermission.BasePermissionIDs[permissionID]
-					globalList.add
-					{
-						type = "label" ,
-						caption = { isBasePermissionID and "SICore.权限管理-窗口-全局-列表-原始编码-原始" or globalSettings.ExpandPermissions[permissionID] and "SICore.权限管理-窗口-全局-列表-原始编码-扩展" or "SICore.权限管理-窗口-全局-列表-原始编码-基础" , globalSettings.DefaultNames[permissionID] } ,
-						tooltip = { "SICore.权限管理-窗口-全局-列表-原始编码-提示" , permissionID , globalSettings.PermissionTooltips[permissionID] } ,
-						style = SIConstants_Core.raw.Styles.Permission_Global_ListLabelHead
-					}
-					-- 单选
-					settings.data.global.radios[permissionID] =
-					{
-						[SIPermission.PermissionElementCode.TRUE] = globalList
+			for permissionID , permissionEnabled in pairs( globalSettings.EnabledPermissions ) do
+				if permissionEnabled == SIPermission.PermissionCode.TRUE then
+					if isMaster or permissionID ~= SIPermission.PermissionIDs.Master then
+						local permissionCode = globalSettings.DefaultPermissions[permissionID]
+						local isBasePermissionID = SIPermission.BasePermissionIDs[permissionID]
+						globalList.add
+						{
+							type = "label" ,
+							caption = { isBasePermissionID and "SICore.权限管理-窗口-全局-列表-原始编码-原始" or globalSettings.ExpandPermissions[permissionID] and "SICore.权限管理-窗口-全局-列表-原始编码-扩展" or "SICore.权限管理-窗口-全局-列表-原始编码-基础" , globalSettings.DefaultNames[permissionID] } ,
+							tooltip = { "SICore.权限管理-窗口-全局-列表-原始编码-提示" , permissionID , globalSettings.PermissionTooltips[permissionID] } ,
+							style = SIConstants_Core.raw.Styles.Permission_Global_ListLabelHead
+						}
+						-- 单选
+						settings.data.global.radios[permissionID] =
+						{
+							[SIPermission.PermissionElementCode.TRUE] = globalList
+							.add{ type = "flow" , direction = "vertical" , style = SIConstants_Core.raw.Styles.Permission_Global_ListRadioFlow }
+							.add{ type = "radiobutton" , name = SIPermission.Names.GlobalRadioPrefix .. SIPermission.PermissionElementCode.TRUE .. permissionID , state = permissionCode == SIPermission.PermissionCode.TRUE , tooltip = { "SICore.权限管理-窗口-全局-列表-权限启用-提示" } , style = SIConstants_Core.raw.Styles.Common_RadioGreen } ,
+							[SIPermission.PermissionElementCode.FALSE] = globalList
+							.add{ type = "flow" , direction = "vertical" , style = SIConstants_Core.raw.Styles.Permission_Global_ListRadioFlow }
+							.add{ type = "radiobutton" , name = SIPermission.Names.GlobalRadioPrefix .. SIPermission.PermissionElementCode.FALSE .. permissionID , state = permissionCode == SIPermission.PermissionCode.FALSE , tooltip = { "SICore.权限管理-窗口-全局-列表-权限禁用-提示" } , style = SIConstants_Core.raw.Styles.Common_RadioRed }
+						}
+						settings.data.global.texts[permissionID] = {}
+						local textList = settings.data.global.texts[permissionID]
+						-- 名称
+						local name = playerGlobalSettings.DefaultNames[permissionID]
+						local isNameLocal = SITools.IsTable( name )
+						textList.name = globalList.add{ type = "textfield" , text = isNameLocal and name[1] or name , tooltip = { "SICore.权限管理-窗口-全局-列表-显示名称-提示" } , style = SIConstants_Core.raw.Styles.Permission_Global_ListText }
+						textList.nameLocal = globalList
 						.add{ type = "flow" , direction = "vertical" , style = SIConstants_Core.raw.Styles.Permission_Global_ListRadioFlow }
-						.add{ type = "radiobutton" , name = SIPermission.Names.GlobalRadioPrefix .. SIPermission.PermissionElementCode.TRUE .. permissionID , state = permissionCode == SIPermission.PermissionCode.TRUE , tooltip = { "SICore.权限管理-窗口-全局-列表-权限启用-提示" } , style = SIConstants_Core.raw.Styles.Common_RadioGreen } ,
-						[SIPermission.PermissionElementCode.FALSE] = globalList
-						.add{ type = "flow" , direction = "vertical" , style = SIConstants_Core.raw.Styles.Permission_Global_ListRadioFlow }
-						.add{ type = "radiobutton" , name = SIPermission.Names.GlobalRadioPrefix .. SIPermission.PermissionElementCode.FALSE .. permissionID , state = permissionCode == SIPermission.PermissionCode.FALSE , tooltip = { "SICore.权限管理-窗口-全局-列表-权限禁用-提示" } , style = SIConstants_Core.raw.Styles.Common_RadioRed }
-					}
-					settings.data.global.texts[permissionID] = {}
-					local textList = settings.data.global.texts[permissionID]
-					-- 名称
-					local name = playerGlobalSettings.DefaultNames[permissionID]
-					local isNameLocal = SITools.IsTable( name )
-					textList.name = globalList.add{ type = "textfield" , text = isNameLocal and name[1] or name , tooltip = { "SICore.权限管理-窗口-全局-列表-显示名称-提示" } , style = SIConstants_Core.raw.Styles.Permission_Global_ListText }
-					textList.nameLocal = globalList
-					.add{ type = "flow" , direction = "vertical" , style = SIConstants_Core.raw.Styles.Permission_Global_ListRadioFlow }
-					.add{ type = "checkbox" , state = isNameLocal , tooltip = { "SICore.权限管理-窗口-全局-列表-名称本地化字符串-提示" } , style = SIConstants_Core.raw.Styles.Permission_Global_ListCheck }
-					-- 信息
-					if isBasePermissionID then
-						globalList.add{ type = "label" , caption = { "SICore.权限管理-原版权限" } , style = SIConstants_Core.raw.Styles.Permission_Global_ListLabel }
-						globalList.add{ type = "flow" , direction = "vertical" , style = SIConstants_Core.raw.Styles.Permission_Global_ListRadioFlow }
-					else
-						local message = playerGlobalSettings.DefaultMessages[permissionID]
-						local isMessageLocal = SITools.IsTable( message )
-						textList.message = globalList.add{ type = "textfield" , text = isMessageLocal and message[1] or message , tooltip = { "SICore.权限管理-窗口-全局-列表-提示信息-提示" } , style = SIConstants_Core.raw.Styles.Permission_Global_ListText }
-						textList.messageLocal = globalList
-						.add{ type = "flow" , direction = "vertical" , style = SIConstants_Core.raw.Styles.Permission_Global_ListRadioFlow }
-						.add{ type = "checkbox" , state = isMessageLocal , tooltip = { "SICore.权限管理-窗口-全局-列表-信息本地化字符串-提示" } , style = SIConstants_Core.raw.Styles.Permission_Global_ListCheck }
+						.add{ type = "checkbox" , state = isNameLocal , tooltip = { "SICore.权限管理-窗口-全局-列表-名称本地化字符串-提示" } , style = SIConstants_Core.raw.Styles.Permission_Global_ListCheck }
+						-- 信息
+						if isBasePermissionID then
+							globalList.add{ type = "label" , caption = { "SICore.权限管理-原版权限" } , style = SIConstants_Core.raw.Styles.Permission_Global_ListLabel }
+							globalList.add{ type = "flow" , direction = "vertical" , style = SIConstants_Core.raw.Styles.Permission_Global_ListRadioFlow }
+						else
+							local message = playerGlobalSettings.DefaultMessages[permissionID]
+							local isMessageLocal = SITools.IsTable( message )
+							textList.message = globalList.add{ type = "textfield" , text = isMessageLocal and message[1] or message , tooltip = { "SICore.权限管理-窗口-全局-列表-提示信息-提示" } , style = SIConstants_Core.raw.Styles.Permission_Global_ListText }
+							textList.messageLocal = globalList
+							.add{ type = "flow" , direction = "vertical" , style = SIConstants_Core.raw.Styles.Permission_Global_ListRadioFlow }
+							.add{ type = "checkbox" , state = isMessageLocal , tooltip = { "SICore.权限管理-窗口-全局-列表-信息本地化字符串-提示" } , style = SIConstants_Core.raw.Styles.Permission_Global_ListCheck }
+						end
 					end
 				end
 			end
@@ -469,19 +476,22 @@ SIPermission =
 			local listPermissionScroll = checkFlow21.add{ type = "scroll-pane" , horizontal_scroll_policy = "never" , vertical_scroll_policy = "auto-and-reserve-space" , style = SIConstants_Core.raw.Styles.Common_ScrollPane }
 			local listPermission = listPermissionScroll.add{ type = "table" , column_count = 1 , style = SIConstants_Core.raw.Styles.Permission_Check_ListPermission }
 			local currentPermissionButton = nil
-			for permissionID , permissionCode in pairs( globalSettings.DefaultPermissions ) do
-				if isMaster or permissionID ~= SIPermission.PermissionIDs.Master then
-					local button = listPermission.add
-					{
-						type = "button" ,
-						name = SIPermission.Names.CheckItemPrefix .. permissionID ,
-						caption = { SIPermission.BasePermissionIDs[permissionID] and "SICore.权限管理-窗口-查询-列表-原始编码-原始" or globalSettings.ExpandPermissions[permissionID] and "SICore.权限管理-窗口-查询-列表-原始编码-扩展" or "SICore.权限管理-窗口-查询-列表-原始编码-基础" , globalSettings.DefaultNames[permissionID] , { permissionCode == SIPermission.PermissionCode.TRUE and "SICore.权限管理-权限-有权限" or "SICore.权限管理-权限-无权限" } } ,
-						tooltip = { "SICore.权限管理-窗口-查询-列表-原始编码-提示" , permissionID , globalSettings.PermissionTooltips[permissionID] } ,
-						style = SIConstants_Core.raw.Styles.Permission_Check_ListItemPermission
-					}
-					if permissionID == settings.data.check.permissionID then
-						button.enabled = false
-						currentPermissionButton = button
+			for permissionID , permissionEnabled in pairs( globalSettings.EnabledPermissions ) do
+				if permissionEnabled == SIPermission.PermissionCode.TRUE then
+					if isMaster or permissionID ~= SIPermission.PermissionIDs.Master then
+						local permissionCode = globalSettings.DefaultPermissions[permissionID]
+						local button = listPermission.add
+						{
+							type = "button" ,
+							name = SIPermission.Names.CheckItemPrefix .. permissionID ,
+							caption = { SIPermission.BasePermissionIDs[permissionID] and "SICore.权限管理-窗口-查询-列表-原始编码-原始" or globalSettings.ExpandPermissions[permissionID] and "SICore.权限管理-窗口-查询-列表-原始编码-扩展" or "SICore.权限管理-窗口-查询-列表-原始编码-基础" , globalSettings.DefaultNames[permissionID] , { permissionCode == SIPermission.PermissionCode.TRUE and "SICore.权限管理-权限-有权限" or "SICore.权限管理-权限-无权限" } } ,
+							tooltip = { "SICore.权限管理-窗口-查询-列表-原始编码-提示" , permissionID , globalSettings.PermissionTooltips[permissionID] } ,
+							style = SIConstants_Core.raw.Styles.Permission_Check_ListItemPermission
+						}
+						if permissionID == settings.data.check.permissionID then
+							button.enabled = false
+							currentPermissionButton = button
+						end
 					end
 				end
 			end
@@ -522,29 +532,32 @@ SIPermission =
 		items.listBlack.clear()
 		local radios = settings.data.player.radios
 		local otherPlayerSettings = settings.data.player.current
-		for permissionID , globalPermissionCode in pairs( globalSettings.DefaultPermissions ) do
-			if isMaster or permissionID ~= SIPermission.PermissionIDs.Master then
-				local permissionCode = otherPlayerSettings.Permissions[permissionID]
-				items.listPermission.add
-				{
-					type = "label" ,
-					caption = { SIPermission.BasePermissionIDs[permissionID] and "SICore.权限管理-窗口-玩家-列表-原始编码-原始" or globalSettings.ExpandPermissions[permissionID] and "SICore.权限管理-窗口-玩家-列表-原始编码-扩展" or "SICore.权限管理-窗口-玩家-列表-原始编码-基础" , globalSettings.DefaultNames[permissionID] , { globalPermissionCode == SIPermission.PermissionCode.TRUE and "SICore.权限管理-权限-有权限" or "SICore.权限管理-权限-无权限" } } ,
-					tooltip = { "SICore.权限管理-窗口-玩家-列表-原始编码-提示" , permissionID , globalSettings.PermissionTooltips[permissionID] } ,
-					style = SIConstants_Core.raw.Styles.Permission_Player_ListLabelPermission
-				}
-				-- 单选
-				radios[permissionID] =
-				{
-					[SIPermission.PermissionElementCode.DEFAULT] = items.listPermission
-					.add{ type = "flow" , direction = "vertical" , style = SIConstants_Core.raw.Styles.Permission_Player_ListFlow }
-					.add{ type = "radiobutton" , name = SIPermission.Names.PlayerRadioPrefix .. SIPermission.PermissionElementCode.DEFAULT .. permissionID , state = permissionCode == nil , tooltip = { "SICore.权限管理-窗口-玩家-列表-权限默认-提示" } , style = SIConstants_Core.raw.Styles.Common_RadioBlue } ,
-					[SIPermission.PermissionElementCode.TRUE] = items.listPermission
-					.add{ type = "flow" , direction = "vertical" , style = SIConstants_Core.raw.Styles.Permission_Player_ListFlow }
-					.add{ type = "radiobutton" , name = SIPermission.Names.PlayerRadioPrefix .. SIPermission.PermissionElementCode.TRUE .. permissionID , state = permissionCode == SIPermission.PermissionCode.TRUE , tooltip = { "SICore.权限管理-窗口-玩家-列表-权限启用-提示" } , style = SIConstants_Core.raw.Styles.Common_RadioGreen } ,
-					[SIPermission.PermissionElementCode.FALSE] = items.listPermission
-					.add{ type = "flow" , direction = "vertical" , style = SIConstants_Core.raw.Styles.Permission_Player_ListFlow }
-					.add{ type = "radiobutton" , name = SIPermission.Names.PlayerRadioPrefix .. SIPermission.PermissionElementCode.FALSE .. permissionID , state = permissionCode == SIPermission.PermissionCode.FALSE , tooltip = { "SICore.权限管理-窗口-玩家-列表-权限禁用-提示" } , style = SIConstants_Core.raw.Styles.Common_RadioRed }
-				}
+		for permissionID , globalPermissionEnabled in pairs( globalSettings.EnabledPermissions ) do
+			if globalPermissionEnabled == SIPermission.PermissionCode.TRUE then
+				if isMaster or permissionID ~= SIPermission.PermissionIDs.Master then
+					local globalPermissionCode = globalSettings.DefaultPermissions[permissionID]
+					local permissionCode = otherPlayerSettings.Permissions[permissionID]
+					items.listPermission.add
+					{
+						type = "label" ,
+						caption = { SIPermission.BasePermissionIDs[permissionID] and "SICore.权限管理-窗口-玩家-列表-原始编码-原始" or globalSettings.ExpandPermissions[permissionID] and "SICore.权限管理-窗口-玩家-列表-原始编码-扩展" or "SICore.权限管理-窗口-玩家-列表-原始编码-基础" , globalSettings.DefaultNames[permissionID] , { globalPermissionCode == SIPermission.PermissionCode.TRUE and "SICore.权限管理-权限-有权限" or "SICore.权限管理-权限-无权限" } } ,
+						tooltip = { "SICore.权限管理-窗口-玩家-列表-原始编码-提示" , permissionID , globalSettings.PermissionTooltips[permissionID] } ,
+						style = SIConstants_Core.raw.Styles.Permission_Player_ListLabelPermission
+					}
+					-- 单选
+					radios[permissionID] =
+					{
+						[SIPermission.PermissionElementCode.DEFAULT] = items.listPermission
+						.add{ type = "flow" , direction = "vertical" , style = SIConstants_Core.raw.Styles.Permission_Player_ListFlow }
+						.add{ type = "radiobutton" , name = SIPermission.Names.PlayerRadioPrefix .. SIPermission.PermissionElementCode.DEFAULT .. permissionID , state = permissionCode == nil , tooltip = { "SICore.权限管理-窗口-玩家-列表-权限默认-提示" } , style = SIConstants_Core.raw.Styles.Common_RadioBlue } ,
+						[SIPermission.PermissionElementCode.TRUE] = items.listPermission
+						.add{ type = "flow" , direction = "vertical" , style = SIConstants_Core.raw.Styles.Permission_Player_ListFlow }
+						.add{ type = "radiobutton" , name = SIPermission.Names.PlayerRadioPrefix .. SIPermission.PermissionElementCode.TRUE .. permissionID , state = permissionCode == SIPermission.PermissionCode.TRUE , tooltip = { "SICore.权限管理-窗口-玩家-列表-权限启用-提示" } , style = SIConstants_Core.raw.Styles.Common_RadioGreen } ,
+						[SIPermission.PermissionElementCode.FALSE] = items.listPermission
+						.add{ type = "flow" , direction = "vertical" , style = SIConstants_Core.raw.Styles.Permission_Player_ListFlow }
+						.add{ type = "radiobutton" , name = SIPermission.Names.PlayerRadioPrefix .. SIPermission.PermissionElementCode.FALSE .. permissionID , state = permissionCode == SIPermission.PermissionCode.FALSE , tooltip = { "SICore.权限管理-窗口-玩家-列表-权限禁用-提示" } , style = SIConstants_Core.raw.Styles.Common_RadioRed }
+					}
+				end
 			end
 		end
 		for index , itemName in pairs( otherPlayerSettings.Lists.ItemWhiteList ) do
@@ -681,7 +694,7 @@ SIPermission =
 		local playerSettingsList = SIGlobal.GetAllPlayerSettings( SIPermission.Settings.Name )
 		globalSettings.DefaultLists.ItemWhiteList = SIUtils.table.deepcopy( playerGlobalSettings.DefaultLists.ItemWhiteList )
 		globalSettings.DefaultLists.ItemBlackList = SIUtils.table.deepcopy( playerGlobalSettings.DefaultLists.ItemBlackList )
-		for permissionID , permissionCode in pairs( globalSettings.DefaultPermissions ) do
+		for permissionID , permissionCode in pairs( globalSettings.EnabledPermissions ) do
 			local inputActionName = SIPermission.BasePermissionIDs[permissionID]
 			local radioList = settings.data.global.radios[permissionID]
 			if radioList then
@@ -759,7 +772,7 @@ SIPermission =
 				currentOtherPlayerSettings.Lists.ItemBlackList = SIUtils.table.deepcopy( otherPlayerSettings.Lists.ItemBlackList )
 			end
 			local globalSettings = SIGlobal.GetGlobalSettings( SIPermission.Settings.Name )
-			for permissionID , permissionCode in pairs( globalSettings.DefaultPermissions ) do
+			for permissionID , permissionCode in pairs( globalSettings.EnabledPermissions ) do
 				local radioList = settings.data.player.radios[permissionID]
 				if radioList then
 					local oldPermissionCode = currentOtherPlayerSettings.Permissions[permissionID]
@@ -863,15 +876,15 @@ SIPermission =
 			ItemBlackList = {}   -- 物品黑名单 , 临时列表 , 关闭窗口时消失
 		}
 		settings.data.global.current = current
-		-- 去除由于版本更新新增的全局权限项目 , 这部分会在后续的接口中补充
-		local globalSettings = SIGlobal.GetGlobalSettings( SIPermission.Settings.Name )
-		local currentPermissions = SIUtils.table.deepcopy( current.DefaultPermissions )
-		for permissionID , permissionCode in pairs( current.DefaultPermissions ) do
-			if not globalSettings.DefaultPermissions[permissionID] then
-				currentPermissions[permissionID] = nil
+		-- 同步原版的权限
+		if SISettings.Startup.SICore.ControlOriginPermission() then
+			for basePermissionID , inputActionName in pairs( defines.input_action ) do
+				current.EnabledPermissions[basePermissionID] = SIPermission.PermissionCode.TRUE
+				current.DefaultPermissions[basePermissionID] = SIPermission.PermissionCode.TRUE
+				current.DefaultNames[basePermissionID] = { "SICore.权限名称-" .. basePermissionID }
+				current.PermissionTooltips[basePermissionID] = { "SICore.权限提示-" .. basePermissionID }
 			end
 		end
-		current.DefaultPermissions = currentPermissions
 		-- 根据设置更新控件
 		SIPermission.FreshList( settings )
 	end ,
@@ -1451,9 +1464,10 @@ SIPermission =
 			return
 		end
 		local globalSettings = SIGlobal.GetGlobalSettings( SIPermission.Settings.Name )
-		if globalSettings.DefaultPermissions[permissionID] then
+		if globalSettings.EnabledPermissions[permissionID] then
 			return
 		end
+		globalSettings.EnabledPermissions[permissionID] = SIPermission.PermissionCode.TRUE
 		globalSettings.DefaultPermissions[permissionID] = defaultValue or SIPermission.PermissionCode.TRUE
 		globalSettings.DefaultNames[permissionID] = showName and ( isLocalName and { showName } or showName ) or "未知"
 		globalSettings.DefaultMessages[permissionID] = message and ( isLocalMsg and { message } or message ) or "发生了未知错误"
@@ -1479,10 +1493,15 @@ SIPermission =
 			return
 		end
 		local globalSettings = SIGlobal.GetGlobalSettings( SIPermission.Settings.Name )
-		if not globalSettings.DefaultPermissions[permissionID] then
+		if not globalSettings.ExpandPermissions[permissionID] then
 			return
 		end
+		globalSettings.EnabledPermissions[permissionID] = nil
 		globalSettings.DefaultPermissions[permissionID] = nil
+		globalSettings.DefaultNames[permissionID] = nil
+		globalSettings.DefaultMessages[permissionID] = nil
+		globalSettings.PermissionTooltips[permissionID] = nil
+		globalSettings.ExpandPermissions[permissionID] = nil
 		for playerIndex , playerSettings in pairs( SIGlobal.GetAllPlayerSettings( SIPermission.Settings.Name ) ) do
 			if playerSettings.Permissions[permissionID] then
 				playerSettings.Permissions[permissionID] = nil
@@ -1636,6 +1655,26 @@ SIPermission.Settings =
 	Name = "Permission" ,
 	DefaultGlobal =
 	{
+		-- 启用的权限 , 只有这些权限才能显示和编辑
+		EnabledPermissions =
+		{
+			-- 管理员
+			Master           = SIPermission.PermissionCode.TRUE , -- 最高管理员 , 可以修改其他人的权限 , 允许任命管理员
+			Operator         = SIPermission.PermissionCode.TRUE , -- 管理员 , 可以修改其他人的权限 , 但是不能任命管理员
+			-- 以下仅对此 MOD 添加的功能生效
+			GameSpeed        = SIPermission.PermissionCode.TRUE , -- 可以调整游戏速度
+			DeleteMap        = SIPermission.PermissionCode.TRUE , -- 允许使用粉图圈东西
+			OreMap           = SIPermission.PermissionCode.TRUE , -- 允许使用黄图圈东西
+			RequestMap       = SIPermission.PermissionCode.TRUE , -- 允许使用紫图圈东西
+			AutoInsert       = SIPermission.PermissionCode.TRUE , -- 允许使用自动填充
+			OutWhite         = SIPermission.PermissionCode.TRUE , -- 不受物品白名单的影响
+			OutBlack         = SIPermission.PermissionCode.TRUE , -- 不受物品黑名单的影响
+			RPGGlobalSetting = SIPermission.PermissionCode.TRUE , -- 可以使用 RPG 全局属性
+			RPGPlayerStatus  = SIPermission.PermissionCode.TRUE , -- 可以使用 RPG 玩家属性
+			RPGPlayerSkill   = SIPermission.PermissionCode.TRUE , -- 可以使用 RPG 玩家技能
+			RPGExp           = SIPermission.PermissionCode.TRUE , -- 可以获得 RPG 经验
+			RPGSystem        = SIPermission.PermissionCode.TRUE   -- 可以使用 RPG 系统 , 与属性无关
+		} ,
 		-- 当玩家自己的权限不存在时 , 以此表为准
 		DefaultPermissions =
 		{
@@ -1777,16 +1816,59 @@ SIPermission.Settings =
 			ItemWhiteList = nil ,
 			ItemBlackList = nil
 		}
-	}
+	} ,
+	InitFunction = function( settings )
+		if SISettings.Startup.SICore.ControlOriginPermission() then
+			local defaultGlobalSettings = SIGlobal.GetGlobalSettings( SIPermission.Settings.Name )
+			for basePermissionID , inputActionName in pairs( defines.input_action ) do
+				defaultGlobalSettings.EnabledPermissions[basePermissionID] = SIPermission.PermissionCode.TRUE
+				defaultGlobalSettings.DefaultPermissions[basePermissionID] = SIPermission.PermissionCode.TRUE
+				defaultGlobalSettings.DefaultNames[basePermissionID] = { "SICore.权限名称-" .. basePermissionID }
+				defaultGlobalSettings.PermissionTooltips[basePermissionID] = { "SICore.权限提示-" .. basePermissionID }
+			end
+		end
+	end ,
+	ModifyFunction = function( settings )
+		local defaultGlobalSettings = SIGlobal.GetGlobalSettings( SIPermission.Settings.Name )
+		if not defaultGlobalSettings.EnabledPermissions then
+			defaultGlobalSettings.EnabledPermissions = SIUtils.table.deepcopy( SIPermission.Settings.DefaultGlobal.EnabledPermissions )
+		end
+		if SISettings.Startup.SICore.ControlOriginPermission() then
+			for basePermissionID , defultPermissionValue in pairs( defaultGlobalSettings.EnabledPermissions ) do
+				if not SIPermission.Settings.DefaultGlobal.EnabledPermissions[basePermissionID] and not SIPermission.BasePermissionIDs[basePermissionID] and not defaultGlobalSettings.ExpandPermissions[basePermissionID] then
+					defaultGlobalSettings.EnabledPermissions[basePermissionID] = nil
+					defaultGlobalSettings.DefaultPermissions[basePermissionID] = nil
+					defaultGlobalSettings.DefaultNames[basePermissionID] = nil
+					defaultGlobalSettings.DefaultMessages[basePermissionID] = nil
+					defaultGlobalSettings.PermissionTooltips[basePermissionID] = nil
+					defaultGlobalSettings.ExpandPermissions[basePermissionID] = nil
+				else
+					defaultGlobalSettings.EnabledPermissions[basePermissionID] = SIPermission.PermissionCode.TRUE
+				end
+			end
+			for basePermissionID , inputActionName in pairs( defines.input_action ) do
+				if not defaultGlobalSettings.EnabledPermissions[basePermissionID] then
+					defaultGlobalSettings.EnabledPermissions[basePermissionID] = SIPermission.PermissionCode.TRUE
+					defaultGlobalSettings.DefaultPermissions[basePermissionID] = SIPermission.PermissionCode.TRUE
+					defaultGlobalSettings.DefaultNames[basePermissionID] = { "SICore.权限名称-" .. basePermissionID }
+					defaultGlobalSettings.PermissionTooltips[basePermissionID] = { "SICore.权限提示-" .. basePermissionID }
+				end
+			end
+		else
+			for basePermissionID , defultPermissionValue in pairs( defaultGlobalSettings.EnabledPermissions ) do
+				if SIPermission.BasePermissionIDs[basePermissionID] then
+					defaultGlobalSettings.EnabledPermissions[basePermissionID] = SIPermission.PermissionCode.FALSE
+				end
+			end
+		end
+	end
 }
 
 -- 添加原版游戏自带的权限
-local defaultGlobalSettings = SIPermission.Settings.DefaultGlobal
-for basePermissionID , inputActionName in pairs( defines.input_action ) do
-	SIPermission.BasePermissionIDs[basePermissionID] = inputActionName
-	defaultGlobalSettings.DefaultPermissions[basePermissionID] = SIPermission.PermissionCode.TRUE
-	defaultGlobalSettings.DefaultNames[basePermissionID] = { "SICore.权限名称-" .. basePermissionID }
-	defaultGlobalSettings.PermissionTooltips[basePermissionID] = { "SICore.权限提示-" .. basePermissionID }
+if SISettings.Startup.SICore.ControlOriginPermission() then
+	for basePermissionID , inputActionName in pairs( defines.input_action ) do
+		SIPermission.BasePermissionIDs[basePermissionID] = inputActionName
+	end
 end
 
 -- 计算名称前缀的字符串长度

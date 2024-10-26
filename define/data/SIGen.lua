@@ -1200,7 +1200,8 @@ function SIGen.AutoIconItem( iconItemDataList )
 		SIGen
 		.New( SICommon.Types.Items.Item , itemID , alias ,
 		{
-			flags = { SICommon.Flags.Item.HideFromFuelTooltip } ,
+			hidden = true ,
+			flags = { SICommon.Flags.Items.HideFromBonusGUI , SICommon.Flags.Item.HideFromFuelTooltip } ,
 			stack_size = 1000 ,
 			default_request_amount = 1000 ,
 			fuel_category = SIConstants_Core.raw.Categories.Fuel.Special ,
@@ -1209,7 +1210,7 @@ function SIGen.AutoIconItem( iconItemDataList )
 			fuel_top_speed_multiplier = 0.3 ,
 			fuel_emissions_multiplier = 9000 ,
 			fuel_glow_color = { 0.70 , 0.70 , 0.70 } ,
-			burnt_result = SIConstants_Core.raw.Items.Candy ,
+			burnt_result = "wooden-chest" ,
 			place_result = nil ,
 			placed_as_equipment_result = nil ,
 			rocket_launch_products =
@@ -1236,7 +1237,8 @@ function SIGen.AutoIconItem( iconItemDataList )
 		end )
 		.New( SICommon.Types.Entities.SimpleOwner , itemID , alias ,
 		{
-			flags = { SICommon.Flags.Entity.PlaceablePlayer , SICommon.Flags.Entity.PlayerCreation , SICommon.Flags.Entity.HideAltInfo } ,
+			hidden = true ,
+			flags = { SICommon.Flags.Entity.PlaceablePlayer , SICommon.Flags.Entity.PlayerCreation , SICommon.Flags.Entity.HideAltInfo , SICommon.Flags.Entity.HideFromBonus } ,
 			minable =
 			{
 				mining_time = 1.0 ,
@@ -1319,6 +1321,7 @@ function SIGen.AutoIconItem( iconItemDataList )
 		end )
 		.New( SICommon.Types.Equipments.Battery , itemID , alias ,
 		{
+			hidden = true ,
 			take_result = itemPrototypeData.name ,
 			categories =
 			{

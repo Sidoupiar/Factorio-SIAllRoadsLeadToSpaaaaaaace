@@ -1,7 +1,8 @@
 SIMainbar =
 {
 	ID = "Mainbar" ,
-	Name = "主面板" ,
+	Code = "Mainbar" ,
+	Show = "主面板" ,
 	InterfaceID = "SICore-Mainbar" ,
 	Names =
 	{

@@ -1,7 +1,8 @@
 local constantsData =
 {
 	ID = "EmptyPack" ,
-	Name = "空的数据包" ,
+	Code = "EmptyPack" ,
+	Show = "空的数据包" ,
 	FileList =
 	{
 		[SIInit.StateCodeDefine.Data]           = { "1_data" } ,

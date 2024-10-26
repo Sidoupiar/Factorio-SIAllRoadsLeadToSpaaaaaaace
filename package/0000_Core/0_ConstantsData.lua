@@ -69,9 +69,9 @@ local constantsData =
 	-- ======================================================================
 	FileList =
 	{
-		[SIInit.StateCodeDefine.Data]           = { "1_data_base" , "1_data_debug" , "1_data_special" , "1_data_gui" } ,
+		[SIInit.StateCodeDefine.Data]           = { "1_data_base" , "1_data_special" , "1_data_gui" } ,
 		--[SIInit.StateCodeDefine.DataUpdates]    = { "2_data-updates" } ,
-		--[SIInit.StateCodeDefine.DataFinalFixes] = { "3_data-final-fixes" } ,
+		[SIInit.StateCodeDefine.DataFinalFixes] = { "3_data-final-fixes" } ,
 		[SIInit.StateCodeDefine.Control]        = { "4_control" }
 	} ,
 
@@ -160,7 +160,8 @@ local constantsData =
 		Settings =
 		{
 			ShowMainbar = { SICommon.SettingTypes.BOOL , SICommon.SettingAffectTypes.PerUser , true } ,
-			ShowHiddenEntity = { SICommon.SettingTypes.BOOL , SICommon.SettingAffectTypes.PerUser , false }
+			ShowHiddenEntity = { SICommon.SettingTypes.BOOL , SICommon.SettingAffectTypes.PerUser , false } ,
+			ControlOriginPermission = { SICommon.SettingTypes.BOOL , SICommon.SettingAffectTypes.StartUp , false }
 		} ,
 
 		-- ======================================================================
@@ -360,10 +361,6 @@ local constantsData =
 			Fuel =
 			{
 				Special = { Code = "Special" , Show = "特殊燃料" }
-			} ,
-			Module =
-			{
-				FishModule = { Code = "FishModule" , Show = "双鱼插件" }
 			}
 		}
 	} ,

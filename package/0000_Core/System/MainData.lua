@@ -1,7 +1,8 @@
 SIMainData =
 {
 	ID = "SIMainData" ,
-	Name = "核心数据" ,
+	Code = "SIMainData" ,
+	Show = "核心数据" ,
 	InterfaceID = "SICore-MainData" ,
 	-- 内部版本号与迁移脚本列表
 	InnerVersion = 8 ,

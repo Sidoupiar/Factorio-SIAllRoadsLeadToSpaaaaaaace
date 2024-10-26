@@ -1,7 +1,8 @@
 SIOreMap =
 {
 	ID = "OreMap" ,
-	Name = "黄图" ,
+	Code = "OreMap" ,
+	Show = "黄图" ,
 	InterfaceID = "SICore-OreMap" ,
 	Names =
 	{
@@ -57,7 +58,7 @@ SIOreMap =
 			{
 				Name         = SIOreMap.Names.Frame ,
 				Close        = SIOreMap.Names.Close ,
-				Style        = SIConstants_Core.raw.Styles.OreMap_Frame ,
+				Style        = SIConstants_ToolMap.raw.Styles.OreMap_Frame ,
 				Title        = { "SIToolMap.黄图-窗口-标题" } ,
 				TitleTooltip = { "SIToolMap.黄图-窗口-标题-提示" , { "item-name.infinity-chest" } , { "SIToolMapName.物品-黄图" } } ,
 				UseTooltip   = { "SIToolMap.黄图-窗口-使用-提示" , { "item-name.infinity-chest" } , { "SIToolMapName.物品-黄图" } } ,
@@ -65,25 +66,25 @@ SIOreMap =
 			} )
 			-- 第 1 层
 			local flow1 = frame.add{ type = "flow" , direction = "horizontal" , style = SIConstants_Core.raw.Styles.Common_FlowTop }
-			flow1.add{ type = "label" , caption = { "SIToolMap.黄图-窗口-说明" , { "item-name.infinity-chest" } , { "SIToolMapName.物品-黄图" } } , style = SIConstants_Core.raw.Styles.OreMap_LabelTop }
+			flow1.add{ type = "label" , caption = { "SIToolMap.黄图-窗口-说明" , { "item-name.infinity-chest" } , { "SIToolMapName.物品-黄图" } } , style = SIConstants_ToolMap.raw.Styles.OreMap_LabelTop }
 			-- 第 2 层
 			local flow2 = frame.add{ type = "flow" , direction = "vertical" , style = SIConstants_Core.raw.Styles.Common_FlowLeft }
 			flow2.add{ type = "line" , direction = "horizontal" }
-			flow2.add{ type = "label" , caption = { "SIToolMap.黄图-窗口-设置" } , style = SIConstants_Core.raw.Styles.OreMap_LabelTop }
+			flow2.add{ type = "label" , caption = { "SIToolMap.黄图-窗口-设置" } , style = SIConstants_ToolMap.raw.Styles.OreMap_LabelTop }
 			-- 第 2.1 层
 			local flow21 = flow2.add{ type = "flow" , direction = "horizontal" , style = SIConstants_Core.raw.Styles.Common_FlowCenterH }
-			settings.Elements.asDefault = flow21.add{ type = "checkbox" , name = SIOreMap.Names.AsDefault , state = settings.asDefault , caption = { "SIToolMap.黄图-窗口-设置-设为默认" } , tooltip = { "SIToolMap.黄图-窗口-设置-设为默认-提示" } , style = SIConstants_Core.raw.Styles.OreMap_Check }
+			settings.Elements.asDefault = flow21.add{ type = "checkbox" , name = SIOreMap.Names.AsDefault , state = settings.asDefault , caption = { "SIToolMap.黄图-窗口-设置-设为默认" } , tooltip = { "SIToolMap.黄图-窗口-设置-设为默认-提示" } , style = SIConstants_ToolMap.raw.Styles.OreMap_Check }
 			flow21.add{ type = "sprite" , sprite = "info" , tooltip = { "SIToolMap.黄图-窗口-设置-设为默认-提示" } }
 			-- 第 2.2 层
 			local flow22 = flow2.add{ type = "flow" , direction = "horizontal" , style = SIConstants_Core.raw.Styles.Common_FlowCenterH }
-			settings.Elements.totalMode = flow22.add{ type = "checkbox" , name = SIOreMap.Names.TotalMode , state = settings.totalMode , caption = { "SIToolMap.黄图-窗口-设置-总量模式" } , tooltip = { "SIToolMap.黄图-窗口-设置-总量模式-提示" } , style = SIConstants_Core.raw.Styles.OreMap_Check }
+			settings.Elements.totalMode = flow22.add{ type = "checkbox" , name = SIOreMap.Names.TotalMode , state = settings.totalMode , caption = { "SIToolMap.黄图-窗口-设置-总量模式" } , tooltip = { "SIToolMap.黄图-窗口-设置-总量模式-提示" } , style = SIConstants_ToolMap.raw.Styles.OreMap_Check }
 			flow22.add{ type = "sprite" , sprite = "info" , tooltip = { "SIToolMap.黄图-窗口-设置-总量模式-提示" } }
 			-- 第 2.3 层
 			local flow23 = flow2.add{ type = "flow" , direction = "horizontal" , style = SIConstants_Core.raw.Styles.Common_FlowCenterH }
-			local flow23Label = flow23.add{ type = "flow" , direction = "horizontal" , style = SIConstants_Core.raw.Styles.OreMap_FlowShort }
-			flow23Label.add{ type = "label" , caption = { "SIToolMap.黄图-窗口-设置-数量" } , tooltip = { "SIToolMap.黄图-窗口-设置-数量-提示" } , style = SIConstants_Core.raw.Styles.OreMap_LabelShort }
+			local flow23Label = flow23.add{ type = "flow" , direction = "horizontal" , style = SIConstants_ToolMap.raw.Styles.OreMap_FlowShort }
+			flow23Label.add{ type = "label" , caption = { "SIToolMap.黄图-窗口-设置-数量" } , tooltip = { "SIToolMap.黄图-窗口-设置-数量-提示" } , style = SIConstants_ToolMap.raw.Styles.OreMap_LabelShort }
 			flow23Label.add{ type = "sprite" , sprite = "info" , tooltip = { "SIToolMap.黄图-窗口-设置-数量-提示" } }
-			settings.Elements.count = flow23.add{ type = "textfield" , name = SIOreMap.Names.Count , text = tostring( settings.count or 0 ) , numeric = true , tooltip = { "SIToolMap.黄图-窗口-设置-数量-提示" } , style = SIConstants_Core.raw.Styles.OreMap_Number }
+			settings.Elements.count = flow23.add{ type = "textfield" , name = SIOreMap.Names.Count , text = tostring( settings.count or 0 ) , numeric = true , tooltip = { "SIToolMap.黄图-窗口-设置-数量-提示" } , style = SIConstants_ToolMap.raw.Styles.OreMap_Number }
 			-- 第 3 层
 			local flow3 = frame.add{ type = "flow" , direction = "vertical" , style = SIConstants_Core.raw.Styles.Common_FlowLeft }
 			flow3.add{ type = "line" , direction = "horizontal" }
@@ -91,16 +92,16 @@ SIOreMap =
 			local flow31 = flow3.add{ type = "flow" , direction = "horizontal" , style = SIConstants_Core.raw.Styles.Common_FlowTop }
 			flow31.add{ type = "button" , name = SIOreMap.Names.Clean , caption = { "SIToolMap.黄图-窗口-去除" } , tooltip = { "SIToolMap.黄图-窗口-去除-提示" } , style = SIConstants_Core.raw.Styles.Common_ButtonGray }
 			flow31.add{ type = "button" , name = SIOreMap.Names.Fresh , caption = { "SIToolMap.黄图-窗口-刷新" } , tooltip = { "SIToolMap.黄图-窗口-刷新-提示" } , style = SIConstants_Core.raw.Styles.Common_ButtonBlue }
-			flow31.add{ type = "button" , name = SIOreMap.Names.SortCount , caption = { "SIToolMap.黄图-窗口-数量排序" } , tooltip = { "SIToolMap.黄图-窗口-数量排序-提示" } , style = SIConstants_Core.raw.Styles.OreMap_ButtonGreen }
-			flow31.add{ type = "button" , name = SIOreMap.Names.SortName , caption = { "SIToolMap.黄图-窗口-名称排序" } , tooltip = { "SIToolMap.黄图-窗口-名称排序-提示" } , style = SIConstants_Core.raw.Styles.OreMap_ButtonGreen }
+			flow31.add{ type = "button" , name = SIOreMap.Names.SortCount , caption = { "SIToolMap.黄图-窗口-数量排序" } , tooltip = { "SIToolMap.黄图-窗口-数量排序-提示" } , style = SIConstants_ToolMap.raw.Styles.OreMap_ButtonGreen }
+			flow31.add{ type = "button" , name = SIOreMap.Names.SortName , caption = { "SIToolMap.黄图-窗口-名称排序" } , tooltip = { "SIToolMap.黄图-窗口-名称排序-提示" } , style = SIConstants_ToolMap.raw.Styles.OreMap_ButtonGreen }
 			-- 第 4 层
 			local flow4 = frame.add{ type = "flow" , direction = "vertical" , style = SIConstants_Core.raw.Styles.Common_FlowLeft }
 			flow4.add{ type = "line" , direction = "horizontal" }
 			-- 第 4.1 层
 			local flow41 = flow4.add{ type = "flow" , direction = "horizontal" , style = SIConstants_Core.raw.Styles.Common_TitleFlow }
-			flow41.add{ type = "label" , caption = { "SIToolMap.黄图-窗口-标题-选择" } , style = SIConstants_Core.raw.Styles.OreMap_ListTitleIcon }
-			flow41.add{ type = "label" , caption = { "SIToolMap.黄图-窗口-标题-名称" } , style = SIConstants_Core.raw.Styles.OreMap_ListTitleLong }
-			flow41.add{ type = "label" , caption = { "SIToolMap.黄图-窗口-标题-数量" } , style = SIConstants_Core.raw.Styles.OreMap_ListTitleLong }
+			flow41.add{ type = "label" , caption = { "SIToolMap.黄图-窗口-标题-选择" } , style = SIConstants_ToolMap.raw.Styles.OreMap_ListTitleIcon }
+			flow41.add{ type = "label" , caption = { "SIToolMap.黄图-窗口-标题-名称" } , style = SIConstants_ToolMap.raw.Styles.OreMap_ListTitleLong }
+			flow41.add{ type = "label" , caption = { "SIToolMap.黄图-窗口-标题-数量" } , style = SIConstants_ToolMap.raw.Styles.OreMap_ListTitleLong }
 			-- 第 5 层
 			settings.Elements.list = frame
 			.add{ type = "scroll-pane" , horizontal_scroll_policy = "never" , vertical_scroll_policy = "auto-and-reserve-space" , style = SIConstants_Core.raw.Styles.Common_ScrollPane }
@@ -110,7 +111,7 @@ SIOreMap =
 				local flow6 = frame.add{ type = "flow" , direction = "vertical" , style = SIConstants_Core.raw.Styles.Common_FlowRight }
 				flow6.add{ type = "line" , direction = "horizontal" }
 				-- 第 6.1 层
-				flow6.add{ type = "label" , caption = { "SIToolMap.黄图-窗口-地板-选择数量" , #settings.tiles } , style = SIConstants_Core.raw.Styles.OreMap_LabelBottom }
+				flow6.add{ type = "label" , caption = { "SIToolMap.黄图-窗口-地板-选择数量" , #settings.tiles } , style = SIConstants_ToolMap.raw.Styles.OreMap_LabelBottom }
 				-- 第 6.2 层
 				local flow61 = flow6.add{ type = "flow" , direction = "horizontal" , style = SIConstants_Core.raw.Styles.Common_FlowTop }
 				flow61.add{ type = "button" , name = SIOreMap.Names.Close , caption = { "SIToolMap.黄图-窗口-取消" } , tooltip = { "SIToolMap.黄图-窗口-取消-提示" } , style = SIConstants_Core.raw.Styles.Common_ButtonRed }
@@ -146,21 +147,21 @@ SIOreMap =
 		if list then
 			list.clear()
 			if SITable.Size( settings.oreData ) < 1 then
-				local button = list.add{ type = "sprite-button" , sprite = "item/" .. SIConstants_Core.raw.Items.IconEmpty , style = SIConstants_Core.raw.Styles.OreMap_ListIcon }
+				local button = list.add{ type = "sprite-button" , sprite = "item/" .. SIConstants_Core.raw.Items.IconEmpty , style = SIConstants_ToolMap.raw.Styles.OreMap_ListIcon }
 				button.enabled = false
-				list.add{ type = "label" , caption = { "SIToolMap.黄图-窗口-矿物-空的" } , style = SIConstants_Core.raw.Styles.OreMap_ListLabelLong }
-				list.add{ type = "label" , caption = { "SIToolMap.黄图-窗口-矿物-无限" } , style = SIConstants_Core.raw.Styles.OreMap_ListLabelLong }
+				list.add{ type = "label" , caption = { "SIToolMap.黄图-窗口-矿物-空的" } , style = SIConstants_ToolMap.raw.Styles.OreMap_ListLabelLong }
+				list.add{ type = "label" , caption = { "SIToolMap.黄图-窗口-矿物-无限" } , style = SIConstants_ToolMap.raw.Styles.OreMap_ListLabelLong }
 			else
 				for oreName , oreCount in pairs( settings.oreData ) do
 					if oreName == settings.selectedOreName then
-						local button = list.add{ type = "sprite-button" , sprite = "entity/" .. oreName , tooltip = { "SIToolMap.黄图-窗口-矿物-已选择-提示" } , style = SIConstants_Core.raw.Styles.OreMap_ListIcon }
+						local button = list.add{ type = "sprite-button" , sprite = "entity/" .. oreName , tooltip = { "SIToolMap.黄图-窗口-矿物-已选择-提示" } , style = SIConstants_ToolMap.raw.Styles.OreMap_ListIcon }
 						button.enabled = false
-						list.add{ type = "label" , caption = { "SIToolMap.黄图-窗口-矿物-选中" , prototypes.entity[oreName].localised_name } , style = SIConstants_Core.raw.Styles.OreMap_ListLabelLong }
-						list.add{ type = "label" , caption = { "SIToolMap.黄图-窗口-矿物-选中" , { "SIToolMap.黄图-窗口-矿物-数量" , oreCount } } , style = SIConstants_Core.raw.Styles.OreMap_ListLabelLong }
+						list.add{ type = "label" , caption = { "SIToolMap.黄图-窗口-矿物-选中" , prototypes.entity[oreName].localised_name } , style = SIConstants_ToolMap.raw.Styles.OreMap_ListLabelLong }
+						list.add{ type = "label" , caption = { "SIToolMap.黄图-窗口-矿物-选中" , { "SIToolMap.黄图-窗口-矿物-数量" , oreCount } } , style = SIConstants_ToolMap.raw.Styles.OreMap_ListLabelLong }
 					else
-						list.add{ type = "sprite-button" , name = SIOreMap.Names.IconNamePrefix .. oreName , sprite = "entity/" .. oreName , tooltip = { "SIToolMap.黄图-窗口-矿物-未选择-提示" } , style = SIConstants_Core.raw.Styles.OreMap_ListIcon }
-						list.add{ type = "label" , caption = prototypes.entity[oreName].localised_name , style = SIConstants_Core.raw.Styles.OreMap_ListLabelLong }
-						list.add{ type = "label" , caption = { "SIToolMap.黄图-窗口-矿物-数量" , oreCount } , style = SIConstants_Core.raw.Styles.OreMap_ListLabelLong }
+						list.add{ type = "sprite-button" , name = SIOreMap.Names.IconNamePrefix .. oreName , sprite = "entity/" .. oreName , tooltip = { "SIToolMap.黄图-窗口-矿物-未选择-提示" } , style = SIConstants_ToolMap.raw.Styles.OreMap_ListIcon }
+						list.add{ type = "label" , caption = prototypes.entity[oreName].localised_name , style = SIConstants_ToolMap.raw.Styles.OreMap_ListLabelLong }
+						list.add{ type = "label" , caption = { "SIToolMap.黄图-窗口-矿物-数量" , oreCount } , style = SIConstants_ToolMap.raw.Styles.OreMap_ListLabelLong }
 					end
 				end
 			end
@@ -498,7 +499,7 @@ SIOreMap.Toolbar =
 {
 	ID = "SI工具图-黄图" ,
 	Name = "黄图" ,
-	IconItemName = SIConstants_Core.raw.Items.OreMap ,
+	IconItemName = SIConstants_ToolMap.raw.Items.OreMap ,
 	LocalizedName = { "SIToolMap.黄图-工具栏-按钮" } ,
 	LocalizedDescription = { "SIToolMap.黄图-工具栏-提示" , { "item-name.infinity-chest" } , { "SIToolMapName.物品-黄图" } } ,
 	ActionRemoteInterfaceID = SIOreMap.InterfaceID ,
