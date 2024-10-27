@@ -405,10 +405,19 @@ end
 -- settingData   = 设置数据<br>
 -- ======================================================================
 function SIGlobal.ModifyData( settingData )
-	if settingData.ModifyFunction then
-		local settings = SIGlobal.Get( settingData.Name )
-		if settings then
-			settingData.ModifyFunction( settings )
+	local settings = SIGlobal.Get( settingData.Name )
+	if not settings then
+		settings =
+		{
+			Player = {} ,
+			Force = {}
+		}
+		SIGlobal.Set( settingData.Name , settings )
+		if settingData.InitFunction then
+			settingData.InitFunction( settings )
 		end
+	end
+	if settingData.ModifyFunction then
+		settingData.ModifyFunction( settings )
 	end
 end

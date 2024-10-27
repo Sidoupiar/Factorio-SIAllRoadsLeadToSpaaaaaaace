@@ -399,8 +399,9 @@ SIRPGPlayerSkill =
 			else
 				attackSlider.enabled = true
 				attackSlider.set_slider_minimum_maximum( 0 , attackMax )
-				attackSlider.slider_value = 0
-				attackSlider.slider_value = attackActive
+				if math.floor( attackSlider.slider_value ) ~= attackActive then
+					attackSlider.slider_value = attackActive
+				end
 				attackText.enabled = true
 			end
 			attackText.text = tostring( attackActive )
@@ -419,8 +420,9 @@ SIRPGPlayerSkill =
 			else
 				adventureSlider.enabled = true
 				adventureSlider.set_slider_minimum_maximum( 0 , adventureMax )
-				adventureSlider.slider_value = 0
-				adventureSlider.slider_value = adventureActive
+				if math.floor( adventureSlider.slider_value ) ~= adventureActive then
+					adventureSlider.slider_value = adventureActive
+				end
 				adventureText.enabled = true
 			end
 			adventureText.text = tostring( adventureActive )
@@ -439,8 +441,9 @@ SIRPGPlayerSkill =
 			else
 				craftSlider.enabled = true
 				craftSlider.set_slider_minimum_maximum( 0 , craftMax )
-				craftSlider.slider_value = 0
-				craftSlider.slider_value = craftActive
+				if math.floor( craftSlider.slider_value ) ~= craftActive then
+					craftSlider.slider_value = craftActive
+				end
 				craftText.enabled = true
 			end
 			craftText.text = tostring( craftActive )

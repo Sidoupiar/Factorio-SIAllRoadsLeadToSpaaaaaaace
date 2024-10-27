@@ -133,6 +133,7 @@ local PackageConfig =
 	-- ======================================================================
 	{
 		PackageName = "2000_RPGSystem" ,
+		Enabled = false ,
 		Requires =
 		{
 			"0000_Core"

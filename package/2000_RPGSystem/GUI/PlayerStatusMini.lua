@@ -46,12 +46,15 @@ SIRPGPlayerStatusMini =
 				-- 第 1 层
 				local flow1 = frame.add{ type = "flow" , direction = "horizontal" , style = SIConstants_RPGSystem.raw.Styles.PlayerStatusMini_Flow }
 				-- 第 1.1 层
-				local listLevel = flow1.add{ type = "table" , column_count = 2 , style = SIConstants_RPGSystem.raw.Styles.PlayerStatusMini_LevelList }
+				local listLevel = flow1.add{ type = "table" , column_count = 3 , style = SIConstants_RPGSystem.raw.Styles.PlayerStatusMini_LevelList }
 				status.levelCountAttack = listLevel.add{ type = "label" , style = SIConstants_RPGSystem.raw.Styles.PlayerStatusMini_LevelLabel }
+				status.levelPointAttack = listLevel.add{ type = "label" , style = SIConstants_RPGSystem.raw.Styles.PlayerStatusMini_LevelLabel }
 				status.levelProgressAttack = listLevel.add{ type = "progressbar" , style = SIConstants_RPGSystem.raw.Styles.PlayerStatusMini_ProgressRed }
 				status.levelCountAdventure = listLevel.add{ type = "label" , style = SIConstants_RPGSystem.raw.Styles.PlayerStatusMini_LevelLabel }
+				status.levelPointAdventure = listLevel.add{ type = "label" , style = SIConstants_RPGSystem.raw.Styles.PlayerStatusMini_LevelLabel }
 				status.levelProgressAdventure = listLevel.add{ type = "progressbar" , style = SIConstants_RPGSystem.raw.Styles.PlayerStatusMini_ProgressGreen }
 				status.levelCountCraft = listLevel.add{ type = "label" , style = SIConstants_RPGSystem.raw.Styles.PlayerStatusMini_LevelLabel }
+				status.levelPointCraft = listLevel.add{ type = "label" , style = SIConstants_RPGSystem.raw.Styles.PlayerStatusMini_LevelLabel }
 				status.levelProgressCraft = listLevel.add{ type = "progressbar" , style = SIConstants_RPGSystem.raw.Styles.PlayerStatusMini_ProgressCyan }
 				-- 第 1.2 层
 				local listButton = flow1.add{ type = "table" , column_count = 2 , style = SIConstants_RPGSystem.raw.Styles.PlayerStatusMini_ButtonList }
@@ -174,6 +177,9 @@ SIRPGPlayerStatusMini =
 			status.levelCountAttack = nil
 			status.levelCountAdventure = nil
 			status.levelCountCraft = nil
+			status.levelPointAttack = nil
+			status.levelPointAdventure = nil
+			status.levelPointCraft = nil
 			status.levelProgressAttack = nil
 			status.levelProgressAdventure = nil
 			status.levelProgressCraft = nil
@@ -207,18 +213,25 @@ SIRPGPlayerStatusMini =
 	FreshLevel = function( settings )
 		local status = settings.PlayerStatusMini
 		local exp = settings.EXP
+		local points = settings.Points
 		local attackExp = SITools.FormatNumber4( exp.AttackExp )
 		local adventureExp = SITools.FormatNumber4( exp.AdventureExp )
 		local craftExp = SITools.FormatNumber4( exp.CraftExp )
-		local tooltipAttack = { "SIRPGSystem.玩家属性迷你-窗口-经验等级-提示" , { "SIRPGSystem.经验-战斗" } , { "SIRPGSystem.经验-战斗-提示" } , exp.AttackLevel , attackExp , exp.AttackExpMax }
-		local tooltipAdventure = { "SIRPGSystem.玩家属性迷你-窗口-经验等级-提示" , { "SIRPGSystem.经验-探索" } , { "SIRPGSystem.经验-探索-提示" } , exp.AdventureLevel , adventureExp , exp.AdventureExpMax }
-		local tooltipCraft = { "SIRPGSystem.玩家属性迷你-窗口-经验等级-提示" , { "SIRPGSystem.经验-生存" } , { "SIRPGSystem.经验-生存-提示" } , exp.CraftLevel , craftExp , exp.CraftExpMax }
+		local pointAttackText = { "SIRPGSystem.玩家属性迷你-窗口-点数-战斗" , points.Current.Attack , points.Max.Attack }
+		local pointAdventureText = { "SIRPGSystem.玩家属性迷你-窗口-点数-探索" , points.Current.Adventure , points.Max.Adventure }
+		local pointCraftText = { "SIRPGSystem.玩家属性迷你-窗口-点数-生存" , points.Current.Craft , points.Max.Craft }
 		status.levelCountAttack.caption = { "SIRPGSystem.玩家属性迷你-窗口-经验等级-战斗" , exp.AttackLevel }
-		status.levelCountAttack.tooltip = tooltipAttack
+		status.levelCountAttack.tooltip = { "SIRPGSystem.玩家属性迷你-窗口-经验等级-提示" , { "SIRPGSystem.经验-战斗" } , { "SIRPGSystem.经验-战斗-提示" } , exp.AttackLevel , attackExp , exp.AttackExpMax }
 		status.levelCountAdventure.caption = { "SIRPGSystem.玩家属性迷你-窗口-经验等级-探索" , exp.AdventureLevel }
-		status.levelCountAdventure.tooltip = tooltipAdventure
+		status.levelCountAdventure.tooltip = { "SIRPGSystem.玩家属性迷你-窗口-经验等级-提示" , { "SIRPGSystem.经验-探索" } , { "SIRPGSystem.经验-探索-提示" } , exp.AdventureLevel , adventureExp , exp.AdventureExpMax }
 		status.levelCountCraft.caption = { "SIRPGSystem.玩家属性迷你-窗口-经验等级-生存" , exp.CraftLevel }
-		status.levelCountCraft.tooltip = tooltipCraft
+		status.levelCountCraft.tooltip = { "SIRPGSystem.玩家属性迷你-窗口-经验等级-提示" , { "SIRPGSystem.经验-生存" } , { "SIRPGSystem.经验-生存-提示" } , exp.CraftLevel , craftExp , exp.CraftExpMax }
+		status.levelPointAttack.caption = pointAttackText
+		status.levelPointAttack.tooltip = { "SIRPGSystem.玩家属性迷你-窗口-点数-提示" , { "SIRPGSystem.经验-战斗" } , { "SIRPGSystem.经验-战斗-提示" } , { "SIRPGSystem.点数-战斗" } , pointAttackText }
+		status.levelPointAdventure.caption = pointAdventureText
+		status.levelPointAdventure.tooltip = { "SIRPGSystem.玩家属性迷你-窗口-点数-提示" , { "SIRPGSystem.经验-探索" } , { "SIRPGSystem.经验-探索-提示" } , { "SIRPGSystem.点数-探索" } , pointAdventureText }
+		status.levelPointCraft.caption = pointCraftText
+		status.levelPointCraft.tooltip = { "SIRPGSystem.玩家属性迷你-窗口-点数-提示" , { "SIRPGSystem.经验-生存" } , { "SIRPGSystem.经验-生存-提示" } , { "SIRPGSystem.点数-生存" } , pointCraftText }
 		status.levelProgressAttack.value = exp.AttackExp / exp.AttackExpMax
 		status.levelProgressAttack.tooltip = { "SIRPGSystem.玩家属性迷你-窗口-经验-提示" , { "SIRPGSystem.经验-战斗" } , { "SIRPGSystem.经验-战斗-提示" } , attackExp , exp.AttackExpMax }
 		status.levelProgressAdventure.value = exp.AdventureExp / exp.AdventureExpMax

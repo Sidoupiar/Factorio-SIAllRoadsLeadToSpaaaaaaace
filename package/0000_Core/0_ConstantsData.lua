@@ -265,7 +265,7 @@ local constantsData =
 				SubOrder = "9999" ,
 				Subgroups =
 				{
-					Other = "其他"
+					Other = { Code = "Other" , Show = "其他" }
 				}
 			}
 		} ,

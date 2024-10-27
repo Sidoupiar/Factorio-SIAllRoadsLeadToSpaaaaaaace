@@ -18,7 +18,7 @@ local constantsData =
 				ConstantsDataCodeName = "SICore" ,
 				Subgroups =
 				{
-					EXP = "经验"
+					EXP = { Code = "EXP" , Show = "经验" }
 				}
 			}
 		}

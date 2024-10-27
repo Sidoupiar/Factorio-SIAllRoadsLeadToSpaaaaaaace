@@ -113,40 +113,44 @@ SIRPGPlayerStatus =
 			-- 第 5.1 层
 			local listAttack = flow5.add{ type = "table" , column_count = 6 , style = SIConstants_RPGSystem.raw.Styles.PlayerStatus_ValueList }
 			for valueAttackID , critData in pairs( SIRPGSystem.ValueCanCrit ) do
-				local valueChanceID = critData.Chance
-				local valueDamageID = critData.Damage
-				local valueAttackName = SIRPGSystem.ValueNames[valueAttackID]
-				local valueChanceName = SIRPGSystem.ValueNames[valueChanceID]
-				local valueDamageName = SIRPGSystem.ValueNames[valueDamageID]
-				local valueAttackTooltip = { "SIRPGSystem.玩家属性-窗口-数值-提示" , valueAttackName , SIRPGSystem.ValueTooltips[valueAttackID] }
-				local valueChanceTooltip = { "SIRPGSystem.玩家属性-窗口-数值-提示" , valueChanceName , SIRPGSystem.ValueTooltips[valueAttackID] }
-				local valueDamageTooltip = { "SIRPGSystem.玩家属性-窗口-数值-提示" , valueDamageName , SIRPGSystem.ValueTooltips[valueAttackID] }
-				status.ValueLabel[valueAttackID] = listAttack.add{ type = "label" , caption = valueAttackName , tooltip = valueAttackTooltip , style = SIConstants_RPGSystem.raw.Styles.PlayerStatus_ListValue }
-				status.ValueText[valueAttackID] = listAttack.add{ type = "label" , tooltip = valueAttackTooltip , style = SIConstants_RPGSystem.raw.Styles.PlayerStatus_ListValue }
-				status.ValueLabel[valueChanceID] = listAttack.add{ type = "label" , caption = valueChanceName , tooltip = valueChanceTooltip , style = SIConstants_RPGSystem.raw.Styles.PlayerStatus_ListValue }
-				status.ValueText[valueChanceID] = listAttack.add{ type = "label" , tooltip = valueChanceTooltip , style = SIConstants_RPGSystem.raw.Styles.PlayerStatus_ListValue }
-				status.ValueLabel[valueDamageID] = listAttack.add{ type = "label" , caption = valueDamageName , tooltip = valueDamageTooltip , style = SIConstants_RPGSystem.raw.Styles.PlayerStatus_ListValue }
-				status.ValueText[valueDamageID] = listAttack.add{ type = "label" , tooltip = valueDamageTooltip , style = SIConstants_RPGSystem.raw.Styles.PlayerStatus_ListValue }
+				if SIRPGSystem.ValueViewable[valueAttackID] then
+					local valueChanceID = critData.Chance
+					local valueDamageID = critData.Damage
+					local valueAttackName = SIRPGSystem.ValueNames[valueAttackID]
+					local valueChanceName = SIRPGSystem.ValueNames[valueChanceID]
+					local valueDamageName = SIRPGSystem.ValueNames[valueDamageID]
+					local valueAttackTooltip = { "SIRPGSystem.玩家属性-窗口-数值-提示" , valueAttackName , SIRPGSystem.ValueTooltips[valueAttackID] }
+					local valueChanceTooltip = { "SIRPGSystem.玩家属性-窗口-数值-提示" , valueChanceName , SIRPGSystem.ValueTooltips[valueAttackID] }
+					local valueDamageTooltip = { "SIRPGSystem.玩家属性-窗口-数值-提示" , valueDamageName , SIRPGSystem.ValueTooltips[valueAttackID] }
+					status.ValueLabel[valueAttackID] = listAttack.add{ type = "label" , caption = valueAttackName , tooltip = valueAttackTooltip , style = SIConstants_RPGSystem.raw.Styles.PlayerStatus_ListValue }
+					status.ValueText[valueAttackID] = listAttack.add{ type = "label" , tooltip = valueAttackTooltip , style = SIConstants_RPGSystem.raw.Styles.PlayerStatus_ListValue }
+					status.ValueLabel[valueChanceID] = listAttack.add{ type = "label" , caption = valueChanceName , tooltip = valueChanceTooltip , style = SIConstants_RPGSystem.raw.Styles.PlayerStatus_ListValue }
+					status.ValueText[valueChanceID] = listAttack.add{ type = "label" , tooltip = valueChanceTooltip , style = SIConstants_RPGSystem.raw.Styles.PlayerStatus_ListValue }
+					status.ValueLabel[valueDamageID] = listAttack.add{ type = "label" , caption = valueDamageName , tooltip = valueDamageTooltip , style = SIConstants_RPGSystem.raw.Styles.PlayerStatus_ListValue }
+					status.ValueText[valueDamageID] = listAttack.add{ type = "label" , tooltip = valueDamageTooltip , style = SIConstants_RPGSystem.raw.Styles.PlayerStatus_ListValue }
+				end
 			end
 			-- 第 5.2 层
 			flow5.add{ type = "line" , direction = "vertical" }
 			-- 第 5.3 层
 			local listDefence = flow5.add{ type = "table" , column_count = 6 , style = SIConstants_RPGSystem.raw.Styles.PlayerStatus_ValueList }
 			for valueBlockID , defenceData in pairs( SIRPGSystem.ValueIsDefence ) do
-				local valueResistanceID = defenceData.Resistance
-				local valueDefenceID = defenceData.Defence
-				local valueBlockName = SIRPGSystem.ValueNames[valueBlockID]
-				local valueResistanceName = SIRPGSystem.ValueNames[valueResistanceID]
-				local valueDefenceName = SIRPGSystem.ValueNames[valueDefenceID]
-				local valueBlockTooltip = { "SIRPGSystem.玩家属性-窗口-数值-提示" , valueBlockName , SIRPGSystem.ValueTooltips[valueBlockID] }
-				local valueResistanceTooltip = { "SIRPGSystem.玩家属性-窗口-数值-提示" , valueResistanceName , SIRPGSystem.ValueTooltips[valueResistanceID] }
-				local valueDefenceTooltip = { "SIRPGSystem.玩家属性-窗口-数值-提示" , valueDefenceName , SIRPGSystem.ValueTooltips[valueDefenceID] }
-				status.ValueLabel[valueBlockID] = listDefence.add{ type = "label" , caption = valueBlockName , tooltip = valueBlockTooltip , style = SIConstants_RPGSystem.raw.Styles.PlayerStatus_ListValue }
-				status.ValueText[valueBlockID] = listDefence.add{ type = "label" , tooltip = valueBlockTooltip , style = SIConstants_RPGSystem.raw.Styles.PlayerStatus_ListValue }
-				status.ValueLabel[valueResistanceID] = listDefence.add{ type = "label" , caption = valueResistanceName , tooltip = valueResistanceTooltip , style = SIConstants_RPGSystem.raw.Styles.PlayerStatus_ListValue }
-				status.ValueText[valueResistanceID] = listDefence.add{ type = "label" , tooltip = valueResistanceTooltip , style = SIConstants_RPGSystem.raw.Styles.PlayerStatus_ListValue }
-				status.ValueLabel[valueDefenceID] = listDefence.add{ type = "label" , caption = valueDefenceName , tooltip = valueDefenceTooltip , style = SIConstants_RPGSystem.raw.Styles.PlayerStatus_ListValue }
-				status.ValueText[valueDefenceID] = listDefence.add{ type = "label" , tooltip = valueDefenceTooltip , style = SIConstants_RPGSystem.raw.Styles.PlayerStatus_ListValue }
+				if SIRPGSystem.ValueViewable[valueBlockID] then
+					local valueResistanceID = defenceData.Resistance
+					local valueDefenceID = defenceData.Defence
+					local valueBlockName = SIRPGSystem.ValueNames[valueBlockID]
+					local valueResistanceName = SIRPGSystem.ValueNames[valueResistanceID]
+					local valueDefenceName = SIRPGSystem.ValueNames[valueDefenceID]
+					local valueBlockTooltip = { "SIRPGSystem.玩家属性-窗口-数值-提示" , valueBlockName , SIRPGSystem.ValueTooltips[valueBlockID] }
+					local valueResistanceTooltip = { "SIRPGSystem.玩家属性-窗口-数值-提示" , valueResistanceName , SIRPGSystem.ValueTooltips[valueResistanceID] }
+					local valueDefenceTooltip = { "SIRPGSystem.玩家属性-窗口-数值-提示" , valueDefenceName , SIRPGSystem.ValueTooltips[valueDefenceID] }
+					status.ValueLabel[valueBlockID] = listDefence.add{ type = "label" , caption = valueBlockName , tooltip = valueBlockTooltip , style = SIConstants_RPGSystem.raw.Styles.PlayerStatus_ListValue }
+					status.ValueText[valueBlockID] = listDefence.add{ type = "label" , tooltip = valueBlockTooltip , style = SIConstants_RPGSystem.raw.Styles.PlayerStatus_ListValue }
+					status.ValueLabel[valueResistanceID] = listDefence.add{ type = "label" , caption = valueResistanceName , tooltip = valueResistanceTooltip , style = SIConstants_RPGSystem.raw.Styles.PlayerStatus_ListValue }
+					status.ValueText[valueResistanceID] = listDefence.add{ type = "label" , tooltip = valueResistanceTooltip , style = SIConstants_RPGSystem.raw.Styles.PlayerStatus_ListValue }
+					status.ValueLabel[valueDefenceID] = listDefence.add{ type = "label" , caption = valueDefenceName , tooltip = valueDefenceTooltip , style = SIConstants_RPGSystem.raw.Styles.PlayerStatus_ListValue }
+					status.ValueText[valueDefenceID] = listDefence.add{ type = "label" , tooltip = valueDefenceTooltip , style = SIConstants_RPGSystem.raw.Styles.PlayerStatus_ListValue }
+				end
 			end
 			-- 第 6 层
 			frame.add{ type = "line" , direction = "horizontal" }
@@ -357,18 +361,20 @@ SIRPGPlayerStatus =
 		local value = settings.Value
 		local max = value.Max[valueID]
 		-- 更新控件
-		if SIRPGSystem.ValueBarRegen[valueID] then
-			local current = value.Current[valueID]
-			status.ValueTextLeft[valueID].caption = { "SIRPGSystem.玩家属性-窗口-数值-进度条-左" , current }
-			status.ValueTextCenter[valueID].caption = { "SIRPGSystem.玩家属性-窗口-数值-进度条-分隔符" }
-			status.ValueTextRight[valueID].caption = { "SIRPGSystem.玩家属性-窗口-数值-进度条-右" , max }
-			status.ValueBar[valueID].value = current / max
-		elseif SIRPGSystem.ValueShowPersent[valueID] then
-			status.ValueText[valueID].caption = { "SIRPGSystem.玩家属性-窗口-数值-百分比" , max * 100 }
-		elseif SIRPGSystem.ValueShowSecond[valueID] then
-			status.ValueText[valueID].caption = { "SIRPGSystem.玩家属性-窗口-数值-每秒" , max * 60 }
-		else
-			status.ValueText[valueID].caption = { "SIRPGSystem.玩家属性-窗口-数值-普通数值" , max }
+		if SIRPGSystem.ValueViewable[valueID] then
+			if SIRPGSystem.ValueBarRegen[valueID] then
+				local current = value.Current[valueID]
+				status.ValueTextLeft[valueID].caption = { "SIRPGSystem.玩家属性-窗口-数值-进度条-左" , current }
+				status.ValueTextCenter[valueID].caption = { "SIRPGSystem.玩家属性-窗口-数值-进度条-分隔符" }
+				status.ValueTextRight[valueID].caption = { "SIRPGSystem.玩家属性-窗口-数值-进度条-右" , max }
+				status.ValueBar[valueID].value = current / max
+			elseif SIRPGSystem.ValueShowPersent[valueID] then
+				status.ValueText[valueID].caption = { "SIRPGSystem.玩家属性-窗口-数值-百分比" , max * 100 }
+			elseif SIRPGSystem.ValueShowSecond[valueID] then
+				status.ValueText[valueID].caption = { "SIRPGSystem.玩家属性-窗口-数值-每秒" , max * 60 }
+			else
+				status.ValueText[valueID].caption = { "SIRPGSystem.玩家属性-窗口-数值-普通数值" , max }
+			end
 		end
 	end ,
 	FreshProperty = function( settings , globalSettings )
@@ -387,13 +393,37 @@ SIRPGPlayerStatus =
 		-- 生成通用属性
 		local levelTooltip = { "SIRPGSystem.玩家属性-等级" , property.Attack[propertyID] , property.Adventure[propertyID] , property.Craft[propertyID] , max }
 		local descriptionTooltip = { "SIRPGSystem.玩家属性-窗口-属性说明-提示" , propertyName , propertyTooltip , active , levelTooltip }
-		local effectTooltip = { "SIRPGSystem.玩家属性-窗口-属性效果-提示" , propertyName , active , levelTooltip }
-		for valueID , valueCount in pairs( globalSettings.Setting.PropertyEffects[propertyID] ) do
-			local showPersent = SIRPGSystem.ValueShowPersent[valueID]
-			local showSecond = SIRPGSystem.ValueShowSecond[valueID]
-			local currentCount = valueCount * ( showPersent and 100 or showSecond and 60 or 1 )
-			table.insert( effectTooltip , SIRPGSystem.ValueNames[valueID] )
-			table.insert( effectTooltip , showPersent and { "SIRPGSystem.玩家数值-显示-百分比" , currentCount } or showSecond and { "SIRPGSystem.玩家数值-显示-每秒" , currentCount } or { "SIRPGSystem.玩家数值-显示-数值" , currentCount } )
+		local effectTooltipItems = {}
+		local effectTooltip = { "SIRPGSystem.玩家属性-窗口-属性效果-提示" , propertyName , active , levelTooltip , effectTooltipItems }
+		local effectProperty = globalSettings.Setting.PropertyEffects[propertyID]
+		-- 计算可以显示的属性的数量
+		local effectCount = 0
+		for valueID , valueCount in pairs( effectProperty ) do
+			if SIRPGSystem.ValueViewable[valueID] then
+				effectCount = effectCount + 1
+			end
+		end
+		-- 根据可以显示的属性的数量填充本地化文本
+		if effectCount < 1 then
+			table.insert( effectTooltipItems , "SIRPGSystem.玩家属性-窗口-属性效果-提示-空的" )
+		else
+			local currentEffectIndex = 0
+			for valueID , valueCount in pairs( effectProperty ) do
+				if SIRPGSystem.ValueViewable[valueID] then
+					currentEffectIndex = currentEffectIndex + 1
+					local showPersent = SIRPGSystem.ValueShowPersent[valueID]
+					local showSecond = SIRPGSystem.ValueShowSecond[valueID]
+					local currentCount = valueCount * ( showPersent and 100 or showSecond and 60 or 1 )
+					table.insert( effectTooltipItems , currentEffectIndex < effectCount and "SIRPGSystem.玩家属性-窗口-属性效果-提示-中间" or "SIRPGSystem.玩家属性-窗口-属性效果-提示-末尾" )
+					table.insert( effectTooltipItems , SIRPGSystem.ValueNames[valueID] )
+					table.insert( effectTooltipItems , showPersent and { "SIRPGSystem.玩家数值-显示-百分比" , currentCount } or showSecond and { "SIRPGSystem.玩家数值-显示-每秒" , currentCount } or { "SIRPGSystem.玩家数值-显示-数值" , currentCount } )
+					if currentEffectIndex < effectCount then
+						local effectTooltipItemsNew = {}
+						table.insert( effectTooltipItems , effectTooltipItemsNew )
+						effectTooltipItems = effectTooltipItemsNew
+					end
+				end
+			end
 		end
 		local mainTooltip = { "SIRPGSystem.玩家属性-窗口-属性-提示" , descriptionTooltip , effectTooltip }
 		-- 更新控件
@@ -410,8 +440,9 @@ SIRPGPlayerStatus =
 		else
 			slider.enabled = true
 			slider.set_slider_minimum_maximum( 0 , max )
-			slider.slider_value = 0
-			slider.slider_value = active
+			if math.floor( slider.slider_value ) ~= active then
+				slider.slider_value = active
+			end
 			text.enabled = true
 		end
 		text.text = tostring( active )
@@ -485,8 +516,9 @@ SIRPGPlayerStatus =
 		else
 			slider.enabled = true
 			slider.set_slider_minimum_maximum( 0 , max )
-			slider.slider_value = 0
-			slider.slider_value = active
+			if math.floor( slider.slider_value ) ~= active then
+				slider.slider_value = active
+			end
 			text.enabled = true
 		end
 		text.text = tostring( active )

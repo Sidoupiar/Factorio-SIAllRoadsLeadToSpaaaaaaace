@@ -2635,6 +2635,67 @@ SIRPGSystem.AdditionEffectMin =
 	InventorySize    = 0 ,
 	MaxHealth        = 0
 }
+SIRPGSystem.ValueViewable =
+{
+	-- 最大值
+	Health             = true ,
+	Strength           = true ,
+	Mana               = true ,
+	Energy             = true ,
+	Thought            = true ,
+	Soul               = true ,
+	-- 恢复速度
+	HealthRegen        = true ,
+	StrengthRegen      = true ,
+	ManaRegen          = true ,
+	EnergyRegen        = true ,
+	ThoughtRegen       = true ,
+	SoulRegen          = true ,
+	-- 伤害
+	AttackPhysical     = false ,
+	AttackMagic        = false ,
+	AttackElement      = false ,
+	AttackSpace        = false ,
+	AttackThought      = false ,
+	AttackSoul         = false ,
+	AttackNormal       = true ,
+	CritChancePhysical = false ,
+	CritChanceMagic    = false ,
+	CritChanceElement  = false ,
+	CritChanceSpace    = false ,
+	CritChanceThought  = false ,
+	CritChanceSoul     = false ,
+	CritChanceNormal   = true ,
+	CritDamagePhysical = false ,
+	CritDamageMagic    = false ,
+	CritDamageElement  = false ,
+	CritDamageSpace    = false ,
+	CritDamageThought  = false ,
+	CritDamageSoul     = false ,
+	CritDamageNormal   = true ,
+	-- 防御
+	BlockPhysical      = false ,
+	BlockMagic         = false ,
+	BlockElement       = false ,
+	BlockSpace         = false ,
+	BlockThought       = false ,
+	BlockSoul          = false ,
+	BlockNormal        = true ,
+	ResistancePhysical = false ,
+	ResistanceMagic    = false ,
+	ResistanceElement  = false ,
+	ResistanceSpace    = false ,
+	ResistanceThought  = false ,
+	ResistanceSoul     = false ,
+	ResistanceNormal   = true ,
+	DefencePhysical    = false ,
+	DefenceMagic       = false ,
+	DefenceElement     = false ,
+	DefenceSpace       = false ,
+	DefenceThought     = false ,
+	DefenceSoul        = false ,
+	DefenceNormal      = true
+}
 SIRPGSystem.ValueNames =
 {
 	-- 最大值
@@ -3107,6 +3168,9 @@ SIRPGSystem.Settings =
 			levelCountAttack = nil ,
 			levelCountAdventure = nil ,
 			levelCountCraft = nil ,
+			levelPointAttack = nil ,
+			levelPointAdventure = nil ,
+			levelPointCraft = nil ,
 			levelProgressAttack = nil ,
 			levelProgressAdventure = nil ,
 			levelProgressCraft = nil

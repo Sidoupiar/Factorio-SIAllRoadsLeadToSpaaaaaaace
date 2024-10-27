@@ -1004,22 +1004,20 @@ function SIInit.AutoLoad( ModName , CustomPackageConfig , ConstantsDataPrefix , 
 										if not groupData.Order then
 											groupData.Order = constantsData.Order
 										end
-										if autoload.Enable then
-											local groupOrderString = "zSIOrder[" .. groupData.Order .. constantsData.CodeName .. "]-" .. constantsData.GetNextOrderCode() .. "-"
-											local group =
-											{
-												type = SICommon.Types.Group ,
-												name = groupRealName ,
-												localised_name = { constantsData.CodeName .. "Name." .. groupShowName } ,
-												localised_description = { constantsData.CodeName .. "Description." .. groupShowName } ,
-												icon = constantsData.PicturePath .. groupShowName .. SICommon.ShowNameSuffix.ICON .. ".png" ,
-												icon_size = 64 ,
-												icon_mipmaps = 0 ,
-												order = groupOrderString ,
-												order_in_recipe = groupOrderString
-											}
-											table.insert( prototypes , group )
-										end
+										local groupOrderString = "zSIOrder[" .. groupData.Order .. constantsData.CodeName .. "]-" .. constantsData.GetNextOrderCode() .. "-"
+										local group =
+										{
+											type = SICommon.Types.Group ,
+											name = groupRealName ,
+											localised_name = { constantsData.CodeName .. "Name." .. groupShowName } ,
+											localised_description = { constantsData.CodeName .. "Description." .. groupShowName } ,
+											icon = constantsData.PicturePath .. groupShowName .. SICommon.ShowNameSuffix.ICON .. ".png" ,
+											icon_size = 64 ,
+											icon_mipmaps = 0 ,
+											order = groupOrderString ,
+											order_in_recipe = groupOrderString
+										}
+										table.insert( prototypes , group )
 										constantsData.raw.Groups[groupID] = {}
 										if groupData.Subgroups then
 											local subOrder = groupData.SubOrder or "0"
@@ -1027,18 +1025,16 @@ function SIInit.AutoLoad( ModName , CustomPackageConfig , ConstantsDataPrefix , 
 												local subgroupCodeName = groupCodeName .. "-" .. ( subgroupData and subgroupData.Code or subgroupID ):gsub( "_" , "-" )
 												local subgroupShowName = groupShowName .. "-" .. ( subgroupData and subgroupData.Show or subgroupID ):gsub( "_" , "-" )
 												local subgroupRealName = constantsData.CodeNamePrefix .. subgroupCodeName
-												if autoload.Enable then
-													local subgroup =
-													{
-														type = SICommon.Types.Subgroup ,
-														name = subgroupRealName ,
-														localised_name = { constantsData.CodeName .. "Name." .. subgroupShowName } ,
-														localised_description = { constantsData.CodeName .. "Description." .. subgroupShowName } ,
-														group = groupRealName ,
-														order = "zSIOrder[" .. groupData.Order .. constantsData.CodeName .. "]-[" .. subOrder .. "]-" .. constantsData.GetNextOrderCode() .. "-"
-													}
-													table.insert( prototypes , subgroup )
-												end
+												local subgroup =
+												{
+													type = SICommon.Types.Subgroup ,
+													name = subgroupRealName ,
+													localised_name = { constantsData.CodeName .. "Name." .. subgroupShowName } ,
+													localised_description = { constantsData.CodeName .. "Description." .. subgroupShowName } ,
+													group = groupRealName ,
+													order = "zSIOrder[" .. groupData.Order .. constantsData.CodeName .. "]-[" .. subOrder .. "]-" .. constantsData.GetNextOrderCode() .. "-"
+												}
+												table.insert( prototypes , subgroup )
 												constantsData.raw.Groups[groupID][subgroupID] = subgroupRealName
 											end
 										end
@@ -1077,18 +1073,16 @@ function SIInit.AutoLoad( ModName , CustomPackageConfig , ConstantsDataPrefix , 
 											local subgroupCodeName = aimGroupData.CodeName .. "-" .. ( subgroupData and subgroupData.Code or subgroupID ):gsub( "_" , "-" )
 											local subgroupShowName = aimGroupData.ShowName .. "-" .. ( subgroupData and subgroupData.Show or subgroupID ):gsub( "_" , "-" )
 											local subgroupRealName = constantsData.CodeNamePrefix .. subgroupCodeName
-											if autoload.Enable then
-												local subgroup =
-												{
-													type = SICommon.Types.Subgroup ,
-													name = subgroupRealName ,
-													localised_name = { constantsData.CodeName .. "Name." .. subgroupShowName } ,
-													localised_description = { constantsData.CodeName .. "Description." .. subgroupShowName } ,
-													group = aimGroupData.RealName ,
-													order = "zSIOrder[" .. aimGroupData.Order .. ConstantsDataCodeName .. "]-[" .. subOrder .. "]-" .. APIData.GetNextOrderCode() .. "-"
-												}
-												table.insert( prototypes , subgroup )
-											end
+											local subgroup =
+											{
+												type = SICommon.Types.Subgroup ,
+												name = subgroupRealName ,
+												localised_name = { constantsData.CodeName .. "Name." .. subgroupShowName } ,
+												localised_description = { constantsData.CodeName .. "Description." .. subgroupShowName } ,
+												group = aimGroupData.RealName ,
+												order = "zSIOrder[" .. aimGroupData.Order .. ConstantsDataCodeName .. "]-[" .. subOrder .. "]-" .. APIData.GetNextOrderCode() .. "-"
+											}
+											table.insert( prototypes , subgroup )
 											constantsData.raw.Groups[groupID][subgroupID] = subgroupRealName
 										end
 									end
@@ -1100,18 +1094,16 @@ function SIInit.AutoLoad( ModName , CustomPackageConfig , ConstantsDataPrefix , 
 										local codeName = SICommon.CodeNamePrefix[SICommon.Types.DamageType] .. ( resistanceData and resistanceData.Code or damageTypeID ):gsub( "_" , "-" )
 										local showName = SICommon.ShowNamePrefix[SICommon.Types.DamageType] .. ( resistanceData and resistanceData.Show or damageTypeID ):gsub( "_" , "-" )
 										local realName = constantsData.CodeNamePrefix .. codeName
-										if autoload.Enable then
-											local damageType =
-											{
-												type = SICommon.Types.DamageType ,
-												name = realName ,
-												localised_name = { constantsData.CodeName .. "Name." .. showName } ,
-												localised_description = { constantsData.CodeName .. "Description." .. showName } ,
-												order = constantsData.GetOrderString() ,
-												hidden = false
-											}
-											table.insert( prototypes , damageType )
-										end
+										local damageType =
+										{
+											type = SICommon.Types.DamageType ,
+											name = realName ,
+											localised_name = { constantsData.CodeName .. "Name." .. showName } ,
+											localised_description = { constantsData.CodeName .. "Description." .. showName } ,
+											order = constantsData.GetOrderString() ,
+											hidden = false
+										}
+										table.insert( prototypes , damageType )
 										constantsData.raw.DamageTypes[damageTypeID] = realName
 										if resistanceData and ( resistanceData.Decrease or resistanceData.Percent ) then
 											constantsData.raw.DamageTypeValues[damageTypeID] = SITools.Resistance( realName , resistanceData.Decrease , resistanceData.Percent )
@@ -1129,17 +1121,15 @@ function SIInit.AutoLoad( ModName , CustomPackageConfig , ConstantsDataPrefix , 
 											local codeName = SICommon.CodeNamePrefix[typeCode] .. ( categoryData and categoryData.Code or categoryID ):gsub( "_" , "-" )
 											local showName = SICommon.ShowNamePrefix[typeCode] .. ( categoryData and categoryData.Show or categoryID ):gsub( "_" , "-" )
 											local realName = constantsData.CodeNamePrefix .. codeName
-											if autoload.Enable then
-												local category =
-												{
-													type = typeCode ,
-													name = realName ,
-													localised_name = { constantsData.CodeName .. "Name." .. showName } ,
-													localised_description = { constantsData.CodeName .. "Description." .. showName } ,
-													order = constantsData.GetOrderString()
-												}
-												table.insert( prototypes , category )
-											end
+											local category =
+											{
+												type = typeCode ,
+												name = realName ,
+												localised_name = { constantsData.CodeName .. "Name." .. showName } ,
+												localised_description = { constantsData.CodeName .. "Description." .. showName } ,
+												order = constantsData.GetOrderString()
+											}
+											table.insert( prototypes , category )
 											constantsData.raw.Categories[categoryCode][categoryID] = realName
 										end
 									end

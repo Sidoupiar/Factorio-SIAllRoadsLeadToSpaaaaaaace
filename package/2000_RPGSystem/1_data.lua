@@ -245,7 +245,7 @@ SIGen
 -- ============================================================================================================================================
 
 SIGen
-.SetGroup( SIConstants_Core.raw.Groups.Hidden.Icon )
+.SetGroup( SIConstants_Core.raw.Groups.Hidden.IconItem )
 .AutoIconItem
 {
 	IconRPG = "图标RPG" ,
