@@ -9,11 +9,13 @@
         "mods",
         "prototypes",
         "remote",
+        "rendering",
         "script",
         "settings",
         "serpent",
         "storage",
         "table_size",
+        "water_tile_type_names",
         "SIConstants_Core",
         "SIConstants_ToolMap",
         "SIConstants_DebugItem",
@@ -27,6 +29,7 @@
         "SIConstants_BuildLimit",
         "SIConstants_RuinControl",
         "SIConstants_BaseFix",
+        "SIConstants_Resource",
         "SIConstants_Planting",
         "SIConstants_Colorful"
     ]
