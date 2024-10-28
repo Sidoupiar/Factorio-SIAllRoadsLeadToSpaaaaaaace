@@ -39,7 +39,7 @@ local oreList =
 
 SIGen.SetGroup( SIConstants_Resource.raw.Groups.Resource.Ore )
 for oreID , oreAlias in pairs( oreList ) do
-	local oreProjectile = nil
+	local oreProjectile = {}
 	SIGen
 	.New( SICommon.Types.Entities.Projectile , oreID , "扔出去的" .. oreAlias )
 	.MakeIcon( SICommon.Types.Items.Capsule , oreAlias )
@@ -269,7 +269,7 @@ SIGen
 	enemy_map_color = { r = 1.00 , g = 1.00 , b = 1.00 } ,
 	mining_visualisation_tint = { r = 0.98 , g = 0.88 , b = 0.65 } ,
 	tree_removal_probability = 0.6 ,
-    tree_removal_max_distance = 1024 ,
+	tree_removal_max_distance = 1024 ,
 	autoplace = SIAutoPlace.Create
 	{
 		Name = "" ,

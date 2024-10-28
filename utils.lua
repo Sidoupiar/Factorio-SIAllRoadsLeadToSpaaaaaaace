@@ -864,6 +864,8 @@ function SIInit.AutoLoad( ModName , CustomPackageConfig , ConstantsDataPrefix , 
 					constantsData.API.GetNextOrderCode = constantsData.GetNextOrderCode
 					constantsData.API.GetOrderString = constantsData.GetOrderString
 					constantsData.API.GetOrderStringWithOffset = constantsData.GetOrderStringWithOffset
+					-- 注册功能模块配置
+					SIConfigs[constantsData.CodeName] = packageConfig.Configs or {}
 					-- 加载开始前回调
 					if constantsData.BeforeLoad then
 						constantsData.BeforeLoad( constantsData )
@@ -878,7 +880,7 @@ function SIInit.AutoLoad( ModName , CustomPackageConfig , ConstantsDataPrefix , 
 							name = CustomPackagePrefix .. packageName ,
 							localised_name = { "SICommon.EnablePackageName" , constantsData.PackageLocalisedName } ,
 							localised_description = { "SICommon.EnablePackageDescription" , constantsData.PackageLocalisedName , constantsData.PackageLocalisedDescription , { "SICommon.Show-TrueValue" } } ,
-							default_value = packageConfig.Enabled == nil or packageConfig.Enabled ,
+							default_value = packageConfig.Enabled == nil and false or packageConfig.Enabled ,
 							order = constantsData.GetOrderString() ,
 							hidden = false
 						}
@@ -1146,8 +1148,6 @@ function SIInit.AutoLoad( ModName , CustomPackageConfig , ConstantsDataPrefix , 
 							constantsData.Autoload = nil
 						end
 					end
-					-- 注册功能模块配置
-					SIConfigs[constantsData.CodeName] = packageConfig.Configs or {}
 					-- 加载完毕后回调
 					if constantsData.AfterLoad then
 						constantsData.AfterLoad( constantsData )

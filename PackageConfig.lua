@@ -27,7 +27,7 @@ local PackageConfig =
 		PackageName = "0000_Core" ,
 
 		-- ======================================================================
-		-- 默认情况下是否启用这个功能模块 , 默认 : true<br>
+		-- 默认情况下是否启用这个功能模块 , 默认 : false<br>
 		-- ======================================================================
 		Enabled = true ,
 
@@ -72,7 +72,6 @@ local PackageConfig =
 	-- ======================================================================
 	{
 		PackageName = "0001_ToolMap" ,
-		Enabled = false ,
 		Requires =
 		{
 			"0000_Core"
@@ -84,7 +83,6 @@ local PackageConfig =
 	-- ======================================================================
 	{
 		PackageName = "0002_DebugItem" ,
-		Enabled = false ,
 		Requires =
 		{
 			"0000_Core"
@@ -110,6 +108,7 @@ local PackageConfig =
 	-- ======================================================================
 	{
 		PackageName = "0003_AutoInsert" ,
+		Enabled = true ,
 		Requires =
 		{
 			"0000_Core"
@@ -121,7 +120,6 @@ local PackageConfig =
 	-- ======================================================================
 	{
 		PackageName = "0004_Permission" ,
-		Enabled = false ,
 		Requires =
 		{
 			"0000_Core"
@@ -133,7 +131,6 @@ local PackageConfig =
 	-- ======================================================================
 	{
 		PackageName = "0100_ItemPropertyModify" ,
-		Enabled = false ,
 		Requires =
 		{
 			"0000_Core"
@@ -202,7 +199,6 @@ local PackageConfig =
 	-- ======================================================================
 	{
 		PackageName = "2000_RPGSystem" ,
-		Enabled = false ,
 		Requires =
 		{
 			"0000_Core"

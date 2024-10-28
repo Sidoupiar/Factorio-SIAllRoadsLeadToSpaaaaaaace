@@ -461,7 +461,7 @@ SIGen
 				size = { 1 , 8 }
 			}
 		} ,
-        shadow = SIStyle.Dirt.Default
+		shadow = SIStyle.Dirt.Default
 	} ,
 	-- 绘制标尺
 	draw_notches = false ,
