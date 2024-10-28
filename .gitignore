@@ -50,6 +50,3 @@ luac.out
 *.cmd
 *.sh
 *.dat
-
-# VSCode
-.vscode/*

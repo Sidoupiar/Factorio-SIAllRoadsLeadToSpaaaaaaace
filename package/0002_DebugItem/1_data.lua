@@ -36,7 +36,6 @@ SIGen
 .AutoIcon()
 .Append
 {
-	hidden = true ,
 	flags = { SICommon.Flags.Item.HideFromBonusGUI , SICommon.Flags.Item.HideFromFuelTooltip } ,
 	stack_size = 1000 ,
 	default_request_amount = 1000 ,
@@ -212,7 +211,6 @@ SIGen
 .AutoIcon()
 .Append
 {
-	hidden = true ,
 	flags = { SICommon.Flags.Item.HideFromBonusGUI , SICommon.Flags.Item.HideFromFuelTooltip } ,
 	stack_size = 100 ,
 	default_request_amount = 100 ,
@@ -475,7 +473,6 @@ SIGen
 .AutoIcon()
 .Append
 {
-	hidden = true ,
 	flags = { SICommon.Flags.Item.HideFromBonusGUI , SICommon.Flags.Item.HideFromFuelTooltip } ,
 	stack_size = 100 ,
 	default_request_amount = 100 ,
@@ -981,7 +978,6 @@ SIGen
 .AutoIcon()
 .Append
 {
-	hidden = true ,
 	flags = { SICommon.Flags.Item.HideFromBonusGUI , SICommon.Flags.Item.HideFromFuelTooltip } ,
 	stack_size = 100 ,
 	default_request_amount = 100 ,
@@ -1227,7 +1223,6 @@ SIGen
 .AutoIcon()
 .Append
 {
-	hidden = true ,
 	flags = { SICommon.Flags.Item.HideFromBonusGUI , SICommon.Flags.Item.HideFromFuelTooltip } ,
 	stack_size = 10 ,
 	default_request_amount = 10 ,
@@ -1606,7 +1601,6 @@ SIGen
 .AutoIcon()
 .Append
 {
-	hidden = true ,
 	flags = { SICommon.Flags.Item.HideFromBonusGUI , SICommon.Flags.Item.HideFromFuelTooltip } ,
 	stack_size = 100 ,
 	default_request_amount = 100 ,
@@ -2063,7 +2057,6 @@ SIGen
 .AutoIcon()
 .Append
 {
-	hidden = true ,
 	flags = { SICommon.Flags.Item.HideFromBonusGUI , SICommon.Flags.Item.HideFromFuelTooltip } ,
 	stack_size = 100 ,
 	default_request_amount = 100 ,
@@ -3373,7 +3366,6 @@ SIGen
 .AutoIcon()
 .Append
 {
-	hidden = true ,
 	flags = { SICommon.Flags.Item.HideFromBonusGUI , SICommon.Flags.Item.HideFromFuelTooltip } ,
 	stack_size = 10 ,
 	default_request_amount = 10 ,
@@ -4349,7 +4341,6 @@ SIGen
 .AutoIcon()
 .Append
 {
-	hidden = true ,
 	flags = { SICommon.Flags.Item.HideFromBonusGUI , SICommon.Flags.Item.HideFromFuelTooltip } ,
 	stack_size = 1 ,
 	default_request_amount = 1 ,

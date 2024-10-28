@@ -663,7 +663,9 @@ SIInit =
 	ConstantsDataList = {} ,
 	ModName = CoreName ,
 	ModPath = CorePath ,
-	CurrentConstantsData = {}
+	CurrentConstantsData = {} ,
+	ShowUnloadedPackageListMaxCount = 16 ,
+	UnloadedPackageList = {}
 }
 
 -- ======================================================================
@@ -750,26 +752,29 @@ function SIInit.AutoLoad( ModName , CustomPackageConfig , ConstantsDataPrefix , 
 			local packageName = packageConfig.PackageName
 			local packageLoadFlag = false
 			if SIInit.State == SIInit.StateCodeDefine.Settings then
-				-- Settings 阶段不需要判断功能模块是否启用
-				if packageConfig.Requires then
-					for requireIndex , requirePackageName in pairs( packageConfig.Requires ) do
-						if not SIInit.ConstantsDataList[ModName .. "_" .. requirePackageName] then
-							return CodeE( SIInit , "模块缺少强制依赖 , Package=\"" .. packageName .. "\" , Require=\"" .. requirePackageName .. "\"" )
-						end
-					end
-				end
+				-- Settings 阶段不需要判断功能模块是否启用和强制依赖
+				--if packageConfig.Requires then
+				--	for requireIndex , requirePackageName in pairs( packageConfig.Requires ) do
+				--		if not SIInit.ConstantsDataList[ModName .. "_" .. requirePackageName] then
+				--			return CodeE( SIInit , "功能模块缺少强制依赖 , Package=\"" .. packageName .. "\" , Require=\"" .. requirePackageName .. "\"" )
+				--		end
+				--	end
+				--end
 				packageLoadFlag = true
 			else
 				-- Data 和 Control 阶段需要判断功能模块是否启用
 				if SISettings.Package[packageName]() then
+					packageLoadFlag = true
 					if packageConfig.Requires then
 						for requireIndex , requirePackageName in pairs( packageConfig.Requires ) do
 							if not SISettings.Package[requirePackageName]() or not SIInit.ConstantsDataList[ModName .. "_" .. requirePackageName] then
-								return CodeE( SIInit , "模块缺少强制依赖 , Package=\"" .. packageName .. "\" , Require=\"" .. requirePackageName .. "\"" )
+								table.insert( SIInit.UnloadedPackageList , packageConfig )
+								packageLoadFlag = false
+								break
+								--return CodeE( SIInit , "功能模块缺少强制依赖 , Package=\"" .. packageName .. "\" , Require=\"" .. requirePackageName .. "\"" )
 							end
 						end
 					end
-					packageLoadFlag = true
 				end
 			end
 			if packageLoadFlag then
@@ -824,8 +829,10 @@ function SIInit.AutoLoad( ModName , CustomPackageConfig , ConstantsDataPrefix , 
 					constantsData.ShowNamePrefix = constantsData.ShowName .. "-"
 					constantsData.OrderPrefix = SIOrderPrefix() .. "[" .. constantsData.Order .. constantsData.CodeName .. "]-"
 					constantsData.OrderCode = SIInit.OrderCode
-					constantsData.LocalisedName = { "ConstantsDataName." .. constantsData.CodeName }
-					constantsData.LocalisedDescription = { "ConstantsDataDescription." .. constantsData.CodeName }
+					--constantsData.LocalisedName = { "SIConstantsDataName." .. constantsData.CodeName }
+					--constantsData.LocalisedDescription = { "SIConstantsDataDescription." .. constantsData.CodeName }
+					constantsData.PackageLocalisedName = { "SIPackageName." .. packageName }
+					constantsData.PackageLocalisedDescription = { "SIPackageDescription." .. packageName }
 					constantsData.GetNextOrderCode = function()
 						local orderCode = constantsData.OrderCode + 1
 						while constantsData.OrderOffset[orderCode] do
@@ -864,20 +871,18 @@ function SIInit.AutoLoad( ModName , CustomPackageConfig , ConstantsDataPrefix , 
 					-- 按阶段生成属性
 					if SIInit.State == SIInit.StateCodeDefine.Settings then
 						-- 创建功能模块启用设置
-						if packageName ~= "0000_Core" then
-							local packageSettingItem =
-							{
-								type = SICommon.SettingTypes.BOOL .. "-setting" ,
-								setting_type = SICommon.SettingAffectTypes.StartUp ,
-								name = CustomPackagePrefix .. packageName ,
-								localised_name = { "SICommon.EnablePackageName" , { "SIPackageName." .. packageName } } ,
-								localised_description = { "SICommon.EnablePackageDescription" , { "SIPackageName." .. packageName } , { "SIPackageDescription." .. packageName } , { "SICommon.Show-TrueValue" } } ,
-								default_value = packageConfig.Enabled == nil or packageConfig.Enabled ,
-								order = constantsData.GetOrderString() ,
-								hidden = false
-							}
-							data:extend( { packageSettingItem } )
-						end
+						local packageSettingItem =
+						{
+							type = SICommon.SettingTypes.BOOL .. "-setting" ,
+							setting_type = SICommon.SettingAffectTypes.StartUp ,
+							name = CustomPackagePrefix .. packageName ,
+							localised_name = { "SICommon.EnablePackageName" , constantsData.PackageLocalisedName } ,
+							localised_description = { "SICommon.EnablePackageDescription" , constantsData.PackageLocalisedName , constantsData.PackageLocalisedDescription , { "SICommon.Show-TrueValue" } } ,
+							default_value = packageConfig.Enabled == nil or packageConfig.Enabled ,
+							order = constantsData.GetOrderString() ,
+							hidden = false
+						}
+						data:extend( { packageSettingItem } )
 						-- 自动创建设置
 						if constantsData.Autoload.Enable and constantsData.Autoload.Settings then
 							local settings = {}
@@ -897,9 +902,9 @@ function SIInit.AutoLoad( ModName , CustomPackageConfig , ConstantsDataPrefix , 
 									if settingValues[2] == SICommon.SettingAffectTypes.StartUp then
 										settingItem.localised_name = { "SICommon.SettingsStartUp" , settingValues[4] or { "SISettingName."..realName } }
 									else
-										settingItem.localised_name = settingValues[4] or { "SISettingName."..realName }
+										settingItem.localised_name = { "SICommon.SettingsRuntime" , { "SIPackageName." .. packageName } , settingValues[4] or { "SISettingName."..realName } }
 									end
-									settingItem.localised_description = settingValues[5] or { "SICommon.SettingsDescription" , constantsData.LocalisedName , { "SISettingDescription."..realName } , SIPrint.ToShow( settingValues[3] ) }
+									settingItem.localised_description = settingValues[5] or { "SICommon.SettingsDescription" , constantsData.PackageLocalisedName , { "SISettingDescription."..realName } , SIPrint.ToShow( settingValues[3] ) }
 									settingItem.forced_value = false
 								elseif settingType == SICommon.SettingTypes.INT or settingType == SICommon.SettingTypes.DOUBLE then
 									settingItem.minimum_value = settingValues[4]
@@ -908,18 +913,18 @@ function SIInit.AutoLoad( ModName , CustomPackageConfig , ConstantsDataPrefix , 
 									if settingValues[2] == SICommon.SettingAffectTypes.StartUp then
 										settingItem.localised_name = { "SICommon.SettingsStartUp" , settingValues[7] or { "SISettingName."..realName } }
 									else
-										settingItem.localised_name = settingValues[7] or { "SISettingName."..realName }
+										settingItem.localised_name = { "SICommon.SettingsRuntime" , { "SIPackageName." .. packageName } , settingValues[7] or { "SISettingName."..realName } }
 									end
-									settingItem.localised_description = settingValues[8] or { "SICommon.SettingsDescription" , constantsData.LocalisedName , { "SISettingDescription."..realName } , SIPrint.ToShow( settingValues[3] ) }
+									settingItem.localised_description = settingValues[8] or { "SICommon.SettingsDescription" , constantsData.PackageLocalisedName , { "SISettingDescription."..realName } , SIPrint.ToShow( settingValues[3] ) }
 								elseif settingType == SICommon.SettingTypes.STRING then
 									settingItem.allow_blank = settingValues[4] or false
 									settingItem.allowed_values = settingValues[5]
 									if settingValues[2] == SICommon.SettingAffectTypes.StartUp then
 										settingItem.localised_name = { "SICommon.SettingsStartUp" , settingValues[6] or { "SISettingName."..realName } }
 									else
-										settingItem.localised_name = settingValues[6] or { "SISettingName."..realName }
+										settingItem.localised_name = { "SICommon.SettingsRuntime" , { "SIPackageName." .. packageName } , settingValues[6] or { "SISettingName."..realName } }
 									end
-									settingItem.localised_description = settingValues[7] or { "SICommon.SettingsDescription" , constantsData.LocalisedName , { "SISettingDescription."..realName } , SIPrint.ToShow( settingValues[3] ) }
+									settingItem.localised_description = settingValues[7] or { "SICommon.SettingsDescription" , constantsData.PackageLocalisedName , { "SISettingDescription."..realName } , SIPrint.ToShow( settingValues[3] ) }
 									settingItem.auto_trim = true
 								end
 								table.insert( settings , settingItem )
@@ -1225,4 +1230,34 @@ function SIInit.AutoLoad( ModName , CustomPackageConfig , ConstantsDataPrefix , 
 		end
 	end
 	return SIInit
+end
+
+-- ======================================================================
+-- 向玩家显示未能成功载入的功能模块的信息<br>
+-- ======================================================================
+-- playerOrIndex = 向这个玩家显示未能成功载入的功能模块的信息<br>
+-- ======================================================================
+function SIInit.ShowUnloadedPackageList( playerOrIndex )
+	local unloadedPackageOutput = {}
+	local messageOutput = { "SIUtils.ShowUnloadedPackageList" , unloadedPackageOutput }
+	local unloadedPackageCount = #SIInit.UnloadedPackageList
+	for packageIndex , packageConfig in pairs( SIInit.UnloadedPackageList ) do
+		if( packageIndex > SIInit.ShowUnloadedPackageListMaxCount ) then
+			table.insert( unloadedPackageOutput , "SIUtils.ShowUnloadedPackageListEndless" )
+		else
+			if packageIndex < unloadedPackageCount then
+				table.insert( unloadedPackageOutput , "SIUtils.ShowUnloadedPackageListMedium" )
+				table.insert( unloadedPackageOutput , "SIPackageName." .. packageConfig.PackageName )
+				table.insert( unloadedPackageOutput , "SIUtils.ShowUnloadedPackageListReason-NoRequire" )
+				local unloadedPackageOutputNew = {}
+				table.insert( unloadedPackageOutput , "SIPackageName." .. unloadedPackageOutputNew )
+				unloadedPackageOutput = unloadedPackageOutputNew
+			else
+				table.insert( unloadedPackageOutput , "SIUtils.ShowUnloadedPackageListEnd" )
+				table.insert( unloadedPackageOutput , "SIPackageName." .. packageConfig.PackageName )
+				table.insert( unloadedPackageOutput , "SIUtils.ShowUnloadedPackageListReason-NoRequire" )
+			end
+		end
+	end
+	SIPrint.Alert( playerOrIndex , messageOutput )
 end

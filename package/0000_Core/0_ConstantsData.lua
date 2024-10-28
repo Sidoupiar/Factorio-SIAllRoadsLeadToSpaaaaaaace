@@ -137,20 +137,20 @@ local constantsData =
 		-- <br>
 		-- 当是布尔型的设置时<br>
 		-- 元素 4 : 本地化名称 , 对应原型中的 [ localised_name ] 属性 , 默认 : { "SISettingName.[ ShowName ]-[ SettingID ]" }<br>
-		-- 元素 5 : 本地化描述 , 对应原型中的 [ localised_description ] 属性 , 默认 : { "SICommon.SettingsDescription" , ConstantsData.localisedName , { "SISettingDescription.[ ShowName ]-[ SettingID ]" } , [ default_value ] }<br>
+		-- 元素 5 : 本地化描述 , 对应原型中的 [ localised_description ] 属性 , 默认 : { "SICommon.SettingsDescription" , ConstantsData.PackageLocalisedName , { "SISettingDescription.[ ShowName ]-[ SettingID ]" } , [ default_value ] }<br>
 		-- <br>
 		-- 当是数字型的设置时<br>
 		-- 元素 4 : 最小值 , 对应原型中的 [ minimum_value ] 属性<br>
 		-- 元素 5 : 最大值 , 对应原型中的 [ maximum_value ] 属性<br>
 		-- 元素 6 : 可用值 , 用于制作下拉列表 , 对应原型中的 [ allowed_values ] 属性 , 它是一个数组<br>
 		-- 元素 7 : 本地化名称 , 对应原型中的 [ localised_name ] 属性 , 默认 : { "SISettingName.[ ShowName ]-[ SettingID ]" }<br>
-		-- 元素 8 : 本地化描述 , 对应原型中的 [ localised_description ] 属性 , 默认 : { "SICommon.SettingsDescription" , ConstantsData.localisedName , { "SISettingDescription.[ ShowName ]-[ SettingID ]" } , [ default_value ] }<br>
+		-- 元素 8 : 本地化描述 , 对应原型中的 [ localised_description ] 属性 , 默认 : { "SICommon.SettingsDescription" , ConstantsData.PackageLocalisedName , { "SISettingDescription.[ ShowName ]-[ SettingID ]" } , [ default_value ] }<br>
 		-- <br>
 		-- 当是字符串型的设置时<br>
 		-- 元素 4 : 是否可以为空 , 对应原型中的 [ allow_blank ] 属性 , 字符串型的设置专用 , 默认 : false<br>
 		-- 元素 5 : 可用值 , 用于制作下拉列表 , 对应原型中的 [ allowed_values ] 属性 , 它是一个数组<br>
 		-- 元素 6 : 本地化名称 , 对应原型中的 [ localised_name ] 属性 , 默认 : { "SISettingName.[ ShowName ]-[ SettingID ]" }<br>
-		-- 元素 7 : 本地化描述 , 对应原型中的 [ localised_description ] 属性 , 默认 : { "SICommon.SettingsDescription" , ConstantsData.localisedName , { "SISettingDescription.[ ShowName ]-[ SettingID ]" } , [ default_value ] }<br>
+		-- 元素 7 : 本地化描述 , 对应原型中的 [ localised_description ] 属性 , 默认 : { "SICommon.SettingsDescription" , ConstantsData.PackageLocalisedName , { "SISettingDescription.[ ShowName ]-[ SettingID ]" } , [ default_value ] }<br>
 		-- <br>
 		-- 其余的属性比如 order 都是自动补充的<br>
 		-- 不使用某个属性时 , 可以填 nil<br>
@@ -397,33 +397,35 @@ local constantsData =
 
 	-- ======================================================================
 	-- 自动生成的属性 , 其中的值请勿手动修改
-	-- ClassName            = string   , 全局变量名称
-	-- CodeName             = string   , 在本地化字符串中用作分组标签 , 以及作为注册名
-	-- CodeNamePrefix       = string   , 物品 , 实体 , 配方等的 [ name ] 中会添加此前缀
-	-- ShowName             = string   , 在日志或调试信息中输出使用的名称
-	-- ShowNamePrefix       = string   , 物品 , 实体 , 配方等的 [ localised ] 中会添加此前缀
-	-- OrderPrefix          = string   , 物品 , 实体 , 配方等的排序字符串的前缀
-	-- OrderCode            = int      , 物品 , 实体 , 配方等的排序编号 , 一直递增 , 上限 10000
-	-- LocalisedName        = {}       , 此 ConstantsData 的本地化名称 , 值为 "ConstantsDataName.[ CodeName ]" , 其中的所有 "_" 都会被替换成 "-"
-	-- LocalisedDescription = {}       , 此 ConstantsData 的本地化描述 , 值为 "ConstantsDataDescription.[ CodeName ]" , 其中的所有 "_" 都会被替换成 "-"
-	-- GetOrderString       = function , 是个无参数的函数 , 返回下一个此 ConstantsData 的排序字符串
-	-- PicturePath          = string   , 指向了当前功能模块所使用的图片文件所在的文件夹位置 , 默认值 : __ModName__/package/[ PackageName ]/graphic/
-	-- SoundPath            = string   , 指向了当前功能模块所使用的声音文件所在的文件夹位置 , 默认值 : __ModName__/package/[ PackageName ]/sound/
-	-- API                  = {}       , 包含了此 ConstantsData 的一些原始属性和自动生成的函数
-	-- OrderOffset          = {}       , 包含了所有的偏移的排序数据
-	-- raw                  = {}       , 包含了自动处理后的各种物品 , 实体 , 配方等的名称
+	-- ClassName                   = string   , 全局变量名称
+	-- CodeName                    = string   , 在本地化字符串中用作分组标签 , 以及作为注册名
+	-- CodeNamePrefix              = string   , 物品 , 实体 , 配方等的 [ name ] 中会添加此前缀
+	-- ShowName                    = string   , 在日志或调试信息中输出使用的名称
+	-- ShowNamePrefix              = string   , 物品 , 实体 , 配方等的 [ localised ] 中会添加此前缀
+	-- OrderPrefix                 = string   , 物品 , 实体 , 配方等的排序字符串的前缀
+	-- OrderCode                   = int      , 物品 , 实体 , 配方等的排序编号 , 一直递增 , 上限 10000
+	-- LocalisedName               = {}       , 此 ConstantsData 的本地化名称 , 值为 "SIConstantsDataName.[ CodeName ]" , 其中的所有 "_" 都会被替换成 "-"
+	-- LocalisedDescription        = {}       , 此 ConstantsData 的本地化描述 , 值为 "SIConstantsDataDescription.[ CodeName ]" , 其中的所有 "_" 都会被替换成 "-"
+	-- PackageLocalisedName        = {}       , 此 ConstantsData 的本地化名称 , 值为 "SIPackageName.[ package.PackageName ]" , 任何字符都不会被替换
+	-- PackageLocalisedDescription = {}       , 此 ConstantsData 的本地化描述 , 值为 "SIPackageDescription.[ package.PackageName ]" , 任何字符都不会被替换
+	-- GetOrderString              = function , 是个无参数的函数 , 返回下一个此 ConstantsData 的排序字符串
+	-- PicturePath                 = string   , 指向了当前功能模块所使用的图片文件所在的文件夹位置 , 默认值 : __ModName__/package/[ PackageName ]/graphic/
+	-- SoundPath                   = string   , 指向了当前功能模块所使用的声音文件所在的文件夹位置 , 默认值 : __ModName__/package/[ PackageName ]/sound/
+	-- API                         = {}       , 包含了此 ConstantsData 的一些原始属性和自动生成的函数
+	-- OrderOffset                 = {}       , 包含了所有的偏移的排序数据
+	-- raw                         = {}       , 包含了自动处理后的各种物品 , 实体 , 配方等的名称
 	--
 	-- API 中包含的属性 :
-	-- API.ID               = string   , 等于此 [ ConstantsData.ID ] 的值
-	-- API.PackageName      = string   , 此 ConstantsData 所在的功能模块的文件夹名称
-	-- API.ClassName        = string   , 等于此 [ CnstantsData.ClassName ] 的值
-	-- API.OrderPrefix      = string   , 等于此 [ CnstantsData.OrderPrefix ] 的值
-	-- API.GetOrderString   = function , 等于此 [ CnstantsData.GetOrderString ] 的值 , 是个无参数的函数 , 返回下一个此 ConstantsData 的排序字符串
+	-- API.ID                      = string   , 等于此 [ ConstantsData.ID ] 的值
+	-- API.PackageName             = string   , 此 ConstantsData 所在的功能模块的文件夹名称
+	-- API.ClassName               = string   , 等于此 [ CnstantsData.ClassName ] 的值
+	-- API.OrderPrefix             = string   , 等于此 [ CnstantsData.OrderPrefix ] 的值
+	-- API.GetOrderString          = function , 等于此 [ CnstantsData.GetOrderString ] 的值 , 是个无参数的函数 , 返回下一个此 ConstantsData 的排序字符串
 	--
 	-- raw 中包含的属性 :
-	-- raw.Groups           = {}       , 其中包含了自动创建的子分组的名称 , 键的值等于 [ Autoload ] 中的子分组的名称 , 值的值等于子分组的实际 [ name ] 值 , 结构是 raw.Groups[分组 ID][子分组 ID]
-	-- raw.DamageTypes      = {}       , 其中包含了自动创建的伤害类型的名称 , 键的值等于 [ Autoload ] 中的伤害类型的名称 , 值的值等于伤害类型的实际 [ name ] 值
-	-- raw.DamageTypeValues = {}       , 其中包含了自动创建的伤害类型的抗性 , 键的值等于 [ Autoload ] 中的伤害类型的名称 , 值的值等于 [ Autoload ] 中伤害类型定义的抗性值 , 已经过处理可以直接使用
+	-- raw.Groups                  = {}       , 其中包含了自动创建的子分组的名称 , 键的值等于 [ Autoload ] 中的子分组的名称 , 值的值等于子分组的实际 [ name ] 值 , 结构是 raw.Groups[分组 ID][子分组 ID]
+	-- raw.DamageTypes             = {}       , 其中包含了自动创建的伤害类型的名称 , 键的值等于 [ Autoload ] 中的伤害类型的名称 , 值的值等于伤害类型的实际 [ name ] 值
+	-- raw.DamageTypeValues        = {}       , 其中包含了自动创建的伤害类型的抗性 , 键的值等于 [ Autoload ] 中的伤害类型的名称 , 值的值等于 [ Autoload ] 中伤害类型定义的抗性值 , 已经过处理可以直接使用
 	-- ======================================================================
 
 	-- ============================================================================================================================================

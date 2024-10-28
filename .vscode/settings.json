@@ -1,0 +1,33 @@
+{
+    "Lua.diagnostics.globals": [
+        "circuit_connector_definitions",
+        "data",
+        "defines",
+        "game",
+        "localised_print",
+        "log",
+        "mods",
+        "prototypes",
+        "remote",
+        "script",
+        "settings",
+        "serpent",
+        "storage",
+        "table_size",
+        "SIConstants_Core",
+        "SIConstants_ToolMap",
+        "SIConstants_DebugItem",
+        "SIConstants_AutoInsert",
+        "SIConstants_Permission",
+        "SIConstants_RPGSystem",
+        "SIConstants_Overhaul",
+        "SIConstants_Expand",
+        "SIConstants_Bookshelf",
+        "SIConstants_Unlocker",
+        "SIConstants_BuildLimit",
+        "SIConstants_RuinControl",
+        "SIConstants_BaseFix",
+        "SIConstants_Planting",
+        "SIConstants_Colorful"
+    ]
+}
