@@ -768,7 +768,7 @@ function SIInit.AutoLoad( ModName , CustomPackageConfig , ConstantsDataPrefix , 
 					if packageConfig.Requires then
 						for requireIndex , requirePackageName in pairs( packageConfig.Requires ) do
 							if not SISettings.Package[requirePackageName]() or not SIInit.ConstantsDataList[ModName .. "_" .. requirePackageName] then
-								table.insert( SIInit.UnloadedPackageList , packageConfig )
+								table.insert( SIInit.UnloadedPackageList , { Package = packageConfig , Reason = "SIUtils.ShowUnloadedPackageListReason-NoRequire" } )
 								packageLoadFlag = false
 								break
 								--return CodeE( SIInit , "功能模块缺少强制依赖 , Package=\"" .. packageName .. "\" , Require=\"" .. requirePackageName .. "\"" )
@@ -776,10 +776,10 @@ function SIInit.AutoLoad( ModName , CustomPackageConfig , ConstantsDataPrefix , 
 						end
 						for exceptIndex , exceptPackageName in pairs( packageConfig.Excepts ) do
 							if SISettings.Package[exceptPackageName]() or SIInit.ConstantsDataList[ModName .. "_" .. exceptPackageName] then
-								table.insert( SIInit.UnloadedPackageList , packageConfig )
+								table.insert( SIInit.UnloadedPackageList , { Package = packageConfig , Reason = "SIUtils.ShowUnloadedPackageListReason-NoExcept" } )
 								packageLoadFlag = false
 								break
-								--return CodeE( SIInit , "功能模块存在强制排除 , Package=\"" .. packageName .. "\" , Require=\"" .. exceptPackageName .. "\"" )
+								--return CodeE( SIInit , "功能模块检测到互斥依赖 , Package=\"" .. packageName .. "\" , Require=\"" .. exceptPackageName .. "\"" )
 							end
 						end
 					end
@@ -1249,21 +1249,22 @@ function SIInit.ShowUnloadedPackageList( playerOrIndex )
 	local unloadedPackageOutput = {}
 	local messageOutput = { "SIUtils.ShowUnloadedPackageList" , unloadedPackageOutput }
 	local unloadedPackageCount = #SIInit.UnloadedPackageList
-	for packageIndex , packageConfig in pairs( SIInit.UnloadedPackageList ) do
+	for packageIndex , packageConfigData in pairs( SIInit.UnloadedPackageList ) do
+		local packageConfig = packageConfigData.Package
 		if( packageIndex > SIInit.ShowUnloadedPackageListMaxCount ) then
 			table.insert( unloadedPackageOutput , "SIUtils.ShowUnloadedPackageListEndless" )
 		else
 			if packageIndex < unloadedPackageCount then
 				table.insert( unloadedPackageOutput , "SIUtils.ShowUnloadedPackageListMedium" )
 				table.insert( unloadedPackageOutput , "SIPackageName." .. packageConfig.PackageName )
-				table.insert( unloadedPackageOutput , "SIUtils.ShowUnloadedPackageListReason-NoRequire" )
+				table.insert( unloadedPackageOutput , packageConfig.Reason )
 				local unloadedPackageOutputNew = {}
 				table.insert( unloadedPackageOutput , "SIPackageName." .. unloadedPackageOutputNew )
 				unloadedPackageOutput = unloadedPackageOutputNew
 			else
 				table.insert( unloadedPackageOutput , "SIUtils.ShowUnloadedPackageListEnd" )
 				table.insert( unloadedPackageOutput , "SIPackageName." .. packageConfig.PackageName )
-				table.insert( unloadedPackageOutput , "SIUtils.ShowUnloadedPackageListReason-NoRequire" )
+				table.insert( unloadedPackageOutput , packageConfig.Reason )
 			end
 		end
 	end
