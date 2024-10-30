@@ -11,25 +11,25 @@ end
 local Settings =
 {
 --	{
---		type = "bool-setting" ,
+--		type = SICommon.SettingTypes.BOOL ,
 --		setting_type = SICommon.SettingAffectTypes.StartUp ,
 --		name = "SIUtils-ShowPatreon" ,
 --		default_value = true
 --	} ,
 	{
-		type = "bool-setting" ,
+		type = SICommon.SettingTypes.BOOL ,
 		setting_type = SICommon.SettingAffectTypes.StartUp ,
 		name = "SIUtils-Debug" ,
 		default_value = false
 	} ,
 	{
-		type = "bool-setting" ,
+		type = SICommon.SettingTypes.BOOL ,
 		setting_type = SICommon.SettingAffectTypes.StartUp ,
 		name = "SIUtils-ShowError" ,
 		default_value = false
 	} ,
 	{
-		type = "bool-setting" ,
+		type = SICommon.SettingTypes.BOOL ,
 		setting_type = SICommon.SettingAffectTypes.StartUp ,
 		name = "SIUtils-CodeError" ,
 		default_value = true

@@ -131,26 +131,26 @@ local constantsData =
 		-- 自动创建设置 , [ ConstantsData.Autoload.Enable ] 为 true 时才会自动创建<br>
 		-- 每个设置都是由键值对组成 , 键为设置的 ID , 进而计算成实际的 [ name ] 值 , 而值是一个数组 , 填写了创建一个设置必要的参数<br>
 		-- 数组中最多可以有 8 个元素 , 含义分别是 :<br>
-		-- 元素 1 : 设置的类型 , 对应原型中的 [ type ] 属性 , 末尾不需要添加 "-setting" , 可以使用 SICommon.SettingTypes 中的预设值<br>
-		-- 元素 2 : 设置的生效类型 , 对应原型中的 [ setting_type ] 属性 , 可以使用 SICommon.SettingAffectTypes 中的预设值<br>
-		-- 元素 3 : 默认值 , 对应原型中的 [ default_value ] 属性<br>
+		-- Type      : 设置的类型 , 对应原型中的 [ type ] 属性 , 末尾不需要添加 "-setting" , 可以使用 SICommon.SettingTypes 中的预设值<br>
+		-- Affect    : 设置的生效类型 , 对应原型中的 [ setting_type ] 属性 , 可以使用 SICommon.SettingAffectTypes 中的预设值<br>
+		-- Default   : 默认值 , 对应原型中的 [ default_value ] 属性<br>
 		-- <br>
 		-- 当是布尔型的设置时<br>
-		-- 元素 4 : 本地化名称 , 对应原型中的 [ localised_name ] 属性 , 默认 : { "SISettingName.[ ShowName ]-[ SettingID ]" }<br>
-		-- 元素 5 : 本地化描述 , 对应原型中的 [ localised_description ] 属性 , 默认 : { "SICommon.SettingsDescription" , ConstantsData.PackageLocalisedName , { "SISettingDescription.[ ShowName ]-[ SettingID ]" } , [ default_value ] }<br>
+		-- LocalName : 本地化名称 , 对应原型中的 [ localised_name ] 属性 , 默认 : { "SISettingName.[ ShowName ]-[ SettingID ]" }<br>
+		-- LocalDesc : 本地化描述 , 对应原型中的 [ localised_description ] 属性 , 默认 : { "SICommon.SettingsDescription" , ConstantsData.PackageLocalisedName , { "SISettingDescription.[ ShowName ]-[ SettingID ]" } , [ default_value ] }<br>
 		-- <br>
 		-- 当是数字型的设置时<br>
-		-- 元素 4 : 最小值 , 对应原型中的 [ minimum_value ] 属性<br>
-		-- 元素 5 : 最大值 , 对应原型中的 [ maximum_value ] 属性<br>
-		-- 元素 6 : 可用值 , 用于制作下拉列表 , 对应原型中的 [ allowed_values ] 属性 , 它是一个数组<br>
-		-- 元素 7 : 本地化名称 , 对应原型中的 [ localised_name ] 属性 , 默认 : { "SISettingName.[ ShowName ]-[ SettingID ]" }<br>
-		-- 元素 8 : 本地化描述 , 对应原型中的 [ localised_description ] 属性 , 默认 : { "SICommon.SettingsDescription" , ConstantsData.PackageLocalisedName , { "SISettingDescription.[ ShowName ]-[ SettingID ]" } , [ default_value ] }<br>
+		-- LocalName : 本地化名称 , 对应原型中的 [ localised_name ] 属性 , 默认 : { "SISettingName.[ ShowName ]-[ SettingID ]" }<br>
+		-- LocalDesc : 本地化描述 , 对应原型中的 [ localised_description ] 属性 , 默认 : { "SICommon.SettingsDescription" , ConstantsData.PackageLocalisedName , { "SISettingDescription.[ ShowName ]-[ SettingID ]" } , [ default_value ] }<br>
+		-- Min       : 最小值 , 对应原型中的 [ minimum_value ] 属性<br>
+		-- Max       : 最大值 , 对应原型中的 [ maximum_value ] 属性<br>
+		-- AllowIn   : 可用值 , 用于制作下拉列表 , 对应原型中的 [ allowed_values ] 属性 , 它是一个数组<br>
 		-- <br>
 		-- 当是字符串型的设置时<br>
-		-- 元素 4 : 是否可以为空 , 对应原型中的 [ allow_blank ] 属性 , 字符串型的设置专用 , 默认 : false<br>
-		-- 元素 5 : 可用值 , 用于制作下拉列表 , 对应原型中的 [ allowed_values ] 属性 , 它是一个数组<br>
-		-- 元素 6 : 本地化名称 , 对应原型中的 [ localised_name ] 属性 , 默认 : { "SISettingName.[ ShowName ]-[ SettingID ]" }<br>
-		-- 元素 7 : 本地化描述 , 对应原型中的 [ localised_description ] 属性 , 默认 : { "SICommon.SettingsDescription" , ConstantsData.PackageLocalisedName , { "SISettingDescription.[ ShowName ]-[ SettingID ]" } , [ default_value ] }<br>
+		-- LocalName : 本地化名称 , 对应原型中的 [ localised_name ] 属性 , 默认 : { "SISettingName.[ ShowName ]-[ SettingID ]" }<br>
+		-- LocalDesc : 本地化描述 , 对应原型中的 [ localised_description ] 属性 , 默认 : { "SICommon.SettingsDescription" , ConstantsData.PackageLocalisedName , { "SISettingDescription.[ ShowName ]-[ SettingID ]" } , [ default_value ] }<br>
+		-- Nullable  : 是否可以为空 , 对应原型中的 [ allow_blank ] 属性 , 字符串型的设置专用 , 默认 : false<br>
+		-- AllowIn   : 可用值 , 用于制作下拉列表 , 对应原型中的 [ allowed_values ] 属性 , 它是一个数组<br>
 		-- <br>
 		-- 其余的属性比如 order 都是自动补充的<br>
 		-- 不使用某个属性时 , 可以填 nil<br>
@@ -159,9 +159,9 @@ local constantsData =
 		-- ======================================================================
 		Settings =
 		{
-			ShowMainbar = { SICommon.SettingTypes.BOOL , SICommon.SettingAffectTypes.PerUser , true } ,
-			ShowHiddenEntity = { SICommon.SettingTypes.BOOL , SICommon.SettingAffectTypes.PerUser , false } ,
-			ControlOriginPermission = { SICommon.SettingTypes.BOOL , SICommon.SettingAffectTypes.StartUp , false }
+			ShowMainbar             = { Type = SICommon.SettingTypes.BOOL , Affect = SICommon.SettingAffectTypes.PerUser , Default = true  } ,
+			ShowHiddenEntity        = { Type = SICommon.SettingTypes.BOOL , Affect = SICommon.SettingAffectTypes.PerUser , Default = false } ,
+			ControlOriginPermission = { Type = SICommon.SettingTypes.BOOL , Affect = SICommon.SettingAffectTypes.StartUp , Default = false }
 		} ,
 
 		-- ======================================================================

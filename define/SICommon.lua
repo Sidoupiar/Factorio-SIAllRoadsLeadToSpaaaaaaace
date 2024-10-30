@@ -97,10 +97,10 @@ SICommon =
 	} ,
 	SettingTypes =
 	{
-		BOOL = "bool" ,
-		INT = "int" ,
-		DOUBLE = "double" ,
-		STRING = "string"
+		BOOL = "bool-setting" ,
+		INT = "int-setting" ,
+		DOUBLE = "double-setting" ,
+		STRING = "string-setting"
 	} ,
 	SettingAffectTypes =
 	{

@@ -774,6 +774,14 @@ function SIInit.AutoLoad( ModName , CustomPackageConfig , ConstantsDataPrefix , 
 								--return CodeE( SIInit , "功能模块缺少强制依赖 , Package=\"" .. packageName .. "\" , Require=\"" .. requirePackageName .. "\"" )
 							end
 						end
+						for exceptIndex , exceptPackageName in pairs( packageConfig.Excepts ) do
+							if SISettings.Package[exceptPackageName]() or SIInit.ConstantsDataList[ModName .. "_" .. exceptPackageName] then
+								table.insert( SIInit.UnloadedPackageList , packageConfig )
+								packageLoadFlag = false
+								break
+								--return CodeE( SIInit , "功能模块存在强制排除 , Package=\"" .. packageName .. "\" , Require=\"" .. exceptPackageName .. "\"" )
+							end
+						end
 					end
 				end
 			end
@@ -888,45 +896,45 @@ function SIInit.AutoLoad( ModName , CustomPackageConfig , ConstantsDataPrefix , 
 						-- 自动创建设置
 						if constantsData.Autoload.Enable and constantsData.Autoload.Settings then
 							local settings = {}
-							for settingID , settingValues in pairs( constantsData.Autoload.Settings ) do
+							for settingID , settingData in pairs( constantsData.Autoload.Settings ) do
 								local realName = constantsData.CodeNamePrefix .. settingID:gsub( "_" , "-" )
-								local settingType = settingValues[1]
+								local settingType = settingData.Type
 								local settingItem =
 								{
-									type = settingType .. "-setting" ,
-									setting_type = settingValues[2] ,
+									type = settingType ,
+									setting_type = settingData.Affect ,
 									name = realName ,
-									default_value = settingValues[3] ,
+									default_value = settingData.Default ,
 									order = constantsData.GetOrderString() ,
 									hidden = false
 								}
 								if settingType == SICommon.SettingTypes.BOOL then
-									if settingValues[2] == SICommon.SettingAffectTypes.StartUp then
-										settingItem.localised_name = { "SICommon.SettingsStartUp" , settingValues[4] or { "SISettingName."..realName } }
+									if settingData.Affect == SICommon.SettingAffectTypes.StartUp then
+										settingItem.localised_name = { "SICommon.SettingsStartUp" , settingData.LocalName or { "SISettingName."..realName } }
 									else
-										settingItem.localised_name = { "SICommon.SettingsRuntime" , { "SIPackageName." .. packageName } , settingValues[4] or { "SISettingName."..realName } }
+										settingItem.localised_name = { "SICommon.SettingsRuntime" , { "SIPackageName." .. packageName } , settingData.LocalName or { "SISettingName."..realName } }
 									end
-									settingItem.localised_description = settingValues[5] or { "SICommon.SettingsDescription" , constantsData.PackageLocalisedName , { "SISettingDescription."..realName } , SIPrint.ToShow( settingValues[3] ) }
+									settingItem.localised_description = settingData.LocalDesc or { "SICommon.SettingsDescription" , constantsData.PackageLocalisedName , { "SISettingDescription."..realName } , SIPrint.ToShow( settingData.Default ) }
 									settingItem.forced_value = false
 								elseif settingType == SICommon.SettingTypes.INT or settingType == SICommon.SettingTypes.DOUBLE then
-									settingItem.minimum_value = settingValues[4]
-									settingItem.maximum_value = settingValues[5]
-									settingItem.allowed_values = settingValues[6]
-									if settingValues[2] == SICommon.SettingAffectTypes.StartUp then
-										settingItem.localised_name = { "SICommon.SettingsStartUp" , settingValues[7] or { "SISettingName."..realName } }
+									settingItem.minimum_value = settingData.Min
+									settingItem.maximum_value = settingData.Max
+									settingItem.allowed_values = settingData.AllowIn
+									if settingData.Affect == SICommon.SettingAffectTypes.StartUp then
+										settingItem.localised_name = { "SICommon.SettingsStartUp" , settingData.LocalName or { "SISettingName."..realName } }
 									else
-										settingItem.localised_name = { "SICommon.SettingsRuntime" , { "SIPackageName." .. packageName } , settingValues[7] or { "SISettingName."..realName } }
+										settingItem.localised_name = { "SICommon.SettingsRuntime" , { "SIPackageName." .. packageName } , settingData.LocalName or { "SISettingName."..realName } }
 									end
-									settingItem.localised_description = settingValues[8] or { "SICommon.SettingsDescription" , constantsData.PackageLocalisedName , { "SISettingDescription."..realName } , SIPrint.ToShow( settingValues[3] ) }
+									settingItem.localised_description = settingData.LocalDesc or { "SICommon.SettingsDescription" , constantsData.PackageLocalisedName , { "SISettingDescription."..realName } , SIPrint.ToShow( settingData.Default ) }
 								elseif settingType == SICommon.SettingTypes.STRING then
-									settingItem.allow_blank = settingValues[4] or false
-									settingItem.allowed_values = settingValues[5]
-									if settingValues[2] == SICommon.SettingAffectTypes.StartUp then
-										settingItem.localised_name = { "SICommon.SettingsStartUp" , settingValues[6] or { "SISettingName."..realName } }
+									settingItem.allow_blank = settingData.Nullable or false
+									settingItem.allowed_values = settingData.AllowIn
+									if settingData.Affect == SICommon.SettingAffectTypes.StartUp then
+										settingItem.localised_name = { "SICommon.SettingsStartUp" , settingData.LocalName or { "SISettingName."..realName } }
 									else
-										settingItem.localised_name = { "SICommon.SettingsRuntime" , { "SIPackageName." .. packageName } , settingValues[6] or { "SISettingName."..realName } }
+										settingItem.localised_name = { "SICommon.SettingsRuntime" , { "SIPackageName." .. packageName } , settingData.LocalName or { "SISettingName."..realName } }
 									end
-									settingItem.localised_description = settingValues[7] or { "SICommon.SettingsDescription" , constantsData.PackageLocalisedName , { "SISettingDescription."..realName } , SIPrint.ToShow( settingValues[3] ) }
+									settingItem.localised_description = settingData.LocalDesc or { "SICommon.SettingsDescription" , constantsData.PackageLocalisedName , { "SISettingDescription."..realName } , SIPrint.ToShow( settingData.Default ) }
 									settingItem.auto_trim = true
 								end
 								table.insert( settings , settingItem )

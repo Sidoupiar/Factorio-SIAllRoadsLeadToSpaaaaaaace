@@ -4,8 +4,8 @@
 -- ============================================================================================================================================
 -- ============================================================================================================================================
 
-local healthMult = SIConfigs.SIDebugItem.DebugEntityHealthMult
-local tankSize = SIConfigs.SIDebugItem.TankSize
+local healthMult = SIConfigs.SIDebugItem.DebugEntityHealthMult ~= nil and SIConfigs.SIDebugItem.DebugEntityHealthMult or 26000.0
+local tankSize = SIConfigs.SIDebugItem.TankSize ~= nil and SIConfigs.SIDebugItem.TankSize or 8.0
 local tankScale = 0.5 * tankSize
 local tankShiftY = 6
 
