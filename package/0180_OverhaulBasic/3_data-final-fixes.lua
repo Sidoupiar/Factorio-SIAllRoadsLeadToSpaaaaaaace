@@ -5,7 +5,7 @@
 -- ============================================================================================================================================
 
 -- 修改树木血量
-if SIConfigs.SIItemPropertyModify.TreeHealth ~= nil and SISettings.Startup.SIOverhaulBasic.TreeHealth() then
+if SIConfigs.SIOverhaulBasic.TreeHealth ~= nil and SISettings.Startup.SIOverhaulBasic.TreeHealth() then
 	SIGen.ForEach( SICommon.Types.Entities.Tree , function( prototypeName , prototypeData )
 		if prototypeData and prototypeData.max_health then
 			prototypeData.max_health = prototypeData.max_health * 30
@@ -20,7 +20,7 @@ end
 -- ============================================================================================================================================
 -- ============================================================================================================================================
 
-if SIConfigs.SIItemPropertyModify.TotalEvening ~= nil and SISettings.Startup.SIOverhaulBasic.TotalEvening() then
+if SIConfigs.SIOverhaulBasic.TotalEvening ~= nil and SISettings.Startup.SIOverhaulBasic.TotalEvening() then
 	SIGen.Find( SICommon.Types.Constants , "default" , function( prototypeName , prototypeData )
 		if prototypeData then
 			prototypeData.daytime_color_lookup =
@@ -50,7 +50,7 @@ end
 -- ============================================================================================================================================
 -- ============================================================================================================================================
 
-if SIConfigs.SIItemPropertyModify.EnemyCorpseDuration ~= nil then
+if SIConfigs.SIOverhaulBasic.EnemyCorpseDuration ~= nil then
 	local enemyCorpseDuration = SISettings.Startup.SIOverhaulBasic.EnemyCorpseDuration()
 	if enemyCorpseDuration > 0 then
 		SIGen.ForEach( SICommon.Types.Entities.Unit , function( unitPrototypeName , unitPrototypeData )
@@ -78,8 +78,8 @@ end
 -- ============================================================================================================================================
 -- ============================================================================================================================================
 
-if SIConfigs.SIItemPropertyModify.ShowItemStackData ~= nil and SISettings.Startup.SIOverhaulBasic.ShowItemStackData() then
-	local forceFlag = SIConfigs.SIItemPropertyModify.ShowItemStackDataForce ~= nil and SISettings.Startup.SIOverhaulBasic.ShowItemStackDataForce() or false
+if SIConfigs.SIOverhaulBasic.ShowItemStackData ~= nil and SISettings.Startup.SIOverhaulBasic.ShowItemStackData() then
+	local forceFlag = SIConfigs.SIOverhaulBasic.ShowItemStackDataForce ~= nil and SISettings.Startup.SIOverhaulBasic.ShowItemStackDataForce() or false
 	SIGen.ForEachType( SICommon.Types.StackableItems , function( prototypeName , prototypeData )
 		if prototypeData then
 			local localDescription = prototypeData.localised_description
