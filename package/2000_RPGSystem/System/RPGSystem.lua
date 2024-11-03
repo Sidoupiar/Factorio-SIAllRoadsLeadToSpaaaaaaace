@@ -174,6 +174,39 @@ SIRPGSystem =
 	-- ========== 功能函数 ========================================================================================================================
 	-- ============================================================================================================================================
 	-- ============================================================================================================================================
+	CreateAttackDamageExp = function( player , finalDamage , damagedEntity )
+		if not player.character or not player.character.valid or not damagedEntity.is_entity_with_health then
+			return
+		end
+		if finalDamage < 1 or not player.force.is_enemy( damagedEntity.force ) then
+			return
+		end
+		local globalSettings = SIGlobal.GetGlobalSettings( SIRPGSystem.Settings.Name )
+		-- 不在特殊实体列表里才有战斗伤害经验
+		if not globalSettings.EXP.SpecialDamagedEntityList[damagedEntity.name] then
+			local exp = math.max( ( finalDamage * 0.0074 - 0.2 ) * ( damagedEntity.quality.level ^ 0.35 ) , 0.003 )
+			exp = math.min( exp ^ 1.47 , globalSettings.EXP.Max ) * globalSettings.Setting.AttackExpMultiplier
+			SIRPGSystem.MakeAttackExp( player.index , exp , false )
+		end
+	end ,
+	CreateAttackDriveDamageExp = function( player , finalDamage , damagedEntity , driveEntity )
+		if not player.character or not player.character.valid or not damagedEntity.is_entity_with_health then
+			return
+		end
+		if finalDamage < 1 or not player.force.is_enemy( damagedEntity.force ) then
+			return
+		end
+		local globalSettings = SIGlobal.GetGlobalSettings( SIRPGSystem.Settings.Name )
+		-- 不在特殊实体列表里才有战斗伤害经验
+		if not globalSettings.EXP.SpecialDamagedEntityList[damagedEntity.name] then
+			local driveHealth = driveEntity.prototype.get_max_health( driveEntity.quality )
+			if driveHealth > 0 then
+				local exp = math.max( ( finalDamage * 4.7 ) / math.max( driveHealth , 400 ) * ( damagedEntity.quality.level ^ 0.35 ) - 0.4 , 0.003 )
+				exp = math.min( exp ^ 1.31 , globalSettings.EXP.Max ) * globalSettings.Setting.AttackExpMultiplier
+				SIRPGSystem.MakeAttackExp( player.index , exp , false )
+			end
+		end
+	end ,
 	CreateAttackKillExp = function( player , diedEntity )
 		if not player.character or not player.character.valid or not diedEntity.is_entity_with_health then
 			return
@@ -182,16 +215,18 @@ SIRPGSystem =
 			return
 		end
 		local globalSettings = SIGlobal.GetGlobalSettings( SIRPGSystem.Settings.Name )
-		local entityName = diedEntity.name
-		local specialBonus = globalSettings.EXP.SpecialEntityList[entityName]
+		local specialBonus = globalSettings.EXP.SpecialEntityList[diedEntity.name]
 		if specialBonus then
 			specialBonus = specialBonus * globalSettings.Setting.AttackExpMultiplier
 			SIRPGSystem.MakeAttackExp( player.index , specialBonus , true )
 		else
-			local maxHealth = diedEntity.prototype.max_health
-			local exp = math.max( maxHealth / 55 - 0.3 , 0.04 )
-			exp = math.min( exp ^ 1.88 , globalSettings.EXP.Max ) * globalSettings.Setting.AttackExpMultiplier
-			SIRPGSystem.MakeAttackExp( player.index , exp , false )
+			local quality = diedEntity.quality
+			local maxHealth = diedEntity.prototype.get_max_health( quality )
+			if maxHealth > 0 then
+				local exp = math.max( ( maxHealth * 0.0089 - 0.3 ) * ( quality.level ^ 0.35 ) , 0.04 )
+				exp = math.min( exp ^ 1.88 , globalSettings.EXP.Max ) * globalSettings.Setting.AttackExpMultiplier
+				SIRPGSystem.MakeAttackExp( player.index , exp , false )
+			end
 		end
 	end ,
 	CreateAttackDriveExp = function( player , diedEntity , driveEntity )
@@ -202,17 +237,19 @@ SIRPGSystem =
 			return
 		end
 		local globalSettings = SIGlobal.GetGlobalSettings( SIRPGSystem.Settings.Name )
-		local entityName = diedEntity.name
-		local specialBonus = globalSettings.EXP.SpecialEntityList[entityName]
+		local specialBonus = globalSettings.EXP.SpecialEntityList[diedEntity.name]
 		if specialBonus then
 			specialBonus = specialBonus * globalSettings.Setting.AttackExpMultiplier
 			SIRPGSystem.MakeAttackExp( player.index , specialBonus , true )
 		else
-			local maxHealth = diedEntity.prototype.max_health
-			local driveHealth = driveEntity.prototype.max_health
-			local exp = math.max( maxHealth * 8.4 / math.max( driveHealth , 400 ) - 0.7 , 0.04 )
-			exp = math.min( exp ^ 1.68 , globalSettings.EXP.Max ) * globalSettings.Setting.AttackExpMultiplier
-			SIRPGSystem.MakeAttackExp( player.index , exp , false )
+			local diedEntityQuality = diedEntity.quality
+			local maxHealth = diedEntity.prototype.get_max_health( diedEntityQuality )
+			local driveHealth = driveEntity.prototype.get_max_health( driveEntity.quality )
+			if maxHealth > 0 and driveHealth > 0 then
+				local exp = math.max( maxHealth * 5.1 / math.max( driveHealth , 400 ) * ( diedEntityQuality.Level ^ 0.35 ) - 0.7 , 0.04 )
+				exp = math.min( exp ^ 1.68 , globalSettings.EXP.Max ) * globalSettings.Setting.AttackExpMultiplier
+				SIRPGSystem.MakeAttackExp( player.index , exp , false )
+			end
 		end
 	end ,
 	CreateAdventureThingExp = function( player , adventureThing )
@@ -220,19 +257,17 @@ SIRPGSystem =
 			return
 		end
 	end ,
-	CreateCraftRecipeExp = function( player , recipe )
+	CreateCraftRecipeExp = function( player , recipe , itemStack )
 		if not player.character or not player.character.valid then
 			return
 		end
 		local globalSettings = SIGlobal.GetGlobalSettings( SIRPGSystem.Settings.Name )
-		local recipeName = recipe.name
-		local specialBonus = globalSettings.EXP.SpecialRecipeList[recipeName]
+		local specialBonus = globalSettings.EXP.SpecialRecipeList[recipe.name]
 		if specialBonus then
 			specialBonus = specialBonus * globalSettings.Setting.CraftExpMultiplier
 			SIRPGSystem.MakeCraftExp( player.index , specialBonus , true )
 		else
-			local energy = recipe.energy * 1.5
-			local time = math.max( energy / ( player.character_crafting_speed_modifier + 1 ) - 0.4 , 0.04 )
+			local time = math.max( recipe.energy * 1.5 / ( player.character_crafting_speed_modifier + 1 ) * ( itemStack.quality.level ^ 0.35 ) - 0.4 , 0.04 )
 			time = math.min( time ^ 1.72 , globalSettings.EXP.Max ) * globalSettings.Setting.CraftExpMultiplier
 			SIRPGSystem.MakeCraftExp( player.index , time , false )
 		end
@@ -245,8 +280,7 @@ SIRPGSystem =
 			return
 		end
 		local globalSettings = SIGlobal.GetGlobalSettings( SIRPGSystem.Settings.Name )
-		local entityName = entity.name
-		local specialBonus = globalSettings.EXP.SpecialMiningList[entityName]
+		local specialBonus = globalSettings.EXP.SpecialMiningList[entity.name]
 		if specialBonus then
 			specialBonus = specialBonus * globalSettings.Setting.CraftExpMultiplier
 			SIRPGSystem.MakeCraftExp( player.index , specialBonus , true )
@@ -254,16 +288,14 @@ SIRPGSystem =
 			if not entity.prototype.mineable_properties then
 				return
 			end
-			local mining = entity.prototype.mineable_properties.mining_time * 1.2
-			local time = math.max( mining / ( player.character_mining_speed_modifier + 1 ) - 0.4 , 0.04 )
+			local time = math.max( entity.prototype.mineable_properties.mining_time * 1.2 / ( player.character_mining_speed_modifier + 1 ) - 0.4 , 0.04 )
 			time = math.min( time ^ 1.64 , globalSettings.EXP.Max ) * globalSettings.Setting.CraftExpMultiplier
 			SIRPGSystem.MakeCraftExp( player.index , time , false )
 		end
 	end ,
 	CreateCraftTechnologyExp = function( force , technology )
 		local globalSettings = SIGlobal.GetGlobalSettings( SIRPGSystem.Settings.Name )
-		local technologyName = technology.name
-		local specialBonus = globalSettings.EXP.SpecialTechnologyList[technologyName]
+		local specialBonus = globalSettings.EXP.SpecialTechnologyList[technology.name]
 		if specialBonus then
 			specialBonus = specialBonus * globalSettings.Setting.CraftExpMultiplier
 			for index , player in pairs( force.players ) do
@@ -278,7 +310,7 @@ SIRPGSystem =
 			if technology.research_unit_count_formula then
 				unitCount = load( "local L = " .. ( technology.level - 1 ) .. " return " .. technology.research_unit_count_formula )()
 			end
-			local exp = math.max( count * unitCount * technology.research_unit_energy / 160 , 1 )
+			local exp = math.max( count * unitCount * technology.research_unit_energy * 0.0057 / ( #technology.research_unit_ingredients ^ 0.42 ) , 2 )
 			exp = math.min( exp ^ 1.26 , globalSettings.EXP.Max ) * globalSettings.Setting.CraftExpMultiplier
 			for index , player in pairs( force.players ) do
 				SIRPGSystem.MakeCraftExp( player.index , exp , false )
@@ -3108,6 +3140,7 @@ SIRPGSystem.Settings =
 		EXP =
 		{
 			Max = 1000000.0 ,
+			SpecialDamagedEntityList = {} ,
 			SpecialEntityList = {} ,
 			SpecialRecipeList = {} ,
 			SpecialMiningList = {} ,

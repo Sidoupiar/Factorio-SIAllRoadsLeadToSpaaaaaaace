@@ -690,15 +690,27 @@ SIEventBus
 	local player = nil
 	if causeEntity.is_player() then
 		player = causeEntity
+		-- 玩家战斗经验
+		SIRPGSystem.CreateAttackDamageExp( player , event.final_damage_amount , entity )
 	elseif causeEntity.type == SICommon.Types.Entities.Character then
 		player = causeEntity.player
+		-- 玩家战斗经验
+		if player and player.valid and player.is_player() then
+			SIRPGSystem.CreateAttackDamageExp( player , event.final_damage_amount , entity )
+		end
 	elseif causeEntity.type == SICommon.Types.Entities.Car or causeEntity.type == SICommon.Types.Entities.SpiderVehicle then
 		local driver = causeEntity.get_driver()
 		if driver and driver.valid then
 			if driver.is_player() then
 				player = driver
+				-- 玩家战斗经验 , 开车不给战斗伤害经验
+				-- SIRPGSystem.CreateAttackDriveDamageExp( player , event.final_damage_amount , entity , causeEntity )
 			elseif driver.type == SICommon.Types.Entities.Character then
 				player = driver.player
+				-- 玩家战斗经验 , 开车不给战斗伤害经验
+				-- if player and player.valid and player.is_player() then
+				-- 	SIRPGSystem.CreateAttackDriveDamageExp( player , event.final_damage_amount , entity , causeEntity )
+				-- end
 			end
 		end
 	end
@@ -767,19 +779,21 @@ end )
 	local playerIndex = event.player_index
 	local player = game.get_player( playerIndex )
 	-- 玩家生存经验
-	SIRPGSystem.CreateCraftRecipeExp( player , event.recipe )
+	SIRPGSystem.CreateCraftRecipeExp( player , event.recipe , itemStack )
 end )
 .Add( SIEvents.on_player_mined_entity , function( event , functionID )
 	local entity = event.entity
 	if not entity or not entity.valid then
 		return
 	end
+	local entityType = entity.type
+	if entityType == SICommon.Types.Entities.ItemEntity and entityType == SICommon.Types.Entities.GhostEntity and entityType == SICommon.Types.Entities.GhostTile then
+		return
+	end
 	local playerIndex = event.player_index
 	local player = game.get_player( playerIndex )
 	-- 玩家生存经验
-	if entity.type ~= SICommon.Types.Entities.ItemEntity then
-		SIRPGSystem.CreateCraftMiningExp( player , entity )
-	end
+	SIRPGSystem.CreateCraftMiningExp( player , entity )
 end )
 .Add( SIEvents.on_research_finished , function( event , functionID )
 	local technology = event.research
