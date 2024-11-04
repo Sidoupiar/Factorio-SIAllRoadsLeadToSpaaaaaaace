@@ -6,3 +6,44 @@
 
 -- SIGen
 -- .SetGroup( SIConstants_Core.raw.Groups.Hidden.Base )
+
+-- ============================================================================================================================================
+-- ============================================================================================================================================
+-- ========== 修改原版 UI 样式 ================================================================================================================
+-- ============================================================================================================================================
+-- ============================================================================================================================================
+
+--local function SetStyleProperty( style , propertyID , value )
+--	if style and style[propertyID] then
+--		style[propertyID] = value
+--	end
+--end
+--
+--SIGen
+--
+---- 此项不可以禁用或删除
+--.Find( SICommon.Types.Style , "default" , function( prototypeName , prototypeData )
+--	if prototypeData then
+--		-- 修改弹出说明的窗口的最大宽度
+--		SetStyleProperty( prototypeData.tooltip_title_label , "maximal_width" , 406 )
+--		SetStyleProperty( prototypeData.tooltip_label , "maximal_width" , 406 )
+--		-- 修改插件槽列表的最大高度
+--		SetStyleProperty( prototypeData.module_inventory_scroll_pane , "maximal_height" , 350 )
+--		-- 修改装甲模块区域的最大宽度
+--		SetStyleProperty( prototypeData.horizontally_limited_equipment_grid_scroll_pane , "maximal_width" , 812 )
+--	end
+--end )
+--
+---- 此项不可以禁用或删除
+--.Find( SICommon.Types.Constants , "default" , function( prototypeName , prototypeData )
+--	if prototypeData then
+--		-- 修改配方栏的宽度以及每行的配方数量 (包括筛选器)
+--		local filterLine = SISettings.Startup.SICore.ChangeFilterLine() or 20
+--		prototypeData.select_group_row_count = math.floor( filterLine * 0.6 + 0.001 )
+--		prototypeData.select_slot_row_count = filterLine
+--		-- 修改背包每行的格子数量
+--		prototypeData.inventory_width = SISettings.Startup.SICore.ChangeInventoryLine() or 15
+--		-- 修改插件槽每行的格子数量
+--		prototypeData.module_inventory_width = SISettings.Startup.SICore.ChangeModuleLine() or 15
+--	end
+--end )

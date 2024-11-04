@@ -13,6 +13,7 @@
 -- ======================================================================
 -- 初始化
 -- ======================================================================
+local hideTechnologySelf = SIConfigs.SIHideTechnology.HideTechnologySelf ~= nil and SISettings.Startup.SIHideTechnology.HideTechnologySelf() or false
 
 -- ======================================================================
 -- 事件
@@ -30,7 +31,6 @@
 SIEventBus
 .ConfigurationChange( function( functionID )
 	-- 初始化隐藏科技
-	local hideTechnologySelf = SIConfigs.SIHideTechnology.HideTechnologySelf ~= nil and SISettings.Startup.SIHideTechnology.HideTechnologySelf() or false
 	if hideTechnologySelf then
 		local orderPrefix = SIOrderPrefix()
 		for forceName , force in pairs( game.forces ) do
@@ -110,7 +110,6 @@ end )
 	local name = technology.name
 	local force = technology.force
 	-- 显示隐藏的科技
-	local hideTechnologySelf = SIConfigs.SIHideTechnology.HideTechnologySelf ~= nil and SISettings.Startup.SIHideTechnology.HideTechnologySelf() or false
 	if hideTechnologySelf then
 		local orderPrefix = SIOrderPrefix()
 		for subName , subTechnology in pairs( force.technologies ) do
@@ -158,7 +157,6 @@ end )
 	local name = technology.name
 	local force = technology.force
 	-- 重新把科技隐藏
-	local hideTechnologySelf = SIConfigs.SIHideTechnology.HideTechnologySelf ~= nil and SISettings.Startup.SIHideTechnology.HideTechnologySelf() or false
 	if hideTechnologySelf then
 		local orderPrefix = SIOrderPrefix()
 		for subName , subTechnology in pairs( force.technologies ) do
