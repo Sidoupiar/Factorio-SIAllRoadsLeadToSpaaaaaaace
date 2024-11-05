@@ -5,7 +5,7 @@
 -- ============================================================================================================================================
 
 local recipeList = {}
-for index , data in pairs( SIConstants_RuinControl.RuinRecipeData ) do
+for index , data in pairs( SIConstants_RuinSystem.RuinRecipeData ) do
 	recipeList["RuinRecipe_" .. data.ID] = "遗迹配方-" .. data.alias
 end
 
@@ -38,8 +38,8 @@ SIControl.Init
 -- ======================================================================
 -- 初始化
 -- ======================================================================
-SINeed( "System/RuinControl" )
-SIGlobal.CreateSettings( SIRuinControl.Settings )
+SINeed( "System/RuinSystem" )
+SIGlobal.CreateSettings( SIRuinSystem.Settings )
 
 -- ======================================================================
 -- 事件
@@ -47,11 +47,11 @@ SIGlobal.CreateSettings( SIRuinControl.Settings )
 SIEventBus
 .Init( function( functionID )
 	-- 刷新基础数据
-	SIRuinControl.FreshRuinData()
+	SIRuinSystem.FreshRuinData()
 end )
 .ConfigurationChange( function( functionID )
 	-- 刷新基础数据
-	SIRuinControl.FreshRuinData()
+	SIRuinSystem.FreshRuinData()
 end )
 
 -- ============================================================================================================================================
@@ -67,10 +67,10 @@ SIEventBus
 .Add( SIEvents.on_chunk_generated , function( event , functionID )
 	local surface = event.surface
 	local surfaceName = surface.name
-	for surfacePrefix , value in pairs( SIConfigs.SIRuinControl.SurfacePrefixWhiteList ) do
+	for surfacePrefix , value in pairs( SIConfigs.SIRuinSystem.SurfacePrefixWhiteList ) do
 		if surfaceName:StartsWith( surfacePrefix ) then
 			-- 生成遗迹
-			SIRuinControl.CreateRuinWithChance( surface.index , event.position )
+			SIRuinSystem.CreateRuinWithChance( surface.index , event.position )
 			return
 		end
 	end
@@ -79,11 +79,11 @@ end )
 	local surfaceIndex = event.surface_index
 	local surface = game.get_surface( surfaceIndex )
 	local surfaceName = surface.name
-	for surfacePrefix , value in pairs( SIConfigs.SIRuinControl.SurfacePrefixWhiteList ) do
+	for surfacePrefix , value in pairs( SIConfigs.SIRuinSystem.SurfacePrefixWhiteList ) do
 		if surfaceName:StartsWith( surfacePrefix ) then
 			-- 移除遗迹
 			for index , position in pairs( event.positions ) do
-				SIRuinControl.RemoveRuinWithChunk( surfaceIndex , position )
+				SIRuinSystem.RemoveRuinWithChunk( surfaceIndex , position )
 			end
 			return
 		end
@@ -93,10 +93,10 @@ end )
 	local surfaceIndex = event.surface_index
 	local surface = game.get_surface( surfaceIndex )
 	local surfaceName = surface.name
-	for surfacePrefix , value in pairs( SIConfigs.SIRuinControl.SurfacePrefixWhiteList ) do
+	for surfacePrefix , value in pairs( SIConfigs.SIRuinSystem.SurfacePrefixWhiteList ) do
 		if surfaceName:StartsWith( surfacePrefix ) then
 			-- 移除遗迹
-			SIRuinControl.RemoveRuinWithSurface( surfaceIndex )
+			SIRuinSystem.RemoveRuinWithSurface( surfaceIndex )
 			return
 		end
 	end

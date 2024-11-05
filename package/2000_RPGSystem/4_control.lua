@@ -182,8 +182,8 @@ SIEventBus
 	-- 注册技能
 	SIRPGSystem.AddSkills( SIRPGSkillData )
 	-- 添加遗迹物品补给类型
-	if SIConstants_RuinControl then
-		SIRuinControl.AddItemSet( SIRPGRuinItemSet )
+	if SIRuinSystem then
+		SIRuinSystem.AddItemSet( SIRPGRuinItemSet )
 	end
 end )
 .ConfigurationChange( function( functionID )
@@ -193,8 +193,8 @@ end )
 	SIRPGSystem.AddSkills( SIRPGSkillData )
 	SIRPGSystem.FreshSkills( SIRPGSkillData )
 	-- 添加遗迹物品补给类型
-	if SIConstants_RuinControl then
-		SIRuinControl.AddItemSet( SIRPGRuinItemSet )
+	if SIRuinSystem then
+		SIRuinSystem.AddItemSet( SIRPGRuinItemSet )
 	end
 end )
 

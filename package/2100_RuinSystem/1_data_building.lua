@@ -1,4 +1,3 @@
----@diagnostic disable: newfield-call
 -- ============================================================================================================================================
 -- ============================================================================================================================================
 -- ========== 遗迹建筑 ========================================================================================================================
@@ -6,7 +5,7 @@
 -- ============================================================================================================================================
 
 SIGen
-.SetGroup( SIConstants_RuinControl.raw.Groups.Hidden.RuinBuildings )
+.SetGroup( SIConstants_RuinSystem.raw.Groups.Hidden.RuinBuildings )
 
 -- ======================================================================
 -- 根据等级创建遗迹建筑
@@ -157,7 +156,7 @@ SIGen
 		}
 	} )
 }
-CreateRuinBuildings( SICommon.Types.Entities.Wall , "RuinWall" , "遗迹围墙" , 0.85 , SIConstants_RuinControl.LevelValueList ,
+CreateRuinBuildings( SICommon.Types.Entities.Wall , "RuinWall" , "遗迹围墙" , 0.85 , SIConstants_RuinSystem.LevelValueList ,
 {
 	localised_name = SIGen.MakeLocalisedName( SICommon.Types.Entities.Wall , "遗迹围墙" ) ,
 	localised_description = SIGen.MakeLocalisedDescription( SICommon.Types.Entities.Wall , "遗迹围墙" ) ,
@@ -178,7 +177,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Wall , "RuinWall" , "遗迹围墙" 
 		results = {}
 	} ,
 	max_health = 550 ,
-	corpse = SIConstants_RuinControl.raw.Entities.RuinWallRemnants ,
+	corpse = SIConstants_RuinSystem.raw.Entities.RuinWallRemnants ,
 	dying_explosion = "wall-explosion" ,
 	map_color = { r = 1.0 , g = 1.0 , b = 1.0 } ,
 	friendly_map_color = { r = 0.4 , g = 0.4 , b = 1.0 } ,
@@ -902,7 +901,7 @@ SIGen
 		}
 	} )
 }
-CreateRuinBuildings( SICommon.Types.Entities.LandMine , "RuinLandMine" , "遗迹地雷" , 1 , SIConstants_RuinControl.LevelValueList ,
+CreateRuinBuildings( SICommon.Types.Entities.LandMine , "RuinLandMine" , "遗迹地雷" , 1 , SIConstants_RuinSystem.LevelValueList ,
 {
 	localised_name = SIGen.MakeLocalisedName( SICommon.Types.Entities.LandMine , "遗迹地雷" ) ,
 	localised_description = SIGen.MakeLocalisedDescription( SICommon.Types.Entities.LandMine , "遗迹地雷" ) ,
@@ -923,7 +922,7 @@ CreateRuinBuildings( SICommon.Types.Entities.LandMine , "RuinLandMine" , "遗迹
 		results = {}
 	} ,
 	max_health = 15 ,
-	corpse = SIConstants_RuinControl.raw.Entities.RuinLandMineRemnants ,
+	corpse = SIConstants_RuinSystem.raw.Entities.RuinLandMineRemnants ,
 	dying_explosion = "land-mine-explosion" ,
 	map_color = { r = 1.0 , g = 1.0 , b = 1.0 } ,
 	friendly_map_color = { r = 0.4 , g = 0.4 , b = 1.0 } ,
@@ -944,7 +943,7 @@ CreateRuinBuildings( SICommon.Types.Entities.LandMine , "RuinLandMine" , "遗迹
 	} ,
 	repair_speed_modifier = 1.0 ,
 	trigger_radius = 1.35 ,
-	ammo_category = SIConstants_RuinControl.raw.Categories.Ammo.RuinTurret ,
+	ammo_category = SIConstants_RuinSystem.raw.Categories.Ammo.RuinTurret ,
 	action =
 	{
 		{
@@ -1162,7 +1161,7 @@ SIGen
 		}
 	} )
 }
-CreateRuinBuildings( SICommon.Types.Entities.Turret , "RuinGunTurret" , "遗迹机枪炮塔" , 2 , SIConstants_RuinControl.LevelValueList ,
+CreateRuinBuildings( SICommon.Types.Entities.Turret , "RuinGunTurret" , "遗迹机枪炮塔" , 2 , SIConstants_RuinSystem.LevelValueList ,
 {
 	localised_name = SIGen.MakeLocalisedName( SICommon.Types.Entities.Turret , "遗迹机枪炮塔" ) ,
 	localised_description = SIGen.MakeLocalisedDescription( SICommon.Types.Entities.Turret , "遗迹机枪炮塔" ) ,
@@ -1183,7 +1182,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Turret , "RuinGunTurret" , "遗迹�
 		results = {}
 	} ,
 	max_health = 190 ,
-	corpse = SIConstants_RuinControl.raw.Entities.RuinGunTurretRemnants ,
+	corpse = SIConstants_RuinSystem.raw.Entities.RuinGunTurretRemnants ,
 	dying_explosion = "gun-turret-explosion" ,
 	map_color = { r = 1.0 , g = 1.0 , b = 1.0 } ,
 	friendly_map_color = { r = 0.4 , g = 0.4 , b = 1.0 } ,
@@ -1219,7 +1218,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Turret , "RuinGunTurret" , "遗迹�
 		projectile_center = { 0 , -0.0875 } ,
 		ammo_type =
 		{
-			category = SIConstants_RuinControl.raw.Categories.Ammo.RuinTurret ,
+			category = SIConstants_RuinSystem.raw.Categories.Ammo.RuinTurret ,
 			action =
 			{
 				{
@@ -2387,7 +2386,7 @@ SIGen
 		}
 	} )
 }
-CreateRuinBuildings( SICommon.Types.Entities.Turret , "RuinLaserTurret" , "遗迹激光炮塔" , 2 , SIConstants_RuinControl.LevelValueList ,
+CreateRuinBuildings( SICommon.Types.Entities.Turret , "RuinLaserTurret" , "遗迹激光炮塔" , 2 , SIConstants_RuinSystem.LevelValueList ,
 {
 	localised_name = SIGen.MakeLocalisedName( SICommon.Types.Entities.Turret , "遗迹激光炮塔" ) ,
 	localised_description = SIGen.MakeLocalisedDescription( SICommon.Types.Entities.Turret , "遗迹激光炮塔" ) ,
@@ -2408,7 +2407,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Turret , "RuinLaserTurret" , "遗�
 		results = {}
 	} ,
 	max_health = 250 ,
-	corpse = SIConstants_RuinControl.raw.Entities.RuinLaserTurretRemnants ,
+	corpse = SIConstants_RuinSystem.raw.Entities.RuinLaserTurretRemnants ,
 	dying_explosion = "laser-turret-explosion" ,
 	map_color = { r = 1.0 , g = 1.0 , b = 1.0 } ,
 	friendly_map_color = { r = 0.4 , g = 0.4 , b = 1.0 } ,
@@ -2444,7 +2443,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Turret , "RuinLaserTurret" , "遗�
 		source_offset = { 0 , -0.85587225 } ,
 		ammo_type =
 		{
-			category = SIConstants_RuinControl.raw.Categories.Ammo.RuinTurret ,
+			category = SIConstants_RuinSystem.raw.Categories.Ammo.RuinTurret ,
 			action =
 			{
 				{
@@ -2453,7 +2452,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Turret , "RuinLaserTurret" , "遗�
 					{
 						{
 							type = "beam" ,
-							beam = SIConstants_RuinControl.raw.Entities.RuinLaserTurret_Beam ,
+							beam = SIConstants_RuinSystem.raw.Entities.RuinLaserTurret_Beam ,
 							max_length = 0 ,
 							duration = 15 ,
 							source_offset = { 0 , -1.31439 } ,
@@ -3330,7 +3329,7 @@ SIGen
 		}
 	}
 }
-CreateRuinBuildings( SICommon.Types.Entities.Turret , "RuinFlameTurret" , "遗迹喷火炮塔" , 2 , SIConstants_RuinControl.LevelValueList ,
+CreateRuinBuildings( SICommon.Types.Entities.Turret , "RuinFlameTurret" , "遗迹喷火炮塔" , 2 , SIConstants_RuinSystem.LevelValueList ,
 {
 	localised_name = SIGen.MakeLocalisedName( SICommon.Types.Entities.Turret , "遗迹喷火炮塔" ) ,
 	localised_description = SIGen.MakeLocalisedDescription( SICommon.Types.Entities.Turret , "遗迹喷火炮塔" ) ,
@@ -3351,7 +3350,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Turret , "RuinFlameTurret" , "遗�
 		results = {}
 	} ,
 	max_health = 410 ,
-	corpse = SIConstants_RuinControl.raw.Entities.RuinFlameTurretRemnants ,
+	corpse = SIConstants_RuinSystem.raw.Entities.RuinFlameTurretRemnants ,
 	dying_explosion = "medium-explosion" ,
 	map_color = { r = 1.0 , g = 1.0 , b = 1.0 } ,
 	friendly_map_color = { r = 0.4 , g = 0.4 , b = 1.0 } ,
@@ -3396,7 +3395,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Turret , "RuinFlameTurret" , "遗�
 		fluid_consumption = 0.2 ,
 		ammo_type =
 		{
-			category = SIConstants_RuinControl.raw.Categories.Ammo.RuinTurret ,
+			category = SIConstants_RuinSystem.raw.Categories.Ammo.RuinTurret ,
 			action =
 			{
 				{
@@ -3890,7 +3889,7 @@ SIGen
 		}
 	}
 }
-CreateRuinBuildings( SICommon.Types.Entities.Container , "RuinChest" , "遗迹箱子" , 1 , SIConstants_RuinControl.LevelValueList ,
+CreateRuinBuildings( SICommon.Types.Entities.Container , "RuinChest" , "遗迹箱子" , 1 , SIConstants_RuinSystem.LevelValueList ,
 {
 	localised_name = SIGen.MakeLocalisedName( SICommon.Types.Entities.Container , "遗迹箱子" ) ,
 	localised_description = SIGen.MakeLocalisedDescription( SICommon.Types.Entities.Container , "遗迹箱子" ) ,
@@ -3911,7 +3910,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Container , "RuinChest" , "遗迹�
 		results = {}
 	} ,
 	max_health = 8 ,
-	corpse = SIConstants_RuinControl.raw.Entities.RuinChestRemnants ,
+	corpse = SIConstants_RuinSystem.raw.Entities.RuinChestRemnants ,
 	dying_explosion = "wooden-chest-explosion" ,
 	map_color = { r = 1.0 , g = 1.0 , b = 1.0 } ,
 	friendly_map_color = { r = 0.4 , g = 0.4 , b = 1.0 } ,
@@ -4052,7 +4051,7 @@ SIGen
 		}
 	} )
 }
-CreateRuinBuildings( SICommon.Types.Entities.Machine , "RuinMachine" , "遗迹组装机" , 2 , SIConstants_RuinControl.LevelValueList ,
+CreateRuinBuildings( SICommon.Types.Entities.Machine , "RuinMachine" , "遗迹组装机" , 2 , SIConstants_RuinSystem.LevelValueList ,
 {
 	localised_name = SIGen.MakeLocalisedName( SICommon.Types.Entities.Machine , "遗迹组装机" ) ,
 	localised_description = SIGen.MakeLocalisedDescription( SICommon.Types.Entities.Machine , "遗迹组装机" ) ,
@@ -4073,7 +4072,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Machine , "RuinMachine" , "遗迹�
 		results = {}
 	} ,
 	max_health = 24 ,
-	corpse = SIConstants_RuinControl.raw.Entities.RuinMachineRemnants ,
+	corpse = SIConstants_RuinSystem.raw.Entities.RuinMachineRemnants ,
 	dying_explosion = "assembling-machine-3-explosion" ,
 	map_color = { r = 1.0 , g = 1.0 , b = 1.0 } ,
 	friendly_map_color = { r = 0.4 , g = 0.4 , b = 1.0 } ,
@@ -4117,7 +4116,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Machine , "RuinMachine" , "遗迹�
 		module_info_icon_shift = { 0.0 , 0.8 }
 	} ,
 	base_productivity = 0 ,
-	crafting_categories = { SIConstants_RuinControl.raw.Categories.Recipe.RuinMachine } ,
+	crafting_categories = { SIConstants_RuinSystem.raw.Categories.Recipe.RuinMachine } ,
 	crafting_speed = 1.0 ,
 	ingredient_count = 10 ,
 	return_ingredients_on_change = false ,
@@ -4802,7 +4801,7 @@ SIGen
 		results = {}
 	} ,
 	max_health = 270 ,
-	corpse = SIConstants_RuinControl.raw.Entities.RuinInserterRemnants ,
+	corpse = SIConstants_RuinSystem.raw.Entities.RuinInserterRemnants ,
 	dying_explosion = "inserter-explosion" ,
 	map_color = { r = 1.0 , g = 1.0 , b = 1.0 } ,
 	friendly_map_color = { r = 0.4 , g = 0.4 , b = 1.0 } ,
@@ -5082,6 +5081,7 @@ local function MakeTileTransition( options )
 	end
 	return data
 end
+
 SIGen
 .New( SICommon.Types.Tile , "RuinFloor" , "遗迹地板" )
 .AutoIcon()
@@ -5341,6 +5341,7 @@ SIGen
 	} ,
 	transitions =
 	{
+		---@diagnostic disable-next-line: newfield-call
 		MakeTileTransition
 		{
 			picture = "遗迹地板-过渡" ,
@@ -5361,6 +5362,7 @@ SIGen
 			oTransition_Tall = false ,
 			background = false
 		} ,
+		---@diagnostic disable-next-line: newfield-call
 		MakeTileTransition
 		{
 			picture = "遗迹地板-地图外-过渡" ,
@@ -5384,6 +5386,7 @@ SIGen
 	} ,
 	transitions_between_transitions =
 	{
+		---@diagnostic disable-next-line: newfield-call
 		MakeTileTransition
 		{
 			picture = "遗迹地板-过渡的过渡" ,
@@ -5405,6 +5408,7 @@ SIGen
 			oTransition_Count = 0 ,
 			background = false
 		} ,
+		---@diagnostic disable-next-line: newfield-call
 		MakeTileTransition
 		{
 			picture = "遗迹地板-地图外-过渡2" ,
@@ -5425,6 +5429,7 @@ SIGen
 				offset_background_layer_by_tile_layer = true
 			}
 		} ,
+		---@diagnostic disable-next-line: newfield-call
 		MakeTileTransition
 		{
 			picture = "遗迹地板-地图外岸边-过渡" ,

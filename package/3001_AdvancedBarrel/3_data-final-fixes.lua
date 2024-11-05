@@ -59,7 +59,7 @@ local barrelStackSize = SIConfigs.SIAdvancedBarrel.BarrelStackSize ~= nil and SI
 
 -- 流体装桶
 SIGen
-.SetGroup( SIConstants_Expand.raw.Groups.Expand.MakeBarrel )
+.SetGroup( SIConstants_AdvancedBarrel.raw.Groups.Expand.MakeBarrel )
 .ForEach( SICommon.Types.Fluid , function( fluidPrototypeName , fluidPrototypeData )
 	if SIConfigs.SIAdvancedBarrel.BarrelBlackList[fluidPrototypeName] then
 		return
@@ -124,7 +124,7 @@ SIGen
 				place_result = nil
 			}
 			.New( SICommon.Types.Recipe , BarrelFullIDPrefix_1 .. fluidID , BarrelFullAliasPrefix_1 .. fluidID )
-			.ReferenceUnlockRecipe( SIConstants_Expand.raw.Technologies.Barrel_1 )
+			.ReferenceUnlockRecipe( SIConstants_AdvancedBarrel.raw.Technologies.Barrel_1 )
 			.Append
 			{
 				localised_name = SIGen.MakeSelfLocalisedName( BarrelFullLocalisedPrefix_1 , localName ) ,
@@ -145,7 +145,7 @@ SIGen
 				} ,
 				icon_size = 64 ,
 				icon_mipmaps = 4 ,
-				category = SIConstants_Expand.raw.Categories.Recipe.MakeBarrel ,
+				category = SIConstants_AdvancedBarrel.raw.Categories.Recipe.MakeBarrel ,
 				crafting_machine_tint =
 				{
 					primary = fluidColor ,
@@ -162,7 +162,7 @@ SIGen
 				{
 					{
 						type = SICommon.Types.Items.Item ,
-						name = SIConstants_Expand.raw.Items.WoodenBarrel ,
+						name = SIConstants_AdvancedBarrel.raw.Items.WoodenBarrel ,
 						amount = 1
 					} ,
 					{
@@ -175,12 +175,12 @@ SIGen
 				{
 					{
 						type = SICommon.Types.Items.Item ,
-						name = SIConstants_Expand.raw.Items[BarrelItemIDPrefix_1 .. fluidID] ,
+						name = SIConstants_AdvancedBarrel.raw.Items[BarrelItemIDPrefix_1 .. fluidID] ,
 						amount = 1 ,
 						catalyst_amount = 1
 					}
 				} ,
-				main_product = SIConstants_Expand.raw.Items[BarrelItemIDPrefix_1 .. fluidID] ,
+				main_product = SIConstants_AdvancedBarrel.raw.Items[BarrelItemIDPrefix_1 .. fluidID] ,
 				emissions_multiplier = 0.1 ,
 				requester_paste_multiplier = 10 ,
 				overload_multiplier = 5 ,
@@ -202,7 +202,7 @@ SIGen
 				end
 			end )
 			.New( SICommon.Types.Recipe , BarrelEmptyIDPrefix_1 .. fluidID , BarrelEmptyAliasPrefix_1 .. fluidID )
-			.ReferenceUnlockRecipe( SIConstants_Expand.raw.Technologies.Barrel_1 )
+			.ReferenceUnlockRecipe( SIConstants_AdvancedBarrel.raw.Technologies.Barrel_1 )
 			.Append
 			{
 				localised_name = SIGen.MakeSelfLocalisedName( BarrelEmptyLocalisedPrefix_1 , localName ) ,
@@ -223,7 +223,7 @@ SIGen
 				} ,
 				icon_size = 64 ,
 				icon_mipmaps = 4 ,
-				category = SIConstants_Expand.raw.Categories.Recipe.DropBarrel ,
+				category = SIConstants_AdvancedBarrel.raw.Categories.Recipe.DropBarrel ,
 				crafting_machine_tint =
 				{
 					primary = fluidColor ,
@@ -240,7 +240,7 @@ SIGen
 				{
 					{
 						type = SICommon.Types.Items.Item ,
-						name = SIConstants_Expand.raw.Items[BarrelItemIDPrefix_1 .. fluidID] ,
+						name = SIConstants_AdvancedBarrel.raw.Items[BarrelItemIDPrefix_1 .. fluidID] ,
 						amount = 1
 					}
 				} ,
@@ -248,7 +248,7 @@ SIGen
 				{
 					{
 						type = SICommon.Types.Items.Item ,
-						name = SIConstants_Expand.raw.Items.WoodenBarrel ,
+						name = SIConstants_AdvancedBarrel.raw.Items.WoodenBarrel ,
 						amount = 1 ,
 						catalyst_amount = 1
 					} ,
@@ -281,7 +281,7 @@ SIGen
 				end
 			end )
 			.New( SICommon.Types.Recipe , BarrelFullAssembledIDPrefix_1 .. fluidID , BarrelFullAssembledAliasPrefix_1 .. fluidID )
-			.ReferenceUnlockRecipe( SIConstants_Expand.raw.Technologies.Barrel_1 )
+			.ReferenceUnlockRecipe( SIConstants_AdvancedBarrel.raw.Technologies.Barrel_1 )
 			.Append
 			{
 				localised_name = SIGen.MakeSelfLocalisedName( BarrelFullLocalisedPrefix_1 , localName ) ,
@@ -319,7 +319,7 @@ SIGen
 				{
 					{
 						type = SICommon.Types.Items.Item ,
-						name = SIConstants_Expand.raw.Items.WoodenBarrel ,
+						name = SIConstants_AdvancedBarrel.raw.Items.WoodenBarrel ,
 						amount = 1
 					} ,
 					{
@@ -332,12 +332,12 @@ SIGen
 				{
 					{
 						type = SICommon.Types.Items.Item ,
-						name = SIConstants_Expand.raw.Items[BarrelItemIDPrefix_1 .. fluidID] ,
+						name = SIConstants_AdvancedBarrel.raw.Items[BarrelItemIDPrefix_1 .. fluidID] ,
 						amount = 1 ,
 						catalyst_amount = 1
 					}
 				} ,
-				main_product = SIConstants_Expand.raw.Items[BarrelItemIDPrefix_1 .. fluidID] ,
+				main_product = SIConstants_AdvancedBarrel.raw.Items[BarrelItemIDPrefix_1 .. fluidID] ,
 				emissions_multiplier = 0.1 ,
 				requester_paste_multiplier = 10 ,
 				overload_multiplier = 5 ,
@@ -359,7 +359,7 @@ SIGen
 				end
 			end )
 			.New( SICommon.Types.Recipe , BarrelEmptyAssembledIDPrefix_1 .. fluidID , BarrelEmptyAssembledAliasPrefix_1 .. fluidID )
-			.ReferenceUnlockRecipe( SIConstants_Expand.raw.Technologies.Barrel_1 )
+			.ReferenceUnlockRecipe( SIConstants_AdvancedBarrel.raw.Technologies.Barrel_1 )
 			.Append
 			{
 				localised_name = SIGen.MakeSelfLocalisedName( BarrelEmptyLocalisedPrefix_1 , localName ) ,
@@ -397,7 +397,7 @@ SIGen
 				{
 					{
 						type = SICommon.Types.Items.Item ,
-						name = SIConstants_Expand.raw.Items[BarrelItemIDPrefix_1 .. fluidID] ,
+						name = SIConstants_AdvancedBarrel.raw.Items[BarrelItemIDPrefix_1 .. fluidID] ,
 						amount = 1
 					}
 				} ,
@@ -405,7 +405,7 @@ SIGen
 				{
 					{
 						type = SICommon.Types.Items.Item ,
-						name = SIConstants_Expand.raw.Items.WoodenBarrel ,
+						name = SIConstants_AdvancedBarrel.raw.Items.WoodenBarrel ,
 						amount = 1 ,
 						catalyst_amount = 1
 					} ,
@@ -439,7 +439,7 @@ SIGen
 			end )
 			.New( SICommon.Types.Entities.SimpleOwner , BarrelItemIDPrefix_1 .. fluidID , BarrelItemAliasPrefix_1 .. fluidName )
 			.SetSize( 1 , 1 )
-			.ReferencePlaceResult( SICommon.Types.Items.Item , SIConstants_Expand.raw.Items[BarrelItemIDPrefix_1 .. fluidID] )
+			.ReferencePlaceResult( SICommon.Types.Items.Item , SIConstants_AdvancedBarrel.raw.Items[BarrelItemIDPrefix_1 .. fluidID] )
 			.Append
 			{
 				localised_name = SIGen.MakeSelfLocalisedName( BarrelItemLocalisedPrefix_1 , localName ) ,
@@ -468,7 +468,7 @@ SIGen
 					{
 						{
 							type = SICommon.Types.Items.Item ,
-							name = SIConstants_Expand.raw.Items[BarrelItemIDPrefix_1 .. fluidID] ,
+							name = SIConstants_AdvancedBarrel.raw.Items[BarrelItemIDPrefix_1 .. fluidID] ,
 							amount = 1
 						}
 					}
@@ -572,7 +572,7 @@ SIGen
 				place_result = nil
 			}
 			.New( SICommon.Types.Recipe , BarrelFullIDPrefix_2 .. fluidID , BarrelFullAliasPrefix_2 .. fluidID )
-			.ReferenceUnlockRecipe( SIConstants_Expand.raw.Technologies.Barrel_2 )
+			.ReferenceUnlockRecipe( SIConstants_AdvancedBarrel.raw.Technologies.Barrel_2 )
 			.Append
 			{
 				localised_name = SIGen.MakeSelfLocalisedName( BarrelFullLocalisedPrefix_2 , localName ) ,
@@ -593,7 +593,7 @@ SIGen
 				} ,
 				icon_size = 64 ,
 				icon_mipmaps = 4 ,
-				category = SIConstants_Expand.raw.Categories.Recipe.MakeBarrel ,
+				category = SIConstants_AdvancedBarrel.raw.Categories.Recipe.MakeBarrel ,
 				crafting_machine_tint =
 				{
 					primary = fluidColor ,
@@ -610,7 +610,7 @@ SIGen
 				{
 					{
 						type = SICommon.Types.Items.Item ,
-						name = SIConstants_Expand.raw.Items.PlasticCapable ,
+						name = SIConstants_AdvancedBarrel.raw.Items.PlasticCapable ,
 						amount = 1
 					} ,
 					{
@@ -623,12 +623,12 @@ SIGen
 				{
 					{
 						type = SICommon.Types.Items.Item ,
-						name = SIConstants_Expand.raw.Items[BarrelItemIDPrefix_2 .. fluidID] ,
+						name = SIConstants_AdvancedBarrel.raw.Items[BarrelItemIDPrefix_2 .. fluidID] ,
 						amount = 1 ,
 						catalyst_amount = 1
 					}
 				} ,
-				main_product = SIConstants_Expand.raw.Items[BarrelItemIDPrefix_2 .. fluidID] ,
+				main_product = SIConstants_AdvancedBarrel.raw.Items[BarrelItemIDPrefix_2 .. fluidID] ,
 				emissions_multiplier = 0.1 ,
 				requester_paste_multiplier = 10 ,
 				overload_multiplier = 5 ,
@@ -650,7 +650,7 @@ SIGen
 				end
 			end )
 			.New( SICommon.Types.Recipe , BarrelEmptyIDPrefix_2 .. fluidID , BarrelEmptyAliasPrefix_2 .. fluidID )
-			.ReferenceUnlockRecipe( SIConstants_Expand.raw.Technologies.Barrel_2 )
+			.ReferenceUnlockRecipe( SIConstants_AdvancedBarrel.raw.Technologies.Barrel_2 )
 			.Append
 			{
 				localised_name = SIGen.MakeSelfLocalisedName( BarrelEmptyLocalisedPrefix_2 , localName ) ,
@@ -671,7 +671,7 @@ SIGen
 				} ,
 				icon_size = 64 ,
 				icon_mipmaps = 4 ,
-				category = SIConstants_Expand.raw.Categories.Recipe.DropBarrel ,
+				category = SIConstants_AdvancedBarrel.raw.Categories.Recipe.DropBarrel ,
 				crafting_machine_tint =
 				{
 					primary = fluidColor ,
@@ -688,7 +688,7 @@ SIGen
 				{
 					{
 						type = SICommon.Types.Items.Item ,
-						name = SIConstants_Expand.raw.Items[BarrelItemIDPrefix_2 .. fluidID] ,
+						name = SIConstants_AdvancedBarrel.raw.Items[BarrelItemIDPrefix_2 .. fluidID] ,
 						amount = 1
 					}
 				} ,
@@ -723,7 +723,7 @@ SIGen
 				end
 			end )
 			.New( SICommon.Types.Recipe , BarrelFullAssembledIDPrefix_2 .. fluidID , BarrelFullAssembledAliasPrefix_2 .. fluidID )
-			.ReferenceUnlockRecipe( SIConstants_Expand.raw.Technologies.Barrel_2 )
+			.ReferenceUnlockRecipe( SIConstants_AdvancedBarrel.raw.Technologies.Barrel_2 )
 			.Append
 			{
 				localised_name = SIGen.MakeSelfLocalisedName( BarrelFullLocalisedPrefix_2 , localName ) ,
@@ -761,7 +761,7 @@ SIGen
 				{
 					{
 						type = SICommon.Types.Items.Item ,
-						name = SIConstants_Expand.raw.Items.PlasticCapable ,
+						name = SIConstants_AdvancedBarrel.raw.Items.PlasticCapable ,
 						amount = 1
 					} ,
 					{
@@ -774,12 +774,12 @@ SIGen
 				{
 					{
 						type = SICommon.Types.Items.Item ,
-						name = SIConstants_Expand.raw.Items[BarrelItemIDPrefix_2 .. fluidID] ,
+						name = SIConstants_AdvancedBarrel.raw.Items[BarrelItemIDPrefix_2 .. fluidID] ,
 						amount = 1 ,
 						catalyst_amount = 1
 					}
 				} ,
-				main_product = SIConstants_Expand.raw.Items[BarrelItemIDPrefix_2 .. fluidID] ,
+				main_product = SIConstants_AdvancedBarrel.raw.Items[BarrelItemIDPrefix_2 .. fluidID] ,
 				emissions_multiplier = 0.1 ,
 				requester_paste_multiplier = 10 ,
 				overload_multiplier = 5 ,
@@ -801,7 +801,7 @@ SIGen
 				end
 			end )
 			.New( SICommon.Types.Recipe , BarrelEmptyAssembledIDPrefix_2 .. fluidID , BarrelEmptyAssembledAliasPrefix_2 .. fluidID )
-			.ReferenceUnlockRecipe( SIConstants_Expand.raw.Technologies.Barrel_2 )
+			.ReferenceUnlockRecipe( SIConstants_AdvancedBarrel.raw.Technologies.Barrel_2 )
 			.Append
 			{
 				localised_name = SIGen.MakeSelfLocalisedName( BarrelEmptyLocalisedPrefix_2 , localName ) ,
@@ -839,7 +839,7 @@ SIGen
 				{
 					{
 						type = SICommon.Types.Items.Item ,
-						name = SIConstants_Expand.raw.Items[BarrelItemIDPrefix_2 .. fluidID] ,
+						name = SIConstants_AdvancedBarrel.raw.Items[BarrelItemIDPrefix_2 .. fluidID] ,
 						amount = 1
 					}
 				} ,
@@ -875,7 +875,7 @@ SIGen
 			end )
 			.New( SICommon.Types.Entities.SimpleOwner , BarrelItemIDPrefix_2 .. fluidID , BarrelItemAliasPrefix_2 .. fluidName )
 			.SetSizeSize( 1 , 1 , 0.5 )
-			.ReferencePlaceResult( SICommon.Types.Items.Item , SIConstants_Expand.raw.Items[BarrelItemIDPrefix_2 .. fluidID] )
+			.ReferencePlaceResult( SICommon.Types.Items.Item , SIConstants_AdvancedBarrel.raw.Items[BarrelItemIDPrefix_2 .. fluidID] )
 			.Append
 			{
 				localised_name = SIGen.MakeSelfLocalisedName( BarrelItemLocalisedPrefix_2 , localName ) ,
@@ -904,7 +904,7 @@ SIGen
 					{
 						{
 							type = SICommon.Types.Items.Item ,
-							name = SIConstants_Expand.raw.Items[BarrelItemIDPrefix_2 .. fluidID] ,
+							name = SIConstants_AdvancedBarrel.raw.Items[BarrelItemIDPrefix_2 .. fluidID] ,
 							amount = 1
 						}
 					}
@@ -1095,7 +1095,7 @@ SIGen
 				end
 			end )
 			.New( SICommon.Types.Recipe , BarrelFullIDPrefix_3 .. fluidID , BarrelFullAliasPrefix_3 .. fluidID )
-			.ReferenceUnlockRecipe( SIConstants_Expand.raw.Technologies.Barrel_3 )
+			.ReferenceUnlockRecipe( SIConstants_AdvancedBarrel.raw.Technologies.Barrel_3 )
 			.Append
 			{
 				localised_name = SIGen.MakeSelfLocalisedName( BarrelFullLocalisedPrefix_3 , localName ) ,
@@ -1111,7 +1111,7 @@ SIGen
 				} ,
 				icon_size = 64 ,
 				icon_mipmaps = 4 ,
-				category = SIConstants_Expand.raw.Categories.Recipe.MakeBarrel ,
+				category = SIConstants_AdvancedBarrel.raw.Categories.Recipe.MakeBarrel ,
 				crafting_machine_tint =
 				{
 					primary = fluidColor ,
@@ -1136,12 +1136,12 @@ SIGen
 				{
 					{
 						type = SICommon.Types.Items.Item ,
-						name = SIConstants_Expand.raw.Items[BarrelItemIDPrefix_3 .. fluidID] ,
+						name = SIConstants_AdvancedBarrel.raw.Items[BarrelItemIDPrefix_3 .. fluidID] ,
 						amount = 1 ,
 						catalyst_amount = 1
 					}
 				} ,
-				main_product = SIConstants_Expand.raw.Items[BarrelItemIDPrefix_3 .. fluidID] ,
+				main_product = SIConstants_AdvancedBarrel.raw.Items[BarrelItemIDPrefix_3 .. fluidID] ,
 				emissions_multiplier = 0.1 ,
 				requester_paste_multiplier = 10 ,
 				overload_multiplier = 5 ,
@@ -1163,7 +1163,7 @@ SIGen
 				end
 			end )
 			.New( SICommon.Types.Recipe , BarrelEmptyIDPrefix_3 .. fluidID , BarrelEmptyAliasPrefix_3 .. fluidID )
-			.ReferenceUnlockRecipe( SIConstants_Expand.raw.Technologies.Barrel_3 )
+			.ReferenceUnlockRecipe( SIConstants_AdvancedBarrel.raw.Technologies.Barrel_3 )
 			.Append
 			{
 				localised_name = SIGen.MakeSelfLocalisedName( BarrelEmptyLocalisedPrefix_3 , localName ) ,
@@ -1179,7 +1179,7 @@ SIGen
 				} ,
 				icon_size = 64 ,
 				icon_mipmaps = 4 ,
-				category = SIConstants_Expand.raw.Categories.Recipe.DropBarrel ,
+				category = SIConstants_AdvancedBarrel.raw.Categories.Recipe.DropBarrel ,
 				crafting_machine_tint =
 				{
 					primary = fluidColor ,
@@ -1196,7 +1196,7 @@ SIGen
 				{
 					{
 						type = SICommon.Types.Items.Item ,
-						name = SIConstants_Expand.raw.Items[BarrelItemIDPrefix_3 .. fluidID] ,
+						name = SIConstants_AdvancedBarrel.raw.Items[BarrelItemIDPrefix_3 .. fluidID] ,
 						amount = 1
 					}
 				} ,
@@ -1231,7 +1231,7 @@ SIGen
 				end
 			end )
 			.New( SICommon.Types.Recipe , BarrelEmptyAssembledIDPrefix_3 .. fluidID , BarrelEmptyAssembledAliasPrefix_3 .. fluidID )
-			.ReferenceUnlockRecipe( SIConstants_Expand.raw.Technologies.Barrel_3 )
+			.ReferenceUnlockRecipe( SIConstants_AdvancedBarrel.raw.Technologies.Barrel_3 )
 			.Append
 			{
 				localised_name = SIGen.MakeSelfLocalisedName( BarrelEmptyLocalisedPrefix_3 , localName ) ,
@@ -1264,7 +1264,7 @@ SIGen
 				{
 					{
 						type = SICommon.Types.Items.Item ,
-						name = SIConstants_Expand.raw.Items[BarrelItemIDPrefix_3 .. fluidID] ,
+						name = SIConstants_AdvancedBarrel.raw.Items[BarrelItemIDPrefix_3 .. fluidID] ,
 						amount = 1
 					}
 				} ,

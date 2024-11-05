@@ -45,13 +45,13 @@ SIEventBus
 .ConfigurationChange( function( functionID )
 	for forceIndex , force in pairs( game.forces ) do
 		local recipeList = {}
-		local technology_1 = force.technologies[SIConstants_Expand.raw.Technologies.Barrel_1]
+		local technology_1 = force.technologies[SIConstants_AdvancedBarrel.raw.Technologies.Barrel_1]
 		if technology_1 and technology_1.researched then
 			for effectIndex , effect in pairs( technology_1.effects ) do
 				if effect.type == SICommon.Flags.TechnologyModifier.UnlockRecipe then
 					local recipe = force.recipes[effect.recipe]
 					if recipe then
-						if recipe.name:StartsWith( SIConstants_Expand.raw.Recipes.BarrelFullPrefix ) then
+						if recipe.name:StartsWith( SIConstants_AdvancedBarrel.raw.Recipes.BarrelFullPrefix ) then
 							table.insert( recipeList, recipe )
 						end
 						if not recipe.enabled then
@@ -61,7 +61,7 @@ SIEventBus
 				end
 			end
 		end
-		local technology_2 = force.technologies[SIConstants_Expand.raw.Technologies.Barrel_2]
+		local technology_2 = force.technologies[SIConstants_AdvancedBarrel.raw.Technologies.Barrel_2]
 		if technology_2 and technology_2.researched then
 			for recipeIndex , recipe in pairs( recipeList ) do
 				recipe.enabled = false
@@ -71,7 +71,7 @@ SIEventBus
 				if effect.type == SICommon.Flags.TechnologyModifier.UnlockRecipe then
 					local recipe = force.recipes[effect.recipe]
 					if recipe then
-						if recipe.name:StartsWith( SIConstants_Expand.raw.Recipes.BarrelFullPrefix ) then
+						if recipe.name:StartsWith( SIConstants_AdvancedBarrel.raw.Recipes.BarrelFullPrefix ) then
 							table.insert( recipeList , recipe )
 						end
 						if not recipe.enabled then
@@ -81,7 +81,7 @@ SIEventBus
 				end
 			end
 		end
-		local technology_3 = force.technologies[SIConstants_Expand.raw.Technologies.Barrel_3]
+		local technology_3 = force.technologies[SIConstants_AdvancedBarrel.raw.Technologies.Barrel_3]
 		if technology_3 and technology_3.researched then
 			for recipeIndex , recipe in pairs( recipeList ) do
 				recipe.enabled = false
@@ -106,14 +106,14 @@ end )
 	end
 	local name = technology.name
 	local force = technology.force
-	if name == SIConstants_Expand.raw.Technologies.Barrel_2 then
+	if name == SIConstants_AdvancedBarrel.raw.Technologies.Barrel_2 then
 		-- 移除上一级科技的配方
-		local technology_1 = force.technologies[SIConstants_Expand.raw.Technologies.Barrel_1]
+		local technology_1 = force.technologies[SIConstants_AdvancedBarrel.raw.Technologies.Barrel_1]
 		if technology_1 and technology_1.researched then
 			for effectIndex , effect in pairs( technology_1.effects ) do
 				if effect.type == SICommon.Flags.TechnologyModifier.UnlockRecipe then
 					local recipe = force.recipes[effect.recipe]
-					if recipe and recipe.name:StartsWith( SIConstants_Expand.raw.Recipes.BarrelFullPrefix ) then
+					if recipe and recipe.name:StartsWith( SIConstants_AdvancedBarrel.raw.Recipes.BarrelFullPrefix ) then
 						recipe.enabled = false
 					end
 				end
@@ -121,25 +121,25 @@ end )
 		end
 		return
 	end
-	if name == SIConstants_Expand.raw.Technologies.Barrel_3 then
+	if name == SIConstants_AdvancedBarrel.raw.Technologies.Barrel_3 then
 		-- 移除上一级科技的配方
-		local technology_1 = force.technologies[SIConstants_Expand.raw.Technologies.Barrel_1]
+		local technology_1 = force.technologies[SIConstants_AdvancedBarrel.raw.Technologies.Barrel_1]
 		if technology_1 and technology_1.researched then
 			for effectIndex , effect in pairs( technology_1.effects ) do
 				if effect.type == SICommon.Flags.TechnologyModifier.UnlockRecipe then
 					local recipe = force.recipes[effect.recipe]
-					if recipe and recipe.name:StartsWith( SIConstants_Expand.raw.Recipes.BarrelFullPrefix ) then
+					if recipe and recipe.name:StartsWith( SIConstants_AdvancedBarrel.raw.Recipes.BarrelFullPrefix ) then
 						recipe.enabled = false
 					end
 				end
 			end
 		end
-		local technology_2 = force.technologies[SIConstants_Expand.raw.Technologies.Barrel_2]
+		local technology_2 = force.technologies[SIConstants_AdvancedBarrel.raw.Technologies.Barrel_2]
 		if technology_2 and technology_2.researched then
 			for effectIndex , effect in pairs( technology_2.effects ) do
 				if effect.type == SICommon.Flags.TechnologyModifier.UnlockRecipe then
 					local recipe = force.recipes[effect.recipe]
-					if recipe and recipe.name:StartsWith( SIConstants_Expand.raw.Recipes.BarrelFullPrefix ) then
+					if recipe and recipe.name:StartsWith( SIConstants_AdvancedBarrel.raw.Recipes.BarrelFullPrefix ) then
 						recipe.enabled = false
 					end
 				end
@@ -155,14 +155,14 @@ end )
 	end
 	local name = technology.name
 	local force = technology.force
-	if name == SIConstants_Expand.raw.Technologies.Barrel_2 then
+	if name == SIConstants_AdvancedBarrel.raw.Technologies.Barrel_2 then
 		-- 恢复上一级科技的配方
-		local technology_1 = force.technologies[SIConstants_Expand.raw.Technologies.Barrel_1]
+		local technology_1 = force.technologies[SIConstants_AdvancedBarrel.raw.Technologies.Barrel_1]
 		if technology_1 and technology_1.researched then
 			for effectIndex , effect in pairs( technology_1.effects ) do
 				if effect.type == SICommon.Flags.TechnologyModifier.UnlockRecipe then
 					local recipe = force.recipes[effect.recipe]
-					if recipe and recipe.name:StartsWith( SIConstants_Expand.raw.Recipes.BarrelFullPrefix ) then
+					if recipe and recipe.name:StartsWith( SIConstants_AdvancedBarrel.raw.Recipes.BarrelFullPrefix ) then
 						recipe.enabled = true
 					end
 				end
@@ -170,26 +170,26 @@ end )
 		end
 		return
 	end
-	if name == SIConstants_Expand.raw.Technologies.Barrel_3 then
+	if name == SIConstants_AdvancedBarrel.raw.Technologies.Barrel_3 then
 		-- 恢复上一级科技的配方
-		local technology_2 = force.technologies[SIConstants_Expand.raw.Technologies.Barrel_2]
+		local technology_2 = force.technologies[SIConstants_AdvancedBarrel.raw.Technologies.Barrel_2]
 		if technology_2 and technology_2.researched then
 			for effectIndex , effect in pairs( technology_2.effects ) do
 				if effect.type == SICommon.Flags.TechnologyModifier.UnlockRecipe then
 					local recipe = force.recipes[effect.recipe]
-					if recipe and recipe.name:StartsWith( SIConstants_Expand.raw.Recipes.BarrelFullPrefix ) then
+					if recipe and recipe.name:StartsWith( SIConstants_AdvancedBarrel.raw.Recipes.BarrelFullPrefix ) then
 						recipe.enabled = true
 					end
 				end
 			end
 			return
 		end
-		local technology_1 = force.technologies[SIConstants_Expand.raw.Technologies.Barrel_1]
+		local technology_1 = force.technologies[SIConstants_AdvancedBarrel.raw.Technologies.Barrel_1]
 		if technology_1 and technology_1.researched then
 			for effectIndex , effect in pairs( technology_1.effects ) do
 				if effect.type == SICommon.Flags.TechnologyModifier.UnlockRecipe then
 					local recipe = force.recipes[effect.recipe]
-					if recipe and recipe.name:StartsWith( SIConstants_Expand.raw.Recipes.BarrelFullPrefix ) then
+					if recipe and recipe.name:StartsWith( SIConstants_AdvancedBarrel.raw.Recipes.BarrelFullPrefix ) then
 						recipe.enabled = true
 					end
 				end

@@ -44,12 +44,12 @@ end
 
 for technologyName , ammoCategoryList in pairs
 {
-	[SIConstants_Expand.raw.Technologies.Infinite_WeaponAmmoTurret_1]      = { "bullet" , "shotgun-shell" } ,
-	[SIConstants_Expand.raw.Technologies.Infinite_WeaponLaserTurret_1]     = { "laser" , "beam" } ,
-	[SIConstants_Expand.raw.Technologies.Infinite_WeaponExplosiveTurret_1] = { "rocket" , "grenade" , "cannon-shell" , "landmine" } ,
-	[SIConstants_Expand.raw.Technologies.Infinite_WeaponFlameTurret_1]     = { "flamethrower" } ,
-	[SIConstants_Expand.raw.Technologies.Infinite_WeaponEnergyTurret_1]    = { "electric" } ,
-	[SIConstants_Expand.raw.Technologies.Infinite_WeaponArtilleryTurret_1] = { "artillery-shell" }
+	[SIConstants_InfiniteTechnology.raw.Technologies.Infinite_WeaponAmmoTurret_1]      = { "bullet" , "shotgun-shell" } ,
+	[SIConstants_InfiniteTechnology.raw.Technologies.Infinite_WeaponLaserTurret_1]     = { "laser" , "beam" } ,
+	[SIConstants_InfiniteTechnology.raw.Technologies.Infinite_WeaponExplosiveTurret_1] = { "rocket" , "grenade" , "cannon-shell" , "landmine" } ,
+	[SIConstants_InfiniteTechnology.raw.Technologies.Infinite_WeaponFlameTurret_1]     = { "flamethrower" } ,
+	[SIConstants_InfiniteTechnology.raw.Technologies.Infinite_WeaponEnergyTurret_1]    = { "electric" } ,
+	[SIConstants_InfiniteTechnology.raw.Technologies.Infinite_WeaponArtilleryTurret_1] = { "artillery-shell" }
 } do
 	-- 整理 effects 数组
 	local effects = {}

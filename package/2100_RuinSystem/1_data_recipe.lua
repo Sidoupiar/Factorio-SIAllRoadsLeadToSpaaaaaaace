@@ -5,16 +5,16 @@
 -- ============================================================================================================================================
 
 SIGen
-.SetGroup( SIConstants_RuinControl.raw.Groups.Hidden.RuinRecipes )
+.SetGroup( SIConstants_RuinSystem.raw.Groups.Hidden.RuinRecipes )
 
 -- ======================================================================
 -- 资源类配方
 -- ======================================================================
-for index , data in pairs( SIConstants_RuinControl.RuinRecipeData ) do
+for index , data in pairs( SIConstants_RuinSystem.RuinRecipeData ) do
 	SIGen
-	.New( SICommon.Types.Recipe , "RuinRecipe_" .. data.ID , "遗迹配方-" .. data.alias ,
+	.New( SICommon.Types.Recipe , "RuinRecipe_" .. data.ID , "遗迹配方-" .. data.Alias ,
 	{
-		category = SIConstants_RuinControl.raw.Categories.Recipe.RuinMachine ,
+		category = SIConstants_RuinSystem.raw.Categories.Recipe.RuinMachine ,
 		crafting_machine_tint =
 		{
 			primary = { r = 0.70 , g = 0.70 , b = 0.70 } ,
@@ -26,7 +26,7 @@ for index , data in pairs( SIConstants_RuinControl.RuinRecipeData ) do
 		hidden = true ,
 		hide_from_stats = true ,
 		hide_from_player_crafting = true ,
-		energy_required = 24.0 ,
+		energy_required = data.Time * 24.0 ,
 		ingredients = {} ,
 		results =
 		{
@@ -37,7 +37,7 @@ for index , data in pairs( SIConstants_RuinControl.RuinRecipeData ) do
 				catalyst_amount = 2
 			}
 		} ,
-		main_product = data.result ,
+		main_product = data.Result ,
 		emissions_multiplier = 0.4 ,
 		requester_paste_multiplier = 10 ,
 		overload_multiplier = 5 ,

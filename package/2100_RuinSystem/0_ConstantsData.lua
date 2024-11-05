@@ -1,10 +1,11 @@
 local constantsData =
 {
-	ID = "RuinControl" ,
-	Name = "遗迹管理" ,
+	ID = "RuinSystem" ,
+	Code = "RuinSystem" ,
+	Show = "遗迹系统" ,
 	FileList =
 	{
-		[SIInit.StateCodeDefine.Data]    = { "1_data_building" , "1_data_recipe" } ,
+		[SIInit.StateCodeDefine.Data]    = { "1_data_building" , "2_data_recipe" } ,
 		[SIInit.StateCodeDefine.Control] = { "4_control" }
 	} ,
 	Autoload =
@@ -40,13 +41,13 @@ local constantsData =
 	LevelValueList = {} ,
 	RuinRecipeData =
 	{
-		{ ID = "Wood"    , alias = "木头" , result = "wood"        } ,
-		{ ID = "Icon"    , alias = "铁矿" , result = "iron-ore"    } ,
-		{ ID = "Copper"  , alias = "铜矿" , result = "copper-ore"  } ,
-		{ ID = "Uranium" , alias = "铀矿" , result = "uranium-ore" } ,
-		{ ID = "Stone"   , alias = "石矿" , result = "stone"       } ,
-		{ ID = "Coal"    , alias = "煤矿" , result = "coal"        } ,
-		{ ID = "Fish"    , alias = "鲜鱼" , result = "raw-fish"    }
+		{ ID = "Wood"    , Alias = "木头" , Result = "wood"        , Time = 1.0 } ,
+		{ ID = "Icon"    , Alias = "铁矿" , Result = "iron-ore"    , Time = 1.0 } ,
+		{ ID = "Copper"  , Alias = "铜矿" , Result = "copper-ore"  , Time = 1.0 } ,
+		{ ID = "Uranium" , Alias = "铀矿" , Result = "uranium-ore" , Time = 1.0 } ,
+		{ ID = "Stone"   , Alias = "石矿" , Result = "stone"       , Time = 1.0 } ,
+		{ ID = "Coal"    , Alias = "煤矿" , Result = "coal"        , Time = 1.0 } ,
+		{ ID = "Fish"    , Alias = "鲜鱼" , Result = "raw-fish"    , Time = 1.0 }
 	}
 }
 

@@ -1,11 +1,11 @@
-SIRuinControl =
+SIRuinSystem =
 {
-	ID = "RuinControl" ,
+	ID = "RuinSystem" ,
 	Name = "遗迹控制" ,
-	InterfaceID = "SIRuinControl-Main" ,
+	InterfaceID = "SIRuinSystem-Main" ,
 	Settings =
 	{
-		Name = "RuinControl" ,
+		Name = "RuinSystem" ,
 		Default =
 		{
 			Surfaces = {} ,
@@ -55,7 +55,7 @@ SIRuinControl =
 	-- 注册基础的遗迹数据<br>
 	-- ======================================================================
 	FreshRuinData = function()
-		local maxLevel = SITable.Size( SIConstants_RuinControl.LevelValueList )
+		local maxLevel = SITable.Size( SIConstants_RuinSystem.LevelValueList )
 		-- 注册遗迹样式
 		local style =
 		{
@@ -70,18 +70,18 @@ SIRuinControl =
 			BrokenTurretChance = 0.19 ,
 			BrokenTurretHealth = 0.77
 		}
-		for level , levelValue in pairs( SIConstants_RuinControl.LevelValueList ) do
-			table.insert( style.WallList , { SIConstants_RuinControl.raw.Entities.RuinWallPrefix .. level } )
-			table.insert( style.FloorList , { SIConstants_RuinControl.raw.Tiles.RuinFloor } )
+		for level , levelValue in pairs( SIConstants_RuinSystem.LevelValueList ) do
+			table.insert( style.WallList , { SIConstants_RuinSystem.raw.Entities.RuinWallPrefix .. level } )
+			table.insert( style.FloorList , { SIConstants_RuinSystem.raw.Tiles.RuinFloor } )
 		end
-		SIRuinControl.AddRuinStyle( style )
+		SIRuinSystem.AddRuinStyle( style )
 		-- 注册遗迹炮塔
 		for name , prefix in pairs
 		{
-			["遗迹地雷"] = SIConstants_RuinControl.raw.Entities.RuinLandMinePrefix ,
-			["遗迹机枪炮塔"] = SIConstants_RuinControl.raw.Entities.RuinGunTurretPrefix ,
-			["遗迹激光炮塔"] = SIConstants_RuinControl.raw.Entities.RuinLaserTurretPrefix ,
-			["遗迹喷火炮塔"] = SIConstants_RuinControl.raw.Entities.RuinFlameTurretPrefix
+			["遗迹地雷"] = SIConstants_RuinSystem.raw.Entities.RuinLandMinePrefix ,
+			["遗迹机枪炮塔"] = SIConstants_RuinSystem.raw.Entities.RuinGunTurretPrefix ,
+			["遗迹激光炮塔"] = SIConstants_RuinSystem.raw.Entities.RuinLaserTurretPrefix ,
+			["遗迹喷火炮塔"] = SIConstants_RuinSystem.raw.Entities.RuinFlameTurretPrefix
 		} do
 			local set =
 			{
@@ -89,7 +89,7 @@ SIRuinControl =
 				Weight = 10000 ,
 				List = {}
 			}
-			for level , levelValue in pairs( SIConstants_RuinControl.LevelValueList ) do
+			for level , levelValue in pairs( SIConstants_RuinSystem.LevelValueList ) do
 				local list = { prefix .. level }
 				if level > 1 then
 					table.insert( list , prefix .. ( level - 1 ) )
@@ -99,7 +99,7 @@ SIRuinControl =
 				end
 				table.insert( set.List , list )
 			end
-			SIRuinControl.AddTurretSet( set )
+			SIRuinSystem.AddTurretSet( set )
 		end
 		-- 注册物品
 		local itemPackDataList =
@@ -146,12 +146,12 @@ SIRuinControl =
 			Weight = 10000 ,
 			List = {}
 		}
-		for level , levelValue in pairs( SIConstants_RuinControl.LevelValueList ) do
+		for level , levelValue in pairs( SIConstants_RuinSystem.LevelValueList ) do
 			local itemList = {}
 			for itemPackIndex = 1 , math.min( level * 3 , #itemPackDataList ) , 1 do
 				local itemPack =
 				{
-					Chest = SIConstants_RuinControl.raw.Entities.RuinChestPrefix .. level ,
+					Chest = SIConstants_RuinSystem.raw.Entities.RuinChestPrefix .. level ,
 					Items = {}
 				}
 				for itemDataIndex , itemDataData in pairs( itemPackDataList[itemPackIndex] ) do
@@ -167,11 +167,11 @@ SIRuinControl =
 			end
 			table.insert( itemSet.List , itemList )
 		end
-		SIRuinControl.AddItemSet( itemSet )
+		SIRuinSystem.AddItemSet( itemSet )
 		-- 注册组装配方
 		local recipeList = {}
-		for index , data in pairs( SIConstants_RuinControl.RuinRecipeData ) do
-			table.insert( recipeList , SIConstants_RuinControl.raw.Recipes["RuinRecipe_" .. data.ID] )
+		for index , data in pairs( SIConstants_RuinSystem.RuinRecipeData ) do
+			table.insert( recipeList , SIConstants_RuinSystem.raw.Recipes["RuinRecipe_" .. data.ID] )
 		end
 		local machineSet =
 		{
@@ -179,19 +179,19 @@ SIRuinControl =
 			Weight = 10000 ,
 			List = {}
 		}
-		for level , levelValue in pairs( SIConstants_RuinControl.LevelValueList ) do
+		for level , levelValue in pairs( SIConstants_RuinSystem.LevelValueList ) do
 			local machineDataList = {}
 			for index , recipe in pairs( recipeList ) do
 				local machineData =
 				{
-					Machine = SIConstants_RuinControl.raw.Entities.RuinMachinePrefix .. level ,
+					Machine = SIConstants_RuinSystem.raw.Entities.RuinMachinePrefix .. level ,
 					Recipe = recipe
 				}
 				table.insert( machineDataList , machineData )
 			end
 			table.insert( machineSet.List , machineDataList )
 		end
-		SIRuinControl.AddMachineSet( machineSet )
+		SIRuinSystem.AddMachineSet( machineSet )
 		-- 注册市场
 	end ,
 	GetSurfaceSettings = function( globalSettings , surfaceIndex )
@@ -281,28 +281,28 @@ SIRuinControl =
 		local floorListLength = #ruinStyle.FloorList
 		local floorList = level > floorListLength and ruinStyle.FloorList[floorListLength] or ruinStyle.FloorList[level]
 		if #floorList < 1 then
-			SIPrint.Alert( nil , { "SIRuinControl.遗迹构建-错误-无法读取遗迹地板" , ruinStyle.ID , ruinStrength , level , ruinCenter.x , ruinCenter.y } )
+			SIPrint.Alert( nil , { "SIRuinSystem.遗迹构建-错误-无法读取遗迹地板" , ruinStyle.ID , ruinStrength , level , ruinCenter.x , ruinCenter.y } )
 			return nil
 		end
 		local floor = floorList[math.random( #floorList )]
 		if not prototypes.tile[floor] then
-			SIPrint.Alert( nil , { "SIRuinControl.遗迹构建-错误-遗迹地板不存在" , ruinStyle.ID , ruinStrength , level , ruinCenter.x , ruinCenter.y , floor } )
+			SIPrint.Alert( nil , { "SIRuinSystem.遗迹构建-错误-遗迹地板不存在" , ruinStyle.ID , ruinStrength , level , ruinCenter.x , ruinCenter.y , floor } )
 			return nil
 		end
 		-- 获取围墙
 		local wallListLength = #ruinStyle.WallList
 		local wallList = level > wallListLength and ruinStyle.WallList[wallListLength] or ruinStyle.WallList[level]
 		if #wallList < 1 then
-			SIPrint.Alert( nil , { "SIRuinControl.遗迹构建-错误-无法读取遗迹围墙" , ruinStyle.ID , ruinStrength , level , ruinCenter.x , ruinCenter.y } )
+			SIPrint.Alert( nil , { "SIRuinSystem.遗迹构建-错误-无法读取遗迹围墙" , ruinStyle.ID , ruinStrength , level , ruinCenter.x , ruinCenter.y } )
 			return nil
 		end
 		local wall = wallList[math.random( #wallList )]
 		if not prototypes.entity[wall] then
-			SIPrint.Alert( nil , { "SIRuinControl.遗迹构建-错误-遗迹围墙不存在" , ruinStyle.ID , ruinStrength , level , ruinCenter.x , ruinCenter.y , wall } )
+			SIPrint.Alert( nil , { "SIRuinSystem.遗迹构建-错误-遗迹围墙不存在" , ruinStyle.ID , ruinStrength , level , ruinCenter.x , ruinCenter.y , wall } )
 			return nil
 		end
 		-- 创建遗迹数据
-		local ruinID = SIRuinControl.MakeRuinID( chunkPosition , surfaceSettings.OrderID )
+		local ruinID = SIRuinSystem.MakeRuinID( chunkPosition , surfaceSettings.OrderID )
 		local ruinData =
 		{
 			RuinID = ruinID ,
@@ -413,7 +413,7 @@ SIRuinControl =
 			table.remove( turretLocationList , turretLocationIndex )
 			turretCount = turretCount + 1
 			-- 读取炮塔数据
-			local turretSet = SIRuinControl.GetRandomData( globalSettings , surfaceSettings , SIRuinControl.ControlNames.TurretSets )
+			local turretSet = SIRuinSystem.GetRandomData( globalSettings , surfaceSettings , SIRuinSystem.ControlNames.TurretSets )
 			if turretSet then
 				local turretListLength = #turretSet.List
 				local turretList = level > turretListLength and turretSet.List[turretListLength] or turretSet.List[level]
@@ -448,7 +448,7 @@ SIRuinControl =
 									{
 										name = turret ,
 										position = position ,
-										direction = SIRuinControl.TurretDirection[math.random( 4 )] ,
+										direction = SIRuinSystem.TurretDirection[math.random( 4 )] ,
 										force = "enemy" ,
 										fast_replace = false ,
 										raise_built = true ,
@@ -470,7 +470,7 @@ SIRuinControl =
 										x = ruinCenter.x + turretLocation.x ,
 										y = ruinCenter.y + turretLocation.y
 									} ,
-									direction = SIRuinControl.TurretDirection[math.random( 4 )] ,
+									direction = SIRuinSystem.TurretDirection[math.random( 4 )] ,
 									force = "enemy" ,
 									fast_replace = false ,
 									raise_built = true ,
@@ -484,16 +484,16 @@ SIRuinControl =
 								end
 							end
 						else
-							SIPrint.Alert( nil , { "SIRuinControl.遗迹构建-错误-遗迹炮塔体积过小" , ruinStyle.ID , ruinStrength , level , ruinCenter.x , ruinCenter.y , turretSet.ID , turret } )
+							SIPrint.Alert( nil , { "SIRuinSystem.遗迹构建-错误-遗迹炮塔体积过小" , ruinStyle.ID , ruinStrength , level , ruinCenter.x , ruinCenter.y , turretSet.ID , turret } )
 						end
 					else
-						SIPrint.Alert( nil , { "SIRuinControl.遗迹构建-错误-遗迹炮塔不存在" , ruinStyle.ID , ruinStrength , level , ruinCenter.x , ruinCenter.y , turretSet.ID , turret } )
+						SIPrint.Alert( nil , { "SIRuinSystem.遗迹构建-错误-遗迹炮塔不存在" , ruinStyle.ID , ruinStrength , level , ruinCenter.x , ruinCenter.y , turretSet.ID , turret } )
 					end
 				else
-					SIPrint.Alert( nil , { "SIRuinControl.遗迹构建-错误-无法读取遗迹炮塔" , ruinStyle.ID , ruinStrength , level , ruinCenter.x , ruinCenter.y , turretSet.ID } )
+					SIPrint.Alert( nil , { "SIRuinSystem.遗迹构建-错误-无法读取遗迹炮塔" , ruinStyle.ID , ruinStrength , level , ruinCenter.x , ruinCenter.y , turretSet.ID } )
 				end
 			else
-				SIPrint.Alert( nil , { "SIRuinControl.遗迹构建-错误-无法读取遗迹炮塔" , ruinStyle.ID , ruinStrength , level , ruinCenter.x , ruinCenter.y } )
+				SIPrint.Alert( nil , { "SIRuinSystem.遗迹构建-错误-无法读取遗迹炮塔" , ruinStyle.ID , ruinStrength , level , ruinCenter.x , ruinCenter.y } )
 			end
 		end
 		-- 中心位置
@@ -508,7 +508,7 @@ SIRuinControl =
 		local itemPositionIndex = math.random( #centerPositionList )
 		local itemPosition = centerPositionList[itemPositionIndex]
 		table.remove( centerPositionList , itemPositionIndex )
-		local itemSet = SIRuinControl.GetRandomData( globalSettings , surfaceSettings , SIRuinControl.ControlNames.ItemSets )
+		local itemSet = SIRuinSystem.GetRandomData( globalSettings , surfaceSettings , SIRuinSystem.ControlNames.ItemSets )
 		if itemSet then
 			local itemPackListLength = #itemSet.List
 			local itemPackList = level > itemPackListLength and itemSet.List[itemPackListLength] or itemSet.List[level]
@@ -541,7 +541,7 @@ SIRuinControl =
 					local xAdden = itemPositionXFlag and 1 or -1
 					local chestInserter = surface.create_entity
 					{
-						name = SIConstants_RuinControl.raw.Entities.RuinInserter ,
+						name = SIConstants_RuinSystem.raw.Entities.RuinInserter ,
 						position =
 						{
 							x = itemPosition.x + xAdden ,
@@ -592,7 +592,7 @@ SIRuinControl =
 			local machinePositionIndex = math.random( #centerPositionList )
 			local machinePosition = centerPositionList[machinePositionIndex]
 			table.remove( centerPositionList , machinePositionIndex )
-			local machineSet = SIRuinControl.GetRandomData( globalSettings , surfaceSettings , SIRuinControl.ControlNames.MachineSets )
+			local machineSet = SIRuinSystem.GetRandomData( globalSettings , surfaceSettings , SIRuinSystem.ControlNames.MachineSets )
 			if machineSet then
 				local machineDataListLength = #machineSet.List
 				local machineDataList = level > machineDataListLength and machineSet.List[machineDataListLength] or machineSet.List[level]
@@ -626,7 +626,7 @@ SIRuinControl =
 						local xAdden = machinePositionXFlag and 1.5 or -1.5
 						local machineInserter = surface.create_entity
 						{
-							name = SIConstants_RuinControl.raw.Entities.RuinInserter ,
+							name = SIConstants_RuinSystem.raw.Entities.RuinInserter ,
 							position =
 							{
 								x = machinePosition.x + xAdden ,
@@ -675,19 +675,19 @@ SIRuinControl =
 	-- 返回值 = 遗迹的 ID , 如果没能成功创建遗迹则返回 nil
 	-- ======================================================================
 	CreateRuin = function( surfaceIndex , chunkPosition , ruinStyleID , ruinStrength )
-		local globalSettings = SIGlobal.GetGlobalSettings( SIRuinControl.Settings.Name )
-		local surfaceSettings = SIRuinControl.GetSurfaceSettings( globalSettings , surfaceIndex )
-		local ruinCenter = SIRuinControl.MakeRuinCenter( chunkPosition )
+		local globalSettings = SIGlobal.GetGlobalSettings( SIRuinSystem.Settings.Name )
+		local surfaceSettings = SIRuinSystem.GetSurfaceSettings( globalSettings , surfaceIndex )
+		local ruinCenter = SIRuinSystem.MakeRuinCenter( chunkPosition )
 		local ruinStyle = surfaceSettings.Controls.RuinStyles[ruinStyleID]
 		if not ruinStyle then
 			ruinStyle = globalSettings.Controls.RuinStyles[ruinStyleID]
 		end
 		if not ruinStyle then
-			SIPrint.Alert( nil , { "SIRuinControl.遗迹构建-错误-无效遗迹布局类型" } )
+			SIPrint.Alert( nil , { "SIRuinSystem.遗迹构建-错误-无效遗迹布局类型" } )
 			return nil
 		end
 		local surface = game.get_surface( surfaceIndex )
-		return SIRuinControl.CreateRuinInner( surface , globalSettings , surfaceSettings , chunkPosition , ruinCenter , ruinStyle , ruinStrength )
+		return SIRuinSystem.CreateRuinInner( surface , globalSettings , surfaceSettings , chunkPosition , ruinCenter , ruinStyle , ruinStrength )
 	end ,
 
 	-- ======================================================================
@@ -701,26 +701,26 @@ SIRuinControl =
 	-- 返回值 = 遗迹的 ID , 如果没能成功创建遗迹则返回 nil
 	-- ======================================================================
 	CreateRuinWithChance = function( surfaceIndex , chunkPosition )
-		local globalSettings = SIGlobal.GetGlobalSettings( SIRuinControl.Settings.Name )
-		local surfaceSettings = SIRuinControl.GetSurfaceSettings( globalSettings , surfaceIndex )
-		local ruinCenter = SIRuinControl.MakeRuinCenter( chunkPosition )
+		local globalSettings = SIGlobal.GetGlobalSettings( SIRuinSystem.Settings.Name )
+		local surfaceSettings = SIRuinSystem.GetSurfaceSettings( globalSettings , surfaceIndex )
+		local ruinCenter = SIRuinSystem.MakeRuinCenter( chunkPosition )
 		local distance = ( ruinCenter.x ^ 2 + ruinCenter.y ^ 2 ) ^ 0.5
-		if distance < ( surfaceSettings.minRuinDistance or SIConfigs.SIRuinControl.MinRuinDistance ) then
+		if distance < ( surfaceSettings.minRuinDistance or SIConfigs.SIRuinSystem.MinRuinDistance ) then
 			return nil
 		end
-		if math.random() > ( surfaceSettings.ruinCreateChance or SIConfigs.SIRuinControl.RuinCreateChance ) then
+		if math.random() > ( surfaceSettings.ruinCreateChance or SIConfigs.SIRuinSystem.RuinCreateChance ) then
 			return nil
 		end
-		local ruinStyle = SIRuinControl.GetRandomData( globalSettings , surfaceSettings , SIRuinControl.ControlNames.RuinStyles )
+		local ruinStyle = SIRuinSystem.GetRandomData( globalSettings , surfaceSettings , SIRuinSystem.ControlNames.RuinStyles )
 		if not ruinStyle then
 			return nil
 		end
 		local surface = game.get_surface( surfaceIndex )
-		local ruinStrength = ( surfaceSettings.ruinStrength or SIConfigs.SIRuinControl.RuinStrength ) + distance / 32 * ( surfaceSettings.ruinStrengthAdden or SIConfigs.SIRuinControl.RuinStrengthAdden )
+		local ruinStrength = ( surfaceSettings.ruinStrength or SIConfigs.SIRuinSystem.RuinStrength ) + distance / 32 * ( surfaceSettings.ruinStrengthAdden or SIConfigs.SIRuinSystem.RuinStrengthAdden )
 		if ruinStrength > 20 then
 			ruinStrength = ruinStrength ^ 1.5
 		end
-		return SIRuinControl.CreateRuinInner( surface , globalSettings , surfaceSettings , chunkPosition , ruinCenter , ruinStyle , ruinStrength )
+		return SIRuinSystem.CreateRuinInner( surface , globalSettings , surfaceSettings , chunkPosition , ruinCenter , ruinStyle , ruinStrength )
 	end ,
 
 	-- ======================================================================
@@ -730,7 +730,7 @@ SIRuinControl =
 	-- ruinID            = 遗迹的 ID<br>
 	-- ======================================================================
 	RemoveRuin = function( surfaceIndex , ruinID )
-		local globalSettings = SIGlobal.GetGlobalSettings( SIRuinControl.Settings.Name )
+		local globalSettings = SIGlobal.GetGlobalSettings( SIRuinSystem.Settings.Name )
 		local surfaceSettings = globalSettings.Surfaces[surfaceIndex]
 		if surfaceSettings and surfaceSettings.Ruins[ruinID] then
 			local ruinData = surfaceSettings.Ruins[ruinID]
@@ -750,10 +750,10 @@ SIRuinControl =
 	-- chunkPosition     = 区块坐标 , 注意是区块坐标 , 不是实际坐标<br>
 	-- ======================================================================
 	RemoveRuinWithChunk = function( surfaceIndex , chunkPosition )
-		local globalSettings = SIGlobal.GetGlobalSettings( SIRuinControl.Settings.Name )
+		local globalSettings = SIGlobal.GetGlobalSettings( SIRuinSystem.Settings.Name )
 		local surfaceSettings = globalSettings.Surfaces[surfaceIndex]
 		if surfaceSettings then
-			local ruinIDPrefix = SIRuinControl.MakeRuinID( chunkPosition , nil )
+			local ruinIDPrefix = SIRuinSystem.MakeRuinID( chunkPosition , nil )
 			for ruinID , ruinData in pairs( surfaceSettings.Ruins ) do
 				if ruinID:StartsWith( ruinIDPrefix ) then
 					for index , entity in pairs( ruinData.Entities ) do
@@ -773,7 +773,7 @@ SIRuinControl =
 	-- surfaceIndex      = 世界索引<br>
 	-- ======================================================================
 	RemoveRuinWithSurface = function( surfaceIndex )
-		local globalSettings = SIGlobal.GetGlobalSettings( SIRuinControl.Settings.Name )
+		local globalSettings = SIGlobal.GetGlobalSettings( SIRuinSystem.Settings.Name )
 		local surfaceSettings = globalSettings.Surfaces[surfaceIndex]
 		if surfaceSettings then
 			for ruinID , ruinData in pairs( surfaceSettings.Ruins ) do
@@ -803,8 +803,8 @@ SIRuinControl =
 	-- ruinStrengthAdden = 随着与地图中心的距离的增加而获得的额外遗迹强度系数 , 每 16 格增加一次<br>
 	-- ======================================================================
 	SetSurfaceSettings = function( surfaceIndex , minRuinDistance , ruinCreateChance , ruinStrength , ruinStrengthAdden )
-		local globalSettings = SIGlobal.GetGlobalSettings( SIRuinControl.Settings.Name )
-		local surfaceSettings = SIRuinControl.GetSurfaceSettings( globalSettings , surfaceIndex )
+		local globalSettings = SIGlobal.GetGlobalSettings( SIRuinSystem.Settings.Name )
+		local surfaceSettings = SIRuinSystem.GetSurfaceSettings( globalSettings , surfaceIndex )
 		surfaceSettings.minRuinDistance = minRuinDistance
 		surfaceSettings.ruinCreateChance = ruinCreateChance
 		surfaceSettings.ruinStrength = ruinStrength
@@ -819,10 +819,10 @@ SIRuinControl =
 	-- newSurfaceIndex   = 作为复制目标的世界索引<br>
 	-- ======================================================================
 	CopySurfaceSettings = function( oldSurfaceIndex , newSurfaceIndex )
-		local globalSettings = SIGlobal.GetGlobalSettings( SIRuinControl.Settings.Name )
+		local globalSettings = SIGlobal.GetGlobalSettings( SIRuinSystem.Settings.Name )
 		local oldSurfaceSettings = globalSettings.Surfaces[oldSurfaceIndex]
 		if oldSurfaceSettings then
-			local newSurfaceSettings = SIRuinControl.GetSurfaceSettings( globalSettings , newSurfaceIndex )
+			local newSurfaceSettings = SIRuinSystem.GetSurfaceSettings( globalSettings , newSurfaceIndex )
 			newSurfaceSettings.Controls = SIUtils.table.deepcopy( oldSurfaceSettings.Controls )
 			newSurfaceSettings.Weights = SIUtils.table.deepcopy( oldSurfaceSettings.Weights )
 			newSurfaceSettings.minRuinDistance = oldSurfaceSettings.minRuinDistance
@@ -852,12 +852,12 @@ SIRuinControl =
 	-- BrokenTurretHealth = 残血炮塔的血量浮动范围 , 小数 , 浮动范围为 [此值] 至 1.0 (满血)<br>
 	-- ======================================================================
 	AddRuinStyle = function( ruinStyle , surfaceIndexList )
-		local globalSettings = SIGlobal.GetGlobalSettings( SIRuinControl.Settings.Name )
+		local globalSettings = SIGlobal.GetGlobalSettings( SIRuinSystem.Settings.Name )
 		local ID = ruinStyle.ID
 		ruinStyle.Weight = ruinStyle.Weight or 1
 		if surfaceIndexList then
 			for index , surfaceIndex in pairs( surfaceIndexList ) do
-				local surfaceSettings = SIRuinControl.GetSurfaceSettings( globalSettings , surfaceIndex )
+				local surfaceSettings = SIRuinSystem.GetSurfaceSettings( globalSettings , surfaceIndex )
 				if surfaceSettings.Controls.RuinStyles[ID] then
 					surfaceSettings.Weights.RuinStyles = surfaceSettings.Weights.RuinStyles - surfaceSettings.Controls.RuinStyles[ID].Weight
 				end
@@ -886,12 +886,12 @@ SIRuinControl =
 	-- List               = 炮塔列表 , 本身是一个二维数组 , 对应从 1 到 n 级的炮塔数组 , 如果遗迹等级超过 n , 则选取最高等级的炮塔数组 , 每个炮塔数组都可以包含多种炮塔类型 , 每个炮塔位置都会重新随机选择<br>
 	-- ======================================================================
 	AddTurretSet = function( turretSet , surfaceIndexList )
-		local globalSettings = SIGlobal.GetGlobalSettings( SIRuinControl.Settings.Name )
+		local globalSettings = SIGlobal.GetGlobalSettings( SIRuinSystem.Settings.Name )
 		local ID = turretSet.ID
 		turretSet.Weight = turretSet.Weight or 1
 		if surfaceIndexList then
 			for index , surfaceIndex in pairs( surfaceIndexList ) do
-				local surfaceSettings = SIRuinControl.GetSurfaceSettings( globalSettings , surfaceIndex )
+				local surfaceSettings = SIRuinSystem.GetSurfaceSettings( globalSettings , surfaceIndex )
 				if surfaceSettings.Controls.TurretSets[ID] then
 					surfaceSettings.Weights.TurretSets = surfaceSettings.Weights.TurretSets - surfaceSettings.Controls.TurretSets[ID].Weight
 				end
@@ -929,12 +929,12 @@ SIRuinControl =
 	-- Max                = 物品数量的最大值<br>
 	-- ======================================================================
 	AddItemSet = function( itemSet , surfaceIndexList )
-		local globalSettings = SIGlobal.GetGlobalSettings( SIRuinControl.Settings.Name )
+		local globalSettings = SIGlobal.GetGlobalSettings( SIRuinSystem.Settings.Name )
 		local ID = itemSet.ID
 		itemSet.Weight = itemSet.Weight or 1
 		if surfaceIndexList then
 			for index , surfaceIndex in pairs( surfaceIndexList ) do
-				local surfaceSettings = SIRuinControl.GetSurfaceSettings( globalSettings , surfaceIndex )
+				local surfaceSettings = SIRuinSystem.GetSurfaceSettings( globalSettings , surfaceIndex )
 				if surfaceSettings.Controls.ItemSets[ID] then
 					surfaceSettings.Weights.ItemSets = surfaceSettings.Weights.ItemSets - surfaceSettings.Controls.ItemSets[ID].Weight
 				end
@@ -967,12 +967,12 @@ SIRuinControl =
 	-- Recipe             = 组装机使用的配方<br>
 	-- ======================================================================
 	AddMachineSet = function( machineSet , surfaceIndexList )
-		local globalSettings = SIGlobal.GetGlobalSettings( SIRuinControl.Settings.Name )
+		local globalSettings = SIGlobal.GetGlobalSettings( SIRuinSystem.Settings.Name )
 		local ID = machineSet.ID
 		machineSet.Weight = machineSet.Weight or 1
 		if surfaceIndexList then
 			for index , surfaceIndex in pairs( surfaceIndexList ) do
-				local surfaceSettings = SIRuinControl.GetSurfaceSettings( globalSettings , surfaceIndex )
+				local surfaceSettings = SIRuinSystem.GetSurfaceSettings( globalSettings , surfaceIndex )
 				if surfaceSettings.Controls.MachineSets[ID] then
 					surfaceSettings.Weights.MachineSets = surfaceSettings.Weights.MachineSets - surfaceSettings.Controls.MachineSets[ID].Weight
 				end
@@ -998,12 +998,12 @@ SIRuinControl =
 	-- 待定义
 	-- ======================================================================
 	AddMarketSet = function( marketSet , surfaceIndexList )
-		local globalSettings = SIGlobal.GetGlobalSettings( SIRuinControl.Settings.Name )
+		local globalSettings = SIGlobal.GetGlobalSettings( SIRuinSystem.Settings.Name )
 		local ID = marketSet.ID
 		marketSet.Weight = marketSet.Weight or 1
 		if surfaceIndexList then
 			for index , surfaceIndex in pairs( surfaceIndexList ) do
-				local surfaceSettings = SIRuinControl.GetSurfaceSettings( globalSettings , surfaceIndex )
+				local surfaceSettings = SIRuinSystem.GetSurfaceSettings( globalSettings , surfaceIndex )
 				if surfaceSettings.Controls.MarketSets[ID] then
 					surfaceSettings.Weights.MarketSets = surfaceSettings.Weights.MarketSets - surfaceSettings.Controls.MarketSets[ID].Weight
 				end
@@ -1029,12 +1029,12 @@ SIRuinControl =
 	-- 待定义
 	-- ======================================================================
 	AddSpecialEntitySet = function( specialEntitySet , surfaceIndexList )
-		local globalSettings = SIGlobal.GetGlobalSettings( SIRuinControl.Settings.Name )
+		local globalSettings = SIGlobal.GetGlobalSettings( SIRuinSystem.Settings.Name )
 		local ID = specialEntitySet.ID
 		specialEntitySet.Weight = specialEntitySet.Weight or 1
 		if surfaceIndexList then
 			for index , surfaceIndex in pairs( surfaceIndexList ) do
-				local surfaceSettings = SIRuinControl.GetSurfaceSettings( globalSettings , surfaceIndex )
+				local surfaceSettings = SIRuinSystem.GetSurfaceSettings( globalSettings , surfaceIndex )
 				if surfaceSettings.Controls.SpecialEntitySets[ID] then
 					surfaceSettings.Weights.SpecialEntitySets = surfaceSettings.Weights.SpecialEntitySets - surfaceSettings.Controls.SpecialEntitySets[ID].Weight
 				end

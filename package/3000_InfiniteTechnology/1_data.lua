@@ -5,7 +5,7 @@
 -- ============================================================================================================================================
 
 SIGen
-.SetGroup( SIConstants_Expand.raw.Groups.Expand.InfiniteTech )
+.SetGroup( SIConstants_InfiniteTechnology.raw.Groups.Expand.InfiniteTech )
 
 -- ======================================================================
 -- 研究包
@@ -61,12 +61,12 @@ SIGen
 	{
 		{
 			type = SICommon.Types.Items.Item ,
-			name = SIConstants_Expand.raw.Items.FirstPack ,
+			name = SIConstants_InfiniteTechnology.raw.Items.FirstPack ,
 			amount = 3 ,
 			catalyst_amount = 3
 		}
 	} ,
-	main_product = SIConstants_Expand.raw.Items.FirstPack ,
+	main_product = SIConstants_InfiniteTechnology.raw.Items.FirstPack ,
 	emissions_multiplier = 3.5 ,
 	requester_paste_multiplier = 10 ,
 	overload_multiplier = 5 ,
@@ -131,12 +131,12 @@ SIGen
 	{
 		{
 			type = SICommon.Types.Items.Item ,
-			name = SIConstants_Expand.raw.Items.SecondPack ,
+			name = SIConstants_InfiniteTechnology.raw.Items.SecondPack ,
 			amount = 3 ,
 			catalyst_amount = 3
 		}
 	} ,
-	main_product = SIConstants_Expand.raw.Items.SecondPack ,
+	main_product = SIConstants_InfiniteTechnology.raw.Items.SecondPack ,
 	emissions_multiplier = 3.5 ,
 	requester_paste_multiplier = 10 ,
 	overload_multiplier = 5 ,
@@ -201,12 +201,12 @@ SIGen
 	{
 		{
 			type = SICommon.Types.Items.Item ,
-			name = SIConstants_Expand.raw.Items.ThirdPack ,
+			name = SIConstants_InfiniteTechnology.raw.Items.ThirdPack ,
 			amount = 3 ,
 			catalyst_amount = 3
 		}
 	} ,
-	main_product = SIConstants_Expand.raw.Items.ThirdPack ,
+	main_product = SIConstants_InfiniteTechnology.raw.Items.ThirdPack ,
 	emissions_multiplier = 3.5 ,
 	requester_paste_multiplier = 10 ,
 	overload_multiplier = 5 ,
@@ -271,12 +271,12 @@ SIGen
 	{
 		{
 			type = SICommon.Types.Items.Item ,
-			name = SIConstants_Expand.raw.Items.ForthPack ,
+			name = SIConstants_InfiniteTechnology.raw.Items.ForthPack ,
 			amount = 3 ,
 			catalyst_amount = 3
 		}
 	} ,
-	main_product = SIConstants_Expand.raw.Items.ForthPack ,
+	main_product = SIConstants_InfiniteTechnology.raw.Items.ForthPack ,
 	emissions_multiplier = 3.5 ,
 	requester_paste_multiplier = 10 ,
 	overload_multiplier = 5 ,
@@ -341,12 +341,12 @@ SIGen
 	{
 		{
 			type = SICommon.Types.Items.Item ,
-			name = SIConstants_Expand.raw.Items.FifthPack ,
+			name = SIConstants_InfiniteTechnology.raw.Items.FifthPack ,
 			amount = 3 ,
 			catalyst_amount = 3
 		}
 	} ,
-	main_product = SIConstants_Expand.raw.Items.FifthPack ,
+	main_product = SIConstants_InfiniteTechnology.raw.Items.FifthPack ,
 	emissions_multiplier = 3.5 ,
 	requester_paste_multiplier = 10 ,
 	overload_multiplier = 5 ,
@@ -418,12 +418,12 @@ SIGen
 	{
 		{
 			type = SICommon.Types.Items.Item ,
-			name = SIConstants_Expand.raw.Items.Lab ,
+			name = SIConstants_InfiniteTechnology.raw.Items.Lab ,
 			amount = 1 ,
 			catalyst_amount = 1
 		}
 	} ,
-	main_product = SIConstants_Expand.raw.Items.Lab ,
+	main_product = SIConstants_InfiniteTechnology.raw.Items.Lab ,
 	emissions_multiplier = 5.0 ,
 	requester_paste_multiplier = 10 ,
 	overload_multiplier = 5 ,
@@ -483,7 +483,7 @@ SIGen
 .New( SICommon.Types.Entities.Lab , "Lab" , "无尽研究球" )
 .AutoIcon()
 .SetSize( 3 , 3 )
-.ReferencePlaceResult( SICommon.Types.Items.Item , SIConstants_Expand.raw.Items.Lab )
+.ReferencePlaceResult( SICommon.Types.Items.Item , SIConstants_InfiniteTechnology.raw.Items.Lab )
 .Append
 {
 	flags = { SICommon.Flags.Entity.PlaceablePlayer , SICommon.Flags.Entity.PlayerCreation } ,
@@ -494,13 +494,13 @@ SIGen
 		{
 			{
 				type = SICommon.Types.Items.Item ,
-				name = SIConstants_Expand.raw.Items.Lab ,
+				name = SIConstants_InfiniteTechnology.raw.Items.Lab ,
 				amount = 1
 			}
 		}
 	} ,
 	max_health = 185 ,
-	corpse = SIConstants_Expand.raw.Entities.LabRemnants ,
+	corpse = SIConstants_InfiniteTechnology.raw.Entities.LabRemnants ,
 	dying_explosion = "lab-explosion" ,
 	map_color = { r = 1.00 , g = 1.00 , b = 1.00 } ,
 	friendly_map_color = { r = 0.40 , g = 0.40 , b = 1.00 } ,
@@ -551,11 +551,11 @@ SIGen
 	researching_speed = 1 ,
 	inputs =
 	{
-		SIConstants_Expand.raw.Items.FirstPack ,
-		SIConstants_Expand.raw.Items.SecondPack ,
-		SIConstants_Expand.raw.Items.ThirdPack ,
-		SIConstants_Expand.raw.Items.ForthPack ,
-		SIConstants_Expand.raw.Items.FifthPack
+		SIConstants_InfiniteTechnology.raw.Items.FirstPack ,
+		SIConstants_InfiniteTechnology.raw.Items.SecondPack ,
+		SIConstants_InfiniteTechnology.raw.Items.ThirdPack ,
+		SIConstants_InfiniteTechnology.raw.Items.ForthPack ,
+		SIConstants_InfiniteTechnology.raw.Items.FifthPack
 	} ,
 	entity_info_icon_shift = { 0 , 0 } ,
 	alert_icon_shift = { 0 , 0 } ,
@@ -810,7 +810,7 @@ SIGen
 	upgrade = false ,
 	prerequisites =
 	{
-		SIConstants_Expand.raw.Technologies.InfiniteStart
+		SIConstants_InfiniteTechnology.raw.Technologies.InfiniteStart
 	} ,
 	unit =
 	{
@@ -822,11 +822,11 @@ SIGen
 	{
 		{
 			type = SICommon.Flags.TechnologyModifier.UnlockRecipe ,
-			recipe = SIConstants_Expand.raw.Recipes.FirstPack
+			recipe = SIConstants_InfiniteTechnology.raw.Recipes.FirstPack
 		} ,
 		{
 			type = SICommon.Flags.TechnologyModifier.UnlockRecipe ,
-			recipe = SIConstants_Expand.raw.Recipes.Lab
+			recipe = SIConstants_InfiniteTechnology.raw.Recipes.Lab
 		}
 	}
 } )
@@ -840,7 +840,7 @@ SIGen
 	upgrade = false ,
 	prerequisites =
 	{
-		SIConstants_Expand.raw.Technologies.Infinite_1
+		SIConstants_InfiniteTechnology.raw.Technologies.Infinite_1
 	} ,
 	unit =
 	{
@@ -850,7 +850,7 @@ SIGen
 		{
 			{
 				type = SICommon.Types.Items.Item ,
-				name = SIConstants_Expand.raw.Items.FirstPack ,
+				name = SIConstants_InfiniteTechnology.raw.Items.FirstPack ,
 				amount = 1
 			}
 		}
@@ -859,7 +859,7 @@ SIGen
 	{
 		{
 			type = SICommon.Flags.TechnologyModifier.UnlockRecipe ,
-			recipe = SIConstants_Expand.raw.Recipes.SecondPack
+			recipe = SIConstants_InfiniteTechnology.raw.Recipes.SecondPack
 		}
 	}
 } )
@@ -873,7 +873,7 @@ SIGen
 	upgrade = false ,
 	prerequisites =
 	{
-		SIConstants_Expand.raw.Technologies.Infinite_2
+		SIConstants_InfiniteTechnology.raw.Technologies.Infinite_2
 	} ,
 	unit =
 	{
@@ -883,7 +883,7 @@ SIGen
 		{
 			{
 				type = SICommon.Types.Items.Item ,
-				name = SIConstants_Expand.raw.Items.SecondPack ,
+				name = SIConstants_InfiniteTechnology.raw.Items.SecondPack ,
 				amount = 1
 			}
 		}
@@ -892,7 +892,7 @@ SIGen
 	{
 		{
 			type = SICommon.Flags.TechnologyModifier.UnlockRecipe ,
-			recipe = SIConstants_Expand.raw.Recipes.ThirdPack
+			recipe = SIConstants_InfiniteTechnology.raw.Recipes.ThirdPack
 		}
 	}
 } )
@@ -906,7 +906,7 @@ SIGen
 	upgrade = false ,
 	prerequisites =
 	{
-		SIConstants_Expand.raw.Technologies.Infinite_3
+		SIConstants_InfiniteTechnology.raw.Technologies.Infinite_3
 	} ,
 	unit =
 	{
@@ -916,7 +916,7 @@ SIGen
 		{
 			{
 				type = SICommon.Types.Items.Item ,
-				name = SIConstants_Expand.raw.Items.ThirdPack ,
+				name = SIConstants_InfiniteTechnology.raw.Items.ThirdPack ,
 				amount = 1
 			}
 		}
@@ -925,7 +925,7 @@ SIGen
 	{
 		{
 			type = SICommon.Flags.TechnologyModifier.UnlockRecipe ,
-			recipe = SIConstants_Expand.raw.Recipes.ForthPack
+			recipe = SIConstants_InfiniteTechnology.raw.Recipes.ForthPack
 		}
 	}
 } )
@@ -939,7 +939,7 @@ SIGen
 	upgrade = false ,
 	prerequisites =
 	{
-		SIConstants_Expand.raw.Technologies.Infinite_4
+		SIConstants_InfiniteTechnology.raw.Technologies.Infinite_4
 	} ,
 	unit =
 	{
@@ -949,7 +949,7 @@ SIGen
 		{
 			{
 				type = SICommon.Types.Items.Item ,
-				name = SIConstants_Expand.raw.Items.ForthPack ,
+				name = SIConstants_InfiniteTechnology.raw.Items.ForthPack ,
 				amount = 1
 			}
 		}
@@ -958,7 +958,7 @@ SIGen
 	{
 		{
 			type = SICommon.Flags.TechnologyModifier.UnlockRecipe ,
-			recipe = SIConstants_Expand.raw.Recipes.FifthPack
+			recipe = SIConstants_InfiniteTechnology.raw.Recipes.FifthPack
 		}
 	}
 } )
@@ -1001,7 +1001,7 @@ local function InfiniteTech( ID , alias , maxLevel , subIcon , effects )
 		max_level = maxLevel ,
 		prerequisites =
 		{
-			SIConstants_Expand.raw.Technologies.Infinite_1
+			SIConstants_InfiniteTechnology.raw.Technologies.Infinite_1
 		} ,
 		unit =
 		{
@@ -1011,7 +1011,7 @@ local function InfiniteTech( ID , alias , maxLevel , subIcon , effects )
 			{
 				{
 					type = SICommon.Types.Items.Item ,
-					name = SIConstants_Expand.raw.Items.FirstPack ,
+					name = SIConstants_InfiniteTechnology.raw.Items.FirstPack ,
 					amount = 1
 				}
 			}
@@ -1050,8 +1050,8 @@ local function InfiniteTech( ID , alias , maxLevel , subIcon , effects )
 		max_level = maxLevel * 2 ,
 		prerequisites =
 		{
-			SIConstants_Expand.raw.Technologies[IDPrefix .. "_" .. 1] ,
-			SIConstants_Expand.raw.Technologies.Infinite_2
+			SIConstants_InfiniteTechnology.raw.Technologies[IDPrefix .. "_" .. 1] ,
+			SIConstants_InfiniteTechnology.raw.Technologies.Infinite_2
 		} ,
 		unit =
 		{
@@ -1061,7 +1061,7 @@ local function InfiniteTech( ID , alias , maxLevel , subIcon , effects )
 			{
 				{
 					type = SICommon.Types.Items.Item ,
-					name = SIConstants_Expand.raw.Items.SecondPack ,
+					name = SIConstants_InfiniteTechnology.raw.Items.SecondPack ,
 					amount = 1
 				}
 			}
@@ -1100,8 +1100,8 @@ local function InfiniteTech( ID , alias , maxLevel , subIcon , effects )
 		max_level = maxLevel * 3 ,
 		prerequisites =
 		{
-			SIConstants_Expand.raw.Technologies[IDPrefix .. "_" .. 2] ,
-			SIConstants_Expand.raw.Technologies.Infinite_3
+			SIConstants_InfiniteTechnology.raw.Technologies[IDPrefix .. "_" .. 2] ,
+			SIConstants_InfiniteTechnology.raw.Technologies.Infinite_3
 		} ,
 		unit =
 		{
@@ -1111,7 +1111,7 @@ local function InfiniteTech( ID , alias , maxLevel , subIcon , effects )
 			{
 				{
 					type = SICommon.Types.Items.Item ,
-					name = SIConstants_Expand.raw.Items.ThirdPack ,
+					name = SIConstants_InfiniteTechnology.raw.Items.ThirdPack ,
 					amount = 1
 				}
 			}
@@ -1150,8 +1150,8 @@ local function InfiniteTech( ID , alias , maxLevel , subIcon , effects )
 		max_level = maxLevel * 4 ,
 		prerequisites =
 		{
-			SIConstants_Expand.raw.Technologies[IDPrefix .. "_" .. 3] ,
-			SIConstants_Expand.raw.Technologies.Infinite_4
+			SIConstants_InfiniteTechnology.raw.Technologies[IDPrefix .. "_" .. 3] ,
+			SIConstants_InfiniteTechnology.raw.Technologies.Infinite_4
 		} ,
 		unit =
 		{
@@ -1161,7 +1161,7 @@ local function InfiniteTech( ID , alias , maxLevel , subIcon , effects )
 			{
 				{
 					type = SICommon.Types.Items.Item ,
-					name = SIConstants_Expand.raw.Items.ForthPack ,
+					name = SIConstants_InfiniteTechnology.raw.Items.ForthPack ,
 					amount = 1
 				}
 			}
@@ -1200,8 +1200,8 @@ local function InfiniteTech( ID , alias , maxLevel , subIcon , effects )
 		max_level = maxLevel * 5 ,
 		prerequisites =
 		{
-			SIConstants_Expand.raw.Technologies[IDPrefix .. "_" .. 4] ,
-			SIConstants_Expand.raw.Technologies.Infinite_5
+			SIConstants_InfiniteTechnology.raw.Technologies[IDPrefix .. "_" .. 4] ,
+			SIConstants_InfiniteTechnology.raw.Technologies.Infinite_5
 		} ,
 		unit =
 		{
@@ -1211,7 +1211,7 @@ local function InfiniteTech( ID , alias , maxLevel , subIcon , effects )
 			{
 				{
 					type = SICommon.Types.Items.Item ,
-					name = SIConstants_Expand.raw.Items.FifthPack ,
+					name = SIConstants_InfiniteTechnology.raw.Items.FifthPack ,
 					amount = 1
 				}
 			}
@@ -1250,7 +1250,7 @@ local function InfiniteTech( ID , alias , maxLevel , subIcon , effects )
 		max_level = "infinite" ,
 		prerequisites =
 		{
-			SIConstants_Expand.raw.Technologies[IDPrefix .. "_" .. 5] ,
+			SIConstants_InfiniteTechnology.raw.Technologies[IDPrefix .. "_" .. 5] ,
 			"space-science-pack"
 		} ,
 		unit =
@@ -1261,27 +1261,27 @@ local function InfiniteTech( ID , alias , maxLevel , subIcon , effects )
 			{
 				{
 					type = SICommon.Types.Items.Item ,
-					name = SIConstants_Expand.raw.Items.FirstPack ,
+					name = SIConstants_InfiniteTechnology.raw.Items.FirstPack ,
 					amount = 1
 				} ,
 				{
 					type = SICommon.Types.Items.Item ,
-					name = SIConstants_Expand.raw.Items.SecondPack ,
+					name = SIConstants_InfiniteTechnology.raw.Items.SecondPack ,
 					amount = 1
 				} ,
 				{
 					type = SICommon.Types.Items.Item ,
-					name = SIConstants_Expand.raw.Items.ThirdPack ,
+					name = SIConstants_InfiniteTechnology.raw.Items.ThirdPack ,
 					amount = 1
 				} ,
 				{
 					type = SICommon.Types.Items.Item ,
-					name = SIConstants_Expand.raw.Items.ForthPack ,
+					name = SIConstants_InfiniteTechnology.raw.Items.ForthPack ,
 					amount = 1
 				} ,
 				{
 					type = SICommon.Types.Items.Item ,
-					name = SIConstants_Expand.raw.Items.FifthPack ,
+					name = SIConstants_InfiniteTechnology.raw.Items.FifthPack ,
 					amount = 1
 				}
 			}

@@ -10,7 +10,7 @@ local animationShadowShift = SIUtils.by_pixel( 2 , 0 )
 local moduleSlot = 6
 
 SIGen
-.SetGroup( SIConstants_Expand.raw.Groups.Expand.MakeBarrel )
+.SetGroup( SIConstants_AdvancedBarrel.raw.Groups.Expand.MakeBarrel )
 
 -- ======================================================================
 -- 桶物品
@@ -61,12 +61,12 @@ SIGen
 	{
 		{
 			type = SICommon.Types.Items.Item ,
-			name = SIConstants_Expand.raw.Items.WoodenBarrel ,
+			name = SIConstants_AdvancedBarrel.raw.Items.WoodenBarrel ,
 			amount = 2 ,
 			catalyst_amount = 2
 		}
 	} ,
-	main_product = SIConstants_Expand.raw.Items.WoodenBarrel ,
+	main_product = SIConstants_AdvancedBarrel.raw.Items.WoodenBarrel ,
 	emissions_multiplier = 0.4 ,
 	requester_paste_multiplier = 10 ,
 	overload_multiplier = 5 ,
@@ -83,7 +83,7 @@ SIGen
 .New( SICommon.Types.Entities.SimpleOwner , "WoodenBarrel" , "木桶" )
 .AutoIcon()
 .SetSize( 1 , 1 )
-.ReferencePlaceResult( SICommon.Types.Items.Item , SIConstants_Expand.raw.Items.WoodenBarrel )
+.ReferencePlaceResult( SICommon.Types.Items.Item , SIConstants_AdvancedBarrel.raw.Items.WoodenBarrel )
 .Append
 {
 	flags = { SICommon.Flags.Entity.PlaceablePlayer , SICommon.Flags.Entity.PlayerCreation , SICommon.Flags.Entity.HideAltInfo } ,
@@ -94,7 +94,7 @@ SIGen
 		{
 			{
 				type = SICommon.Types.Items.Item ,
-				name = SIConstants_Expand.raw.Items.WoodenBarrel ,
+				name = SIConstants_AdvancedBarrel.raw.Items.WoodenBarrel ,
 				amount = 1
 			}
 		}
@@ -201,12 +201,12 @@ SIGen
 	{
 		{
 			type = SICommon.Types.Items.Item ,
-			name = SIConstants_Expand.raw.Items.PlasticCapable ,
+			name = SIConstants_AdvancedBarrel.raw.Items.PlasticCapable ,
 			amount = 8 ,
 			catalyst_amount = 8
 		}
 	} ,
-	main_product = SIConstants_Expand.raw.Items.PlasticCapable ,
+	main_product = SIConstants_AdvancedBarrel.raw.Items.PlasticCapable ,
 	emissions_multiplier = 0.6 ,
 	requester_paste_multiplier = 10 ,
 	overload_multiplier = 5 ,
@@ -223,7 +223,7 @@ SIGen
 .New( SICommon.Types.Entities.SimpleOwner , "PlasticCapable" , "塑料胶囊" )
 .AutoIcon()
 .SetSizeSize( 1 , 1 , 0.5 )
-.ReferencePlaceResult( SICommon.Types.Items.Item , SIConstants_Expand.raw.Items.PlasticCapable )
+.ReferencePlaceResult( SICommon.Types.Items.Item , SIConstants_AdvancedBarrel.raw.Items.PlasticCapable )
 .Append
 {
 	flags = { SICommon.Flags.Entity.PlaceablePlayer , SICommon.Flags.Entity.PlayerCreation , SICommon.Flags.Entity.HideAltInfo } ,
@@ -234,7 +234,7 @@ SIGen
 		{
 			{
 				type = SICommon.Types.Items.Item ,
-				name = SIConstants_Expand.raw.Items.PlasticCapable ,
+				name = SIConstants_AdvancedBarrel.raw.Items.PlasticCapable ,
 				amount = 1
 			}
 		}
@@ -420,12 +420,12 @@ SIGen
 	{
 		{
 			type = SICommon.Types.Items.Item ,
-			name = SIConstants_Expand.raw.Items.BarrelMaker ,
+			name = SIConstants_AdvancedBarrel.raw.Items.BarrelMaker ,
 			amount = 1 ,
 			catalyst_amount = 1
 		}
 	} ,
-	main_product = SIConstants_Expand.raw.Items.BarrelMaker ,
+	main_product = SIConstants_AdvancedBarrel.raw.Items.BarrelMaker ,
 	emissions_multiplier = 1.0 ,
 	requester_paste_multiplier = 10 ,
 	overload_multiplier = 5 ,
@@ -442,7 +442,7 @@ SIGen
 .New( SICommon.Types.Entities.Furnace , "BarrelMaker" , "灌装设备" )
 .AutoIcon()
 .SetSize( 2 , 2 )
-.ReferencePlaceResult( SICommon.Types.Items.Item , SIConstants_Expand.raw.Items.BarrelMaker )
+.ReferencePlaceResult( SICommon.Types.Items.Item , SIConstants_AdvancedBarrel.raw.Items.BarrelMaker )
 .Append
 {
 	flags = { SICommon.Flags.Entity.PlaceablePlayer , SICommon.Flags.Entity.PlayerCreation } ,
@@ -453,7 +453,7 @@ SIGen
 		{
 			{
 				type = SICommon.Types.Items.Item ,
-				name = SIConstants_Expand.raw.Items.BarrelMaker ,
+				name = SIConstants_AdvancedBarrel.raw.Items.BarrelMaker ,
 				amount = 1
 			}
 		}
@@ -508,7 +508,7 @@ SIGen
 		module_info_icon_shift = { 0.0 , 0.8 }
 	} ,
 	base_productivity = 0 ,
-	crafting_categories = { SIConstants_Expand.raw.Categories.Recipe.MakeBarrel } ,
+	crafting_categories = { SIConstants_AdvancedBarrel.raw.Categories.Recipe.MakeBarrel } ,
 	crafting_speed = 1.0 ,
 	source_inventory_size = 1 ,
 	result_inventory_size = 2 ,
@@ -718,12 +718,12 @@ SIGen
 	{
 		{
 			type = SICommon.Types.Items.Item ,
-			name = SIConstants_Expand.raw.Items.BarrelDropper ,
+			name = SIConstants_AdvancedBarrel.raw.Items.BarrelDropper ,
 			amount = 1 ,
 			catalyst_amount = 1
 		}
 	} ,
-	main_product = SIConstants_Expand.raw.Items.BarrelDropper ,
+	main_product = SIConstants_AdvancedBarrel.raw.Items.BarrelDropper ,
 	emissions_multiplier = 1.0 ,
 	requester_paste_multiplier = 10 ,
 	overload_multiplier = 5 ,
@@ -740,7 +740,7 @@ SIGen
 .New( SICommon.Types.Entities.Furnace , "BarrelDropper" , "倾倒设备" )
 .AutoIcon()
 .SetSize( 2 , 2 )
-.ReferencePlaceResult( SICommon.Types.Items.Item , SIConstants_Expand.raw.Items.BarrelDropper )
+.ReferencePlaceResult( SICommon.Types.Items.Item , SIConstants_AdvancedBarrel.raw.Items.BarrelDropper )
 .Append
 {
 	flags = { SICommon.Flags.Entity.PlaceablePlayer , SICommon.Flags.Entity.PlayerCreation } ,
@@ -751,7 +751,7 @@ SIGen
 		{
 			{
 				type = SICommon.Types.Items.Item ,
-				name = SIConstants_Expand.raw.Items.BarrelDropper ,
+				name = SIConstants_AdvancedBarrel.raw.Items.BarrelDropper ,
 				amount = 1
 			}
 		}
@@ -806,7 +806,7 @@ SIGen
 		module_info_icon_shift = { 0.0 , 0.8 }
 	} ,
 	base_productivity = 0 ,
-	crafting_categories = { SIConstants_Expand.raw.Categories.Recipe.DropBarrel } ,
+	crafting_categories = { SIConstants_AdvancedBarrel.raw.Categories.Recipe.DropBarrel } ,
 	crafting_speed = 1.0 ,
 	source_inventory_size = 1 ,
 	result_inventory_size = 2 ,
@@ -1000,15 +1000,15 @@ SIGen
 	{
 		{
 			type = SICommon.Flags.TechnologyModifier.UnlockRecipe ,
-			recipe = SIConstants_Expand.raw.Recipes.WoodenBarrel
+			recipe = SIConstants_AdvancedBarrel.raw.Recipes.WoodenBarrel
 		} ,
 		{
 			type = SICommon.Flags.TechnologyModifier.UnlockRecipe ,
-			recipe = SIConstants_Expand.raw.Recipes.BarrelMaker
+			recipe = SIConstants_AdvancedBarrel.raw.Recipes.BarrelMaker
 		} ,
 		{
 			type = SICommon.Flags.TechnologyModifier.UnlockRecipe ,
-			recipe = SIConstants_Expand.raw.Recipes.BarrelDropper
+			recipe = SIConstants_AdvancedBarrel.raw.Recipes.BarrelDropper
 		}
 	}
 } )
@@ -1024,7 +1024,7 @@ SIGen
 	{
 		"military-science-pack" ,
 		"plastics" ,
-		SIConstants_Expand.raw.Technologies.Barrel_1
+		SIConstants_AdvancedBarrel.raw.Technologies.Barrel_1
 	} ,
 	unit =
 	{
@@ -1053,7 +1053,7 @@ SIGen
 	{
 		{
 			type = SICommon.Flags.TechnologyModifier.UnlockRecipe ,
-			recipe = SIConstants_Expand.raw.Recipes.PlasticCapable
+			recipe = SIConstants_AdvancedBarrel.raw.Recipes.PlasticCapable
 		}
 	}
 } )
@@ -1068,7 +1068,7 @@ SIGen
 	prerequisites =
 	{
 		"production-science-pack" ,
-		SIConstants_Expand.raw.Technologies.Barrel_2
+		SIConstants_AdvancedBarrel.raw.Technologies.Barrel_2
 	} ,
 	unit =
 	{
