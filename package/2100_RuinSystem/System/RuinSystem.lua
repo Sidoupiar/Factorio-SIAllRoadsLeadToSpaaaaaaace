@@ -1,6 +1,7 @@
 SIRuinSystem =
 {
 	ID = "RuinSystem" ,
+	Code = "RuinSystem" ,
 	Name = "遗迹控制" ,
 	InterfaceID = "SIRuinSystem-Main" ,
 	Settings =

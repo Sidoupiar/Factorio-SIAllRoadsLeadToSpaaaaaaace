@@ -1,6 +1,7 @@
 SIBuildLimit =
 {
-	ID = "SIBuildLimit" ,
+	ID = "BuildLimit" ,
+	Code = "BuildLimit" ,
 	Name = "建造限制" ,
 	InterfaceID = "SIBuildLimit" ,
 	Settings =

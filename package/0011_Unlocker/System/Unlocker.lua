@@ -1,7 +1,8 @@
 SIUnlocker =
 {
-	ID = "SIUnlocker" ,
-	Name = "解锁逻辑" ,
+	ID = "Unlocker" ,
+	Code = "Unlocker" ,
+	Name = "触发解锁" ,
 	InterfaceID = "SIUnlocker" ,
 	Settings =
 	{
@@ -579,9 +580,9 @@ SIUnlocker.ResultTypeID =
 	RemoveRecipe     = "RemoveRecipe"     , -- 锁定配方
 	AddTechnology    = "AddTechnology"    , -- 解锁科技
 	RemoveTechnology = "RemoveTechnology" , -- 锁定科技
-	GiveItem         = "GiveItem"         , -- 赠予物品 , 阵营内如果有多个玩家 , 则只有最终触发玩家会获得物品
-	MessageForce     = "MessageForce"     , -- 向阵营所有玩家发送一个消息
-	MessagePlayer    = "MessagePlayer"    , -- 向最终触发的玩家发送一个消息
+	GiveItem         = "GiveItem"         , -- 赠予物品 , 阵营内如果有多个玩家 , 则只有最终触发解锁的玩家会获得物品
+	MessageForce     = "MessageForce"     , -- 向阵营所有玩家发送一条消息
+	MessagePlayer    = "MessagePlayer"    , -- 向最终触发解锁的玩家发送一条消息
 	Interface        = "Interface"          -- 执行 remote 接口函数 , 有六个参数 , 第 1 个参数是解锁数据的 ID , 第 2 个参数是保存在其中的数据包 , 第 3 个参数是触发的阵营编号 , 第 4 个参数是最终触发的玩家编号 , 可能为 nil , 第 5 个参数是触发的次数 , 第 6 个参数是当前游戏刻
 }
 SIUnlocker.CountMode =

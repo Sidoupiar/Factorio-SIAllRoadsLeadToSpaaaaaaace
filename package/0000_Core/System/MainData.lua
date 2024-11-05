@@ -1,7 +1,7 @@
 SIMainData =
 {
-	ID = "SIMainData" ,
-	Code = "SIMainData" ,
+	ID = "MainData" ,
+	Code = "MainData" ,
 	Show = "核心数据" ,
 	InterfaceID = "SICore-MainData" ,
 	-- 内部版本号与迁移脚本列表
