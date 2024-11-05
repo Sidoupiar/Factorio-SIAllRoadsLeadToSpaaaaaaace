@@ -736,7 +736,7 @@ function SIInit.AutoLoad( ModName , CustomPackageConfig , ConstantsDataPrefix , 
 	if SIInit.State == SIInit.StateCodeDefine.Data or SIInit.State == SIInit.StateCodeDefine.Control then
 		for packageIndex , packageConfig in pairs( CustomPackageConfig ) do
 			local packageName = packageConfig.PackageName
-			if packageName == "0000_Core" then
+			if packageConfig.ForceEnabled then
 				SISettings.Package[packageName] = function()
 					return true
 				end
@@ -881,14 +881,15 @@ function SIInit.AutoLoad( ModName , CustomPackageConfig , ConstantsDataPrefix , 
 					-- 按阶段生成属性
 					if SIInit.State == SIInit.StateCodeDefine.Settings then
 						-- 创建功能模块启用设置
+						local defaultEnabled = packageConfig.ForceEnabled or ( packageConfig.Enabled == nil and false or packageConfig.Enabled )
 						local packageSettingItem =
 						{
 							type = SICommon.SettingTypes.BOOL .. "-setting" ,
 							setting_type = SICommon.SettingAffectTypes.StartUp ,
 							name = CustomPackagePrefix .. packageName ,
 							localised_name = { "SICommon.EnablePackageName" , constantsData.PackageLocalisedName } ,
-							localised_description = { "SICommon.EnablePackageDescription" , constantsData.PackageLocalisedName , constantsData.PackageLocalisedDescription , { "SICommon.Show-TrueValue" } } ,
-							default_value = packageConfig.Enabled == nil and false or packageConfig.Enabled ,
+							localised_description = { "SICommon.EnablePackageDescription" , constantsData.PackageLocalisedName , constantsData.PackageLocalisedDescription , defaultEnabled and { "SICommon.Show-TrueValue" } or { "SICommon.Show-FalseValue" } } ,
+							default_value = defaultEnabled ,
 							order = constantsData.GetOrderString() ,
 							hidden = false
 						}
