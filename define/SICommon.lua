@@ -97,16 +97,22 @@ SICommon =
 	} ,
 	SettingTypes =
 	{
-		BOOL = "bool-setting" ,
-		INT = "int-setting" ,
-		DOUBLE = "double-setting" ,
-		STRING = "string-setting"
+		BOOL    = "bool-setting" ,
+		INT     = "int-setting" ,
+		DOUBLE  = "double-setting" ,
+		STRING  = "string-setting"
 	} ,
 	SettingAffectTypes =
 	{
 		StartUp = "startup" ,
 		Runtime = "runtime-global:" ,
 		PerUser = "runtime-per-user"
+	} ,
+	SettingUnitTypes =
+	{
+		Point   = { "SICommon.SettingsDescriptionUnitPoint" } ,
+		Block   = { "SICommon.SettingsDescriptionUnitBlock" } ,
+		Tick    = { "SICommon.SettingsDescriptionUnitTick" }
 	} ,
 	Flags =
 	{
@@ -339,15 +345,21 @@ SICommon =
 		StackSizeMax = 1000000000 ,
 		StackSizeAdditionMin = -1000000000 ,
 		StackSizeAdditionMax = 1000000000 ,
+		-- 数量数值
+		CountMin = 1 ,
+		CountMax = 100000000 ,
 		-- 倍率
 		MultiplierMin = 0 ,
 		MultiplierMax = 1000000000 ,
 		-- 耐久
 		DurabilityMin = 0.00001 ,
-		DurabilityMax = 1000000000 ,
+		DurabilityMax = 1000000000.0 ,
+		-- 持续时间
+		DurationMin = 1 ,
+		DurationMax = 100000 ,
 		-- 速度
 		SpeedMin = 0.00001 ,
-		SpeedMax = 1000000000 ,
+		SpeedMax = 1000000000.0 ,
 		-- 距离
 		DistanceMin = 1 ,
 		DistanceMax = 1000000000 ,

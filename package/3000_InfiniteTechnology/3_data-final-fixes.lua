@@ -54,7 +54,7 @@ for technologyName , ammoCategoryList in pairs
 	-- 整理 effects 数组
 	local effects = {}
 	SIGen.ForEachType( SICommon.Types.WeaponEntities , function( weaponPrototypeName , weaponPrototypeData )
-		if SIConfigs.SIExpand.TurretBlackList[weaponPrototypeName] then
+		if SIConfigs.SIInfiniteTechnology.TurretBlackList[weaponPrototypeName] then
 			return
 		end
 		if weaponPrototypeData then
@@ -74,13 +74,13 @@ for technologyName , ammoCategoryList in pairs
 		end
 	end )
 	SIGen.ForEachType( SICommon.Types.TurretEntities , function( turretPrototypeName , turretPrototypeData )
-		if SIConfigs.SIExpand.TurretBlackList[turretPrototypeName] then
+		if SIConfigs.SIInfiniteTechnology.TurretBlackList[turretPrototypeName] then
 			return
 		end
 		CheckAttackParameters( effects , ammoCategoryList , turretPrototypeName , turretPrototypeData )
 	end )
 	SIGen.ForEach( SICommon.Types.Entities.LandMine , function( landMinePrototypeName , landMinePrototypeData )
-		if SIConfigs.SIExpand.TurretBlackList[landMinePrototypeName] then
+		if SIConfigs.SIInfiniteTechnology.TurretBlackList[landMinePrototypeName] then
 			return
 		end
 		if landMinePrototypeData and landMinePrototypeData.ammo_category and SITable.Has( ammoCategoryList , landMinePrototypeData.ammo_category ) then

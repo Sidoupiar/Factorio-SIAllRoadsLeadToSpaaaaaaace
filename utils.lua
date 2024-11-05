@@ -925,7 +925,18 @@ function SIInit.AutoLoad( ModName , CustomPackageConfig , ConstantsDataPrefix , 
 									else
 										settingItem.localised_name = { "SICommon.SettingsRuntime" , { "SIPackageName." .. packageName } , settingData.LocalName or { "SISettingName."..realName } }
 									end
-									settingItem.localised_description = settingData.LocalDesc or { "SICommon.SettingsDescription" , constantsData.PackageLocalisedName , { "SISettingDescription."..realName } , SIPrint.ToShow( settingData.Default ) }
+									if settingData.LocalDesc then
+										settingItem.localised_description = settingData.LocalDesc
+									else
+										local localisedDescription = { "SISettingDescription."..realName }
+										if settingData.Min ~= nil and settingData.Max ~= nil then
+											localisedDescription = { "SICommon.SettingsDescriptionRange" , localisedDescription , settingData.Min , settingData.Max }
+										end
+										if settingData.Unit ~= nil then
+											localisedDescription = { "SICommon.SettingsDescriptionUnit" , localisedDescription , settingData.Unit }
+										end
+										settingItem.localised_description = { "SICommon.SettingsDescription" , constantsData.PackageLocalisedName , localisedDescription , SIPrint.ToShow( settingData.Default ) }
+									end
 								elseif settingType == SICommon.SettingTypes.STRING then
 									settingItem.allow_blank = settingData.Nullable or false
 									settingItem.allowed_values = settingData.AllowIn

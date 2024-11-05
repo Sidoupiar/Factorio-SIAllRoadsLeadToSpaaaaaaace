@@ -145,6 +145,7 @@ local constantsData =
 		-- Min       : 最小值 , 对应原型中的 [ minimum_value ] 属性<br>
 		-- Max       : 最大值 , 对应原型中的 [ maximum_value ] 属性<br>
 		-- AllowIn   : 可用值 , 用于制作下拉列表 , 对应原型中的 [ allowed_values ] 属性 , 它是一个数组<br>
+		-- Unit      : 数值的单位 , 用于显示数值的单位信息<br>
 		-- <br>
 		-- 当是字符串型的设置时<br>
 		-- LocalName : 本地化名称 , 对应原型中的 [ localised_name ] 属性 , 默认 : { "SISettingName.[ ShowName ]-[ SettingID ]" }<br>
