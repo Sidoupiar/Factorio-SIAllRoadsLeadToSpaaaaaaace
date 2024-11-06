@@ -83,8 +83,9 @@ function SIQuickStart_SpawnStartUpGift( playerIndex )
 						local chestEntity = playerSurface.create_entity{ name = chestName , position = chestPosition , force = playerForce }
 						if chestEntity then
 							if SIConfigs.SIQuickStart.AutoChestFilter then
-								if chestEntity.type == SICommon.Types.Entities.ContainerLogic and chestEntity.prototype.logistic_type == SICommon.Types.Logistic.Storage then
-									-- TODO : 设置黄箱请求
+								-- TODO : 设置黄箱请求
+								if chestEntity.type == SICommon.Types.Entities.ContainerLogic and chestEntity.prototype.logistic_mode == SICommon.Flags.LogisticMode.Storage then
+									chestEntity.set_filter{}
 								end
 							end
 							chestInventory = chestEntity.get_inventory( defines.inventory.chest )
