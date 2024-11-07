@@ -42,9 +42,17 @@ SITools =
 		local cur = tonumber( number ) or 0
 		return math.max( math.min( cur , max ) , min )
 	end ,
+	AsNumber_Min = function( number , min )
+		local cur = tonumber( number ) or 0
+		return math.max( cur , min )
+	end ,
 	AsNumberInt = function( number , min , max )
 		local cur = tonumber( number ) or 0
 		return math.floor( math.max( math.min( cur , max ) , min ) )
+	end ,
+	AsNumberInt_Min = function( number , min )
+		local cur = tonumber( number ) or 0
+		return math.floor( math.max( cur , min ) )
 	end ,
 	NumberTo16 = function( number , length )
 		local out = ""

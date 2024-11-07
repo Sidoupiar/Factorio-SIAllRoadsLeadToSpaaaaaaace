@@ -159,51 +159,78 @@ local PackageConfig =
 			-- 形式是游戏内的报错信息 , 不是弹窗<br>
 			-- 关闭此项后 , 遇到不存在的物品时会直接跳过这个物品 , 主要用于多 MOD 兼容<br>
 			-- ======================================================================
-			-- 只能直接修改<br>
+			-- 除了直接修改以外<br>
+			-- 也可以在其他 MOD 的 control.lua 的 on_init 和 on_load 阶段中<br>
+			-- 使用代码 [ remote.call( "SIConfigManager" , "Set" , "SIQuickStart" , "ErrorWhenItemNotExist" , 值 ) ] 来修改它的值 , 每次重启游戏都需要设置<br>
+			-- 使用代码 [ remote.call( "SIConfigManager" , "Get" , "SIQuickStart" , "ErrorWhenItemNotExist" ) ] 来读取它的值<br>
 			-- ======================================================================
 			ErrorWhenItemNotExist = true ,
 
 			-- ======================================================================
 			-- 开局时获得的物品列表<br>
-			-- 结构是键值对 , 键是物品名称 , 值是要获得的数量<br>
+			-- 结构是数组 , 填写要获得的物品名称 , 数量和品质<br>
 			-- 设置为 nil 则跳过逻辑<br>
 			-- ======================================================================
-			-- 只能直接修改<br>
+			-- 除了直接修改以外<br>
+			-- 也可以在其他 MOD 的 control.lua 的 on_init 和 on_load 阶段中<br>
+			-- 使用代码 [ remote.call( "SIConfigManager" , "Set" , "SIQuickStart" , "StartUp_ItemList" , 值 ) ] 来修改它的值 , 每次重启游戏都需要设置<br>
+			-- 使用代码 [ remote.call( "SIConfigManager" , "Get" , "SIQuickStart" , "StartUp_ItemList" ) ] 来读取它的值<br>
 			-- ======================================================================
-			StartUpItemList =
+			StartUp_ItemList =
 			{
-				-- 填写物品名称和数量
-				["iron-plate"]   = 1000 ,
-				["copper-plate"] = 1000
+				-- 填写物品名称 , 数量和品质
+				{ Name = "iron-plate"   , Count = 1000 , Quality = nil } ,
+				{ Name = "copper-plate" , Count = 1000 , Quality = nil }
 			} ,
 
 			-- ======================================================================
 			-- 放置物品的箱子的名称列表 , 创建箱子时会随机选择列表中的箱子<br>
-			-- 结构是键值对 , 键是物品名称 , 值是随机到这个箱子的权重<br>
-			-- 默认是只有黄箱<br>
+			-- 结构是数组 , 填写箱子名称 , 随机权重和品质 , 为了保证稳定性 , 最好填写 1 x 1 大小的箱子<br>
+			-- 默认是普通品质的黄箱<br>
 			-- 设置为 nil , 没有箱子 , 或权重为 0 则无法赠送大礼包<br>
 			-- ======================================================================
-			-- 只能直接修改<br>
+			-- 除了直接修改以外<br>
+			-- 也可以在其他 MOD 的 control.lua 的 on_init 和 on_load 阶段中<br>
+			-- 使用代码 [ remote.call( "SIConfigManager" , "Set" , "SIQuickStart" , "StartUp_ChestList" , 值 ) ] 来修改它的值 , 每次重启游戏都需要设置<br>
+			-- 使用代码 [ remote.call( "SIConfigManager" , "Get" , "SIQuickStart" , "StartUp_ChestList" ) ] 来读取它的值<br>
 			-- ======================================================================
-			StartUpChestList =
+			StartUp_ChestList =
 			{
-				["logistic-chest-storage"] = 1000
+				-- 填写箱子名称 , 随机权重和品质
+				{ Name = "logistic-chest-storage" , RandomWeight = 1000 , Quality = nil }
 			} ,
 
 			-- ======================================================================
 			-- 一个箱子是否只放一种物品<br>
 			-- ======================================================================
-			-- 只能直接修改<br>
+			-- 除了直接修改以外<br>
+			-- 也可以在其他 MOD 的 control.lua 的 on_init 和 on_load 阶段中<br>
+			-- 使用代码 [ remote.call( "SIConfigManager" , "Set" , "SIQuickStart" , "StartUp_OneChestOneItem" , 值 ) ] 来修改它的值 , 每次重启游戏都需要设置<br>
+			-- 使用代码 [ remote.call( "SIConfigManager" , "Get" , "SIQuickStart" , "StartUp_OneChestOneItem" ) ] 来读取它的值<br>
 			-- ======================================================================
-			OneChestOneItem = false ,
+			StartUp_OneChestOneItem = false ,
 
 			-- ======================================================================
 			-- 箱子如果是黄箱的话 , 是否自动设置物品筛选<br>
 			-- 需要启用 OneChectOneItem 项<br>
 			-- ======================================================================
-			-- 只能直接修改<br>
+			-- 除了直接修改以外<br>
+			-- 也可以在其他 MOD 的 control.lua 的 on_init 和 on_load 阶段中<br>
+			-- 使用代码 [ remote.call( "SIConfigManager" , "Set" , "SIQuickStart" , "StartUp_AutoChestFilter" , 值 ) ] 来修改它的值 , 每次重启游戏都需要设置<br>
+			-- 使用代码 [ remote.call( "SIConfigManager" , "Get" , "SIQuickStart" , "StartUp_AutoChestFilter" ) ] 来读取它的值<br>
 			-- ======================================================================
-			AutoChestFilter = false
+			StartUp_AutoChestFilter = false ,
+
+			-- ======================================================================
+			-- 生成箱子的时候会给玩家控制的角色留下通行的道路 , 此项规定道路的间距 , 取值范围 : 2 ~ 32 , 单位 : 格<br>
+			-- 它的默认值是 8 格 , 设置为 nil 会使用默认值<br>
+			-- ======================================================================
+			-- 除了直接修改以外<br>
+			-- 也可以在其他 MOD 的 control.lua 的 on_init 和 on_load 阶段中<br>
+			-- 使用代码 [ remote.call( "SIConfigManager" , "Set" , "SIQuickStart" , "StartUp_ChestSpaceSize" , 值 ) ] 来修改它的值 , 每次重启游戏都需要设置<br>
+			-- 使用代码 [ remote.call( "SIConfigManager" , "Get" , "SIQuickStart" , "StartUp_ChestSpaceSize" ) ] 来读取它的值<br>
+			-- ======================================================================
+			StartUp_ChestSpaceSize = 8
 		}
 	} ,
 	-- ======================================================================
@@ -815,8 +842,8 @@ local PackageConfig =
 			-- ======================================================================
 			-- 除了直接修改以外<br>
 			-- 也可以在其他 MOD 的 control.lua 的 on_init 和 on_load 阶段中<br>
-			-- 使用代码 [ remote.call( "SIConfigManager" , "Set" , 键 , 值 ) ] 来修改它的值<br>
-			-- 使用代码 [ remote.call( "SIConfigManager" , "Get" , 键 ) ] 来读取它的值<br>
+			-- 使用代码 [ remote.call( "SIConfigManager" , "Set" , "RuinSystem" , "MinRuinDistance" , 值 ) ] 来修改它的值<br>
+			-- 使用代码 [ remote.call( "SIConfigManager" , "Get" , "RuinSystem" , "MinRuinDistance" ) ] 来读取它的值<br>
 			-- ======================================================================
 			MinRuinDistance = 1000 ,
 
@@ -826,8 +853,8 @@ local PackageConfig =
 			-- ======================================================================
 			-- 除了直接修改以外<br>
 			-- 也可以在其他 MOD 的 control.lua 的 on_init 和 on_load 阶段中<br>
-			-- 使用代码 [ remote.call( "SIConfigManager" , "Set" , 键 , 值 ) ] 来修改它的值<br>
-			-- 使用代码 [ remote.call( "SIConfigManager" , "Get" , 键 ) ] 来读取它的值<br>
+			-- 使用代码 [ remote.call( "SIConfigManager" , "Set" , "RuinSystem" , "RuinCreateChance" , 值 ) ] 来修改它的值<br>
+			-- 使用代码 [ remote.call( "SIConfigManager" , "Get" , "RuinSystem" , "RuinCreateChance" ) ] 来读取它的值<br>
 			-- ======================================================================
 			RuinCreateChance = 0.005 ,
 
@@ -837,8 +864,8 @@ local PackageConfig =
 			-- ======================================================================
 			-- 除了直接修改以外<br>
 			-- 也可以在其他 MOD 的 control.lua 的 on_init 和 on_load 阶段中<br>
-			-- 使用代码 [ remote.call( "SIConfigManager" , "Set" , 键 , 值 ) ] 来修改它的值<br>
-			-- 使用代码 [ remote.call( "SIConfigManager" , "Get" , 键 ) ] 来读取它的值<br>
+			-- 使用代码 [ remote.call( "SIConfigManager" , "Set" , "RuinSystem" , "RuinStrength" , 值 ) ] 来修改它的值<br>
+			-- 使用代码 [ remote.call( "SIConfigManager" , "Get" , "RuinSystem" , "RuinStrength" ) ] 来读取它的值<br>
 			-- ======================================================================
 			RuinStrength = 1.0 ,
 
@@ -848,8 +875,8 @@ local PackageConfig =
 			-- ======================================================================
 			-- 除了直接修改以外<br>
 			-- 也可以在其他 MOD 的 control.lua 的 on_init 和 on_load 阶段中<br>
-			-- 使用代码 [ remote.call( "SIConfigManager" , "Set" , 键 , 值 ) ] 来修改它的值<br>
-			-- 使用代码 [ remote.call( "SIConfigManager" , "Get" , 键 ) ] 来读取它的值<br>
+			-- 使用代码 [ remote.call( "SIConfigManager" , "Set" , "RuinSystem" , "RuinStrengthAdden" , 值 ) ] 来修改它的值<br>
+			-- 使用代码 [ remote.call( "SIConfigManager" , "Get" , "RuinSystem" , "RuinStrengthAdden" ) ] 来读取它的值<br>
 			-- ======================================================================
 			RuinStrengthAdden = 0.146 ,
 
@@ -860,8 +887,8 @@ local PackageConfig =
 			-- ======================================================================
 			-- 除了直接修改以外<br>
 			-- 也可以在其他 MOD 的 control.lua 的 on_init 和 on_load 阶段中<br>
-			-- 使用代码 [ remote.call( "SIConfigManager" , "Set" , 键 , 值 ) ] 来修改它的值 , 每次重启游戏都需要设置<br>
-			-- 使用代码 [ remote.call( "SIConfigManager" , "Get" , 键 ) ] 来读取它的值<br>
+			-- 使用代码 [ remote.call( "SIConfigManager" , "Set" , "RuinSystem" , "SurfacePrefixWhiteList" , 值 ) ] 来修改它的值 , 每次重启游戏都需要设置<br>
+			-- 使用代码 [ remote.call( "SIConfigManager" , "Get" , "RuinSystem" , "SurfacePrefixWhiteList" ) ] 来读取它的值<br>
 			-- ======================================================================
 			SurfacePrefixWhiteList =
 			{
