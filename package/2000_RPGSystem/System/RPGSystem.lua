@@ -2100,7 +2100,7 @@ SIRPGSystem =
 		for additionID , value in pairs( settings.Addition.Max ) do
 			canClear = canClear and SIRPGSystem.CanFreshAdditionEffect( settings , globalSettings , additionID , 0 , settings.Addition.Active[additionID] )
 			if not canClear then
-				SIPrint.Log{ "SIRPGSystem.警告-加成丢失" }
+				SIPrint.Log( "SIRPGSystem.警告-加成丢失" )
 				SIPrint.Alert( playerIndex , { "SIRPGSystem.警告-加成丢失" } )
 				return
 			end
@@ -2526,6 +2526,7 @@ SIRPGSystem.PropertyNames =
 	Constraint  = { "SIRPGSystem.属性-约束" } ,
 	Luck        = { "SIRPGSystem.属性-幸运" }
 }
+
 SIRPGSystem.PropertyTooltips =
 {
 	Power       = { "SIRPGSystem.属性-力量-提示" } ,
@@ -2541,6 +2542,7 @@ SIRPGSystem.PropertyTooltips =
 	Constraint  = { "SIRPGSystem.属性-约束-提示" } ,
 	Luck        = { "SIRPGSystem.属性-幸运-提示" }
 }
+
 SIRPGSystem.AdditionNames =
 {
 	CraftSpeed       = { "SIRPGSystem.加成-手搓速度" } ,
@@ -2555,6 +2557,7 @@ SIRPGSystem.AdditionNames =
 	InventorySize    = { "SIRPGSystem.加成-背包容量" } ,
 	MaxHealth        = { "SIRPGSystem.加成-最大生命值" }
 }
+
 SIRPGSystem.AdditionTooltips =
 {
 	CraftSpeed       = { "SIRPGSystem.加成-手搓速度-提示" } ,
@@ -2569,6 +2572,7 @@ SIRPGSystem.AdditionTooltips =
 	InventorySize    = { "SIRPGSystem.加成-背包容量-提示" , SIRPGSystem.InventoryMax } ,
 	MaxHealth        = { "SIRPGSystem.加成-最大生命值-提示" }
 }
+
 SIRPGSystem.AdditionEffects =
 {
 	CraftSpeed       = "character_crafting_speed_modifier" ,
@@ -2583,6 +2587,7 @@ SIRPGSystem.AdditionEffects =
 	InventorySize    = "character_inventory_slots_bonus" ,
 	MaxHealth        = "character_health_bonus"
 }
+
 SIRPGSystem.AdditionEffectsForce =
 {
 	CraftSpeed       = "manual_crafting_speed_modifier" ,
@@ -2597,6 +2602,7 @@ SIRPGSystem.AdditionEffectsForce =
 	InventorySize    = "character_inventory_slots_bonus" ,
 	MaxHealth        = "character_health_bonus"
 }
+
 SIRPGSystem.AdditionEffectMessages =
 {
 	CraftSpeed       = "SIRPGSystem.玩家属性-加成-百分比" ,
@@ -2611,6 +2617,7 @@ SIRPGSystem.AdditionEffectMessages =
 	InventorySize    = "SIRPGSystem.玩家属性-加成-格子" ,
 	MaxHealth        = "SIRPGSystem.玩家属性-加成-点数"
 }
+
 SIRPGSystem.AdditionEffectsShowPersent =
 {
 	CraftSpeed       = true ,
@@ -2625,6 +2632,7 @@ SIRPGSystem.AdditionEffectsShowPersent =
 	InventorySize    = false ,
 	MaxHealth        = false
 }
+
 SIRPGSystem.AdditionEffectFloor =
 {
 	CraftSpeed       = false ,
@@ -2639,6 +2647,7 @@ SIRPGSystem.AdditionEffectFloor =
 	InventorySize    = true ,
 	MaxHealth        = true
 }
+
 SIRPGSystem.AdditionEffectMax =
 {
 	CraftSpeed       = false ,
@@ -2653,6 +2662,7 @@ SIRPGSystem.AdditionEffectMax =
 	InventorySize    = SIRPGSystem.InventoryMax ,
 	MaxHealth        = false
 }
+
 SIRPGSystem.AdditionEffectMin =
 {
 	CraftSpeed       = -1 ,
@@ -2667,6 +2677,7 @@ SIRPGSystem.AdditionEffectMin =
 	InventorySize    = 0 ,
 	MaxHealth        = 0
 }
+
 SIRPGSystem.ValueViewable =
 {
 	-- 最大值
@@ -2728,6 +2739,7 @@ SIRPGSystem.ValueViewable =
 	DefenceSoul        = false ,
 	DefenceNormal      = true
 }
+
 SIRPGSystem.ValueNames =
 {
 	-- 最大值
@@ -2789,6 +2801,7 @@ SIRPGSystem.ValueNames =
 	DefenceSoul        = { "SIRPGSystem.数值-灵魂防御" } ,
 	DefenceNormal      = { "SIRPGSystem.数值-普通防御" }
 }
+
 SIRPGSystem.ValueTooltips =
 {
 	-- 最大值
@@ -2850,6 +2863,7 @@ SIRPGSystem.ValueTooltips =
 	DefenceSoul        = { "SIRPGSystem.数值-灵魂防御-提示" } ,
 	DefenceNormal      = { "SIRPGSystem.数值-普通防御-提示" }
 }
+
 SIRPGSystem.ValueShowPersent =
 {
 	-- 最大值
@@ -2911,6 +2925,7 @@ SIRPGSystem.ValueShowPersent =
 	DefenceSoul        = false ,
 	DefenceNormal      = false ,
 }
+
 SIRPGSystem.ValueShowSecond =
 {
 	-- 最大值
@@ -2972,6 +2987,7 @@ SIRPGSystem.ValueShowSecond =
 	DefenceSoul        = false ,
 	DefenceNormal      = false
 }
+
 SIRPGSystem.ValueBarRegen =
 {
 	Health   = SIRPGSystem.ValueIDs.HealthRegen ,
@@ -2981,6 +2997,7 @@ SIRPGSystem.ValueBarRegen =
 	Thought  = SIRPGSystem.ValueIDs.ThoughtRegen ,
 	Soul     = SIRPGSystem.ValueIDs.SoulRegen
 }
+
 SIRPGSystem.ValueCanCrit =
 {
 	AttackPhysical = { Chance = SIRPGSystem.ValueIDs.CritChancePhysical , Damage = SIRPGSystem.ValueIDs.CritDamagePhysical } ,
@@ -2991,6 +3008,7 @@ SIRPGSystem.ValueCanCrit =
 	AttackSoul     = { Chance = SIRPGSystem.ValueIDs.CritChanceSoul     , Damage = SIRPGSystem.ValueIDs.CritDamageSoul     } ,
 	AttackNormal   = { Chance = SIRPGSystem.ValueIDs.CritChanceNormal   , Damage = SIRPGSystem.ValueIDs.CritDamageNormal   }
 }
+
 SIRPGSystem.ValueIsDefence =
 {
 	BlockPhysical = { Resistance = SIRPGSystem.ValueIDs.ResistancePhysical , Defence = SIRPGSystem.ValueIDs.DefencePhysical } ,
@@ -3001,6 +3019,7 @@ SIRPGSystem.ValueIsDefence =
 	BlockSoul     = { Resistance = SIRPGSystem.ValueIDs.ResistanceSoul     , Defence = SIRPGSystem.ValueIDs.DefenceSoul     } ,
 	BlockNormal   = { Resistance = SIRPGSystem.ValueIDs.ResistanceNormal   , Defence = SIRPGSystem.ValueIDs.DefenceNormal   }
 }
+
 SIRPGSystem.SpecialDamages =
 {
 	-- 物理伤害
@@ -3042,6 +3061,7 @@ SIRPGSystem.SpecialDamages =
 	[SIConstants_Core.raw.DamageTypes.DamageThought]   = SIRPGSystem.ValueIDs.AttackThought  , -- 精神
 	[SIConstants_Core.raw.DamageTypes.DamageSoul]      = SIRPGSystem.ValueIDs.AttackSoul       -- 灵魂
 }
+
 SIRPGSystem.SpecialDefences =
 {
 	-- 物理伤害
@@ -3485,7 +3505,8 @@ end
 
 
 
--- AABBC =
+-- ======================================================================
+-- AABBCC =
 -- {
 -- 	Health         = 0.0833 ,
 -- 	Strength       = 0.0833 ,
@@ -3573,3 +3594,4 @@ end
 -- 	end
 -- 	SIPrint.Print( out )
 -- end
+-- ======================================================================

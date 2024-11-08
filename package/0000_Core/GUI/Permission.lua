@@ -167,9 +167,9 @@ SIPermission =
 		for key , data in pairs( settings.data ) do
 			data.flow.clear()
 		end
-		-- ======================================================================<br>
+		-- ======================================================================
 		-- 查看自己权限
-		-- ======================================================================<br>
+		-- ======================================================================
 		local lookView = settings.data.look.flow
 		-- 第 1 层 , 说明
 		lookView.add{ type = "label" , caption = { isAdmin and "SICore.权限管理-窗口-查看-说明-有权限" or "SICore.权限管理-窗口-查看-说明-无权限" } , style = SIConstants_Core.raw.Styles.Permission_LabelTop }
@@ -228,9 +228,9 @@ SIPermission =
 		end
 		-- 当为管理员时额外创建的控件
 		if isAdmin then
-			-- ======================================================================<br>
+			-- ======================================================================
 			-- 修改默认权限
-			-- ======================================================================<br>
+			-- ======================================================================
 			local playerGlobalSettings = settings.data.global.current
 			settings.data.global.radios = {}
 			settings.data.global.texts = {}
@@ -362,9 +362,9 @@ SIPermission =
 			globalFlow5.add{ type = "button" , name = SIPermission.Names.GlobalReset , caption = { "SICore.权限管理-窗口-全局-默认" } , tooltip = { "SICore.权限管理-窗口-全局-默认-提示" } , style = SIConstants_Core.raw.Styles.Common_ButtonGray }
 			globalFlow5.add{ type = "button" , name = SIPermission.Names.GlobalBack , caption = { "SICore.权限管理-窗口-全局-撤销" } , tooltip = { "SICore.权限管理-窗口-全局-撤销-提示" } , style = SIConstants_Core.raw.Styles.Common_ButtonBlue }
 			globalFlow5.add{ type = "button" , name = SIPermission.Names.GlobalSave , caption = { "SICore.权限管理-窗口-全局-保存" } , tooltip = { "SICore.权限管理-窗口-全局-保存-提示" } , style = SIConstants_Core.raw.Styles.Common_ButtonGreen }
-			-- ======================================================================<br>
+			-- ======================================================================
 			-- 修改玩家权限
-			-- ======================================================================<br>
+			-- ======================================================================
 			settings.data.player.radios = {}
 			settings.data.player.items = {}
 			local playerFlow = settings.data.player.flow
@@ -455,9 +455,9 @@ SIPermission =
 			if settings.data.player.current then
 				SIPermission.FreshListPlayer( settings , globalSettings , isMaster )
 			end
-			-- ======================================================================<br>
+			-- ======================================================================
 			-- 权限查询
-			-- ======================================================================<br>
+			-- ======================================================================
 			settings.data.check.radios = {}
 			settings.data.check.items = {}
 			local checkFlow = settings.data.check.flow

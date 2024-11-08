@@ -89,16 +89,10 @@ SIDate =
 	-- 计算游戏时间<br>
 	-- 按照游戏时间也是 1 天 24 小时计算<br>
 	-- ======================================================================<br>
-	-- tick = 当前游戏时刻 , game.tick<br>
-	-- ======================================================================<br>
-	-- 返回值 1 = 天数<br>
-	-- 返回值 2 = 小时<br>
-	-- 返回值 3 = 分钟<br>
-	-- ======================================================================<br>
-	---@param tick integer
-	---@return string
-	---@return string
-	---@return string
+	---@param tick integer -- 当前游戏时刻 , game.tick
+	---@return string -- 天数
+	---@return string -- 小时
+	---@return string -- 分钟
 	FormatDateByTick = function( tick )
 		local d , t = math.modf( tick / SIDate.TicksPerDay + 0.5 )
 		local h , m = math.modf( t * 24 )
@@ -109,18 +103,11 @@ SIDate =
 	-- 计算游戏时间<br>
 	-- 按照游戏时间也是 1 天 24 小时计算<br>
 	-- ======================================================================<br>
-	-- tick        = 当前游戏时刻 , game.tick<br>
-	-- ticksPerDay = 当前世界的一天时间长度<br>
-	-- ======================================================================<br>
-	-- 返回值 1 = 天数<br>
-	-- 返回值 2 = 小时<br>
-	-- 返回值 3 = 分钟<br>
-	-- ======================================================================<br>
-	---@param tick integer
-	---@param ticksPerDay integer
-	---@return string
-	---@return string
-	---@return string
+	---@param tick integer -- 当前游戏时刻 , game.tick
+	---@param ticksPerDay integer -- 当前世界的一天时间长度
+	---@return string -- 天数
+	---@return string -- 小时
+	---@return string -- 分钟
 	FormatDateByTickPerDay = function( tick , ticksPerDay )
 		local d , t = math.modf( tick / ticksPerDay + 0.5 )
 		local h , m = math.modf( t * 24 )
@@ -131,18 +118,11 @@ SIDate =
 	-- 计算游戏时间<br>
 	-- 按照现实的时间计算 , 也就是 60 tick = 1 秒<br>
 	-- ======================================================================<br>
-	-- tick = 当前游戏时刻 , game.tick<br>
-	-- ======================================================================<br>
-	-- 返回值 1 = 天数<br>
-	-- 返回值 2 = 小时<br>
-	-- 返回值 3 = 分钟<br>
-	-- 返回值 4 = 秒数<br>
-	-- ======================================================================<br>
-	---@param tick integer
-	---@return string
-	---@return string
-	---@return string
-	---@return string
+	---@param tick integer -- 当前游戏时刻 , game.tick
+	---@return string -- 天数
+	---@return string -- 小时
+	---@return string -- 分钟
+	---@return string -- 秒数
 	FormatDateByTickReal = function( tick )
 		local d , t = math.modf( tick / SIDate.TicksPerDayReal )
 		local h , o = math.modf( t * 24 )
@@ -164,11 +144,8 @@ SITable =
 	-- 数组型的表使用 , 移除第一个匹配的值那一项<br>
 	-- 非数组型的表使用 SITable.RemoveItem 函数<br>
 	-- ======================================================================<br>
-	-- data  = 数组<br>
-	-- value = 值<br>
-	-- ======================================================================<br>
-	---@param data table
-	---@param value any
+	---@param data table 数组
+	---@param value any 值
 	Remove = function( data , value )
 		local pos = nil
 		for i , v in pairs( data ) do
@@ -186,11 +163,8 @@ SITable =
 	-- 非数组型的表使用 , 移除第一个匹配的值那一项<br>
 	-- 数组型的表使用 SITable.Remove 函数<br>
 	-- ======================================================================<br>
-	-- data  = 表<br>
-	-- value = 值<br>
-	-- ======================================================================<br>
-	---@param data table
-	---@param value any
+	---@param data table 表
+	---@param value any 值
 	RemoveItem = function( data , value )
 		for k , v in pairs( data ) do
 			if v == value then
@@ -228,7 +202,7 @@ SITable =
 	-- ======================================================================<br>
 	---@param data table
 	---@param value any
-	---@return unknown
+	---@return table|nil
 	Find = function( data , value )
 		for k , v in pairs( data ) do
 			if v == value then
@@ -241,8 +215,8 @@ SITable =
 	-- ======================================================================<br>
 	---@param data table
 	---@param id string
-	---@return unknown
-	---@return unknown
+	---@return table|nil
+	---@return integer
 	GetWithID = function( data , id )
 		for key , value in pairs( data ) do
 			if SITools.IsTable( value ) and value.ID == id then
@@ -255,8 +229,8 @@ SITable =
 	-- ======================================================================<br>
 	---@param data table
 	---@param code string
-	---@return unknown
-	---@return unknown
+	---@return table|nil
+	---@return integer
 	GetWithCode = function( data , code )
 		for key , value in pairs( data ) do
 			if SITools.IsTable( value ) and value.Code == code then
@@ -269,8 +243,8 @@ SITable =
 	-- ======================================================================<br>
 	---@param data table
 	---@param show string
-	---@return unknown
-	---@return unknown
+	---@return table|nil
+	---@return integer
 	GetWithShow = function( data , show )
 		for key , value in pairs( data ) do
 			if SITools.IsTable( value ) and value.Show == show then
@@ -283,8 +257,8 @@ SITable =
 	-- ======================================================================<br>
 	---@param data table
 	---@param name string
-	---@return any
-	---@return any
+	---@return table|nil
+	---@return integer
 	GetWithName = function( data , name )
 		for key , value in pairs( data ) do
 			if SITools.IsTable( value ) and value.Name == name then
@@ -655,7 +629,7 @@ SIPrint =
 	end ,
 
 	-- ======================================================================<br>
-	---@param playerOrIndex table|integer
+	---@param playerOrIndex table|integer|nil
 	---@param customMessage string|table
 	Message = function( playerOrIndex , customMessage )
 		if not customMessage or customMessage == "" then
@@ -674,7 +648,7 @@ SIPrint =
 	end ,
 
 	-- ======================================================================<br>
-	---@param playerOrIndex table|integer
+	---@param playerOrIndex table|integer|nil
 	---@param customMessage string|table
 	Tip = function( playerOrIndex , customMessage )
 		if not customMessage or customMessage == "" then
@@ -693,7 +667,7 @@ SIPrint =
 	end ,
 
 	-- ======================================================================<br>
-	---@param playerOrIndex table|integer
+	---@param playerOrIndex table|integer|nil
 	---@param customMessage string|table
 	Warning = function( playerOrIndex , customMessage )
 		if not customMessage or customMessage == "" then
@@ -712,7 +686,7 @@ SIPrint =
 	end ,
 
 	-- ======================================================================<br>
-	---@param playerOrIndex table|integer
+	---@param playerOrIndex table|integer|nil
 	---@param customMessage string|table
 	Alert = function( playerOrIndex , customMessage )
 		if not customMessage or customMessage == "" then
@@ -859,9 +833,7 @@ SIInit =
 -- 设置当前的载入阶段<br>
 -- 除了 control 阶段外 , 请勿在外部调用此函数<br>
 -- ======================================================================<br>
--- StateCode = 载入阶段值 , 可用值请见 SIInit.StateCodeDefine 表<br>
--- ======================================================================<br>
----@param StateCode integer
+---@param StateCode integer -- 载入阶段值 , 可用值请见 SIInit.StateCodeDefine 表
 ---@return table
 function SIInit.AutoLoadState( StateCode )
 	if not SITable.Has( SIInit.StateCodeDefine , StateCode ) then
@@ -902,17 +874,11 @@ end
 -- 以及给 ConstantsData 创建一个全局变量<br>
 -- 更多信息请见 data.lua 中的相关注释<br>
 -- ======================================================================<br>
--- ModName = 调用此函数的 MOD 的名称 , 要使用代码名称而不是显示名称<br>
--- CustomPackageConfig = 功能模块的配置信息数组 , 如果值为 nil , 则会尝试加载 MOD 文件夹下的 PackageConfig.lua 文件 , 文件不存在则会报错<br>
--- ConstantsDataPrefix = ConstantsData 在代码的各种位置中进行注册时使用的名称前缀 , 防止重名 , 不影响注册的原型数据<br>
--- CodeNamePrefix      = ConstantsData 在代码的各种位置中进行显示时使用的名称前缀 , 防止重名 , 影响注册的原型数据的 name 属性<br>
--- ShowNamePrefix      = ConstantsData 在代码的各种位置中进行显示时使用的名称前缀 , 防止重名 , 影响注册的原型数据和本地化字符串 , 生成原型数据名称时此前缀也会被包含进去<br>
--- ======================================================================<br>
----@param ModName string
----@param CustomPackageConfig table
----@param ConstantsDataPrefix string
----@param CodeNamePrefix string
----@param ShowNamePrefix string
+---@param ModName string -- 调用此函数的 MOD 的名称 , 要使用代码名称而不是显示名称
+---@param CustomPackageConfig table -- 功能模块的配置信息数组 , 如果值为 nil , 则会尝试加载 MOD 文件夹下的 PackageConfig.lua 文件 , 文件不存在则会报错
+---@param ConstantsDataPrefix string -- ConstantsData 在代码的各种位置中进行注册时使用的名称前缀 , 防止重名 , 不影响注册的原型数据
+---@param CodeNamePrefix string -- ConstantsData 在代码的各种位置中进行显示时使用的名称前缀 , 防止重名 , 影响注册的原型数据的 name 属性
+---@param ShowNamePrefix string -- ConstantsData 在代码的各种位置中进行显示时使用的名称前缀 , 防止重名 , 影响注册的原型数据和本地化字符串 , 生成原型数据名称时此前缀也会被包含进去
 ---@return table
 function SIInit.AutoLoad( ModName , CustomPackageConfig , ConstantsDataPrefix , CodeNamePrefix , ShowNamePrefix )
 	if not ModName then
@@ -1462,9 +1428,7 @@ end
 -- ======================================================================<br>
 -- 向玩家显示未能成功载入的功能模块的信息<br>
 -- ======================================================================<br>
--- playerOrIndex = 向这个玩家显示未能成功载入的功能模块的信息<br>
--- ======================================================================<br>
----@param playerOrIndex table|integer
+---@param playerOrIndex table|integer|nil -- 向这个玩家显示未能成功载入的功能模块的信息
 function SIInit.ShowUnloadedPackageList( playerOrIndex )
 	local unloadedPackageOutput = {}
 	local messageOutput = { "SIUtils.ShowUnloadedPackageList" , unloadedPackageOutput }

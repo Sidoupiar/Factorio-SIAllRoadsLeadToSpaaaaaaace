@@ -1,5 +1,3 @@
----@diagnostic disable: param-type-mismatch
-
 -- ============================================================================================================================================
 -- ============================================================================================================================================
 -- ========== 定义数据 ========================================================================================================================
@@ -780,6 +778,7 @@ for type , real in pairs
 	Equipments       = { "模块" , "Equipments"        }
 } do
 	if SITools.IsTable( SICommon.Types[type] ) then
+		---@diagnostic disable-next-line: param-type-mismatch
 		for key , value in pairs( SICommon.Types[type] ) do
 			SICommon.Types.All[key] = value
 			SICommon.Types.Raw[value] = real[2]
@@ -854,6 +853,7 @@ for index , listData in pairs
 } do
 	local reverseList = {}
 	listData.Source[listData.ListKey .. "_Reverse"] = reverseList
+	---@diagnostic disable-next-line: param-type-mismatch
 	for key , value in pairs( listData.Source[listData.ListKey] ) do
 		reverseList[value] = key
 	end

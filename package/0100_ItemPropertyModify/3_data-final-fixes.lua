@@ -6,7 +6,9 @@
 
 local settingPack = SISettings.Startup.SIItemPropertyModify
 
+-- ======================================================================
 -- 维修工具耐久度倍率
+-- ======================================================================
 if SIConfigs.SIItemPropertyModify.RepairToolDurabilityMultiplier ~= nil then
 	local settingRepairToolDurabilityMultiplier = settingPack.RepairToolDurabilityMultiplier()
 	if settingRepairToolDurabilityMultiplier > 0 and settingRepairToolDurabilityMultiplier ~= 1 then
@@ -18,7 +20,9 @@ if SIConfigs.SIItemPropertyModify.RepairToolDurabilityMultiplier ~= nil then
 	end
 end
 
+-- ======================================================================
 -- 维修工具维修速度倍率
+-- ======================================================================
 if SIConfigs.SIItemPropertyModify.RepairToolSpeedMultiplier ~= nil then
 	local settingRepairToolSpeedMultiplier = settingPack.RepairToolSpeedMultiplier()
 	if settingRepairToolSpeedMultiplier > 0 and settingRepairToolSpeedMultiplier ~= 1 then
@@ -30,7 +34,9 @@ if SIConfigs.SIItemPropertyModify.RepairToolSpeedMultiplier ~= nil then
 	end
 end
 
+-- ======================================================================
 -- 工具 ( 科技包 ) 耐久度倍率
+-- ======================================================================
 if SIConfigs.SIItemPropertyModify.ToolDurabilityMultiplier ~= nil then
 	local settingToolDurabilityMultiplier = settingPack.ToolDurabilityMultiplier()
 	if settingToolDurabilityMultiplier > 0 and settingToolDurabilityMultiplier ~= 1 then
@@ -42,7 +48,9 @@ if SIConfigs.SIItemPropertyModify.ToolDurabilityMultiplier ~= nil then
 	end
 end
 
+-- ======================================================================
 -- 研究球速度倍率
+-- ======================================================================
 if SIConfigs.SIItemPropertyModify.LabSpeedMultiplier ~= nil then
 	local settingLabSpeedMultiplier = settingPack.LabSpeedMultiplier()
 	if settingLabSpeedMultiplier > 0 and settingLabSpeedMultiplier ~= 1 then
@@ -54,7 +62,9 @@ if SIConfigs.SIItemPropertyModify.LabSpeedMultiplier ~= nil then
 	end
 end
 
+-- ======================================================================
 -- 子弹弹夹数量倍率
+-- ======================================================================
 if SIConfigs.SIItemPropertyModify.MagazineAmmoSizeMultiplier ~= nil then
 	local settingMagazineAmmoSizeMultiplier = settingPack.MagazineAmmoSizeMultiplier()
 	if settingMagazineAmmoSizeMultiplier > 0 and settingMagazineAmmoSizeMultiplier ~= 1 then
@@ -66,7 +76,9 @@ if SIConfigs.SIItemPropertyModify.MagazineAmmoSizeMultiplier ~= nil then
 	end
 end
 
+-- ======================================================================
 -- 电路接线距离倍率
+-- ======================================================================
 if SIConfigs.SIItemPropertyModify.CircuitDistanceMultiplier ~= nil then
 	local settingCircuitDistanceMultiplier = settingPack.CircuitDistanceMultiplier()
 	if settingCircuitDistanceMultiplier > 0 and settingCircuitDistanceMultiplier ~= 1 then
@@ -78,7 +90,9 @@ if SIConfigs.SIItemPropertyModify.CircuitDistanceMultiplier ~= nil then
 	end
 end
 
+-- ======================================================================
 -- 地下传送带距离倍率
+-- ======================================================================
 if SIConfigs.SIItemPropertyModify.UndergrundBeltDistanceMultiplier ~= nil then
 	local settingUndergrundBeltDistanceMultiplier = settingPack.UndergrundBeltDistanceMultiplier()
 	if settingUndergrundBeltDistanceMultiplier > 0 and settingUndergrundBeltDistanceMultiplier ~= 1 then
@@ -90,7 +104,9 @@ if SIConfigs.SIItemPropertyModify.UndergrundBeltDistanceMultiplier ~= nil then
 	end
 end
 
+-- ======================================================================
 -- 地下管道距离倍率
+-- ======================================================================
 if SIConfigs.SIItemPropertyModify.UndergrundPipeDistanceMultiplier ~= nil then
 	local settingUndergrundPipeDistanceMultiplier = settingPack.UndergrundPipeDistanceMultiplier()
 	if settingUndergrundPipeDistanceMultiplier > 0 and settingUndergrundPipeDistanceMultiplier ~= 1 then

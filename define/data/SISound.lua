@@ -18,6 +18,12 @@ SISound =
 -- ============================================================================================================================================
 -- ============================================================================================================================================
 
+-- ======================================================================<br>
+---@param filename string
+---@param volume number
+---@param minSpeed number|nil
+---@param maxSpeed number|nil
+---@return table
 function SISound.Core( filename , volume , minSpeed , maxSpeed )
 	return
 	{
@@ -28,6 +34,12 @@ function SISound.Core( filename , volume , minSpeed , maxSpeed )
 	}
 end
 
+-- ======================================================================<br>
+---@param filename string
+---@param volume number
+---@param minSpeed number|nil
+---@param maxSpeed number|nil
+---@return table|nil
 function SISound.Base( filename , volume , minSpeed , maxSpeed )
 	if SIModData.Loaded.base then
 		return

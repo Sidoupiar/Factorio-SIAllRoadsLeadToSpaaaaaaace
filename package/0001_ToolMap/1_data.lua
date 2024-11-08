@@ -6,7 +6,10 @@
 
 SIGen
 .SetGroup( SIConstants_Core.raw.Groups.Hidden.SpecialTool )
+
+-- ======================================================================
 -- 粉图
+-- ======================================================================
 .New( SICommon.Types.Items.SelectionTool , "DeleteMap" , "粉图" ,
 {
 	flags = { SICommon.Flags.Item.NotStackable , SICommon.Flags.Item.HideFromBonusGUI , SICommon.Flags.Item.HideFromFuelTooltip } ,
@@ -144,7 +147,10 @@ SIGen
 } )
 .MakeIcon( SICommon.Types.Items.SelectionTool , "粉图" , 64 , 4 )
 .ReferenceEquipmentResult( SICommon.Types.Items.SelectionTool , SIConstants_ToolMap.raw.Items.DeleteMap )
+
+-- ======================================================================
 -- 黄图
+-- ======================================================================
 .New( SICommon.Types.Items.SelectionTool , "OreMap" , "黄图" ,
 {
 	flags = { SICommon.Flags.Item.NotStackable , SICommon.Flags.Item.HideFromBonusGUI , SICommon.Flags.Item.HideFromFuelTooltip } ,
@@ -282,7 +288,10 @@ SIGen
 } )
 .MakeIcon( SICommon.Types.Items.SelectionTool , "黄图" , 64 , 4 )
 .ReferenceEquipmentResult( SICommon.Types.Items.SelectionTool , SIConstants_ToolMap.raw.Items.OreMap )
+
+-- ======================================================================
 -- 紫图
+-- ======================================================================
 .New( SICommon.Types.Items.SelectionTool , "RequestMap" , "紫图" ,
 {
 	flags = { SICommon.Flags.Item.NotStackable , SICommon.Flags.Item.HideFromBonusGUI , SICommon.Flags.Item.HideFromFuelTooltip } ,
@@ -439,9 +448,9 @@ SIGen
 
 SIGen
 
--- ======================================================================<br>
+-- ======================================================================
 -- 黄图控件样式
--- ======================================================================<br>
+-- ======================================================================
 .AddStyle( "OreMap_Frame" , "黄图-窗口" ,
 {
 	type = "frame_style" ,
@@ -544,9 +553,9 @@ SIGen
 	single_line = false
 } )
 
--- ======================================================================<br>
+-- ======================================================================
 -- 紫图控件样式
--- ======================================================================<br>
+-- ======================================================================
 .AddStyle( "RequestMap_Frame" , "紫图-窗口" ,
 {
 	type = "frame_style" ,

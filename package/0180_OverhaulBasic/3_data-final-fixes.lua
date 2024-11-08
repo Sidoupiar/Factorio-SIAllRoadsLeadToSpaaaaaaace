@@ -4,7 +4,9 @@
 -- ============================================================================================================================================
 -- ============================================================================================================================================
 
+-- ======================================================================
 -- 修改树木血量
+-- ======================================================================
 if SIConfigs.SIOverhaulBasic.TreeHealth ~= nil and SISettings.Startup.SIOverhaulBasic.TreeHealth() then
 	SIGen.ForEach( SICommon.Types.Entities.Tree , function( prototypeName , prototypeData )
 		if prototypeData and prototypeData.max_health then

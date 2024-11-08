@@ -7,9 +7,9 @@
 local config = SIConfigs.SIItemStackSizeModify
 local ignoreCannotStack = config.IgnoreCannotStack ~= nil and SISettings.Startup.SIItemStackSizeModify.IgnoreCannotStack() or false
 
--- ======================================================================<br>
+-- ======================================================================
 -- 倍率修改堆叠
--- ======================================================================<br>
+-- ======================================================================
 if config.ItemStackSizeMultiplier and config.ItemStackSizeMultiplier.TypeList then
 	local min = config.ItemStackSizeMultiplier.Min == 0 and SICommon.Numbers.StackSizeMin or SITools.AsNumberInt( config.ItemStackSizeMultiplier.Min , SICommon.Numbers.StackSizeMin , SICommon.Numbers.StackSizeMax )
 	local max = config.ItemStackSizeMultiplier.Max == 0 and SICommon.Numbers.StackSizeMax or SITools.AsNumberInt( config.ItemStackSizeMultiplier.Max , SICommon.Numbers.StackSizeMin , SICommon.Numbers.StackSizeMax )
@@ -50,9 +50,9 @@ if config.ItemStackSizeMultiplier and config.ItemStackSizeMultiplier.TypeList th
 	end
 end
 
--- ======================================================================<br>
+-- ======================================================================
 -- 单独修改堆叠
--- ======================================================================<br>
+-- ======================================================================
 if config.EnableItemStackSizeList then
 	for itemType , itemList in pairs( config.ItemStackSizeList ) do
 		if itemList then

@@ -95,9 +95,10 @@ SIGen
 			local localName = fluidPrototypeData.localised_name or { "fluid-name." .. fluidName }
 			local localDescription = fluidPrototypeData.localised_description or { "fluid-description." .. fluidName }
 			SIGen
-			-- ======================================================================<br>
+
+			-- ======================================================================
 			-- 灌装科技 1
-			-- ======================================================================<br>
+			-- ======================================================================
 			.New( SICommon.Types.Items.Item , BarrelItemIDPrefix_1 .. fluidID , BarrelItemAliasPrefix_1 .. fluidName )
 			.Append
 			{
@@ -543,9 +544,10 @@ SIGen
 					SISound.Base( "machine-close" , 0.5 )
 				}
 			}
-			-- ======================================================================<br>
+
+			-- ======================================================================
 			-- 灌装科技 2
-			-- ======================================================================<br>
+			-- ======================================================================
 			.New( SICommon.Types.Items.Item , BarrelItemIDPrefix_2 .. fluidID , BarrelItemAliasPrefix_2 .. fluidName )
 			.Append
 			{
@@ -1064,9 +1066,10 @@ SIGen
 					SISound.Base( "machine-close" , 0.5 )
 				}
 			}
-			-- ======================================================================<br>
+
+			-- ======================================================================
 			-- 灌装科技 3
-			-- ======================================================================<br>
+			-- ======================================================================
 			.New( SICommon.Types.Items.Item , BarrelItemIDPrefix_3 .. fluidID , BarrelItemAliasPrefix_3 .. fluidName )
 			.Append
 			{

@@ -36,6 +36,10 @@ SIStyle =
 -- ============================================================================================================================================
 -- ============================================================================================================================================
 
+-- ======================================================================<br>
+---@param tint table
+---@param scale number
+---@return table
 function SIStyle.CreateGlow( tint , scale )
 	return
 	{
@@ -47,6 +51,10 @@ function SIStyle.CreateGlow( tint , scale )
 	}
 end
 
+-- ======================================================================<br>
+---@param tint table
+---@param scale number
+---@return table
 function SIStyle.CreateGlowTop( tint , scale )
 	return
 	{
@@ -66,6 +74,10 @@ function SIStyle.CreateGlowTop( tint , scale )
 	}
 end
 
+-- ======================================================================<br>
+---@param tint table
+---@param scale number
+---@return table
 function SIStyle.CreateGlowInner( tint , scale )
 	return
 	{
@@ -77,6 +89,10 @@ function SIStyle.CreateGlowInner( tint , scale )
 	}
 end
 
+-- ======================================================================<br>
+---@param tint table
+---@param scale number
+---@return table
 function SIStyle.CreateGlowRadio( tint , scale )
 	return
 	{
@@ -91,6 +107,10 @@ function SIStyle.CreateGlowRadio( tint , scale )
 	}
 end
 
+-- ======================================================================<br>
+---@param location integer
+---@param dirt table
+---@return table
 function SIStyle.ColorButton( location , dirt )
 	return
 	{
@@ -192,6 +212,10 @@ function SIStyle.ColorButton( location , dirt )
 	}
 end
 
+-- ======================================================================<br>
+---@param x integer
+---@param y integer
+---@return table
 function SIStyle.RadioGraphics( x , y )
 	return
 	{
@@ -261,6 +285,10 @@ function SIStyle.RadioGraphics( x , y )
 	}
 end
 
+-- ======================================================================<br>
+---@param x integer
+---@param y integer
+---@return table
 function SIStyle.CheckBoxGraphics( x , y )
 	return
 	{
@@ -352,15 +380,18 @@ SIStyle.Dirt =
 	Orange = SIStyle.CreateGlow( SIStyle.DirtColor.Orange , 0.5 ) ,
 	Yellow = SIStyle.CreateGlow( SIStyle.DirtColor.Yellow , 0.5 )
 }
+
 SIStyle.DirtRadio =
 {
 	Default = SIStyle.CreateGlowRadio( SIStyle.DirtColor.Default , 0.5 ) ,
 	Glow = SIStyle.CreateGlowRadio( SIStyle.DirtColor.Glow , 0.5 )
 }
+
 SIStyle.DirtTop =
 {
 	Shadow = SIStyle.CreateGlowTop( SIStyle.DirtColor.Shadow , 0.5 )
 }
+
 SIStyle.DirtInner =
 {
 	Shadow = SIStyle.CreateGlowInner( SIStyle.DirtColor.Black , 0.5 )

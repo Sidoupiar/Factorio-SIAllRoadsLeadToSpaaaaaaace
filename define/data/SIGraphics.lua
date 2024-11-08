@@ -18,6 +18,8 @@ SIGraphics =
 -- ============================================================================================================================================
 -- ============================================================================================================================================
 
+-- ======================================================================<br>
+---@return table
 function SIGraphics.ItemIcon_SI()
 	return
 	{
@@ -34,6 +36,8 @@ end
 -- ============================================================================================================================================
 -- ============================================================================================================================================
 
+-- ======================================================================<br>
+---@return table
 function SIGraphics.TechnologyIcon_Add()
 	return
 	{
@@ -44,6 +48,8 @@ function SIGraphics.TechnologyIcon_Add()
 	}
 end
 
+-- ======================================================================<br>
+---@return table
 function SIGraphics.TechnologyIcon_Health()
 	return
 	{
@@ -54,6 +60,8 @@ function SIGraphics.TechnologyIcon_Health()
 	}
 end
 
+-- ======================================================================<br>
+---@return table
 function SIGraphics.TechnologyIcon_Damage()
 	return
 	{
@@ -64,6 +72,8 @@ function SIGraphics.TechnologyIcon_Damage()
 	}
 end
 
+-- ======================================================================<br>
+---@return table
 function SIGraphics.TechnologyIcon_Range()
 	return
 	{
@@ -74,6 +84,8 @@ function SIGraphics.TechnologyIcon_Range()
 	}
 end
 
+-- ======================================================================<br>
+---@return table
 function SIGraphics.TechnologyIcon_Move()
 	return
 	{
@@ -84,6 +96,8 @@ function SIGraphics.TechnologyIcon_Move()
 	}
 end
 
+-- ======================================================================<br>
+---@return table
 function SIGraphics.TechnologyIcon_Speed()
 	return
 	{
@@ -94,6 +108,8 @@ function SIGraphics.TechnologyIcon_Speed()
 	}
 end
 
+-- ======================================================================<br>
+---@return table
 function SIGraphics.TechnologyIcon_Time()
 	return
 	{
@@ -104,6 +120,8 @@ function SIGraphics.TechnologyIcon_Time()
 	}
 end
 
+-- ======================================================================<br>
+---@return table
 function SIGraphics.TechnologyIcon_Productivity()
 	return
 	{
@@ -114,6 +132,8 @@ function SIGraphics.TechnologyIcon_Productivity()
 	}
 end
 
+-- ======================================================================<br>
+---@return table
 function SIGraphics.TechnologyIcon_Mining()
 	return
 	{
@@ -124,6 +144,8 @@ function SIGraphics.TechnologyIcon_Mining()
 	}
 end
 
+-- ======================================================================<br>
+---@return table
 function SIGraphics.TechnologyIcon_Logistic()
 	return
 	{
@@ -134,6 +156,8 @@ function SIGraphics.TechnologyIcon_Logistic()
 	}
 end
 
+-- ======================================================================<br>
+---@return table
 function SIGraphics.TechnologyIcon_Ghost()
 	return
 	{
@@ -144,6 +168,8 @@ function SIGraphics.TechnologyIcon_Ghost()
 	}
 end
 
+-- ======================================================================<br>
+---@return table
 function SIGraphics.TechnologyIcon_Count()
 	return
 	{
@@ -154,6 +180,8 @@ function SIGraphics.TechnologyIcon_Count()
 	}
 end
 
+-- ======================================================================<br>
+---@return table
 function SIGraphics.TechnologyIcon_Stack()
 	return
 	{
@@ -164,6 +192,8 @@ function SIGraphics.TechnologyIcon_Stack()
 	}
 end
 
+-- ======================================================================<br>
+---@return table
 function SIGraphics.TechnologyIcon_Battery()
 	return
 	{
@@ -174,6 +204,8 @@ function SIGraphics.TechnologyIcon_Battery()
 	}
 end
 
+-- ======================================================================<br>
+---@return table
 function SIGraphics.TechnologyIcon_Robot()
 	return
 	{
@@ -184,6 +216,8 @@ function SIGraphics.TechnologyIcon_Robot()
 	}
 end
 
+-- ======================================================================<br>
+---@return table
 function SIGraphics.TechnologyIcon_EquipBlack()
 	return
 	{
@@ -194,6 +228,8 @@ function SIGraphics.TechnologyIcon_EquipBlack()
 	}
 end
 
+-- ======================================================================<br>
+---@return table
 function SIGraphics.TechnologyIcon_EquipWhite()
 	return
 	{
@@ -204,6 +240,8 @@ function SIGraphics.TechnologyIcon_EquipWhite()
 	}
 end
 
+-- ======================================================================<br>
+---@return table
 function SIGraphics.TechnologyIcon_BrakingForce()
 	return
 	{
@@ -214,6 +252,8 @@ function SIGraphics.TechnologyIcon_BrakingForce()
 	}
 end
 
+-- ======================================================================<br>
+---@return table
 function SIGraphics.TechnologyIcon_MapZoomIn()
 	return
 	{
@@ -224,6 +264,8 @@ function SIGraphics.TechnologyIcon_MapZoomIn()
 	}
 end
 
+-- ======================================================================<br>
+---@return table
 function SIGraphics.TechnologyIcon_MapZoomOut()
 	return
 	{
@@ -240,6 +282,10 @@ end
 -- ============================================================================================================================================
 -- ============================================================================================================================================
 
+-- ======================================================================<br>
+---@param count integer
+---@param layers table
+---@return table
 function SIGraphics.MakeRemnantsAnimation( count , layers )
 	local animations = {}
 	for index = 0 , count - 1 , 1 do
@@ -276,6 +322,8 @@ end
 -- ============================================================================================================================================
 -- ============================================================================================================================================
 
+-- ======================================================================<br>
+---@param layer table
 local function CreateHrVersionData( layer )
 	layer.hr_version = nil
 	local hrData = SIUtils.table.deepcopy( layer )
@@ -298,6 +346,9 @@ local function CreateHrVersionData( layer )
 	layer.hr_version = hrData
 end
 
+-- ======================================================================<br>
+---@param graphicData any
+---@return any
 function SIGraphics.MakeHrVersionData( graphicData )
 	if not SITools.IsTable( graphicData ) then
 		return graphicData
