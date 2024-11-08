@@ -14,9 +14,15 @@ if defines and defines.events then
 		SIEvents[k] = v
 	end
 end
+
+-- ======================================================================<br>
+---@return string
 function GetCorePath()
 	return CorePath
 end
+
+-- ======================================================================<br>
+---@return string
 function SIOrderPrefix()
 	return "zSIOrderT"
 end
@@ -35,19 +41,33 @@ require( CorePath .. "/define/SIModData" )
 SIUtils.CollisionMask = require( "__core__/lualib/collision-mask-util" )
 SIUtils.Settings =
 {
+	-- ======================================================================<br>
+	---@return boolean
 	ShowPatreon = function()
 		return settings and settings.startup and settings.startup["SIUtils-ShowPatreon"].value or true
 	end ,
+
+	-- ======================================================================<br>
+	---@return boolean
 	Debug = function()
 		return settings and settings.startup and settings.startup["SIUtils-Debug"].value or false
 	end ,
+
+	-- ======================================================================<br>
+	---@return boolean
 	ShowError = function()
 		return settings and settings.startup and settings.startup["SIUtils-ShowError"].value or false
 	end ,
+
+	-- ======================================================================<br>
+	---@return boolean
 	CodeError = function()
 		return settings and settings.startup and settings.startup["SIUtils-CodeError"].value or true
 	end
 }
+
+-- ======================================================================<br>
+---@param localisedString table
 function SIUtils.PrintLocalised( localisedString )
 	localised_print( localisedString )
 end
@@ -64,48 +84,65 @@ SIDate =
 	TicksPerHalfDay = 12500 ,
 	TicksPerDayReal = 5184000 ,
 	TicksPerHalfDayReal = 2592000 ,
-	-- ======================================================================
+
+	-- ======================================================================<br>
 	-- 计算游戏时间<br>
 	-- 按照游戏时间也是 1 天 24 小时计算<br>
-	-- ======================================================================
+	-- ======================================================================<br>
 	-- tick = 当前游戏时刻 , game.tick<br>
-	-- ======================================================================
+	-- ======================================================================<br>
 	-- 返回值 1 = 天数<br>
 	-- 返回值 2 = 小时<br>
 	-- 返回值 3 = 分钟<br>
-	-- ======================================================================
+	-- ======================================================================<br>
+	---@param tick integer
+	---@return string
+	---@return string
+	---@return string
 	FormatDateByTick = function( tick )
 		local d , t = math.modf( tick / SIDate.TicksPerDay + 0.5 )
 		local h , m = math.modf( t * 24 )
 		return ( "%u" ):format( d + 1 ) , ( "%02u" ):format( h ) , ( "%02u" ):format( math.floor( m * 60 ) )
 	end ,
-	-- ======================================================================
+
+	-- ======================================================================<br>
 	-- 计算游戏时间<br>
 	-- 按照游戏时间也是 1 天 24 小时计算<br>
-	-- ======================================================================
+	-- ======================================================================<br>
 	-- tick        = 当前游戏时刻 , game.tick<br>
 	-- ticksPerDay = 当前世界的一天时间长度<br>
-	-- ======================================================================
+	-- ======================================================================<br>
 	-- 返回值 1 = 天数<br>
 	-- 返回值 2 = 小时<br>
 	-- 返回值 3 = 分钟<br>
-	-- ======================================================================
+	-- ======================================================================<br>
+	---@param tick integer
+	---@param ticksPerDay integer
+	---@return string
+	---@return string
+	---@return string
 	FormatDateByTickPerDay = function( tick , ticksPerDay )
 		local d , t = math.modf( tick / ticksPerDay + 0.5 )
 		local h , m = math.modf( t * 24 )
 		return ( "%u" ):format( d + 1 ) , ( "%02u" ):format( h ) , ( "%02u" ):format( math.floor( m * 60 ) )
 	end ,
-	-- ======================================================================
+
+	-- ======================================================================<br>
 	-- 计算游戏时间<br>
 	-- 按照现实的时间计算 , 也就是 60 tick = 1 秒<br>
-	-- ======================================================================
+	-- ======================================================================<br>
 	-- tick = 当前游戏时刻 , game.tick<br>
-	-- ======================================================================
+	-- ======================================================================<br>
 	-- 返回值 1 = 天数<br>
 	-- 返回值 2 = 小时<br>
 	-- 返回值 3 = 分钟<br>
 	-- 返回值 4 = 秒数<br>
-	-- ======================================================================
+	-- ======================================================================<br>
+	---@param tick integer
+	---@return string
+	---@return string
+	---@return string
+	---@return string
 	FormatDateByTickReal = function( tick )
 		local d , t = math.modf( tick / SIDate.TicksPerDayReal )
 		local h , o = math.modf( t * 24 )
@@ -113,27 +150,25 @@ SIDate =
 		return ( "%u" ):format( d ) , ( "%02u" ):format( h ) , ( "%02u" ):format( m ) , ( "%02u" ):format( math.floor( s * 60 ) )
 	end
 }
-SIMath =
-{
-	Range = function( num , min , max )
-		return math.max( math.min( num , max ) , min )
-	end ,
-	Cnum = function( num , min , max )
-		return SIMath.Range( math.floor( num ) , min , max )
-	end
-}
+
 SITable =
 {
+	-- ======================================================================<br>
+	---@param data table
+	---@return integer
 	Size = function( data )
 		return table_size( data )
 	end ,
-	-- ======================================================================
+
+	-- ======================================================================<br>
 	-- 数组型的表使用 , 移除第一个匹配的值那一项<br>
 	-- 非数组型的表使用 SITable.RemoveItem 函数<br>
-	-- ======================================================================
+	-- ======================================================================<br>
 	-- data  = 数组<br>
 	-- value = 值<br>
-	-- ======================================================================
+	-- ======================================================================<br>
+	---@param data table
+	---@param value any
 	Remove = function( data , value )
 		local pos = nil
 		for i , v in pairs( data ) do
@@ -146,13 +181,16 @@ SITable =
 			table.remove( data , pos )
 		end
 	end ,
-	-- ======================================================================
+
+	-- ======================================================================<br>
 	-- 非数组型的表使用 , 移除第一个匹配的值那一项<br>
 	-- 数组型的表使用 SITable.Remove 函数<br>
-	-- ======================================================================
+	-- ======================================================================<br>
 	-- data  = 表<br>
 	-- value = 值<br>
-	-- ======================================================================
+	-- ======================================================================<br>
+	---@param data table
+	---@param value any
 	RemoveItem = function( data , value )
 		for k , v in pairs( data ) do
 			if v == value then
@@ -160,6 +198,11 @@ SITable =
 			end
 		end
 	end ,
+
+	-- ======================================================================<br>
+	---@param data table
+	---@param key any
+	---@return boolean
 	HasKey = function( data , key )
 		for k , v in pairs( data ) do
 			if k == key then
@@ -168,6 +211,11 @@ SITable =
 		end
 		return false
 	end ,
+
+	-- ======================================================================<br>
+	---@param data table
+	---@param value any
+	---@return boolean
 	Has = function( data , value )
 		for k , v in pairs( data ) do
 			if v == value then
@@ -176,6 +224,11 @@ SITable =
 		end
 		return false
 	end ,
+
+	-- ======================================================================<br>
+	---@param data table
+	---@param value any
+	---@return unknown
 	Find = function( data , value )
 		for k , v in pairs( data ) do
 			if v == value then
@@ -184,6 +237,12 @@ SITable =
 		end
 		return nil
 	end ,
+
+	-- ======================================================================<br>
+	---@param data table
+	---@param id string
+	---@return unknown
+	---@return unknown
 	GetWithID = function( data , id )
 		for key , value in pairs( data ) do
 			if SITools.IsTable( value ) and value.ID == id then
@@ -192,6 +251,12 @@ SITable =
 		end
 		return nil , 0
 	end ,
+
+	-- ======================================================================<br>
+	---@param data table
+	---@param code string
+	---@return unknown
+	---@return unknown
 	GetWithCode = function( data , code )
 		for key , value in pairs( data ) do
 			if SITools.IsTable( value ) and value.Code == code then
@@ -200,6 +265,12 @@ SITable =
 		end
 		return nil , 0
 	end ,
+
+	-- ======================================================================<br>
+	---@param data table
+	---@param show string
+	---@return unknown
+	---@return unknown
 	GetWithShow = function( data , show )
 		for key , value in pairs( data ) do
 			if SITools.IsTable( value ) and value.Show == show then
@@ -208,6 +279,12 @@ SITable =
 		end
 		return nil , 0
 	end ,
+
+	-- ======================================================================<br>
+	---@param data table
+	---@param name string
+	---@return any
+	---@return any
 	GetWithName = function( data , name )
 		for key , value in pairs( data ) do
 			if SITools.IsTable( value ) and value.Name == name then
@@ -216,6 +293,10 @@ SITable =
 		end
 		return nil , 0
 	end ,
+
+	-- ======================================================================<br>
+	---@param data table
+	---@return table
 	ShallowCopy = function( data )
 		local newData = {}
 		for k , v in pairs( data ) do
@@ -223,6 +304,11 @@ SITable =
 		end
 		return newData
 	end ,
+
+	-- ======================================================================<br>
+	---@param data table
+	---@param level integer|nil
+	---@return string
 	TableToString = function( data , level )
 		if SITools.IsNotTable( data ) then
 			E( "数据处理 : 数据类型错误 , 无法对非 table 类型的数据进行转换" )
@@ -271,6 +357,11 @@ SITable =
 		end
 		return output .. "\n" .. levelBaseSpace .. "}"
 	end ,
+
+	-- ======================================================================<br>
+	---@param stringList table
+	---@param source string
+	---@return boolean
 	StartsWithList = function( stringList , source )
 		for index , string in pairs( stringList ) do
 			if string:StartsWith( string , source ) then
@@ -279,6 +370,11 @@ SITable =
 		end
 		return false
 	end ,
+
+	-- ======================================================================<br>
+	---@param stringList table
+	---@param source string
+	---@return boolean
 	EndsWithList = function( stringList , source )
 		for index , string in pairs( stringList ) do
 			if string:EndsWith( string , source ) then
@@ -289,6 +385,9 @@ SITable =
 	end
 }
 
+-- ======================================================================<br>
+---@param separator string
+---@return table
 function string:Split( separator )
 	if not separator or separator:len() < 1 then
 		return { self }
@@ -303,6 +402,10 @@ function string:Split( separator )
 	return list
 end
 
+-- ======================================================================<br>
+---@param list table
+---@param separator string
+---@return string
 function string:Concat( list , separator )
 	local str = self and self .. separator or ""
 	local index = 1
@@ -316,21 +419,33 @@ function string:Concat( list , separator )
 	return str
 end
 
+-- ======================================================================<br>
+---@return string
 function string:UpperCaseFirst()
 	return self:sub( 1 , 1 ):upper() .. self:sub( 1 - self:len() )
 end
 
+-- ======================================================================<br>
+---@param str string
+---@return boolean
 function string:StartsWith( str )
 	return self:sub( 1 , str:len() ) == str
 end
 
+-- ======================================================================<br>
+---@param str string
+---@return boolean
 function string:EndsWith( str )
 	return self:sub( -str:len() ) == str
 end
 
+-- ======================================================================<br>
+---@param str string
+---@return integer|nil
+---@return integer|nil
 function string:FindLast( str )
 	if not str or str:len() < 1 then
-		return nil
+		return nil , nil
 	end
 	local length = str:len()
 	for index = self:len() - length , 1 , -1 do
@@ -339,14 +454,19 @@ function string:FindLast( str )
 			return startPos , endPos
 		end
 	end
-	return nil
+	return nil , nil
 end
 
+-- ======================================================================<br>
+---@param str string
+---@return string|stringlib
 function string:RemoveLastAndAfter( str )
 	local startPos = self:FindLast( str )
 	return startPos and self:sub( 1 , startPos ) or self
 end
 
+-- ======================================================================<br>
+---@return table
 function string:ToABlist()
 	if self and self ~= "" then
 		local list = self:Split( ";" )
@@ -371,23 +491,35 @@ function string:ToABlist()
 	end
 end
 
+-- ======================================================================<br>
+---@param pos table
+---@return string
 function string:Spos( pos )
 	self = self or ""
 	return self .. pos.x .. "," .. pos.y
 end
 
+-- ======================================================================<br>
+---@return number|nil
 function string:Level()
 	return tonumber( self:sub( -1 ) )
 end
 
+-- ======================================================================<br>
+---@return string
 function string:LastLevel()
 	return self:sub( 1 , -2 ) .. ( self:Level() - 1 )
 end
 
+-- ======================================================================<br>
+---@return string
 function string:NextLevel()
 	return self:sub( 1 , -2 ) .. ( self:Level() + 1 )
 end
 
+-- ======================================================================<br>
+---@return number|nil
+---@return string
 function string:GetEnergyClass()
 	local class = ""
 	local value = tostring( self )
@@ -399,6 +531,8 @@ function string:GetEnergyClass()
 	return tonumber( value ) , class
 end
 
+-- ======================================================================<br>
+---@return string
 function string:ToFunctionName()
 	local functionName = ""
 	for index , str in pairs( self:Split( "-" ) ) do
@@ -415,6 +549,8 @@ end
 
 local SIMmess = error
 
+-- ======================================================================<br>
+---@param message string
 function error( message )
 	if SIUtils.Settings.ShowError() then
 		SIMmess( message )
@@ -423,6 +559,8 @@ function error( message )
 	log( "[获取错误] : " .. CoreName .. "_Code: " .. message )
 end
 
+-- ======================================================================<br>
+---@param message string
 function E( message )
 	local output = ""
 	for i = 5 , 2 , -1 do
@@ -453,16 +591,27 @@ function E( message )
 	log( "[获取错误] :\n_____ ::\n" .. output .. message )
 end
 
+-- ======================================================================<br>
+---@param Structure table
+---@param message string
+---@return table
 function CodeE( Structure , message )
 	E( Structure.Show .. " [ " .. Structure.ID .. " ] : " .. message )
 	return Structure
 end
 
+-- ======================================================================<br>
+---@param Structure table
+---@param message string
+---@return table
 function UseE( Structure , message )
 	E( "模块使用 [ " .. Structure.ID .. " ] : " .. message )
 	return Structure
 end
 
+-- ======================================================================<br>
+---@param tableData table
+---@param tableName string
 function TableE( tableData , tableName )
 	if tableName and tableName ~= "" then
 		E( "当前表 [" .. tostring( tableName ) .. "] 的数据 :" .. SITable.TableToString( tableData ) )
@@ -479,9 +628,14 @@ end
 
 SIPrint =
 {
+	-- ======================================================================<br>
+	---@param message string
 	Log = function( message )
 		log( CoreName .. " : " .. ( message or "nil" ) )
 	end ,
+
+	-- ======================================================================<br>
+	---@param message string|table
 	Debug = function( message )
 		if SIUtils.Settings.Debug() then
 			log( CoreName .. " : " .. ( message or "nil" ) )
@@ -490,12 +644,19 @@ SIPrint =
 			end
 		end
 	end ,
+
+	-- ======================================================================<br>
+	---@param message string|table
 	Print = function( message )
 		if SIInit.State == SIInit.StateCodeDefine.Control and game then
 			game.print( { "SICommon.message" , message } , SICommon.Colors.Print.GREEN )
 		end
 		SIPrint.Log( message )
 	end ,
+
+	-- ======================================================================<br>
+	---@param playerOrIndex table|integer
+	---@param customMessage string|table
 	Message = function( playerOrIndex , customMessage )
 		if not customMessage or customMessage == "" then
 			return
@@ -511,6 +672,10 @@ SIPrint =
 			SIPrint.Log( customMessage )
 		end
 	end ,
+
+	-- ======================================================================<br>
+	---@param playerOrIndex table|integer
+	---@param customMessage string|table
 	Tip = function( playerOrIndex , customMessage )
 		if not customMessage or customMessage == "" then
 			return
@@ -526,6 +691,10 @@ SIPrint =
 			SIPrint.Log( customMessage )
 		end
 	end ,
+
+	-- ======================================================================<br>
+	---@param playerOrIndex table|integer
+	---@param customMessage string|table
 	Warning = function( playerOrIndex , customMessage )
 		if not customMessage or customMessage == "" then
 			return
@@ -541,6 +710,10 @@ SIPrint =
 			SIPrint.Log( customMessage )
 		end
 	end ,
+
+	-- ======================================================================<br>
+	---@param playerOrIndex table|integer
+	---@param customMessage string|table
 	Alert = function( playerOrIndex , customMessage )
 		if not customMessage or customMessage == "" then
 			return
@@ -556,6 +729,10 @@ SIPrint =
 			SIPrint.Log( customMessage )
 		end
 	end ,
+
+	-- ======================================================================<br>
+	---@param value string|integer|number
+	---@return table|string
 	ToShow = function( value )
 		local show = tostring( value )
 		if show == nil or show == "" then
@@ -567,6 +744,7 @@ SIPrint =
 		end
 		return show
 	end ,
+
 	Error      = E ,
 	ErrorCode  = CodeE ,
 	ErrorUse   = UseE ,
@@ -581,6 +759,11 @@ SIPrint =
 
 local SINeedListData = {}
 
+-- ======================================================================<br>
+---@param name string
+---@param notself boolean|nil
+---@return any
+---@return any
 function SINeed( name , notself )
 	local source = debug.getinfo( 2 , "S" ).source
 	if notself then
@@ -607,6 +790,10 @@ function SINeed( name , notself )
 	return require( path .. name )
 end
 
+-- ======================================================================<br>
+---@param basePath string
+---@param ... table
+---@return table
 function SINeedList( basePath , ... )
 	local results = {}
 	for i , path in pairs{ ... } do
@@ -668,12 +855,14 @@ SIInit =
 	UnloadedPackageList = {}
 }
 
--- ======================================================================
+-- ======================================================================<br>
 -- 设置当前的载入阶段<br>
 -- 除了 control 阶段外 , 请勿在外部调用此函数<br>
--- ======================================================================
+-- ======================================================================<br>
 -- StateCode = 载入阶段值 , 可用值请见 SIInit.StateCodeDefine 表<br>
--- ======================================================================
+-- ======================================================================<br>
+---@param StateCode integer
+---@return table
 function SIInit.AutoLoadState( StateCode )
 	if not SITable.Has( SIInit.StateCodeDefine , StateCode ) then
 		return CodeE( SIInit , "不存在的阶段 , StateCode=" .. StateCode )
@@ -706,19 +895,25 @@ function SIInit.AutoLoadState( StateCode )
 	return SIInit
 end
 
--- ======================================================================
+-- ======================================================================<br>
 -- 初始化 ConstantsData 数据包<br>
 -- 除了自动创建一些 ConstantsData 属性和自动创建一些 ConstantsData 定义的数据外<br>
 -- 还负责读取 ConstantsData.FileList 中定义的文件列表<br>
 -- 以及给 ConstantsData 创建一个全局变量<br>
 -- 更多信息请见 data.lua 中的相关注释<br>
--- ======================================================================
+-- ======================================================================<br>
 -- ModName = 调用此函数的 MOD 的名称 , 要使用代码名称而不是显示名称<br>
 -- CustomPackageConfig = 功能模块的配置信息数组 , 如果值为 nil , 则会尝试加载 MOD 文件夹下的 PackageConfig.lua 文件 , 文件不存在则会报错<br>
 -- ConstantsDataPrefix = ConstantsData 在代码的各种位置中进行注册时使用的名称前缀 , 防止重名 , 不影响注册的原型数据<br>
 -- CodeNamePrefix      = ConstantsData 在代码的各种位置中进行显示时使用的名称前缀 , 防止重名 , 影响注册的原型数据的 name 属性<br>
 -- ShowNamePrefix      = ConstantsData 在代码的各种位置中进行显示时使用的名称前缀 , 防止重名 , 影响注册的原型数据和本地化字符串 , 生成原型数据名称时此前缀也会被包含进去<br>
--- ======================================================================
+-- ======================================================================<br>
+---@param ModName string
+---@param CustomPackageConfig table
+---@param ConstantsDataPrefix string
+---@param CodeNamePrefix string
+---@param ShowNamePrefix string
+---@return table
 function SIInit.AutoLoad( ModName , CustomPackageConfig , ConstantsDataPrefix , CodeNamePrefix , ShowNamePrefix )
 	if not ModName then
 		ModName = CoreName
@@ -1183,11 +1378,17 @@ function SIInit.AutoLoad( ModName , CustomPackageConfig , ConstantsDataPrefix , 
 				if currentFileList then
 					local packagePath = SIInit.ModPath .. "/package/" .. packageName .. "/"
 					SIInit.CurrentConstantsData = constantsData
+					if constantsData.BeforeStateLoadFile then
+						constantsData.BeforeStateLoadFile( constantsData , SIInit.State )
+					end
 					for index, fileName in pairs( currentFileList ) do
 						SINeed( packagePath .. fileName , true )
 					end
 					if SIGen then
 						SIGen.Fresh()
+					end
+					if constantsData.AfterStateLoadFile then
+						constantsData.AfterStateLoadFile( constantsData , SIInit.State )
 					end
 				end
 			end
@@ -1199,11 +1400,17 @@ function SIInit.AutoLoad( ModName , CustomPackageConfig , ConstantsDataPrefix , 
 				if currentFileList then
 					local packagePath = SIInit.ModPath .. "/package/" .. constantsData.API.PackageName .. "/"
 					SIInit.CurrentConstantsData = constantsData
+					if constantsData.BeforeStateLoadFile then
+						constantsData.BeforeStateLoadFile( constantsData , SIInit.State )
+					end
 					for index, fileName in pairs( constantsData.FileList[SIInit.State] ) do
 						SINeed( packagePath .. fileName , true )
 					end
 					if SIGen then
 						SIGen.Fresh()
+					end
+					if constantsData.AfterStateLoadFile then
+						constantsData.AfterStateLoadFile( constantsData , SIInit.State )
 					end
 				end
 			end
@@ -1252,11 +1459,12 @@ function SIInit.AutoLoad( ModName , CustomPackageConfig , ConstantsDataPrefix , 
 	return SIInit
 end
 
--- ======================================================================
+-- ======================================================================<br>
 -- 向玩家显示未能成功载入的功能模块的信息<br>
--- ======================================================================
+-- ======================================================================<br>
 -- playerOrIndex = 向这个玩家显示未能成功载入的功能模块的信息<br>
--- ======================================================================
+-- ======================================================================<br>
+---@param playerOrIndex table|integer
 function SIInit.ShowUnloadedPackageList( playerOrIndex )
 	local unloadedPackageOutput = {}
 	local messageOutput = { "SIUtils.ShowUnloadedPackageList" , unloadedPackageOutput }

@@ -30,15 +30,15 @@ SIRPGSkillUI_OverView =
 	-- ============================================================================================================================================
 	-- ============================================================================================================================================
 
-	-- ======================================================================
+	-- ======================================================================<br>
 	-- 技能入口接口<br>
 	-- [ 洞察 ] 技能<br>
-	-- ======================================================================
+	-- ======================================================================<br>
 	-- playerIndex     = 玩家索引<br>
 	-- globalSkillData = 全局技能数据 , 静态数据<br>
 	-- playerSkillData = 玩家技能数据 , 当前技能的玩家相关的数据 , 动态数据<br>
 	-- gameTick        = 游戏帧<br>
-	-- ======================================================================
+	-- ======================================================================<br>
 	OpenFrame = function( playerIndex , globalSkillData , playerSkillData , isQuickUse , gameTick )
 		if isQuickUse and playerSkillData.CustomData.DefaultPointDataIndex then
 			SIRPGSkillUI_OverView.UseSkillInner( playerIndex , playerSkillData.CustomData.DefaultPointDataIndex )
@@ -148,9 +148,9 @@ SIRPGSkillUI_OverView =
 		local pointDataIndex = tonumber( name:sub( SIRPGSkillUI_OverView.Names.UsePosition ) ) or 0
 		SIRPGSkillUI_OverView.UseSkillInner( playerIndex , pointDataIndex )
 	end ,
-	-- ======================================================================
+	-- ======================================================================<br>
 	-- 这是一个内部函数 , 请勿外部调用<br>
-	-- ======================================================================
+	-- ======================================================================<br>
 	UseSkillInner = function( playerIndex , pointDataIndex )
 		if not SIPermission.HasPermission( SIPermission.PermissionIDs.RPGPlayerSkill , playerIndex ) then
 			SIPrint.Alert( playerIndex , SIPermission.GetPermissionMessage( SIPermission.PermissionIDs.RPGPlayerSkill ) )

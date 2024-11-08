@@ -6,9 +6,9 @@
 
 SIInterface
 
--- ======================================================================
+-- ======================================================================<br>
 -- 自动填充功能相关接口<br>
--- ======================================================================
+-- ======================================================================<br>
 .Add( SIAutoInsert.InterfaceID ,
 {
 	-- 窗口
@@ -19,6 +19,6 @@ SIInterface
 	-- 导入导出
 	ImpoerSettingsData = SIAutoInsert.ImpoerSettingsData ,
 	ExportSettingsData = SIAutoInsert.ExportSettingsData ,
-	-- 事件
+	-- 事件<br>
 	GetModuleEventID = SIAutoInsert.GetModuleEventID
 } )

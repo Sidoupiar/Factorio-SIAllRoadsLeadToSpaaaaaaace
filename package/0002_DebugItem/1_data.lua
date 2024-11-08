@@ -29,9 +29,9 @@ local defaultResistances =
 SIGen
 .SetGroup( SIConstants_Core.raw.Groups.Hidden.DebugItem )
 
--- ======================================================================
+-- ======================================================================<br>
 -- 量产之酥皮夹心糖果
--- ======================================================================
+-- ======================================================================<br>
 .New( SICommon.Types.Items.Tool , "SuperCandy" , "量产之酥皮夹心糖果" )
 .AutoIcon()
 .Append
@@ -204,9 +204,9 @@ SIGen
 .MakeIcon( SICommon.Types.Items.Tool , "量产之酥皮夹心糖果" , 64 , 4 )
 .ReferenceEquipmentResult( SICommon.Types.Items.Tool , SIConstants_DebugItem.raw.Items.SuperCandy )
 
--- ======================================================================
+-- ======================================================================<br>
 -- 璀璨之闪耀能量罐头
--- ======================================================================
+-- ======================================================================<br>
 .New( SICommon.Types.Items.Item , "SuperBrightBar" , "璀璨之闪耀能量罐头" )
 .AutoIcon()
 .Append
@@ -466,9 +466,9 @@ SIGen
 .MakeIcon( SICommon.Types.Items.Item , "璀璨之闪耀能量罐头" , 64 , 4 )
 .ReferenceEquipmentResult( SICommon.Types.Items.Item , SIConstants_DebugItem.raw.Items.SuperBrightBar )
 
--- ======================================================================
+-- ======================================================================<br>
 -- 奇妙之双鱼螺旋插件
--- ======================================================================
+-- ======================================================================<br>
 .New( SICommon.Types.Items.Module , "SuperFishModule" , "奇妙之双鱼螺旋插件" )
 .AutoIcon()
 .Append
@@ -971,9 +971,9 @@ SIGen
 .MakeIcon( SICommon.Types.Items.Module , "奇妙之双鱼螺旋插件" , 64 , 4 )
 .ReferenceEquipmentResult( SICommon.Types.Items.Module , SIConstants_DebugItem.raw.Items.SuperFishModule )
 
--- ======================================================================
+-- ======================================================================<br>
 -- 洞察之一览无余雷达
--- ======================================================================
+-- ======================================================================<br>
 .New( SICommon.Types.Items.Item , "SuperLookRadar" , "洞察之一览无余雷达" )
 .AutoIcon()
 .Append
@@ -1216,9 +1216,9 @@ SIGen
 .MakeIcon( SICommon.Types.Items.Item , "洞察之一览无余雷达" , 64 , 4 )
 .ReferenceEquipmentResult( SICommon.Types.Items.Item , SIConstants_DebugItem.raw.Items.SuperLookRadar )
 
--- ======================================================================
+-- ======================================================================<br>
 -- 集成之指点江山平台
--- ======================================================================
+-- ======================================================================<br>
 .New( SICommon.Types.Items.Item , "SuperRoboport" , "集成之指点江山平台" )
 .AutoIcon()
 .Append
@@ -1594,9 +1594,9 @@ SIGen
 .MakeIcon( SICommon.Types.Items.Item , "集成之指点江山平台" , 64 , 4 )
 .ReferenceEquipmentResult( SICommon.Types.Items.Item , SIConstants_DebugItem.raw.Items.SuperRoboport )
 
--- ======================================================================
+-- ======================================================================<br>
 -- 伟力之移山填海建设单元
--- ======================================================================
+-- ======================================================================<br>
 .New( SICommon.Types.Items.Item , "SuperConstruction" , "伟力之移山填海建设单元" )
 .AutoIcon()
 .Append
@@ -2050,9 +2050,9 @@ SIGen
 .MakeIcon( SICommon.Types.Items.Item , "伟力之移山填海建设单元" , 64 , 4 )
 .ReferenceEquipmentResult( SICommon.Types.Items.Item , SIConstants_DebugItem.raw.Items.SuperConstruction )
 
--- ======================================================================
+-- ======================================================================<br>
 -- 伟力之移山填海物流单元
--- ======================================================================
+-- ======================================================================<br>
 .New( SICommon.Types.Items.Item , "SuperLogistic" , "伟力之移山填海物流单元" )
 .AutoIcon()
 .Append
@@ -2423,9 +2423,9 @@ SIGen
 .MakeIcon( SICommon.Types.Items.Item , "伟力之移山填海物流单元" , 64 , 4 )
 .ReferenceEquipmentResult( SICommon.Types.Items.Item , SIConstants_DebugItem.raw.Items.SuperLogistic )
 
--- ======================================================================
+-- ======================================================================<br>
 -- 终末之横扫千军光束
--- ======================================================================
+-- ======================================================================<br>
 .New( SICommon.Types.Entities.Beam , "SuperLaser_BeamSmall" , "终末之横扫千军光束-激光细" )
 .Append
 {
@@ -3841,9 +3841,9 @@ SIGen
 .MakeIcon( SICommon.Types.Items.Item , "终末之横扫千军光束" , 64 , 4 )
 .ReferenceEquipmentResult( SICommon.Types.Items.Item , SIConstants_DebugItem.raw.Items.SuperLaser )
 
--- ======================================================================
+-- ======================================================================<br>
 -- 超越之安如磐石战车
--- ======================================================================
+-- ======================================================================<br>
 .New( SICommon.Types.Items.Gun , "SuperTank_Gun" , "超越之安如磐石战车-机枪" )
 .AutoIcon()
 .Append

@@ -135,9 +135,9 @@ SIRPGPlayerSkill =
 			SIRPGPlayerSkill.FreshSkillType( settings , globalSettings , skillType )
 		end
 	end ,
-	-- ======================================================================
+	-- ======================================================================<br>
 	-- 只创建控件<br>
-	-- ======================================================================
+	-- ======================================================================<br>
 	FreshSkillType = function( settings , globalSettings , skillType )
 		local skill = settings.PlayerSkill
 		local list = skill.List[skillType]
@@ -376,9 +376,9 @@ SIRPGPlayerSkill =
 			end
 		end
 	end ,
-	-- ======================================================================
+	-- ======================================================================<br>
 	-- 只更新控件的数据<br>
-	-- ======================================================================
+	-- ======================================================================<br>
 	FreshSkillLine = function( settings , globalSettings , skillID )
 		local skill = settings.PlayerSkill
 		local globalSkillData = globalSettings.SkillList[skillID]

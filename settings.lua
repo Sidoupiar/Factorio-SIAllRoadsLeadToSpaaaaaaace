@@ -35,6 +35,9 @@ local Settings =
 		default_value = true
 	}
 }
+
+-- ======================================================================<br>
+---@param list table
 local function LoadSettings( list )
 	for index , setting in pairs( list ) do
 		setting.localised_name = { "SISettingName." .. setting.name }
@@ -43,6 +46,7 @@ local function LoadSettings( list )
 	end
 	data:extend( list )
 end
+
 LoadSettings( Settings )
 
 -- ============================================================================================================================================

@@ -165,9 +165,9 @@ SIMainbarNote =
 			end
 		end
 	end ,
-	-- ======================================================================
+	-- ======================================================================<br>
 	-- 这是一个内部函数 , 请勿外部调用<br>
-	-- ======================================================================
+	-- ======================================================================<br>
 	AddNoteButton = function( list , noteData )
 		local button1 = list.add{ type = "button" , name = SIMainbarNote.Names.NotePrefix .. noteData.ID , tooltip = { "SICore.主面板便签管理-窗口-列表便签-提示" } , style = noteData.isKey and SIConstants_Core.raw.Styles.Mainbar_Note_ListNoteKey or SIConstants_Core.raw.Styles.Mainbar_Note_ListNoteNormal }
 		local flow = button1.add{ type = "flow" , direction = "vertical" , ignored_by_interaction = true , style = SIConstants_Core.raw.Styles.Mainbar_Note_ListFlow }
@@ -175,9 +175,9 @@ SIMainbarNote =
 		flow.add{ type = "label" , ignored_by_interaction = true , caption = noteData.content , style = SIConstants_Core.raw.Styles.Mainbar_Note_ListContent }
 		list.add{ type = "sprite-button" , name = SIMainbarNote.Names.DeletePrefix .. noteData.ID , sprite = "item/" .. SIConstants_Core.raw.Items.IconClose , tooltip = { "SICore.主面板便签管理-窗口-列表便签-删除-提示" } , style = SIConstants_Core.raw.Styles.Mainbar_Note_ListNoteDelete }
 	end ,
-	-- ======================================================================
+	-- ======================================================================<br>
 	-- 这是一个内部函数 , 请勿外部调用<br>
-	-- ======================================================================
+	-- ======================================================================<br>
 	AddNoneButton = function( list )
 		local button1 = list.add{ type = "button" , tooltip = { "SICore.主面板便签管理-窗口-列表便签-无-提示" } , style = SIConstants_Core.raw.Styles.Mainbar_Note_ListNoteNone }
 		local flow = button1.add{ type = "flow" , direction = "vertical" , ignored_by_interaction = true , style = SIConstants_Core.raw.Styles.Mainbar_Note_ListFlow }
@@ -315,40 +315,40 @@ SIMainbarNote =
 	-- ============================================================================================================================================
 	-- ============================================================================================================================================
 
-	-- ======================================================================
+	-- ======================================================================<br>
 	-- 打开指定玩家的便签管理窗口<br>
-	-- ======================================================================
+	-- ======================================================================<br>
 	-- playerIndex = 玩家索引<br>
-	-- ======================================================================
+	-- ======================================================================<br>
 	OpenFrameByPlayerIndex = function( playerIndex )
 		SIMainbarNote.OpenFrame( playerIndex )
 	end ,
 
-	-- ======================================================================
+	-- ======================================================================<br>
 	-- 关闭指定玩家的便签管理窗口<br>
-	-- ======================================================================
+	-- ======================================================================<br>
 	-- playerIndex = 玩家索引<br>
-	-- ======================================================================
+	-- ======================================================================<br>
 	CloseFrameByPlayerIndex = function( playerIndex )
 		SIMainbarNote.CloseFrame( playerIndex )
 	end ,
 
-	-- ======================================================================
+	-- ======================================================================<br>
 	-- 打开所有玩家的便签管理窗口<br>
-	-- ======================================================================
+	-- ======================================================================<br>
 	-- 无参数<br>
-	-- ======================================================================
+	-- ======================================================================<br>
 	OpenFrames = function()
 		for playerIndex , settings in pairs( SIGlobal.GetAllPlayerSettings( SIMainData.Settings.Name ) ) do
 			SIMainbarNote.OpenFrame( playerIndex )
 		end
 	end ,
 
-	-- ======================================================================
+	-- ======================================================================<br>
 	-- 关闭所有玩家的便签管理窗口<br>
-	-- ======================================================================
+	-- ======================================================================<br>
 	-- 无参数<br>
-	-- ======================================================================
+	-- ======================================================================<br>
 	CloseFrames = function()
 		for playerIndex , settings in pairs( SIGlobal.GetAllPlayerSettings( SIMainData.Settings.Name ) ) do
 			SIMainbarNote.CloseFrame( playerIndex )

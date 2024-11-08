@@ -7,9 +7,9 @@
 SIGen
 .SetGroup( SIConstants_RuinSystem.raw.Groups.Hidden.RuinRecipes )
 
--- ======================================================================
+-- ======================================================================<br>
 -- 资源类配方
--- ======================================================================
+-- ======================================================================<br>
 for index , data in pairs( SIConstants_RuinSystem.RuinRecipeData ) do
 	SIGen
 	.New( SICommon.Types.Recipe , "RuinRecipe_" .. data.ID , "遗迹配方-" .. data.Alias ,

@@ -6,9 +6,9 @@
 
 SIInterface
 
--- ======================================================================
+-- ======================================================================<br>
 -- 权限管理接口<br>
--- ======================================================================
+-- ======================================================================<br>
 .Add( SIPermission.InterfaceID ,
 {
 	-- 窗口
@@ -24,6 +24,6 @@ SIInterface
 	HasPermission = SIPermission.HasPermission ,
 	GetPermissionMessage = SIPermission.GetPermissionMessage ,
 	IsAdmin = SIPermission.IsAdmin ,
-	-- 事件
+	-- 事件<br>
 	GetEventID = SIPermission.GetEventID
 } )

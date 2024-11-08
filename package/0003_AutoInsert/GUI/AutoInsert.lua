@@ -470,23 +470,23 @@ SIAutoInsert =
 		settings.tabPane.selected_tab_index = settings.tabSettingsIndex
 		SIAutoInsert.FreshPage( settings )
 	end ,
-	-- ======================================================================
+	-- ======================================================================<br>
 	-- 这是一个内部函数 , 请勿外部调用<br>
-	-- ======================================================================
+	-- ======================================================================<br>
 	CreatePage = function( settings , tabSettingsIndex )
 		local page = settings.tabPane.add{ type = "flow" , direction = "vertical" , style = SIConstants_Core.raw.Styles.Common_FlowLeft }
 		local elements = settings.Elements[tabSettingsIndex]
-		-- ======================================================================
+		-- ======================================================================<br>
 		-- 设置名称
-		-- ======================================================================
+		-- ======================================================================<br>
 		local nameFlow = page.add{ type = "flow" , direction = "horizontal" , style = SIConstants_Core.raw.Styles.Common_FlowCenterH }
 		nameFlow.add{ type = "label" , caption = { "SIAutoInsert.自动填充-窗口-名称" } , tooltip = { "SIAutoInsert.自动填充-窗口-名称-提示" } , style = SIConstants_AutoInsert.raw.Styles.AutoInsert_Label }
 		elements.TabSettingsName = nameFlow.add{ type = "textfield" , name = SIAutoInsert.Names.TabSettingsName , text = nil , tooltip = { "SIAutoInsert.自动填充-窗口-名称-提示" } , style = SIConstants_AutoInsert.raw.Styles.AutoInsert_Text }
 		nameFlow.add{ type = "flow" , direction = "vertical" , style = SIConstants_AutoInsert.raw.Styles.AutoInsert_EmptyFlow }
 		nameFlow.add{ type = "button" , name = SIAutoInsert.Names.Delete , caption = { "SIAutoInsert.自动填充-窗口-删除" } , tooltip = { "SIAutoInsert.自动填充-窗口-删除-提示" } , style = SIConstants_Core.raw.Styles.Common_ButtonRed }
-		-- ======================================================================
+		-- ======================================================================<br>
 		-- 默认选择
-		-- ======================================================================
+		-- ======================================================================<br>
 		local defaultIndexFlow = page.add{ type = "flow" , direction = "horizontal" , style = SIConstants_Core.raw.Styles.Common_FlowCenterH }
 		defaultIndexFlow.add{ type = "label" , caption = { "SIAutoInsert.自动填充-窗口-默认选择" } , tooltip = { "SIAutoInsert.自动填充-窗口-默认选择-提示" } , style = SIConstants_AutoInsert.raw.Styles.AutoInsert_Label }
 		elements.DefaultIndex = defaultIndexFlow.add
@@ -499,58 +499,58 @@ SIAutoInsert =
 			selected_index = 1 ,
 			style = SIConstants_AutoInsert.raw.Styles.AutoInsert_DropDown
 		}
-		-- ======================================================================
+		-- ======================================================================<br>
 		-- 设置列表按钮
-		-- ======================================================================
+		-- ======================================================================<br>
 		local listButtonFlow = page.add{ type = "flow" , direction = "horizontal" , style = SIConstants_AutoInsert.raw.Styles.AutoInsert_ListButtonFlow }
-		-- ======================================================================
+		-- ======================================================================<br>
 		-- 设置列表
-		-- ======================================================================
+		-- ======================================================================<br>
 		local scroll = page.add{ type = "scroll-pane" , horizontal_scroll_policy = "never" , vertical_scroll_policy = "auto-and-reserve-space" , style = SIConstants_Core.raw.Styles.Common_ScrollPane }
 		local list = scroll.add{ type = "table" , column_count = 1 , style = SIConstants_Core.raw.Styles.Common_List }
 		elements.Scroll = scroll
-		-- ======================================================================
+		-- ======================================================================<br>
 		-- 最大格子
-		-- ======================================================================
+		-- ======================================================================<br>
 		elements.MaxSlot_Enable = list.add{ type = "checkbox" , name = SIAutoInsert.Names.EnablePrefix .. "MaxSlot_Flow" , state = false , caption = { "SIAutoInsert.自动填充-窗口-最大格子-启用" , { "SIAutoInsert.自动填充-窗口-启用-未设置" } } , tooltip = { "SIAutoInsert.自动填充-窗口-最大格子-启用-提示" } , style = SIConstants_AutoInsert.raw.Styles.AutoInsert_ListCheck }
 		local MaxSlot_Flow = list.add{ type = "flow" , direction = "vertical" , style = SIConstants_AutoInsert.raw.Styles.AutoInsert_ListPanelFlow }
 		elements.MaxSlot_Flow = MaxSlot_Flow
 		elements.MaxSlot_List = MaxSlot_Flow.add{ type = "table" , column_count = 2 , style = SIConstants_AutoInsert.raw.Styles.AutoInsert_SubList }
-		-- ======================================================================
+		-- ======================================================================<br>
 		-- 绿箱向蓝箱供货
-		-- ======================================================================
+		-- ======================================================================<br>
 		elements.GreenToBlue_Enable = list.add{ type = "checkbox" , name = SIAutoInsert.Names.EnablePrefix .. "GreenToBlue_Flow" , state = false , caption = { "SIAutoInsert.自动填充-窗口-绿箱向蓝箱供货-启用" , { "SIAutoInsert.自动填充-窗口-启用-未设置" } } , tooltip = { "SIAutoInsert.自动填充-窗口-绿箱向蓝箱供货-启用-提示" } , style = SIConstants_AutoInsert.raw.Styles.AutoInsert_ListCheck }
 		local GreenToBlue_Flow = list.add{ type = "flow" , direction = "vertical" , style = SIConstants_AutoInsert.raw.Styles.AutoInsert_ListPanelFlow }
 		elements.GreenToBlue_Flow = GreenToBlue_Flow
 		elements.GreenToBlue_Check = GreenToBlue_Flow.add{ type = "checkbox" , name = SIAutoInsert.Names.GreenToBlue_Check , state = false , caption = { "SIAutoInsert.自动填充-窗口-绿箱向蓝箱供货-勾选" } , tooltip = { "SIAutoInsert.自动填充-窗口-绿箱向蓝箱供货-勾选-提示" } , style = SIConstants_Core.raw.Styles.Common_CheckBox }
-		-- ======================================================================
+		-- ======================================================================<br>
 		-- 设置插件
-		-- ======================================================================
+		-- ======================================================================<br>
 		elements.SetModule_Enable = list.add{ type = "checkbox" , name = SIAutoInsert.Names.EnablePrefix .. "SetModule_Flow" , state = false , caption = { "SIAutoInsert.自动填充-窗口-设置插件-启用" , { "SIAutoInsert.自动填充-窗口-启用-未设置" } } , tooltip = { "SIAutoInsert.自动填充-窗口-设置插件-启用-提示" } , style = SIConstants_AutoInsert.raw.Styles.AutoInsert_ListCheck }
 		local SetModule_Flow = list.add{ type = "flow" , direction = "vertical" , style = SIConstants_AutoInsert.raw.Styles.AutoInsert_ListPanelFlow }
 		elements.SetModule_Flow = SetModule_Flow
 		elements.SetModule_List = SetModule_Flow.add{ type = "table" , column_count = 3 , style = SIConstants_AutoInsert.raw.Styles.AutoInsert_SubList }
-		-- ======================================================================
+		-- ======================================================================<br>
 		-- 插入燃料
-		-- ======================================================================
+		-- ======================================================================<br>
 		elements.InsertFuel_Enable = list.add{ type = "checkbox" , name = SIAutoInsert.Names.EnablePrefix .. "InsertFuel_Flow" , state = false , caption = { "SIAutoInsert.自动填充-窗口-插入燃料-启用" , { "SIAutoInsert.自动填充-窗口-启用-未设置" } } , tooltip = { "SIAutoInsert.自动填充-窗口-插入燃料-启用-提示" } , style = SIConstants_AutoInsert.raw.Styles.AutoInsert_ListCheck }
 		local InsertFuel_Flow = list.add{ type = "flow" , direction = "vertical" , style = SIConstants_AutoInsert.raw.Styles.AutoInsert_ListPanelFlow }
 		elements.InsertFuel_Flow = InsertFuel_Flow
 		elements.InsertFuel_List = InsertFuel_Flow.add{ type = "table" , column_count = 2 , style = SIConstants_AutoInsert.raw.Styles.AutoInsert_SubList }
-		-- ======================================================================
+		-- ======================================================================<br>
 		-- 插入弹药
-		-- ======================================================================
+		-- ======================================================================<br>
 		elements.InsertAmmo_Enable = list.add{ type = "checkbox" , name = SIAutoInsert.Names.EnablePrefix .. "InsertAmmo_Flow" , state = false , caption = { "SIAutoInsert.自动填充-窗口-插入弹药-启用" , { "SIAutoInsert.自动填充-窗口-启用-未设置" } } , tooltip = { "SIAutoInsert.自动填充-窗口-插入弹药-启用-提示" } , style = SIConstants_AutoInsert.raw.Styles.AutoInsert_ListCheck }
 		local InsertAmmo_Flow = list.add{ type = "flow" , direction = "vertical" , style = SIConstants_AutoInsert.raw.Styles.AutoInsert_ListPanelFlow }
 		elements.InsertAmmo_Flow = InsertAmmo_Flow
 		elements.InsertAmmo_List = InsertAmmo_Flow.add{ type = "table" , column_count = 2 , style = SIConstants_AutoInsert.raw.Styles.AutoInsert_SubList }
-		-- ======================================================================
+		-- ======================================================================<br>
 		-- 插入空白区
-		-- ======================================================================
+		-- ======================================================================<br>
 		list.add{ type = "flow" , direction = "vertical" , style = SIConstants_AutoInsert.raw.Styles.AutoInsert_BlankFlow }
-		-- ======================================================================
+		-- ======================================================================<br>
 		-- 创建滚动定位按钮
-		-- ======================================================================
+		-- ======================================================================<br>
 		for key , value in pairs( SIAutoInsert.DefaultTabSettings ) do
 			if key ~= "Name" then
 				local button = listButtonFlow.add{ type = "sprite-button" , name = SIAutoInsert.Names.ListButtonPrefix .. key .. "_Enable" , sprite = "item/" .. SIAutoInsert.ListButtonIcon[key] , tooltip = { "SIAutoInsert.自动填充-窗口-列表定位按钮-提示" , { elements[key .. "_Enable"].caption[1] , "" } } , style = SIConstants_AutoInsert.raw.Styles.AutoInsert_ListButton }
@@ -564,42 +564,42 @@ SIAutoInsert =
 		local tabSettingsIndex = settings.tabSettingsIndex
 		local tabSettings = settings.TabSettingsList[tabSettingsIndex]
 		local elements = settings.Elements[tabSettingsIndex]
-		-- ======================================================================
+		-- ======================================================================<br>
 		-- 设置名称
-		-- ======================================================================
+		-- ======================================================================<br>
 		elements.TabSettingsName.text = tabSettings.Name
-		-- ======================================================================
+		-- ======================================================================<br>
 		-- 默认选择
-		-- ======================================================================
+		-- ======================================================================<br>
 		elements.DefaultIndex.selected_index = settings.defaultIndex == tabSettingsIndex and 2 or 1
-		-- ======================================================================
+		-- ======================================================================<br>
 		-- 最大格子
-		-- ======================================================================
+		-- ======================================================================<br>
 		elements.MaxSlot_Enable.state = tabSettings.MaxSlot.Enable
 		elements.MaxSlot_Flow.visible = tabSettings.MaxSlot.Enable
 		SIAutoInsert.FreshPage_MaxSlot( settings , tabSettings , elements )
-		-- ======================================================================
+		-- ======================================================================<br>
 		-- 绿箱向蓝箱供货
-		-- ======================================================================
+		-- ======================================================================<br>
 		elements.GreenToBlue_Enable.state = tabSettings.GreenToBlue.Enable
 		elements.GreenToBlue_Flow.visible = tabSettings.GreenToBlue.Enable
 		elements.GreenToBlue_Check.state = tabSettings.GreenToBlue.Check
 		SIAutoInsert.FreshPage_GreenToBlue( settings , tabSettings , elements )
-		-- ======================================================================
+		-- ======================================================================<br>
 		-- 设置插件
-		-- ======================================================================
+		-- ======================================================================<br>
 		elements.SetModule_Enable.state = tabSettings.SetModule.Enable
 		elements.SetModule_Flow.visible = tabSettings.SetModule.Enable
 		SIAutoInsert.FreshPage_SetModule( settings , tabSettings , elements )
-		-- ======================================================================
+		-- ======================================================================<br>
 		-- 插入燃料
-		-- ======================================================================
+		-- ======================================================================<br>
 		elements.InsertFuel_Enable.state = tabSettings.InsertFuel.Enable
 		elements.InsertFuel_Flow.visible = tabSettings.InsertFuel.Enable
 		SIAutoInsert.FreshPage_InsertFuel( settings , tabSettings , elements )
-		-- ======================================================================
+		-- ======================================================================<br>
 		-- 插入弹药
-		-- ======================================================================
+		-- ======================================================================<br>
 		elements.InsertAmmo_Enable.state = tabSettings.InsertAmmo.Enable
 		elements.InsertAmmo_Flow.visible = tabSettings.InsertAmmo.Enable
 		SIAutoInsert.FreshPage_InsertAmmo( settings , tabSettings , elements )
@@ -1096,9 +1096,9 @@ SIAutoInsert =
 			settings.defaultIndex = 0
 		end
 	end ,
-	-- ======================================================================
+	-- ======================================================================<br>
 	-- 这是一个内部函数 , 请勿外部调用<br>
-	-- ======================================================================
+	-- ======================================================================<br>
 	FireModuleEvent = function( playerIndex , entity )
 		local data =
 		{
@@ -1122,9 +1122,9 @@ SIAutoInsert =
 			local entityPrototype = entity.prototype
 			local type = entityPrototype.type
 			local moduleFlag = false
-			-- ======================================================================
+			-- ======================================================================<br>
 			-- 最大格子
-			-- ======================================================================
+			-- ======================================================================<br>
 			if tabSettings.MaxSlot.Enable then
 				local maxSlotCount = tabSettings.MaxSlot.List[entityName]
 				if maxSlotCount then
@@ -1164,9 +1164,9 @@ SIAutoInsert =
 					end
 				end
 			end
-			-- ======================================================================
+			-- ======================================================================<br>
 			-- 绿箱向蓝箱供货
-			-- ======================================================================
+			-- ======================================================================<br>
 			if tabSettings.GreenToBlue.Enable then
 				if type == SICommon.Types.Entities.ContainerLogic then
 					local logisticMode = entityPrototype.logistic_mode
@@ -1175,9 +1175,9 @@ SIAutoInsert =
 					end
 				end
 			end
-			-- ======================================================================
+			-- ======================================================================<br>
 			-- 设置插件
-			-- ======================================================================
+			-- ======================================================================<br>
 			if tabSettings.SetModule.Enable then
 				local setModuleList = tabSettings.SetModule.List[entityName]
 				if setModuleList then
@@ -1235,9 +1235,9 @@ SIAutoInsert =
 			if moduleFlag then
 				SIAutoInsert.FireModuleEvent( playerIndex , entity )
 			end
-			-- ======================================================================
+			-- ======================================================================<br>
 			-- 插入燃料
-			-- ======================================================================
+			-- ======================================================================<br>
 			if tabSettings.InsertFuel.Enable then
 				local insertFuelList = tabSettings.InsertFuel.List[entityName]
 				if insertFuelList then
@@ -1275,9 +1275,9 @@ SIAutoInsert =
 					end
 				end
 			end
-			-- ======================================================================
+			-- ======================================================================<br>
 			-- 插入弹药
-			-- ======================================================================
+			-- ======================================================================<br>
 			if tabSettings.InsertAmmo.Enable then
 				local insertAmmoList = tabSettings.InsertAmmo.List[entityName]
 				if insertAmmoList then
@@ -1705,40 +1705,40 @@ SIAutoInsert =
 	-- ============================================================================================================================================
 	-- ============================================================================================================================================
 
-	-- ======================================================================
+	-- ======================================================================<br>
 	-- 打开指定玩家的自动填充的管理窗口<br>
-	-- ======================================================================
+	-- ======================================================================<br>
 	-- playerIndex = 玩家索引<br>
-	-- ======================================================================
+	-- ======================================================================<br>
 	OpenFrameByPlayerIndex = function( playerIndex )
 		SIAutoInsert.OpenFrame( playerIndex )
 	end ,
 
-	-- ======================================================================
+	-- ======================================================================<br>
 	-- 关闭指定玩家的自动填充的管理窗口<br>
-	-- ======================================================================
+	-- ======================================================================<br>
 	-- playerIndex = 玩家索引<br>
-	-- ======================================================================
+	-- ======================================================================<br>
 	CloseFrameByPlayerIndex = function( playerIndex )
 		SIAutoInsert.CloseFrame( playerIndex )
 	end ,
 
-	-- ======================================================================
+	-- ======================================================================<br>
 	-- 打开所有玩家的自动填充的管理窗口<br>
-	-- ======================================================================
+	-- ======================================================================<br>
 	-- 无参数<br>
-	-- ======================================================================
+	-- ======================================================================<br>
 	OpenFrames = function()
 		for playerIndex , settings in pairs( SIGlobal.GetAllPlayerSettings( SIAutoInsert.Settings.Name ) ) do
 			SIAutoInsert.OpenFrame( playerIndex )
 		end
 	end ,
 
-	-- ======================================================================
+	-- ======================================================================<br>
 	-- 关闭所有玩家的自动填充的管理窗口<br>
-	-- ======================================================================
+	-- ======================================================================<br>
 	-- 无参数<br>
-	-- ======================================================================
+	-- ======================================================================<br>
 	CloseFrames = function()
 		for playerIndex , settings in pairs( SIGlobal.GetAllPlayerSettings( SIAutoInsert.Settings.Name ) ) do
 			SIAutoInsert.CloseFrame( playerIndex )
@@ -1750,14 +1750,14 @@ SIAutoInsert =
 	-- ============================================================================================================================================
 	-- ============================================================================================================================================
 
-	-- ======================================================================
+	-- ======================================================================<br>
 	-- 导入数据<br>
-	-- ======================================================================
+	-- ======================================================================<br>
 	-- playerIndex    = 点击按钮的玩家索引<br>
 	-- data           = 导出时保存的数据 , 根据导出时导出接口函数返回的数据 , 此参数可能为 nil<br>
 	-- settingsDataID = 导入导出设置数据包的 ID<br>
 	-- gameTick       = 导出数据时的游戏时间 , tick<br>
-	-- ======================================================================
+	-- ======================================================================<br>
 	ImpoerSettingsData = function( playerIndex , data , settingsDataID , gameTick )
 		if not data then
 			return
@@ -1778,15 +1778,15 @@ SIAutoInsert =
 		end
 	end ,
 
-	-- ======================================================================
+	-- ======================================================================<br>
 	-- 导出数据<br>
-	-- ======================================================================
+	-- ======================================================================<br>
 	-- playerIndex    = 点击按钮的玩家索引<br>
 	-- settingsDataID = 导入导出设置数据包的 ID<br>
 	-- gameTick       = 当前的游戏时间 , tick<br>
-	-- ======================================================================
+	-- ======================================================================<br>
 	-- 返回值 = 导出的数据<br>
-	-- ======================================================================
+	-- ======================================================================<br>
 	ExportSettingsData = function( playerIndex , settingsDataID , gameTick )
 		local settings = SIGlobal.GetPlayerSettings( SIAutoInsert.Settings.Name , playerIndex )
 		return
@@ -1802,16 +1802,16 @@ SIAutoInsert =
 	-- ============================================================================================================================================
 	-- ============================================================================================================================================
 
-	-- ======================================================================
+	-- ======================================================================<br>
 	-- 当一个玩家通过自动填充修改了实体的插件时 , 会触发此事件<br>
 	-- 事件会包含 4 个参数 :<br>
 	-- name          = 事件的 ID 值<br>
 	-- tick          = 当前游戏刻<br>
 	-- player_index  = 操作玩家的索引<br>
 	-- entity        = 被修改了插件的实体<br>
-	-- ======================================================================
+	-- ======================================================================<br>
 	-- 返回值 = 事件的 ID 值<br>
-	-- ======================================================================
+	-- ======================================================================<br>
 	GetModuleEventID = function()
 		return SIAutoInsert.ModuleEventID
 	end
