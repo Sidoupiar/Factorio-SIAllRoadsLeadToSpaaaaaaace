@@ -14,7 +14,7 @@ local constantsData =
 		Settings = {}
 	} ,
 	BeforeLoad = function( constantsData )
-		if SIConfigs.SIHideTechnology.HideTechnologySelf ~= nil then constantsData.Settings.HideTechnologySelf = { Type = SICommon.SettingTypes.BOOL , Affect = SICommon.SettingAffectTypes.StartUp , Default = SIConfigs.SIHideTechnology.HideTechnologySelf } end
+		if SIConfigs.SIHideTechnology.HideTechnologySelf ~= nil then constantsData.Autoload.Settings.HideTechnologySelf = { Type = SICommon.SettingTypes.BOOL , Affect = SICommon.SettingAffectTypes.StartUp , Default = SIConfigs.SIHideTechnology.HideTechnologySelf } end
 	end
 }
 

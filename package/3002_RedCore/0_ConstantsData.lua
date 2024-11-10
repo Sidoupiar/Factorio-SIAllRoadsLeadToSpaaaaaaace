@@ -16,7 +16,7 @@ local constantsData =
 	BeforeLoad = function( constantsData )
 		if SIConfigs.SIRedCore.DifficultyLevel ~= nil then
 			local default = SITools.Round( math.floor( SIConfigs.SIRedCore.DifficultyLevel ) , 1 , 5 )
-			constantsData.Settings.DifficultyLevel = { Type = SICommon.SettingTypes.INT , Affect = SICommon.SettingAffectTypes.StartUp , Default = default , AllowIn = { 1 , 2 , 3 , 4 , 5 } }
+			constantsData.Autoload.Settings.DifficultyLevel = { Type = SICommon.SettingTypes.INT , Affect = SICommon.SettingAffectTypes.StartUp , Default = default , AllowIn = { 1 , 2 , 3 , 4 , 5 } }
 		end
 	end
 }

@@ -935,6 +935,8 @@ function SIInit.AutoLoad( ModName , CustomPackageConfig , ConstantsDataPrefix , 
 								--return CodeE( SIInit , "功能模块缺少强制依赖 , Package=\"" .. packageName .. "\" , Require=\"" .. requirePackageName .. "\"" )
 							end
 						end
+					end
+					if packageConfig.Excepts then
 						for exceptIndex , exceptPackageName in pairs( packageConfig.Excepts ) do
 							if SISettings.Package[exceptPackageName]() or SIInit.ConstantsDataList[ModName .. "_" .. exceptPackageName] then
 								table.insert( SIInit.UnloadedPackageList , { Package = packageConfig , Reason = "SIUtils.ShowUnloadedPackageListReason-NoExcept" } )
@@ -1042,10 +1044,10 @@ function SIInit.AutoLoad( ModName , CustomPackageConfig , ConstantsDataPrefix , 
 					-- 按阶段生成属性
 					if SIInit.State == SIInit.StateCodeDefine.Settings then
 						-- 创建功能模块启用设置
-						local defaultEnabled = packageConfig.ForceEnabled or ( packageConfig.Enabled == nil and false or packageConfig.Enabled )
+						local defaultEnabled = packageConfig.ForceEnabled or ( packageConfig.Enabled ~= nil and packageConfig.Enabled or false )
 						local packageSettingItem =
 						{
-							type = SICommon.SettingTypes.BOOL .. "-setting" ,
+							type = SICommon.SettingTypes.BOOL ,
 							setting_type = SICommon.SettingAffectTypes.StartUp ,
 							name = CustomPackagePrefix .. packageName ,
 							localised_name = { "SICommon.EnablePackageName" , constantsData.PackageLocalisedName } ,
@@ -1092,7 +1094,7 @@ function SIInit.AutoLoad( ModName , CustomPackageConfig , ConstantsDataPrefix , 
 									else
 										local localisedDescription = { "SISettingDescription."..realName }
 										if settingData.Min ~= nil and settingData.Max ~= nil then
-											localisedDescription = { "SICommon.SettingsDescriptionRange" , localisedDescription , settingData.Min , settingData.Max }
+											localisedDescription = { "SICommon.SettingsDescriptionRange" , localisedDescription , tostring( settingData.Min ) , tostring( settingData.Max ) }
 										end
 										if settingData.Unit ~= nil then
 											localisedDescription = { "SICommon.SettingsDescriptionUnit" , localisedDescription , settingData.Unit }
@@ -1153,20 +1155,21 @@ function SIInit.AutoLoad( ModName , CustomPackageConfig , ConstantsDataPrefix , 
 								local runtimeChangeList = {}
 								local perUserChangeList = {}
 								for settingID , settingValues in pairs( autoload.Settings ) do
+									local settingAffect = settingValues.Affect
 									local realName = constantsData.CodeNamePrefix .. settingID:gsub( "_" , "-" )
 									constantsData.raw.Settings[settingID] = realName
-									if settingValues[2] == SICommon.SettingAffectTypes.StartUp then
+									if settingAffect == SICommon.SettingAffectTypes.StartUp then
 										startupList[settingID] = function()
 											return settings.startup[realName].value
 										end
-									elseif settingValues[2] == SICommon.SettingAffectTypes.Runtime then
+									elseif settingAffect == SICommon.SettingAffectTypes.Runtime then
 										runtimeList[settingID] = function()
 											return settings.global[realName].value
 										end
 										runtimeChangeList[settingID] = function( value )
 											settings.global[realName] = { value = value }
 										end
-									elseif settingValues[2] == SICommon.SettingAffectTypes.PerUser then
+									elseif settingAffect == SICommon.SettingAffectTypes.PerUser then
 										perUserList[settingID] = function( playerOrIndex )
 											return settings.get_player_settings( playerOrIndex )[realName].value
 										end
@@ -1430,27 +1433,29 @@ end
 -- ======================================================================<br>
 ---@param playerOrIndex table|integer|nil -- 向这个玩家显示未能成功载入的功能模块的信息
 function SIInit.ShowUnloadedPackageList( playerOrIndex )
-	local unloadedPackageOutput = {}
-	local messageOutput = { "SIUtils.ShowUnloadedPackageList" , unloadedPackageOutput }
 	local unloadedPackageCount = #SIInit.UnloadedPackageList
-	for packageIndex , packageConfigData in pairs( SIInit.UnloadedPackageList ) do
-		local packageConfig = packageConfigData.Package
-		if( packageIndex > SIInit.ShowUnloadedPackageListMaxCount ) then
-			table.insert( unloadedPackageOutput , "SIUtils.ShowUnloadedPackageListEndless" )
-		else
-			if packageIndex < unloadedPackageCount then
-				table.insert( unloadedPackageOutput , "SIUtils.ShowUnloadedPackageListMedium" )
-				table.insert( unloadedPackageOutput , "SIPackageName." .. packageConfig.PackageName )
-				table.insert( unloadedPackageOutput , packageConfig.Reason )
-				local unloadedPackageOutputNew = {}
-				table.insert( unloadedPackageOutput , "SIPackageName." .. unloadedPackageOutputNew )
-				unloadedPackageOutput = unloadedPackageOutputNew
+	if unloadedPackageCount > 0 then
+		local unloadedPackageOutput = {}
+		local messageOutput = { "SIUtils.ShowUnloadedPackageList" , unloadedPackageOutput }
+		for packageIndex , packageConfigData in pairs( SIInit.UnloadedPackageList ) do
+			local packageConfig = packageConfigData.Package
+			if packageIndex > SIInit.ShowUnloadedPackageListMaxCount then
+				table.insert( unloadedPackageOutput , "SIUtils.ShowUnloadedPackageListEndless" )
 			else
-				table.insert( unloadedPackageOutput , "SIUtils.ShowUnloadedPackageListEnd" )
-				table.insert( unloadedPackageOutput , "SIPackageName." .. packageConfig.PackageName )
-				table.insert( unloadedPackageOutput , packageConfig.Reason )
+				if packageIndex < unloadedPackageCount then
+					table.insert( unloadedPackageOutput , "SIUtils.ShowUnloadedPackageListMedium" )
+					table.insert( unloadedPackageOutput , "SIPackageName." .. packageConfig.PackageName )
+					table.insert( unloadedPackageOutput , packageConfig.Reason )
+					local unloadedPackageOutputNew = {}
+					table.insert( unloadedPackageOutput , "SIPackageName." .. unloadedPackageOutputNew )
+					unloadedPackageOutput = unloadedPackageOutputNew
+				else
+					table.insert( unloadedPackageOutput , "SIUtils.ShowUnloadedPackageListEnd" )
+					table.insert( unloadedPackageOutput , "SIPackageName." .. packageConfig.PackageName )
+					table.insert( unloadedPackageOutput , packageConfig.Reason )
+				end
 			end
 		end
+		SIPrint.Alert( playerOrIndex , messageOutput )
 	end
-	SIPrint.Alert( playerOrIndex , messageOutput )
 end
