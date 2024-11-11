@@ -2905,7 +2905,7 @@ SIGen
 						{
 							type = "nested-result" ,
 							show_in_tooltip = false ,
-							probability = 0.34 ,
+							probability = 0.18 ,
 							action =
 							{
 								{
@@ -2916,6 +2916,35 @@ SIGen
 									radius = 18 ,
 									trigger_from_target = true ,
 									target_entities = true ,
+									collision_mode = "distance-from-collision-box" ,
+									action_delivery =
+									{
+										{
+											type = "beam" ,
+											beam = SIConstants_DebugItem.raw.Entities.SuperLaser_BeamSmall ,
+											max_length = 0 ,
+											duration = 12 ,
+											source_offset = { 0 , 0 } ,
+											add_to_shooter = true
+										}
+									}
+								}
+							}
+						} ,
+						{
+							type = "nested-result" ,
+							show_in_tooltip = false ,
+							probability = 0.18 ,
+							action =
+							{
+								{
+									type = "area" ,
+									show_in_tooltip = false ,
+									force = "enemy" ,
+									ignore_collision_condition = true ,
+									radius = 18 ,
+									trigger_from_target = true ,
+									target_entities = false ,
 									collision_mode = "distance-from-collision-box" ,
 									action_delivery =
 									{
