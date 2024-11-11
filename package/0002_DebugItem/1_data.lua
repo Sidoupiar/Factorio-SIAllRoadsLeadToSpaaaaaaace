@@ -35,9 +35,9 @@ local laserSmallDamage  = 8
 local laserMediumDamage = 13
 local laserLargeDamage  = 24
 local laserLargeDamageDirect = 37
-local laserSmallSize = 0.33
-local laserMediumSize = 0.6
-local laserLargeSize = 1.0
+local laserSmallSize = 0.3
+local laserMediumSize = 0.5
+local laserLargeSize = 0.8
 
 -- ======================================================================<br>
 ---@param damageAmount number
@@ -2913,7 +2913,7 @@ SIGen
 									show_in_tooltip = false ,
 									force = "enemy" ,
 									ignore_collision_condition = true ,
-									radius = 16 ,
+									radius = 18 ,
 									trigger_from_target = true ,
 									target_entities = false ,
 									collision_mode = "distance-from-collision-box" ,
