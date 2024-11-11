@@ -602,10 +602,9 @@ SIRPGSystem =
 	-- 只不过是正常游戏使用的增加经验值的函数 , 会判断权限弹出消息等<br>
 	-- 如果只是想修改经验值 , 请使用 AddAttackExp 函数<br>
 	-- ======================================================================<br>
-	-- playerIndex     = 玩家索引<br>
-	-- expCount        = 经验值数量 , 不可以是负数<br>
-	-- isSpecial       = 是否为特殊经验 , 弹出的消息中显示的文字和颜色不一样而已<br>
-	-- ======================================================================<br>
+	---@param playerIndex integer -- 玩家索引
+	---@param expCount number -- 经验值数量 , 不可以是负数
+	---@param isSpecial boolean -- 是否为特殊经验 , 弹出的消息中显示的文字和颜色不一样而已
 	MakeAttackExp = function( playerIndex , expCount , isSpecial )
 		if expCount <= 0 then
 			return
@@ -631,10 +630,9 @@ SIRPGSystem =
 	-- 只不过是正常游戏使用的增加经验值的函数 , 会判断权限弹出消息等<br>
 	-- 如果只是想修改经验值 , 请使用 AddAdventureExp 函数<br>
 	-- ======================================================================<br>
-	-- playerIndex     = 玩家索引<br>
-	-- expCount        = 经验值数量 , 不可以是负数<br>
-	-- isSpecial       = 是否为特殊经验 , 弹出的消息中显示的文字和颜色不一样而已<br>
-	-- ======================================================================<br>
+	---@param playerIndex integer -- 玩家索引
+	---@param expCount number -- 经验值数量 , 不可以是负数
+	---@param isSpecial boolean -- 是否为特殊经验 , 弹出的消息中显示的文字和颜色不一样而已
 	MakeAdventureExp = function( playerIndex , expCount , isSpecial )
 		if expCount <= 0 then
 			return
@@ -660,10 +658,9 @@ SIRPGSystem =
 	-- 只不过是正常游戏使用的增加经验值的函数 , 会判断权限弹出消息等<br>
 	-- 如果只是想修改经验值 , 请使用 AddCraftExp 函数<br>
 	-- ======================================================================<br>
-	-- playerIndex     = 玩家索引<br>
-	-- expCount        = 经验值数量 , 不可以是负数<br>
-	-- isSpecial       = 是否为特殊经验 , 弹出的消息中显示的文字和颜色不一样而已<br>
-	-- ======================================================================<br>
+	---@param playerIndex integer -- 玩家索引
+	---@param expCount number -- 经验值数量 , 不可以是负数
+	---@param isSpecial boolean -- 是否为特殊经验 , 弹出的消息中显示的文字和颜色不一样而已
 	MakeCraftExp = function( playerIndex , expCount , isSpecial )
 		if expCount <= 0 then
 			return
@@ -689,11 +686,9 @@ SIRPGSystem =
 	-- 经验值每级独立计算 , 也就是说计算后经验值永远是非负的<br>
 	-- 不要使用此接口来降低等级 , 降低等级请使用 AddAttackLevel 接口<br>
 	-- ======================================================================<br>
-	-- playerIndex     = 玩家索引<br>
-	-- expCount        = 经验值数量 , 可以是负数<br>
-	-- ======================================================================<br>
-	-- 返回值 = 实际提升的等级<br>
-	-- ======================================================================<br>
+	---@param playerIndex integer -- 玩家索引
+	---@param expCount number -- 经验值数量 , 可以是负数
+	---@return integer -- 实际提升的等级
 	AddAttackExp = function( playerIndex , expCount )
 		local settings = SIGlobal.GetPlayerSettings( SIRPGSystem.Settings.Name , playerIndex )
 		local exp = math.max( settings.EXP.AttackExp + expCount , 0 )
@@ -736,11 +731,9 @@ SIRPGSystem =
 	-- 经验值每级独立计算 , 也就是说计算后经验值永远是非负的<br>
 	-- 不要使用此接口来降低等级 , 降低等级请使用 AddAttackLevel 接口<br>
 	-- ======================================================================<br>
-	-- playerIndex     = 玩家索引<br>
-	-- expCount        = 经验值数量 , 虽然可以是负数 , 但是会被当作 0 处理<br>
-	-- ======================================================================<br>
-	-- 返回值 = 实际提升的等级<br>
-	-- ======================================================================<br>
+	---@param playerIndex integer -- 玩家索引
+	---@param expCount number -- 经验值数量 , 虽然可以是负数 , 但是会被当作 0 处理
+	---@return integer -- 实际提升的等级
 	SetAttackExp = function( playerIndex , expCount )
 		local settings = SIGlobal.GetPlayerSettings( SIRPGSystem.Settings.Name , playerIndex )
 		local exp = math.max( expCount , 0 )
@@ -781,10 +774,8 @@ SIRPGSystem =
 	-- ======================================================================<br>
 	-- 获取玩家的当前战斗经验值<br>
 	-- ======================================================================<br>
-	-- playerIndex     = 玩家索引<br>
-	-- ======================================================================<br>
-	-- 返回值 = 当前的战斗经验值<br>
-	-- ======================================================================<br>
+	---@param playerIndex integer -- 玩家索引
+	---@return number -- 当前的战斗经验值
 	GetAttackExp = function( playerIndex )
 		local settings = SIGlobal.GetPlayerSettings( SIRPGSystem.Settings.Name , playerIndex )
 		return settings.EXP.AttackExp
@@ -794,10 +785,8 @@ SIRPGSystem =
 	-- 获取玩家的当前战斗经验等级的经验值上限<br>
 	-- 当经验值超过上限时 , 玩家就会升级 , 且溢出的经验值会被保留到下一级<br>
 	-- ======================================================================<br>
-	-- playerIndex     = 玩家索引<br>
-	-- ======================================================================<br>
-	-- 返回值 = 当前战斗经验等级的经验值上限<br>
-	-- ======================================================================<br>
+	---@param playerIndex integer -- 玩家索引
+	---@return number -- 当前战斗经验等级的经验值上限
 	GetCurrentLevelMaxAttackExp = function( playerIndex )
 		local settings = SIGlobal.GetPlayerSettings( SIRPGSystem.Settings.Name , playerIndex )
 		return settings.EXP.AttackExpMax
@@ -808,11 +797,9 @@ SIRPGSystem =
 	-- 经验值每级独立计算 , 也就是说计算后经验值永远是非负的<br>
 	-- 不要使用此接口来降低等级 , 降低等级请使用 AddAdventureLevel 接口<br>
 	-- ======================================================================<br>
-	-- playerIndex     = 玩家索引<br>
-	-- expCount        = 经验值数量 , 可以是负数<br>
-	-- ======================================================================<br>
-	-- 返回值 = 实际提升的等级<br>
-	-- ======================================================================<br>
+	---@param playerIndex integer -- 玩家索引
+	---@param expCount number -- 经验值数量 , 可以是负数
+	---@return integer -- 实际提升的等级
 	AddAdventureExp = function( playerIndex , expCount )
 		local settings = SIGlobal.GetPlayerSettings( SIRPGSystem.Settings.Name , playerIndex )
 		local exp = math.max( settings.EXP.AdventureExp + expCount , 0 )
@@ -855,11 +842,9 @@ SIRPGSystem =
 	-- 经验值每级独立计算 , 也就是说计算后经验值永远是非负的<br>
 	-- 不要使用此接口来降低等级 , 降低等级请使用 AddAdventureLevel 接口<br>
 	-- ======================================================================<br>
-	-- playerIndex     = 玩家索引<br>
-	-- expCount        = 经验值数量 , 虽然可以是负数 , 但是会被当作 0 处理<br>
-	-- ======================================================================<br>
-	-- 返回值 = 实际提升的等级<br>
-	-- ======================================================================<br>
+	---@param playerIndex integer -- 玩家索引
+	---@param expCount number -- 经验值数量 , 虽然可以是负数 , 但是会被当作 0 处理
+	---@return integer -- 实际提升的等级
 	SetAdventureExp = function( playerIndex , expCount )
 		local settings = SIGlobal.GetPlayerSettings( SIRPGSystem.Settings.Name , playerIndex )
 		local exp = math.max( expCount , 0 )
@@ -900,10 +885,8 @@ SIRPGSystem =
 	-- ======================================================================<br>
 	-- 获取玩家的当前探索经验值<br>
 	-- ======================================================================<br>
-	-- playerIndex     = 玩家索引<br>
-	-- ======================================================================<br>
-	-- 返回值 = 当前的探索经验值<br>
-	-- ======================================================================<br>
+	---@param playerIndex integer -- 玩家索引
+	---@return number -- 当前的探索经验值
 	GetAdventureExp = function( playerIndex )
 		local settings = SIGlobal.GetPlayerSettings( SIRPGSystem.Settings.Name , playerIndex )
 		return settings.EXP.AdventureExp
@@ -913,10 +896,8 @@ SIRPGSystem =
 	-- 获取玩家的当前探索经验等级的经验值上限<br>
 	-- 当经验值超过上限时 , 玩家就会升级 , 且溢出的经验值会被保留到下一级<br>
 	-- ======================================================================<br>
-	-- playerIndex     = 玩家索引<br>
-	-- ======================================================================<br>
-	-- 返回值 = 当前探索经验等级的经验值上限<br>
-	-- ======================================================================<br>
+	---@param playerIndex integer -- 玩家索引
+	---@return number -- 当前探索经验等级的经验值上限
 	GetCurrentLevelMaxAdventureExp = function( playerIndex )
 		local settings = SIGlobal.GetPlayerSettings( SIRPGSystem.Settings.Name , playerIndex )
 		return settings.EXP.AdventureExpMax
@@ -927,11 +908,9 @@ SIRPGSystem =
 	-- 经验值每级独立计算 , 也就是说计算后经验值永远是非负的<br>
 	-- 不要使用此接口来降低等级 , 降低等级请使用 AddCraftLevel 接口<br>
 	-- ======================================================================<br>
-	-- playerIndex     = 玩家索引<br>
-	-- expCount        = 经验值数量 , 可以是负数<br>
-	-- ======================================================================<br>
-	-- 返回值 = 实际提升的等级<br>
-	-- ======================================================================<br>
+	---@param playerIndex integer -- 玩家索引
+	---@param expCount number -- 经验值数量 , 可以是负数
+	---@return integer -- 实际提升的等级
 	AddCraftExp = function( playerIndex , expCount )
 		local settings = SIGlobal.GetPlayerSettings( SIRPGSystem.Settings.Name , playerIndex )
 		local exp = math.max( settings.EXP.CraftExp + expCount , 0 )
@@ -974,11 +953,9 @@ SIRPGSystem =
 	-- 经验值每级独立计算 , 也就是说计算后经验值永远是非负的<br>
 	-- 不要使用此接口来降低等级 , 降低等级请使用 AddCraftLevel 接口<br>
 	-- ======================================================================<br>
-	-- playerIndex     = 玩家索引<br>
-	-- expCount        = 经验值数量 , 虽然可以是负数 , 但是会被当作 0 处理<br>
-	-- ======================================================================<br>
-	-- 返回值 = 实际提升的等级<br>
-	-- ======================================================================<br>
+	---@param playerIndex integer -- 玩家索引
+	---@param expCount number -- 经验值数量 , 虽然可以是负数 , 但是会被当作 0 处理
+	---@return integer -- 实际提升的等级
 	SetCraftExp = function( playerIndex , expCount )
 		local settings = SIGlobal.GetPlayerSettings( SIRPGSystem.Settings.Name , playerIndex )
 		local exp = math.max( expCount , 0 )
@@ -1019,10 +996,8 @@ SIRPGSystem =
 	-- ======================================================================<br>
 	-- 获取玩家的当前生存经验值<br>
 	-- ======================================================================<br>
-	-- playerIndex     = 玩家索引<br>
-	-- ======================================================================<br>
-	-- 返回值 = 当前的生存经验值<br>
-	-- ======================================================================<br>
+	---@param playerIndex integer -- 玩家索引
+	---@return number -- 当前的生存经验值
 	GetCraftExp = function( playerIndex )
 		local settings = SIGlobal.GetPlayerSettings( SIRPGSystem.Settings.Name , playerIndex )
 		return settings.EXP.CraftExp
@@ -1032,10 +1007,8 @@ SIRPGSystem =
 	-- 获取玩家的当前生存经验等级的经验值上限<br>
 	-- 当经验值超过上限时 , 玩家就会升级 , 且溢出的经验值会被保留到下一级<br>
 	-- ======================================================================<br>
-	-- playerIndex     = 玩家索引<br>
-	-- ======================================================================<br>
-	-- 返回值 = 当前生存经验等级的经验值上限<br>
-	-- ======================================================================<br>
+	---@param playerIndex integer -- 玩家索引
+	---@return number -- 当前生存经验等级的经验值上限
 	GetCurrentLevelMaxCraftExp = function( playerIndex )
 		local settings = SIGlobal.GetPlayerSettings( SIRPGSystem.Settings.Name , playerIndex )
 		return settings.EXP.CraftExpMax
@@ -1048,11 +1021,9 @@ SIRPGSystem =
 	-- 如果升级后经验值超过了当前等级的经验值上限 , 那么会强制把经验值设置成 [ 当前等级的经验值上限 - 1 ] 的值<br>
 	-- 不要使用此接口来减少经验值 , 降低经验值请使用 AddAttackExp 接口<br>
 	-- ======================================================================<br>
-	-- playerIndex     = 玩家索引<br>
-	-- levelCount      = 等级数量 , 可以是负数<br>
-	-- ======================================================================<br>
-	-- 返回值 = 实际提升的等级<br>
-	-- ======================================================================<br>
+	---@param playerIndex integer -- 玩家索引
+	---@param levelCount integer -- 等级数量 , 可以是负数
+	---@return integer -- 实际提升的等级
 	AddAttackLevel = function( playerIndex , levelCount )
 		local settings = SIGlobal.GetPlayerSettings( SIRPGSystem.Settings.Name , playerIndex )
 		local level = math.max( settings.EXP.AttackLevel + levelCount , 0 )
@@ -1122,11 +1093,9 @@ SIRPGSystem =
 	-- 如果升级后经验值超过了当前等级的经验值上限 , 那么会强制把经验值设置成 [ 当前等级的经验值上限 - 1 ] 的值<br>
 	-- 不要使用此接口来减少经验值 , 降低经验值请使用 AddAttackExp 接口<br>
 	-- ======================================================================<br>
-	-- playerIndex     = 玩家索引<br>
-	-- levelCount      = 等级数量 , 虽然可以是负数 , 但是会被当作 0 处理
-	-- ======================================================================<br>
-	-- 返回值 = 实际提升的等级<br>
-	-- ======================================================================<br>
+	---@param playerIndex integer -- 玩家索引
+	---@param levelCount integer -- 等级数量 , 虽然可以是负数 , 但是会被当作 0 处理
+	---@return integer -- 实际提升的等级
 	SetAttackLevel = function( playerIndex , levelCount )
 		local settings = SIGlobal.GetPlayerSettings( SIRPGSystem.Settings.Name , playerIndex )
 		local level = math.max( levelCount , 0 )
@@ -1192,10 +1161,8 @@ SIRPGSystem =
 	-- ======================================================================<br>
 	-- 获取玩家的当前战斗经验等级<br>
 	-- ======================================================================<br>
-	-- playerIndex     = 玩家索引<br>
-	-- ======================================================================<br>
-	-- 返回值 = 当前的战斗经验等级<br>
-	-- ======================================================================<br>
+	---@param playerIndex integer -- 玩家索引
+	---@return integer -- 当前的战斗经验等级
 	GetAttackLevel = function( playerIndex )
 		local settings = SIGlobal.GetPlayerSettings( SIRPGSystem.Settings.Name , playerIndex )
 		return settings.EXP.AttackLevel
@@ -1208,11 +1175,9 @@ SIRPGSystem =
 	-- 如果升级后经验值超过了当前等级的经验值上限 , 那么会强制把经验值设置成 [ 当前等级的经验值上限 - 1 ] 的值<br>
 	-- 不要使用此接口来减少经验值 , 降低经验值请使用 AddAdventureExp 接口<br>
 	-- ======================================================================<br>
-	-- playerIndex     = 玩家索引<br>
-	-- levelCount      = 等级数量 , 可以是负数<br>
-	-- ======================================================================<br>
-	-- 返回值 = 实际提升的等级<br>
-	-- ======================================================================<br>
+	---@param playerIndex integer -- 玩家索引
+	---@param levelCount integer -- 等级数量 , 可以是负数
+	---@return integer -- 实际提升的等级
 	AddAdventureLevel = function( playerIndex , levelCount )
 		local settings = SIGlobal.GetPlayerSettings( SIRPGSystem.Settings.Name , playerIndex )
 		local level = math.max( settings.EXP.AdventureLevel + levelCount , 0 )
@@ -1282,11 +1247,9 @@ SIRPGSystem =
 	-- 如果升级后经验值超过了当前等级的经验值上限 , 那么会强制把经验值设置成 [ 当前等级的经验值上限 - 1 ] 的值<br>
 	-- 不要使用此接口来减少经验值 , 降低经验值请使用 AddAdventureExp 接口<br>
 	-- ======================================================================<br>
-	-- playerIndex     = 玩家索引<br>
-	-- levelCount      = 等级数量 , 虽然可以是负数 , 但是会被当作 0 处理
-	-- ======================================================================<br>
-	-- 返回值 = 实际提升的等级<br>
-	-- ======================================================================<br>
+	---@param playerIndex integer -- 玩家索引
+	---@param levelCount integer -- 等级数量 , 虽然可以是负数 , 但是会被当作 0 处理
+	---@return integer -- 实际提升的等级
 	SetAdventureLevel = function( playerIndex , levelCount )
 		local settings = SIGlobal.GetPlayerSettings( SIRPGSystem.Settings.Name , playerIndex )
 		local level = math.max( levelCount , 0 )
@@ -1352,10 +1315,8 @@ SIRPGSystem =
 	-- ======================================================================<br>
 	-- 获取玩家的当前探索经验等级<br>
 	-- ======================================================================<br>
-	-- playerIndex     = 玩家索引<br>
-	-- ======================================================================<br>
-	-- 返回值 = 当前的探索经验等级<br>
-	-- ======================================================================<br>
+	---@param playerIndex integer -- 玩家索引
+	---@return integer -- 当前的探索经验等级
 	GetAdventureLevel = function( playerIndex )
 		local settings = SIGlobal.GetPlayerSettings( SIRPGSystem.Settings.Name , playerIndex )
 		return settings.EXP.AdventureLevel
@@ -1368,11 +1329,9 @@ SIRPGSystem =
 	-- 如果升级后经验值超过了当前等级的经验值上限 , 那么会强制把经验值设置成 [ 当前等级的经验值上限 - 1 ] 的值<br>
 	-- 不要使用此接口来减少经验值 , 降低经验值请使用 AddCraftExp 接口<br>
 	-- ======================================================================<br>
-	-- playerIndex     = 玩家索引<br>
-	-- levelCount      = 等级数量 , 可以是负数<br>
-	-- ======================================================================<br>
-	-- 返回值 = 实际提升的等级<br>
-	-- ======================================================================<br>
+	---@param playerIndex integer -- 玩家索引
+	---@param levelCount integer -- 等级数量 , 可以是负数
+	---@return integer -- 实际提升的等级
 	AddCraftLevel = function( playerIndex , levelCount )
 		local settings = SIGlobal.GetPlayerSettings( SIRPGSystem.Settings.Name , playerIndex )
 		local level = math.max( settings.EXP.CraftLevel + levelCount , 0 )
@@ -1442,11 +1401,9 @@ SIRPGSystem =
 	-- 如果升级后经验值超过了当前等级的经验值上限 , 那么会强制把经验值设置成 [ 当前等级的经验值上限 - 1 ] 的值<br>
 	-- 不要使用此接口来减少经验值 , 降低经验值请使用 AddCraftExp 接口<br>
 	-- ======================================================================<br>
-	-- playerIndex     = 玩家索引<br>
-	-- levelCount      = 等级数量 , 虽然可以是负数 , 但是会被当作 0 处理<br>
-	-- ======================================================================<br>
-	-- 返回值 = 实际提升的等级<br>
-	-- ======================================================================<br>
+	---@param playerIndex integer -- 玩家索引
+	---@param levelCount integer -- 等级数量 , 虽然可以是负数 , 但是会被当作 0 处理
+	---@return integer -- 实际提升的等级
 	SetCraftLevel = function( playerIndex , levelCount )
 		local settings = SIGlobal.GetPlayerSettings( SIRPGSystem.Settings.Name , playerIndex )
 		local level = math.max( levelCount , 0 )
@@ -1512,10 +1469,8 @@ SIRPGSystem =
 	-- ======================================================================<br>
 	-- 获取玩家的当前生存经验等级<br>
 	-- ======================================================================<br>
-	-- playerIndex     = 玩家索引<br>
-	-- ======================================================================<br>
-	-- 返回值 = 当前的生存经验等级<br>
-	-- ======================================================================<br>
+	---@param playerIndex integer -- 玩家索引
+	---@return integer -- 当前的生存经验等级
 	GetCraftLevel = function( playerIndex )
 		local settings = SIGlobal.GetPlayerSettings( SIRPGSystem.Settings.Name , playerIndex )
 		return settings.EXP.CraftLevel
@@ -1530,10 +1485,9 @@ SIRPGSystem =
 	-- 使用 [ 纷争点数 ] 增加属性<br>
 	-- 可用的点数不足时 , 不会产生任何变化<br>
 	-- ======================================================================<br>
-	-- playerIndex     = 玩家索引<br>
-	-- propertyID      = 增加的属性的 ID<br>
-	-- count           = 增加的数量 , 可以是负数 , 负数表示逆向操作<br>
-	-- ======================================================================<br>
+	---@param playerIndex integer -- 玩家索引
+	---@param propertyID string -- 增加的属性的 ID
+	---@param count integer -- 增加的数量 , 可以是负数 , 负数表示逆向操作
 	UseAttackPointToProperty = function( playerIndex , propertyID , count )
 		if not SITable.Has( SIRPGSystem.PropertyIDs , propertyID ) or count == 0 then
 			return
@@ -1593,10 +1547,9 @@ SIRPGSystem =
 	-- 可用的点数不足时 , 不会产生任何变化<br>
 	-- 当玩家没有 character 时 , 不可以使用此函数<br>
 	-- ======================================================================<br>
-	-- playerIndex     = 玩家索引<br>
-	-- additionID      = 增加的加成的 ID<br>
-	-- count           = 增加的数量 , 可以是负数 , 负数表示逆向操作<br>
-	-- ======================================================================<br>
+	---@param playerIndex integer -- 玩家索引
+	---@param additionID string -- 增加的加成的 ID
+	---@param count integer -- 增加的数量 , 可以是负数 , 负数表示逆向操作
 	UseAttackPointToAddition = function( playerIndex , additionID , count )
 		if not SITable.Has( SIRPGSystem.AdditionIDs , additionID ) or count == 0 then
 			return
@@ -1647,10 +1600,9 @@ SIRPGSystem =
 	-- 使用 [ 纷争点数 ] 增加技能<br>
 	-- 可用的点数不足时 , 不会产生任何变化<br>
 	-- ======================================================================<br>
-	-- playerIndex     = 玩家索引<br>
-	-- skillID         = 技能的 ID<br>
-	-- count           = 增加的数量 , 可以是负数 , 负数表示逆向操作<br>
-	-- ======================================================================<br>
+	---@param playerIndex integer -- 玩家索引
+	---@param skillID string -- 技能的 ID
+	---@param count integer -- 增加的数量 , 可以是负数 , 负数表示逆向操作
 	UseAttackPointToSkill = function( playerIndex , skillID , count )
 		local globalSettings = SIGlobal.GetGlobalSettings( SIRPGSystem.Settings.Name )
 		local globalSkillData = globalSettings.SkillList[skillID]
@@ -1705,10 +1657,9 @@ SIRPGSystem =
 	-- 使用 [ 奇迹点数 ] 增加属性<br>
 	-- 可用的点数不足时 , 不会产生任何变化<br>
 	-- ======================================================================<br>
-	-- playerIndex     = 玩家索引<br>
-	-- propertyID      = 增加的属性的 ID<br>
-	-- count           = 增加的数量 , 可以是负数 , 负数表示逆向操作<br>
-	-- ======================================================================<br>
+	---@param playerIndex integer -- 玩家索引
+	---@param propertyID string -- 增加的属性的 ID
+	---@param count integer -- 增加的数量 , 可以是负数 , 负数表示逆向操作
 	UseAdventurePointToProperty = function( playerIndex , propertyID , count )
 		if not SITable.Has( SIRPGSystem.PropertyIDs , propertyID ) or count == 0 then
 			return
@@ -1768,10 +1719,9 @@ SIRPGSystem =
 	-- 可用的点数不足时 , 不会产生任何变化<br>
 	-- 当玩家没有 character 时 , 不可以使用此函数<br>
 	-- ======================================================================<br>
-	-- playerIndex     = 玩家索引<br>
-	-- additionID      = 增加的加成的 ID<br>
-	-- count           = 增加的数量 , 可以是负数 , 负数表示逆向操作<br>
-	-- ======================================================================<br>
+	---@param playerIndex integer -- 玩家索引
+	---@param additionID string -- 增加的加成的 ID
+	---@param count integer -- 增加的数量 , 可以是负数 , 负数表示逆向操作
 	UseAdventurePointToAddition = function( playerIndex , additionID , count )
 		if not SITable.Has( SIRPGSystem.AdditionIDs , additionID ) or count == 0 then
 			return
@@ -1822,10 +1772,9 @@ SIRPGSystem =
 	-- 使用 [ 奇迹点数 ] 增加技能<br>
 	-- 可用的点数不足时 , 不会产生任何变化<br>
 	-- ======================================================================<br>
-	-- playerIndex     = 玩家索引<br>
-	-- skillID         = 技能的 ID<br>
-	-- count           = 增加的数量 , 可以是负数 , 负数表示逆向操作<br>
-	-- ======================================================================<br>
+	---@param playerIndex integer -- 玩家索引
+	---@param skillID string -- 技能的 ID
+	---@param count integer -- 增加的数量 , 可以是负数 , 负数表示逆向操作
 	UseAdventurePointToSkill = function( playerIndex , skillID , count )
 		local globalSettings = SIGlobal.GetGlobalSettings( SIRPGSystem.Settings.Name )
 		local globalSkillData = globalSettings.SkillList[skillID]
@@ -1880,10 +1829,9 @@ SIRPGSystem =
 	-- 使用 [ 阅历点数 ] 增加属性<br>
 	-- 可用的点数不足时 , 不会产生任何变化<br>
 	-- ======================================================================<br>
-	-- playerIndex     = 玩家索引<br>
-	-- propertyID      = 增加的属性的 ID<br>
-	-- count           = 增加的数量 , 可以是负数 , 负数表示逆向操作<br>
-	-- ======================================================================<br>
+	---@param playerIndex integer -- 玩家索引
+	---@param propertyID string -- 增加的属性的 ID
+	---@param count integer -- 增加的数量 , 可以是负数 , 负数表示逆向操作
 	UseCraftPointToProperty = function( playerIndex , propertyID , count )
 		if not SITable.Has( SIRPGSystem.PropertyIDs , propertyID ) or count == 0 then
 			return
@@ -1943,10 +1891,9 @@ SIRPGSystem =
 	-- 可用的点数不足时 , 不会产生任何变化<br>
 	-- 当玩家没有 character 时 , 不可以使用此函数<br>
 	-- ======================================================================<br>
-	-- playerIndex     = 玩家索引<br>
-	-- additionID      = 增加的加成的 ID<br>
-	-- count           = 增加的数量 , 可以是负数 , 负数表示逆向操作<br>
-	-- ======================================================================<br>
+	---@param playerIndex integer -- 玩家索引
+	---@param additionID string -- 增加的加成的 ID
+	---@param count integer -- 增加的数量 , 可以是负数 , 负数表示逆向操作
 	UseCraftPointToAddition= function( playerIndex , additionID , count )
 		if not SITable.Has( SIRPGSystem.AdditionIDs , additionID ) or count == 0 then
 			return
@@ -1997,10 +1944,9 @@ SIRPGSystem =
 	-- 使用 [ 阅历点数 ] 增加技能<br>
 	-- 可用的点数不足时 , 不会产生任何变化<br>
 	-- ======================================================================<br>
-	-- playerIndex     = 玩家索引<br>
-	-- skillID         = 技能的 ID<br>
-	-- count           = 增加的数量 , 可以是负数 , 负数表示逆向操作<br>
-	-- ======================================================================<br>
+	---@param playerIndex integer -- 玩家索引
+	---@param skillID string -- 技能的 ID
+	---@param count integer -- 增加的数量 , 可以是负数 , 负数表示逆向操作
 	UseCraftPointToSkill = function( playerIndex , skillID , count )
 		local globalSettings = SIGlobal.GetGlobalSettings( SIRPGSystem.Settings.Name )
 		local globalSkillData = globalSettings.SkillList[skillID]
@@ -2055,8 +2001,7 @@ SIRPGSystem =
 	-- 根据等级重新计算点数<br>
 	-- 若新计算后的点数比原来的少 , 则会强制洗点<br>
 	-- ======================================================================<br>
-	-- playerIndex     = 玩家索引<br>
-	-- ======================================================================<br>
+	---@param playerIndex integer -- 玩家索引
 	FreshPoints = function( playerIndex )
 		local settings = SIGlobal.GetPlayerSettings( SIRPGSystem.Settings.Name , playerIndex )
 		local maxAttack = SIRPGSystem.CalculateAttackPoint( 0 , settings.EXP.AttackLevel )
@@ -2091,8 +2036,7 @@ SIRPGSystem =
 	-- 清空所有点数分配<br>
 	-- 之后根据等级重新计算点数<br>
 	-- ======================================================================<br>
-	-- playerIndex     = 玩家索引<br>
-	-- ======================================================================<br>
+	---@param playerIndex integer -- 玩家索引
 	ClearPoints = function( playerIndex )
 		local globalSettings = SIGlobal.GetGlobalSettings( SIRPGSystem.Settings.Name )
 		local settings = SIGlobal.GetPlayerSettings( SIRPGSystem.Settings.Name , playerIndex )
@@ -2166,8 +2110,7 @@ SIRPGSystem =
 	-- 重新载入时不需要在 on_load 中重新注册<br>
 	-- 这就导致即使玩家卸载了注册技能的那个 MOD , 他依然可以在技能列表中看到这个技能<br>
 	-- ======================================================================<br>
-	-- skillData       = 技能数据 , 具体结构请见 SIRPGSkillData 中的元素<br>
-	-- ======================================================================<br>
+	---@param skillData table -- 技能数据 , 具体结构请见 SIRPGSkillData 中的元素
 	AddSkill = function( skillData )
 		local globalSettings = SIGlobal.GetGlobalSettings( SIRPGSystem.Settings.Name )
 		local skillID = skillData.ID
@@ -2211,8 +2154,7 @@ SIRPGSystem =
 	-- 重新载入时不需要在 on_load 中重新注册<br>
 	-- 这就导致即使玩家卸载了注册技能的那个 MOD , 他依然可以在技能列表中看到这个技能<br>
 	-- ======================================================================<br>
-	-- skillDataList   = 技能数据数组 , 每个元素都是 skillData , 具体结构请见 SIRPGSkillData 中的元素<br>
-	-- ======================================================================<br>
+	---@param skillDataList table -- 技能数据数组 , 每个元素都是 skillData , 具体结构请见 SIRPGSkillData 中的元素
 	AddSkills = function( skillDataList )
 		local globalSettings = SIGlobal.GetGlobalSettings( SIRPGSystem.Settings.Name )
 		local skills = {}
@@ -2264,8 +2206,7 @@ SIRPGSystem =
 	-- ======================================================================<br>
 	-- 更新一个技能 , 如果技能没有注册 , 则没有效果<br>
 	-- ======================================================================<br>
-	-- skillData       = 技能数据 , 具体结构请见 SIRPGSkillData 中的元素<br>
-	-- ======================================================================<br>
+	---@param skillData table -- 技能数据 , 具体结构请见 SIRPGSkillData 中的元素
 	FreshSkill = function( skillData )
 		local globalSettings = SIGlobal.GetGlobalSettings( SIRPGSystem.Settings.Name )
 		local skillID = skillData.ID
@@ -2314,8 +2255,7 @@ SIRPGSystem =
 	-- ======================================================================<br>
 	-- 更新一堆技能 , 如果技能没有注册 , 则没有效果<br>
 	-- ======================================================================<br>
-	-- skillDataList   = 技能数据数组 , 每个元素都是 skillData , 具体结构请见 SIRPGSkillData 中的元素<br>
-	-- ======================================================================<br>
+	---@param skillDataList table -- 技能数据数组 , 每个元素都是 skillData , 具体结构请见 SIRPGSkillData 中的元素
 	FreshSkills = function( skillDataList )
 		local globalSettings = SIGlobal.GetGlobalSettings( SIRPGSystem.Settings.Name )
 		local skills = {}
@@ -2378,10 +2318,8 @@ SIRPGSystem =
 	-- ======================================================================<br>
 	-- 查询是否存在一个技能<br>
 	-- ======================================================================<br>
-	-- skillID         = 技能的名称<br>
-	-- ======================================================================<br>
-	-- 返回值 = 是否存在 , true = 存在 , false = 不存在<br>
-	-- ======================================================================<br>
+	---@param skillID string -- 技能的名称
+	---@return boolean -- 是否存在 , true = 存在 , false = 不存在
 	HasSkill = function( skillID )
 		local globalSettings = SIGlobal.GetGlobalSettings( SIRPGSystem.Settings.Name )
 		return globalSettings.SkillList[skillID] ~= nil
@@ -2390,12 +2328,10 @@ SIRPGSystem =
 	-- ======================================================================<br>
 	-- 获取一个技能的全局数据和玩家数据<br>
 	-- ======================================================================<br>
-	-- playerIndex     = 玩家索引<br>
-	-- skillID         = 技能的名称<br>
-	-- ======================================================================<br>
-	-- 返回值 1 = 技能的全局数据<br>
-	-- 返回值 2 = 技能的玩家数据<br>
-	-- ======================================================================<br>
+	---@param playerIndex integer -- 玩家索引
+	---@param skillID string -- 技能的名称
+	---@return table -- 技能的全局数据
+	---@return table -- 技能的玩家数据
 	GetPlayerSkillData = function( playerIndex , skillID )
 		local globalSettings = SIGlobal.GetGlobalSettings( SIRPGSystem.Settings.Name )
 		local settings = SIGlobal.GetPlayerSettings( SIRPGSystem.Settings.Name , playerIndex )
@@ -2405,10 +2341,9 @@ SIRPGSystem =
 	-- ======================================================================<br>
 	-- 保存一个技能的玩家数据<br>
 	-- ======================================================================<br>
-	-- playerIndex     = 玩家索引<br>
-	-- skillID         = 技能的名称<br>
-	-- playerSkillData = 玩家的技能数据<br>
-	-- ======================================================================<br>
+	---@param playerIndex integer -- 玩家索引
+	---@param skillID string -- 技能的名称
+	---@param playerSkillData table -- 玩家的技能数据
 	SavePlayerSkillData = function( playerIndex , skillID , playerSkillData )
 		local settings = SIGlobal.GetPlayerSettings( SIRPGSystem.Settings.Name , playerIndex )
 		local currentPlayerSkillData = settings.SkillList[skillID]
@@ -2419,9 +2354,8 @@ SIRPGSystem =
 	-- ======================================================================<br>
 	-- 无视条件强制解锁玩家的技能<br>
 	-- ======================================================================<br>
-	-- playerIndex     = 玩家索引<br>
-	-- skillID         = 技能的名称<br>
-	-- ======================================================================<br>
+	---@param playerIndex integer -- 玩家索引
+	---@param skillID string -- 技能的名称
 	UnlockSkill = function( playerIndex , skillID )
 		local settings = SIGlobal.GetPlayerSettings( SIRPGSystem.Settings.Name , playerIndex )
 		local playerSkillData = settings.SkillList[skillID]
@@ -2440,9 +2374,8 @@ SIRPGSystem =
 	-- 重新锁定玩家的技能<br>
 	-- 如果玩家自身条件已经满足解锁条件的话 , 即使重新锁定 , 技能也会在下次属性改变时自动解锁 , 因此此函数只适用于特殊需求的情况<br>
 	-- ======================================================================<br>
-	-- playerIndex     = 玩家索引<br>
-	-- skillID         = 技能的名称<br>
-	-- ======================================================================<br>
+	---@param playerIndex integer -- 玩家索引
+	---@param skillID string -- 技能的名称
 	RelockSkill = function( playerIndex , skillID )
 		local settings = SIGlobal.GetPlayerSettings( SIRPGSystem.Settings.Name , playerIndex )
 		local playerSkillData = settings.SkillList[skillID]
@@ -2461,11 +2394,9 @@ SIRPGSystem =
 	-- 应用技能消耗 , 包括各种值和物品<br>
 	-- 通过投掷物品的方式使用技能时会自动计算消耗 , 无需再使用此函数<br>
 	-- ======================================================================<br>
-	-- playerIndex     = 玩家索引<br>
-	-- skillID         = 技能的名称<br>
-	-- ======================================================================<br>
-	-- 返回值 = 是否消耗成功 , true = 是 , false = 否<br>
-	-- ======================================================================<br>
+	---@param playerIndex integer -- 玩家索引
+	---@param skillID string -- 技能的名称
+	---@return boolean -- 是否消耗成功 , true = 是 , false = 否
 	TakeSkillCost = function( playerIndex , skillID )
 		local settings = SIGlobal.GetPlayerSettings( SIRPGSystem.Settings.Name , playerIndex )
 		local globalSettings = SIGlobal.GetGlobalSettings( SIRPGSystem.Settings.Name )

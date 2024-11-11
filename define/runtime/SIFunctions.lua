@@ -32,6 +32,10 @@ SIFunctions =
 -- ============================================================================================================================================
 -- ============================================================================================================================================
 
+-- ======================================================================<br>
+---@param text string|table
+---@param entity table
+---@param height number
 function SIFunctions.FlyingText( text , entity , height )
 	entity.surface.create_entity
 	{
@@ -42,6 +46,11 @@ function SIFunctions.FlyingText( text , entity , height )
 	}
 end
 
+-- ======================================================================<br>
+---@param text string|table
+---@param player table
+---@param height number
+---@param createAtCursor boolean|nil
 function SIFunctions.FlyingTextPlayer( text , player , height , createAtCursor )
 	player.create_local_flying_text
 	{
@@ -54,6 +63,11 @@ function SIFunctions.FlyingTextPlayer( text , player , height , createAtCursor )
 	}
 end
 
+-- ======================================================================<br>
+---@param text string|table
+---@param entity table
+---@param height number
+---@param force table
 function SIFunctions.FlyingTextForce( text , entity , height , force )
 	local textEntity = entity.surface.create_entity
 	{
@@ -65,6 +79,11 @@ function SIFunctions.FlyingTextForce( text , entity , height , force )
 	textEntity.render_to_forces = { force }
 end
 
+-- ======================================================================<br>
+---@param text string|table
+---@param entity table
+---@param height number
+---@param forceList table
 function SIFunctions.FlyingTextForceList( text , entity , height , forceList )
 	local textEntity = entity.surface.create_entity
 	{

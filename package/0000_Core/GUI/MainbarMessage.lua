@@ -161,8 +161,7 @@ SIMainbarMessage =
 	-- ======================================================================<br>
 	-- 打开指定玩家的消息管理窗口<br>
 	-- ======================================================================<br>
-	-- playerIndex       = 玩家索引<br>
-	-- ======================================================================<br>
+	---@param playerIndex integer -- 玩家索引
 	OpenFrameByPlayerIndex = function( playerIndex )
 		SIMainbarMessage.OpenFrame( playerIndex )
 	end ,
@@ -170,16 +169,13 @@ SIMainbarMessage =
 	-- ======================================================================<br>
 	-- 关闭指定玩家的消息管理窗口<br>
 	-- ======================================================================<br>
-	-- playerIndex       = 玩家索引<br>
-	-- ======================================================================<br>
+	---@param playerIndex integer -- 玩家索引
 	CloseFrameByPlayerIndex = function( playerIndex )
 		SIMainbarMessage.CloseFrame( playerIndex )
 	end ,
 
 	-- ======================================================================<br>
 	-- 打开所有玩家的消息管理窗口<br>
-	-- ======================================================================<br>
-	-- 无参数<br>
 	-- ======================================================================<br>
 	OpenFrames = function()
 		for playerIndex , settings in pairs( SIGlobal.GetAllPlayerSettings( SIMainData.Settings.Name ) ) do
@@ -189,8 +185,6 @@ SIMainbarMessage =
 
 	-- ======================================================================<br>
 	-- 关闭所有玩家的消息管理窗口<br>
-	-- ======================================================================<br>
-	-- 无参数<br>
 	-- ======================================================================<br>
 	CloseFrames = function()
 		for playerIndex , settings in pairs( SIGlobal.GetAllPlayerSettings( SIMainData.Settings.Name ) ) do
@@ -207,12 +201,11 @@ SIMainbarMessage =
 	-- 给指定玩家添加一条消息<br>
 	-- 由于一些技术原因 , 目前最多只能显示 3 行消息内容 , 且消息部分的文字不要改变字体大小<br>
 	-- ======================================================================<br>
-	-- playerIndex       = 玩家索引<br>
-	-- messageName       = 消息的 [ name ] 值 , 从接口中删除消息需要使用这个属性<br>
-	-- title             = 消息的标题<br>
-	-- content           = 消息的内容<br>
-	-- type              = 消息按钮的颜色 , 参考值请见 SIMainbarMessage.MessageTypes<br>
-	-- ======================================================================<br>
+	---@param playerIndex integer -- 玩家索引
+	---@param messageName string -- 消息的 [ name ] 值 , 从接口中删除消息需要使用这个属性
+	---@param title string|table -- 消息的标题
+	---@param content string|table -- 消息的内容
+	---@param type integer -- 消息按钮的颜色 , 参考值请见 SIMainbarMessage.MessageTypes
 	AddMessage = function( playerIndex , messageName , title , content , type )
 		local settings = SIGlobal.GetPlayerSettings( SIMainData.Settings.Name , playerIndex )
 		settings.Message.MessageOrder = settings.Message.MessageOrder + 1
@@ -247,9 +240,8 @@ SIMainbarMessage =
 	-- 删除指定玩家的一条消息<br>
 	-- 如果多条消息拥有相同的 [ name ] 属性 , 那么会删除匹配到的第一条消息<br>
 	-- ======================================================================<br>
-	-- playerIndex       = 玩家索引<br>
-	-- messageName       = 消息的 [ name ] 值 , 从接口中删除消息需要使用这个属性<br>
-	-- ======================================================================<br>
+	---@param playerIndex integer -- 玩家索引
+	---@param messageName string -- 消息的 [ name ] 值 , 从接口中删除消息需要使用这个属性
 	RemoveMessage = function( playerIndex , messageName )
 		local settings = SIGlobal.GetPlayerSettings( SIMainData.Settings.Name , playerIndex )
 		local messageData , index = SITable.GetWithName( settings.Message.MessageList , messageName )

@@ -38,10 +38,10 @@ local hasFinish = false
 -- 只有第一个被找到的原型数据会调用回调函数<br>
 -- 如果没有找到任何匹配的原型数据 , 则会调用一次参数为 nil 的回调函数<br>
 -- ======================================================================<br>
--- typeCode              = 原型数据的 [ type ] 值<br>
--- prototypeName         = 原型数据的 [ name ] 值<br>
--- callback              = 回调函数 , 有 2 个参数 , 参数 1 = 原型数据的 [ name ] 值 , 参数 2 = 原型数据本身<br>
--- ======================================================================<br>
+---@param typeCode string -- 原型数据的 [ type ] 值
+---@param prototypeName string -- 原型数据的 [ name ] 值
+---@param callback function -- 回调函数 , 有 2 个参数 , 参数 1 = 原型数据的 [ name ] 值 , 参数 2 = 原型数据本身
+---@return table -- 自身
 function SIGen.Find( typeCode , prototypeName , callback )
 	if not typeCode then
 		return CodeE( SIGen , "查找原型数据时 , 不能使用空的原型类型" )
@@ -72,9 +72,9 @@ end
 -- 位于 SIGen 内部和 data 内部的原型数据均可被查找到<br>
 -- 如果 SIGen 内部和 data 内部均有匹配的原型数据 , 则它们都会被找到<br>
 -- ======================================================================<br>
--- typeCode              = 原型数据的 [ type ] 值<br>
--- callback              = 回调函数 , 有 2 个参数 , 参数 1 = 原型数据的 [ name ] 值 , 参数 2 = 原型数据本身<br>
--- ======================================================================<br>
+---@param typeCode string -- 原型数据的 [ type ] 值
+---@param callback function -- 回调函数 , 有 2 个参数 , 参数 1 = 原型数据的 [ name ] 值 , 参数 2 = 原型数据本身
+---@return table -- 自身
 function SIGen.ForEach( typeCode , callback )
 	if not typeCode then
 		return CodeE( SIGen , "遍历原型数据时 , 不能使用空的原型类型" )
@@ -105,9 +105,9 @@ end
 -- 位于 SIGen 内部和 data 内部的原型数据均可被查找到<br>
 -- 如果 SIGen 内部和 data 内部均有匹配的原型数据 , 则它们都会被找到<br>
 -- ======================================================================<br>
--- typeCodeList          = 原型数据的 [ type ] 值数组 , 这个数组只关心它的 [值] 的部分<br>
--- callback              = 回调函数 , 有 2 个参数 , 参数 1 = 原型数据的 [ name ] 值 , 参数 2 = 原型数据本身<br>
--- ======================================================================<br>
+---@param typeCodeList table -- 原型数据的 [ type ] 值数组 , 这个数组只关心它的 [值] 的部分
+---@param callback function -- 回调函数 , 有 2 个参数 , 参数 1 = 原型数据的 [ name ] 值 , 参数 2 = 原型数据本身
+---@return table -- 自身
 function SIGen.ForEachType( typeCodeList , callback )
 	if not typeCodeList then
 		return CodeE( SIGen , "遍历原型数据时 , 不能使用空的原型类型列表" )
@@ -140,10 +140,10 @@ end
 -- 只有第一个被找到的原型数据会调用回调函数<br>
 -- 如果没有找到任何匹配的原型数据 , 则会调用一次参数为 nil 的回调函数<br>
 -- ======================================================================<br>
--- typeCode              = 原型数据的 [ type ] 值<br>
--- prototypeName         = 原型数据的 [ name ] 值<br>
--- callback              = 回调函数 , 有 2 个参数 , 参数 1 = 原型数据的 [ name ] 值 , 参数 2 = 原型数据本身<br>
--- ======================================================================<br>
+---@param typeCode string -- 原型数据的 [ type ] 值
+---@param prototypeName string -- 原型数据的 [ name ] 值
+---@param callback function -- 回调函数 , 有 2 个参数 , 参数 1 = 原型数据的 [ name ] 值 , 参数 2 = 原型数据本身
+---@return table -- 自身
 function SIGen.FindInner( typeCode , prototypeName , callback )
 	if not typeCode then
 		return CodeE( SIGen , "查找原型数据时 , 不能使用空的原型类型" )
@@ -166,9 +166,9 @@ end
 -- 只有位于 SIGen 内部的原型数据可被查找到<br>
 -- 如果 SIGen 内部有匹配的原型数据 , 则它们会被找到<br>
 -- ======================================================================<br>
--- typeCode              = 原型数据的 [ type ] 值<br>
--- callback              = 回调函数 , 有 2 个参数 , 参数 1 = 原型数据的 [ name ] 值 , 参数 2 = 原型数据本身<br>
--- ======================================================================<br>
+---@param typeCode string -- 原型数据的 [ type ] 值
+---@param callback function -- 回调函数 , 有 2 个参数 , 参数 1 = 原型数据的 [ name ] 值 , 参数 2 = 原型数据本身
+---@return table -- 自身
 function SIGen.ForEachInner( typeCode , callback )
 	if not typeCode then
 		return CodeE( SIGen , "遍历原型数据时 , 不能使用空的原型类型" )
@@ -191,9 +191,9 @@ end
 -- 只有位于 SIGen 内部的原型数据可被查找到<br>
 -- 如果 SIGen 内部有匹配的原型数据 , 则它们会被找到<br>
 -- ======================================================================<br>
--- typeCodeList          = 原型数据的 [ type ] 值数组 , 这个数组只关心它的 [值] 的部分<br>
--- callback              = 回调函数 , 有 2 个参数 , 参数 1 = 原型数据的 [ name ] 值 , 参数 2 = 原型数据本身<br>
--- ======================================================================<br>
+---@param typeCodeList table -- 原型数据的 [ type ] 值数组 , 这个数组只关心它的 [值] 的部分
+---@param callback function -- 回调函数 , 有 2 个参数 , 参数 1 = 原型数据的 [ name ] 值 , 参数 2 = 原型数据本身
+---@return table -- 自身
 function SIGen.ForEachTypeInner( typeCodeList , callback )
 	if not typeCodeList then
 		return CodeE( SIGen , "遍历原型数据时 , 不能使用空的原型类型列表" )
@@ -218,10 +218,10 @@ end
 -- 只有第一个被找到的原型数据会调用回调函数<br>
 -- 如果没有找到任何匹配的原型数据 , 则会调用一次参数为 nil 的回调函数<br>
 -- ======================================================================<br>
--- typeCode              = 原型数据的 [ type ] 值<br>
--- prototypeName         = 原型数据的 [ name ] 值<br>
--- callback              = 回调函数 , 有 2 个参数 , 参数 1 = 原型数据的 [ name ] 值 , 参数 2 = 原型数据本身<br>
--- ======================================================================<br>
+---@param typeCode string -- 原型数据的 [ type ] 值
+---@param prototypeName string -- 原型数据的 [ name ] 值
+---@param callback function -- 回调函数 , 有 2 个参数 , 参数 1 = 原型数据的 [ name ] 值 , 参数 2 = 原型数据本身
+---@return table -- 自身
 function SIGen.FindOuter( typeCode , prototypeName , callback )
 	if not typeCode then
 		return CodeE( SIGen , "查找原型数据时 , 不能使用空的原型类型" )
@@ -244,9 +244,9 @@ end
 -- 只有位于 data 内部的原型数据可被查找到<br>
 -- 如果 data 内部有匹配的原型数据 , 则它们会被找到<br>
 -- ======================================================================<br>
--- typeCode              = 原型数据的 [ type ] 值<br>
--- callback              = 回调函数 , 有 2 个参数 , 参数 1 = 原型数据的 [ name ] 值 , 参数 2 = 原型数据本身<br>
--- ======================================================================<br>
+---@param typeCode string -- 原型数据的 [ type ] 值
+---@param callback function -- 回调函数 , 有 2 个参数 , 参数 1 = 原型数据的 [ name ] 值 , 参数 2 = 原型数据本身
+---@return table -- 自身
 function SIGen.ForEachOuter( typeCode , callback )
 	if not typeCode then
 		return CodeE( SIGen , "遍历原型数据时 , 不能使用空的原型类型" )
@@ -269,9 +269,9 @@ end
 -- 只有位于 data 内部的原型数据可被查找到<br>
 -- 如果 data 内部有匹配的原型数据 , 则它们会被找到<br>
 -- ======================================================================<br>
--- typeCodeList          = 原型数据的 [ type ] 值数组 , 这个数组只关心它的 [值] 的部分<br>
--- callback              = 回调函数 , 有 2 个参数 , 参数 1 = 原型数据的 [ name ] 值 , 参数 2 = 原型数据本身<br>
--- ======================================================================<br>
+---@param typeCodeList table -- 原型数据的 [ type ] 值数组 , 这个数组只关心它的 [值] 的部分
+---@param callback function -- 回调函数 , 有 2 个参数 , 参数 1 = 原型数据的 [ name ] 值 , 参数 2 = 原型数据本身
+---@return table -- 自身
 function SIGen.ForEachTypeOuter( typeCodeList , callback )
 	if not typeCodeList then
 		return CodeE( SIGen , "遍历原型数据时 , 不能使用空的原型类型列表" )
@@ -300,8 +300,8 @@ end
 -- 用法与 data:extend 一致 , 效果也一致<br>
 -- 但是效果仅局限在 SIGen 内部<br>
 -- ======================================================================<br>
--- prototypeList         = 原型数据的数组<br>
--- ======================================================================<br>
+---@param prototypeList table -- 原型数据的数组
+---@return table -- 自身
 function SIGen.Extend( prototypeList )
 	if hasFinish then
 		return CodeE( SIGen , "流程已经结束 , 无法使用 SIGen.Extend 函数" )
@@ -336,8 +336,8 @@ end
 -- ======================================================================<br>
 -- 设置 SIGen 在创建原型数据时使用的分组信息<br>
 -- ======================================================================<br>
--- subgroupName          = 子分组的 [ name ] 值<br>
--- ======================================================================<br>
+---@param subgroupName string -- 子分组的 [ name ] 值
+---@return table -- 自身
 function SIGen.SetGroup( subgroupName )
 	return SIGen.Find( SICommon.Types.Subgroup , subgroupName , function( prototypeName , prototypeData )
 		if prototypeData and prototypeData.group then
@@ -353,8 +353,8 @@ end
 -- 设置 SIGen 在创建原型数据时使用的 ConstantsData<br>
 -- 如果不设置默认使用 SIInit.CurrentPrototypeData<br>
 -- ======================================================================<br>
--- ConstantsData         = 任意一个 ConstantsData 表<br>
--- ======================================================================<br>
+---@param ConstantsData table -- 任意一个 ConstantsData 表
+---@return table -- 自身
 function SIGen.SetConstantsData( ConstantsData )
 	SIGen.TempConstantsData = ConstantsData
 	return SIGen
@@ -364,6 +364,7 @@ end
 -- 移除 SIGen 中的 ConstantsData 设置<br>
 -- 不设置时使用 SIInit.CurrentPrototypeData<br>
 -- ======================================================================<br>
+---@return table -- 自身
 function SIGen.RemoveConstantsData()
 	SIGen.TempConstantsData = nil
 	return SIGen
@@ -378,14 +379,14 @@ end
 -- group , subgroup 和 order 会被自动补充<br>
 -- 当用来复制数据的原型数据中存在 localised_name 和 localised_description 时 , 对应的属性不会再自动创建<br>
 -- ======================================================================<br>
--- typeCode              = 原型数据的类型 , 等于 [ type ] 属性<br>
--- prototypeID           = ID , 用于计算 [ name ] 值和在 ConstantsData.raw 中注册<br>
--- aliasName             = 别名 , 和 ConstantsData.Autoload 中的别名一样 , 在计算 [ name ] 值时代替 ID 进行计算 , 影响本地化字符串 , 不影响 ConstantsData.raw 中的注册<br>
--- prototypeDataToCopy   = 用来复制数据的原型数据<br>
--- ======================================================================<br>
 -- prototypeDataToCopy 中的特殊属性 :<br>
 -- OrderOffset           = 排序偏移 , 自动生成排序时 , 最终的排序会向后这么多位<br>
 -- ======================================================================<br>
+---@param typeCode string -- 原型数据的类型 , 等于 [ type ] 属性
+---@param prototypeID string -- ID , 用于计算 [ name ] 值和在 ConstantsData.raw 中注册
+---@param aliasName string -- 别名 , 和 ConstantsData.Autoload 中的别名一样 , 在计算 [ name ] 值时代替 ID 进行计算 , 影响本地化字符串 , 不影响 ConstantsData.raw 中的注册
+---@param prototypeDataToCopy table|nil -- 用来复制数据的原型数据
+---@return table -- 自身
 function SIGen.New( typeCode , prototypeID , aliasName , prototypeDataToCopy )
 	if not typeCode then
 		return CodeE( SIGen , "创建原型数据时 , [ type ] 的值不能为空" )
@@ -464,8 +465,8 @@ end
 -- 向此原型数据中添加另一个原型的数据 , 普通表也可以<br>
 -- 添加的数据会被直接复制 , 被复制的原型数据中的表或数组发了的修改的话 , 此原型数据的相应表或数组也会发生修改<br>
 -- ======================================================================<br>
--- prototypeData         = 被复制的原型数据 , 其中 [ type ] 属性和 [ name ] 属性不会被复制<br>
--- ======================================================================<br>
+---@param prototypeData table -- 被复制的原型数据 , 其中 [ type ] 属性和 [ name ] 属性不会被复制
+---@return table -- 自身
 function SIGen.Append( prototypeData )
 	if not SIGen.CurrentPrototypeData then
 		return CodeE( SIGen , "需要先创建新的原型数据 , 之后才可以完善它" )
@@ -483,8 +484,8 @@ end
 -- 向此原型数据中添加另一个原型的数据 , 普通表也可以<br>
 -- 添加的数据会被深度复制 , 被复制的原型数据发了的修改不会影响此原型数据<br>
 -- ======================================================================<br>
--- prototypeDataToCopy   = 被复制的原型数据 , 其中 [ type ] 属性和 [ name ] 属性不会被复制<br>
--- ======================================================================<br>
+---@param prototypeDataToCopy table -- 被复制的原型数据 , 其中 [ type ] 属性和 [ name ] 属性不会被复制
+---@return table -- 自身
 function SIGen.Import( prototypeDataToCopy )
 	if not SIGen.CurrentPrototypeData then
 		return CodeE( SIGen , "需要先创建新的原型数据 , 之后才可以完善它" )
@@ -502,9 +503,9 @@ end
 -- 使用 SIGen 完善最新创建的原型数据<br>
 -- 向此原型数据中添加一对键值对<br>
 -- ======================================================================<br>
--- key                   = 属性名称 , 不能是 [ type ] 和 [ name ]<br>
--- value                 = 属性的值 , 不限类型<br>
--- ======================================================================<br>
+---@param key string -- 属性名称 , 不能是 [ type ] 和 [ name ]
+---@param value any -- 属性的值 , 不限类型
+---@return table -- 自身
 function SIGen.AddParameter( key , value )
 	if key == "type" or key == "name" then
 		return CodeE( SIGen , "完善原型数据属性时 , 不允许修改其 [ type ] 属性和 [ name ] 属性的值" )
@@ -524,10 +525,10 @@ end
 -- 向此原型数据中添加图标代码<br>
 -- icon                  = "[ PicturePath ][ 类型别名 ]-[ 别名或 ID ]-[ 类型别名 ICON 项 ].png"<br>
 -- ======================================================================<br>
--- iconFileName          = 图标文件名 , 文件位置是相对于 ConstantsData.PicturePath 的 , 不需要后缀<br>
--- size                  = 图标的宽高像素数量<br>
--- mipmaps               = 图标分级 , 默认是 0 , 原版物品图标是 4 , 查看原版的图片文件就能知道它的含义了<br>
--- ======================================================================<br>
+---@param iconFileName string -- 图标文件名 , 文件位置是相对于 ConstantsData.PicturePath 的 , 不需要后缀
+---@param size table -- 图标的宽高像素数量
+---@param mipmaps integer -- 图标分级 , 默认是 0 , 原版物品图标是 4 , 查看原版的图片文件就能知道它的含义了
+---@return table -- 自身
 function SIGen.AddIcon( iconFileName , size , mipmaps )
 	if not iconFileName then
 		return CodeE( SIGen , "完善原型数据属性时 , 图标文件名称不能为空" )
@@ -573,11 +574,11 @@ end
 -- 根据给定的 [ type ] 值进行计算 , 而非使用原型数据自己的 [ type ] 值<br>
 -- icon                  = "[ PicturePath ][ 类型别名 ]-[ 别名或 ID ]-[ 类型别名 ICON 项 ].png"<br>
 -- ======================================================================<br>
--- typeCode              = 原型数据的 [ type ] 值<br>
--- iconFileName          = 图标文件名 , 文件位置是相对于 ConstantsData.PicturePath 的 , 不需要后缀<br>
--- size                  = 图标的宽高像素数量<br>
--- mipmaps               = 图标分级 , 默认是 0 , 原版物品图标是 4 , 查看原版的图片文件就能知道它的含义了<br>
--- ======================================================================<br>
+---@param typeCode string -- 原型数据的 [ type ] 值
+---@param iconFileName string -- 图标文件名 , 文件位置是相对于 ConstantsData.PicturePath 的 , 不需要后缀
+---@param size table -- 图标的宽高像素数量
+---@param mipmaps integer -- 图标分级 , 默认是 0 , 原版物品图标是 4 , 查看原版的图片文件就能知道它的含义了
+---@return table -- 自身
 function SIGen.MakeIcon( typeCode , iconFileName , size , mipmaps )
 	if not iconFileName then
 		return CodeE( SIGen , "完善原型数据属性时 , 图标文件名称不能为空" )
@@ -625,6 +626,7 @@ end
 -- 向此原型数据中添加图标代码 , 使用默认值<br>
 -- icon = "[ PicturePath ][ 类型别名 ]-[ 别名或 ID ]-[ 类型别名 ICON 项 ].png"<br>
 -- ======================================================================<br>
+---@return table -- 自身
 function SIGen.AutoIcon()
 	if not SIGen.CurrentPrototypeData then
 		return CodeE( SIGen , "需要先创建新的原型数据 , 之后才可以完善它" )
@@ -668,9 +670,9 @@ end
 -- 正是因为小了 0.025 单位 , 这就导致了实体之间实际上是有一条小缝的 , 玩家或许可以挤过去 , 大概<br>
 -- 如果需要控制缩放比例可以使用 SIGen.SetSizeSize 函数 , 或干脆直接手写属性<br>
 -- ======================================================================<br>
--- width                 = 实体的宽度<br>
--- height                = 实体的高度<br>
--- ======================================================================<br>
+---@param width number -- 实体的宽度
+---@param height number -- 实体的高度
+---@return table -- 自身
 function SIGen.SetSize( width , height )
 	if not SIGen.CurrentPrototypeData then
 		return CodeE( SIGen , "需要先创建新的原型数据 , 之后才可以完善它" )
@@ -691,10 +693,10 @@ end
 -- 根据宽高的值来创建实体的选择区域和碰撞区域<br>
 -- 和 SIGen.SetSize 函数的效果一样 , 只不过可以自己调节碰撞区域到底缩小多少<br>
 -- ======================================================================<br>
--- width                 = 实体的宽度<br>
--- height                = 实体的高度<br>
--- size                  = 碰撞区域的减小量 , 相比于选择区域<br>
--- ======================================================================<br>
+---@param width number -- 实体的宽度
+---@param height number -- 实体的高度
+---@param size number -- 碰撞区域的减小量 , 相比于选择区域
+---@return table -- 自身
 function SIGen.SetSizeSize( width , height , size )
 	if not SIGen.CurrentPrototypeData then
 		return CodeE( SIGen , "需要先创建新的原型数据 , 之后才可以完善它" )
@@ -716,10 +718,10 @@ end
 -- 根据宽高的值来创建实体的选择区域和碰撞区域<br>
 -- 和 SIGen.SetSize 函数的效果一样 , 只不过可以自己调节碰撞区域到底缩小多少<br>
 -- ======================================================================<br>
--- width                 = 实体的宽度<br>
--- height                = 实体的高度<br>
--- scale                 = 碰撞区域的实际大小倍率 , 相比于选择区域<br>
--- ======================================================================<br>
+---@param width number -- 实体的宽度
+---@param height number -- 实体的高度
+---@param scale number -- 碰撞区域的实际大小倍率 , 相比于选择区域
+---@return table -- 自身
 function SIGen.SetSizeScale( width , height , scale )
 	if not SIGen.CurrentPrototypeData then
 		return CodeE( SIGen , "需要先创建新的原型数据 , 之后才可以完善它" )
@@ -740,8 +742,8 @@ end
 -- 给 order 属性添加后缀<br>
 -- order 属性最多可以有 200 个字符<br>
 -- ======================================================================<br>
--- suffix                = 后缀<br>
--- ======================================================================<br>
+---@param suffix string -- 后缀
+---@return table -- 自身
 function SIGen.SetOrderSuffix( suffix )
 	if not SIGen.CurrentPrototypeData then
 		return CodeE( SIGen , "需要先创建新的原型数据 , 之后才可以完善它" )
@@ -758,8 +760,8 @@ end
 -- 参数中的回调函数会立刻被调用<br>
 -- 这只是一种语法糖 , 并没有什么特别的含义<br>
 -- ======================================================================<br>
--- callback              = 回调函数 , 有 2 个参数 , 参数 1 = 原型数据的 [ name ] 值 , 参数 2 = 原型数据本身<br>
--- ======================================================================<br>
+---@param callback function -- 回调函数 , 有 2 个参数 , 参数 1 = 原型数据的 [ name ] 值 , 参数 2 = 原型数据本身
+---@return table -- 自身
 function SIGen.AddFunction( callback )
 	if not SIGen.CurrentPrototypeData then
 		return CodeE( SIGen , "需要先创建新的原型数据 , 之后才可以完善它" )
@@ -774,8 +776,8 @@ end
 -- 这些最终构建回调函数会在 type 的最终构建回调函数调用完毕后再调用<br>
 -- 可以添加多个最终构建回调函数<br>
 -- ======================================================================<br>
--- callback              = 回调函数 , 有 3 个参数 , 参数 1 = 原型数据的 [ name ] 值 , 参数 2 = 原型数据本身 , 参数 3 = 注册的顺序索引<br>
--- ======================================================================<br>
+---@param callback function -- 回调函数 , 有 3 个参数 , 参数 1 = 原型数据的 [ name ] 值 , 参数 2 = 原型数据本身 , 参数 3 = 注册的顺序索引
+---@return table -- 自身
 function SIGen.AddCallback( callback )
 	if not callback then
 		return CodeE( SIGen , "完善原型数据属性时 , 回调函数不能为空" )
@@ -804,9 +806,9 @@ end
 -- 如果原型数据也存在最终构建回调函数 , 则此处的最终构建回调函数会在它们之前完成全部调用<br>
 -- 每个 type 都可以添加多个最终构建回调函数<br>
 -- ======================================================================<br>
--- typeCode              = 原型数据的 [ type ] 值<br>
--- callback              = 回调函数 , 有 3 个参数 , 参数 1 = 原型数据的 [ name ] 值 , 参数 2 = 原型数据本身 , 参数 3 = 注册的顺序索引<br>
--- ======================================================================<br>
+---@param typeCode string -- 原型数据的 [ type ] 值
+---@param callback function -- 回调函数 , 有 3 个参数 , 参数 1 = 原型数据的 [ name ] 值 , 参数 2 = 原型数据本身 , 参数 3 = 注册的顺序索引
+---@return table -- 自身
 function SIGen.AddFinalCallback( typeCode , callback )
 	if not callback then
 		return CodeE( SIGen , "不能添加空值作为原型数据最终构建回调函数" )
@@ -831,9 +833,9 @@ end
 -- ======================================================================<br>
 -- 把当前实体类型的原型数据添加至目标物品的 place_result 属性中<br>
 -- ======================================================================<br>
--- targetPrototypeType   = 目标物品的类型<br>
--- targetPrototypeName   = 目标物品的名称<br>
--- ======================================================================<br>
+---@param targetPrototypeType string -- 目标物品的类型
+---@param targetPrototypeName string -- 目标物品的名称
+---@return table -- 自身
 function SIGen.ReferencePlaceResult( targetPrototypeType , targetPrototypeName )
 	if not SIGen.CurrentPrototypeData then
 		return CodeE( SIGen , "需要先创建新的原型数据 , 之后才可以使用 SIGen.ReferencePlaceResult 函数" )
@@ -857,9 +859,9 @@ end
 -- ======================================================================<br>
 -- 把当前模块类型的原型数据添加至目标物品的 placed_as_equipment_result 属性中<br>
 -- ======================================================================<br>
--- targetPrototypeType   = 目标物品的类型<br>
--- targetPrototypeName   = 目标物品的名称<br>
--- ======================================================================<br>
+---@param targetPrototypeType string -- 目标物品的类型
+---@param targetPrototypeName string -- 目标物品的名称
+---@return table -- 自身
 function SIGen.ReferenceEquipmentResult( targetPrototypeType , targetPrototypeName )
 	if not SIGen.CurrentPrototypeData then
 		return CodeE( SIGen , "需要先创建新的原型数据 , 之后才可以使用 SIGen.ReferenceEquipmentResult 函数" )
@@ -883,8 +885,8 @@ end
 -- ======================================================================<br>
 -- 把当前配方类型的原型数据添加至目标科技的 effects 属性中<br>
 -- ======================================================================<br>
--- technologyName        = 目标科技的名称<br>
--- ======================================================================<br>
+---@param technologyName string -- 目标科技的名称
+---@return table -- 自身
 function SIGen.ReferenceUnlockRecipe( technologyName )
 	if not SIGen.CurrentPrototypeData then
 		return CodeE( SIGen , "需要先创建新的原型数据 , 之后才可以使用 SIGen.ReferenceUnlockRecipe 函数" )
@@ -917,6 +919,7 @@ end
 -- 向此原型数据中添加一个特殊得图标代码<br>
 -- 只有物品类型的原型数据可以使用此函数<br>
 -- ======================================================================<br>
+---@return table -- 自身
 function SIGen.SetItemIconSI()
 	if not SIGen.CurrentPrototypeData then
 		return CodeE( SIGen , "需要先创建新的原型数据 , 之后才可以完善它" )
@@ -961,11 +964,9 @@ end
 -- 用于计算作为原型数据显示名称的本地化字符串<br>
 -- 使用原型数据自己的 [ type ] 值进行计算<br>
 -- ======================================================================<br>
--- name                  = 本地化字符串的键后半部分的值<br>
--- ...                   = 本地化字符串的追加参数 , 不定长<br>
--- ======================================================================<br>
--- 返回值                 = 计算好的本地化字符串<br>
--- ======================================================================<br>
+---@param name string -- 本地化字符串的键后半部分的值
+---@param ... string|table -- 本地化字符串的追加参数 , 不定长
+---@return table -- 计算好的本地化字符串
 function SIGen.MakeSelfLocalisedName( name , ... )
 	if not SIGen.CurrentPrototypeData then
 		return CodeE( SIGen , "需要先创建新的原型数据 , 之后才可以使用 SIGen.MakeSelfLocalisedName 函数" )
@@ -982,12 +983,10 @@ end
 -- 用于计算作为原型数据显示名称的本地化字符串<br>
 -- 根据给定的 [ type ] 值进行计算 , 而非使用原型数据自己的 [ type ] 值<br>
 -- ======================================================================<br>
--- typeCode              = 原型数据的 [ type ] 值<br>
--- name                  = 本地化字符串的键后半部分的值<br>
--- ...                   = 本地化字符串的追加参数 , 不定长<br>
--- ======================================================================<br>
--- 返回值                 = 计算好的本地化字符串<br>
--- ======================================================================<br>
+---@param typeCode string -- 原型数据的 [ type ] 值
+---@param name string -- 本地化字符串的键后半部分的值
+---@param ... string|table -- 本地化字符串的追加参数 , 不定长
+---@return table -- 计算好的本地化字符串
 function SIGen.MakeLocalisedName( typeCode , name , ... )
 	if not SICommon.ShowNamePrefix[typeCode] then
 		return CodeE( SIGen , "构造器无法操作不支持的类型的原型数据 , 当前类型 = " .. typeCode )
@@ -1004,11 +1003,9 @@ end
 -- 用于计算作为原型数据显示描述的本地化字符串<br>
 -- 使用原型数据自己的 [ type ] 值进行计算<br>
 -- ======================================================================<br>
--- name                  = 本地化字符串的键后半部分的值<br>
--- ...                   = 本地化字符串的追加参数 , 不定长<br>
--- ======================================================================<br>
--- 返回值                 = 计算好的本地化字符串<br>
--- ======================================================================<br>
+---@param name string -- 本地化字符串的键后半部分的值
+---@param ... string|table -- 本地化字符串的追加参数 , 不定长
+---@return table -- 计算好的本地化字符串
 function SIGen.MakeSelfLocalisedDescription( name , ... )
 	if not SIGen.CurrentPrototypeData then
 		return CodeE( SIGen , "需要先创建新的原型数据 , 之后才可以使用 SIGen.MakeSelfLocalisedDescription 函数" )
@@ -1025,12 +1022,10 @@ end
 -- 用于计算作为原型数据显示描述的本地化字符串<br>
 -- 根据给定的 [ type ] 值进行计算 , 而非使用原型数据自己的 [ type ] 值<br>
 -- ======================================================================<br>
--- typeCode              = 原型数据的 [ type ] 值<br>
--- name                  = 本地化字符串的键后半部分的值<br>
--- ...                   = 本地化字符串的追加参数 , 不定长<br>
--- ======================================================================<br>
--- 返回值                 = 计算好的本地化字符串<br>
--- ======================================================================<br>
+---@param typeCode string -- 原型数据的 [ type ] 值
+---@param name string -- 本地化字符串的键后半部分的值
+---@param ... string|table -- 本地化字符串的追加参数 , 不定长
+---@return table -- 计算好的本地化字符串
 function SIGen.MakeLocalisedDescription( typeCode , name , ... )
 	if not SICommon.ShowNamePrefix[typeCode] then
 		return CodeE( SIGen , "构造器无法操作不支持的类型的原型数据 , 当前类型 = " .. typeCode )
@@ -1048,10 +1043,8 @@ end
 -- 此处的图片位置不会自动添加名称后缀 , 会自动添加文件扩展名 (.png)<br>
 -- 使用原型数据自己的 [ type ] 值进行计算<br>
 -- ======================================================================<br>
--- pictureName           = 图片名称 , 不需要添加扩展名<br>
--- ======================================================================<br>
--- 返回值                 = 计算好的图片位置<br>
--- ======================================================================<br>
+---@param pictureName string -- 图片名称 , 不需要添加扩展名
+---@return string|table -- 计算好的图片位置
 function SIGen.MakeSelfPicturePath( pictureName )
 	if not SIGen.CurrentPrototypeData then
 		return CodeE( SIGen , "需要先创建新的原型数据 , 之后才可以使用 SIGen.GetPicturePath 函数" )
@@ -1064,11 +1057,9 @@ end
 -- 此处的图片位置不会自动添加名称后缀 , 会自动添加文件扩展名 (.png)<br>
 -- 根据给定的 [ type ] 值进行计算 , 而非使用原型数据自己的 [ type ] 值<br>
 -- ======================================================================<br>
--- typeCode              = 原型数据的 [ type ] 值<br>
--- pictureName           = 图片名称 , 不需要添加扩展名<br>
--- ======================================================================<br>
--- 返回值                 = 计算好的图片位置<br>
--- ======================================================================<br>
+---@param typeCode string -- 原型数据的 [ type ] 值
+---@param pictureName string -- 图片名称 , 不需要添加扩展名
+---@return string|table -- 计算好的图片位置
 function SIGen.MakePicturePath( typeCode , pictureName )
 	if not SICommon.ShowNamePrefix[typeCode] then
 		return CodeE( SIGen , "构造器无法操作不支持的类型的原型数据 , 当前类型 = " .. typeCode )
@@ -1081,10 +1072,8 @@ end
 -- 此处的图片位置不会自动添加名称后缀 , 会自动添加文件扩展名 (.png)<br>
 -- 不使用 [ type ] 值进行计算<br>
 -- ======================================================================<br>
--- pictureName           = 图片名称 , 不需要添加扩展名<br>
--- ======================================================================<br>
--- 返回值                 = 计算好的图片位置<br>
--- ======================================================================<br>
+---@param pictureName string -- 图片名称 , 不需要添加扩展名
+---@return string -- 计算好的图片位置
 function SIGen.MakeRawPicturePath( pictureName )
 	return ( SIGen.TempConstantsData or SIInit.CurrentConstantsData ).PicturePath .. pictureName .. ".png"
 end
@@ -1094,10 +1083,8 @@ end
 -- 此处的图片位置不会自动添加名称后缀 , 会自动添加文件扩展名 (.png)<br>
 -- 使用原型数据自己的 [ type ] 值进行计算<br>
 -- ======================================================================<br>
--- pictureName           = 图片名称 , 不需要添加扩展名<br>
--- ======================================================================<br>
--- 返回值                 = 计算好的图片位置<br>
--- ======================================================================<br>
+---@param pictureName string -- 图片名称 , 不需要添加扩展名
+---@return string|table -- 计算好的图片位置
 function SIGen.MakeSelfPicturePathHr( pictureName )
 	if not SIGen.CurrentPrototypeData then
 		return CodeE( SIGen , "需要先创建新的原型数据 , 之后才可以使用 SIGen.GetPicturePath 函数" )
@@ -1110,11 +1097,9 @@ end
 -- 此处的图片位置不会自动添加名称后缀 , 会自动添加文件扩展名 (.png)<br>
 -- 根据给定的 [ type ] 值进行计算 , 而非使用原型数据自己的 [ type ] 值<br>
 -- ======================================================================<br>
--- typeCode              = 原型数据的 [ type ] 值<br>
--- pictureName           = 图片名称 , 不需要添加扩展名<br>
--- ======================================================================<br>
--- 返回值                 = 计算好的图片位置<br>
--- ======================================================================<br>
+---@param typeCode string -- 原型数据的 [ type ] 值
+---@param pictureName string -- 图片名称 , 不需要添加扩展名
+---@return string|table -- 计算好的图片位置
 function SIGen.MakePicturePathHr( typeCode , pictureName )
 	if not SICommon.ShowNamePrefix[typeCode] then
 		return CodeE( SIGen , "构造器无法操作不支持的类型的原型数据 , 当前类型 = " .. typeCode )
@@ -1127,10 +1112,8 @@ end
 -- 此处的图片位置不会自动添加名称后缀 , 会自动添加文件扩展名 (.png)<br>
 -- 不使用 [ type ] 值进行计算<br>
 -- ======================================================================<br>
--- pictureName           = 图片名称 , 不需要添加扩展名<br>
--- ======================================================================<br>
--- 返回值                 = 计算好的图片位置<br>
--- ======================================================================<br>
+---@param pictureName string -- 图片名称 , 不需要添加扩展名
+---@return string -- 计算好的图片位置
 function SIGen.MakeRawPicturePathHr( pictureName )
 	return ( SIGen.TempConstantsData or SIInit.CurrentConstantsData ).PicturePath .. SICommon.ShowNamePrefix.HrVer .. pictureName .. ".png"
 end
@@ -1140,10 +1123,8 @@ end
 -- 此处的声音位置不会自动添加名称后缀 , 会自动添加文件扩展名 (.png)<br>
 -- 使用原型数据自己的 [ type ] 值进行计算<br>
 -- ======================================================================<br>
--- soundName             = 声音名称 , 不需要添加扩展名<br>
--- ======================================================================<br>
--- 返回值                 = 计算好的声音位置<br>
--- ======================================================================<br>
+---@param soundName string -- 声音名称 , 不需要添加扩展名
+---@return string|table -- 计算好的声音位置
 function SIGen.MakeSelfSoundPath( soundName )
 	if not SIGen.CurrentPrototypeData then
 		return CodeE( SIGen , "需要先创建新的原型数据 , 之后才可以使用 SIGen.GetSoundPath 函数" )
@@ -1156,11 +1137,9 @@ end
 -- 此处的声音位置不会自动添加名称后缀 , 会自动添加文件扩展名 (.png)<br>
 -- 根据给定的 [ type ] 值进行计算 , 而非使用原型数据自己的 [ type ] 值<br>
 -- ======================================================================<br>
--- typeCode              = 原型数据的 [ type ] 值<br>
--- soundName             = 声音名称 , 不需要添加扩展名<br>
--- ======================================================================<br>
--- 返回值                 = 计算好的声音位置<br>
--- ======================================================================<br>
+---@param typeCode string -- 原型数据的 [ type ] 值
+---@param soundName string -- 声音名称 , 不需要添加扩展名
+---@return string|table -- 计算好的声音位置
 function SIGen.MakeSoundPath( typeCode , soundName )
 	if not SICommon.ShowNamePrefix[typeCode] then
 		return CodeE( SIGen , "构造器无法操作不支持的类型的原型数据 , 当前类型 = " .. typeCode )
@@ -1173,10 +1152,8 @@ end
 -- 此处的声音位置不会自动添加名称后缀 , 会自动添加文件扩展名 (.png)<br>
 -- 不使用 [ type ] 值进行计算<br>
 -- ======================================================================<br>
--- soundName             = 声音名称 , 不需要添加扩展名<br>
--- ======================================================================<br>
--- 返回值                 = 计算好的声音位置<br>
--- ======================================================================<br>
+---@param soundName string -- 声音名称 , 不需要添加扩展名
+---@return string -- 计算好的声音位置
 function SIGen.MakeRawSoundPath( soundName )
 	return ( SIGen.TempConstantsData or SIInit.CurrentConstantsData ).SoundPath .. soundName .. ".ogg"
 end
@@ -1186,8 +1163,8 @@ end
 -- 仍然需要先通过 SIGen.SetGroup 函数设置一个可用的子分组<br>
 -- 会创建图标物品 , 图标放置在地上的实体 , 以及图标放在模块区域的实体<br>
 -- ======================================================================<br>
--- iconItemDataList      = 图标物品的数字表 , 由键值对组成 , 键为 ID , 值为别名<br>
--- ======================================================================<br>
+---@param iconItemDataList table -- 图标物品的数字表 , 由键值对组成 , 键为 ID , 值为别名
+---@return table -- 自身
 function SIGen.AutoIconItem( iconItemDataList )
 	if not SIGen.CurrentSubgroup then
 		return CodeE( SIGen , "创建原型数据时 , 需要先通过 SIGen.SetGroup 函数设置一个可用的子分组" )
@@ -1375,13 +1352,13 @@ end
 -- 使用 SIGen 创建一个新的字体数据<br>
 -- SIGen 会自动将新的字体数据进行注册 , 并自动生成一些属性<br>
 -- ======================================================================<br>
--- fontID                = ID , 用于计算 [ name ] 值和在 ConstantsData.raw.Fonts 中注册<br>
--- aliasName             = 别名 , 和 ConstantsData.Autoload 中的别名一样 , 在计算 [ name ] 值时代替 ID 进行计算 , 不影响 ConstantsData.raw.Fonts 中的注册<br>
--- fontSize              = 字体的字号<br>
--- hasBorder             = 是否拥有边框<br>
--- borderColor           = 如果有边框的话 , 这里定义它的颜色 , 默认是 000 纯黑<br>
--- from                  = 使用的字体<br>
--- ======================================================================<br>
+---@param fontID string -- ID , 用于计算 [ name ] 值和在 ConstantsData.raw.Fonts 中注册
+---@param aliasName string -- 别名 , 和 ConstantsData.Autoload 中的别名一样 , 在计算 [ name ] 值时代替 ID 进行计算 , 不影响 ConstantsData.raw.Fonts 中的注册
+---@param fontSize integer -- 字体的字号
+---@param hasBorder boolean|nil -- 是否拥有边框
+---@param borderColor table|nil -- 如果有边框的话 , 这里定义它的颜色 , 默认是 000 纯黑
+---@param from string|nil -- 使用的字体
+---@return table -- 自身
 function SIGen.AddFont( fontID , aliasName , fontSize , hasBorder , borderColor , from )
 	if not fontID then
 		return CodeE( SIGen , "创建原型数据时 , ID 不能为空" )
@@ -1420,10 +1397,10 @@ end
 -- SIGen 会自动将新的控件样式进行注册 , 并自动生成一些属性<br>
 -- 新的控件样式会自动使用新的贴图 , 如果不想使用新样式 , 则需要添加 oldGUI = true 属性<br>
 -- ======================================================================<br>
--- styleID               = ID , 用于计算 [ name ] 值和在 ConstantsData.raw.Styles 中注册<br>
--- aliasName             = 别名 , 和 ConstantsData.Autoload 中的别名一样 , 在计算 [ name ] 值时代替 ID 进行计算 , 不影响 ConstantsData.raw.Styles 中的注册<br>
--- styleDataToCopy       = 用来复制数据的控件样式<br>
--- ======================================================================<br>
+---@param styleID string -- ID , 用于计算 [ name ] 值和在 ConstantsData.raw.Styles 中注册
+---@param aliasName string -- 别名 , 和 ConstantsData.Autoload 中的别名一样 , 在计算 [ name ] 值时代替 ID 进行计算 , 不影响 ConstantsData.raw.Styles 中的注册
+---@param styleDataToCopy table -- 用来复制数据的控件样式
+---@return table -- 自身
 function SIGen.AddStyle( styleID , aliasName , styleDataToCopy )
 	if not styleID then
 		return CodeE( SIGen , "创建控件样式时 , ID 不能为空" )
@@ -1455,8 +1432,8 @@ end
 -- 向此控件样式中添加另一个控件的样式 , 普通表也可以<br>
 -- 添加的数据会被直接复制 , 被复制的控件样式中的表或数组发了的修改的话 , 此控件样式的相应表或数组也会发生修改<br>
 -- ======================================================================<br>
--- styleDataToCopy       = 被复制的控件样式<br>
--- ======================================================================<br>
+---@param styleDataToCopy table -- 被复制的控件样式
+---@return table -- 自身
 function SIGen.AppendStyleData( styleDataToCopy )
 	if not SIGen.CurrentStyleData then
 		return CodeE( SIGen , "需要先创建新的控件样式 , 之后才可以完善它" )
@@ -1476,6 +1453,7 @@ end
 -- ======================================================================<br>
 -- 重置 SIGen 的动态数据<br>
 -- ======================================================================<br>
+---@return table -- 自身
 function SIGen.Fresh()
 	SIGen.CurrentPrototypeData = nil
 	SIGen.CurrentStyleData = nil
@@ -1489,6 +1467,7 @@ end
 -- 重置 SIGen 的动态数据并结束使用<br>
 -- 请勿在外部使用此函数<br>
 -- ======================================================================<br>
+---@return table -- 自身
 function SIGen.Finish()
 	if hasFinish then
 		return CodeE( SIGen , "流程已经结束 , 无法使用 SIGen.Finish 函数" )

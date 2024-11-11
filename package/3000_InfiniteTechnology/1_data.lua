@@ -964,6 +964,12 @@ SIGen
 } )
 .AutoIcon()
 
+-- ======================================================================<br>
+---@param ID string
+---@param alias string
+---@param maxLevel integer
+---@param subIcon table
+---@param effects table
 local function InfiniteTech( ID , alias , maxLevel , subIcon , effects )
 	local IDPrefix = "Infinite_" .. ID
 	local aliasPrefix = "无尽科技-" .. alias

@@ -689,8 +689,7 @@ SIRPGPlayerStatus =
 	-- ======================================================================<br>
 	-- 打开指定玩家的权限管理窗口<br>
 	-- ======================================================================<br>
-	-- playerIndex = 玩家索引<br>
-	-- ======================================================================<br>
+	---@param playerIndex integer -- 玩家索引
 	OpenFrameByPlayerIndex = function( playerIndex )
 		SIRPGPlayerStatus.OpenFrame( playerIndex )
 	end ,
@@ -698,16 +697,13 @@ SIRPGPlayerStatus =
 	-- ======================================================================<br>
 	-- 关闭指定玩家的权限管理窗口<br>
 	-- ======================================================================<br>
-	-- playerIndex = 玩家索引<br>
-	-- ======================================================================<br>
+	---@param playerIndex integer -- 玩家索引
 	CloseFrameByPlayerIndex = function( playerIndex )
 		SIRPGPlayerStatus.CloseFrame( playerIndex )
 	end ,
 
 	-- ======================================================================<br>
 	-- 打开所有玩家的权限管理窗口<br>
-	-- ======================================================================<br>
-	-- 无参数<br>
 	-- ======================================================================<br>
 	OpenFrames = function()
 		for playerIndex , settings in pairs( SIGlobal.GetAllPlayerSettings( SIRPGSystem.Settings.Name ) ) do
@@ -717,8 +713,6 @@ SIRPGPlayerStatus =
 
 	-- ======================================================================<br>
 	-- 关闭所有玩家的权限管理窗口<br>
-	-- ======================================================================<br>
-	-- 无参数<br>
 	-- ======================================================================<br>
 	CloseFrames = function()
 		for playerIndex , settings in pairs( SIGlobal.GetAllPlayerSettings( SIRPGSystem.Settings.Name ) ) do

@@ -302,8 +302,7 @@ SIFinder =
 	-- ======================================================================<br>
 	-- 打开指定玩家的信息查询窗口<br>
 	-- ======================================================================<br>
-	-- playerIndex = 玩家索引<br>
-	-- ======================================================================<br>
+	---@param playerIndex integer -- 玩家索引
 	OpenFrameByPlayerIndex = function( playerIndex )
 		SIFinder.OpenFrame( playerIndex )
 	end ,
@@ -311,16 +310,13 @@ SIFinder =
 	-- ======================================================================<br>
 	-- 关闭指定玩家的信息查询窗口<br>
 	-- ======================================================================<br>
-	-- playerIndex = 玩家索引<br>
-	-- ======================================================================<br>
+	---@param playerIndex integer -- 玩家索引
 	CloseFrameByPlayerIndex = function( playerIndex )
 		SIFinder.CloseFrame( playerIndex )
 	end ,
 
 	-- ======================================================================<br>
 	-- 打开所有玩家的信息查询窗口<br>
-	-- ======================================================================<br>
-	-- 无参数<br>
 	-- ======================================================================<br>
 	OpenFrames = function()
 		for playerIndex , settings in pairs( SIGlobal.GetAllPlayerSettings( SIFinder.Settings.Name ) ) do
@@ -330,8 +326,6 @@ SIFinder =
 
 	-- ======================================================================<br>
 	-- 关闭所有玩家的信息查询窗口<br>
-	-- ======================================================================<br>
-	-- 无参数<br>
 	-- ======================================================================<br>
 	CloseFrames = function()
 		for playerIndex , settings in pairs( SIGlobal.GetAllPlayerSettings( SIFinder.Settings.Name ) ) do
@@ -347,10 +341,9 @@ SIFinder =
 	-- ======================================================================<br>
 	-- 打开窗口并查询给定的项目<br>
 	-- ======================================================================<br>
-	-- playerIndex = 玩家索引<br>
-	-- type        = 查询的类型 , 是一个数字 , 可用值请见 SIFinder.DropDownTypes 的定义 , 无效值会被重新定义为 SIFinder.DropDownTypes.Item 的值<br>
-	-- thingName   = 查询的项目名称<br>
-	-- ======================================================================<br>
+	---@param playerIndex integer -- 玩家索引
+	---@param type integer -- 查询的类型 , 是一个数字 , 可用值请见 SIFinder.DropDownTypes 的定义 , 无效值会被重新定义为 SIFinder.DropDownTypes.Item 的值
+	---@param thingName string -- 查询的项目名称
 	Find = function( playerIndex , type , thingName )
 		local settings = SIGlobal.GetPlayerSettings( SIFinder.Settings.Name , playerIndex )
 		if not settings.frame or not settings.frame.valid then

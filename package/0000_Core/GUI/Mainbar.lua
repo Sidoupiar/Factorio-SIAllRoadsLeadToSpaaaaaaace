@@ -638,8 +638,7 @@ SIMainbar =
 	-- ======================================================================<br>
 	-- 当对主面板上的显示的原始游戏数据进行了调整时 , 可以通过此函数来刷新主面板<br>
 	-- ======================================================================<br>
-	-- playerIndex       = 玩家索引<br>
-	-- ======================================================================<br>
+	---@param playerIndex integer -- 玩家索引
 	Fresh = function( playerIndex )
 		local settings = SIGlobal.GetPlayerSettings( SIMainData.Settings.Name , playerIndex )
 		SIMainbar.FreshFrame( settings )
@@ -653,8 +652,7 @@ SIMainbar =
 	-- ======================================================================<br>
 	-- 展开指定玩家的工具栏<br>
 	-- ======================================================================<br>
-	-- playerIndex       = 玩家索引<br>
-	-- ======================================================================<br>
+	---@param playerIndex integer -- 玩家索引
 	OpenToolbarByPlayerIndex = function( playerIndex )
 		SIMainbar.OpenToolbar( playerIndex )
 	end ,
@@ -662,16 +660,13 @@ SIMainbar =
 	-- ======================================================================<br>
 	-- 收起指定玩家的工具栏<br>
 	-- ======================================================================<br>
-	-- playerIndex       = 玩家索引<br>
-	-- ======================================================================<br>
+	---@param playerIndex integer -- 玩家索引
 	CloseToolbarByPlayerIndex = function( playerIndex )
 		SIMainbar.CloseToolbar( playerIndex )
 	end ,
 
 	-- ======================================================================<br>
 	-- 展开所有玩家的工具栏<br>
-	-- ======================================================================<br>
-	-- 无参数<br>
 	-- ======================================================================<br>
 	OpenToolbars = function()
 		for playerIndex , settings in pairs( SIGlobal.GetAllPlayerSettings( SIMainData.Settings.Name ) ) do
@@ -681,8 +676,6 @@ SIMainbar =
 
 	-- ======================================================================<br>
 	-- 收起所有玩家的工具栏<br>
-	-- ======================================================================<br>
-	-- 无参数<br>
 	-- ======================================================================<br>
 	CloseToolbars = function()
 		for playerIndex , settings in pairs( SIGlobal.GetAllPlayerSettings( SIMainData.Settings.Name ) ) do
@@ -704,8 +697,6 @@ SIMainbar =
 	-- 如果想游戏一开始就加上工具栏按钮 , 那么应该在 on_init 和 on_load 中都添加注册代码<br>
 	-- 因为需要的属性比较多 , 不慎将 nil 作为参数传递进来后果自负<br>
 	-- ======================================================================<br>
-	-- toolbarButtonData = 工具栏按钮数据包<br>
-	-- ======================================================================<br>
 	-- 工具栏按钮数据包中包含的属性 :<br>
 	-- ID                       = 工具栏按钮的 ID , 用于移除此工具栏按钮 , 以及用于内部函数调用 , 定义 ID 只是为了避免重名<br>
 	-- Name                     = 工具栏按钮的名称 , 用于 on_gui_click 事件的判断 , 事件监听不需要手动添加 , 内部函数已经处理了 , 如果 Name 属性重复 , 那么在绘制控件时会弹窗<br>
@@ -723,6 +714,7 @@ SIMainbar =
 	-- 参数 2 = 按钮的 ID 属性的值<br>
 	-- 参数 3 = 游戏时间 , tick<br>
 	-- ======================================================================<br>
+	---@param toolbarButtonData table -- 工具栏按钮数据包
 	RegisterToolbarButton = function( toolbarButtonData )
 		if SITable.GetWithID( SIMainbar.ToolbarButtonDataList , toolbarButtonData.ID ) then
 			return
@@ -755,8 +747,7 @@ SIMainbar =
 	-- 把一个工具栏按钮从主面板的工具栏中注销掉<br>
 	-- 默认工具栏按钮无法被注销<br>
 	-- ======================================================================<br>
-	-- toolbarButtonID   = 工具栏按钮名称<br>
-	-- ======================================================================<br>
+	---@param toolbarButtonID string -- 工具栏按钮名称
 	UnregisterToolbarButton = function( toolbarButtonID )
 		local toolbarButtonData , index = SITable.GetWithID( SIMainbar.ToolbarButtonDataList , toolbarButtonID )
 		if toolbarButtonData then

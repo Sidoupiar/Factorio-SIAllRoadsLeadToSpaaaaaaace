@@ -16,6 +16,9 @@ local Range_FlameTurret = 25
 local CallForHelpRadius = 30
 local UtilFunctions = {}
 
+-- ======================================================================<br>
+---@param actions table
+---@param levelValue table
 function UtilFunctions.ModifyActions( actions , levelValue )
 	if actions then
 		for actionIndex , action in pairs( actions ) do
@@ -32,6 +35,9 @@ function UtilFunctions.ModifyActions( actions , levelValue )
 	end
 end
 
+-- ======================================================================<br>
+---@param effects table
+---@param levelValue table
 function UtilFunctions.ModifyEffects( effects , levelValue )
 	if effects then
 		for effectIndex , effect in pairs( effects ) do
@@ -43,6 +49,13 @@ function UtilFunctions.ModifyEffects( effects , levelValue )
 	end
 end
 
+-- ======================================================================<br>
+---@param type string
+---@param IDPrefix string
+---@param aliasPrefix string
+---@param size number
+---@param levelValueList table
+---@param basePrototypeData table
 local function CreateRuinBuildings( type , IDPrefix , aliasPrefix , size , levelValueList , basePrototypeData )
 	IDPrefix = IDPrefix .. "_"
 	aliasPrefix = aliasPrefix .. "-"

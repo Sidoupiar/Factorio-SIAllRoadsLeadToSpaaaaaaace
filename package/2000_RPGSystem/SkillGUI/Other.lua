@@ -15,11 +15,11 @@ SIRPGSkillUI_Other =
 	-- 技能入口接口<br>
 	-- [ 强壮 ] 技能<br>
 	-- ======================================================================<br>
-	-- playerIndex     = 玩家索引<br>
-	-- globalSkillData = 全局技能数据 , 静态数据<br>
-	-- playerSkillData = 玩家技能数据 , 当前技能的玩家相关的数据 , 动态数据<br>
-	-- gameTick        = 游戏帧<br>
-	-- ======================================================================<br>
+	---@param playerIndex integer -- 玩家索引
+	---@param globalSkillData table -- 全局技能数据 , 静态数据
+	---@param playerSkillData table -- 玩家技能数据 , 当前技能的玩家相关的数据 , 动态数据
+	---@param isQuickUse boolean -- 是否通过快捷键施放技能
+	---@param gameTick integer -- 游戏帧
 	Strong = function( playerIndex , globalSkillData , playerSkillData , isQuickUse , gameTick )
 		local settings = SIGlobal.GetPlayerSettings( SIRPGSystem.Settings.Name , playerIndex )
 		local strong = settings.SkillUI.Strong

@@ -318,8 +318,7 @@ SIMainbarNote =
 	-- ======================================================================<br>
 	-- 打开指定玩家的便签管理窗口<br>
 	-- ======================================================================<br>
-	-- playerIndex = 玩家索引<br>
-	-- ======================================================================<br>
+	---@param playerIndex integer -- 玩家索引
 	OpenFrameByPlayerIndex = function( playerIndex )
 		SIMainbarNote.OpenFrame( playerIndex )
 	end ,
@@ -327,16 +326,13 @@ SIMainbarNote =
 	-- ======================================================================<br>
 	-- 关闭指定玩家的便签管理窗口<br>
 	-- ======================================================================<br>
-	-- playerIndex = 玩家索引<br>
-	-- ======================================================================<br>
+	---@param playerIndex integer -- 玩家索引
 	CloseFrameByPlayerIndex = function( playerIndex )
 		SIMainbarNote.CloseFrame( playerIndex )
 	end ,
 
 	-- ======================================================================<br>
 	-- 打开所有玩家的便签管理窗口<br>
-	-- ======================================================================<br>
-	-- 无参数<br>
 	-- ======================================================================<br>
 	OpenFrames = function()
 		for playerIndex , settings in pairs( SIGlobal.GetAllPlayerSettings( SIMainData.Settings.Name ) ) do
@@ -346,8 +342,6 @@ SIMainbarNote =
 
 	-- ======================================================================<br>
 	-- 关闭所有玩家的便签管理窗口<br>
-	-- ======================================================================<br>
-	-- 无参数<br>
 	-- ======================================================================<br>
 	CloseFrames = function()
 		for playerIndex , settings in pairs( SIGlobal.GetAllPlayerSettings( SIMainData.Settings.Name ) ) do

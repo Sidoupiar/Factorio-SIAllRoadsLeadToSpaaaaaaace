@@ -39,9 +39,9 @@ SIInterface =
 -- 接口最终会注册进 remote 中<br>
 -- 参数的含义对应 remote.add_interface 函数<br>
 -- ======================================================================<br>
--- interfaceID   = 接口 ID<br>
--- interfaceList = 接口列表<br>
--- ======================================================================<br>
+---@param interfaceID string -- 接口 ID
+---@param interfaceList table -- 接口列表
+---@return table -- 自身
 function SIInterface.Add( interfaceID , interfaceList )
 	if not interfaceID then
 		return CodeE( SIInterface , "注册接口时 , 接口 ID 不能为空" )
@@ -61,8 +61,7 @@ end
 -- 把所有已经注册的接口整理成可以输出的字符串的形式<br>
 -- 以表的形式<br>
 -- ======================================================================<br>
--- 返回值 = 所有已经注册的接口整理成的字符串<br>
--- ======================================================================<br>
+---@return string -- 所有已经注册的接口整理成的字符串
 function SIInterface.ConcatAllInterfaceAsTable()
 	local output = {}
 	for interfaceID , interfaceList in pairs( SIInterface.Interfaces ) do

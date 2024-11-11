@@ -12,7 +12,7 @@ SITools =
 	---@param curData table
 	---@param customData table
 	---@param needOverwrite boolean
-	---@return table
+	---@return table -- 自身
 	CopyData = function( curData , customData , needOverwrite )
 		if not curData then
 			curData = {}
@@ -212,7 +212,7 @@ SITools =
 	---@param green integer|nil
 	---@param blue integer|nil
 	---@param alpha integer|nil
-	---@return table
+	---@return table -- 颜色数据
 	MakeColor = function( red , green , blue , alpha )
 		return
 		{
@@ -228,7 +228,7 @@ SITools =
 	---@param green integer|nil
 	---@param blue integer|nil
 	---@param alpha integer|nil
-	---@return table
+	---@return table -- 颜色数据
 	MakeColor256 = function( red , green , blue , alpha )
 		return
 		{
@@ -326,7 +326,7 @@ SITools =
 	---@param shift table
 	---@param mipmaps integer
 	---@param size integer
-	---@return table
+	---@return table -- 图标数据
 	Icon = function( iconPath , tint , scale , shift , mipmaps , size )
 		local icon = {}
 		if iconPath then
@@ -364,7 +364,7 @@ SITools =
 	---@param damageType string
 	---@param decrease number
 	---@param percent number
-	---@return table
+	---@return table -- 抗性数据
 	Resistance = function( damageType , decrease , percent )
 		return
 		{

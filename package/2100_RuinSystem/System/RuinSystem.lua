@@ -668,13 +668,11 @@ SIRuinSystem =
 	-- 无视所有生成遗迹的限制条件<br>
 	-- 要求当前区块已经生成 , 无法在未生成区块的位置生成遗迹<br>
 	-- ======================================================================<br>
-	-- surfaceIndex      = 世界索引<br>
-	-- chunkPosition     = 区块坐标 , 注意是区块坐标 , 不是实际坐标<br>
-	-- ruinStyleID       = 遗迹布局类型 ID , 如果为 nil , 则为随机遗迹布局类型<br>
-	-- ruinStrength      = 遗迹的强度<br>
-	-- ======================================================================<br>
-	-- 返回值 = 遗迹的 ID , 如果没能成功创建遗迹则返回 nil
-	-- ======================================================================<br>
+	---@param surfaceIndex integer -- 世界索引
+	---@param chunkPosition table -- 区块坐标 , 注意是区块坐标 , 不是实际坐标
+	---@param ruinStyleID integer|string -- 遗迹布局类型 ID , 如果为 nil , 则为随机遗迹布局类型
+	---@param ruinStrength number -- 遗迹的强度
+	---@return integer|string|nil -- 遗迹的 ID , 如果没能成功创建遗迹则返回 nil
 	CreateRuin = function( surfaceIndex , chunkPosition , ruinStyleID , ruinStrength )
 		local globalSettings = SIGlobal.GetGlobalSettings( SIRuinSystem.Settings.Name )
 		local surfaceSettings = SIRuinSystem.GetSurfaceSettings( globalSettings , surfaceIndex )
@@ -696,11 +694,9 @@ SIRuinSystem =
 	-- 遵循所有生成遗迹的限制条件 , 使用随机遗迹布局类型<br>
 	-- 要求当前区块已经生成 , 无法在未生成区块的位置生成遗迹<br>
 	-- ======================================================================<br>
-	-- surfaceIndex      = 世界索引<br>
-	-- chunkPosition     = 区块坐标 , 注意是区块坐标 , 不是实际坐标<br>
-	-- ======================================================================<br>
-	-- 返回值 = 遗迹的 ID , 如果没能成功创建遗迹则返回 nil
-	-- ======================================================================<br>
+	---@param surfaceIndex integer -- 世界索引
+	---@param chunkPosition table -- 区块坐标 , 注意是区块坐标 , 不是实际坐标
+	---@return integer|string|nil -- 遗迹的 ID , 如果没能成功创建遗迹则返回 nil
 	CreateRuinWithChance = function( surfaceIndex , chunkPosition )
 		local globalSettings = SIGlobal.GetGlobalSettings( SIRuinSystem.Settings.Name )
 		local surfaceSettings = SIRuinSystem.GetSurfaceSettings( globalSettings , surfaceIndex )
@@ -727,9 +723,8 @@ SIRuinSystem =
 	-- ======================================================================<br>
 	-- 删除指定世界中的指定遗迹<br>
 	-- ======================================================================<br>
-	-- surfaceIndex      = 世界索引<br>
-	-- ruinID            = 遗迹的 ID<br>
-	-- ======================================================================<br>
+	---@param surfaceIndex integer -- 世界索引
+	---@param ruinID integer|string -- 遗迹的 ID
 	RemoveRuin = function( surfaceIndex , ruinID )
 		local globalSettings = SIGlobal.GetGlobalSettings( SIRuinSystem.Settings.Name )
 		local surfaceSettings = globalSettings.Surfaces[surfaceIndex]
@@ -747,9 +742,8 @@ SIRuinSystem =
 	-- ======================================================================<br>
 	-- 删除指定世界中的位于指定区块上的遗迹<br>
 	-- ======================================================================<br>
-	-- surfaceIndex      = 世界索引<br>
-	-- chunkPosition     = 区块坐标 , 注意是区块坐标 , 不是实际坐标<br>
-	-- ======================================================================<br>
+	---@param surfaceIndex integer -- 世界索引
+	---@param chunkPosition table -- 区块坐标 , 注意是区块坐标 , 不是实际坐标
 	RemoveRuinWithChunk = function( surfaceIndex , chunkPosition )
 		local globalSettings = SIGlobal.GetGlobalSettings( SIRuinSystem.Settings.Name )
 		local surfaceSettings = globalSettings.Surfaces[surfaceIndex]
@@ -771,8 +765,7 @@ SIRuinSystem =
 	-- ======================================================================<br>
 	-- 删除指定世界中的所有遗迹<br>
 	-- ======================================================================<br>
-	-- surfaceIndex      = 世界索引<br>
-	-- ======================================================================<br>
+	---@param surfaceIndex integer -- 世界索引
 	RemoveRuinWithSurface = function( surfaceIndex )
 		local globalSettings = SIGlobal.GetGlobalSettings( SIRuinSystem.Settings.Name )
 		local surfaceSettings = globalSettings.Surfaces[surfaceIndex]
@@ -797,12 +790,11 @@ SIRuinSystem =
 	-- 设置每个世界的遗迹生成规律<br>
 	-- 如果设置已存在 , 则会覆盖原来的值<br>
 	-- ======================================================================<br>
-	-- surfaceIndex      = 世界索引<br>
-	-- minRuinDistance   = 安全距离 , 在这个距离内不会生成遗迹<br>
-	-- ruinCreateChance  = 每个新区块生成遗迹的概率 , 满足距离时才会判断概率<br>
-	-- ruinStrength      = 遗迹的起始强度系数<br>
-	-- ruinStrengthAdden = 随着与地图中心的距离的增加而获得的额外遗迹强度系数 , 每 16 格增加一次<br>
-	-- ======================================================================<br>
+	---@param surfaceIndex integer -- 世界索引
+	---@param minRuinDistance number -- 安全距离 , 在这个距离内不会生成遗迹
+	---@param ruinCreateChance number -- 每个新区块生成遗迹的概率 , 满足距离时才会判断概率
+	---@param ruinStrength number -- 遗迹的起始强度系数
+	---@param ruinStrengthAdden number -- 随着与地图中心的距离的增加而获得的额外遗迹强度系数 , 每 16 格增加一次
 	SetSurfaceSettings = function( surfaceIndex , minRuinDistance , ruinCreateChance , ruinStrength , ruinStrengthAdden )
 		local globalSettings = SIGlobal.GetGlobalSettings( SIRuinSystem.Settings.Name )
 		local surfaceSettings = SIRuinSystem.GetSurfaceSettings( globalSettings , surfaceIndex )
@@ -816,9 +808,8 @@ SIRuinSystem =
 	-- 把一个世界的设置复制到另一个世界上<br>
 	-- 如果作为复制源的世界设置不存在 , 则不会发生任何事情<br>
 	-- ======================================================================<br>
-	-- oldSurfaceIndex   = 作为复制源的世界索引<br>
-	-- newSurfaceIndex   = 作为复制目标的世界索引<br>
-	-- ======================================================================<br>
+	---@param oldSurfaceIndex integer -- 作为复制源的世界索引
+	---@param newSurfaceIndex integer -- 作为复制目标的世界索引
 	CopySurfaceSettings = function( oldSurfaceIndex , newSurfaceIndex )
 		local globalSettings = SIGlobal.GetGlobalSettings( SIRuinSystem.Settings.Name )
 		local oldSurfaceSettings = globalSettings.Surfaces[oldSurfaceIndex]
@@ -837,9 +828,6 @@ SIRuinSystem =
 	-- 设置每个世界可用的遗迹布局类型<br>
 	-- 如果设置已存在 , 则会覆盖原来的值<br>
 	-- ======================================================================<br>
-	-- ruinStyle          = 遗迹布局类型数据<br>
-	-- surfaceIndexList   = 世界索引的数组 , 如果为 nil 则全部世界都会使用<br>
-	-- ======================================================================<br>
 	-- 遗迹布局类型数据的结构如下 :<br>
 	-- ID                 = 遗迹布局的 ID<br>
 	-- Weight             = 随机到这个遗迹布局的权重<br>
@@ -852,6 +840,8 @@ SIRuinSystem =
 	-- BrokenTurretChance = 遗迹的炮塔中残血炮塔的比例 , 小数<br>
 	-- BrokenTurretHealth = 残血炮塔的血量浮动范围 , 小数 , 浮动范围为 [此值] 至 1.0 (满血)<br>
 	-- ======================================================================<br>
+	---@param ruinStyle table -- 遗迹布局类型数据
+	---@param surfaceIndexList table|nil -- 世界索引的数组 , 如果为 nil 则全部世界都会使用
 	AddRuinStyle = function( ruinStyle , surfaceIndexList )
 		local globalSettings = SIGlobal.GetGlobalSettings( SIRuinSystem.Settings.Name )
 		local ID = ruinStyle.ID
@@ -878,14 +868,13 @@ SIRuinSystem =
 	-- 设置每个世界可用的炮塔类型<br>
 	-- 如果设置已存在 , 则会覆盖原来的值<br>
 	-- ======================================================================<br>
-	-- turretSet          = 炮塔类型数据<br>
-	-- surfaceIndexList   = 世界索引的数组 , 如果为 nil 则全部世界都会使用<br>
-	-- ======================================================================<br>
 	-- 炮塔类型数据的结构如下 :<br>
 	-- ID                 = 炮塔类型的 ID<br>
 	-- Weight             = 随机到这个炮塔类型的权重<br>
 	-- List               = 炮塔列表 , 本身是一个二维数组 , 对应从 1 到 n 级的炮塔数组 , 如果遗迹等级超过 n , 则选取最高等级的炮塔数组 , 每个炮塔数组都可以包含多种炮塔类型 , 每个炮塔位置都会重新随机选择<br>
 	-- ======================================================================<br>
+	---@param turretSet table -- 炮塔类型数据
+	---@param surfaceIndexList table|nil -- 世界索引的数组 , 如果为 nil 则全部世界都会使用
 	AddTurretSet = function( turretSet , surfaceIndexList )
 		local globalSettings = SIGlobal.GetGlobalSettings( SIRuinSystem.Settings.Name )
 		local ID = turretSet.ID
@@ -912,9 +901,6 @@ SIRuinSystem =
 	-- 设置每个世界可用的物品补给类型<br>
 	-- 如果设置已存在 , 则会覆盖原来的值<br>
 	-- ======================================================================<br>
-	-- itemSet            = 物品补给类型数据<br>
-	-- surfaceIndexList   = 世界索引的数组 , 如果为 nil 则全部世界都会使用<br>
-	-- ======================================================================<br>
 	-- 物品补给类型数据的结构如下 :<br>
 	-- ID                 = 物品补给类型的 ID<br>
 	-- Weight             = 随机到这个物品补给类型的权重<br>
@@ -929,6 +915,8 @@ SIRuinSystem =
 	-- Min                = 物品数量的最小值<br>
 	-- Max                = 物品数量的最大值<br>
 	-- ======================================================================<br>
+	---@param itemSet table -- 物品补给类型数据
+	---@param surfaceIndexList table|nil -- 世界索引的数组 , 如果为 nil 则全部世界都会使用
 	AddItemSet = function( itemSet , surfaceIndexList )
 		local globalSettings = SIGlobal.GetGlobalSettings( SIRuinSystem.Settings.Name )
 		local ID = itemSet.ID
@@ -955,9 +943,6 @@ SIRuinSystem =
 	-- 设置每个世界可用的组装机类型<br>
 	-- 如果设置已存在 , 则会覆盖原来的值<br>
 	-- ======================================================================<br>
-	-- machineSet         = 组装机类型数据<br>
-	-- surfaceIndexList   = 世界索引的数组 , 如果为 nil 则全部世界都会使用<br>
-	-- ======================================================================<br>
 	-- 组装机类型数据的结构如下 :<br>
 	-- ID                 = 组装机类型的 ID<br>
 	-- Weight             = 随机到这个组装机类型的权重<br>
@@ -967,6 +952,8 @@ SIRuinSystem =
 	-- Machine            = 组装机实体的名称 , 请务必和配方匹配 , 需要 2x2 的组装机<br>
 	-- Recipe             = 组装机使用的配方<br>
 	-- ======================================================================<br>
+	---@param machineSet table -- 组装机类型数据
+	---@param surfaceIndexList table|nil -- 世界索引的数组 , 如果为 nil 则全部世界都会使用
 	AddMachineSet = function( machineSet , surfaceIndexList )
 		local globalSettings = SIGlobal.GetGlobalSettings( SIRuinSystem.Settings.Name )
 		local ID = machineSet.ID
@@ -993,11 +980,10 @@ SIRuinSystem =
 	-- 设置每个世界可用的市场类型<br>
 	-- 如果设置已存在 , 则会覆盖原来的值<br>
 	-- ======================================================================<br>
-	-- marketSet          = 市场类型数据<br>
-	-- surfaceIndexList   = 世界索引的数组 , 如果为 nil 则全部世界都会使用<br>
-	-- ======================================================================<br>
 	-- 待定义
 	-- ======================================================================<br>
+	---@param marketSet table -- 市场类型数据
+	---@param surfaceIndexList table|nil -- 世界索引的数组 , 如果为 nil 则全部世界都会使用
 	AddMarketSet = function( marketSet , surfaceIndexList )
 		local globalSettings = SIGlobal.GetGlobalSettings( SIRuinSystem.Settings.Name )
 		local ID = marketSet.ID
@@ -1024,11 +1010,10 @@ SIRuinSystem =
 	-- 设置每个世界可用的特殊实体类型<br>
 	-- 如果设置已存在 , 则会覆盖原来的值<br>
 	-- ======================================================================<br>
-	-- specialEntitySet   = 特殊实体类型数据<br>
-	-- surfaceIndexList   = 世界索引的数组 , 如果为 nil 则全部世界都会使用<br>
-	-- ======================================================================<br>
 	-- 待定义
 	-- ======================================================================<br>
+	---@param specialEntitySet table -- 特殊实体类型数据
+	---@param surfaceIndexList table|nil -- 世界索引的数组 , 如果为 nil 则全部世界都会使用
 	AddSpecialEntitySet = function( specialEntitySet , surfaceIndexList )
 		local globalSettings = SIGlobal.GetGlobalSettings( SIRuinSystem.Settings.Name )
 		local ID = specialEntitySet.ID

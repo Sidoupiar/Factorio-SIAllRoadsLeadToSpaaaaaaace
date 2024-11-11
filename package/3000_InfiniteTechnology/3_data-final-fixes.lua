@@ -4,6 +4,9 @@
 -- ============================================================================================================================================
 -- ============================================================================================================================================
 
+-- ======================================================================<br>
+---@param effects table
+---@param prototypeName string
 local function AddEffect( effects , prototypeName )
 	for index , oldEffect in pairs( effects ) do
 		if oldEffect.turret_id and oldEffect.turret_id == prototypeName then
@@ -18,6 +21,11 @@ local function AddEffect( effects , prototypeName )
 	} )
 end
 
+-- ======================================================================<br>
+---@param effects table
+---@param ammoCategoryList table
+---@param sourcePrototypeName string
+---@param currentPrototypeData table
 local function CheckAttackParameters( effects , ammoCategoryList , sourcePrototypeName , currentPrototypeData )
 	if currentPrototypeData and currentPrototypeData.attack_parameters then
 		local attackParameters = currentPrototypeData.attack_parameters

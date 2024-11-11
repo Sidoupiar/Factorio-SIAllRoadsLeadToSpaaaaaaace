@@ -32,8 +32,7 @@ SIMainData =
 	-- ======================================================================<br>
 	-- 获取当前核心数据的内部版本号<br>
 	-- ======================================================================<br>
-	-- 返回值 = 当前核心数据的内部版本号 , 数字<br>
-	-- ======================================================================<br>
+	---@return integer -- 当前核心数据的内部版本号 , 数字
 	GetInnerVersion = function()
 		local globalSettings = SIGlobal.GetGlobalSettings( SIMainData.Settings.Name )
 		return globalSettings.InnerVersion

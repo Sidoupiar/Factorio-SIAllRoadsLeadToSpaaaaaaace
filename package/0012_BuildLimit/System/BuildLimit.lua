@@ -588,8 +588,7 @@ SIBuildLimit =
 	-- 添加一个建造限制数据包<br>
 	-- 仅对新建的设备和插件塔生效<br>
 	-- ======================================================================<br>
-	-- limitData     = 建造限制数据包 , 其结构见文件末尾的注释<br>
-	-- ======================================================================<br>
+	---@param limitData table -- 建造限制数据包 , 其结构见文件末尾的注释
 	AddLimitData = function( limitData )
 		local globalSettings = SIGlobal.GetGlobalSettings( SIBuildLimit.Settings.Name )
 		local limitDataID = limitData.ID
@@ -633,8 +632,7 @@ SIBuildLimit =
 	-- 添加多个建造限制数据包<br>
 	-- 仅对新建的设备和插件塔生效<br>
 	-- ======================================================================<br>
-	-- limitDataList = 建造限制数据包数组 , 其中包含多个建造限制数据包 , 其结构见文件末尾的注释<br>
-	-- ======================================================================<br>
+	---@param limitDataList table -- 建造限制数据包数组 , 其中包含多个建造限制数据包 , 其结构见文件末尾的注释
 	AddLimitDataList = function( limitDataList )
 		local globalSettings = SIGlobal.GetGlobalSettings( SIBuildLimit.Settings.Name )
 		for index , limitData in pairs( limitDataList ) do
@@ -679,8 +677,7 @@ SIBuildLimit =
 	-- 更新一个建造限制数据包<br>
 	-- 仅对新建的设备和插件塔生效<br>
 	-- ======================================================================<br>
-	-- limitData     = 建造限制数据包 , 其结构见文件末尾的注释<br>
-	-- ======================================================================<br>
+	---@param limitData table -- 建造限制数据包 , 其结构见文件末尾的注释
 	FreshLimitData = function( limitData )
 		local globalSettings = SIGlobal.GetGlobalSettings( SIBuildLimit.Settings.Name )
 		local limitDataID = limitData.ID
@@ -732,8 +729,7 @@ SIBuildLimit =
 	-- 更新多个建造限制数据包<br>
 	-- 仅对新建的设备和插件塔生效<br>
 	-- ======================================================================<br>
-	-- limitDataList = 建造限制数据包数组 , 其中包含多个建造限制数据包 , 其结构见文件末尾的注释<br>
-	-- ======================================================================<br>
+	---@param limitDataList table -- 建造限制数据包数组 , 其中包含多个建造限制数据包 , 其结构见文件末尾的注释
 	FreshLimitDataList = function( limitDataList )
 		local globalSettings = SIGlobal.GetGlobalSettings( SIBuildLimit.Settings.Name )
 		for index , limitData in pairs( limitDataList ) do

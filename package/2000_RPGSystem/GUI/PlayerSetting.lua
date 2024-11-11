@@ -241,11 +241,10 @@ SIRPGPlayerSetting =
 	-- ======================================================================<br>
 	-- 导入数据<br>
 	-- ======================================================================<br>
-	-- playerIndex    = 点击按钮的玩家索引<br>
-	-- data           = 导出时保存的数据 , 根据导出时导出接口函数返回的数据 , 此参数可能为 nil<br>
-	-- settingsDataID = 导入导出设置数据包的 ID<br>
-	-- gameTick       = 导出数据时的游戏时间 , tick<br>
-	-- ======================================================================<br>
+	---@param playerIndex integer -- 点击按钮的玩家索引
+	---@param data table -- 导出时保存的数据 , 根据导出时导出接口函数返回的数据 , 此参数可能为 nil
+	---@param settingsDataID string -- 导入导出设置数据包的 ID
+	---@param gameTick integer -- 导出数据时的游戏时间 , tick
 	ImpoerSettingsData = function( playerIndex , data , settingsDataID , gameTick )
 		if not data then
 			return
@@ -259,12 +258,10 @@ SIRPGPlayerSetting =
 	-- ======================================================================<br>
 	-- 导出数据<br>
 	-- ======================================================================<br>
-	-- playerIndex    = 点击按钮的玩家索引<br>
-	-- settingsDataID = 导入导出设置数据包的 ID<br>
-	-- gameTick       = 当前的游戏时间 , tick<br>
-	-- ======================================================================<br>
-	-- 返回值 = 导出的数据<br>
-	-- ======================================================================<br>
+	---@param playerIndex integer -- 点击按钮的玩家索引
+	---@param settingsDataID string -- 导入导出设置数据包的 ID
+	---@param gameTick integer -- 当前的游戏时间 , tick
+	---@return table -- 导出的数据
 	ExportSettingsData = function( playerIndex , settingsDataID , gameTick )
 		local settings = SIGlobal.GetPlayerSettings( SIRPGSystem.Settings.Name , playerIndex )
 		return settings.PlayerSetting.Base

@@ -1708,8 +1708,7 @@ SIAutoInsert =
 	-- ======================================================================<br>
 	-- 打开指定玩家的自动填充的管理窗口<br>
 	-- ======================================================================<br>
-	-- playerIndex = 玩家索引<br>
-	-- ======================================================================<br>
+	---@param playerIndex integer -- 玩家索引
 	OpenFrameByPlayerIndex = function( playerIndex )
 		SIAutoInsert.OpenFrame( playerIndex )
 	end ,
@@ -1717,16 +1716,13 @@ SIAutoInsert =
 	-- ======================================================================<br>
 	-- 关闭指定玩家的自动填充的管理窗口<br>
 	-- ======================================================================<br>
-	-- playerIndex = 玩家索引<br>
-	-- ======================================================================<br>
+	---@param playerIndex integer -- 玩家索引
 	CloseFrameByPlayerIndex = function( playerIndex )
 		SIAutoInsert.CloseFrame( playerIndex )
 	end ,
 
 	-- ======================================================================<br>
 	-- 打开所有玩家的自动填充的管理窗口<br>
-	-- ======================================================================<br>
-	-- 无参数<br>
 	-- ======================================================================<br>
 	OpenFrames = function()
 		for playerIndex , settings in pairs( SIGlobal.GetAllPlayerSettings( SIAutoInsert.Settings.Name ) ) do
@@ -1736,8 +1732,6 @@ SIAutoInsert =
 
 	-- ======================================================================<br>
 	-- 关闭所有玩家的自动填充的管理窗口<br>
-	-- ======================================================================<br>
-	-- 无参数<br>
 	-- ======================================================================<br>
 	CloseFrames = function()
 		for playerIndex , settings in pairs( SIGlobal.GetAllPlayerSettings( SIAutoInsert.Settings.Name ) ) do
@@ -1753,11 +1747,10 @@ SIAutoInsert =
 	-- ======================================================================<br>
 	-- 导入数据<br>
 	-- ======================================================================<br>
-	-- playerIndex    = 点击按钮的玩家索引<br>
-	-- data           = 导出时保存的数据 , 根据导出时导出接口函数返回的数据 , 此参数可能为 nil<br>
-	-- settingsDataID = 导入导出设置数据包的 ID<br>
-	-- gameTick       = 导出数据时的游戏时间 , tick<br>
-	-- ======================================================================<br>
+	---@param playerIndex integer -- 点击按钮的玩家索引
+	---@param data table -- 导出时保存的数据 , 根据导出时导出接口函数返回的数据 , 此参数可能为 nil
+	---@param settingsDataID string -- 导入导出设置数据包的 ID
+	---@param gameTick integer -- 导出数据时的游戏时间 , tick
 	ImpoerSettingsData = function( playerIndex , data , settingsDataID , gameTick )
 		if not data then
 			return
@@ -1781,12 +1774,10 @@ SIAutoInsert =
 	-- ======================================================================<br>
 	-- 导出数据<br>
 	-- ======================================================================<br>
-	-- playerIndex    = 点击按钮的玩家索引<br>
-	-- settingsDataID = 导入导出设置数据包的 ID<br>
-	-- gameTick       = 当前的游戏时间 , tick<br>
-	-- ======================================================================<br>
-	-- 返回值 = 导出的数据<br>
-	-- ======================================================================<br>
+	---@param playerIndex integer -- 点击按钮的玩家索引
+	---@param settingsDataID string -- 导入导出设置数据包的 ID
+	---@param gameTick integer -- 当前的游戏时间 , tick
+	---@return table -- 导出的数据
 	ExportSettingsData = function( playerIndex , settingsDataID , gameTick )
 		local settings = SIGlobal.GetPlayerSettings( SIAutoInsert.Settings.Name , playerIndex )
 		return
@@ -1810,8 +1801,7 @@ SIAutoInsert =
 	-- player_index  = 操作玩家的索引<br>
 	-- entity        = 被修改了插件的实体<br>
 	-- ======================================================================<br>
-	-- 返回值 = 事件的 ID 值<br>
-	-- ======================================================================<br>
+	---@return integer|string -- 事件的 ID 值
 	GetModuleEventID = function()
 		return SIAutoInsert.ModuleEventID
 	end
@@ -1842,6 +1832,7 @@ SIAutoInsert.Toolbar =
 	Permission = SIPermission.PermissionIDs.AutoInsert ,
 	Order = "SICore-AutoInsert"
 }
+
 SIAutoInsert.SettingsData =
 {
 	ID = "SI核心-自动填充" ,

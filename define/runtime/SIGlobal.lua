@@ -59,9 +59,9 @@ end
 -- ======================================================================<br>
 -- 把数据保存进 global 表中<br>
 -- ======================================================================<br>
--- name          = 键<br>
--- data          = 值<br>
--- ======================================================================<br>
+---@param name string -- 键
+---@param data any -- 值
+---@return table -- 自身
 function SIGlobal.Set( name , data )
 	storage[name] = data
 	return SIGlobal
@@ -70,8 +70,8 @@ end
 -- ======================================================================<br>
 -- 从 global 表中取出数据<br>
 -- ======================================================================<br>
--- name          = 键<br>
--- ======================================================================<br>
+---@param name string -- 键
+---@return any -- 值
 function SIGlobal.Get( name )
 	return storage[name]
 end
@@ -85,8 +85,6 @@ end
 -- ======================================================================<br>
 -- 在 SIGlobal 中注册一个设置数据<br>
 -- ======================================================================<br>
--- settingData   = 设置数据<br>
--- ======================================================================<br>
 -- 设置数据中包含的属性 :<br>
 -- Name           = 引用名称 , 作为设置数据的键存在 , 即 global[引用名称]<br>
 -- Default        = 默认数据 , 当需要引用设置数据时 , 如果没有找到可用的设置数据 , 则会根据给定的参数和默认数据初始化一份设置数据<br>
@@ -97,6 +95,8 @@ end
 -- ModifyFunction = 修改函数 , 并非是更改数据时使用的函数 , 而是在 script.on_configuration_changed 过程中调用的函数 , 有 1 个参数 , 参数 1 = 新创建的数据本体<br>
 -- CreateFunction = 每次根据给定的参数和默认数据初始化设置数据时 , 会调用一次 , 有 3 个参数 , 参数 1 = 设置的引用名称 , 参数 2 = 刚创建的设置数据子表 , 参数 3 = 1 为玩家设置 , 2 为阵营设置 , 0 为全局设置<br>
 -- ======================================================================<br>
+---@param settingData table -- 设置数据
+---@return table -- 自身
 function SIGlobal.CreateSettings( settingData )
 	if SIGlobal.SettingDataList[settingData.Name] then
 		return CodeE( SIGlobal , "设置数据的 [ name ] 属性不能相同 , " .. settingData.Name )
@@ -113,15 +113,13 @@ end
 -- ======================================================================<br>
 -- 通过 SIGlobal 判断是否存在指定的全局设置数据<br>
 -- ======================================================================<br>
--- settingName   = 设置数据的引用名称<br>
--- ======================================================================<br>
--- 返回值        = 是否存在全局设置数据<br>
--- ======================================================================<br>
+---@param settingName string -- 设置数据的引用名称
+---@return boolean -- 是否存在全局设置数据
 function SIGlobal.HasGlobalSettings( settingName )
 	local settings = SIGlobal.Get( settingName )
 	if not settings then
 		CodeE( SIGlobal , "无法负责维护未注册或被外部代码影响的设置数据" )
-		return {}
+		return false
 	end
 	return settings.Global ~= nil
 end
@@ -130,10 +128,8 @@ end
 -- 通过 SIGlobal 获取全局设置数据<br>
 -- 如果还未定义相应的全局设置 , 则会根据注册时的设置数据初始化一份<br>
 -- ======================================================================<br>
--- settingName   = 设置数据的引用名称<br>
--- ======================================================================<br>
--- 返回值        = 符合条件的设置数据子表<br>
--- ======================================================================<br>
+---@param settingName string -- 设置数据的引用名称
+---@return table -- 符合条件的设置数据子表
 function SIGlobal.GetGlobalSettings( settingName )
 	local settings = SIGlobal.Get( settingName )
 	if not settings then
@@ -157,16 +153,14 @@ end
 -- ======================================================================<br>
 -- 通过 SIGlobal 判断是否存在指定的玩家设置数据<br>
 -- ======================================================================<br>
--- settingName   = 设置数据的引用名称<br>
--- playerIndex   = 玩家编号<br>
--- ======================================================================<br>
--- 返回值        = 是否存在指定的玩家设置数据<br>
--- ======================================================================<br>
+---@param settingName string -- 设置数据的引用名称
+---@param playerIndex integer -- 玩家编号
+---@return boolean -- 是否存在指定的玩家设置数据
 function SIGlobal.HasPlayerSettings( settingName , playerIndex )
 	local settings = SIGlobal.Get( settingName )
 	if not settings or not settings.Player then
 		CodeE( SIGlobal , "无法负责维护未注册或被外部代码影响的设置数据" )
-		return {}
+		return false
 	end
 	return settings.Player[playerIndex] ~= nil
 end
@@ -175,11 +169,9 @@ end
 -- 通过 SIGlobal 获取玩家设置数据<br>
 -- 如果还未定义相应的全局设置 , 则会根据注册时的设置数据初始化一份<br>
 -- ======================================================================<br>
--- settingName   = 设置数据的引用名称<br>
--- playerIndex   = 玩家编号<br>
--- ======================================================================<br>
--- 返回值        = 符合条件的设置数据子表<br>
--- ======================================================================<br>
+---@param settingName string -- 设置数据的引用名称
+---@param playerIndex integer -- 玩家编号
+---@return table -- 符合条件的设置数据子表
 function SIGlobal.GetPlayerSettings( settingName , playerIndex )
 	local settings = SIGlobal.Get( settingName )
 	if not settings or not settings.Player then
@@ -207,10 +199,8 @@ end
 -- 通过 SIGlobal 获取所有玩家的设置数据<br>
 -- 如果某个玩家没有数据 , 则并不会帮助初始化 , 因此返回值中不会有他的设置数据<br>
 -- ======================================================================<br>
--- settingName   = 设置数据的引用名称<br>
--- ======================================================================<br>
--- 返回值        = 全部玩家的设置数据子表<br>
--- ======================================================================<br>
+---@param settingName string -- 设置数据的引用名称
+---@return table -- 全部玩家的设置数据子表
 function SIGlobal.GetAllPlayerSettings( settingName )
 	local settings = SIGlobal.Get( settingName )
 	if not settings then
@@ -223,16 +213,14 @@ end
 -- ======================================================================<br>
 -- 通过 SIGlobal 判断是否存在指定的阵营设置数据<br>
 -- ======================================================================<br>
--- settingName   = 设置数据的引用名称<br>
--- forceIndex    = 阵营编号<br>
--- ======================================================================<br>
--- 返回值        = 是否存在指定的阵营设置数据<br>
--- ======================================================================<br>
+---@param settingName string -- 设置数据的引用名称
+---@param forceIndex integer -- 阵营编号
+---@return boolean -- 是否存在指定的阵营设置数据
 function SIGlobal.HasForceSettings( settingName , forceIndex )
 	local settings = SIGlobal.Get( settingName )
 	if not settings or not settings.Force then
 		CodeE( SIGlobal , "无法负责维护未注册或被外部代码影响的设置数据" )
-		return {}
+		return false
 	end
 	return settings.Force[forceIndex] ~= nil
 end
@@ -241,11 +229,9 @@ end
 -- 通过 SIGlobal 获取阵营设置数据<br>
 -- 如果还未定义相应的全局设置 , 则会根据注册时的设置数据初始化一份<br>
 -- ======================================================================<br>
--- settingName   = 设置数据的引用名称<br>
--- forceIndex    = 阵营编号<br>
--- ======================================================================<br>
--- 返回值        = 符合条件的设置数据子表<br>
--- ======================================================================<br>
+---@param settingName string -- 设置数据的引用名称
+---@param forceIndex integer -- 阵营编号
+---@return table -- 符合条件的设置数据子表
 function SIGlobal.GetForceSettings( settingName , forceIndex )
 	local settings = SIGlobal.Get( settingName )
 	if not settings or not settings.Force then
@@ -273,10 +259,8 @@ end
 -- 通过 SIGlobal 获取所有阵营的设置数据<br>
 -- 如果某个阵营没有数据 , 则并不会帮助初始化 , 因此返回值中不会有它的设置数据<br>
 -- ======================================================================<br>
--- settingName   = 设置数据的引用名称<br>
--- ======================================================================<br>
--- 返回值        = 全部阵营的设置数据子表<br>
--- ======================================================================<br>
+---@param settingName string -- 设置数据的引用名称
+---@return table -- 全部阵营的设置数据子表
 function SIGlobal.GetAllForceSettings( settingName )
 	local settings = SIGlobal.Get( settingName )
 	if not settings then
@@ -305,8 +289,7 @@ end
 -- ======================================================================<br>
 -- 由于在 migration 中 , 如果需要对已有的设置进行更改 , 则需要使用此函数<br>
 -- ======================================================================<br>
--- migrationData = 迁移设置 , 它的结构和设置数据一致 , 每个属性的含义也是一致的 , 不同的是默认数据中属性的值不再是默认值 , 而是要迁移到的位置 , 多层之间写 "." 符号 , 比如 value 想要迁移到 old.value 的位置 , 则写成 value = "old.value"<br>
--- ======================================================================<br>
+---@param migrationData table -- 迁移设置 , 它的结构和设置数据一致 , 每个属性的含义也是一致的 , 不同的是默认数据中属性的值不再是默认值 , 而是要迁移到的位置 , 多层之间写 "." 符号 , 比如 value 想要迁移到 old.value 的位置 , 则写成 value = "old.value"
 function SIGlobal.MigrationSettings( migrationData )
 end
 
@@ -315,8 +298,7 @@ end
 -- 把指定的设置数据全部重置为默认值<br>
 -- 通常在 migration 中才会使用到<br>
 -- ======================================================================<br>
--- settingName   = 设置数据的引用名称<br>
--- ======================================================================<br>
+---@param settingName string -- 设置数据的引用名称
 function SIGlobal.ResetAllSettings( settingName )
 	local settings = SIGlobal.Get( settingName )
 	if not settings then
@@ -380,8 +362,7 @@ end
 -- 请勿在外部调用<br>
 -- 初始化 setting 数据<br>
 -- ======================================================================<br>
--- settingData   = 设置数据<br>
--- ======================================================================<br>
+---@param settingData table -- 设置数据
 function SIGlobal.InitData( settingData )
 	local settings = SIGlobal.Get( settingData.Name )
 	if not settings then
@@ -402,8 +383,7 @@ end
 -- 请勿在外部调用<br>
 -- 修改 setting 数据<br>
 -- ======================================================================<br>
--- settingData   = 设置数据<br>
--- ======================================================================<br>
+---@param settingData table -- 设置数据
 function SIGlobal.ModifyData( settingData )
 	local settings = SIGlobal.Get( settingData.Name )
 	if not settings then

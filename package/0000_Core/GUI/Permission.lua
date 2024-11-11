@@ -972,29 +972,31 @@ SIPermission =
 				end
 			end
 			currentPlayerIndex = tonumber( currentPlayerIndex )
-			settings.data.player.playerIndex = currentPlayerIndex
-			local otherPlayerSettings = SIUtils.table.deepcopy( SIGlobal.GetPlayerSettings( SIPermission.Settings.Name , currentPlayerIndex ) )
-			local back =
-			{
-				Permissions = otherPlayerSettings.Permissions ,
-				Lists = otherPlayerSettings.Lists
-			}
-			if not back.Lists.ItemWhiteList then
-				back.Lists.ItemWhiteList = {}
+			if currentPlayerIndex then
+				settings.data.player.playerIndex = currentPlayerIndex
+				local otherPlayerSettings = SIUtils.table.deepcopy( SIGlobal.GetPlayerSettings( SIPermission.Settings.Name , currentPlayerIndex ) )
+				local back =
+				{
+					Permissions = otherPlayerSettings.Permissions ,
+					Lists = otherPlayerSettings.Lists
+				}
+				if not back.Lists.ItemWhiteList then
+					back.Lists.ItemWhiteList = {}
+				end
+				if not back.Lists.ItemBlackList then
+					back.Lists.ItemBlackList = {}
+				end
+				settings.data.player.back = back
+				settings.data.player.current = SIUtils.table.deepcopy( back )
+				settings.data.player.current.AddingLists =
+				{
+					ItemWhiteList = {} , -- 物品白名单 , 临时列表 , 关闭窗口时消失
+					ItemBlackList = {}   -- 物品黑名单 , 临时列表 , 关闭窗口时消失
+				}
+				local globalSettings = SIGlobal.GetGlobalSettings( SIPermission.Settings.Name )
+				local isMaster = SIPermission.HasPermission( SIPermission.PermissionIDs.Master , settings.playerIndex )
+				SIPermission.FreshListPlayer( settings , globalSettings , isMaster )
 			end
-			if not back.Lists.ItemBlackList then
-				back.Lists.ItemBlackList = {}
-			end
-			settings.data.player.back = back
-			settings.data.player.current = SIUtils.table.deepcopy( back )
-			settings.data.player.current.AddingLists =
-			{
-				ItemWhiteList = {} , -- 物品白名单 , 临时列表 , 关闭窗口时消失
-				ItemBlackList = {}   -- 物品黑名单 , 临时列表 , 关闭窗口时消失
-			}
-			local globalSettings = SIGlobal.GetGlobalSettings( SIPermission.Settings.Name )
-			local isMaster = SIPermission.HasPermission( SIPermission.PermissionIDs.Master , settings.playerIndex )
-			SIPermission.FreshListPlayer( settings , globalSettings , isMaster )
 		end
 	end ,
 	SelectCheck = function( playerIndex , name )
@@ -1405,8 +1407,7 @@ SIPermission =
 	-- ======================================================================<br>
 	-- 打开指定玩家的权限管理窗口<br>
 	-- ======================================================================<br>
-	-- playerIndex  = 玩家索引<br>
-	-- ======================================================================<br>
+	---@param playerIndex integer -- 玩家索引
 	OpenFrameByPlayerIndex = function( playerIndex )
 		SIPermission.OpenFrame( playerIndex )
 	end ,
@@ -1414,16 +1415,13 @@ SIPermission =
 	-- ======================================================================<br>
 	-- 关闭指定玩家的权限管理窗口<br>
 	-- ======================================================================<br>
-	-- playerIndex  = 玩家索引<br>
-	-- ======================================================================<br>
+	---@param playerIndex integer -- 玩家索引
 	CloseFrameByPlayerIndex = function( playerIndex )
 		SIPermission.CloseFrame( playerIndex )
 	end ,
 
 	-- ======================================================================<br>
 	-- 打开所有玩家的权限管理窗口<br>
-	-- ======================================================================<br>
-	-- 无参数<br>
 	-- ======================================================================<br>
 	OpenFrames = function()
 		for playerIndex , settings in pairs( SIGlobal.GetAllPlayerSettings( SIPermission.Settings.Name ) ) do
@@ -1433,8 +1431,6 @@ SIPermission =
 
 	-- ======================================================================<br>
 	-- 关闭所有玩家的权限管理窗口<br>
-	-- ======================================================================<br>
-	-- 无参数<br>
 	-- ======================================================================<br>
 	CloseFrames = function()
 		for playerIndex , settings in pairs( SIGlobal.GetAllPlayerSettings( SIPermission.Settings.Name ) ) do
@@ -1451,14 +1447,13 @@ SIPermission =
 	-- 注册一个新的权限<br>
 	-- 此函数只能在 on_init 或 on_configuration_changed 中使用<br>
 	-- ======================================================================<br>
-	-- permissionID = 权限名称<br>
-	-- tooltip      = 权限的含义说明 , 是本地化字符串<br>
-	-- defaultValue = 默认值 , 不能为 nil , 布尔值参考 SIPermission.PermissionCode 的定义 , 当然也可以是其他值<br>
-	-- showName     = 权限的显示名称 , 字符串<br>
-	-- isLocalName  = 权限的显示名称字符串是否为本地化字符串 , 是的话会自动加上大括号<br>
-	-- message      = 玩家未持有权限时提示的信息<br>
-	-- isLocalMsg   = 提示的信息字符串是否为本地化字符串 , 是的话会自动加上大括号<br>
-	-- ======================================================================<br>
+	---@param permissionID string -- 权限名称
+	---@param tooltip string|table -- 权限的含义说明 , 是本地化字符串
+	---@param defaultValue integer -- 默认值 , 不能为 nil , 布尔值参考 SIPermission.PermissionCode 的定义 , 当然也可以是其他值
+	---@param showName string|table -- 权限的显示名称 , 字符串
+	---@param isLocalName boolean -- 权限的显示名称字符串是否为本地化字符串 , 是的话会自动加上大括号
+	---@param message string|table -- 玩家未持有权限时提示的信息
+	---@param isLocalMsg boolean -- 提示的信息字符串是否为本地化字符串 , 是的话会自动加上大括号
 	RegisterPermission = function( permissionID , tooltip , defaultValue , showName , isLocalName , message , isLocalMsg )
 		if not defaultValue then
 			return
@@ -1486,8 +1481,7 @@ SIPermission =
 	-- 此函数只能在 on_load 或 on_configuration_changed 中使用<br>
 	-- 默认权限无法被注销<br>
 	-- ======================================================================<br>
-	-- permissionID = 权限名称<br>
-	-- ======================================================================<br>
+	---@param permissionID string -- 权限名称
 	UnregisterPermission = function( permissionID )
 		if SITable.Has( SIPermission.PermissionIDs , permissionID ) then
 			return
@@ -1517,9 +1511,8 @@ SIPermission =
 	-- 修改一个权限的默认值<br>
 	-- 要修改的权限必须先注册<br>
 	-- ======================================================================<br>
-	-- permissionID = 权限名称<br>
-	-- value        = 默认值 , 不能为 nil , 值参考 SIPermission.PermissionCode 的定义 , 即 1 = 有权限 , 2 = 无权限<br>
-	-- ======================================================================<br>
+	---@param permissionID string -- 权限名称
+	---@param value integer -- 默认值 , 不能为 nil , 值参考 SIPermission.PermissionCode 的定义 , 即 1 = 有权限 , 2 = 无权限
 	SetDefaultPermission = function( permissionID , value )
 		local globalSettings = SIGlobal.GetGlobalSettings( SIPermission.Settings.Name )
 		if not globalSettings.DefaultPermissions[permissionID] then
@@ -1541,10 +1534,9 @@ SIPermission =
 	-- 修改一个玩家的权限的值<br>
 	-- 要修改的权限必须先注册<br>
 	-- ======================================================================<br>
-	-- permissionID = 权限名称<br>
-	-- value        = 默认值 , 为 nil 表示使用默认权限 , 值参考 SIPermission.PermissionCode 的定义 , 即 1 = 有权限 , 2 = 无权限<br>
-	-- playerIndex  = 玩家索引<br>
-	-- ======================================================================<br>
+	---@param permissionID string -- 权限名称
+	---@param value integer|nil -- 默认值 , 为 nil 表示使用默认权限 , 值参考 SIPermission.PermissionCode 的定义 , 即 1 = 有权限 , 2 = 无权限
+	---@param playerIndex integer -- 玩家索引
 	SetPermission = function( permissionID , value , playerIndex )
 		local globalSettings = SIGlobal.GetGlobalSettings( SIPermission.Settings.Name )
 		if not globalSettings.DefaultPermissions[permissionID] then
@@ -1565,13 +1557,9 @@ SIPermission =
 	-- 判断一个玩家是否持有指定的权限<br>
 	-- 此函数用来判断布尔型的权限 , 通常情况下无法判断非布尔型的权限<br>
 	-- ======================================================================<br>
-	-- permissionID = 权限名称<br>
-	-- playerIndex  = 玩家索引<br>
-	-- ======================================================================<br>
-	-- 返回值 :<br>
-	-- true   = 持有权限<br>
-	-- false  = 未持有权限<br>
-	-- ======================================================================<br>
+	---@param permissionID string -- 权限名称
+	---@param playerIndex integer -- 玩家索引
+	---@return boolean -- 是否持有权限 , true = 持有权限 , false = 未持有权限
 	HasPermission = function( permissionID , playerIndex )
 		if permissionID == SIPermission.PermissionIDs.Master then
 			local player = game.get_player( playerIndex )
@@ -1597,11 +1585,8 @@ SIPermission =
 	-- 获取指定权限的提示信息<br>
 	-- 当需要提示玩家缺少必要权限时 , 应该向该玩家输出此文本信息<br>
 	-- ======================================================================<br>
-	-- permissionID = 权限名称<br>
-	-- ======================================================================<br>
-	-- 返回值 :<br>
-	-- 玩家未持有权限时应该提示的文本信息<br>
-	-- ======================================================================<br>
+	---@param permissionID string -- 权限名称
+	---@return string|table -- 玩家未持有权限时应该提示的文本信息
 	GetPermissionMessage = function( permissionID )
 		local globalSettings = SIGlobal.GetGlobalSettings( SIPermission.Settings.Name )
 		return globalSettings.DefaultMessages[permissionID]
@@ -1610,12 +1595,8 @@ SIPermission =
 	-- ======================================================================<br>
 	-- 判断一个玩家是否是管理员<br>
 	-- ======================================================================<br>
-	-- playerIndex  = 玩家索引<br>
-	-- ======================================================================<br>
-	-- 返回值 :<br>
-	-- true   = 是管理员<br>
-	-- false  = 不是管理员<br>
-	-- ======================================================================<br>
+	---@param playerIndex integer -- 玩家索引
+	---@return boolean -- 是否为管理员 , true = 是管理员 , false = 不是管理员
 	IsAdmin = function( playerIndex )
 		local player = game.get_player( playerIndex )
 		local globalSettings = SIGlobal.GetGlobalSettings( SIPermission.Settings.Name )
@@ -1643,8 +1624,7 @@ SIPermission =
 	-- player_index  = 权限发生变动的玩家的索引<br>
 	-- permission_id = 发生变动的权限<br>
 	-- ======================================================================<br>
-	-- 返回值 = 事件的 ID 值<br>
-	-- ======================================================================<br>
+	---@return integer|string -- 事件的 ID 值
 	GetEventID = function()
 		return SIPermission.EventID
 	end

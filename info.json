@@ -8,7 +8,8 @@
 	"description": "Adds some UI, tools, items and technologies.",
 	"dependencies": [
 		"base >= 2.0.0",
-		"? SIAllRoadsLeadToSpaaaaaaaceGraphics1 >= 1.0.1",
+		"(?) SIAllRoadsLeadToSpaaaaaaaceGraphics1 >= 1.0.1",
+		"(?) SIAllRoadsLeadToSpaaaaaaaceGraphics2 >= 0.0.1",
 		"! SICoreFunctionLibrary",
 		"! SIBeltExtension",
 		"! SICharacterExtension",

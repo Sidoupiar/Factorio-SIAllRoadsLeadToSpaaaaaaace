@@ -357,8 +357,7 @@ SIOreMap =
 	-- ======================================================================<br>
 	-- 打开指定玩家的黄图的管理窗口<br>
 	-- ======================================================================<br>
-	-- playerIndex    = 玩家索引<br>
-	-- ======================================================================<br>
+	---@param playerIndex integer -- 玩家索引
 	OpenFrameByPlayerIndex = function( playerIndex )
 		SIOreMap.OpenFrame( playerIndex )
 	end ,
@@ -366,16 +365,13 @@ SIOreMap =
 	-- ======================================================================<br>
 	-- 关闭指定玩家的黄图的管理窗口<br>
 	-- ======================================================================<br>
-	-- playerIndex    = 玩家索引<br>
-	-- ======================================================================<br>
+	---@param playerIndex integer -- 玩家索引
 	CloseFrameByPlayerIndex = function( playerIndex )
 		SIOreMap.CloseFrame( playerIndex )
 	end ,
 
 	-- ======================================================================<br>
 	-- 打开所有玩家的黄图的管理窗口<br>
-	-- ======================================================================<br>
-	-- 无参数<br>
 	-- ======================================================================<br>
 	OpenFrames = function()
 		for playerIndex , settings in pairs( SIGlobal.GetAllPlayerSettings( SIOreMap.Settings.Name ) ) do
@@ -385,8 +381,6 @@ SIOreMap =
 
 	-- ======================================================================<br>
 	-- 关闭所有玩家的黄图的管理窗口<br>
-	-- ======================================================================<br>
-	-- 无参数<br>
 	-- ======================================================================<br>
 	CloseFrames = function()
 		for playerIndex , settings in pairs( SIGlobal.GetAllPlayerSettings( SIOreMap.Settings.Name ) ) do
@@ -402,11 +396,10 @@ SIOreMap =
 	-- ======================================================================<br>
 	-- 导入数据<br>
 	-- ======================================================================<br>
-	-- playerIndex    = 点击按钮的玩家索引<br>
-	-- data           = 导出时保存的数据 , 根据导出时导出接口函数返回的数据 , 此参数可能为 nil<br>
-	-- settingsDataID = 导入导出设置数据包的 ID<br>
-	-- gameTick       = 导出数据时的游戏时间 , tick<br>
-	-- ======================================================================<br>
+	---@param playerIndex integer -- 点击按钮的玩家索引
+	---@param data table -- 导出时保存的数据 , 根据导出时导出接口函数返回的数据 , 此参数可能为 nil
+	---@param settingsDataID string -- 导入导出设置数据包的 ID
+	---@param gameTick integer -- 导出数据时的游戏时间 , tick
 	ImpoerSettingsData = function( playerIndex , data , settingsDataID , gameTick )
 		if not data then
 			return
@@ -425,12 +418,10 @@ SIOreMap =
 	-- ======================================================================<br>
 	-- 导出数据<br>
 	-- ======================================================================<br>
-	-- playerIndex    = 点击按钮的玩家索引<br>
-	-- settingsDataID = 导入导出设置数据包的 ID<br>
-	-- gameTick       = 当前的游戏时间 , tick<br>
-	-- ======================================================================<br>
-	-- 返回值 = 导出的数据<br>
-	-- ======================================================================<br>
+	---@param playerIndex integer -- 点击按钮的玩家索引
+	---@param settingsDataID string -- 导入导出设置数据包的 ID
+	---@param gameTick integer -- 当前的游戏时间 , tick
+	---@return table -- 导出的数据
 	ExportSettingsData = function( playerIndex , settingsDataID , gameTick )
 		local settings = SIGlobal.GetPlayerSettings( SIOreMap.Settings.Name , playerIndex )
 		return
@@ -449,10 +440,9 @@ SIOreMap =
 	-- ======================================================================<br>
 	-- 向玩家数据内添加矿物<br>
 	-- ======================================================================<br>
-	-- playerIndex    = 玩家索引<br>
-	-- oreName        = 矿物实体名称<br>
-	-- count          = 添加的数量 , 不能小于 1<br>
-	-- ======================================================================<br>
+	---@param playerIndex integer -- 玩家索引
+	---@param oreName string -- 矿物实体名称
+	---@param count integer -- 添加的数量 , 不能小于 1
 	AddOre = function( playerIndex , oreName , count )
 		if count > 0 then
 			local settings = SIGlobal.GetPlayerSettings( SIOreMap.Settings.Name , playerIndex )
@@ -472,10 +462,9 @@ SIOreMap =
 	-- 从玩家数据中移除矿物<br>
 	-- 数量不足时会直接删除条目<br>
 	-- ======================================================================<br>
-	-- playerIndex    = 玩家索引<br>
-	-- oreName        = 矿物实体名称<br>
-	-- count          = 移除的数量 , 不能小于 1<br>
-	-- ======================================================================<br>
+	---@param playerIndex integer -- 玩家索引
+	---@param oreName string -- 矿物实体名称
+	---@param count integer -- 移除的数量 , 不能小于 1
 	RemoveOre = function( playerIndex , oreName , count )
 		if count > 0 then
 			local settings = SIGlobal.GetPlayerSettings( SIOreMap.Settings.Name , playerIndex )
@@ -495,6 +484,7 @@ SIOreMap =
 }
 
 SIOreMap.Names.IconNamePosition = #SIOreMap.Names.IconNamePrefix + 1
+
 SIOreMap.Toolbar =
 {
 	ID = "SI工具图-黄图" ,
@@ -507,6 +497,7 @@ SIOreMap.Toolbar =
 	Permission = SIPermission.PermissionIDs.OreMap ,
 	Order = "SICore-MapOre"
 }
+
 SIOreMap.SettingsData =
 {
 	ID = "SI工具图-黄图" ,

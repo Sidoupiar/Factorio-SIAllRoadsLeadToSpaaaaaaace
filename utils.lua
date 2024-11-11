@@ -568,7 +568,7 @@ end
 -- ======================================================================<br>
 ---@param Structure table
 ---@param message string
----@return table
+---@return table -- 自身
 function CodeE( Structure , message )
 	E( Structure.Show .. " [ " .. Structure.ID .. " ] : " .. message )
 	return Structure
@@ -577,7 +577,7 @@ end
 -- ======================================================================<br>
 ---@param Structure table
 ---@param message string
----@return table
+---@return table -- 自身
 function UseE( Structure , message )
 	E( "模块使用 [ " .. Structure.ID .. " ] : " .. message )
 	return Structure
@@ -834,7 +834,7 @@ SIInit =
 -- 除了 control 阶段外 , 请勿在外部调用此函数<br>
 -- ======================================================================<br>
 ---@param StateCode integer -- 载入阶段值 , 可用值请见 SIInit.StateCodeDefine 表
----@return table
+---@return table -- 自身
 function SIInit.AutoLoadState( StateCode )
 	if not SITable.Has( SIInit.StateCodeDefine , StateCode ) then
 		return CodeE( SIInit , "不存在的阶段 , StateCode=" .. StateCode )
@@ -879,7 +879,7 @@ end
 ---@param ConstantsDataPrefix string -- ConstantsData 在代码的各种位置中进行注册时使用的名称前缀 , 防止重名 , 不影响注册的原型数据
 ---@param CodeNamePrefix string -- ConstantsData 在代码的各种位置中进行显示时使用的名称前缀 , 防止重名 , 影响注册的原型数据的 name 属性
 ---@param ShowNamePrefix string -- ConstantsData 在代码的各种位置中进行显示时使用的名称前缀 , 防止重名 , 影响注册的原型数据和本地化字符串 , 生成原型数据名称时此前缀也会被包含进去
----@return table
+---@return table -- 自身
 function SIInit.AutoLoad( ModName , CustomPackageConfig , ConstantsDataPrefix , CodeNamePrefix , ShowNamePrefix )
 	if not ModName then
 		ModName = CoreName

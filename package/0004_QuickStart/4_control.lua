@@ -5,6 +5,7 @@
 -- ============================================================================================================================================
 
 SIQuickStartSettingName = "QuickStart"
+SIQuickStartNTHName = "QuickStart"
 SIQuickStartMaxCheck = 16384
 
 -- ============================================================================================================================================
@@ -146,7 +147,7 @@ function SIQuickStart_StartUp_SpawnGift( event )
 	-- 取得保存的数据
 	local globalSettings = SIGlobal.GetGlobalSettings( SIQuickStartSettingName )
 	if #globalSettings.ProcessList < 1 then
-		script.on_nth_tick( 1 , nil )
+		SIEventBus.RemoveNth( 1 , SIQuickStartNTHName )
 		return
 	end
 	local processData = globalSettings.ProcessList[1]
@@ -278,8 +279,7 @@ SIEventBus
 		CurrentItemData = { Name = nil , CountLeft = nil , Quality = nil }
 	}
 	table.insert( globalSettings.ProcessList , processData )
-	script.on_nth_tick( 1 , nil )
-	script.on_nth_tick( 1 , SIQuickStart_StartUp_SpawnGift )
+	SIEventBus.AddOrSetNth( 1 , SIQuickStart_StartUp_SpawnGift , SIQuickStartNTHName )
 end )
 
 -- ============================================================================================================================================

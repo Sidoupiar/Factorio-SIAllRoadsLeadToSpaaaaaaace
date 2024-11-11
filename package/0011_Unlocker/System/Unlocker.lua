@@ -445,8 +445,7 @@ SIUnlocker =
 	-- ======================================================================<br>
 	-- 添加一个解锁数据包<br>
 	-- ======================================================================<br>
-	-- unlockData     = 解锁数据包 , 其结构见文件末尾的注释<br>
-	-- ======================================================================<br>
+	---@param unlockData table -- 解锁数据包 , 其结构见文件末尾的注释
 	AddUnlockData = function( unlockData )
 		local globalSettings = SIGlobal.GetGlobalSettings( SIUnlocker.Settings.Name )
 		local unlockDataID = unlockData.ID
@@ -467,8 +466,7 @@ SIUnlocker =
 	-- ======================================================================<br>
 	-- 添加多个解锁数据包<br>
 	-- ======================================================================<br>
-	-- unlockDataList = 解锁数据包数组 , 其中包含多个解锁数据包 , 其结构见文件末尾的注释<br>
-	-- ======================================================================<br>
+	---@param unlockDataList table -- 解锁数据包数组 , 其中包含多个解锁数据包 , 其结构见文件末尾的注释
 	AddUnlockDataList = function( unlockDataList )
 		local globalSettings = SIGlobal.GetGlobalSettings( SIUnlocker.Settings.Name )
 		for index , unlockData in pairs( unlockDataList ) do
@@ -489,8 +487,7 @@ SIUnlocker =
 	-- ======================================================================<br>
 	-- 更新一个解锁数据包<br>
 	-- ======================================================================<br>
-	-- unlockData     = 解锁数据包 , 其结构见文件末尾的注释<br>
-	-- ======================================================================<br>
+	---@param unlockData table -- 解锁数据包 , 其结构见文件末尾的注释
 	FreshUnlockData = function( unlockData )
 		local globalSettings = SIGlobal.GetGlobalSettings( SIUnlocker.Settings.Name )
 		local unlockDataID = unlockData.ID
@@ -512,8 +509,7 @@ SIUnlocker =
 	-- ======================================================================<br>
 	-- 更新多个解锁数据包<br>
 	-- ======================================================================<br>
-	-- unlockDataList = 解锁数据包数组 , 其中包含多个解锁数据包 , 其结构见文件末尾的注释<br>
-	-- ======================================================================<br>
+	---@param unlockDataList table -- 解锁数据包数组 , 其中包含多个解锁数据包 , 其结构见文件末尾的注释
 	FreshUnlockDataList = function( unlockDataList )
 		local globalSettings = SIGlobal.GetGlobalSettings( SIUnlocker.Settings.Name )
 		for index , unlockData in pairs( unlockDataList ) do
@@ -541,9 +537,8 @@ SIUnlocker =
 	-- 强制解锁<br>
 	-- 就算是已经解锁过的 , 依然可以重复解锁<br>
 	-- ======================================================================<br>
-	-- forceIndex     = 阵营索引 , 不可以是阵营的名称<br>
-	-- unlockDataID   = 解锁数据包的 ID<br>
-	-- ======================================================================<br>
+	---@param forceIndex integer -- 阵营索引 , 不可以是阵营的名称
+	---@param unlockDataID string -- 解锁数据包的 ID
 	Unlock = function( forceIndex , unlockDataID )
 		local forceSettings = SIGlobal.GetForceSettings( SIUnlocker.Settings.Name , forceIndex )
 		local unlockData = forceSettings.UnlockData[unlockDataID]
@@ -574,6 +569,7 @@ SIUnlocker.TriggerTypeID =
 	Destroy     = "Destroy" ,
 	Capsule     = "Capsule"
 }
+
 SIUnlocker.ResultTypeID =
 {
 	AddRecipe        = "AddRecipe"        , -- 解锁配方
@@ -585,6 +581,7 @@ SIUnlocker.ResultTypeID =
 	MessagePlayer    = "MessagePlayer"    , -- 向最终触发解锁的玩家发送一条消息
 	Interface        = "Interface"          -- 执行 remote 接口函数 , 有六个参数 , 第 1 个参数是解锁数据的 ID , 第 2 个参数是保存在其中的数据包 , 第 3 个参数是触发的阵营编号 , 第 4 个参数是最终触发的玩家编号 , 可能为 nil , 第 5 个参数是触发的次数 , 第 6 个参数是当前游戏刻
 }
+
 SIUnlocker.CountMode =
 {
 	Single = 1 ,

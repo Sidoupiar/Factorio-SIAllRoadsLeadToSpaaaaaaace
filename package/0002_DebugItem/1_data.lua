@@ -8,23 +8,60 @@ local healthMult = SIConfigs.SIDebugItem.DebugEntityHealthMult ~= nil and SIConf
 local tankSize = SIConfigs.SIDebugItem.TankSize ~= nil and SIConfigs.SIDebugItem.TankSize or 8.0
 local tankScale = 0.5 * tankSize
 local tankShiftY = 6
-
-local LaserSmallDamage = 6
-local LaserLargeDamage = 10
-local LaserLargeDamageDirect = 14
-
 local maxHealth = math.max( 26000.0 * healthMult , 1.0 )
 local defaultResistances =
 {
-	SITools.Resistance( "physical" , 10 , 25 ) ,
-	SITools.Resistance( "impact" , 0 , 98 ) ,
-	SITools.Resistance( "poison" , 0 , 100 ) ,
-	SITools.Resistance( "explosion" , 5 , 65 ) ,
-	SITools.Resistance( "fire" , 0 , 100 ) ,
-	SITools.Resistance( "laser" , 25 , 0 ) ,
-	SITools.Resistance( "acid" , 0 , 100 ) ,
-	SITools.Resistance( "electric" , 0 , 100 ) ,
+	SITools.Resistance( "physical"  , 22 ,  56.0 ) ,
+	SITools.Resistance( "impact"    ,  0 ,  99.9 ) ,
+	SITools.Resistance( "poison"    ,  0 , 100.0 ) ,
+	SITools.Resistance( "explosion" , 80 ,  68.0 ) ,
+	SITools.Resistance( "fire"      , 15 ,  44.0 ) ,
+	SITools.Resistance( "laser"     , 21 ,  62.0 ) ,
+	SITools.Resistance( "acid"      , 43 ,  80.0 ) ,
+	SITools.Resistance( "electric"  ,  0 , 100.0 ) ,
 }
+local damageTypeList =
+{
+	"physical" ,
+	"impact" ,
+	"poison" ,
+	"explosion" ,
+	"fire" ,
+	"laser" ,
+	"acid" ,
+	"electric"
+}
+local laserSmallDamage  = 8
+local laserMediumDamage = 13
+local laserLargeDamage  = 24
+local laserLargeDamageDirect = 37
+local laserSmallSize = 0.33
+local laserMediumSize = 0.6
+local laserLargeSize = 1.0
+
+-- ======================================================================<br>
+---@param damageAmount number
+---@param isShowInTooltip boolean
+---@return table
+local function MakeLaserDamageEffectList( damageAmount , isShowInTooltip )
+	local damageEffectList = {}
+	for _ , damageType in pairs( damageTypeList ) do
+		table.insert( damageEffectList ,
+		{
+			type = "damage" ,
+			show_in_tooltip = isShowInTooltip ,
+			lower_damage_modifier = 1.0 ,
+			upper_damage_modifier = 1.0 ,
+			apply_damage_to_trees = true ,
+			damage =
+			{
+				type = damageType ,
+				amount = damageAmount
+			}
+		} )
+	end
+	return damageEffectList
+end
 
 SIGen
 .SetGroup( SIConstants_Core.raw.Groups.Hidden.DebugItem )
@@ -2451,81 +2488,7 @@ SIGen
 			{
 				{
 					type = "instant" ,
-					target_effects =
-					{
-						{
-							type = "damage" ,
-							show_in_tooltip = true ,
-							lower_damage_modifier = 1.0 ,
-							upper_damage_modifier = 1.0 ,
-							apply_damage_to_trees = true ,
-							damage =
-							{
-								type = "physical" ,
-								amount = LaserSmallDamage
-							}
-						} ,
-						{
-							type = "damage" ,
-							show_in_tooltip = true ,
-							lower_damage_modifier = 1.0 ,
-							upper_damage_modifier = 1.0 ,
-							apply_damage_to_trees = true ,
-							damage =
-							{
-								type = "impact" ,
-								amount = LaserSmallDamage
-							}
-						} ,
-						{
-							type = "damage" ,
-							show_in_tooltip = true ,
-							lower_damage_modifier = 1.0 ,
-							upper_damage_modifier = 1.0 ,
-							apply_damage_to_trees = true ,
-							damage =
-							{
-								type = "poison" ,
-								amount = LaserSmallDamage
-							}
-						} ,
-						{
-							type = "damage" ,
-							show_in_tooltip = true ,
-							lower_damage_modifier = 1.0 ,
-							upper_damage_modifier = 1.0 ,
-							apply_damage_to_trees = true ,
-							damage =
-							{
-								type = "explosion" ,
-								amount = LaserSmallDamage
-							}
-						} ,
-						{
-							type = "damage" ,
-							show_in_tooltip = true ,
-							lower_damage_modifier = 1.0 ,
-							upper_damage_modifier = 1.0 ,
-							apply_damage_to_trees = true ,
-							damage =
-							{
-								type = "fire" ,
-								amount = LaserSmallDamage
-							}
-						} ,
-						{
-							type = "damage" ,
-							show_in_tooltip = true ,
-							lower_damage_modifier = 1.0 ,
-							upper_damage_modifier = 1.0 ,
-							apply_damage_to_trees = true ,
-							damage =
-							{
-								type = "laser" ,
-								amount = LaserSmallDamage
-							}
-						}
-					}
+					target_effects = MakeLaserDamageEffectList( laserSmallDamage , true )
 				}
 			}
 		}
@@ -2549,7 +2512,7 @@ SIGen
 						frame_count = 8 ,
 						line_length = 8 ,
 						animation_speed = 0.5 ,
-						scale = 0.5
+						scale = laserSmallSize
 					} ,
 					{
 						filename = SIGen.MakeSelfPicturePath( "终末之横扫千军光束-激光-身体-光效" ) ,
@@ -2561,7 +2524,7 @@ SIGen
 						frame_count = 8 ,
 						line_length = 8 ,
 						animation_speed = 0.5 ,
-						scale = 0.5
+						scale = laserSmallSize
 					}
 				}
 			} ,
@@ -2579,7 +2542,7 @@ SIGen
 						frame_count = 8 ,
 						line_length = 8 ,
 						animation_speed = 0.5 ,
-						scale = 0.5
+						scale = laserSmallSize
 					} ,
 					{
 						filename = SIGen.MakeSelfPicturePath( "终末之横扫千军光束-激光-身体-光效" ) ,
@@ -2591,7 +2554,7 @@ SIGen
 						frame_count = 8 ,
 						line_length = 8 ,
 						animation_speed = 0.5 ,
-						scale = 0.5
+						scale = laserSmallSize
 					}
 				}
 			} ,
@@ -2609,7 +2572,7 @@ SIGen
 						frame_count = 8 ,
 						line_length = 8 ,
 						animation_speed = 0.5 ,
-						scale = 0.5 ,
+						scale = laserSmallSize ,
 						shift = SIUtils.by_pixel( 11.5 , 1 )
 					} ,
 					{
@@ -2622,7 +2585,7 @@ SIGen
 						frame_count = 8 ,
 						line_length = 8 ,
 						animation_speed = 0.5 ,
-						scale = 0.5 ,
+						scale = laserSmallSize ,
 						shift = SIUtils.by_pixel( 11.5 , 1 )
 					}
 				}
@@ -2643,7 +2606,7 @@ SIGen
 						line_length = 1 ,
 						repeat_count = 8 ,
 						animation_speed = 0.5 ,
-						scale = 0.5 ,
+						scale = laserSmallSize ,
 						tint = { r = 0.50 , g = 0.50 , b = 0.05 }
 					}
 				}
@@ -2661,7 +2624,7 @@ SIGen
 						line_length = 1 ,
 						repeat_count = 8 ,
 						animation_speed = 0.5 ,
-						scale = 0.5 ,
+						scale = laserSmallSize ,
 						tint = { r = 0.50 , g = 0.50 , b = 0.05 } ,
 						shift = SIUtils.by_pixel( -32 , 0 )
 					}
@@ -2680,7 +2643,7 @@ SIGen
 						line_length = 1 ,
 						repeat_count = 8 ,
 						animation_speed = 0.5 ,
-						scale = 0.5 ,
+						scale = laserSmallSize ,
 						tint = { r = 0.50 , g = 0.50 , b = 0.05 } ,
 						shift = SIUtils.by_pixel( 32 , 0 )
 					}
@@ -2714,81 +2677,7 @@ SIGen
 			{
 				{
 					type = "instant" ,
-					target_effects =
-					{
-						{
-							type = "damage" ,
-							show_in_tooltip = true ,
-							lower_damage_modifier = 1.0 ,
-							upper_damage_modifier = 1.0 ,
-							apply_damage_to_trees = true ,
-							damage =
-							{
-								type = "physical" ,
-								amount = LaserSmallDamage
-							}
-						} ,
-						{
-							type = "damage" ,
-							show_in_tooltip = true ,
-							lower_damage_modifier = 1.0 ,
-							upper_damage_modifier = 1.0 ,
-							apply_damage_to_trees = true ,
-							damage =
-							{
-								type = "impact" ,
-								amount = LaserSmallDamage
-							}
-						} ,
-						{
-							type = "damage" ,
-							show_in_tooltip = true ,
-							lower_damage_modifier = 1.0 ,
-							upper_damage_modifier = 1.0 ,
-							apply_damage_to_trees = true ,
-							damage =
-							{
-								type = "poison" ,
-								amount = LaserSmallDamage
-							}
-						} ,
-						{
-							type = "damage" ,
-							show_in_tooltip = true ,
-							lower_damage_modifier = 1.0 ,
-							upper_damage_modifier = 1.0 ,
-							apply_damage_to_trees = true ,
-							damage =
-							{
-								type = "explosion" ,
-								amount = LaserSmallDamage
-							}
-						} ,
-						{
-							type = "damage" ,
-							show_in_tooltip = true ,
-							lower_damage_modifier = 1.0 ,
-							upper_damage_modifier = 1.0 ,
-							apply_damage_to_trees = true ,
-							damage =
-							{
-								type = "fire" ,
-								amount = LaserSmallDamage
-							}
-						} ,
-						{
-							type = "damage" ,
-							show_in_tooltip = true ,
-							lower_damage_modifier = 1.0 ,
-							upper_damage_modifier = 1.0 ,
-							apply_damage_to_trees = true ,
-							damage =
-							{
-								type = "laser" ,
-								amount = LaserSmallDamage
-							}
-						}
-					}
+					target_effects = MakeLaserDamageEffectList( laserMediumDamage , true )
 				}
 			}
 		}
@@ -2812,7 +2701,7 @@ SIGen
 						frame_count = 8 ,
 						line_length = 8 ,
 						animation_speed = 0.5 ,
-						scale = 0.9
+						scale = laserMediumSize
 					} ,
 					{
 						filename = SIGen.MakeSelfPicturePath( "终末之横扫千军光束-激光-身体-光效" ) ,
@@ -2824,7 +2713,7 @@ SIGen
 						frame_count = 8 ,
 						line_length = 8 ,
 						animation_speed = 0.5 ,
-						scale = 0.9
+						scale = laserMediumSize
 					}
 				}
 			} ,
@@ -2842,7 +2731,7 @@ SIGen
 						frame_count = 8 ,
 						line_length = 8 ,
 						animation_speed = 0.5 ,
-						scale = 0.9
+						scale = laserMediumSize
 					} ,
 					{
 						filename = SIGen.MakeSelfPicturePath( "终末之横扫千军光束-激光-身体-光效" ) ,
@@ -2854,7 +2743,7 @@ SIGen
 						frame_count = 8 ,
 						line_length = 8 ,
 						animation_speed = 0.5 ,
-						scale = 0.9
+						scale = laserMediumSize
 					}
 				}
 			} ,
@@ -2872,7 +2761,7 @@ SIGen
 						frame_count = 8 ,
 						line_length = 8 ,
 						animation_speed = 0.5 ,
-						scale = 0.9 ,
+						scale = laserMediumSize ,
 						shift = SIUtils.by_pixel( 11.5 , 1 )
 					} ,
 					{
@@ -2885,7 +2774,7 @@ SIGen
 						frame_count = 8 ,
 						line_length = 8 ,
 						animation_speed = 0.5 ,
-						scale = 0.9 ,
+						scale = laserMediumSize ,
 						shift = SIUtils.by_pixel( 11.5 , 1 )
 					}
 				}
@@ -2906,7 +2795,7 @@ SIGen
 						line_length = 1 ,
 						repeat_count = 8 ,
 						animation_speed = 0.5 ,
-						scale = 0.9 ,
+						scale = laserMediumSize ,
 						tint = { r = 0.50 , g = 0.50 , b = 0.05 }
 					}
 				}
@@ -2924,7 +2813,7 @@ SIGen
 						line_length = 1 ,
 						repeat_count = 8 ,
 						animation_speed = 0.5 ,
-						scale = 0.9 ,
+						scale = laserMediumSize ,
 						tint = { r = 0.50 , g = 0.50 , b = 0.05 } ,
 						shift = SIUtils.by_pixel( -32 , 0 )
 					}
@@ -2943,7 +2832,7 @@ SIGen
 						line_length = 1 ,
 						repeat_count = 8 ,
 						animation_speed = 0.5 ,
-						scale = 0.9 ,
+						scale = laserMediumSize ,
 						tint = { r = 0.50 , g = 0.50 , b = 0.05 } ,
 						shift = SIUtils.by_pixel( 32 , 0 )
 					}
@@ -2977,81 +2866,7 @@ SIGen
 			{
 				{
 					type = "instant" ,
-					target_effects =
-					{
-						{
-							type = "damage" ,
-							show_in_tooltip = true ,
-							lower_damage_modifier = 1.0 ,
-							upper_damage_modifier = 1.0 ,
-							apply_damage_to_trees = true ,
-							damage =
-							{
-								type = "physical" ,
-								amount = LaserLargeDamage
-							}
-						} ,
-						{
-							type = "damage" ,
-							show_in_tooltip = true ,
-							lower_damage_modifier = 1.0 ,
-							upper_damage_modifier = 1.0 ,
-							apply_damage_to_trees = true ,
-							damage =
-							{
-								type = "impact" ,
-								amount = LaserLargeDamage
-							}
-						} ,
-						{
-							type = "damage" ,
-							show_in_tooltip = true ,
-							lower_damage_modifier = 1.0 ,
-							upper_damage_modifier = 1.0 ,
-							apply_damage_to_trees = true ,
-							damage =
-							{
-								type = "poison" ,
-								amount = LaserLargeDamage
-							}
-						} ,
-						{
-							type = "damage" ,
-							show_in_tooltip = true ,
-							lower_damage_modifier = 1.0 ,
-							upper_damage_modifier = 1.0 ,
-							apply_damage_to_trees = true ,
-							damage =
-							{
-								type = "explosion" ,
-								amount = LaserLargeDamage
-							}
-						} ,
-						{
-							type = "damage" ,
-							show_in_tooltip = true ,
-							lower_damage_modifier = 1.0 ,
-							upper_damage_modifier = 1.0 ,
-							apply_damage_to_trees = true ,
-							damage =
-							{
-								type = "fire" ,
-								amount = LaserLargeDamage
-							}
-						} ,
-						{
-							type = "damage" ,
-							show_in_tooltip = true ,
-							lower_damage_modifier = 1.0 ,
-							upper_damage_modifier = 1.0 ,
-							apply_damage_to_trees = true ,
-							damage =
-							{
-								type = "laser" ,
-								amount = LaserLargeDamage
-							}
-						}
-					}
+					target_effects = MakeLaserDamageEffectList( laserLargeDamage , true )
 				}
 			}
 		} ,
@@ -3063,81 +2878,7 @@ SIGen
 			{
 				{
 					type = "instant" ,
-					target_effects =
-					{
-						{
-							type = "damage" ,
-							show_in_tooltip = false ,
-							lower_damage_modifier = 1.0 ,
-							upper_damage_modifier = 1.0 ,
-							apply_damage_to_trees = true ,
-							damage =
-							{
-								type = "physical" ,
-								amount = LaserLargeDamageDirect
-							}
-						} ,
-						{
-							type = "damage" ,
-							show_in_tooltip = false ,
-							lower_damage_modifier = 1.0 ,
-							upper_damage_modifier = 1.0 ,
-							apply_damage_to_trees = true ,
-							damage =
-							{
-								type = "impact" ,
-								amount = LaserLargeDamageDirect
-							}
-						} ,
-						{
-							type = "damage" ,
-							show_in_tooltip = false ,
-							lower_damage_modifier = 1.0 ,
-							upper_damage_modifier = 1.0 ,
-							apply_damage_to_trees = true ,
-							damage =
-							{
-								type = "poison" ,
-								amount = LaserLargeDamageDirect
-							}
-						} ,
-						{
-							type = "damage" ,
-							show_in_tooltip = false ,
-							lower_damage_modifier = 1.0 ,
-							upper_damage_modifier = 1.0 ,
-							apply_damage_to_trees = true ,
-							damage =
-							{
-								type = "explosion" ,
-								amount = LaserLargeDamageDirect
-							}
-						} ,
-						{
-							type = "damage" ,
-							show_in_tooltip = false ,
-							lower_damage_modifier = 1.0 ,
-							upper_damage_modifier = 1.0 ,
-							apply_damage_to_trees = true ,
-							damage =
-							{
-								type = "fire" ,
-								amount = LaserLargeDamageDirect
-							}
-						} ,
-						{
-							type = "damage" ,
-							show_in_tooltip = false ,
-							lower_damage_modifier = 1.0 ,
-							upper_damage_modifier = 1.0 ,
-							apply_damage_to_trees = true ,
-							damage =
-							{
-								type = "laser" ,
-								amount = LaserLargeDamageDirect
-							}
-						}
-					}
+					target_effects = MakeLaserDamageEffectList( laserLargeDamageDirect , false )
 				}
 			}
 		} ,
@@ -3146,7 +2887,7 @@ SIGen
 			show_in_tooltip = false ,
 			force = "enemy" ,
 			ignore_collision_condition = true ,
-			radius = 24 ,
+			radius = 26 ,
 			trigger_from_target = true ,
 			target_entities = true ,
 			collision_mode = "distance-from-collision-box" ,
@@ -3172,7 +2913,7 @@ SIGen
 									show_in_tooltip = false ,
 									force = "enemy" ,
 									ignore_collision_condition = true ,
-									radius = 15 ,
+									radius = 16 ,
 									trigger_from_target = true ,
 									target_entities = false ,
 									collision_mode = "distance-from-collision-box" ,
@@ -3214,7 +2955,7 @@ SIGen
 						frame_count = 8 ,
 						line_length = 8 ,
 						animation_speed = 0.5 ,
-						scale = 1.5
+						scale = laserLargeSize
 					} ,
 					{
 						filename = SIGen.MakeSelfPicturePath( "终末之横扫千军光束-激光-身体-光效" ) ,
@@ -3226,7 +2967,7 @@ SIGen
 						frame_count = 8 ,
 						line_length = 8 ,
 						animation_speed = 0.5 ,
-						scale = 1.5
+						scale = laserLargeSize
 					}
 				}
 			} ,
@@ -3244,7 +2985,7 @@ SIGen
 						frame_count = 8 ,
 						line_length = 8 ,
 						animation_speed = 0.5 ,
-						scale = 1.5
+						scale = laserLargeSize
 					} ,
 					{
 						filename = SIGen.MakeSelfPicturePath( "终末之横扫千军光束-激光-身体-光效" ) ,
@@ -3256,7 +2997,7 @@ SIGen
 						frame_count = 8 ,
 						line_length = 8 ,
 						animation_speed = 0.5 ,
-						scale = 1.5
+						scale = laserLargeSize
 					}
 				}
 			} ,
@@ -3274,7 +3015,7 @@ SIGen
 						frame_count = 8 ,
 						line_length = 8 ,
 						animation_speed = 0.5 ,
-						scale = 1.5 ,
+						scale = laserLargeSize ,
 						shift = SIUtils.by_pixel( 11.5 , 1 )
 					} ,
 					{
@@ -3287,7 +3028,7 @@ SIGen
 						frame_count = 8 ,
 						line_length = 8 ,
 						animation_speed = 0.5 ,
-						scale = 1.5 ,
+						scale = laserLargeSize ,
 						shift = SIUtils.by_pixel( 11.5 , 1 )
 					}
 				}
@@ -3308,7 +3049,7 @@ SIGen
 					line_length = 1 ,
 					repeat_count = 8 ,
 					animation_speed = 0.5 ,
-					scale = 1.5 ,
+					scale = laserLargeSize ,
 					tint = { r = 0.50 , g = 0.50 , b = 0.05 }
 				}
 			}
@@ -3326,7 +3067,7 @@ SIGen
 					line_length = 1 ,
 					repeat_count = 8 ,
 					animation_speed = 0.5 ,
-					scale = 1.5 ,
+					scale = laserLargeSize ,
 					tint = { r = 0.50 , g = 0.50 , b = 0.05 } ,
 					shift = SIUtils.by_pixel( -32 , 0 )
 				}
@@ -3345,7 +3086,7 @@ SIGen
 					line_length = 1 ,
 					repeat_count = 8 ,
 					animation_speed = 0.5 ,
-					scale = 1.5 ,
+					scale = laserLargeSize ,
 					tint = { r = 0.50 , g = 0.50 , b = 0.05 } ,
 					shift = SIUtils.by_pixel( 32 , 0 )
 				}
@@ -3463,7 +3204,7 @@ SIGen
 	{
 		type = "beam" ,
 		cooldown = 4 ,
-		range = 74 ,
+		range = 75 ,
 		damage_modifier = 1 ,
 		movement_slow_down_factor = 0.5 ,
 		source_direction_count = 64 ,
@@ -4329,11 +4070,12 @@ SIGen
 }
 .New( SICommon.Types.EquipmentGrid , "SuperTank_Grid" , "超越之安如磐石战车-区域" ,
 {
-	width = 20 ,
-	height = 20 ,
+	width = 15 ,
+	height = 15 ,
 	equipment_categories =
 	{
 		"armor" ,
+		SIConstants_Core.raw.Categories.Equipment.Special ,
 		SIConstants_DebugItem.raw.Categories.Equipment.DebugItem
 	}
 } )
@@ -4429,14 +4171,14 @@ SIGen
 	hide_resistances = true ,
 	resistances =
 	{
-		SITools.Resistance( "physical" , 22 , 35 ) ,
-		SITools.Resistance( "impact" , 0 , 100 ) ,
-		SITools.Resistance( "poison" , 0 , 100 ) ,
-		SITools.Resistance( "explosion" , 0 , 100 ) ,
-		SITools.Resistance( "fire" , 0 , 96 ) ,
-		SITools.Resistance( "laser" , 22 , 35 ) ,
-		SITools.Resistance( "acid" , 4 , 90 ) ,
-		SITools.Resistance( "electric" , 4 , 96 )
+		SITools.Resistance( "physical"  , 330 ,  56.0 ) ,
+		SITools.Resistance( "impact"    ,   0 , 100.0 ) ,
+		SITools.Resistance( "poison"    ,   0 , 100.0 ) ,
+		SITools.Resistance( "explosion" ,   0 , 100.0 ) ,
+		SITools.Resistance( "fire"      ,   0 , 100.0 ) ,
+		SITools.Resistance( "laser"     , 200 ,  90.0 ) ,
+		SITools.Resistance( "acid"      ,   0 , 100.0 ) ,
+		SITools.Resistance( "electric"  ,   0 , 100.0 )
 	} ,
 	damaged_trigger_effect =
 	{
