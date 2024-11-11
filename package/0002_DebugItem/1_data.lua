@@ -2897,7 +2897,7 @@ SIGen
 					type = "beam" ,
 					beam = SIConstants_DebugItem.raw.Entities.SuperLaser_BeamMedium ,
 					max_length = 0 ,
-					duration = 4 ,
+					duration = 8 ,
 					source_offset = { 0 , 0 } ,
 					add_to_shooter = true ,
 					target_effects =
@@ -2915,7 +2915,7 @@ SIGen
 									ignore_collision_condition = true ,
 									radius = 18 ,
 									trigger_from_target = true ,
-									target_entities = false ,
+									target_entities = true ,
 									collision_mode = "distance-from-collision-box" ,
 									action_delivery =
 									{
