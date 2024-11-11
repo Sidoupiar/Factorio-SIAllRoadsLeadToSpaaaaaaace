@@ -35,9 +35,9 @@ local laserSmallDamage  = 8
 local laserMediumDamage = 13
 local laserLargeDamage  = 24
 local laserLargeDamageDirect = 37
-local laserSmallSize = 0.3
+local laserSmallSize = 0.5
 local laserMediumSize = 0.5
-local laserLargeSize = 0.8
+local laserLargeSize = 0.5
 
 -- ======================================================================<br>
 ---@param damageAmount number
@@ -2498,36 +2498,6 @@ SIGen
 		transparent_start_end_animations = true ,
 		beam =
 		{
-			body =
-			{
-				layers =
-				{
-					{
-						filename = SIGen.MakeSelfPicturePath( "终末之横扫千军光束-激光-身体" ) ,
-						priority = "medium" ,
-						blend_mode = "additive" ,
-						flags = { "trilinear-filtering" } ,
-						width = 64 ,
-						height = 12 ,
-						frame_count = 8 ,
-						line_length = 8 ,
-						animation_speed = 0.5 ,
-						scale = laserSmallSize
-					} ,
-					{
-						filename = SIGen.MakeSelfPicturePath( "终末之横扫千军光束-激光-身体-光效" ) ,
-						priority = "medium" ,
-						draw_as_light = true ,
-						flags = { "light" } ,
-						width = 64 ,
-						height = 12 ,
-						frame_count = 8 ,
-						line_length = 8 ,
-						animation_speed = 0.5 ,
-						scale = laserSmallSize
-					}
-				}
-			} ,
 			head =
 			{
 				layers =
@@ -2589,28 +2559,42 @@ SIGen
 						shift = SIUtils.by_pixel( 11.5 , 1 )
 					}
 				}
+			} ,
+			body =
+			{
+				{
+					layers =
+					{
+						{
+							filename = SIGen.MakeSelfPicturePath( "终末之横扫千军光束-激光-身体" ) ,
+							priority = "medium" ,
+							blend_mode = "additive" ,
+							flags = { "trilinear-filtering" } ,
+							width = 64 ,
+							height = 12 ,
+							frame_count = 8 ,
+							line_length = 8 ,
+							animation_speed = 0.5 ,
+							scale = laserSmallSize
+						} ,
+						{
+							filename = SIGen.MakeSelfPicturePath( "终末之横扫千军光束-激光-身体-光效" ) ,
+							priority = "medium" ,
+							draw_as_light = true ,
+							flags = { "light" } ,
+							width = 64 ,
+							height = 12 ,
+							frame_count = 8 ,
+							line_length = 8 ,
+							animation_speed = 0.5 ,
+							scale = laserSmallSize
+						}
+					}
+				}
 			}
 		} ,
 		ground =
 		{
-			body =
-			{
-				layers =
-				{
-					{
-						filename = SIGen.MakeSelfPicturePath( "终末之横扫千军光束-激光-地面-身体" ) ,
-						priority = "medium" ,
-						width = 64 ,
-						height = 256 ,
-						frame_count = 1 ,
-						line_length = 1 ,
-						repeat_count = 8 ,
-						animation_speed = 0.5 ,
-						scale = laserSmallSize ,
-						tint = { r = 0.50 , g = 0.50 , b = 0.05 }
-					}
-				}
-			} ,
 			head =
 			{
 				layers =
@@ -2646,6 +2630,26 @@ SIGen
 						scale = laserSmallSize ,
 						tint = { r = 0.50 , g = 0.50 , b = 0.05 } ,
 						shift = SIUtils.by_pixel( 32 , 0 )
+					}
+				}
+			} ,
+			body =
+			{
+				{
+					layers =
+					{
+						{
+							filename = SIGen.MakeSelfPicturePath( "终末之横扫千军光束-激光-地面-身体" ) ,
+							priority = "medium" ,
+							width = 64 ,
+							height = 256 ,
+							frame_count = 1 ,
+							line_length = 1 ,
+							repeat_count = 8 ,
+							animation_speed = 0.5 ,
+							scale = laserSmallSize ,
+							tint = { r = 0.50 , g = 0.50 , b = 0.05 }
+						}
 					}
 				}
 			}
@@ -2687,36 +2691,6 @@ SIGen
 		transparent_start_end_animations = true ,
 		beam =
 		{
-			body =
-			{
-				layers =
-				{
-					{
-						filename = SIGen.MakeSelfPicturePath( "终末之横扫千军光束-激光-身体" ) ,
-						priority = "medium" ,
-						blend_mode = "additive" ,
-						flags = { "trilinear-filtering" } ,
-						width = 64 ,
-						height = 12 ,
-						frame_count = 8 ,
-						line_length = 8 ,
-						animation_speed = 0.5 ,
-						scale = laserMediumSize
-					} ,
-					{
-						filename = SIGen.MakeSelfPicturePath( "终末之横扫千军光束-激光-身体-光效" ) ,
-						priority = "medium" ,
-						draw_as_light = true ,
-						flags = { "light" } ,
-						width = 64 ,
-						height = 12 ,
-						frame_count = 8 ,
-						line_length = 8 ,
-						animation_speed = 0.5 ,
-						scale = laserMediumSize
-					}
-				}
-			} ,
 			head =
 			{
 				layers =
@@ -2778,28 +2752,42 @@ SIGen
 						shift = SIUtils.by_pixel( 11.5 , 1 )
 					}
 				}
+			} ,
+			body =
+			{
+				{
+					layers =
+					{
+						{
+							filename = SIGen.MakeSelfPicturePath( "终末之横扫千军光束-激光-身体" ) ,
+							priority = "medium" ,
+							blend_mode = "additive" ,
+							flags = { "trilinear-filtering" } ,
+							width = 64 ,
+							height = 12 ,
+							frame_count = 8 ,
+							line_length = 8 ,
+							animation_speed = 0.5 ,
+							scale = laserMediumSize
+						} ,
+						{
+							filename = SIGen.MakeSelfPicturePath( "终末之横扫千军光束-激光-身体-光效" ) ,
+							priority = "medium" ,
+							draw_as_light = true ,
+							flags = { "light" } ,
+							width = 64 ,
+							height = 12 ,
+							frame_count = 8 ,
+							line_length = 8 ,
+							animation_speed = 0.5 ,
+							scale = laserMediumSize
+						}
+					}
+				}
 			}
 		} ,
 		ground =
 		{
-			body =
-			{
-				layers =
-				{
-					{
-						filename = SIGen.MakeSelfPicturePath( "终末之横扫千军光束-激光-地面-身体" ) ,
-						priority = "medium" ,
-						width = 64 ,
-						height = 256 ,
-						frame_count = 1 ,
-						line_length = 1 ,
-						repeat_count = 8 ,
-						animation_speed = 0.5 ,
-						scale = laserMediumSize ,
-						tint = { r = 0.50 , g = 0.50 , b = 0.05 }
-					}
-				}
-			} ,
 			head =
 			{
 				layers =
@@ -2835,6 +2823,26 @@ SIGen
 						scale = laserMediumSize ,
 						tint = { r = 0.50 , g = 0.50 , b = 0.05 } ,
 						shift = SIUtils.by_pixel( 32 , 0 )
+					}
+				}
+			} ,
+			body =
+			{
+				{
+					layers =
+					{
+						{
+							filename = SIGen.MakeSelfPicturePath( "终末之横扫千军光束-激光-地面-身体" ) ,
+							priority = "medium" ,
+							width = 64 ,
+							height = 256 ,
+							frame_count = 1 ,
+							line_length = 1 ,
+							repeat_count = 8 ,
+							animation_speed = 0.5 ,
+							scale = laserMediumSize ,
+							tint = { r = 0.50 , g = 0.50 , b = 0.05 }
+						}
 					}
 				}
 			}
@@ -2970,36 +2978,6 @@ SIGen
 		transparent_start_end_animations = true ,
 		beam =
 		{
-			body =
-			{
-				layers =
-				{
-					{
-						filename = SIGen.MakeSelfPicturePath( "终末之横扫千军光束-激光-身体" ) ,
-						priority = "medium" ,
-						blend_mode = "additive" ,
-						flags = { "trilinear-filtering" } ,
-						width = 64 ,
-						height = 12 ,
-						frame_count = 8 ,
-						line_length = 8 ,
-						animation_speed = 0.5 ,
-						scale = laserLargeSize
-					} ,
-					{
-						filename = SIGen.MakeSelfPicturePath( "终末之横扫千军光束-激光-身体-光效" ) ,
-						priority = "medium" ,
-						draw_as_light = true ,
-						flags = { "light" } ,
-						width = 64 ,
-						height = 12 ,
-						frame_count = 8 ,
-						line_length = 8 ,
-						animation_speed = 0.5 ,
-						scale = laserLargeSize
-					}
-				}
-			} ,
 			head =
 			{
 				layers =
@@ -3061,28 +3039,42 @@ SIGen
 						shift = SIUtils.by_pixel( 11.5 , 1 )
 					}
 				}
+			} ,
+			body =
+			{
+				{
+					layers =
+					{
+						{
+							filename = SIGen.MakeSelfPicturePath( "终末之横扫千军光束-激光-身体" ) ,
+							priority = "medium" ,
+							blend_mode = "additive" ,
+							flags = { "trilinear-filtering" } ,
+							width = 64 ,
+							height = 12 ,
+							frame_count = 8 ,
+							line_length = 8 ,
+							animation_speed = 0.5 ,
+							scale = laserLargeSize
+						} ,
+						{
+							filename = SIGen.MakeSelfPicturePath( "终末之横扫千军光束-激光-身体-光效" ) ,
+							priority = "medium" ,
+							draw_as_light = true ,
+							flags = { "light" } ,
+							width = 64 ,
+							height = 12 ,
+							frame_count = 8 ,
+							line_length = 8 ,
+							animation_speed = 0.5 ,
+							scale = laserLargeSize
+						}
+					}
+				}
 			}
 		} ,
 		ground =
 		{
-			body =
-			{
-				layers =
-				{
-					{
-						filename = SIGen.MakeSelfPicturePath( "终末之横扫千军光束-激光-地面-身体" ) ,
-						priority = "medium" ,
-						width = 64 ,
-						height = 256 ,
-						frame_count = 1 ,
-						line_length = 1 ,
-						repeat_count = 8 ,
-						animation_speed = 0.5 ,
-						scale = laserLargeSize ,
-						tint = { r = 0.50 , g = 0.50 , b = 0.05 }
-					}
-				}
-			} ,
 			head =
 			{
 				layers =
@@ -3118,6 +3110,26 @@ SIGen
 						scale = laserLargeSize ,
 						tint = { r = 0.50 , g = 0.50 , b = 0.05 } ,
 						shift = SIUtils.by_pixel( 32 , 0 )
+					}
+				}
+			} ,
+			body =
+			{
+				{
+					layers =
+					{
+						{
+							filename = SIGen.MakeSelfPicturePath( "终末之横扫千军光束-激光-地面-身体" ) ,
+							priority = "medium" ,
+							width = 64 ,
+							height = 256 ,
+							frame_count = 1 ,
+							line_length = 1 ,
+							repeat_count = 8 ,
+							animation_speed = 0.5 ,
+							scale = laserLargeSize ,
+							tint = { r = 0.50 , g = 0.50 , b = 0.05 }
+						}
 					}
 				}
 			}
