@@ -3066,61 +3066,61 @@ SIGen
 		ground =
 		{
 			body =
-		{
-			layers =
 			{
+				layers =
 				{
-					filename = SIGen.MakeSelfPicturePath( "终末之横扫千军光束-激光-地面-身体" ) ,
-					priority = "medium" ,
-					width = 64 ,
-					height = 256 ,
-					frame_count = 1 ,
-					line_length = 1 ,
-					repeat_count = 8 ,
-					animation_speed = 0.5 ,
-					scale = laserLargeSize ,
-					tint = { r = 0.50 , g = 0.50 , b = 0.05 }
+					{
+						filename = SIGen.MakeSelfPicturePath( "终末之横扫千军光束-激光-地面-身体" ) ,
+						priority = "medium" ,
+						width = 64 ,
+						height = 256 ,
+						frame_count = 1 ,
+						line_length = 1 ,
+						repeat_count = 8 ,
+						animation_speed = 0.5 ,
+						scale = laserLargeSize ,
+						tint = { r = 0.50 , g = 0.50 , b = 0.05 }
+					}
+				}
+			} ,
+			head =
+			{
+				layers =
+				{
+					{
+						filename = SIGen.MakeSelfPicturePath( "终末之横扫千军光束-激光-地面-头部" ) ,
+						priority = "medium" ,
+						width = 256 ,
+						height = 256 ,
+						frame_count = 1 ,
+						line_length = 1 ,
+						repeat_count = 8 ,
+						animation_speed = 0.5 ,
+						scale = laserLargeSize ,
+						tint = { r = 0.50 , g = 0.50 , b = 0.05 } ,
+						shift = SIUtils.by_pixel( -32 , 0 )
+					}
+				}
+			} ,
+			tail =
+			{
+				layers =
+				{
+					{
+						filename = SIGen.MakeSelfPicturePath( "终末之横扫千军光束-激光-地面-尾部" ) ,
+						priority = "medium" ,
+						width = 256 ,
+						height = 256 ,
+						frame_count = 1 ,
+						line_length = 1 ,
+						repeat_count = 8 ,
+						animation_speed = 0.5 ,
+						scale = laserLargeSize ,
+						tint = { r = 0.50 , g = 0.50 , b = 0.05 } ,
+						shift = SIUtils.by_pixel( 32 , 0 )
+					}
 				}
 			}
-		} ,
-		head =
-		{
-			layers =
-			{
-				{
-					filename = SIGen.MakeSelfPicturePath( "终末之横扫千军光束-激光-地面-头部" ) ,
-					priority = "medium" ,
-					width = 256 ,
-					height = 256 ,
-					frame_count = 1 ,
-					line_length = 1 ,
-					repeat_count = 8 ,
-					animation_speed = 0.5 ,
-					scale = laserLargeSize ,
-					tint = { r = 0.50 , g = 0.50 , b = 0.05 } ,
-					shift = SIUtils.by_pixel( -32 , 0 )
-				}
-			}
-		} ,
-		tail =
-		{
-			layers =
-			{
-				{
-					filename = SIGen.MakeSelfPicturePath( "终末之横扫千军光束-激光-地面-尾部" ) ,
-					priority = "medium" ,
-					width = 256 ,
-					height = 256 ,
-					frame_count = 1 ,
-					line_length = 1 ,
-					repeat_count = 8 ,
-					animation_speed = 0.5 ,
-					scale = laserLargeSize ,
-					tint = { r = 0.50 , g = 0.50 , b = 0.05 } ,
-					shift = SIUtils.by_pixel( 32 , 0 )
-				}
-			}
-		}
 		}
 	} ,
 	working_sound =
