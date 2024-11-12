@@ -796,16 +796,15 @@ end
 -- ============================================================================================================================================
 
 -- API 的使用常见和原始 MOD 中一致
-
----@class SIAPI
 SIAPI = {}
-
----@class SIConfigs
 SIConfigs = {}
 
----@class SISettings
+---@class SISettings : SIBaseClass
 SISettings =
 {
+	ID = "SISettings" ,
+	Code = "SISettings" ,
+	Show = "游戏设置" ,
 	Package = {} ,
 	Startup = {} ,
 	Runtime = {} ,

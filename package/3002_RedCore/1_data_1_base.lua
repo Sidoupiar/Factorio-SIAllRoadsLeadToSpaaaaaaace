@@ -12,8 +12,13 @@ SIRedCore_Level4_MultiplierIngredients   = -0.7      + 1.0
 SIRedCore_Level4_CountModuleSlot         = 2
 SIRedCore_Level5_MultiplierProducts      = 1.0       + 1.0
 SIRedCore_Level5_RemoveHardProducts      = true
+SIRedCore_Level6_ProductsChance          = 0.02
+SIRedCore_Level7_RandomRecipe            = true
 
-local difficultyLevel = SIConfigs.SIRedCore.DifficultyLevel ~= nil and SITools.Round( math.floor( SISettings.Startup.SIRedCore.DifficultyLevel() ) , 1 , 5 ) or 1
+local difficultyLevel = SIConstants_RedCore.MinLevel
+if SIConfigs.SIRedCore.DifficultyLevel ~= nil then
+	difficultyLevel = SITools.Range( math.floor( SISettings.Startup.SIRedCore.DifficultyLevel() ) , SIConstants_RedCore.MinLevel , SIConstants_RedCore.MaxLevel )
+end
 
 -- ======================================================================<br>
 ---@return table
@@ -75,12 +80,34 @@ function SIRedCore_CheckData_Recipe( recipeData )
 			end
 		end
 	end
-	if redCoreSettings.AllowModify_Products and recipeData.results and difficultyLevel > 4 then
+	if redCoreSettings.AllowModify_Products and recipeData.results then
+		local isLevel5 = difficultyLevel > 4
+		local isLevel6 = difficultyLevel > 5
 		local realResultList = {}
 		for index , resultData in pairs( recipeData.results ) do
 			if resultData then
 				if SIRedCore_Level5_RemoveHardProducts then
 					if resultData.SIRedCoreNotHard then
+						if isLevel5 then
+							if resultData.amount then
+								resultData.amount = math.max( math.ceil( resultData.amount * SIRedCore_Level5_MultiplierProducts ) , 1 )
+							end
+							if resultData.amount_min then
+								resultData.amount_min = math.max( math.ceil( resultData.amount_min * SIRedCore_Level5_MultiplierProducts ) , 1 )
+							end
+							if resultData.amount_max then
+								resultData.amount_max = math.max( math.ceil( resultData.amount_max * SIRedCore_Level5_MultiplierProducts ) , 1 )
+							end
+						end
+						if isLevel6 then
+							if resultData.probability then
+								resultData.probability = math.max( math.min( resultData.probability + SIRedCore_Level6_ProductsChance , 1.0 ) , 0.0 )
+							end
+						end
+						table.insert( realResultList , resultData )
+					end
+				else
+					if isLevel5 then
 						if resultData.amount then
 							resultData.amount = math.max( math.ceil( resultData.amount * SIRedCore_Level5_MultiplierProducts ) , 1 )
 						end
@@ -90,17 +117,11 @@ function SIRedCore_CheckData_Recipe( recipeData )
 						if resultData.amount_max then
 							resultData.amount_max = math.max( math.ceil( resultData.amount_max * SIRedCore_Level5_MultiplierProducts ) , 1 )
 						end
-						table.insert( realResultList , resultData )
 					end
-				else
-					if resultData.amount then
-						resultData.amount = math.max( math.ceil( resultData.amount * SIRedCore_Level5_MultiplierProducts ) , 1 )
-					end
-					if resultData.amount_min then
-						resultData.amount_min = math.max( math.ceil( resultData.amount_min * SIRedCore_Level5_MultiplierProducts ) , 1 )
-					end
-					if resultData.amount_max then
-						resultData.amount_max = math.max( math.ceil( resultData.amount_max * SIRedCore_Level5_MultiplierProducts ) , 1 )
+					if isLevel6 then
+						if resultData.probability then
+							resultData.probability = math.max( math.min( resultData.probability + SIRedCore_Level6_ProductsChance , 1.0 ) , 0.0 )
+						end
 					end
 					table.insert( realResultList , resultData )
 				end

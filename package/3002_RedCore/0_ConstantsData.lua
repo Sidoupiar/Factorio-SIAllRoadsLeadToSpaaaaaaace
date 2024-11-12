@@ -15,10 +15,16 @@ local constantsData =
 	} ,
 	BeforeLoad = function( constantsData )
 		if SIConfigs.SIRedCore.DifficultyLevel ~= nil then
-			local default = SITools.Round( math.floor( SIConfigs.SIRedCore.DifficultyLevel ) , 1 , 5 )
-			constantsData.Autoload.Settings.DifficultyLevel = { Type = SICommon.SettingTypes.INT , Affect = SICommon.SettingAffectTypes.StartUp , Default = default , AllowIn = { 1 , 2 , 3 , 4 , 5 } }
+			local default = SITools.Range( math.floor( SIConfigs.SIRedCore.DifficultyLevel ) , constantsData.MinLevel , constantsData.MaxLevel )
+			local allowInList = {}
+			for level = constantsData.MinLevel , 1 , constantsData.MaxLevel do
+				table.insert( allowInList , level )
+			end
+			constantsData.Autoload.Settings.DifficultyLevel = { Type = SICommon.SettingTypes.INT , Affect = SICommon.SettingAffectTypes.StartUp , Default = default , Min = constantsData.MinLevel , Max = constantsData.MaxLevel , AllowIn = allowInList }
 		end
-	end
+	end ,
+	MinLevel = 1 ,
+	MaxLevel = 7
 }
 
 return constantsData

@@ -14,7 +14,7 @@ if SIConfigs.SIItemPropertyModify.RepairToolDurabilityMultiplier ~= nil then
 	if settingRepairToolDurabilityMultiplier > 0 and settingRepairToolDurabilityMultiplier ~= 1 then
 		SIGen.ForEach( SICommon.Types.Items.ToolRepair , function( prototypeName , prototypeData )
 			if prototypeData then
-				prototypeData.durability = SITools.Round( ( prototypeData.durability or 1 ) * settingRepairToolDurabilityMultiplier , SICommon.Numbers.DurabilityMin , SICommon.Numbers.DurabilityMax )
+				prototypeData.durability = SITools.Range( ( prototypeData.durability or 1 ) * settingRepairToolDurabilityMultiplier , SICommon.Numbers.DurabilityMin , SICommon.Numbers.DurabilityMax )
 			end
 		end )
 	end
@@ -28,7 +28,7 @@ if SIConfigs.SIItemPropertyModify.RepairToolSpeedMultiplier ~= nil then
 	if settingRepairToolSpeedMultiplier > 0 and settingRepairToolSpeedMultiplier ~= 1 then
 		SIGen.ForEach( SICommon.Types.Items.ToolRepair , function( prototypeName , prototypeData )
 			if prototypeData then
-				prototypeData.speed = SITools.Round( ( prototypeData.speed or 1 ) * settingRepairToolSpeedMultiplier , SICommon.Numbers.SpeedMin , SICommon.Numbers.SpeedMax )
+				prototypeData.speed = SITools.Range( ( prototypeData.speed or 1 ) * settingRepairToolSpeedMultiplier , SICommon.Numbers.SpeedMin , SICommon.Numbers.SpeedMax )
 			end
 		end )
 	end
@@ -42,7 +42,7 @@ if SIConfigs.SIItemPropertyModify.ToolDurabilityMultiplier ~= nil then
 	if settingToolDurabilityMultiplier > 0 and settingToolDurabilityMultiplier ~= 1 then
 		SIGen.ForEach( SICommon.Types.Items.Tool , function( prototypeName , prototypeData )
 			if prototypeData then
-				prototypeData.durability = SITools.Round( ( prototypeData.durability or 1 ) * settingToolDurabilityMultiplier , SICommon.Numbers.DurabilityMin , SICommon.Numbers.DurabilityMax )
+				prototypeData.durability = SITools.Range( ( prototypeData.durability or 1 ) * settingToolDurabilityMultiplier , SICommon.Numbers.DurabilityMin , SICommon.Numbers.DurabilityMax )
 			end
 		end )
 	end
@@ -56,7 +56,7 @@ if SIConfigs.SIItemPropertyModify.LabSpeedMultiplier ~= nil then
 	if settingLabSpeedMultiplier > 0 and settingLabSpeedMultiplier ~= 1 then
 		SIGen.ForEach( SICommon.Types.Entities.Lab , function( prototypeName , prototypeData )
 			if prototypeData then
-				prototypeData.researching_speed = SITools.Round( ( prototypeData.researching_speed or 1 ) * settingLabSpeedMultiplier , SICommon.Numbers.SpeedMin , SICommon.Numbers.SpeedMax )
+				prototypeData.researching_speed = SITools.Range( ( prototypeData.researching_speed or 1 ) * settingLabSpeedMultiplier , SICommon.Numbers.SpeedMin , SICommon.Numbers.SpeedMax )
 			end
 		end )
 	end
@@ -70,7 +70,7 @@ if SIConfigs.SIItemPropertyModify.MagazineAmmoSizeMultiplier ~= nil then
 	if settingMagazineAmmoSizeMultiplier > 0 and settingMagazineAmmoSizeMultiplier ~= 1 then
 		SIGen.ForEach( SICommon.Types.Items.Ammo , function( prototypeName , prototypeData )
 			if prototypeData then
-				prototypeData.magazine_size = SITools.Round( math.floor( ( prototypeData.magazine_size or 1 ) * settingMagazineAmmoSizeMultiplier ) , SICommon.Numbers.StackSizeMin , SICommon.Numbers.StackSizeMax )
+				prototypeData.magazine_size = SITools.Range( math.floor( ( prototypeData.magazine_size or 1 ) * settingMagazineAmmoSizeMultiplier ) , SICommon.Numbers.StackSizeMin , SICommon.Numbers.StackSizeMax )
 			end
 		end )
 	end
@@ -84,7 +84,7 @@ if SIConfigs.SIItemPropertyModify.CircuitDistanceMultiplier ~= nil then
 	if settingCircuitDistanceMultiplier > 0 and settingCircuitDistanceMultiplier ~= 1 then
 		SIGen.ForEachType( SICommon.Types.HealthEntities , function( prototypeName , prototypeData )
 			if prototypeData and prototypeData.circuit_wire_max_distance then
-				prototypeData.circuit_wire_max_distance = SITools.Round( math.floor( prototypeData.circuit_wire_max_distance * settingCircuitDistanceMultiplier ) , SICommon.Numbers.DistanceMin , SICommon.Numbers.DistanceMax )
+				prototypeData.circuit_wire_max_distance = SITools.Range( math.floor( prototypeData.circuit_wire_max_distance * settingCircuitDistanceMultiplier ) , SICommon.Numbers.DistanceMin , SICommon.Numbers.DistanceMax )
 			end
 		end )
 	end
@@ -98,7 +98,7 @@ if SIConfigs.SIItemPropertyModify.UndergrundBeltDistanceMultiplier ~= nil then
 	if settingUndergrundBeltDistanceMultiplier > 0 and settingUndergrundBeltDistanceMultiplier ~= 1 then
 		SIGen.ForEach( SICommon.Types.Entities.BeltGround , function( prototypeName , prototypeData )
 			if prototypeData then
-				prototypeData.max_distance = SITools.Round( math.floor( ( prototypeData.max_distance or 1 ) * settingUndergrundBeltDistanceMultiplier ) , SICommon.Numbers.DistanceMin , SICommon.Numbers.DistanceMax )
+				prototypeData.max_distance = SITools.Range( math.floor( ( prototypeData.max_distance or 1 ) * settingUndergrundBeltDistanceMultiplier ) , SICommon.Numbers.DistanceMin , SICommon.Numbers.DistanceMax )
 			end
 		end )
 	end
@@ -114,7 +114,7 @@ if SIConfigs.SIItemPropertyModify.UndergrundPipeDistanceMultiplier ~= nil then
 			if prototypeData then
 				for index , pipeData in pairs( prototypeData.fluid_box.pipe_connections ) do
 					if pipeData.max_underground_distance then
-						pipeData.max_underground_distance = SITools.Round( math.floor( pipeData.max_underground_distance * settingUndergrundPipeDistanceMultiplier ) , SICommon.Numbers.DistanceMin , SICommon.Numbers.DistanceMax )
+						pipeData.max_underground_distance = SITools.Range( math.floor( pipeData.max_underground_distance * settingUndergrundPipeDistanceMultiplier ) , SICommon.Numbers.DistanceMin , SICommon.Numbers.DistanceMax )
 					end
 				end
 			end

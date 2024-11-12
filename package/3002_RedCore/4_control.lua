@@ -12,6 +12,8 @@ SIRedCore_Level4_MultiplierIngredients   = -0.7      + 1.0
 SIRedCore_Level4_CountModuleSlot         = 2
 SIRedCore_Level5_MultiplierProducts      = 1.0       + 1.0
 SIRedCore_Level5_RemoveHardProducts      = true
+SIRedCore_Level6_ProductsChance          = 0.02
+SIRedCore_Level7_RandomRecipe            = true
 
 -- ============================================================================================================================================
 -- ============================================================================================================================================
@@ -22,6 +24,16 @@ SIRedCore_Level5_RemoveHardProducts      = true
 -- ======================================================================
 -- 初始化
 -- ======================================================================
+
+-- ======================================================================<br>
+---@return integer -- 难度等级
+function SIRedCore_GetDifficultyLevel()
+	if SIConfigs.SIRedCore.DifficultyLevel ~= nil then
+		return SITools.Range( math.floor( SISettings.Startup.SIRedCore.DifficultyLevel() ) , SIConstants_RedCore.MinLevel , SIConstants_RedCore.MaxLevel )
+	else
+		return SIConstants_RedCore.MinLevel
+	end
+end
 
 -- ======================================================================
 -- 事件

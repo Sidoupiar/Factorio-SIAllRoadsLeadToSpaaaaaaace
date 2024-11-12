@@ -67,7 +67,7 @@ SITools =
 	---@param min number
 	---@param max number
 	---@return number
-	Round = function( number , min , max )
+	Range = function( number , min , max )
 		return math.max( math.min( number , max ) , min )
 	end ,
 

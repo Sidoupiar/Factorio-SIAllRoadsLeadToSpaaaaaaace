@@ -24,7 +24,7 @@ if config.ItemStackSizeMultiplier and config.ItemStackSizeMultiplier.TypeList th
 			if itemStackSizeMultiplier > 0.0 and itemStackSizeMultiplier ~= 1.0 then
 				SIGen.ForEach( itemType , function( prototypeName , prototypeData )
 					if prototypeData then
-						local itemStackSize = SITools.Round( math.floor( ( prototypeData.stack_size or 1 ) * itemStackSizeMultiplier ) , min , max )
+						local itemStackSize = SITools.Range( math.floor( ( prototypeData.stack_size or 1 ) * itemStackSizeMultiplier ) , min , max )
 						if ignoreCannotStack then
 							if itemStackSize > 1 and prototypeData.flags then
 								while SITable.Has( prototypeData.flags , SICommon.Flags.Item.NotStackable ) do
