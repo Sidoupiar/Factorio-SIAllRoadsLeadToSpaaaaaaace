@@ -42,6 +42,7 @@ SIRPGPlayerStatus =
 		if status.frame and status.frame.valid then
 			SIRPGPlayerStatus.CloseFrame( playerIndex )
 		else
+			local globalSettings = SIGlobal.GetGlobalSettings( SIRPGSystem.Settings.Name )
 			local player = game.get_player( playerIndex )
 			-- 显示窗口
 			local frame = SIElements.CreateFrame( player , status ,

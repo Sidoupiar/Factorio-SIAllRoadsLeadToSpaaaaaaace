@@ -31,6 +31,7 @@ SIRPGPlayerStatusMini =
 		if settings.PlayerSetting.Base.showPlayerStatusMini then
 			local status = settings.PlayerStatusMini
 			if not status.frame or not status.frame.valid then
+				local globalSettings = SIGlobal.GetGlobalSettings( SIRPGSystem.Settings.Name )
 				local player = game.get_player( playerIndex )
 				-- 显示窗口
 				local frame = SIElements.CreateFrame( player , status ,
