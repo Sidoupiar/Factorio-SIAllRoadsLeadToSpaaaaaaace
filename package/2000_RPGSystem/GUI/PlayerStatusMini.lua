@@ -40,7 +40,7 @@ SIRPGPlayerStatusMini =
 					Style        = SIConstants_RPGSystem.raw.Styles.PlayerStatusMini_Frame ,
 					Title        = { "SIRPGSystem.玩家属性迷你-窗口-标题" } ,
 					TitleTooltip = { "SIRPGSystem.玩家属性迷你-窗口-标题-提示" } ,
-					UseTooltip   = { "SIRPGSystem.玩家属性迷你-窗口-使用-提示" , SIRPGSystem.ExpMax } ,
+					UseTooltip   = { "SIRPGSystem.玩家属性迷你-窗口-使用-提示" , globalSettings.EXP.Max } ,
 					LockTooltip  = { "SIRPGSystem.玩家属性迷你-窗口-锁定-提示" } ,
 					isLocked     = status.frameLocked
 				} )

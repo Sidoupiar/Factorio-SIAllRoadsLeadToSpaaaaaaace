@@ -5,7 +5,6 @@ SIRPGSystem =
 	Code = "RPGSystem" ,
 	Show = "RPG系统" ,
 	InterfaceID = "SIRPGSystem-System" ,
-	ExpMax = 1000000000 ,
 	PointIDs =
 	{
 		Attack = "Attack" ,
