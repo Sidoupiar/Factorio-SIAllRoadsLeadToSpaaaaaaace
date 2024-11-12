@@ -893,11 +893,11 @@ end
 -- 以及给 ConstantsData 创建一个全局变量<br>
 -- 更多信息请见 data.lua 中的相关注释<br>
 -- ======================================================================<br>
----@param ModName string -- 调用此函数的 MOD 的名称 , 要使用代码名称而不是显示名称
----@param CustomPackageConfig table -- 功能模块的配置信息数组 , 如果值为 nil , 则会尝试加载 MOD 文件夹下的 PackageConfig.lua 文件 , 文件不存在则会报错
----@param ConstantsDataPrefix string -- ConstantsData 在代码的各种位置中进行注册时使用的名称前缀 , 防止重名 , 不影响注册的原型数据
----@param CodeNamePrefix string -- ConstantsData 在代码的各种位置中进行显示时使用的名称前缀 , 防止重名 , 影响注册的原型数据的 name 属性
----@param ShowNamePrefix string -- ConstantsData 在代码的各种位置中进行显示时使用的名称前缀 , 防止重名 , 影响注册的原型数据和本地化字符串 , 生成原型数据名称时此前缀也会被包含进去
+---@param ModName string|nil -- 调用此函数的 MOD 的名称 , 要使用代码名称而不是显示名称
+---@param CustomPackageConfig table|nil -- 功能模块的配置信息数组 , 如果值为 nil , 则会尝试加载 MOD 文件夹下的 PackageConfig.lua 文件 , 文件不存在则会报错
+---@param ConstantsDataPrefix string|nil -- ConstantsData 在代码的各种位置中进行注册时使用的名称前缀 , 防止重名 , 不影响注册的原型数据
+---@param CodeNamePrefix string|nil -- ConstantsData 在代码的各种位置中进行显示时使用的名称前缀 , 防止重名 , 影响注册的原型数据的 name 属性
+---@param ShowNamePrefix string|nil -- ConstantsData 在代码的各种位置中进行显示时使用的名称前缀 , 防止重名 , 影响注册的原型数据和本地化字符串 , 生成原型数据名称时此前缀也会被包含进去
 ---@return SIInit -- 自身
 function SIInit.AutoLoad( ModName , CustomPackageConfig , ConstantsDataPrefix , CodeNamePrefix , ShowNamePrefix )
 	if not ModName then
