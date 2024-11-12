@@ -1,8 +1,9 @@
+---@class SIUnlocker : SIBaseClass
 SIUnlocker =
 {
 	ID = "Unlocker" ,
 	Code = "Unlocker" ,
-	Name = "触发解锁" ,
+	Show = "触发解锁" ,
 	InterfaceID = "SIUnlocker" ,
 	Settings =
 	{

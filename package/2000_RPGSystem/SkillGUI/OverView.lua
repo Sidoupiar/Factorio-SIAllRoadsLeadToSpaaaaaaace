@@ -1,3 +1,4 @@
+---@class SIRPGSkillUI_OverView : SIBaseClass
 SIRPGSkillUI_OverView =
 {
 	ID = "RPGSkillUI_OverView" ,

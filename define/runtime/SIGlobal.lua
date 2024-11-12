@@ -24,6 +24,7 @@
 -- ============================================================================================================================================
 -- ============================================================================================================================================
 
+---@class SIGlobal : SIBaseClass
 SIGlobal =
 {
 	ID = "SIGlobal" ,
@@ -61,7 +62,7 @@ end
 -- ======================================================================<br>
 ---@param name string -- 键
 ---@param data any -- 值
----@return table -- 自身
+---@return SIGlobal -- 自身
 function SIGlobal.Set( name , data )
 	storage[name] = data
 	return SIGlobal
@@ -96,7 +97,7 @@ end
 -- CreateFunction = 每次根据给定的参数和默认数据初始化设置数据时 , 会调用一次 , 有 3 个参数 , 参数 1 = 设置的引用名称 , 参数 2 = 刚创建的设置数据子表 , 参数 3 = 1 为玩家设置 , 2 为阵营设置 , 0 为全局设置<br>
 -- ======================================================================<br>
 ---@param settingData table -- 设置数据
----@return table -- 自身
+---@return SIGlobal -- 自身
 function SIGlobal.CreateSettings( settingData )
 	if SIGlobal.SettingDataList[settingData.Name] then
 		return CodeE( SIGlobal , "设置数据的 [ name ] 属性不能相同 , " .. settingData.Name )

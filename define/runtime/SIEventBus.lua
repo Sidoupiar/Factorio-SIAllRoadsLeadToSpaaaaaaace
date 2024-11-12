@@ -19,6 +19,7 @@
 -- ============================================================================================================================================
 -- ============================================================================================================================================
 
+---@class SIEventBus : SIBaseClass
 SIEventBus =
 {
 	ID = "SIEventBus" ,
@@ -78,7 +79,7 @@ SIEventBus =
 -- ======================================================================<br>
 ---@param func function -- 事件函数 , 不能为空
 ---@param id integer|string|nil -- 事件函数的 id , 默认是一个递增的数字
----@return table -- 自身
+---@return SIEventBus -- 自身
 function SIEventBus.Init( func , id )
 	if not func then
 		return CodeE( SIEventBus , "不能添加空的初始化事件函数" )
@@ -97,7 +98,7 @@ end
 -- ======================================================================<br>
 ---@param func function -- 事件函数 , 不能为空
 ---@param id integer|string|nil -- 事件函数的 id , 默认是一个递增的数字
----@return table -- 自身
+---@return SIEventBus -- 自身
 function SIEventBus.Load( func , id )
 	if not func then
 		return CodeE( SIEventBus , "不能添加空的载入存档事件函数" )
@@ -116,7 +117,7 @@ end
 -- ======================================================================<br>
 ---@param func function -- 事件函数 , 不能为空
 ---@param id integer|string|nil -- 事件函数的 id , 默认是一个递增的数字
----@return table -- 自身
+---@return SIEventBus -- 自身
 function SIEventBus.ConfigurationChange( func , id )
 	if not func then
 		return CodeE( SIEventBus , "不能添加空的初始化事件函数" )
@@ -145,7 +146,7 @@ end
 -- ======================================================================<br>
 ---@param func function -- 事件函数 , 不能为空
 ---@param id integer|string|nil -- 事件函数的 id , 默认是一个递增的数字
----@return table -- 自身
+---@return SIEventBus -- 自身
 function SIEventBus.Wait( func , id )
 	return CodeE( SIEventBus , "暂时不给用" )
 -- 	if not func then
@@ -166,7 +167,7 @@ end
 ---@param count integer -- 执行间隔 , 不能为空
 ---@param func function -- 事件函数 , 不能为空
 ---@param id integer|string|nil -- 事件函数的 id , 默认是一个递增的数字
----@return table -- 自身
+---@return SIEventBus -- 自身
 function SIEventBus.AddNth( count , func , id )
 	if not func then
 		return CodeE( SIEventBus , "不能添加空的事件函数" )
@@ -201,7 +202,7 @@ end
 ---@param count integer -- 执行间隔 , 不能为空
 ---@param func function -- 事件函数 , 不能为空
 ---@param id integer|string|nil -- 事件函数的 id , 不能为空
----@return table -- 自身
+---@return SIEventBus -- 自身
 function SIEventBus.SetNth( count , func , id )
 	if not func then
 		return CodeE( SIEventBus , "不能设置空的事件函数" )
@@ -230,7 +231,7 @@ end
 ---@param count integer -- 执行间隔 , 不能为空
 ---@param func function -- 事件函数 , 不能为空
 ---@param id integer|string -- 事件函数的 id , 不能为空
----@return table -- 自身
+---@return SIEventBus -- 自身
 function SIEventBus.AddOrSetNth( count , func , id )
 	if not func then
 		return CodeE( SIEventBus , "不能设置空的事件函数" )
@@ -264,7 +265,7 @@ end
 -- ======================================================================<br>
 ---@param count integer -- 执行间隔 , 不能为空
 ---@param id integer|string -- 事件函数的 id , 不能为空
----@return table -- 自身
+---@return SIEventBus -- 自身
 function SIEventBus.RemoveNth( count , id )
 	if not id then
 		return CodeE( SIEventBus , "移除事件函数时必须使用明确的 id" )
@@ -290,7 +291,7 @@ end
 -- 移除注册进 script.on_nth_tick 的事件函数<br>
 -- ======================================================================<br>
 ---@param count integer -- 执行间隔 , 不能为空
----@return table -- 自身
+---@return SIEventBus -- 自身
 function SIEventBus.ClearNth( count )
 	if SIEventBus.NthFunctions[count] then
 		SIEventBus.NthFunctions[count] = nil
@@ -306,7 +307,7 @@ end
 ---@param eventID string -- defines.events 中枚举的事件 id 或自定义的事件 id , 不能为空
 ---@param func function -- 事件函数 , 不能为空
 ---@param id integer|string|nil -- 事件函数的 id , 默认是一个递增的数字
----@return table -- 自身
+---@return SIEventBus -- 自身
 function SIEventBus.Add( eventID , func , id )
 	if not func then
 		return CodeE( SIEventBus , "不能添加空的事件函数" )
@@ -351,7 +352,7 @@ end
 ---@param eventID string -- defines.events 中枚举的事件 id 或自定义的事件 id , 不能为空
 ---@param func function -- 事件函数 , 不能为空
 ---@param id integer|string -- 事件函数的 id , 不能为空
----@return table -- 自身
+---@return SIEventBus -- 自身
 function SIEventBus.Set( eventID , func , id )
 	if not func then
 		return CodeE( SIEventBus , "不能设置空的事件函数" )
@@ -382,7 +383,7 @@ end
 -- ======================================================================<br>
 ---@param eventID string -- defines.events 中枚举的事件 id 或自定义的事件 id , 不能为空
 ---@param id integer|string -- 事件函数的 id , 不能为空
----@return table -- 自身
+---@return SIEventBus -- 自身
 function SIEventBus.Remove( eventID , id )
 	if not id then
 		return CodeE( SIEventBus , "移除事件函数时必须使用明确的 id" )
@@ -415,7 +416,7 @@ end
 -- 移除注册进 script.on_event 的事件函数<br>
 -- ======================================================================<br>
 ---@param eventID string -- defines.events 中枚举的事件 id 或自定义的事件 id , 不能为空
----@return table -- 自身
+---@return SIEventBus -- 自身
 function SIEventBus.Clear( eventID )
 	if SIEventBus.EventList[eventID] then
 		SIEventBus.EventList[eventID] = nil
@@ -436,7 +437,7 @@ end
 -- funcName = 要执行的函数名称 , 指向一个全局函数 , 调用时会传递两个参数 , 参数 1 = 当前的游戏刻 , 参数 2 = 执行函数时使用的自定义数据包 , 即上面的数据包<br>
 -- ======================================================================<br> 
 ---@param asyncDataList table -- 需要伪异步执行的数据包列表
----@return table -- 自身
+---@return SIEventBus -- 自身
 function SIEventBus.AddAsyncData( asyncDataList )
 	return CodeE( SIEventBus , "暂时不给用" )
 -- 	if SIEventBus.IsOnCode or SIEventBus.IsOnLoad then
@@ -540,7 +541,7 @@ end )
 -- 框架内部函数 , 请勿在外部调用<br>
 -- 注册一些需要持久化保存的数据<br>
 -- ======================================================================<br>
----@return table -- 自身
+---@return SIEventBus -- 自身
 function SIEventBus.InitSelf()
 	if not SIGlobal then
 		UseE( SIEventBus , "需要使用 SIGlobal 来读取和保存持久化数据" )

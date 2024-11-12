@@ -1,8 +1,9 @@
+---@class SIRuinSystem : SIBaseClass
 SIRuinSystem =
 {
 	ID = "RuinSystem" ,
 	Code = "RuinSystem" ,
-	Name = "遗迹控制" ,
+	Show = "遗迹控制" ,
 	InterfaceID = "SIRuinSystem-Main" ,
 	Settings =
 	{

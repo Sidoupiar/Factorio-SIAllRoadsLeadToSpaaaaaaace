@@ -1,3 +1,4 @@
+---@class SIPermission : SIBaseClass
 SIPermission =
 {
 	ID = "Permission" ,

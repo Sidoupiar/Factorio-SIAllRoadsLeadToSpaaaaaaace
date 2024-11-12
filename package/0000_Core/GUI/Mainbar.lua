@@ -1,3 +1,4 @@
+---@class SIMainbar : SIBaseClass
 SIMainbar =
 {
 	ID = "Mainbar" ,

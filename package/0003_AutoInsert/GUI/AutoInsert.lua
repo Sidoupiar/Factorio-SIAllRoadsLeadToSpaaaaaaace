@@ -1,3 +1,4 @@
+---@class SIAutoInsert : SIBaseClass
 SIAutoInsert =
 {
 	ID = "AutoInsert" ,

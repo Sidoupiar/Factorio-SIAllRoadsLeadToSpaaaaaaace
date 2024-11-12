@@ -1,3 +1,4 @@
+---@class SIMainbarMessage : SIBaseClass
 SIMainbarMessage =
 {
 	ID = "MainbarMessage" ,

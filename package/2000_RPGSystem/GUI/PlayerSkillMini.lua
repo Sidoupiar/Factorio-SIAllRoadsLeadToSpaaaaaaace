@@ -1,3 +1,4 @@
+---@class SIRPGPlayerSkillMini : SIBaseClass
 SIRPGPlayerSkillMini =
 {
 	ID = "RPGPlayerSkillMini" ,

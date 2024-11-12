@@ -1,4 +1,5 @@
 -- 虽然名字是面板 , 但是主要保存的是一些没有面板的技能的函数
+---@class SIRPGSkillUI_Other : SIBaseClass
 SIRPGSkillUI_Other =
 {
 	ID = "RPGSkillUI_Other" ,

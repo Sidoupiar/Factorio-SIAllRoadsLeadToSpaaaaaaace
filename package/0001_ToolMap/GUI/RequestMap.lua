@@ -1,3 +1,4 @@
+---@class SIRequestMap : SIBaseClass
 SIRequestMap =
 {
 	ID = "RequestMap" ,

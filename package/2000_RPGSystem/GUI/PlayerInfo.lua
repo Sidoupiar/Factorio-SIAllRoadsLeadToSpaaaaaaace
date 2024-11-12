@@ -1,3 +1,4 @@
+---@class SIRPGPlayerInfo : SIBaseClass
 SIRPGPlayerInfo =
 {
 	ID = "RPGPlayerInfo" ,

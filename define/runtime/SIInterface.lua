@@ -19,6 +19,7 @@
 -- ============================================================================================================================================
 -- ============================================================================================================================================
 
+---@class SIInterface : SIBaseClass
 SIInterface =
 {
 	ID = "SIInterface" ,
@@ -41,7 +42,7 @@ SIInterface =
 -- ======================================================================<br>
 ---@param interfaceID string -- 接口 ID
 ---@param interfaceList table -- 接口列表
----@return table -- 自身
+---@return SIInterface -- 自身
 function SIInterface.Add( interfaceID , interfaceList )
 	if not interfaceID then
 		return CodeE( SIInterface , "注册接口时 , 接口 ID 不能为空" )

@@ -1,3 +1,4 @@
+---@class SIMainData : SIBaseClass
 SIMainData =
 {
 	ID = "MainData" ,

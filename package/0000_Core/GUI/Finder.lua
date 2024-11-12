@@ -1,3 +1,4 @@
+---@class SIFinder : SIBaseClass
 SIFinder =
 {
 	ID = "Finder" ,

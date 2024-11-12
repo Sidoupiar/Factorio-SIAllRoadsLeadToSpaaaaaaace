@@ -1,3 +1,4 @@
+---@class SIOreMap : SIBaseClass
 SIOreMap =
 {
 	ID = "OreMap" ,
