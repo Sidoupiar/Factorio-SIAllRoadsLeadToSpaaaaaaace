@@ -4,6 +4,7 @@
 -- ============================================================================================================================================
 -- ============================================================================================================================================
 
+---@class SIGen
 SIGen =
 {
 	-- 固定属性
@@ -41,7 +42,7 @@ local hasFinish = false
 ---@param typeCode string -- 原型数据的 [ type ] 值
 ---@param prototypeName string -- 原型数据的 [ name ] 值
 ---@param callback function -- 回调函数 , 有 2 个参数 , 参数 1 = 原型数据的 [ name ] 值 , 参数 2 = 原型数据本身
----@return table -- 自身
+---@return SIGen -- 自身
 function SIGen.Find( typeCode , prototypeName , callback )
 	if not typeCode then
 		return CodeE( SIGen , "查找原型数据时 , 不能使用空的原型类型" )
@@ -74,7 +75,7 @@ end
 -- ======================================================================<br>
 ---@param typeCode string -- 原型数据的 [ type ] 值
 ---@param callback function -- 回调函数 , 有 2 个参数 , 参数 1 = 原型数据的 [ name ] 值 , 参数 2 = 原型数据本身
----@return table -- 自身
+---@return SIGen -- 自身
 function SIGen.ForEach( typeCode , callback )
 	if not typeCode then
 		return CodeE( SIGen , "遍历原型数据时 , 不能使用空的原型类型" )
@@ -107,7 +108,7 @@ end
 -- ======================================================================<br>
 ---@param typeCodeList table -- 原型数据的 [ type ] 值数组 , 这个数组只关心它的 [值] 的部分
 ---@param callback function -- 回调函数 , 有 2 个参数 , 参数 1 = 原型数据的 [ name ] 值 , 参数 2 = 原型数据本身
----@return table -- 自身
+---@return SIGen -- 自身
 function SIGen.ForEachType( typeCodeList , callback )
 	if not typeCodeList then
 		return CodeE( SIGen , "遍历原型数据时 , 不能使用空的原型类型列表" )
@@ -143,7 +144,7 @@ end
 ---@param typeCode string -- 原型数据的 [ type ] 值
 ---@param prototypeName string -- 原型数据的 [ name ] 值
 ---@param callback function -- 回调函数 , 有 2 个参数 , 参数 1 = 原型数据的 [ name ] 值 , 参数 2 = 原型数据本身
----@return table -- 自身
+---@return SIGen -- 自身
 function SIGen.FindInner( typeCode , prototypeName , callback )
 	if not typeCode then
 		return CodeE( SIGen , "查找原型数据时 , 不能使用空的原型类型" )
@@ -168,7 +169,7 @@ end
 -- ======================================================================<br>
 ---@param typeCode string -- 原型数据的 [ type ] 值
 ---@param callback function -- 回调函数 , 有 2 个参数 , 参数 1 = 原型数据的 [ name ] 值 , 参数 2 = 原型数据本身
----@return table -- 自身
+---@return SIGen -- 自身
 function SIGen.ForEachInner( typeCode , callback )
 	if not typeCode then
 		return CodeE( SIGen , "遍历原型数据时 , 不能使用空的原型类型" )
@@ -193,7 +194,7 @@ end
 -- ======================================================================<br>
 ---@param typeCodeList table -- 原型数据的 [ type ] 值数组 , 这个数组只关心它的 [值] 的部分
 ---@param callback function -- 回调函数 , 有 2 个参数 , 参数 1 = 原型数据的 [ name ] 值 , 参数 2 = 原型数据本身
----@return table -- 自身
+---@return SIGen -- 自身
 function SIGen.ForEachTypeInner( typeCodeList , callback )
 	if not typeCodeList then
 		return CodeE( SIGen , "遍历原型数据时 , 不能使用空的原型类型列表" )
@@ -221,7 +222,7 @@ end
 ---@param typeCode string -- 原型数据的 [ type ] 值
 ---@param prototypeName string -- 原型数据的 [ name ] 值
 ---@param callback function -- 回调函数 , 有 2 个参数 , 参数 1 = 原型数据的 [ name ] 值 , 参数 2 = 原型数据本身
----@return table -- 自身
+---@return SIGen -- 自身
 function SIGen.FindOuter( typeCode , prototypeName , callback )
 	if not typeCode then
 		return CodeE( SIGen , "查找原型数据时 , 不能使用空的原型类型" )
@@ -246,7 +247,7 @@ end
 -- ======================================================================<br>
 ---@param typeCode string -- 原型数据的 [ type ] 值
 ---@param callback function -- 回调函数 , 有 2 个参数 , 参数 1 = 原型数据的 [ name ] 值 , 参数 2 = 原型数据本身
----@return table -- 自身
+---@return SIGen -- 自身
 function SIGen.ForEachOuter( typeCode , callback )
 	if not typeCode then
 		return CodeE( SIGen , "遍历原型数据时 , 不能使用空的原型类型" )
@@ -271,7 +272,7 @@ end
 -- ======================================================================<br>
 ---@param typeCodeList table -- 原型数据的 [ type ] 值数组 , 这个数组只关心它的 [值] 的部分
 ---@param callback function -- 回调函数 , 有 2 个参数 , 参数 1 = 原型数据的 [ name ] 值 , 参数 2 = 原型数据本身
----@return table -- 自身
+---@return SIGen -- 自身
 function SIGen.ForEachTypeOuter( typeCodeList , callback )
 	if not typeCodeList then
 		return CodeE( SIGen , "遍历原型数据时 , 不能使用空的原型类型列表" )
@@ -301,7 +302,7 @@ end
 -- 但是效果仅局限在 SIGen 内部<br>
 -- ======================================================================<br>
 ---@param prototypeList table -- 原型数据的数组
----@return table -- 自身
+---@return SIGen -- 自身
 function SIGen.Extend( prototypeList )
 	if hasFinish then
 		return CodeE( SIGen , "流程已经结束 , 无法使用 SIGen.Extend 函数" )
@@ -337,7 +338,7 @@ end
 -- 设置 SIGen 在创建原型数据时使用的分组信息<br>
 -- ======================================================================<br>
 ---@param subgroupName string -- 子分组的 [ name ] 值
----@return table -- 自身
+---@return SIGen -- 自身
 function SIGen.SetGroup( subgroupName )
 	return SIGen.Find( SICommon.Types.Subgroup , subgroupName , function( prototypeName , prototypeData )
 		if prototypeData and prototypeData.group then
@@ -354,7 +355,7 @@ end
 -- 如果不设置默认使用 SIInit.CurrentPrototypeData<br>
 -- ======================================================================<br>
 ---@param ConstantsData table -- 任意一个 ConstantsData 表
----@return table -- 自身
+---@return SIGen -- 自身
 function SIGen.SetConstantsData( ConstantsData )
 	SIGen.TempConstantsData = ConstantsData
 	return SIGen
@@ -364,7 +365,7 @@ end
 -- 移除 SIGen 中的 ConstantsData 设置<br>
 -- 不设置时使用 SIInit.CurrentPrototypeData<br>
 -- ======================================================================<br>
----@return table -- 自身
+---@return SIGen -- 自身
 function SIGen.RemoveConstantsData()
 	SIGen.TempConstantsData = nil
 	return SIGen
@@ -386,7 +387,7 @@ end
 ---@param prototypeID string -- ID , 用于计算 [ name ] 值和在 ConstantsData.raw 中注册
 ---@param aliasName string -- 别名 , 和 ConstantsData.Autoload 中的别名一样 , 在计算 [ name ] 值时代替 ID 进行计算 , 影响本地化字符串 , 不影响 ConstantsData.raw 中的注册
 ---@param prototypeDataToCopy table|nil -- 用来复制数据的原型数据
----@return table -- 自身
+---@return SIGen -- 自身
 function SIGen.New( typeCode , prototypeID , aliasName , prototypeDataToCopy )
 	if not typeCode then
 		return CodeE( SIGen , "创建原型数据时 , [ type ] 的值不能为空" )
@@ -466,7 +467,7 @@ end
 -- 添加的数据会被直接复制 , 被复制的原型数据中的表或数组发了的修改的话 , 此原型数据的相应表或数组也会发生修改<br>
 -- ======================================================================<br>
 ---@param prototypeData table -- 被复制的原型数据 , 其中 [ type ] 属性和 [ name ] 属性不会被复制
----@return table -- 自身
+---@return SIGen -- 自身
 function SIGen.Append( prototypeData )
 	if not SIGen.CurrentPrototypeData then
 		return CodeE( SIGen , "需要先创建新的原型数据 , 之后才可以完善它" )
@@ -485,7 +486,7 @@ end
 -- 添加的数据会被深度复制 , 被复制的原型数据发了的修改不会影响此原型数据<br>
 -- ======================================================================<br>
 ---@param prototypeDataToCopy table -- 被复制的原型数据 , 其中 [ type ] 属性和 [ name ] 属性不会被复制
----@return table -- 自身
+---@return SIGen -- 自身
 function SIGen.Import( prototypeDataToCopy )
 	if not SIGen.CurrentPrototypeData then
 		return CodeE( SIGen , "需要先创建新的原型数据 , 之后才可以完善它" )
@@ -505,7 +506,7 @@ end
 -- ======================================================================<br>
 ---@param key string -- 属性名称 , 不能是 [ type ] 和 [ name ]
 ---@param value any -- 属性的值 , 不限类型
----@return table -- 自身
+---@return SIGen -- 自身
 function SIGen.AddParameter( key , value )
 	if key == "type" or key == "name" then
 		return CodeE( SIGen , "完善原型数据属性时 , 不允许修改其 [ type ] 属性和 [ name ] 属性的值" )
@@ -528,7 +529,7 @@ end
 ---@param iconFileName string -- 图标文件名 , 文件位置是相对于 ConstantsData.PicturePath 的 , 不需要后缀
 ---@param size table -- 图标的宽高像素数量
 ---@param mipmaps integer -- 图标分级 , 默认是 0 , 原版物品图标是 4 , 查看原版的图片文件就能知道它的含义了
----@return table -- 自身
+---@return SIGen -- 自身
 function SIGen.AddIcon( iconFileName , size , mipmaps )
 	if not iconFileName then
 		return CodeE( SIGen , "完善原型数据属性时 , 图标文件名称不能为空" )
@@ -576,9 +577,9 @@ end
 -- ======================================================================<br>
 ---@param typeCode string -- 原型数据的 [ type ] 值
 ---@param iconFileName string -- 图标文件名 , 文件位置是相对于 ConstantsData.PicturePath 的 , 不需要后缀
----@param size table -- 图标的宽高像素数量
----@param mipmaps integer -- 图标分级 , 默认是 0 , 原版物品图标是 4 , 查看原版的图片文件就能知道它的含义了
----@return table -- 自身
+---@param size integer|nil -- 图标的宽高像素数量
+---@param mipmaps integer|nil -- 图标分级 , 默认是 0 , 原版物品图标是 4 , 查看原版的图片文件就能知道它的含义了
+---@return SIGen -- 自身
 function SIGen.MakeIcon( typeCode , iconFileName , size , mipmaps )
 	if not iconFileName then
 		return CodeE( SIGen , "完善原型数据属性时 , 图标文件名称不能为空" )
@@ -626,7 +627,7 @@ end
 -- 向此原型数据中添加图标代码 , 使用默认值<br>
 -- icon = "[ PicturePath ][ 类型别名 ]-[ 别名或 ID ]-[ 类型别名 ICON 项 ].png"<br>
 -- ======================================================================<br>
----@return table -- 自身
+---@return SIGen -- 自身
 function SIGen.AutoIcon()
 	if not SIGen.CurrentPrototypeData then
 		return CodeE( SIGen , "需要先创建新的原型数据 , 之后才可以完善它" )
@@ -672,7 +673,7 @@ end
 -- ======================================================================<br>
 ---@param width number -- 实体的宽度
 ---@param height number -- 实体的高度
----@return table -- 自身
+---@return SIGen -- 自身
 function SIGen.SetSize( width , height )
 	if not SIGen.CurrentPrototypeData then
 		return CodeE( SIGen , "需要先创建新的原型数据 , 之后才可以完善它" )
@@ -696,7 +697,7 @@ end
 ---@param width number -- 实体的宽度
 ---@param height number -- 实体的高度
 ---@param size number -- 碰撞区域的减小量 , 相比于选择区域
----@return table -- 自身
+---@return SIGen -- 自身
 function SIGen.SetSizeSize( width , height , size )
 	if not SIGen.CurrentPrototypeData then
 		return CodeE( SIGen , "需要先创建新的原型数据 , 之后才可以完善它" )
@@ -721,7 +722,7 @@ end
 ---@param width number -- 实体的宽度
 ---@param height number -- 实体的高度
 ---@param scale number -- 碰撞区域的实际大小倍率 , 相比于选择区域
----@return table -- 自身
+---@return SIGen -- 自身
 function SIGen.SetSizeScale( width , height , scale )
 	if not SIGen.CurrentPrototypeData then
 		return CodeE( SIGen , "需要先创建新的原型数据 , 之后才可以完善它" )
@@ -743,7 +744,7 @@ end
 -- order 属性最多可以有 200 个字符<br>
 -- ======================================================================<br>
 ---@param suffix string -- 后缀
----@return table -- 自身
+---@return SIGen -- 自身
 function SIGen.SetOrderSuffix( suffix )
 	if not SIGen.CurrentPrototypeData then
 		return CodeE( SIGen , "需要先创建新的原型数据 , 之后才可以完善它" )
@@ -761,7 +762,7 @@ end
 -- 这只是一种语法糖 , 并没有什么特别的含义<br>
 -- ======================================================================<br>
 ---@param callback function -- 回调函数 , 有 2 个参数 , 参数 1 = 原型数据的 [ name ] 值 , 参数 2 = 原型数据本身
----@return table -- 自身
+---@return SIGen -- 自身
 function SIGen.AddFunction( callback )
 	if not SIGen.CurrentPrototypeData then
 		return CodeE( SIGen , "需要先创建新的原型数据 , 之后才可以完善它" )
@@ -777,7 +778,7 @@ end
 -- 可以添加多个最终构建回调函数<br>
 -- ======================================================================<br>
 ---@param callback function -- 回调函数 , 有 3 个参数 , 参数 1 = 原型数据的 [ name ] 值 , 参数 2 = 原型数据本身 , 参数 3 = 注册的顺序索引
----@return table -- 自身
+---@return SIGen -- 自身
 function SIGen.AddCallback( callback )
 	if not callback then
 		return CodeE( SIGen , "完善原型数据属性时 , 回调函数不能为空" )
@@ -808,7 +809,7 @@ end
 -- ======================================================================<br>
 ---@param typeCode string -- 原型数据的 [ type ] 值
 ---@param callback function -- 回调函数 , 有 3 个参数 , 参数 1 = 原型数据的 [ name ] 值 , 参数 2 = 原型数据本身 , 参数 3 = 注册的顺序索引
----@return table -- 自身
+---@return SIGen -- 自身
 function SIGen.AddFinalCallback( typeCode , callback )
 	if not callback then
 		return CodeE( SIGen , "不能添加空值作为原型数据最终构建回调函数" )
@@ -835,7 +836,7 @@ end
 -- ======================================================================<br>
 ---@param targetPrototypeType string -- 目标物品的类型
 ---@param targetPrototypeName string -- 目标物品的名称
----@return table -- 自身
+---@return SIGen -- 自身
 function SIGen.ReferencePlaceResult( targetPrototypeType , targetPrototypeName )
 	if not SIGen.CurrentPrototypeData then
 		return CodeE( SIGen , "需要先创建新的原型数据 , 之后才可以使用 SIGen.ReferencePlaceResult 函数" )
@@ -857,24 +858,24 @@ function SIGen.ReferencePlaceResult( targetPrototypeType , targetPrototypeName )
 end
 
 -- ======================================================================<br>
--- 把当前模块类型的原型数据添加至目标物品的 placed_as_equipment_result 属性中<br>
+-- 把当前模块类型的原型数据添加至目标物品的 place_as_equipment_result 属性中<br>
 -- ======================================================================<br>
 ---@param targetPrototypeType string -- 目标物品的类型
 ---@param targetPrototypeName string -- 目标物品的名称
----@return table -- 自身
+---@return SIGen -- 自身
 function SIGen.ReferenceEquipmentResult( targetPrototypeType , targetPrototypeName )
 	if not SIGen.CurrentPrototypeData then
 		return CodeE( SIGen , "需要先创建新的原型数据 , 之后才可以使用 SIGen.ReferenceEquipmentResult 函数" )
 	end
 	if not SITable.Has( SICommon.Types.Equipments , SIGen.CurrentPrototypeData.type ) then
-		return CodeE( SIGen , "无法把非模块类型的原型数据添加至目标物品的 placed_as_equipment_result 属性中 , 当前类型 = " .. tostring( SIGen.CurrentPrototypeData.type ) )
+		return CodeE( SIGen , "无法把非模块类型的原型数据添加至目标物品的 place_as_equipment_result 属性中 , 当前类型 = " .. tostring( SIGen.CurrentPrototypeData.type ) )
 	end
 	if not SITable.Has( SICommon.Types.Items , targetPrototypeType ) then
 		return CodeE( SIGen , "无法给非物品类型的原型数据添加交叉引用数据 , 当前类型 = " .. tostring( targetPrototypeType ) )
 	end
 	SIGen.Find( targetPrototypeType , targetPrototypeName , function( prototypeName , prototypeData )
 		if prototypeData then
-			prototypeData.placed_as_equipment_result = SIGen.CurrentPrototypeData.name
+			prototypeData.place_as_equipment_result = SIGen.CurrentPrototypeData.name
 		else
 			CodeE( SIGen , "无法给不存在的目标物品添加交叉引用数据 , 当前类型 = " .. tostring( targetPrototypeType ) .. " , 原型名称 = " .. tostring( targetPrototypeName )  )
 		end
@@ -886,7 +887,7 @@ end
 -- 把当前配方类型的原型数据添加至目标科技的 effects 属性中<br>
 -- ======================================================================<br>
 ---@param technologyName string -- 目标科技的名称
----@return table -- 自身
+---@return SIGen -- 自身
 function SIGen.ReferenceUnlockRecipe( technologyName )
 	if not SIGen.CurrentPrototypeData then
 		return CodeE( SIGen , "需要先创建新的原型数据 , 之后才可以使用 SIGen.ReferenceUnlockRecipe 函数" )
@@ -919,7 +920,7 @@ end
 -- 向此原型数据中添加一个特殊得图标代码<br>
 -- 只有物品类型的原型数据可以使用此函数<br>
 -- ======================================================================<br>
----@return table -- 自身
+---@return SIGen -- 自身
 function SIGen.SetItemIconSI()
 	if not SIGen.CurrentPrototypeData then
 		return CodeE( SIGen , "需要先创建新的原型数据 , 之后才可以完善它" )
@@ -1164,7 +1165,7 @@ end
 -- 会创建图标物品 , 图标放置在地上的实体 , 以及图标放在模块区域的实体<br>
 -- ======================================================================<br>
 ---@param iconItemDataList table -- 图标物品的数字表 , 由键值对组成 , 键为 ID , 值为别名
----@return table -- 自身
+---@return SIGen -- 自身
 function SIGen.AutoIconItem( iconItemDataList )
 	if not SIGen.CurrentSubgroup then
 		return CodeE( SIGen , "创建原型数据时 , 需要先通过 SIGen.SetGroup 函数设置一个可用的子分组" )
@@ -1358,7 +1359,7 @@ end
 ---@param hasBorder boolean|nil -- 是否拥有边框
 ---@param borderColor table|nil -- 如果有边框的话 , 这里定义它的颜色 , 默认是 000 纯黑
 ---@param from string|nil -- 使用的字体
----@return table -- 自身
+---@return SIGen -- 自身
 function SIGen.AddFont( fontID , aliasName , fontSize , hasBorder , borderColor , from )
 	if not fontID then
 		return CodeE( SIGen , "创建原型数据时 , ID 不能为空" )
@@ -1400,7 +1401,7 @@ end
 ---@param styleID string -- ID , 用于计算 [ name ] 值和在 ConstantsData.raw.Styles 中注册
 ---@param aliasName string -- 别名 , 和 ConstantsData.Autoload 中的别名一样 , 在计算 [ name ] 值时代替 ID 进行计算 , 不影响 ConstantsData.raw.Styles 中的注册
 ---@param styleDataToCopy table -- 用来复制数据的控件样式
----@return table -- 自身
+---@return SIGen -- 自身
 function SIGen.AddStyle( styleID , aliasName , styleDataToCopy )
 	if not styleID then
 		return CodeE( SIGen , "创建控件样式时 , ID 不能为空" )
@@ -1433,7 +1434,7 @@ end
 -- 添加的数据会被直接复制 , 被复制的控件样式中的表或数组发了的修改的话 , 此控件样式的相应表或数组也会发生修改<br>
 -- ======================================================================<br>
 ---@param styleDataToCopy table -- 被复制的控件样式
----@return table -- 自身
+---@return SIGen -- 自身
 function SIGen.AppendStyleData( styleDataToCopy )
 	if not SIGen.CurrentStyleData then
 		return CodeE( SIGen , "需要先创建新的控件样式 , 之后才可以完善它" )
@@ -1453,7 +1454,7 @@ end
 -- ======================================================================<br>
 -- 重置 SIGen 的动态数据<br>
 -- ======================================================================<br>
----@return table -- 自身
+---@return SIGen -- 自身
 function SIGen.Fresh()
 	SIGen.CurrentPrototypeData = nil
 	SIGen.CurrentStyleData = nil
@@ -1467,7 +1468,7 @@ end
 -- 重置 SIGen 的动态数据并结束使用<br>
 -- 请勿在外部使用此函数<br>
 -- ======================================================================<br>
----@return table -- 自身
+---@return SIGen -- 自身
 function SIGen.Finish()
 	if hasFinish then
 		return CodeE( SIGen , "流程已经结束 , 无法使用 SIGen.Finish 函数" )
