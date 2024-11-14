@@ -30,16 +30,16 @@ if SIConfigs.SIOverhaulBasic.TotalEvening ~= nil and SISettings.Startup.SIOverha
 				{ 0.00 , "identity" } ,
 				{ 0.15 , "identity" } ,
 				{ 0.20 , "identity" } ,
-				{ 0.45 , SIGen.MakeRawPicturePath( "世界光线-夜晚" ) } ,
-				{ 0.55 , SIGen.MakeRawPicturePath( "世界光线-夜晚" ) } ,
+				{ 0.45 , SIGen.MakeRawPicturePath( "WorldLight-Night" , "世界光线-夜晚" ) } ,
+				{ 0.55 , SIGen.MakeRawPicturePath( "WorldLight-Night" , "世界光线-夜晚" ) } ,
 				{ 0.80 , "identity" } ,
 				{ 0.85 , "identity" }
 			}
 			prototypeData.zoom_to_world_daytime_color_lookup =
 			{
 				{ 0.25 , "identity" } ,
-				{ 0.45 , SIGen.MakeRawPicturePath( "世界光线-夜晚" ) } ,
-				{ 0.55 , SIGen.MakeRawPicturePath( "世界光线-夜晚" ) } ,
+				{ 0.45 , SIGen.MakeRawPicturePath( "WorldLight-Night" , "世界光线-夜晚" ) } ,
+				{ 0.55 , SIGen.MakeRawPicturePath( "WorldLight-Night" , "世界光线-夜晚" ) } ,
 				{ 0.75 , "identity" }
 			}
 		end

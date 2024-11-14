@@ -34,8 +34,8 @@ local shellPartProjectile = {}
 
 SIGen
 .SetGroup( SIConstants_Resource.raw.Groups.Resource.Crystal )
-.New( SICommon.Types.Entities.Projectile , "Shell" , "扔出去的矿石壳" , { OrderOffset = orderOffset } )
-.MakeIcon( SICommon.Types.Items.Capsule , "Shell" )
+.New( SICommon.Types.Entities.Projectile , "ThrowedShell" , "扔出去的矿石壳" , { OrderOffset = orderOffset } )
+.MakeIcon( SICommon.Types.Items.Capsule , "ThrowedShell" , "扔出去的矿石壳" )
 .SetSize( 0.4 , 0.4 )
 .Append
 {
@@ -51,7 +51,7 @@ SIGen
 		layers =
 		{
 			{
-				filename = SIGen.MakeSelfPicturePath( "扔出去的矿石壳" ) ,
+				filename = SIGen.MakeSelfPicturePath( "ThrowedShell" , "扔出去的矿石壳" ) ,
 				priority = "high" ,
 				width = 32 ,
 				height = 32 ,
@@ -166,8 +166,8 @@ end )
 	}
 } )
 .AutoIcon()
-.New( SICommon.Types.Entities.Projectile , "ShellPart" , "扔出去的矿石壳屑" , { OrderOffset = orderOffset } )
-.MakeIcon( SICommon.Types.Items.Capsule , "ShellPart" )
+.New( SICommon.Types.Entities.Projectile , "ThrowedShellPart" , "扔出去的矿石壳屑" , { OrderOffset = orderOffset } )
+.MakeIcon( SICommon.Types.Items.Capsule , "ThrowedShellPart" , "扔出去的矿石壳屑" )
 .SetSize( 0.4 , 0.4 )
 .Append
 {
@@ -183,7 +183,7 @@ end )
 		layers =
 		{
 			{
-				filename = SIGen.MakeSelfPicturePath( "扔出去的矿石壳屑" ) ,
+				filename = SIGen.MakeSelfPicturePath( "ThrowedShellPart" , "扔出去的矿石壳屑" ) ,
 				priority = "high" ,
 				width = 32 ,
 				height = 32 ,
@@ -314,7 +314,7 @@ end )
 		layers =
 		{
 			{
-				filename = SIGen.MakeSelfPicturePath( "晶石减速" ) ,
+				filename = SIGen.MakeSelfPicturePath( "CrystalSlow" , "晶石减速" ) ,
 				priority = "high" ,
 				width = 32 ,
 				height = 32 ,
@@ -342,7 +342,7 @@ end )
 		layers =
 		{
 			{
-				filename = SIGen.MakeSelfPicturePath( "宁寂减速" ) ,
+				filename = SIGen.MakeSelfPicturePath( "QuietSlow" , "宁寂减速" ) ,
 				priority = "high" ,
 				width = 32 ,
 				height = 32 ,
@@ -410,8 +410,8 @@ for crystalID , crystalData in pairs( crystalList ) do
 	local crystalAlias = crystalData.Alias
 	local crystalProjectile = {}
 	SIGen
-	.New( SICommon.Types.Entities.Projectile , crystalID , "扔出去的" .. crystalAlias )
-	.MakeIcon( SICommon.Types.Items.Capsule , crystalID )
+	.New( SICommon.Types.Entities.Projectile , "Throwed" .. crystalID , "扔出去的" .. crystalAlias )
+	.MakeIcon( SICommon.Types.Items.Capsule , "Throwed" .. crystalID , "扔出去的" .. crystalAlias )
 	.SetSize( 0.4 , 0.4 )
 	.Append
 	{
@@ -427,7 +427,7 @@ for crystalID , crystalData in pairs( crystalList ) do
 			layers =
 			{
 				{
-					filename = SIGen.MakeSelfPicturePath( "扔出去的" .. crystalAlias ) ,
+					filename = SIGen.MakeSelfPicturePath( "Throwed" .. crystalID , "扔出去的" .. crystalAlias ) ,
 					priority = "high" ,
 					width = 32 ,
 					height = 32 ,
@@ -486,8 +486,8 @@ for crystalID , crystalData in pairs( crystalList ) do
 	.AddFunction( function( prototypeName , prototypeData )
 		crystalProjectile = prototypeData
 	end )
-	.New( SICommon.Types.Entities.Fire , crystalID .. "Fluid" , "洒出来的" .. crystalAlias )
-	.MakeIcon( SICommon.Types.Items.Capsule , crystalID )
+	.New( SICommon.Types.Entities.Fire , "Spilled" .. crystalID , "洒出来的" .. crystalAlias )
+	.MakeIcon( SICommon.Types.Items.Capsule , "Spilled" .. crystalID , "洒出来的" .. crystalAlias )
 	.SetSize( 1.5 , 1.5 )
 	.Append
 	{
@@ -595,7 +595,7 @@ for crystalID , crystalData in pairs( crystalList ) do
 				layers =
 				{
 					{
-						filename = SIGen.MakeSelfPicturePath( "洒出来的" .. crystalAlias .. "-创建-1" ) ,
+						filename = SIGen.MakeSelfPicturePath( "Spilled" .. crystalID .. "-create-1" , "洒出来的" .. crystalAlias .. "-创建-1" ) ,
 						priority = "high" ,
 						width = 48 ,
 						height = 48 ,
@@ -611,7 +611,7 @@ for crystalID , crystalData in pairs( crystalList ) do
 				layers =
 				{
 					{
-						filename = SIGen.MakeSelfPicturePath( "洒出来的" .. crystalAlias .. "-创建-2" ) ,
+						filename = SIGen.MakeSelfPicturePath( "Spilled" .. crystalID .. "-create-2" , "洒出来的" .. crystalAlias .. "-创建-2" ) ,
 						priority = "high" ,
 						width = 48 ,
 						height = 48 ,
@@ -627,7 +627,7 @@ for crystalID , crystalData in pairs( crystalList ) do
 				layers =
 				{
 					{
-						filename = SIGen.MakeSelfPicturePath( "洒出来的" .. crystalAlias .. "-创建-3" ) ,
+						filename = SIGen.MakeSelfPicturePath( "Spilled" .. crystalID .. "-create-3" , "洒出来的" .. crystalAlias .. "-创建-3" ) ,
 						priority = "high" ,
 						width = 48 ,
 						height = 48 ,
@@ -643,7 +643,7 @@ for crystalID , crystalData in pairs( crystalList ) do
 				layers =
 				{
 					{
-						filename = SIGen.MakeSelfPicturePath( "洒出来的" .. crystalAlias .. "-创建-4" ) ,
+						filename = SIGen.MakeSelfPicturePath( "Spilled" .. crystalID .. "-create-4" , "洒出来的" .. crystalAlias .. "-创建-4" ) ,
 						priority = "high" ,
 						width = 48 ,
 						height = 48 ,
@@ -662,7 +662,7 @@ for crystalID , crystalData in pairs( crystalList ) do
 				layers =
 				{
 					{
-						filename = SIGen.MakeSelfPicturePath( "洒出来的" .. crystalAlias .. "-消失-1" ) ,
+						filename = SIGen.MakeSelfPicturePath( "Spilled" .. crystalID .. "-disappear-1" , "洒出来的" .. crystalAlias .. "-消失-1" ) ,
 						priority = "high" ,
 						width = 48 ,
 						height = 48 ,
@@ -678,7 +678,7 @@ for crystalID , crystalData in pairs( crystalList ) do
 				layers =
 				{
 					{
-						filename = SIGen.MakeSelfPicturePath( "洒出来的" .. crystalAlias .. "-消失-2" ) ,
+						filename = SIGen.MakeSelfPicturePath( "Spilled" .. crystalID .. "-disappear-2" , "洒出来的" .. crystalAlias .. "-消失-2" ) ,
 						priority = "high" ,
 						width = 48 ,
 						height = 48 ,
@@ -694,7 +694,7 @@ for crystalID , crystalData in pairs( crystalList ) do
 				layers =
 				{
 					{
-						filename = SIGen.MakeSelfPicturePath( "洒出来的" .. crystalAlias .. "-消失-3" ) ,
+						filename = SIGen.MakeSelfPicturePath( "Spilled" .. crystalID .. "-disappear-3" , "洒出来的" .. crystalAlias .. "-消失-3" ) ,
 						priority = "high" ,
 						width = 48 ,
 						height = 48 ,
@@ -710,7 +710,7 @@ for crystalID , crystalData in pairs( crystalList ) do
 				layers =
 				{
 					{
-						filename = SIGen.MakeSelfPicturePath( "洒出来的" .. crystalAlias .. "-消失-4" ) ,
+						filename = SIGen.MakeSelfPicturePath( "Spilled" .. crystalID .. "-disappear-4" , "洒出来的" .. crystalAlias .. "-消失-4" ) ,
 						priority = "high" ,
 						width = 48 ,
 						height = 48 ,
@@ -736,7 +736,7 @@ for crystalID , crystalData in pairs( crystalList ) do
 				layers =
 				{
 					{
-						filename = SIGen.MakeSelfPicturePath( crystalAlias .. "-1" ) ,
+						filename = SIGen.MakeSelfPicturePath( crystalID .. "-1" , crystalAlias .. "-1" ) ,
 						size = 64 ,
 						mipmap_count = 4 ,
 						scale = 0.25
@@ -747,7 +747,7 @@ for crystalID , crystalData in pairs( crystalList ) do
 				layers =
 				{
 					{
-						filename = SIGen.MakeSelfPicturePath( crystalAlias .. "-2" ) ,
+						filename = SIGen.MakeSelfPicturePath( crystalID .. "-2" , crystalAlias .. "-2" ) ,
 						size = 64 ,
 						mipmap_count = 4 ,
 						scale = 0.25
@@ -758,7 +758,7 @@ for crystalID , crystalData in pairs( crystalList ) do
 				layers =
 				{
 					{
-						filename = SIGen.MakeSelfPicturePath( crystalAlias .. "-3" ) ,
+						filename = SIGen.MakeSelfPicturePath( crystalID .. "-3" , crystalAlias .. "-3" ) ,
 						size = 64 ,
 						mipmap_count = 4 ,
 						scale = 0.25
@@ -769,7 +769,7 @@ for crystalID , crystalData in pairs( crystalList ) do
 				layers =
 				{
 					{
-						filename = SIGen.MakeSelfPicturePath( crystalAlias .. "-4" ) ,
+						filename = SIGen.MakeSelfPicturePath( crystalID .. "-4" , crystalAlias .. "-4" ) ,
 						size = 64 ,
 						mipmap_count = 4 ,
 						scale = 0.25
@@ -924,21 +924,22 @@ for crystalOreID , crystalOreData in pairs( crystalOreList ) do
 		mining_visualisation_tint = crystalOreData.Color ,
 		tree_removal_probability = 0.05 ,
 		tree_removal_max_distance = 0 ,
-		autoplace = crystalOreData.Autoplace and SIAutoPlace.Create
-		{
-			Name = "" ,
-			BaseDensity = 4 ,
-			RegularMultiplier = 1.0 ,
-			StartingMultiplier = 1.1 ,
-			HasStarting = false
-		} or nil ,
+		autoplace = nil ,
+--		autoplace = crystalOreData.Autoplace and SIAutoPlace.Create
+--		{
+--			Name = "" ,
+--			BaseDensity = 4 ,
+--			RegularMultiplier = 1.0 ,
+--			StartingMultiplier = 1.1 ,
+--			HasStarting = false
+--		} or nil ,
 		stage_counts = { 100000 , 33333 , 10000 , 3333 , 1000 , 333 , 100 , 33 } ,
 		stages =
 		{
 			sheets =
 			{
 				{
-					filename = SIGen.MakeSelfPicturePath( crystalOreData.Alias ) ,
+					filename = SIGen.MakeSelfPicturePath( crystalOreID  , crystalOreData.Alias ) ,
 					priority = "extra-high" ,
 					width = 64 ,
 					height = 64 ,
@@ -956,7 +957,7 @@ for crystalOreID , crystalOreData in pairs( crystalOreList ) do
 		{
 			sheet =
 			{
-				filename = SIGen.MakeSelfPicturePath( crystalOreData.Alias .. "-光效" ) ,
+				filename = SIGen.MakeSelfPicturePath( crystalOreID .. "-Light" , crystalOreData.Alias .. "-光效" ) ,
 				priority = "extra-high" ,
 				blend_mode = "additive" ,
 				flags = {" light" } ,
@@ -998,8 +999,8 @@ end
 local blackProjectile = {}
 
 SIGen
-.New( SICommon.Types.Entities.Projectile , "BlackHard" , "扔出去的黑硬的物质" )
-.MakeIcon( SICommon.Types.Items.Capsule , "BlackHard" )
+.New( SICommon.Types.Entities.Projectile , "ThrowedBlackHard" , "扔出去的黑硬的物质" )
+.MakeIcon( SICommon.Types.Items.Capsule , "ThrowedBlackHard" , "扔出去的黑硬的物质" )
 .SetSize( 0.4 , 0.4 )
 .Append
 {
@@ -1015,7 +1016,7 @@ SIGen
 		layers =
 		{
 			{
-				filename = SIGen.MakeSelfPicturePath( "扔出去的黑硬的物质" ) ,
+				filename = SIGen.MakeSelfPicturePath( "ThrowedBlackHard" , "扔出去的黑硬的物质" ) ,
 				priority = "high" ,
 				width = 32 ,
 				height = 32 ,
@@ -1086,7 +1087,7 @@ end )
 			layers =
 			{
 				{
-					filename = SIGen.MakeSelfPicturePath( "黑硬的物质-1" ) ,
+					filename = SIGen.MakeSelfPicturePath( "BlackHard-1" , "黑硬的物质-1" ) ,
 					size = 64 ,
 					mipmap_count = 4 ,
 					scale = 0.25
@@ -1097,7 +1098,7 @@ end )
 			layers =
 			{
 				{
-					filename = SIGen.MakeSelfPicturePath( "黑硬的物质-2" ) ,
+					filename = SIGen.MakeSelfPicturePath( "BlackHard-2" , "黑硬的物质-2" ) ,
 					size = 64 ,
 					mipmap_count = 4 ,
 					scale = 0.25
@@ -1108,7 +1109,7 @@ end )
 			layers =
 			{
 				{
-					filename = SIGen.MakeSelfPicturePath( "黑硬的物质-3" ) ,
+					filename = SIGen.MakeSelfPicturePath( "BlackHard-3" , "黑硬的物质-3" ) ,
 					size = 64 ,
 					mipmap_count = 4 ,
 					scale = 0.25
@@ -1119,7 +1120,7 @@ end )
 			layers =
 			{
 				{
-					filename = SIGen.MakeSelfPicturePath( "黑硬的物质-4" ) ,
+					filename = SIGen.MakeSelfPicturePath( "BlackHard-4" , "黑硬的物质-4" ) ,
 					size = 64 ,
 					mipmap_count = 4 ,
 					scale = 0.25
@@ -1203,21 +1204,22 @@ end )
 	mining_visualisation_tint = { r = 0.00 , g = 0.00 , b = 0.00 } ,
 	tree_removal_probability = 1.0 ,
 	tree_removal_max_distance = 25 ,
-	autoplace = SIAutoPlace.Create
-	{
-		Name = "" ,
-		BaseDensity = 4 ,
-		RegularMultiplier = 1.0 ,
-		StartingMultiplier = 1.1 ,
-		HasStarting = false
-	} ,
+	autoplace = nil ,
+--	autoplace = SIAutoPlace.Create
+--	{
+--		Name = "" ,
+--		BaseDensity = 4 ,
+--		RegularMultiplier = 1.0 ,
+--		StartingMultiplier = 1.1 ,
+--		HasStarting = false
+--	} ,
 	stage_counts = { 100000 , 33333 , 10000 , 3333 , 1000 , 333 , 100 , 33 } ,
 	stages =
 	{
 		sheets =
 		{
 			{
-				filename = SIGen.MakeSelfPicturePath( "黑硬的物质" ) ,
+				filename = SIGen.MakeSelfPicturePath( "BlackHard" , "黑硬的物质" ) ,
 				priority = "extra-high" ,
 				width = 64 ,
 				height = 64 ,

@@ -31,7 +31,7 @@ for r = 0 , SIConstants_Colorful.ColorMax , SIConstants_Colorful.ColorStep do
 				icons =
 				{
 					{
-						icon = SIGen.MakeSelfPicturePath( "像素块-图标" ) ,
+						icon = SIGen.MakeSelfPicturePath( "Pixel-icon" , "像素块-图标" ) ,
 						icon_size = 64 ,
 						icon_mipmaps = 4 ,
 						tint = tint
@@ -76,7 +76,7 @@ for r = 0 , SIConstants_Colorful.ColorMax , SIConstants_Colorful.ColorStep do
 						layers =
 						{
 							{
-								filename = SIGen.MakeSelfPicturePath( "像素块" ) ,
+								filename = SIGen.MakeSelfPicturePath( "Pixel" , "像素块" ) ,
 								priority = "very-low" ,
 								width = 32 ,
 								height = 32 ,

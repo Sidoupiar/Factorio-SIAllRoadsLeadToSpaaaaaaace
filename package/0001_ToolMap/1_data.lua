@@ -138,14 +138,14 @@ SIGen
 	} ,
 	sprite =
 	{
-		filename = SIGen.MakePicturePath( SICommon.Types.Items.SelectionTool , "粉图" .. SICommon.ShowNameSuffix.ICON ) ,
+		filename = SIGen.MakePicturePath( SICommon.Types.Items.SelectionTool , "DeleteMap" .. SICommon.ShowNameSuffix.ICON , "粉图" .. SICommon.ShowNameSuffix.ICON ) ,
 		priority = "medium" ,
 		width = 64 ,
 		height = 64 ,
 		scale = 1.0
 	}
 } )
-.MakeIcon( SICommon.Types.Items.SelectionTool , "粉图" , 64 , 4 )
+.MakeIcon( SICommon.Types.Items.SelectionTool , "DeleteMap" , "粉图" , 64 , 4 )
 .ReferenceEquipmentResult( SICommon.Types.Items.SelectionTool , SIConstants_ToolMap.raw.Items.DeleteMap )
 
 -- ======================================================================
@@ -279,14 +279,14 @@ SIGen
 	} ,
 	sprite =
 	{
-		filename = SIGen.MakePicturePath( SICommon.Types.Items.SelectionTool , "黄图" .. SICommon.ShowNameSuffix.ICON ) ,
+		filename = SIGen.MakePicturePath( SICommon.Types.Items.SelectionTool , "OreMap" .. SICommon.ShowNameSuffix.ICON , "黄图" .. SICommon.ShowNameSuffix.ICON ) ,
 		priority = "medium" ,
 		width = 64 ,
 		height = 64 ,
 		scale = 1.0
 	}
 } )
-.MakeIcon( SICommon.Types.Items.SelectionTool , "黄图" , 64 , 4 )
+.MakeIcon( SICommon.Types.Items.SelectionTool , "OreMap" , "黄图" , 64 , 4 )
 .ReferenceEquipmentResult( SICommon.Types.Items.SelectionTool , SIConstants_ToolMap.raw.Items.OreMap )
 
 -- ======================================================================
@@ -420,14 +420,14 @@ SIGen
 	} ,
 	sprite =
 	{
-		filename = SIGen.MakePicturePath( SICommon.Types.Items.SelectionTool , "紫图" .. SICommon.ShowNameSuffix.ICON ) ,
+		filename = SIGen.MakePicturePath( SICommon.Types.Items.SelectionTool , "RequestMap" .. SICommon.CodeNameSuffix.ICON , "紫图" .. SICommon.ShowNameSuffix.ICON ) ,
 		priority = "medium" ,
 		width = 64 ,
 		height = 64 ,
 		scale = 1.0
 	}
 } )
-.MakeIcon( SICommon.Types.Items.SelectionTool , "紫图" , 64 , 4 )
+.MakeIcon( SICommon.Types.Items.SelectionTool , "RequestMap" , "紫图" , 64 , 4 )
 .ReferenceEquipmentResult( SICommon.Types.Items.SelectionTool , SIConstants_ToolMap.raw.Items.RequestMap )
 
 -- ============================================================================================================================================

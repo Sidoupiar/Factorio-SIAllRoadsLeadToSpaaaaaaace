@@ -8,8 +8,8 @@ SIControl.Init
 {
 	[SICommon.Types.Sprite] =
 	{
-		Beacon = "提示插件塔过载" ,
-		Module = "提示插件过载"
+		AlertBeacon = "提示插件塔过载" ,
+		AlertModule = "提示插件过载"
 	}
 }
 
@@ -137,22 +137,28 @@ end )
 	end
 	SIBuildLimit.DestroyEntityIcons( unitNumber )
 end )
-.Add( SIRequestMap.GetModuleEventID() , function( event , functionID )
-	local entity = event.entity
-	if not entity or not entity.valid then
-		return
-	end
-	local playerIndex = event.player_index
-	SIBuildLimit.CheckModule( playerIndex , entity , true )
-end )
-.Add( SIAutoInsert.GetModuleEventID() , function( event , functionID )
-	local entity = event.entity
-	if not entity or not entity.valid then
-		return
-	end
-	local playerIndex = event.player_index
-	SIBuildLimit.CheckModule( playerIndex , entity , true )
-end )
+
+if SIRequestMap then
+	SIEventBus.Add( SIRequestMap.GetModuleEventID() , function( event , functionID )
+		local entity = event.entity
+		if not entity or not entity.valid then
+			return
+		end
+		local playerIndex = event.player_index
+		SIBuildLimit.CheckModule( playerIndex , entity , true )
+	end )
+end
+
+if SIAutoInsert then
+	SIEventBus.Add( SIAutoInsert.GetModuleEventID() , function( event , functionID )
+		local entity = event.entity
+		if not entity or not entity.valid then
+			return
+		end
+		local playerIndex = event.player_index
+		SIBuildLimit.CheckModule( playerIndex , entity , true )
+	end )
+end
 
 -- ============================================================================================================================================
 -- ============================================================================================================================================

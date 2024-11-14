@@ -759,56 +759,56 @@ SICommon =
 
 for type , real in pairs
 {
-	Group            = { "分组" , "Groups"            } ,
-	Fluid            = { "流体" , "Fluids"            } ,
-	Tile             = { "地板" , "Tiles"             } ,
-	Signal           = { "信号" , "Signals"           } ,
-	Recipe           = { "配方" , "Recipes"           } ,
-	Technology       = { "科技" , "Technologies"      } ,
-	DamageType       = { "伤害" , "DamageTypes"       } ,
-	EquipmentGrid    = { "区域" , "EquipmentGrids"    } ,
-	Decorative       = { "遮盖" , "Decoratives"       } ,
-	Input            = { "按键" , "Inputs"            } ,
-	AmbientSound     = { "音乐" , "EmbientSounds"     } ,
-	Font             = { "字体" , "Fonts"             } ,
-	ControlAutoplace = { "放置" , "ControlAutoplaces" } ,
-	Sprite           = { "图片" , "Sprites"           } ,
-	Categories       = { "类别" , "Categories"        } ,
-	Items            = { "物品" , "Items"             } ,
-	Entities         = { "实体" , "Entities"          } ,
-	Equipments       = { "模块" , "Equipments"        }
+	Group            = { Code = "Groups"            , Show = "分组"} ,
+	Fluid            = { Code = "Fluids"            , Show = "流体"} ,
+	Tile             = { Code = "Tiles"             , Show = "地板"} ,
+	Signal           = { Code = "Signals"           , Show = "信号"} ,
+	Recipe           = { Code = "Recipes"           , Show = "配方"} ,
+	Technology       = { Code = "Technologies"      , Show = "科技"} ,
+	DamageType       = { Code = "DamageTypes"       , Show = "伤害"} ,
+	EquipmentGrid    = { Code = "EquipmentGrids"    , Show = "区域"} ,
+	Decorative       = { Code = "Decoratives"       , Show = "遮盖"} ,
+	Input            = { Code = "Inputs"            , Show = "按键"} ,
+	AmbientSound     = { Code = "EmbientSounds"     , Show = "音乐"} ,
+	Font             = { Code = "Fonts"             , Show = "字体"} ,
+	ControlAutoplace = { Code = "ControlAutoplaces" , Show = "放置"} ,
+	Sprite           = { Code = "Sprites"           , Show = "图片"} ,
+	Categories       = { Code = "Categories"        , Show = "类别"} ,
+	Items            = { Code = "Items"             , Show = "物品"} ,
+	Entities         = { Code = "Entities"          , Show = "实体"} ,
+	Equipments       = { Code = "Equipments"        , Show = "模块"}
 } do
 	if SITools.IsTable( SICommon.Types[type] ) then
 		---@diagnostic disable-next-line: param-type-mismatch
 		for key , value in pairs( SICommon.Types[type] ) do
 			SICommon.Types.All[key] = value
-			SICommon.Types.Raw[value] = real[2]
-			SICommon.CodeName[value] = real[2]
-			SICommon.CodeNamePrefix[value] = real[2] .. "-"
-			SICommon.ShowName[value] = real[1]
-			SICommon.ShowNamePrefix[value] = real[1] .. "-"
+			SICommon.Types.Raw[value] = real.Code
+			SICommon.CodeName[value] = real.Code
+			SICommon.CodeNamePrefix[value] = real.Code .. "-"
+			SICommon.ShowName[value] = real.Show
+			SICommon.ShowNamePrefix[value] = real.Show .. "-"
 		end
 	else
 		SICommon.Types.All[type] = SICommon.Types[type]
-		SICommon.Types.Raw[SICommon.Types[type]] = real[2]
-		SICommon.CodeName[SICommon.Types[type]] = real[2]
-		SICommon.CodeNamePrefix[SICommon.Types[type]] = real[2] .. "-"
-		SICommon.ShowName[SICommon.Types[type]] = real[1]
-		SICommon.ShowNamePrefix[SICommon.Types[type]] = real[1] .. "-"
+		SICommon.Types.Raw[SICommon.Types[type]] = real.Code
+		SICommon.CodeName[SICommon.Types[type]] = real.Code
+		SICommon.CodeNamePrefix[SICommon.Types[type]] = real.Code .. "-"
+		SICommon.ShowName[SICommon.Types[type]] = real.Show
+		SICommon.ShowNamePrefix[SICommon.Types[type]] = real.Show .. "-"
 	end
 end
 
 for type , real in pairs
 {
-	ICON  = { "图标" , "icon" } ,
-	HrVer = { "高清" , "hr"   }
+	ICON  = { Code = "Icon" , Show = "图标" } ,
+	HrVer = { Code = "HR"   , Show = "高清" }
 } do
-	SICommon.CodeName[type] = real[2]
-	SICommon.CodeNamePrefix[type] = real[2] .. "-"
-	SICommon.CodeNameSuffix[type] = "-" .. real[2]
-	SICommon.ShowName[type] = real[1]
-	SICommon.ShowNamePrefix[type] = real[1] .. "-"
-	SICommon.ShowNameSuffix[type] = "-" .. real[1]
+	SICommon.CodeName[type] = real.Code
+	SICommon.CodeNamePrefix[type] = real.Code .. "-"
+	SICommon.CodeNameSuffix[type] = "-" .. real.Code
+	SICommon.ShowName[type] = real.Show
+	SICommon.ShowNamePrefix[type] = real.Show .. "-"
+	SICommon.ShowNameSuffix[type] = "-" .. real.Show
 end
 
 -- ============================================================================================================================================

@@ -128,7 +128,7 @@ end
 -- 遗迹围墙
 -- ======================================================================
 SIGen
-.New( SICommon.Types.Entities.Corpse , "RuinWallRemnants" , "遗迹围墙-残骸" )
+.New( SICommon.Types.Entities.Corpse , "RuinWall_Corpse" , "遗迹围墙-残骸" )
 .AutoIcon()
 .SetSizeScale( 1 , 1 , 0 )
 .Append
@@ -143,7 +143,7 @@ SIGen
 	animation = SIGraphics.MakeRemnantsAnimation( 4 ,
 	{
 		{
-			filename = SIGen.MakeSelfPicturePath( "遗迹围墙-残骸" ) ,
+			filename = SIGen.MakeSelfPicturePath( "RuinWall-Corpse" , "遗迹围墙-残骸" ) ,
 			priority = "extra-high" ,
 			width = 60 ,
 			height = 58 ,
@@ -155,7 +155,7 @@ SIGen
 			shift = SIUtils.by_pixel( 3 , 7.5 ) ,
 			hr_version =
 			{
-				filename = SIGen.MakeSelfPicturePathHr( "遗迹围墙-残骸" ) ,
+				filename = SIGen.MakeSelfPicturePathHr( "RuinWall-Corpse" , "遗迹围墙-残骸" ) ,
 				priority = "extra-high" ,
 				width = 118 ,
 				height = 114 ,
@@ -176,7 +176,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Wall , "RuinWall" , "遗迹围墙" 
 	icons =
 	{
 		{
-			icon = SIGen.MakePicturePath( SICommon.Types.Entities.Wall , "遗迹围墙" .. SICommon.ShowNameSuffix.ICON ) ,
+			icon = SIGen.MakePicturePath( SICommon.Types.Entities.Wall , "RuinWall" .. SICommon.CodeNameSuffix.ICON , "遗迹围墙" .. SICommon.ShowNameSuffix.ICON ) ,
 			icon_size = 64 ,
 			icon_mipmaps = 4
 		}
@@ -190,7 +190,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Wall , "RuinWall" , "遗迹围墙" 
 		results = {}
 	} ,
 	max_health = 550 ,
-	corpse = SIConstants_RuinSystem.raw.Entities.RuinWallRemnants ,
+	corpse = SIConstants_RuinSystem.raw.Entities.RuinWall_Corpse ,
 	dying_explosion = "wall-explosion" ,
 	map_color = { r = 1.0 , g = 1.0 , b = 1.0 } ,
 	friendly_map_color = { r = 0.4 , g = 0.4 , b = 1.0 } ,
@@ -230,7 +230,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Wall , "RuinWall" , "遗迹围墙" 
 			layers =
 			{
 				{
-					filename = SIGen.MakePicturePath( SICommon.Types.Entities.Wall , "遗迹围墙-独立" ) ,
+					filename = SIGen.MakePicturePath( SICommon.Types.Entities.Wall , "RuinWall-single" , "遗迹围墙-独立" ) ,
 					priority = "extra-high" ,
 					width = 32 ,
 					height = 46 ,
@@ -240,7 +240,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Wall , "RuinWall" , "遗迹围墙" 
 					shift = SIUtils.by_pixel( 0 , -6 ) ,
 					hr_version =
 					{
-						filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Wall , "遗迹围墙-独立" ) ,
+						filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Wall , "RuinWall-Single" , "遗迹围墙-独立" ) ,
 						priority = "extra-high" ,
 						width = 64 ,
 						height = 86 ,
@@ -251,7 +251,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Wall , "RuinWall" , "遗迹围墙" 
 					}
 				} ,
 				{
-					filename = SIGen.MakePicturePath( SICommon.Types.Entities.Wall , "遗迹围墙-独立-影子" ) ,
+					filename = SIGen.MakePicturePath( SICommon.Types.Entities.Wall , "RuinWall-Single-Shadow" , "遗迹围墙-独立-影子" ) ,
 					priority = "extra-high" ,
 					width = 50 ,
 					height = 32 ,
@@ -261,7 +261,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Wall , "RuinWall" , "遗迹围墙" 
 					draw_as_shadow = true ,
 					hr_version =
 					{
-						filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Wall , "遗迹围墙-独立-影子" ) ,
+						filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Wall , "RuinWall-Single-Shadow" , "遗迹围墙-独立-影子" ) ,
 						priority = "extra-high" ,
 						width = 98 ,
 						height = 60 ,
@@ -278,7 +278,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Wall , "RuinWall" , "遗迹围墙" 
 			layers =
 			{
 				{
-					filename = SIGen.MakePicturePath( SICommon.Types.Entities.Wall , "遗迹围墙-横向" ) ,
+					filename = SIGen.MakePicturePath( SICommon.Types.Entities.Wall , "RuinWall-Horizontal" , "遗迹围墙-横向" ) ,
 					priority = "extra-high" ,
 					width = 32 ,
 					height = 50 ,
@@ -288,7 +288,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Wall , "RuinWall" , "遗迹围墙" 
 					shift = SIUtils.by_pixel( 0 , -4 ) ,
 					hr_version =
 					{
-						filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Wall , "遗迹围墙-横向" ) ,
+						filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Wall , "RuinWall-Horizontal" , "遗迹围墙-横向" ) ,
 						priority = "extra-high" ,
 						width = 64 ,
 						height = 92 ,
@@ -299,7 +299,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Wall , "RuinWall" , "遗迹围墙" 
 					}
 				} ,
 				{
-					filename = SIGen.MakePicturePath( SICommon.Types.Entities.Wall , "遗迹围墙-横向-影子" ) ,
+					filename = SIGen.MakePicturePath( SICommon.Types.Entities.Wall , "RuinWall-Horizontal-Shadow" , "遗迹围墙-横向-影子" ) ,
 					priority = "extra-high" ,
 					width = 62 ,
 					height = 36 ,
@@ -309,7 +309,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Wall , "RuinWall" , "遗迹围墙" 
 					draw_as_shadow = true ,
 					hr_version =
 					{
-						filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Wall , "遗迹围墙-横向-影子" ) ,
+						filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Wall , "RuinWall-Horizontal-Shadow" , "遗迹围墙-横向-影子" ) ,
 						priority = "extra-high" ,
 						width = 124 ,
 						height = 68 ,
@@ -326,7 +326,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Wall , "RuinWall" , "遗迹围墙" 
 			layers =
 			{
 				{
-					filename = SIGen.MakePicturePath( SICommon.Types.Entities.Wall , "遗迹围墙-纵向" ) ,
+					filename = SIGen.MakePicturePath( SICommon.Types.Entities.Wall , "RuinWall-Vertical" , "遗迹围墙-纵向" ) ,
 					priority = "extra-high" ,
 					width = 32 ,
 					height = 68 ,
@@ -336,7 +336,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Wall , "RuinWall" , "遗迹围墙" 
 					shift = SIUtils.by_pixel( 0 , 8 ) ,
 					hr_version =
 					{
-						filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Wall , "遗迹围墙-纵向" ) ,
+						filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Wall , "RuinWall-Vertical" , "遗迹围墙-纵向" ) ,
 						priority = "extra-high" ,
 						width = 64 ,
 						height = 134 ,
@@ -347,7 +347,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Wall , "RuinWall" , "遗迹围墙" 
 					}
 				} ,
 				{
-					filename = SIGen.MakePicturePath( SICommon.Types.Entities.Wall , "遗迹围墙-纵向-影子" ) ,
+					filename = SIGen.MakePicturePath( SICommon.Types.Entities.Wall , "RuinWall-Vertical-Shadow" , "遗迹围墙-纵向-影子" ) ,
 					priority = "extra-high" ,
 					width = 50 ,
 					height = 58 ,
@@ -357,7 +357,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Wall , "RuinWall" , "遗迹围墙" 
 					draw_as_shadow = true ,
 					hr_version =
 					{
-						filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Wall , "遗迹围墙-纵向-影子" ) ,
+						filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Wall , "RuinWall-Vertical-Shadow" , "遗迹围墙-纵向-影子" ) ,
 						priority = "extra-high" ,
 						width = 98 ,
 						height = 110 ,
@@ -374,7 +374,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Wall , "RuinWall" , "遗迹围墙" 
 			layers =
 			{
 				{
-					filename = SIGen.MakePicturePath( SICommon.Types.Entities.Wall , "遗迹围墙-拐角左" ) ,
+					filename = SIGen.MakePicturePath( SICommon.Types.Entities.Wall , "RuinWall-LeftDown" , "遗迹围墙-拐角左" ) ,
 					priority = "extra-high" ,
 					width = 32 ,
 					height = 68 ,
@@ -384,7 +384,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Wall , "RuinWall" , "遗迹围墙" 
 					shift = SIUtils.by_pixel( 0 , 6 ) ,
 					hr_version =
 					{
-						filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Wall , "遗迹围墙-拐角左" ) ,
+						filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Wall , "RuinWall-LeftDown" , "遗迹围墙-拐角左" ) ,
 						priority = "extra-high" ,
 						width = 64 ,
 						height = 134 ,
@@ -395,7 +395,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Wall , "RuinWall" , "遗迹围墙" 
 					}
 				} ,
 				{
-					filename = SIGen.MakePicturePath( SICommon.Types.Entities.Wall , "遗迹围墙-拐角左-影子" ) ,
+					filename = SIGen.MakePicturePath( SICommon.Types.Entities.Wall , "RuinWall-LeftDown-Shadow" , "遗迹围墙-拐角左-影子" ) ,
 					priority = "extra-high" ,
 					width = 54 ,
 					height = 60 ,
@@ -405,7 +405,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Wall , "RuinWall" , "遗迹围墙" 
 					draw_as_shadow = true ,
 					hr_version =
 					{
-						filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Wall , "遗迹围墙-拐角左-影子" ) ,
+						filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Wall , "RuinWall-LeftDown-Shadow" , "遗迹围墙-拐角左-影子" ) ,
 						priority = "extra-high" ,
 						width = 102 ,
 						height = 120 ,
@@ -422,7 +422,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Wall , "RuinWall" , "遗迹围墙" 
 			layers =
 			{
 				{
-					filename = SIGen.MakePicturePath( SICommon.Types.Entities.Wall , "遗迹围墙-拐角右" ) ,
+					filename = SIGen.MakePicturePath( SICommon.Types.Entities.Wall , "RuinWall-RightDown" , "遗迹围墙-拐角右" ) ,
 					priority = "extra-high",
 					width = 32 ,
 					height = 64 ,
@@ -432,7 +432,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Wall , "RuinWall" , "遗迹围墙" 
 					shift = SIUtils.by_pixel( 0 , 6 ) ,
 					hr_version =
 					{
-						filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Wall , "遗迹围墙-拐角右" ) ,
+						filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Wall , "RuinWall-RightDown" , "遗迹围墙-拐角右" ) ,
 						priority = "extra-high",
 						width = 64 ,
 						height = 128 ,
@@ -443,7 +443,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Wall , "RuinWall" , "遗迹围墙" 
 					}
 				} ,
 				{
-					filename = SIGen.MakePicturePath( SICommon.Types.Entities.Wall , "遗迹围墙-拐角右-影子" ) ,
+					filename = SIGen.MakePicturePath( SICommon.Types.Entities.Wall , "RuinWall-RightDown-Shadow" , "遗迹围墙-拐角右-影子" ) ,
 					priority = "extra-high" ,
 					width = 62 ,
 					height = 60 ,
@@ -453,7 +453,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Wall , "RuinWall" , "遗迹围墙" 
 					draw_as_shadow = true ,
 					hr_version =
 					{
-						filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Wall , "遗迹围墙-拐角右-影子" ) ,
+						filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Wall , "RuinWall-RightDown-Shadow" , "遗迹围墙-拐角右-影子" ) ,
 						priority = "extra-high" ,
 						width = 124 ,
 						height = 120 ,
@@ -470,7 +470,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Wall , "RuinWall" , "遗迹围墙" 
 			layers =
 			{
 				{
-					filename = SIGen.MakePicturePath( SICommon.Types.Entities.Wall , "遗迹围墙-中分" ) ,
+					filename = SIGen.MakePicturePath( SICommon.Types.Entities.Wall , "RuinWall-TUp" , "遗迹围墙-中分" ) ,
 					priority = "extra-high" ,
 					width = 32 ,
 					height = 68 ,
@@ -480,7 +480,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Wall , "RuinWall" , "遗迹围墙" 
 					shift = SIUtils.by_pixel( 0 , 6 ) ,
 					hr_version =
 					{
-						filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Wall , "遗迹围墙-中分" ) ,
+						filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Wall , "RuinWall-TUp" , "遗迹围墙-中分" ) ,
 						priority = "extra-high" ,
 						width = 64 ,
 						height = 134 ,
@@ -491,7 +491,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Wall , "RuinWall" , "遗迹围墙" 
 					}
 				} ,
 				{
-					filename = SIGen.MakePicturePath( SICommon.Types.Entities.Wall , "遗迹围墙-中分-影子" ) ,
+					filename = SIGen.MakePicturePath( SICommon.Types.Entities.Wall , "RuinWall-TUp-Shadow" , "遗迹围墙-中分-影子" ) ,
 					priority = "extra-high" ,
 					width = 62 ,
 					height = 60 ,
@@ -501,7 +501,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Wall , "RuinWall" , "遗迹围墙" 
 					draw_as_shadow = true ,
 					hr_version =
 					{
-						filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Wall , "遗迹围墙-中分-影子" ) ,
+						filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Wall , "RuinWall-TUp-Shadow" , "遗迹围墙-中分-影子" ) ,
 						priority = "extra-high" ,
 						width = 124 ,
 						height = 120 ,
@@ -518,7 +518,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Wall , "RuinWall" , "遗迹围墙" 
 			layers =
 			{
 				{
-					filename = SIGen.MakePicturePath( SICommon.Types.Entities.Wall , "遗迹围墙-尽头左" ) ,
+					filename = SIGen.MakePicturePath( SICommon.Types.Entities.Wall , "RuinWall-EndLeft" , "遗迹围墙-尽头左" ) ,
 					priority = "extra-high" ,
 					width = 32 ,
 					height = 48 ,
@@ -528,7 +528,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Wall , "RuinWall" , "遗迹围墙" 
 					shift = SIUtils.by_pixel( 0 , -4 ) ,
 					hr_version =
 					{
-						filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Wall , "遗迹围墙-尽头左" ) ,
+						filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Wall , "RuinWall-EndLeft" , "遗迹围墙-尽头左" ) ,
 						priority = "extra-high" ,
 						width = 64 ,
 						height = 92 ,
@@ -539,7 +539,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Wall , "RuinWall" , "遗迹围墙" 
 					}
 				} ,
 				{
-					filename = SIGen.MakePicturePath( SICommon.Types.Entities.Wall , "遗迹围墙-尽头左-影子" ) ,
+					filename = SIGen.MakePicturePath( SICommon.Types.Entities.Wall , "RuinWall-EndLeft-Shadow" , "遗迹围墙-尽头左-影子" ) ,
 					priority = "extra-high" ,
 					width = 54 ,
 					height = 36 ,
@@ -549,7 +549,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Wall , "RuinWall" , "遗迹围墙" 
 					draw_as_shadow = true ,
 					hr_version =
 					{
-						filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Wall , "遗迹围墙-尽头左-影子" ) ,
+						filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Wall , "RuinWall-EndLeft-Shadow" , "遗迹围墙-尽头左-影子" ) ,
 						priority = "extra-high" ,
 						width = 102 ,
 						height = 68 ,
@@ -566,7 +566,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Wall , "RuinWall" , "遗迹围墙" 
 			layers =
 			{
 				{
-					filename = SIGen.MakePicturePath( SICommon.Types.Entities.Wall , "遗迹围墙-尽头右" ) ,
+					filename = SIGen.MakePicturePath( SICommon.Types.Entities.Wall , "RuinWall-EndRight" , "遗迹围墙-尽头右" ) ,
 					priority = "extra-high" ,
 					width = 32 ,
 					height = 48 ,
@@ -576,7 +576,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Wall , "RuinWall" , "遗迹围墙" 
 					shift = SIUtils.by_pixel( 0 , -4 ) ,
 					hr_version =
 					{
-						filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Wall , "遗迹围墙-尽头右" ) ,
+						filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Wall , "RuinWall-EndRight" , "遗迹围墙-尽头右" ) ,
 						priority = "extra-high" ,
 						width = 64 ,
 						height = 92 ,
@@ -587,7 +587,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Wall , "RuinWall" , "遗迹围墙" 
 					}
 				} ,
 				{
-					filename = SIGen.MakePicturePath( SICommon.Types.Entities.Wall , "遗迹围墙-尽头右-影子" ) ,
+					filename = SIGen.MakePicturePath( SICommon.Types.Entities.Wall , "RuinWall-EndRight-Shadow" , "遗迹围墙-尽头右-影子" ) ,
 					priority = "extra-high" ,
 					width = 62 ,
 					height = 36 ,
@@ -597,7 +597,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Wall , "RuinWall" , "遗迹围墙" 
 					draw_as_shadow = true ,
 					hr_version =
 					{
-						filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Wall , "遗迹围墙-尽头右-影子" ) ,
+						filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Wall , "RuinWall-EndRight-Shadow" , "遗迹围墙-尽头右-影子" ) ,
 						priority = "extra-high" ,
 						width = 124 ,
 						height = 68 ,
@@ -614,7 +614,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Wall , "RuinWall" , "遗迹围墙" 
 			layers =
 			{
 				{
-					filename = SIGen.MakePicturePath( SICommon.Types.Entities.Wall , "遗迹围墙-填充" ) ,
+					filename = SIGen.MakePicturePath( SICommon.Types.Entities.Wall , "RuinWall-Fill" , "遗迹围墙-填充" ) ,
 					priority = "extra-high" ,
 					width = 24 ,
 					height = 30 ,
@@ -624,7 +624,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Wall , "RuinWall" , "遗迹围墙" 
 					shift = SIUtils.by_pixel( 0 , -2 ) ,
 					hr_version =
 					{
-						filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Wall , "遗迹围墙-填充" ) ,
+						filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Wall , "RuinWall-Fill-Shadow" , "遗迹围墙-填充" ) ,
 						priority = "extra-high" ,
 						width = 48 ,
 						height = 56 ,
@@ -641,7 +641,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Wall , "RuinWall" , "遗迹围墙" 
 			sheets =
 			{
 				{
-					filename = SIGen.MakePicturePath( SICommon.Types.Entities.Wall , "遗迹围墙-拼接" ) ,
+					filename = SIGen.MakePicturePath( SICommon.Types.Entities.Wall , "RuinWall-Water" , "遗迹围墙-拼接" ) ,
 					priority = "extra-high" ,
 					width = 58 ,
 					height = 64 ,
@@ -649,7 +649,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Wall , "RuinWall" , "遗迹围墙" 
 					shift = SIUtils.by_pixel( 0 , -2 ) ,
 					hr_version =
 					{
-						filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Wall , "遗迹围墙-拼接" ) ,
+						filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Wall , "RuinWall-Water" , "遗迹围墙-拼接" ) ,
 						priority = "extra-high" ,
 						width = 116 ,
 						height = 128 ,
@@ -658,7 +658,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Wall , "RuinWall" , "遗迹围墙" 
 					}
 				} ,
 				{
-					filename = SIGen.MakePicturePath( SICommon.Types.Entities.Wall , "遗迹围墙-拼接-影子" ) ,
+					filename = SIGen.MakePicturePath( SICommon.Types.Entities.Wall , "RuinWall-Water-Shadow" , "遗迹围墙-拼接-影子" ) ,
 					priority = "extra-high" ,
 					width = 74 ,
 					height = 52 ,
@@ -667,7 +667,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Wall , "RuinWall" , "遗迹围墙" 
 					draw_as_shadow = true ,
 					hr_version =
 					{
-						filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Wall , "遗迹围墙-拼接-影子" ) ,
+						filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Wall , "RuinWall-Water-Shadow" , "遗迹围墙-拼接-影子" ) ,
 						priority = "extra-high" ,
 						width = 144 ,
 						height = 100 ,
@@ -683,7 +683,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Wall , "RuinWall" , "遗迹围墙" 
 			sheets =
 			{
 				{
-					filename = SIGen.MakePicturePath( SICommon.Types.Entities.Wall , "遗迹围墙-闸门" ) ,
+					filename = SIGen.MakePicturePath( SICommon.Types.Entities.Wall , "RuinWall-Gate" , "遗迹围墙-闸门" ) ,
 					priority = "extra-high" ,
 					width = 42 ,
 					height = 56 ,
@@ -691,7 +691,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Wall , "RuinWall" , "遗迹围墙" 
 					shift = SIUtils.by_pixel( 0 , -8 ) ,
 					hr_version =
 					{
-						filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Wall , "遗迹围墙-闸门" ) ,
+						filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Wall , "RuinWall-Gate" , "遗迹围墙-闸门" ) ,
 						priority = "extra-high" ,
 						width = 82 ,
 						height = 108 ,
@@ -700,7 +700,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Wall , "RuinWall" , "遗迹围墙" 
 					}
 				} ,
 				{
-					filename = SIGen.MakePicturePath( SICommon.Types.Entities.Wall , "遗迹围墙-闸门-影子" ) ,
+					filename = SIGen.MakePicturePath( SICommon.Types.Entities.Wall , "RuinWall-Gate-Shadow" , "遗迹围墙-闸门-影子" ) ,
 					priority = "extra-high" ,
 					width = 66 ,
 					height = 40 ,
@@ -709,7 +709,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Wall , "RuinWall" , "遗迹围墙" 
 					draw_as_shadow = true ,
 					hr_version =
 					{
-						filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Wall , "遗迹围墙-闸门-影子" ) ,
+						filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Wall , "RuinWall-Gate-Shadow" , "遗迹围墙-闸门-影子" ) ,
 						priority = "extra-high" ,
 						width = 130 ,
 						height = 78 ,
@@ -733,7 +733,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Wall , "RuinWall" , "遗迹围墙" 
 	{
 		sheet =
 		{
-			filename = SIGen.MakePicturePath( SICommon.Types.Entities.Wall , "遗迹围墙-信号灯-绿" ) ,
+			filename = SIGen.MakePicturePath( SICommon.Types.Entities.Wall , "RuinWall-Diode-Green" , "遗迹围墙-信号灯-绿" ) ,
 			priority = "extra-high" ,
 			width = 38 ,
 			height = 24 ,
@@ -742,7 +742,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Wall , "RuinWall" , "遗迹围墙" 
 			draw_as_glow = true ,
 			hr_version =
 			{
-				filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Wall , "遗迹围墙-信号灯-绿" ) ,
+				filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Wall , "RuinWall-Diode-Green" , "遗迹围墙-信号灯-绿" ) ,
 				priority = "extra-high" ,
 				width = 72 ,
 				height = 44 ,
@@ -788,7 +788,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Wall , "RuinWall" , "遗迹围墙" 
 	{
 		sheet =
 		{
-			filename = SIGen.MakePicturePath( SICommon.Types.Entities.Wall , "遗迹围墙-信号灯-红" ) ,
+			filename = SIGen.MakePicturePath( SICommon.Types.Entities.Wall , "RuinWall-Diode-Red" , "遗迹围墙-信号灯-红" ) ,
 			priority = "extra-high" ,
 			width = 38 ,
 			height = 24 ,
@@ -797,7 +797,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Wall , "RuinWall" , "遗迹围墙" 
 			draw_as_glow = true ,
 			hr_version =
 			{
-				filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Wall , "遗迹围墙-信号灯-红" ) ,
+				filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Wall , "RuinWall-Diode-Red" , "遗迹围墙-信号灯-红" ) ,
 				priority = "extra-high" ,
 				width = 72 ,
 				height = 44 ,
@@ -871,7 +871,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Wall , "RuinWall" , "遗迹围墙" 
 -- 遗迹地雷
 -- ======================================================================
 SIGen
-.New( SICommon.Types.Entities.Corpse , "RuinLandMineRemnants" , "遗迹地雷-残骸" )
+.New( SICommon.Types.Entities.Corpse , "RuinLandMine_Corpse" , "遗迹地雷-残骸" )
 .AutoIcon()
 .SetSizeScale( 1 , 1 , 0 )
 .Append
@@ -886,7 +886,7 @@ SIGen
 	animation = SIGraphics.MakeRemnantsAnimation( 3 ,
 	{
 		{
-			filename = SIGen.MakeSelfPicturePath( "遗迹地雷-残骸" ) ,
+			filename = SIGen.MakeSelfPicturePath( "RuinLandMine-Corpse" , "遗迹地雷-残骸" ) ,
 			priority = "extra-high" ,
 			width = 68 ,
 			height = 66 ,
@@ -899,7 +899,7 @@ SIGen
 			axially_symmetrical = false ,
 			hr_version =
 			{
-				filename = SIGen.MakeSelfPicturePathHr( "遗迹地雷-残骸" ) ,
+				filename = SIGen.MakeSelfPicturePathHr( "RuinLandMine-Corpse" , "遗迹地雷-残骸" ) ,
 				priority = "extra-high" ,
 				width = 68 ,
 				height = 66 ,
@@ -921,7 +921,7 @@ CreateRuinBuildings( SICommon.Types.Entities.LandMine , "RuinLandMine" , "遗迹
 	icons =
 	{
 		{
-			icon = SIGen.MakePicturePath( SICommon.Types.Entities.LandMine , "遗迹地雷" .. SICommon.ShowNameSuffix.ICON ) ,
+			icon = SIGen.MakePicturePath( SICommon.Types.Entities.LandMine , "RuinLandMine" .. SICommon.CodeNameSuffix.ICON , "遗迹地雷" .. SICommon.ShowNameSuffix.ICON ) ,
 			icon_size = 64 ,
 			icon_mipmaps = 4
 		}
@@ -935,7 +935,7 @@ CreateRuinBuildings( SICommon.Types.Entities.LandMine , "RuinLandMine" , "遗迹
 		results = {}
 	} ,
 	max_health = 15 ,
-	corpse = SIConstants_RuinSystem.raw.Entities.RuinLandMineRemnants ,
+	corpse = SIConstants_RuinSystem.raw.Entities.RuinLandMine_Corpse ,
 	dying_explosion = "land-mine-explosion" ,
 	map_color = { r = 1.0 , g = 1.0 , b = 1.0 } ,
 	friendly_map_color = { r = 0.4 , g = 0.4 , b = 1.0 } ,
@@ -1027,14 +1027,14 @@ CreateRuinBuildings( SICommon.Types.Entities.LandMine , "RuinLandMine" , "遗迹
 		layers =
 		{
 			{
-				filename = SIGen.MakePicturePath( SICommon.Types.Entities.LandMine , "遗迹地雷" ) ,
+				filename = SIGen.MakePicturePath( SICommon.Types.Entities.LandMine , "RuinLandMine" , "遗迹地雷" ) ,
 				priority = "medium" ,
 				width = 32 ,
 				height = 32 ,
 				scale = 1.0 ,
 				hr_version =
 				{
-					filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.LandMine , "遗迹地雷" ) ,
+					filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.LandMine , "RuinLandMine" , "遗迹地雷" ) ,
 					priority = "medium" ,
 					width = 64 ,
 					height = 64 ,
@@ -1048,14 +1048,14 @@ CreateRuinBuildings( SICommon.Types.Entities.LandMine , "RuinLandMine" , "遗迹
 		layers =
 		{
 			{
-				filename = SIGen.MakePicturePath( SICommon.Types.Entities.LandMine , "遗迹地雷-部署" ) ,
+				filename = SIGen.MakePicturePath( SICommon.Types.Entities.LandMine , "RuinLandMine-Set" , "遗迹地雷-部署" ) ,
 				priority = "medium" ,
 				width = 32 ,
 				height = 32 ,
 				scale = 1.0 ,
 				hr_version =
 				{
-					filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.LandMine , "遗迹地雷-部署" ) ,
+					filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.LandMine , "RuinLandMine-Set" , "遗迹地雷-部署" ) ,
 					priority = "medium" ,
 					width = 64 ,
 					height = 64 ,
@@ -1069,7 +1069,7 @@ CreateRuinBuildings( SICommon.Types.Entities.LandMine , "RuinLandMine" , "遗迹
 		layers =
 		{
 			{
-				filename = SIGen.MakePicturePath( SICommon.Types.Entities.LandMine , "遗迹地雷-部署敌对" ) ,
+				filename = SIGen.MakePicturePath( SICommon.Types.Entities.LandMine , "RuinLandMine-Set-Enemy" , "遗迹地雷-部署敌对" ) ,
 				priority = "medium" ,
 				width = 32 ,
 				height = 32 ,
@@ -1104,7 +1104,7 @@ CreateRuinBuildings( SICommon.Types.Entities.LandMine , "RuinLandMine" , "遗迹
 -- 遗迹机枪炮塔
 -- ======================================================================
 SIGen
-.New( SICommon.Types.Entities.Corpse , "RuinGunTurretRemnants" , "遗迹机枪炮塔-残骸" )
+.New( SICommon.Types.Entities.Corpse , "RuinGunTurret_Corpse" , "遗迹机枪炮塔-残骸" )
 .AutoIcon()
 .SetSizeScale( 2 , 2 , 0 )
 .Append
@@ -1119,7 +1119,7 @@ SIGen
 	animation = SIGraphics.MakeRemnantsAnimation( 3 ,
 	{
 		{
-			filename = SIGen.MakeSelfPicturePath( "遗迹机枪炮塔-残骸" ) ,
+			filename = SIGen.MakeSelfPicturePath( "RuinGunTurret-Corpse" , "遗迹机枪炮塔-残骸" ) ,
 			priority = "extra-high" ,
 			width = 126 ,
 			height = 122 ,
@@ -1132,7 +1132,7 @@ SIGen
 			axially_symmetrical = false ,
 			hr_version =
 			{
-				filename = SIGen.MakeSelfPicturePathHr( "遗迹机枪炮塔-残骸" ) ,
+				filename = SIGen.MakeSelfPicturePathHr( "RuinGunTurret-Corpse" , "遗迹机枪炮塔-残骸" ) ,
 				priority = "extra-high" ,
 				width = 252 ,
 				height = 242 ,
@@ -1146,7 +1146,7 @@ SIGen
 			}
 		} ,
 		{
-			filename = SIGen.MakeSelfPicturePath( "遗迹机枪炮塔-残骸-遮盖" ) ,
+			filename = SIGen.MakeSelfPicturePath( "RuinGunTurret-Corpse-Cover" , "遗迹机枪炮塔-残骸-遮盖" ) ,
 			priority = "low" ,
 			width = 34 ,
 			height = 32 ,
@@ -1159,7 +1159,7 @@ SIGen
 			apply_runtime_tint = true ,
 			hr_version =
 			{
-				filename = SIGen.MakeSelfPicturePathHr( "遗迹机枪炮塔-残骸-遮盖" ) ,
+				filename = SIGen.MakeSelfPicturePathHr( "RuinGunTurret-Corpse-Cover" , "遗迹机枪炮塔-残骸-遮盖" ) ,
 				priority = "low" ,
 				width = 68 ,
 				height = 64 ,
@@ -1181,7 +1181,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Turret , "RuinGunTurret" , "遗迹�
 	icons =
 	{
 		{
-			icon = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "遗迹机枪炮塔" .. SICommon.ShowNameSuffix.ICON ) ,
+			icon = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "RuinGunTurret" .. SICommon.CodeNameSuffix.ICON , "遗迹机枪炮塔" .. SICommon.ShowNameSuffix.ICON ) ,
 			icon_size = 64 ,
 			icon_mipmaps = 4
 		}
@@ -1195,7 +1195,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Turret , "RuinGunTurret" , "遗迹�
 		results = {}
 	} ,
 	max_health = 190 ,
-	corpse = SIConstants_RuinSystem.raw.Entities.RuinGunTurretRemnants ,
+	corpse = SIConstants_RuinSystem.raw.Entities.RuinGunTurret_Corpse ,
 	dying_explosion = "gun-turret-explosion" ,
 	map_color = { r = 1.0 , g = 1.0 , b = 1.0 } ,
 	friendly_map_color = { r = 0.4 , g = 0.4 , b = 1.0 } ,
@@ -1297,7 +1297,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Turret , "RuinGunTurret" , "遗迹�
 		layers =
 		{
 			{
-				filename = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "遗迹机枪炮塔" ) ,
+				filename = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "RuinGunTurret" , "遗迹机枪炮塔" ) ,
 				priority = "high" ,
 				width = 76 ,
 				height = 60 ,
@@ -1309,7 +1309,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Turret , "RuinGunTurret" , "遗迹�
 				axially_symmetrical = false ,
 				hr_version =
 				{
-					filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Turret , "遗迹机枪炮塔" ) ,
+					filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Turret , "RuinGunTurret" , "遗迹机枪炮塔" ) ,
 					priority = "high" ,
 					width = 150 ,
 					height = 118 ,
@@ -1322,7 +1322,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Turret , "RuinGunTurret" , "遗迹�
 				}
 			} ,
 			{
-				filename = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "遗迹机枪炮塔-遮盖" ) ,
+				filename = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "RuinGunTurret-Cover" , "遗迹机枪炮塔-遮盖" ) ,
 				priority = "medium" ,
 				flags = { "mask" , "low-object" } ,
 				width = 62 ,
@@ -1336,7 +1336,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Turret , "RuinGunTurret" , "遗迹�
 				apply_runtime_tint = true ,
 				hr_version =
 				{
-					filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Turret , "遗迹机枪炮塔-遮盖" ) ,
+					filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Turret , "RuinGunTurret-Cover" , "遗迹机枪炮塔-遮盖" ) ,
 					priority = "medium" ,
 					flags = { "mask" , "low-object" } ,
 					width = 122 ,
@@ -1357,7 +1357,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Turret , "RuinGunTurret" , "遗迹�
 		layers =
 		{
 			{
-				filename = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "遗迹机枪炮塔-升起" ) ,
+				filename = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "RuinGunTurret-Raise" , "遗迹机枪炮塔-升起" ) ,
 				priority = "medium" ,
 				run_mode = "forward" ,
 				width = 66 ,
@@ -1370,7 +1370,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Turret , "RuinGunTurret" , "遗迹�
 				axially_symmetrical = false ,
 				hr_version =
 				{
-					filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Turret , "遗迹机枪炮塔-升起" ) ,
+					filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Turret , "RuinGunTurret-Raise" , "遗迹机枪炮塔-升起" ) ,
 					priority = "medium" ,
 					run_mode = "forward" ,
 					width = 130 ,
@@ -1384,7 +1384,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Turret , "RuinGunTurret" , "遗迹�
 				}
 			} ,
 			{
-				filename = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "遗迹机枪炮塔-升起-遮盖" ) ,
+				filename = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "RuinGunTurret-Raise-Cover" , "遗迹机枪炮塔-升起-遮盖" ) ,
 				priority = "medium" ,
 				run_mode = "forward" ,
 				flags = { "mask" } ,
@@ -1399,7 +1399,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Turret , "RuinGunTurret" , "遗迹�
 				apply_runtime_tint = true ,
 				hr_version =
 				{
-					filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Turret , "遗迹机枪炮塔-升起-遮盖" ) ,
+					filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Turret , "RuinGunTurret-Raise-Cover" , "遗迹机枪炮塔-升起-遮盖" ) ,
 					priority = "medium" ,
 					run_mode = "forward" ,
 					flags = { "mask" } ,
@@ -1415,7 +1415,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Turret , "RuinGunTurret" , "遗迹�
 				}
 			} ,
 			{
-				filename = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "遗迹机枪炮塔-升起-影子" ) ,
+				filename = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "RuinGunTurret-Raise-Shadow" , "遗迹机枪炮塔-升起-影子" ) ,
 				priority = "medium" ,
 				run_mode = "forward" ,
 				width = 126 ,
@@ -1429,7 +1429,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Turret , "RuinGunTurret" , "遗迹�
 				axially_symmetrical = false ,
 				hr_version =
 				{
-					filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Turret , "遗迹机枪炮塔-升起-影子" ) ,
+					filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Turret , "RuinGunTurret-Raise-Shadow" , "遗迹机枪炮塔-升起-影子" ) ,
 					priority = "medium" ,
 					run_mode = "forward" ,
 					width = 250 ,
@@ -1453,22 +1453,22 @@ CreateRuinBuildings( SICommon.Types.Entities.Turret , "RuinGunTurret" , "遗迹�
 				stripes =
 				{
 					{
-						filename = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "遗迹机枪炮塔-射击-1" ) ,
+						filename = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "RuinGunTurret-Shoot-1" , "遗迹机枪炮塔-射击-1" ) ,
 						width_in_frames = 1 ,
 						height_in_frames = 16
 					} ,
 					{
-						filename = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "遗迹机枪炮塔-射击-2" ) ,
+						filename = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "RuinGunTurret-Shoot-2" , "遗迹机枪炮塔-射击-2" ) ,
 						width_in_frames = 1 ,
 						height_in_frames = 16
 					} ,
 					{
-						filename = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "遗迹机枪炮塔-射击-3" ) ,
+						filename = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "RuinGunTurret-Shoot-3" , "遗迹机枪炮塔-射击-3" ) ,
 						width_in_frames = 1 ,
 						height_in_frames = 16
 					} ,
 					{
-						filename = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "遗迹机枪炮塔-射击-4" ) ,
+						filename = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "RuinGunTurret-Shoot-4" , "遗迹机枪炮塔-射击-4" ) ,
 						width_in_frames = 1 ,
 						height_in_frames = 16
 					}
@@ -1486,22 +1486,22 @@ CreateRuinBuildings( SICommon.Types.Entities.Turret , "RuinGunTurret" , "遗迹�
 					stripes =
 					{
 						{
-							filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Turret , "遗迹机枪炮塔-射击-1" ) ,
+							filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Turret , "RuinGunTurret-Shoot-1" , "遗迹机枪炮塔-射击-1" ) ,
 							width_in_frames = 1 ,
 							height_in_frames = 16
 						} ,
 						{
-							filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Turret , "遗迹机枪炮塔-射击-2" ) ,
+							filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Turret , "RuinGunTurret-Shoot-2" , "遗迹机枪炮塔-射击-2" ) ,
 							width_in_frames = 1 ,
 							height_in_frames = 16
 						} ,
 						{
-							filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Turret , "遗迹机枪炮塔-射击-3" ) ,
+							filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Turret , "RuinGunTurret-Shoot-3" , "遗迹机枪炮塔-射击-3" ) ,
 							width_in_frames = 1 ,
 							height_in_frames = 16
 						} ,
 						{
-							filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Turret , "遗迹机枪炮塔-射击-4" ) ,
+							filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Turret , "RuinGunTurret-Shoot-4" , "遗迹机枪炮塔-射击-4" ) ,
 							width_in_frames = 1 ,
 							height_in_frames = 16
 						}
@@ -1520,22 +1520,22 @@ CreateRuinBuildings( SICommon.Types.Entities.Turret , "RuinGunTurret" , "遗迹�
 				stripes =
 				{
 					{
-						filename = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "遗迹机枪炮塔-射击-遮盖-1" ) ,
+						filename = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "RuinGunTurret-Shoot-Cover-1" , "遗迹机枪炮塔-射击-遮盖-1" ) ,
 						width_in_frames = 1 ,
 						height_in_frames = 16
 					} ,
 					{
-						filename = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "遗迹机枪炮塔-射击-遮盖-2" ) ,
+						filename = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "RuinGunTurret-Shoot-Cover-2" , "遗迹机枪炮塔-射击-遮盖-2" ) ,
 						width_in_frames = 1 ,
 						height_in_frames = 16
 					} ,
 					{
-						filename = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "遗迹机枪炮塔-射击-遮盖-3" ) ,
+						filename = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "RuinGunTurret-Shoot-Cover-3" , "遗迹机枪炮塔-射击-遮盖-3" ) ,
 						width_in_frames = 1 ,
 						height_in_frames = 16
 					} ,
 					{
-						filename = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "遗迹机枪炮塔-射击-遮盖-4" ) ,
+						filename = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "RuinGunTurret-Shoot-Cover-4" , "遗迹机枪炮塔-射击-遮盖-4" ) ,
 						width_in_frames = 1 ,
 						height_in_frames = 16
 					}
@@ -1556,22 +1556,22 @@ CreateRuinBuildings( SICommon.Types.Entities.Turret , "RuinGunTurret" , "遗迹�
 					stripes =
 					{
 						{
-							filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Turret , "遗迹机枪炮塔-射击-遮盖-1" ) ,
+							filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Turret , "RuinGunTurret-Shoot-Cover-1" , "遗迹机枪炮塔-射击-遮盖-1" ) ,
 							width_in_frames = 1 ,
 							height_in_frames = 16
 						} ,
 						{
-							filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Turret , "遗迹机枪炮塔-射击-遮盖-2" ) ,
+							filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Turret , "RuinGunTurret-Shoot-Cover-2" , "遗迹机枪炮塔-射击-遮盖-2" ) ,
 							width_in_frames = 1 ,
 							height_in_frames = 16
 						} ,
 						{
-							filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Turret , "遗迹机枪炮塔-射击-遮盖-3" ) ,
+							filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Turret , "RuinGunTurret-Shoot-Cover-3" , "遗迹机枪炮塔-射击-遮盖-3" ) ,
 							width_in_frames = 1 ,
 							height_in_frames = 16
 						} ,
 						{
-							filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Turret , "遗迹机枪炮塔-射击-遮盖-4" ) ,
+							filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Turret , "RuinGunTurret-Shoot-Cover-4" , "遗迹机枪炮塔-射击-遮盖-4" ) ,
 							width_in_frames = 1 ,
 							height_in_frames = 16
 						}
@@ -1593,22 +1593,22 @@ CreateRuinBuildings( SICommon.Types.Entities.Turret , "RuinGunTurret" , "遗迹�
 				stripes =
 				{
 					{
-						filename = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "遗迹机枪炮塔-射击-影子-1" ) ,
+						filename = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "RuinGunTurret-Shoot-Shadow-1" , "遗迹机枪炮塔-射击-影子-1" ) ,
 						width_in_frames = 1 ,
 						height_in_frames = 16
 					} ,
 					{
-						filename = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "遗迹机枪炮塔-射击-影子-2" ) ,
+						filename = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "RuinGunTurret-Shoot-Shadow-2" , "遗迹机枪炮塔-射击-影子-2" ) ,
 						width_in_frames = 1 ,
 						height_in_frames = 16
 					} ,
 					{
-						filename = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "遗迹机枪炮塔-射击-影子-3" ) ,
+						filename = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "RuinGunTurret-Shoot-Shadow-3" , "遗迹机枪炮塔-射击-影子-3" ) ,
 						width_in_frames = 1 ,
 						height_in_frames = 16
 					} ,
 					{
-						filename = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "遗迹机枪炮塔-射击-影子-4" ) ,
+						filename = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "RuinGunTurret-Shoot-Shadow-4" , "遗迹机枪炮塔-射击-影子-4" ) ,
 						width_in_frames = 1 ,
 						height_in_frames = 16
 					}
@@ -1627,22 +1627,22 @@ CreateRuinBuildings( SICommon.Types.Entities.Turret , "RuinGunTurret" , "遗迹�
 					stripes =
 					{
 						{
-							filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Turret , "遗迹机枪炮塔-射击-影子-1" ) ,
+							filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Turret , "RuinGunTurret-Shoot-Shadow-1" , "遗迹机枪炮塔-射击-影子-1" ) ,
 							width_in_frames = 1 ,
 							height_in_frames = 16
 						} ,
 						{
-							filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Turret , "遗迹机枪炮塔-射击-影子-2" ) ,
+							filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Turret , "RuinGunTurret-Shoot-Shadow-2" , "遗迹机枪炮塔-射击-影子-2" ) ,
 							width_in_frames = 1 ,
 							height_in_frames = 16
 						} ,
 						{
-							filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Turret , "遗迹机枪炮塔-射击-影子-3" ) ,
+							filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Turret , "RuinGunTurret-Shoot-Shadow-3" , "遗迹机枪炮塔-射击-影子-3" ) ,
 							width_in_frames = 1 ,
 							height_in_frames = 16
 						} ,
 						{
-							filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Turret , "遗迹机枪炮塔-射击-影子-4" ) ,
+							filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Turret , "RuinGunTurret-Shoot-Shadow-4" , "遗迹机枪炮塔-射击-影子-4" ) ,
 							width_in_frames = 1 ,
 							height_in_frames = 16
 						}
@@ -1665,7 +1665,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Turret , "RuinGunTurret" , "遗迹�
 		layers =
 		{
 			{
-				filename = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "遗迹机枪炮塔-升起" ) ,
+				filename = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "RuinGunTurret-Raise" , "遗迹机枪炮塔-升起" ) ,
 				priority = "medium" ,
 				run_mode = "backward" ,
 				width = 66 ,
@@ -1678,7 +1678,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Turret , "RuinGunTurret" , "遗迹�
 				axially_symmetrical = false ,
 				hr_version =
 				{
-					filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Turret , "遗迹机枪炮塔-升起" ) ,
+					filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Turret , "RuinGunTurret-Raise" , "遗迹机枪炮塔-升起" ) ,
 					priority = "medium" ,
 					run_mode = "backward" ,
 					width = 130 ,
@@ -1692,7 +1692,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Turret , "RuinGunTurret" , "遗迹�
 				}
 			} ,
 			{
-				filename = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "遗迹机枪炮塔-升起-遮盖" ) ,
+				filename = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "RuinGunTurret-Raise-Cover" , "遗迹机枪炮塔-升起-遮盖" ) ,
 				priority = "medium" ,
 				run_mode = "backward" ,
 				flags = { "mask" } ,
@@ -1707,7 +1707,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Turret , "RuinGunTurret" , "遗迹�
 				apply_runtime_tint = true ,
 				hr_version =
 				{
-					filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Turret , "遗迹机枪炮塔-升起-遮盖" ) ,
+					filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Turret , "RuinGunTurret-Raise-Cover" , "遗迹机枪炮塔-升起-遮盖" ) ,
 					priority = "medium" ,
 					run_mode = "backward" ,
 					flags = { "mask" } ,
@@ -1723,7 +1723,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Turret , "RuinGunTurret" , "遗迹�
 				}
 			} ,
 			{
-				filename = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "遗迹机枪炮塔-升起-影子" ) ,
+				filename = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "RuinGunTurret-Raise-Shadow" , "遗迹机枪炮塔-升起-影子" ) ,
 				priority = "medium" ,
 				run_mode = "backward" ,
 				width = 126 ,
@@ -1737,7 +1737,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Turret , "RuinGunTurret" , "遗迹�
 				axially_symmetrical = false ,
 				hr_version =
 				{
-					filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Turret , "遗迹机枪炮塔-升起-影子" ) ,
+					filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Turret , "RuinGunTurret-Raise-Shadow" , "遗迹机枪炮塔-升起-影子" ) ,
 					priority = "medium" ,
 					run_mode = "backward" ,
 					width = 250 ,
@@ -1758,7 +1758,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Turret , "RuinGunTurret" , "遗迹�
 		layers =
 		{
 			{
-				filename = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "遗迹机枪炮塔-升起" ) ,
+				filename = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "RuinGunTurret-Raise" , "遗迹机枪炮塔-升起" ) ,
 				priority = "medium" ,
 				run_mode = "forward" ,
 				width = 66 ,
@@ -1771,7 +1771,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Turret , "RuinGunTurret" , "遗迹�
 				axially_symmetrical = false ,
 				hr_version =
 				{
-					filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Turret , "遗迹机枪炮塔-升起" ) ,
+					filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Turret , "RuinGunTurret-Raise" , "遗迹机枪炮塔-升起" ) ,
 					priority = "medium" ,
 					run_mode = "forward" ,
 					width = 130 ,
@@ -1785,7 +1785,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Turret , "RuinGunTurret" , "遗迹�
 				}
 			} ,
 			{
-				filename = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "遗迹机枪炮塔-升起-遮盖" ) ,
+				filename = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "RuinGunTurret-Raise-Cover" , "遗迹机枪炮塔-升起-遮盖" ) ,
 				priority = "medium" ,
 				run_mode = "forward" ,
 				flags = { "mask" } ,
@@ -1800,7 +1800,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Turret , "RuinGunTurret" , "遗迹�
 				apply_runtime_tint = true ,
 				hr_version =
 				{
-					filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Turret , "遗迹机枪炮塔-升起-遮盖" ) ,
+					filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Turret , "RuinGunTurret-Raise-Cover" , "遗迹机枪炮塔-升起-遮盖" ) ,
 					priority = "medium" ,
 					run_mode = "forward" ,
 					flags = { "mask" } ,
@@ -1816,7 +1816,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Turret , "RuinGunTurret" , "遗迹�
 				}
 			} ,
 			{
-				filename = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "遗迹机枪炮塔-升起-影子" ) ,
+				filename = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "RuinGunTurret-Raise-Shadow" , "遗迹机枪炮塔-升起-影子" ) ,
 				priority = "medium" ,
 				run_mode = "forward" ,
 				width = 126 ,
@@ -1830,7 +1830,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Turret , "RuinGunTurret" , "遗迹�
 				axially_symmetrical = false ,
 				hr_version =
 				{
-					filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Turret , "遗迹机枪炮塔-升起-影子" ) ,
+					filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Turret , "RuinGunTurret-Raise-Shadow" , "遗迹机枪炮塔-升起-影子" ) ,
 					priority = "medium" ,
 					run_mode = "forward" ,
 					width = 250 ,
@@ -1854,22 +1854,22 @@ CreateRuinBuildings( SICommon.Types.Entities.Turret , "RuinGunTurret" , "遗迹�
 				stripes =
 				{
 					{
-						filename = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "遗迹机枪炮塔-射击-1" ) ,
+						filename = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "RuinGunTurret-Shoot-1" , "遗迹机枪炮塔-射击-1" ) ,
 						width_in_frames = 2 ,
 						height_in_frames = 16
 					} ,
 					{
-						filename = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "遗迹机枪炮塔-射击-2" ) ,
+						filename = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "RuinGunTurret-Shoot-2" , "遗迹机枪炮塔-射击-2" ) ,
 						width_in_frames = 2 ,
 						height_in_frames = 16
 					} ,
 					{
-						filename = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "遗迹机枪炮塔-射击-3" ) ,
+						filename = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "RuinGunTurret-Shoot-3" , "遗迹机枪炮塔-射击-3" ) ,
 						width_in_frames = 2 ,
 						height_in_frames = 16
 					} ,
 					{
-						filename = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "遗迹机枪炮塔-射击-4" ) ,
+						filename = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "RuinGunTurret-Shoot-4" , "遗迹机枪炮塔-射击-4" ) ,
 						width_in_frames = 2 ,
 						height_in_frames = 16
 					}
@@ -1887,22 +1887,22 @@ CreateRuinBuildings( SICommon.Types.Entities.Turret , "RuinGunTurret" , "遗迹�
 					stripes =
 					{
 						{
-							filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Turret , "遗迹机枪炮塔-射击-1" ) ,
+							filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Turret , "RuinGunTurret-Shoot-1" , "遗迹机枪炮塔-射击-1" ) ,
 							width_in_frames = 2 ,
 							height_in_frames = 16
 						} ,
 						{
-							filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Turret , "遗迹机枪炮塔-射击-2" ) ,
+							filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Turret , "RuinGunTurret-Shoot-2" , "遗迹机枪炮塔-射击-2" ) ,
 							width_in_frames = 2 ,
 							height_in_frames = 16
 						} ,
 						{
-							filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Turret , "遗迹机枪炮塔-射击-3" ) ,
+							filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Turret , "RuinGunTurret-Shoot-3" , "遗迹机枪炮塔-射击-3" ) ,
 							width_in_frames = 2 ,
 							height_in_frames = 16
 						} ,
 						{
-							filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Turret , "遗迹机枪炮塔-射击-4" ) ,
+							filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Turret , "RuinGunTurret-Shoot-4" , "遗迹机枪炮塔-射击-4" ) ,
 							width_in_frames = 2 ,
 							height_in_frames = 16
 						}
@@ -1921,22 +1921,22 @@ CreateRuinBuildings( SICommon.Types.Entities.Turret , "RuinGunTurret" , "遗迹�
 				stripes =
 				{
 					{
-						filename = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "遗迹机枪炮塔-射击-遮盖-1" ) ,
+						filename = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "RuinGunTurret-Shoot-Cover-1" , "遗迹机枪炮塔-射击-遮盖-1" ) ,
 						width_in_frames = 2 ,
 						height_in_frames = 16
 					} ,
 					{
-						filename = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "遗迹机枪炮塔-射击-遮盖-2" ) ,
+						filename = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "RuinGunTurret-Shoot-Cover-2" , "遗迹机枪炮塔-射击-遮盖-2" ) ,
 						width_in_frames = 2 ,
 						height_in_frames = 16
 					} ,
 					{
-						filename = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "遗迹机枪炮塔-射击-遮盖-3" ) ,
+						filename = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "RuinGunTurret-Shoot-Cover-3" , "遗迹机枪炮塔-射击-遮盖-3" ) ,
 						width_in_frames = 2 ,
 						height_in_frames = 16
 					} ,
 					{
-						filename = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "遗迹机枪炮塔-射击-遮盖-4" ) ,
+						filename = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "RuinGunTurret-Shoot-Cover-4" , "遗迹机枪炮塔-射击-遮盖-4" ) ,
 						width_in_frames = 2 ,
 						height_in_frames = 16
 					}
@@ -1957,22 +1957,22 @@ CreateRuinBuildings( SICommon.Types.Entities.Turret , "RuinGunTurret" , "遗迹�
 					stripes =
 					{
 						{
-							filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Turret , "遗迹机枪炮塔-射击-遮盖-1" ) ,
+							filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Turret , "RuinGunTurret-Shoot-Cover-1" , "遗迹机枪炮塔-射击-遮盖-1" ) ,
 							width_in_frames = 2 ,
 							height_in_frames = 16
 						} ,
 						{
-							filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Turret , "遗迹机枪炮塔-射击-遮盖-2" ) ,
+							filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Turret , "RuinGunTurret-Shoot-Cover-2" , "遗迹机枪炮塔-射击-遮盖-2" ) ,
 							width_in_frames = 2 ,
 							height_in_frames = 16
 						} ,
 						{
-							filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Turret , "遗迹机枪炮塔-射击-遮盖-3" ) ,
+							filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Turret , "RuinGunTurret-Shoot-Cover-3" , "遗迹机枪炮塔-射击-遮盖-3" ) ,
 							width_in_frames = 2 ,
 							height_in_frames = 16
 						} ,
 						{
-							filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Turret , "遗迹机枪炮塔-射击-遮盖-4" ) ,
+							filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Turret , "RuinGunTurret-Shoot-Cover-4" , "遗迹机枪炮塔-射击-遮盖-4" ) ,
 							width_in_frames = 2 ,
 							height_in_frames = 16
 						}
@@ -1994,22 +1994,22 @@ CreateRuinBuildings( SICommon.Types.Entities.Turret , "RuinGunTurret" , "遗迹�
 				stripes =
 				{
 					{
-						filename = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "遗迹机枪炮塔-射击-影子-1" ) ,
+						filename = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "RuinGunTurret-Shoot-Shadow-1" , "遗迹机枪炮塔-射击-影子-1" ) ,
 						width_in_frames = 2 ,
 						height_in_frames = 16
 					} ,
 					{
-						filename = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "遗迹机枪炮塔-射击-影子-2" ) ,
+						filename = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "RuinGunTurret-Shoot-Shadow-2" , "遗迹机枪炮塔-射击-影子-2" ) ,
 						width_in_frames = 2 ,
 						height_in_frames = 16
 					} ,
 					{
-						filename = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "遗迹机枪炮塔-射击-影子-3" ) ,
+						filename = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "RuinGunTurret-Shoot-Shadow-3" , "遗迹机枪炮塔-射击-影子-3" ) ,
 						width_in_frames = 2 ,
 						height_in_frames = 16
 					} ,
 					{
-						filename = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "遗迹机枪炮塔-射击-影子-4" ) ,
+						filename = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "RuinGunTurret-Shoot-Shadow-4" , "遗迹机枪炮塔-射击-影子-4" ) ,
 						width_in_frames = 2 ,
 						height_in_frames = 16
 					}
@@ -2028,22 +2028,22 @@ CreateRuinBuildings( SICommon.Types.Entities.Turret , "RuinGunTurret" , "遗迹�
 					stripes =
 					{
 						{
-							filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Turret , "遗迹机枪炮塔-射击-影子-1" ) ,
+							filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Turret , "RuinGunTurret-Shoot-Shadow-1" , "遗迹机枪炮塔-射击-影子-1" ) ,
 							width_in_frames = 2 ,
 							height_in_frames = 16
 						} ,
 						{
-							filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Turret , "遗迹机枪炮塔-射击-影子-2" ) ,
+							filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Turret , "RuinGunTurret-Shoot-Shadow-2" , "遗迹机枪炮塔-射击-影子-2" ) ,
 							width_in_frames = 2 ,
 							height_in_frames = 16
 						} ,
 						{
-							filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Turret , "遗迹机枪炮塔-射击-影子-3" ) ,
+							filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Turret , "RuinGunTurret-Shoot-Shadow-3" , "遗迹机枪炮塔-射击-影子-3" ) ,
 							width_in_frames = 2 ,
 							height_in_frames = 16
 						} ,
 						{
-							filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Turret , "遗迹机枪炮塔-射击-影子-4" ) ,
+							filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Turret , "RuinGunTurret-Shoot-Shadow-4" , "遗迹机枪炮塔-射击-影子-4" ) ,
 							width_in_frames = 2 ,
 							height_in_frames = 16
 						}
@@ -2067,7 +2067,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Turret , "RuinGunTurret" , "遗迹�
 		orientation_to_variation = false ,
 		pictures =
 		{
-			filename = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "遗迹机枪炮塔-反射" ) ,
+			filename = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "RuinGunTurret-Reflect" , "遗迹机枪炮塔-反射" ) ,
 			priority = "extra-high" ,
 			width = 20 ,
 			height = 32 ,
@@ -2159,7 +2159,7 @@ SIGen
 		layers =
 		{
 			{
-				filename = SIGen.MakeSelfPicturePath( "遗迹激光炮塔-激光-身体" ) ,
+				filename = SIGen.MakeSelfPicturePath( "RuinLaserTurret-Beam-Body" , "遗迹激光炮塔-激光-身体" ) ,
 				priority = "medium" ,
 				blend_mode = "additive" ,
 				flags = { "trilinear-filtering" } ,
@@ -2177,7 +2177,7 @@ SIGen
 		layers =
 		{
 			{
-				filename = SIGen.MakeSelfPicturePath( "遗迹激光炮塔-激光-身体" ) ,
+				filename = SIGen.MakeSelfPicturePath( "RuinLaserTurret-Beam-Body" , "遗迹激光炮塔-激光-身体" ) ,
 				priority = "medium" ,
 				blend_mode = "additive" ,
 				flags = { "trilinear-filtering" } ,
@@ -2195,7 +2195,7 @@ SIGen
 		layers =
 		{
 			{
-				filename = SIGen.MakeSelfPicturePath( "遗迹激光炮塔-激光-尾部" ) ,
+				filename = SIGen.MakeSelfPicturePath( "RuinLaserTurret-Beam-Tail" , "遗迹激光炮塔-激光-尾部" ) ,
 				priority = "medium" ,
 				blend_mode = "additive" ,
 				flags = { "trilinear-filtering" } ,
@@ -2216,7 +2216,7 @@ SIGen
 			layers =
 			{
 				{
-					filename = SIGen.MakeSelfPicturePath( "遗迹激光炮塔-激光-身体-光效" ) ,
+					filename = SIGen.MakeSelfPicturePath( "RuinLaserTurret-Beam-Body-Light" , "遗迹激光炮塔-激光-身体-光效" ) ,
 					priority = "medium" ,
 					width = 64 ,
 					height = 12 ,
@@ -2232,7 +2232,7 @@ SIGen
 			layers =
 			{
 				{
-					filename = SIGen.MakeSelfPicturePath( "遗迹激光炮塔-激光-身体-光效" ) ,
+					filename = SIGen.MakeSelfPicturePath( "RuinLaserTurret-Beam-Body-Light" , "遗迹激光炮塔-激光-身体-光效" ) ,
 					priority = "medium" ,
 					width = 64 ,
 					height = 12 ,
@@ -2248,7 +2248,7 @@ SIGen
 			layers =
 			{
 				{
-					filename = SIGen.MakeSelfPicturePath( "遗迹激光炮塔-激光-尾部-光效" ) ,
+					filename = SIGen.MakeSelfPicturePath( "RuinLaserTurret-Beam-Tail" , "遗迹激光炮塔-激光-尾部-光效" ) ,
 					priority = "medium" ,
 					width = 110 ,
 					height = 62 ,
@@ -2268,7 +2268,7 @@ SIGen
 			layers =
 			{
 				{
-					filename = SIGen.MakeSelfPicturePath( "遗迹激光炮塔-激光-地面-身体" ) ,
+					filename = SIGen.MakeSelfPicturePath( "RuinLaserTurret-Beam-Ground-Body" , "遗迹激光炮塔-激光-地面-身体" ) ,
 					priority = "medium" ,
 					width = 64 ,
 					height = 256 ,
@@ -2286,7 +2286,7 @@ SIGen
 			layers =
 			{
 				{
-					filename = SIGen.MakeSelfPicturePath( "遗迹激光炮塔-激光-地面-头部" ) ,
+					filename = SIGen.MakeSelfPicturePath( "RuinLaserTurret-Beam-Ground-Head" , "遗迹激光炮塔-激光-地面-头部" ) ,
 					priority = "medium" ,
 					width = 256 ,
 					height = 256 ,
@@ -2305,7 +2305,7 @@ SIGen
 			layers =
 			{
 				{
-					filename = SIGen.MakeSelfPicturePath( "遗迹激光炮塔-激光-地面-尾部" ) ,
+					filename = SIGen.MakeSelfPicturePath( "RuinLaserTurret-Beam-Ground-Tail" , "遗迹激光炮塔-激光-地面-尾部" ) ,
 					priority = "medium" ,
 					width = 256 ,
 					height = 256 ,
@@ -2329,7 +2329,7 @@ SIGen
 		max_sounds_per_type = 1
 	}
 }
-.New( SICommon.Types.Entities.Corpse , "RuinLaserTurretRemnants" , "遗迹激光炮塔-残骸" )
+.New( SICommon.Types.Entities.Corpse , "RuinLaserTurret_Corpse" , "遗迹激光炮塔-残骸" )
 .AutoIcon()
 .SetSizeScale( 2 , 2 , 0 )
 .Append
@@ -2344,7 +2344,7 @@ SIGen
 	animation = SIGraphics.MakeRemnantsAnimation( 3 ,
 	{
 		{
-			filename = SIGen.MakeSelfPicturePath( "遗迹激光炮塔-残骸" ) ,
+			filename = SIGen.MakeSelfPicturePath( "RuinLaserTurret-Corpse" , "遗迹激光炮塔-残骸" ) ,
 			priority = "extra-high" ,
 			width = 100 ,
 			height = 98 ,
@@ -2357,7 +2357,7 @@ SIGen
 			axially_symmetrical = false ,
 			hr_version =
 			{
-				filename = SIGen.MakeSelfPicturePathHr( "遗迹激光炮塔-残骸" ) ,
+				filename = SIGen.MakeSelfPicturePathHr( "RuinLaserTurret-Corpse" , "遗迹激光炮塔-残骸" ) ,
 				priority = "extra-high" ,
 				width = 198 ,
 				height = 194 ,
@@ -2371,7 +2371,7 @@ SIGen
 			}
 		} ,
 		{
-			filename = SIGen.MakeSelfPicturePath( "遗迹激光炮塔-残骸-遮盖" ) ,
+			filename = SIGen.MakeSelfPicturePath( "RuinLaserTurret-Corpse-Cover" , "遗迹激光炮塔-残骸-遮盖" ) ,
 			priority = "low" ,
 			width = 58 ,
 			height = 48 ,
@@ -2384,7 +2384,7 @@ SIGen
 			apply_runtime_tint = true ,
 			hr_version =
 			{
-				filename = SIGen.MakeSelfPicturePathHr( "遗迹激光炮塔-残骸-遮盖" ) ,
+				filename = SIGen.MakeSelfPicturePathHr( "RuinLaserTurret-Corpse-Cover" , "遗迹激光炮塔-残骸-遮盖" ) ,
 				priority = "low" ,
 				width = 114 ,
 				height = 94 ,
@@ -2406,7 +2406,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Turret , "RuinLaserTurret" , "遗�
 	icons =
 	{
 		{
-			icon = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "遗迹激光炮塔" .. SICommon.ShowNameSuffix.ICON ) ,
+			icon = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "RuinLaserTurret" .. SICommon.CodeNameSuffix.ICON , "遗迹激光炮塔" .. SICommon.ShowNameSuffix.ICON ) ,
 			icon_size = 64 ,
 			icon_mipmaps = 4
 		}
@@ -2420,7 +2420,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Turret , "RuinLaserTurret" , "遗�
 		results = {}
 	} ,
 	max_health = 250 ,
-	corpse = SIConstants_RuinSystem.raw.Entities.RuinLaserTurretRemnants ,
+	corpse = SIConstants_RuinSystem.raw.Entities.RuinLaserTurret_Corpse ,
 	dying_explosion = "laser-turret-explosion" ,
 	map_color = { r = 1.0 , g = 1.0 , b = 1.0 } ,
 	friendly_map_color = { r = 0.4 , g = 0.4 , b = 1.0 } ,
@@ -2481,7 +2481,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Turret , "RuinLaserTurret" , "遗�
 		layers =
 		{
 			{
-				filename = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "遗迹激光炮塔" ) ,
+				filename = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "RuinLaserTurret" , "遗迹激光炮塔" ) ,
 				priority = "high" ,
 				width = 70 ,
 				height = 52 ,
@@ -2492,7 +2492,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Turret , "RuinLaserTurret" , "遗�
 				shift = SIUtils.by_pixel( 0 , 2 ) ,
 				hr_version =
 				{
-					filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Turret , "遗迹激光炮塔" ) ,
+					filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Turret , "RuinLaserTurret" , "遗迹激光炮塔" ) ,
 					priority = "high" ,
 					width = 138 ,
 					height = 104 ,
@@ -2504,7 +2504,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Turret , "RuinLaserTurret" , "遗�
 				}
 			} ,
 			{
-				filename = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "遗迹激光炮塔-影子" ) ,
+				filename = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "RuinLaserTurret-Shadow" , "遗迹激光炮塔-影子" ) ,
 				priority = "medium" ,
 				width = 66 ,
 				height = 42 ,
@@ -2516,7 +2516,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Turret , "RuinLaserTurret" , "遗�
 				draw_as_shadow = true ,
 				hr_version =
 				{
-					filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Turret , "遗迹激光炮塔-影子" ) ,
+					filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Turret , "RuinLaserTurret-Shadow" , "遗迹激光炮塔-影子" ) ,
 					priority = "medium" ,
 					width = 132 ,
 					height = 82 ,
@@ -2535,7 +2535,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Turret , "RuinLaserTurret" , "遗�
 		layers =
 		{
 			{
-				filename = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "遗迹激光炮塔-升起" ) ,
+				filename = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "RuinLaserTurret-Raise" , "遗迹激光炮塔-升起" ) ,
 				priority = "medium" ,
 				run_mode = "forward" ,
 				width = 66 ,
@@ -2548,7 +2548,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Turret , "RuinLaserTurret" , "遗�
 				axially_symmetrical = false ,
 				hr_version =
 				{
-					filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Turret , "遗迹激光炮塔-升起" ) ,
+					filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Turret , "RuinLaserTurret-Raise" , "遗迹激光炮塔-升起" ) ,
 					priority = "medium" ,
 					run_mode = "forward" ,
 					width = 130 ,
@@ -2562,7 +2562,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Turret , "RuinLaserTurret" , "遗�
 				}
 			} ,
 			{
-				filename = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "遗迹激光炮塔-升起-遮盖" ) ,
+				filename = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "RuinLaserTurret-Raise-Cover" , "遗迹激光炮塔-升起-遮盖" ) ,
 				priority = "medium" ,
 				run_mode = "forward" ,
 				flags = { "mask" } ,
@@ -2577,7 +2577,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Turret , "RuinLaserTurret" , "遗�
 				apply_runtime_tint = true ,
 				hr_version =
 				{
-					filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Turret , "遗迹激光炮塔-升起-遮盖" ) ,
+					filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Turret , "RuinLaserTurret-Raise-Cover" , "遗迹激光炮塔-升起-遮盖" ) ,
 					priority = "medium" ,
 					run_mode = "forward" ,
 					flags = { "mask" } ,
@@ -2593,7 +2593,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Turret , "RuinLaserTurret" , "遗�
 				}
 			} ,
 			{
-				filename = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "遗迹激光炮塔-升起-影子" ) ,
+				filename = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "RuinLaserTurret-Raise-Shadow" , "遗迹激光炮塔-升起-影子" ) ,
 				priority = "medium" ,
 				run_mode = "forward" ,
 				width = 92 ,
@@ -2607,7 +2607,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Turret , "RuinLaserTurret" , "遗�
 				axially_symmetrical = false ,
 				hr_version =
 				{
-					filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Turret , "遗迹激光炮塔-升起-影子" ) ,
+					filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Turret , "RuinLaserTurret-Raise-Shadow" , "遗迹激光炮塔-升起-影子" ) ,
 					priority = "medium" ,
 					run_mode = "forward" ,
 					width = 182 ,
@@ -2628,7 +2628,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Turret , "RuinLaserTurret" , "遗�
 		layers =
 		{
 			{
-				filename = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "遗迹激光炮塔-射击" ) ,
+				filename = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "RuinLaserTurret-Shoot" , "遗迹激光炮塔-射击" ) ,
 				priority = "medium" ,
 				width = 64 ,
 				height = 60 ,
@@ -2639,7 +2639,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Turret , "RuinLaserTurret" , "遗�
 				shift = SIUtils.by_pixel( 0 , -35 ) ,
 				hr_version =
 				{
-					filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Turret , "遗迹激光炮塔-射击" ) ,
+					filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Turret , "RuinLaserTurret-Shoot" , "遗迹激光炮塔-射击" ) ,
 					priority = "medium" ,
 					width = 126 ,
 					height = 120 ,
@@ -2651,7 +2651,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Turret , "RuinLaserTurret" , "遗�
 				}
 			} ,
 			{
-				filename = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "遗迹激光炮塔-射击-遮盖" ) ,
+				filename = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "RuinLaserTurret-Shoot-Cover" , "遗迹激光炮塔-射击-遮盖" ) ,
 				priority = "medium" ,
 				flags = { "mask" } ,
 				width = 46 ,
@@ -2664,7 +2664,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Turret , "RuinLaserTurret" , "遗�
 				apply_runtime_tint = true ,
 				hr_version =
 				{
-					filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Turret , "遗迹激光炮塔-射击-遮盖" ) ,
+					filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Turret , "RuinLaserTurret-Shoot-Cover" , "遗迹激光炮塔-射击-遮盖" ) ,
 					priority = "medium" ,
 					flags = { "mask" } ,
 					width = 92 ,
@@ -2678,7 +2678,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Turret , "RuinLaserTurret" , "遗�
 				}
 			} ,
 			{
-				filename = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "遗迹激光炮塔-射击-影子" ) ,
+				filename = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "RuinLaserTurret-Shoot-Shadow" , "遗迹激光炮塔-射击-影子" ) ,
 				priority = "medium" ,
 				width = 86 ,
 				height = 46 ,
@@ -2690,7 +2690,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Turret , "RuinLaserTurret" , "遗�
 				draw_as_shadow = true ,
 				hr_version =
 				{
-					filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Turret , "遗迹激光炮塔-射击-影子" ) ,
+					filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Turret , "RuinLaserTurret-Shoot-Shadow" , "遗迹激光炮塔-射击-影子" ) ,
 					priority = "medium" ,
 					width = 170 ,
 					height = 92 ,
@@ -2709,7 +2709,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Turret , "RuinLaserTurret" , "遗�
 		layers =
 		{
 			{
-				filename = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "遗迹激光炮塔-升起" ) ,
+				filename = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "RuinLaserTurret-Raise" , "遗迹激光炮塔-升起" ) ,
 				priority = "medium" ,
 				run_mode = "backward" ,
 				width = 66 ,
@@ -2722,7 +2722,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Turret , "RuinLaserTurret" , "遗�
 				axially_symmetrical = false ,
 				hr_version =
 				{
-					filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Turret , "遗迹激光炮塔-升起" ) ,
+					filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Turret , "RuinLaserTurret-Raise" , "遗迹激光炮塔-升起" ) ,
 					priority = "medium" ,
 					run_mode = "backward" ,
 					width = 130 ,
@@ -2736,7 +2736,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Turret , "RuinLaserTurret" , "遗�
 				}
 			} ,
 			{
-				filename = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "遗迹激光炮塔-升起-遮盖" ) ,
+				filename = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "RuinLaserTurret-Raise-Cover" , "遗迹激光炮塔-升起-遮盖" ) ,
 				priority = "medium" ,
 				run_mode = "backward" ,
 				flags = { "mask" } ,
@@ -2751,7 +2751,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Turret , "RuinLaserTurret" , "遗�
 				apply_runtime_tint = true ,
 				hr_version =
 				{
-					filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Turret , "遗迹激光炮塔-升起-遮盖" ) ,
+					filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Turret , "RuinLaserTurret-Raise-Cover" , "遗迹激光炮塔-升起-遮盖" ) ,
 					priority = "medium" ,
 					run_mode = "backward" ,
 					flags = { "mask" } ,
@@ -2767,7 +2767,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Turret , "RuinLaserTurret" , "遗�
 				}
 			} ,
 			{
-				filename = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "遗迹激光炮塔-升起-影子" ) ,
+				filename = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "RuinLaserTurret-Raise-Shadow" , "遗迹激光炮塔-升起-影子" ) ,
 				priority = "medium" ,
 				run_mode = "backward" ,
 				width = 92 ,
@@ -2781,7 +2781,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Turret , "RuinLaserTurret" , "遗�
 				axially_symmetrical = false ,
 				hr_version =
 				{
-					filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Turret , "遗迹激光炮塔-升起-影子" ) ,
+					filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Turret , "RuinLaserTurret-Raise-Shadow" , "遗迹激光炮塔-升起-影子" ) ,
 					priority = "medium" ,
 					run_mode = "backward" ,
 					width = 182 ,
@@ -2802,7 +2802,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Turret , "RuinLaserTurret" , "遗�
 		layers =
 		{
 			{
-				filename = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "遗迹激光炮塔-升起" ) ,
+				filename = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "RuinLaserTurret-Raise" , "遗迹激光炮塔-升起" ) ,
 				priority = "medium" ,
 				run_mode = "forward" ,
 				width = 66 ,
@@ -2815,7 +2815,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Turret , "RuinLaserTurret" , "遗�
 				axially_symmetrical = false ,
 				hr_version =
 				{
-					filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Turret , "遗迹激光炮塔-升起" ) ,
+					filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Turret , "RuinLaserTurret-Raise" , "遗迹激光炮塔-升起" ) ,
 					priority = "medium" ,
 					run_mode = "forward" ,
 					width = 130 ,
@@ -2829,7 +2829,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Turret , "RuinLaserTurret" , "遗�
 				}
 			} ,
 			{
-				filename = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "遗迹激光炮塔-升起-遮盖" ) ,
+				filename = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "RuinLaserTurret-Raise-Cover" , "遗迹激光炮塔-升起-遮盖" ) ,
 				priority = "medium" ,
 				run_mode = "forward" ,
 				flags = { "mask" } ,
@@ -2844,7 +2844,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Turret , "RuinLaserTurret" , "遗�
 				apply_runtime_tint = true ,
 				hr_version =
 				{
-					filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Turret , "遗迹激光炮塔-升起-遮盖" ) ,
+					filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Turret , "RuinLaserTurret-Raise-Cover" , "遗迹激光炮塔-升起-遮盖" ) ,
 					priority = "medium" ,
 					run_mode = "forward" ,
 					flags = { "mask" } ,
@@ -2860,7 +2860,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Turret , "RuinLaserTurret" , "遗�
 				}
 			} ,
 			{
-				filename = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "遗迹激光炮塔-升起-影子" ) ,
+				filename = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "RuinLaserTurret-Raise-Shadow" , "遗迹激光炮塔-升起-影子" ) ,
 				priority = "medium" ,
 				run_mode = "forward" ,
 				width = 92 ,
@@ -2874,7 +2874,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Turret , "RuinLaserTurret" , "遗�
 				axially_symmetrical = false ,
 				hr_version =
 				{
-					filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Turret , "遗迹激光炮塔-升起-影子" ) ,
+					filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Turret , "RuinLaserTurret-Raise-Shadow" , "遗迹激光炮塔-升起-影子" ) ,
 					priority = "medium" ,
 					run_mode = "forward" ,
 					width = 182 ,
@@ -2896,7 +2896,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Turret , "RuinLaserTurret" , "遗�
 		layers =
 		{
 			{
-				filename = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "遗迹激光炮塔-射击-光效" ) ,
+				filename = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "RuinLaserTurret-Shoot-Light" , "遗迹激光炮塔-射击-光效" ) ,
 				priority = "medium" ,
 				blend_mode = "additive" ,
 				width = 62 ,
@@ -2908,7 +2908,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Turret , "RuinLaserTurret" , "遗�
 				shift = SIUtils.by_pixel( 0 , -35 ) ,
 				hr_version =
 				{
-					filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Turret , "遗迹激光炮塔-射击-光效" ) ,
+					filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Turret , "RuinLaserTurret-Shoot-Light" , "遗迹激光炮塔-射击-光效" ) ,
 					priority = "medium" ,
 					blend_mode = "additive" ,
 					width = 122 ,
@@ -2928,7 +2928,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Turret , "RuinLaserTurret" , "遗�
 		orientation_to_variation = false ,
 		pictures =
 		{
-			filename = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "遗迹激光炮塔-反射" ) ,
+			filename = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "RuinLaserTurret-Reflect" , "遗迹激光炮塔-反射" ) ,
 			priority = "extra-high" ,
 			width = 20 ,
 			height = 32 ,
@@ -2980,7 +2980,7 @@ local function RuinFlameTurretGunAnimationSingle( shift , attacking )
 	local layers =
 	{
 		{
-			filename = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "遗迹喷火炮塔-枪" ) ,
+			filename = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "RuinFlameTurret-Gun" , "遗迹喷火炮塔-枪" ) ,
 			priority = "medium" ,
 			width = 82 ,
 			height = 66 ,
@@ -2993,7 +2993,7 @@ local function RuinFlameTurretGunAnimationSingle( shift , attacking )
 			counterclockwise = true ,
 			hr_version =
 			{
-				filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Turret , "遗迹喷火炮塔-枪" ) ,
+				filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Turret , "RuinFlameTurret-Gun" , "遗迹喷火炮塔-枪" ) ,
 				priority = "medium" ,
 				width = 158 ,
 				height = 128 ,
@@ -3010,7 +3010,7 @@ local function RuinFlameTurretGunAnimationSingle( shift , attacking )
 	if attacking then
 		table.insert( layers ,
 		{
-			filename = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "遗迹喷火炮塔-枪-激活" ) ,
+			filename = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "RuinFlameTurret-Gun-Active" , "遗迹喷火炮塔-枪-激活" ) ,
 			priority = "medium" ,
 			blend_mode = "additive" ,
 			width = 82 ,
@@ -3025,7 +3025,7 @@ local function RuinFlameTurretGunAnimationSingle( shift , attacking )
 			counterclockwise = true ,
 			hr_version =
 			{
-				filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Turret , "遗迹喷火炮塔-枪-激活" ) ,
+				filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Turret , "RuinFlameTurret-Gun-Active" , "遗迹喷火炮塔-枪-激活" ) ,
 				priority = "medium" ,
 				blend_mode = "additive" ,
 				width = 158 ,
@@ -3042,7 +3042,7 @@ local function RuinFlameTurretGunAnimationSingle( shift , attacking )
 		} )
 		table.insert( layers ,
 		{
-			filename = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "遗迹喷火炮塔-枪-激活" ) ,
+			filename = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "RuinFlameTurret-Gun-Active" , "遗迹喷火炮塔-枪-激活" ) ,
 			priority = "medium" ,
 			blend_mode = "additive" ,
 			width = 82 ,
@@ -3058,7 +3058,7 @@ local function RuinFlameTurretGunAnimationSingle( shift , attacking )
 			counterclockwise = true ,
 			hr_version =
 			{
-				filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Turret , "遗迹喷火炮塔-枪-激活" ) ,
+				filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Turret , "RuinFlameTurret-Gun-Active" , "遗迹喷火炮塔-枪-激活" ) ,
 				priority = "medium" ,
 				blend_mode = "additive" ,
 				width = 158 ,
@@ -3077,7 +3077,7 @@ local function RuinFlameTurretGunAnimationSingle( shift , attacking )
 	end
 	table.insert( layers ,
 	{
-		filename = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "遗迹喷火炮塔-枪-遮盖" ) ,
+		filename = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "RuinFlameTurret-Gun-Cover" , "遗迹喷火炮塔-枪-遮盖" ) ,
 		priority = "medium" ,
 		flags = { "mask" } ,
 		width = 74 ,
@@ -3092,7 +3092,7 @@ local function RuinFlameTurretGunAnimationSingle( shift , attacking )
 		counterclockwise = true ,
 		hr_version =
 		{
-			filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Turret , "遗迹喷火炮塔-枪-遮盖" ) ,
+			filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Turret , "RuinFlameTurret-Gun-Cover" , "遗迹喷火炮塔-枪-遮盖" ) ,
 			priority = "medium" ,
 			flags = { "mask" } ,
 			width = 144 ,
@@ -3109,7 +3109,7 @@ local function RuinFlameTurretGunAnimationSingle( shift , attacking )
 	} )
 	table.insert( layers ,
 	{
-		filename = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "遗迹喷火炮塔-枪-影子" ) ,
+		filename = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "RuinFlameTurret-Gun-Shadow" , "遗迹喷火炮塔-枪-影子" ) ,
 		priority = "medium" ,
 		width = 90 ,
 		height = 56 ,
@@ -3123,7 +3123,7 @@ local function RuinFlameTurretGunAnimationSingle( shift , attacking )
 		counterclockwise = true ,
 		hr_version =
 		{
-			filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Turret , "遗迹喷火炮塔-枪-影子" ) ,
+			filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Turret , "RuinFlameTurret-Gun-Shadow" , "遗迹喷火炮塔-枪-影子" ) ,
 			priority = "medium" ,
 			width = 182 ,
 			height = 116 ,
@@ -3157,7 +3157,7 @@ local function RuinFlameTurretExtensionAnimationSingle( runMode , frameCount , l
 	local layers =
 	{
 		{
-			filename = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "遗迹喷火炮塔-枪-扩展" ) ,
+			filename = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "RuinFlameTurret-Gun-Expand" , "遗迹喷火炮塔-枪-扩展" ) ,
 			priority = "medium" ,
 			run_mode = runMode or "forward" ,
 			width = 80 ,
@@ -3171,7 +3171,7 @@ local function RuinFlameTurretExtensionAnimationSingle( runMode , frameCount , l
 			axially_symmetrical = false ,
 			hr_version =
 			{
-				filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Turret , "遗迹喷火炮塔-枪-扩展" ) ,
+				filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Turret , "RuinFlameTurret-Gun-Expand" , "遗迹喷火炮塔-枪-扩展" ) ,
 				priority = "medium" ,
 				run_mode = runMode or "forward" ,
 				width = 152 ,
@@ -3186,7 +3186,7 @@ local function RuinFlameTurretExtensionAnimationSingle( runMode , frameCount , l
 			}
 		} ,
 		{
-			filename = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "遗迹喷火炮塔-枪-扩展-遮盖" ) ,
+			filename = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "RuinFlameTurret-Gun-Expand-Cover" , "遗迹喷火炮塔-枪-扩展-遮盖" ) ,
 			priority = "medium" ,
 			run_mode = runMode or "forward" ,
 			flags = { "mask" } ,
@@ -3202,7 +3202,7 @@ local function RuinFlameTurretExtensionAnimationSingle( runMode , frameCount , l
 			apply_runtime_tint = true ,
 			hr_version =
 			{
-				filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Turret , "遗迹喷火炮塔-枪-扩展-遮盖" ) ,
+				filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Turret , "RuinFlameTurret-Gun-Expand-Cover" , "遗迹喷火炮塔-枪-扩展-遮盖" ) ,
 				priority = "medium" ,
 				run_mode = runMode or "forward" ,
 				flags = { "mask" } ,
@@ -3219,7 +3219,7 @@ local function RuinFlameTurretExtensionAnimationSingle( runMode , frameCount , l
 			}
 		} ,
 		{
-			filename = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "遗迹喷火炮塔-枪-扩展-影子" ) ,
+			filename = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "RuinFlameTurret-Gun-Expand-Shadow" , "遗迹喷火炮塔-枪-扩展-影子" ) ,
 			priority = "medium" ,
 			run_mode = runMode or "forward" ,
 			width = 92 ,
@@ -3234,7 +3234,7 @@ local function RuinFlameTurretExtensionAnimationSingle( runMode , frameCount , l
 			axially_symmetrical = false ,
 			hr_version =
 			{
-				filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Turret , "遗迹喷火炮塔-枪-扩展-影子" ) ,
+				filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Turret , "RuinFlameTurret-Gun-Expand-Shadow" , "遗迹喷火炮塔-枪-扩展-影子" ) ,
 				priority = "medium" ,
 				run_mode = runMode or "forward" ,
 				width = 180 ,
@@ -3267,7 +3267,7 @@ local function RuinFlameTurretExtensionAnimation( runMode , frameCount , lineLen
 	}
 end
 SIGen
-.New( SICommon.Types.Entities.Corpse , "RuinFlameTurretRemnants" , "遗迹喷火炮塔-残骸" )
+.New( SICommon.Types.Entities.Corpse , "RuinFlameTurret_Corpse" , "遗迹喷火炮塔-残骸" )
 .AutoIcon()
 .SetSizeScale( 2 , 2 , 0 )
 .Append
@@ -3285,7 +3285,7 @@ SIGen
 			layers =
 			{
 				{
-					filename = SIGen.MakeSelfPicturePath( "遗迹喷火炮塔-残骸" ) ,
+					filename = SIGen.MakeSelfPicturePath( "RuinFlameTurret-Corpse" , "遗迹喷火炮塔-残骸" ) ,
 					priority = "extra-high" ,
 					width = 152 ,
 					height = 164 ,
@@ -3298,7 +3298,7 @@ SIGen
 					axially_symmetrical = false ,
 					hr_version =
 					{
-						filename = SIGen.MakeSelfPicturePathHr( "遗迹喷火炮塔-残骸" ) ,
+						filename = SIGen.MakeSelfPicturePathHr( "RuinFlameTurret-Corpse" , "遗迹喷火炮塔-残骸" ) ,
 						priority = "extra-high" ,
 						width = 302 ,
 						height = 326 ,
@@ -3312,7 +3312,7 @@ SIGen
 					}
 				} ,
 				{
-					filename = SIGen.MakeSelfPicturePath( "遗迹喷火炮塔-残骸-遮盖" ) ,
+					filename = SIGen.MakeSelfPicturePath( "RuinFlameTurret-Corpse-Cover" , "遗迹喷火炮塔-残骸-遮盖" ) ,
 					priority = "low" ,
 					width = 82 ,
 					height = 82 ,
@@ -3325,7 +3325,7 @@ SIGen
 					apply_runtime_tint = true ,
 					hr_version =
 					{
-						filename = SIGen.MakeSelfPicturePathHr( "遗迹喷火炮塔-残骸-遮盖" ) ,
+						filename = SIGen.MakeSelfPicturePathHr( "RuinFlameTurret-Corpse-Cover" , "遗迹喷火炮塔-残骸-遮盖" ) ,
 						priority = "low" ,
 						width = 164 ,
 						height = 164 ,
@@ -3349,7 +3349,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Turret , "RuinFlameTurret" , "遗�
 	icons =
 	{
 		{
-			icon = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "遗迹喷火炮塔" .. SICommon.ShowNameSuffix.ICON ) ,
+			icon = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "RuinFlameTurret" .. SICommon.CodeNameSuffix.ICON , "遗迹喷火炮塔" .. SICommon.ShowNameSuffix.ICON ) ,
 			icon_size = 64 ,
 			icon_mipmaps = 4
 		}
@@ -3363,7 +3363,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Turret , "RuinFlameTurret" , "遗�
 		results = {}
 	} ,
 	max_health = 410 ,
-	corpse = SIConstants_RuinSystem.raw.Entities.RuinFlameTurretRemnants ,
+	corpse = SIConstants_RuinSystem.raw.Entities.RuinFlameTurret_Corpse ,
 	dying_explosion = "medium-explosion" ,
 	map_color = { r = 1.0 , g = 1.0 , b = 1.0 } ,
 	friendly_map_color = { r = 0.4 , g = 0.4 , b = 1.0 } ,
@@ -3465,7 +3465,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Turret , "RuinFlameTurret" , "遗�
 			layers =
 			{
 				{
-					filename = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "遗迹喷火炮塔-上" ) ,
+					filename = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "RuinFlameTurret-Up" , "遗迹喷火炮塔-上" ) ,
 					priority = "medium" ,
 					width = 80 ,
 					height = 96 ,
@@ -3477,7 +3477,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Turret , "RuinFlameTurret" , "遗�
 					axially_symmetrical = false ,
 					hr_version =
 					{
-						filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Turret , "遗迹喷火炮塔-上" ) ,
+						filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Turret , "RuinFlameTurret-Up" , "遗迹喷火炮塔-上" ) ,
 						priority = "medium" ,
 						width = 158 ,
 						height = 196 ,
@@ -3490,7 +3490,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Turret , "RuinFlameTurret" , "遗�
 					}
 				} ,
 				{
-					filename = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "遗迹喷火炮塔-上-遮盖" ) ,
+					filename = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "RuinFlameTurret-Up-Cover" , "遗迹喷火炮塔-上-遮盖" ) ,
 					priority = "medium" ,
 					flags = { "mask" } ,
 					width = 36 ,
@@ -3504,7 +3504,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Turret , "RuinFlameTurret" , "遗�
 					apply_runtime_tint = true ,
 					hr_version =
 					{
-						filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Turret , "遗迹喷火炮塔-上-遮盖" ) ,
+						filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Turret , "RuinFlameTurret-Up-Cover" , "遗迹喷火炮塔-上-遮盖" ) ,
 						priority = "medium" ,
 						flags = { "mask" } ,
 						width = 74 ,
@@ -3519,7 +3519,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Turret , "RuinFlameTurret" , "遗�
 					}
 				} ,
 				{
-					filename = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "遗迹喷火炮塔-上-影子" ) ,
+					filename = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "RuinFlameTurret-Up-Shadow" , "遗迹喷火炮塔-上-影子" ) ,
 					priority = "medium" ,
 					width = 70 ,
 					height = 78 ,
@@ -3532,7 +3532,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Turret , "RuinFlameTurret" , "遗�
 					axially_symmetrical = false ,
 					hr_version =
 					{
-						filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Turret , "遗迹喷火炮塔-上-影子" ) ,
+						filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Turret , "RuinFlameTurret-Up-Shadow" , "遗迹喷火炮塔-上-影子" ) ,
 						priority = "medium" ,
 						width = 134 ,
 						height = 152 ,
@@ -3552,7 +3552,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Turret , "RuinFlameTurret" , "遗�
 			layers =
 			{
 				{
-					filename = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "遗迹喷火炮塔-右" ) ,
+					filename = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "RuinFlameTurret-Right" , "遗迹喷火炮塔-右" ) ,
 					priority = "medium" ,
 					width = 106 ,
 					height = 72 ,
@@ -3564,7 +3564,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Turret , "RuinFlameTurret" , "遗�
 					axially_symmetrical = false ,
 					hr_version =
 					{
-						filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Turret , "遗迹喷火炮塔-右" ) ,
+						filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Turret , "RuinFlameTurret-Right" , "遗迹喷火炮塔-右" ) ,
 						priority = "medium" ,
 						width = 216 ,
 						height = 146 ,
@@ -3577,7 +3577,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Turret , "RuinFlameTurret" , "遗�
 					}
 				} ,
 				{
-					filename = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "遗迹喷火炮塔-右-遮盖" ) ,
+					filename = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "RuinFlameTurret-Right-Cover" , "遗迹喷火炮塔-右-遮盖" ) ,
 					priority = "medium" ,
 					flags = { "mask" } ,
 					width = 32 ,
@@ -3591,7 +3591,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Turret , "RuinFlameTurret" , "遗�
 					apply_runtime_tint = true ,
 					hr_version =
 					{
-						filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Turret , "遗迹喷火炮塔-右-遮盖" ) ,
+						filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Turret , "RuinFlameTurret-Right-Cover" , "遗迹喷火炮塔-右-遮盖" ) ,
 						priority = "medium" ,
 						flags = { "mask" } ,
 						width = 66 ,
@@ -3606,7 +3606,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Turret , "RuinFlameTurret" , "遗�
 					}
 				} ,
 				{
-					filename = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "遗迹喷火炮塔-右-影子" ) ,
+					filename = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "RuinFlameTurret-Right-Shadow" , "遗迹喷火炮塔-右-影子" ) ,
 					priority = "medium" ,
 					width = 72 ,
 					height = 46 ,
@@ -3619,7 +3619,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Turret , "RuinFlameTurret" , "遗�
 					axially_symmetrical = false ,
 					hr_version =
 					{
-						filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Turret , "遗迹喷火炮塔-右-影子" ) ,
+						filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Turret , "RuinFlameTurret-Right-Shadow" , "遗迹喷火炮塔-右-影子" ) ,
 						priority = "medium" ,
 						width = 144 ,
 						height = 86 ,
@@ -3639,7 +3639,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Turret , "RuinFlameTurret" , "遗�
 			layers =
 			{
 				{
-					filename = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "遗迹喷火炮塔-下" ) ,
+					filename = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "RuinFlameTurret-Down" , "遗迹喷火炮塔-下" ) ,
 					priority = "medium" ,
 					width = 64 ,
 					height = 84 ,
@@ -3651,7 +3651,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Turret , "RuinFlameTurret" , "遗�
 					axially_symmetrical = false ,
 					hr_version =
 					{
-						filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Turret , "遗迹喷火炮塔-下" ) ,
+						filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Turret , "RuinFlameTurret-Down" , "遗迹喷火炮塔-下" ) ,
 						priority = "medium" ,
 						width = 128 ,
 						height = 166 ,
@@ -3664,7 +3664,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Turret , "RuinFlameTurret" , "遗�
 					}
 				} ,
 				{
-					filename = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "遗迹喷火炮塔-下-遮盖" ) ,
+					filename = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "RuinFlameTurret-Down-Cover" , "遗迹喷火炮塔-下-遮盖" ) ,
 					priority = "medium" ,
 					flags = { "mask" } ,
 					width = 36 ,
@@ -3678,7 +3678,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Turret , "RuinFlameTurret" , "遗�
 					apply_runtime_tint = true ,
 					hr_version =
 					{
-						filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Turret , "遗迹喷火炮塔-下-遮盖" ) ,
+						filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Turret , "RuinFlameTurret-Down-Cover" , "遗迹喷火炮塔-下-遮盖" ) ,
 						priority = "medium" ,
 						flags = { "mask" } ,
 						width = 72 ,
@@ -3693,7 +3693,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Turret , "RuinFlameTurret" , "遗�
 					}
 				} ,
 				{
-					filename = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "遗迹喷火炮塔-下-影子" ) ,
+					filename = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "RuinFlameTurret-Down-Shadow" , "遗迹喷火炮塔-下-影子" ) ,
 					priority = "medium" ,
 					width = 70 ,
 					height = 52 ,
@@ -3706,7 +3706,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Turret , "RuinFlameTurret" , "遗�
 					axially_symmetrical = false ,
 					hr_version =
 					{
-						filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Turret , "遗迹喷火炮塔-下-影子" ) ,
+						filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Turret , "RuinFlameTurret-Down-Shadow" , "遗迹喷火炮塔-下-影子" ) ,
 						priority = "medium" ,
 						width = 134 ,
 						height = 98 ,
@@ -3726,7 +3726,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Turret , "RuinFlameTurret" , "遗�
 			layers =
 			{
 				{
-					filename = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "遗迹喷火炮塔-左" ) ,
+					filename = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "RuinFlameTurret-Left" , "遗迹喷火炮塔-左" ) ,
 					priority = "medium" ,
 					width = 100 ,
 					height = 74 ,
@@ -3738,7 +3738,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Turret , "RuinFlameTurret" , "遗�
 					axially_symmetrical = false ,
 					hr_version =
 					{
-						filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Turret , "遗迹喷火炮塔-左" ) ,
+						filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Turret , "RuinFlameTurret-Left" , "遗迹喷火炮塔-左" ) ,
 						priority = "medium" ,
 						width = 208 ,
 						height = 144 ,
@@ -3751,7 +3751,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Turret , "RuinFlameTurret" , "遗�
 					}
 				} ,
 				{
-					filename = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "遗迹喷火炮塔-左-遮盖" ) ,
+					filename = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "RuinFlameTurret-Left-Cover" , "遗迹喷火炮塔-左-遮盖" ) ,
 					priority = "medium" ,
 					flags = { "mask" } ,
 					width = 32 ,
@@ -3765,7 +3765,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Turret , "RuinFlameTurret" , "遗�
 					apply_runtime_tint = true ,
 					hr_version =
 					{
-						filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Turret , "遗迹喷火炮塔-左-遮盖" ) ,
+						filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Turret , "RuinFlameTurret-Left-Cover" , "遗迹喷火炮塔-左-遮盖" ) ,
 						priority = "medium" ,
 						flags = { "mask" } ,
 						width = 64 ,
@@ -3780,7 +3780,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Turret , "RuinFlameTurret" , "遗�
 					}
 				} ,
 				{
-					filename = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "遗迹喷火炮塔-左-影子" ) ,
+					filename = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "RuinFlameTurret-Left-Shadow" , "遗迹喷火炮塔-左-影子" ) ,
 					priority = "medium" ,
 					width = 104 ,
 					height = 44 ,
@@ -3793,7 +3793,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Turret , "RuinFlameTurret" , "遗�
 					axially_symmetrical = false ,
 					hr_version =
 					{
-						filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Turret , "遗迹喷火炮塔-左-影子" ) ,
+						filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Turret , "RuinFlameTurret-Left-Shadow" , "遗迹喷火炮塔-左-影子" ) ,
 						priority = "medium" ,
 						width = 206 ,
 						height = 88 ,
@@ -3856,7 +3856,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Turret , "RuinFlameTurret" , "遗�
 -- 遗迹箱子
 -- ======================================================================
 SIGen
-.New( SICommon.Types.Entities.Corpse , "RuinChestRemnants" , "遗迹箱子-残骸" )
+.New( SICommon.Types.Entities.Corpse , "RuinChest_Corpse" , "遗迹箱子-残骸" )
 .AutoIcon()
 .SetSizeScale( 1 , 1 , 0 )
 .Append
@@ -3874,7 +3874,7 @@ SIGen
 			layers =
 			{
 				{
-					filename = SIGen.MakeSelfPicturePath( "遗迹箱子-残骸" ) ,
+					filename = SIGen.MakeSelfPicturePath( "RuinChest-Corpse" , "遗迹箱子-残骸" ) ,
 					priority = "extra-high" ,
 					width = 56 ,
 					height = 38 ,
@@ -3886,7 +3886,7 @@ SIGen
 					shift = SIUtils.by_pixel( 8 , -1 ) ,
 					hr_version =
 					{
-						filename = SIGen.MakeSelfPicturePathHr( "遗迹箱子-残骸" ) ,
+						filename = SIGen.MakeSelfPicturePathHr( "RuinChest-Corpse" , "遗迹箱子-残骸" ) ,
 						priority = "extra-high" ,
 						width = 110 ,
 						height = 74 ,
@@ -3909,7 +3909,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Container , "RuinChest" , "遗迹�
 	icons =
 	{
 		{
-			icon = SIGen.MakePicturePath( SICommon.Types.Entities.Container , "遗迹箱子" .. SICommon.ShowNameSuffix.ICON ) ,
+			icon = SIGen.MakePicturePath( SICommon.Types.Entities.Container , "RuinChest" .. SICommon.CodeNameSuffix.ICON , "遗迹箱子" .. SICommon.ShowNameSuffix.ICON ) ,
 			icon_size = 64 ,
 			icon_mipmaps = 4
 		}
@@ -3923,7 +3923,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Container , "RuinChest" , "遗迹�
 		results = {}
 	} ,
 	max_health = 8 ,
-	corpse = SIConstants_RuinSystem.raw.Entities.RuinChestRemnants ,
+	corpse = SIConstants_RuinSystem.raw.Entities.RuinChest_Corpse ,
 	dying_explosion = "wooden-chest-explosion" ,
 	map_color = { r = 1.0 , g = 1.0 , b = 1.0 } ,
 	friendly_map_color = { r = 0.4 , g = 0.4 , b = 1.0 } ,
@@ -3953,7 +3953,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Container , "RuinChest" , "遗迹�
 		layers =
 		{
 			{
-				filename = SIGen.MakePicturePath( SICommon.Types.Entities.Container , "遗迹箱子" ) ,
+				filename = SIGen.MakePicturePath( SICommon.Types.Entities.Container , "RuinChest" , "遗迹箱子" ) ,
 				priority = "extra-high" ,
 				width = 32 ,
 				height = 36 ,
@@ -3961,7 +3961,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Container , "RuinChest" , "遗迹�
 				shift = SIUtils.by_pixel( 0.5 , -2 ) ,
 				hr_version =
 				{
-					filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Container , "遗迹箱子" ) ,
+					filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Container , "RuinChest" , "遗迹箱子" ) ,
 					priority = "extra-high" ,
 					width = 62 ,
 					height = 72 ,
@@ -3970,7 +3970,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Container , "RuinChest" , "遗迹�
 				}
 			} ,
 			{
-				filename = SIGen.MakePicturePath( SICommon.Types.Entities.Container , "遗迹箱子-影子" ) ,
+				filename = SIGen.MakePicturePath( SICommon.Types.Entities.Container , "RuinChest-Shadow" , "遗迹箱子-影子" ) ,
 				priority = "extra-high" ,
 				width = 52 ,
 				height = 20 ,
@@ -3979,7 +3979,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Container , "RuinChest" , "遗迹�
 				draw_as_shadow = true ,
 				hr_version =
 				{
-					filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Container , "遗迹箱子-影子" ) ,
+					filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Container , "RuinChest-Shadow" , "遗迹箱子-影子" ) ,
 					priority = "extra-high" ,
 					width = 104 ,
 					height = 40 ,
@@ -4021,7 +4021,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Container , "RuinChest" , "遗迹�
 -- 遗迹组装机
 -- ======================================================================
 SIGen
-.New( SICommon.Types.Entities.Corpse , "RuinMachineRemnants" , "遗迹组装机-残骸" )
+.New( SICommon.Types.Entities.Corpse , "RuinMachine_Corpse" , "遗迹组装机-残骸" )
 .AutoIcon()
 .SetSizeScale( 2 , 2 , 0 )
 .Append
@@ -4036,7 +4036,7 @@ SIGen
 	animation = SIGraphics.MakeRemnantsAnimation( 3 ,
 	{
 		{
-			filename = SIGen.MakeSelfPicturePath( "遗迹组装机-残骸" ) ,
+			filename = SIGen.MakeSelfPicturePath( "RuinMachine-Corpse" , "遗迹组装机-残骸" ) ,
 			priority = "extra-high" ,
 			width = 164 ,
 			height = 142 ,
@@ -4049,7 +4049,7 @@ SIGen
 			axially_symmetrical = false ,
 			hr_version =
 			{
-				filename = SIGen.MakeSelfPicturePathHr( "遗迹组装机-残骸" ) ,
+				filename = SIGen.MakeSelfPicturePathHr( "RuinMachine-Corpse" , "遗迹组装机-残骸" ) ,
 				priority = "extra-high" ,
 				width = 328 ,
 				height = 282 ,
@@ -4071,7 +4071,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Machine , "RuinMachine" , "遗迹�
 	icons =
 	{
 		{
-			icon = SIGen.MakePicturePath( SICommon.Types.Entities.Machine , "遗迹组装机" .. SICommon.ShowNameSuffix.ICON ) ,
+			icon = SIGen.MakePicturePath( SICommon.Types.Entities.Machine , "RuinMachine" .. SICommon.CodeNameSuffix.ICON , "遗迹组装机" .. SICommon.ShowNameSuffix.ICON ) ,
 			icon_size = 64 ,
 			icon_mipmaps = 4
 		}
@@ -4085,7 +4085,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Machine , "RuinMachine" , "遗迹�
 		results = {}
 	} ,
 	max_health = 24 ,
-	corpse = SIConstants_RuinSystem.raw.Entities.RuinMachineRemnants ,
+	corpse = SIConstants_RuinSystem.raw.Entities.RuinMachine_Corpse ,
 	dying_explosion = "assembling-machine-3-explosion" ,
 	map_color = { r = 1.0 , g = 1.0 , b = 1.0 } ,
 	friendly_map_color = { r = 0.4 , g = 0.4 , b = 1.0 } ,
@@ -4149,7 +4149,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Machine , "RuinMachine" , "遗迹�
 					layers =
 					{
 						{
-							filename = SIGen.MakePicturePath( SICommon.Types.Entities.Machine , "遗迹组装机-管道上" ) ,
+							filename = SIGen.MakePicturePath( SICommon.Types.Entities.Machine , "RuinMachine-PipeUp" , "遗迹组装机-管道上" ) ,
 							priority = "extra-high" ,
 							width = 35 ,
 							height = 18 ,
@@ -4157,7 +4157,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Machine , "RuinMachine" , "遗迹�
 							shift = SIUtils.by_pixel( 2.5 , 14 ) ,
 							hr_version =
 							{
-								filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Machine , "遗迹组装机-管道上" ) ,
+								filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Machine , "RuinMachine-PipeUp" , "遗迹组装机-管道上" ) ,
 								priority = "extra-high" ,
 								width = 71 ,
 								height = 38 ,
@@ -4172,7 +4172,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Machine , "RuinMachine" , "遗迹�
 					layers =
 					{
 						{
-							filename = SIGen.MakePicturePath( SICommon.Types.Entities.Machine , "遗迹组装机-管道右" ) ,
+							filename = SIGen.MakePicturePath( SICommon.Types.Entities.Machine , "RuinMachine-PipeRight" , "遗迹组装机-管道右" ) ,
 							priority = "extra-high" ,
 							width = 20 ,
 							height = 38 ,
@@ -4180,7 +4180,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Machine , "RuinMachine" , "遗迹�
 							shift = SIUtils.by_pixel( -25 , 1 ) ,
 							hr_version =
 							{
-								filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Machine , "遗迹组装机-管道右" ) ,
+								filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Machine , "RuinMachine-PipeRight" , "遗迹组装机-管道右" ) ,
 								priority = "extra-high" ,
 								width = 42 ,
 								height = 76 ,
@@ -4195,7 +4195,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Machine , "RuinMachine" , "遗迹�
 					layers =
 					{
 						{
-							filename = SIGen.MakePicturePath( SICommon.Types.Entities.Machine , "遗迹组装机-管道下" ) ,
+							filename = SIGen.MakePicturePath( SICommon.Types.Entities.Machine , "RuinMachine-PipeDown" , "遗迹组装机-管道下" ) ,
 							priority = "extra-high" ,
 							width = 44 ,
 							height = 31 ,
@@ -4203,7 +4203,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Machine , "RuinMachine" , "遗迹�
 							shift = SIUtils.by_pixel( 0 , -31.5 ) ,
 							hr_version =
 							{
-								filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Machine , "遗迹组装机-管道下" ) ,
+								filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Machine , "RuinMachine-PipeDown" , "遗迹组装机-管道下" ) ,
 								priority = "extra-high" ,
 								width = 88 ,
 								height = 61 ,
@@ -4218,7 +4218,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Machine , "RuinMachine" , "遗迹�
 					layers =
 					{
 						{
-							filename = SIGen.MakePicturePath( SICommon.Types.Entities.Machine , "遗迹组装机-管道左" ) ,
+							filename = SIGen.MakePicturePath( SICommon.Types.Entities.Machine , "RuinMachine-PipeLeft" , "遗迹组装机-管道左" ) ,
 							priority = "extra-high" ,
 							width = 19 ,
 							height = 37 ,
@@ -4226,7 +4226,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Machine , "RuinMachine" , "遗迹�
 							shift = SIUtils.by_pixel( 25.5 , 1.5 ) ,
 							hr_version =
 							{
-								filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Machine , "遗迹组装机-管道左" ) ,
+								filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Machine , "RuinMachine-PipeLeft" , "遗迹组装机-管道左" ) ,
 								priority = "extra-high" ,
 								width = 39 ,
 								height = 73 ,
@@ -4244,14 +4244,14 @@ CreateRuinBuildings( SICommon.Types.Entities.Machine , "RuinMachine" , "遗迹�
 					layers =
 					{
 						{
-							filename = SIGen.MakePicturePath( SICommon.Types.Entities.Machine , "遗迹组装机-管道上盖" ) ,
+							filename = SIGen.MakePicturePath( SICommon.Types.Entities.Machine , "RuinMachine-PipeUpCover" , "遗迹组装机-管道上盖" ) ,
 							priority = "extra-high" ,
 							width = 64 ,
 							height = 64 ,
 							scale = 0.66 ,
 							hr_version =
 							{
-								filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Machine , "遗迹组装机-管道上盖" ) ,
+								filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Machine , "RuinMachine-PipeUpCover" , "遗迹组装机-管道上盖" ) ,
 								priority = "extra-high" ,
 								width = 128 ,
 								height = 128 ,
@@ -4259,7 +4259,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Machine , "RuinMachine" , "遗迹�
 							}
 						} ,
 						{
-							filename = SIGen.MakePicturePath( SICommon.Types.Entities.Machine , "遗迹组装机-管道上盖-影子" ) ,
+							filename = SIGen.MakePicturePath( SICommon.Types.Entities.Machine , "RuinMachine-PipeUpCover-Shadow" , "遗迹组装机-管道上盖-影子" ) ,
 							priority = "extra-high" ,
 							width = 64 ,
 							height = 64 ,
@@ -4267,7 +4267,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Machine , "RuinMachine" , "遗迹�
 							draw_as_shadow = true ,
 							hr_version =
 							{
-								filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Machine , "遗迹组装机-管道上盖-影子" ) ,
+								filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Machine , "RuinMachine-PipeUpCover-Shadow" , "遗迹组装机-管道上盖-影子" ) ,
 								priority = "extra-high" ,
 								width = 128 ,
 								height = 128 ,
@@ -4282,14 +4282,14 @@ CreateRuinBuildings( SICommon.Types.Entities.Machine , "RuinMachine" , "遗迹�
 					layers =
 					{
 						{
-							filename = SIGen.MakePicturePath( SICommon.Types.Entities.Machine , "遗迹组装机-管道右盖" ) ,
+							filename = SIGen.MakePicturePath( SICommon.Types.Entities.Machine , "RuinMachine-PipeRightCover" , "遗迹组装机-管道右盖" ) ,
 							priority = "extra-high" ,
 							width = 64 ,
 							height = 64 ,
 							scale = 0.66 ,
 							hr_version =
 							{
-								filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Machine , "遗迹组装机-管道右盖" ) ,
+								filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Machine , "RuinMachine-PipeRightCover" , "遗迹组装机-管道右盖" ) ,
 								priority = "extra-high" ,
 								width = 128 ,
 								height = 128 ,
@@ -4297,7 +4297,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Machine , "RuinMachine" , "遗迹�
 							}
 						} ,
 						{
-							filename = SIGen.MakePicturePath( SICommon.Types.Entities.Machine , "遗迹组装机-管道右盖-影子" ) ,
+							filename = SIGen.MakePicturePath( SICommon.Types.Entities.Machine , "RuinMachine-PipeRightCover-Shadow" , "遗迹组装机-管道右盖-影子" ) ,
 							priority = "extra-high" ,
 							width = 64 ,
 							height = 64 ,
@@ -4305,7 +4305,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Machine , "RuinMachine" , "遗迹�
 							draw_as_shadow = true ,
 							hr_version =
 							{
-								filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Machine , "遗迹组装机-管道右盖-影子" ) ,
+								filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Machine , "RuinMachine-PipeRightCover-Shadow" , "遗迹组装机-管道右盖-影子" ) ,
 								priority = "extra-high" ,
 								width = 128 ,
 								height = 128 ,
@@ -4320,14 +4320,14 @@ CreateRuinBuildings( SICommon.Types.Entities.Machine , "RuinMachine" , "遗迹�
 					layers =
 					{
 						{
-							filename = SIGen.MakePicturePath( SICommon.Types.Entities.Machine , "遗迹组装机-管道下盖" ) ,
+							filename = SIGen.MakePicturePath( SICommon.Types.Entities.Machine , "RuinMachine-PipeDownCover" , "遗迹组装机-管道下盖" ) ,
 							priority = "extra-high" ,
 							width = 64 ,
 							height = 64 ,
 							scale = 0.66 ,
 							hr_version =
 							{
-								filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Machine , "遗迹组装机-管道下盖" ) ,
+								filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Machine , "RuinMachine-PipeDownCover" , "遗迹组装机-管道下盖" ) ,
 								priority = "extra-high" ,
 								width = 128 ,
 								height = 128 ,
@@ -4335,7 +4335,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Machine , "RuinMachine" , "遗迹�
 							}
 						} ,
 						{
-							filename = SIGen.MakePicturePath( SICommon.Types.Entities.Machine , "遗迹组装机-管道下盖-影子" ) ,
+							filename = SIGen.MakePicturePath( SICommon.Types.Entities.Machine , "RuinMachine-PipeDownCover-Shadow" , "遗迹组装机-管道下盖-影子" ) ,
 							priority = "extra-high" ,
 							width = 64 ,
 							height = 64 ,
@@ -4343,7 +4343,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Machine , "RuinMachine" , "遗迹�
 							draw_as_shadow = true ,
 							hr_version =
 							{
-								filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Machine , "遗迹组装机-管道下盖-影子" ) ,
+								filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Machine , "RuinMachine-PipeDownCover-Shadow" , "遗迹组装机-管道下盖-影子" ) ,
 								priority = "extra-high" ,
 								width = 128 ,
 								height = 128 ,
@@ -4358,14 +4358,14 @@ CreateRuinBuildings( SICommon.Types.Entities.Machine , "RuinMachine" , "遗迹�
 					layers =
 					{
 						{
-							filename = SIGen.MakePicturePath( SICommon.Types.Entities.Machine , "遗迹组装机-管道左盖" ) ,
+							filename = SIGen.MakePicturePath( SICommon.Types.Entities.Machine , "RuinMachine-PipeLeftCover" , "遗迹组装机-管道左盖" ) ,
 							priority = "extra-high" ,
 							width = 64 ,
 							height = 64 ,
 							scale = 0.66 ,
 							hr_version =
 							{
-								filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Machine , "遗迹组装机-管道左盖" ) ,
+								filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Machine , "RuinMachine-PipeLeftCover" , "遗迹组装机-管道左盖" ) ,
 								priority = "extra-high" ,
 								width = 128 ,
 								height = 128 ,
@@ -4373,7 +4373,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Machine , "RuinMachine" , "遗迹�
 							}
 						} ,
 						{
-							filename = SIGen.MakePicturePath( SICommon.Types.Entities.Machine , "遗迹组装机-管道左盖-影子" ) ,
+							filename = SIGen.MakePicturePath( SICommon.Types.Entities.Machine , "RuinMachine-PipeLeftCover-Shadow" , "遗迹组装机-管道左盖-影子" ) ,
 							priority = "extra-high" ,
 							width = 64 ,
 							height = 64 ,
@@ -4381,7 +4381,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Machine , "RuinMachine" , "遗迹�
 							draw_as_shadow = true ,
 							hr_version =
 							{
-								filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Machine , "遗迹组装机-管道左盖-影子" ) ,
+								filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Machine , "RuinMachine-PipeLeftCover-Shadow" , "遗迹组装机-管道左盖-影子" ) ,
 								priority = "extra-high" ,
 								width = 128 ,
 								height = 128 ,
@@ -4414,7 +4414,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Machine , "RuinMachine" , "遗迹�
 					layers =
 					{
 						{
-							filename = SIGen.MakePicturePath( SICommon.Types.Entities.Machine , "遗迹组装机-管道上" ) ,
+							filename = SIGen.MakePicturePath( SICommon.Types.Entities.Machine , "RuinMachine-PipeUp" , "遗迹组装机-管道上" ) ,
 							priority = "extra-high" ,
 							width = 35 ,
 							height = 18 ,
@@ -4422,7 +4422,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Machine , "RuinMachine" , "遗迹�
 							shift = SIUtils.by_pixel( 2.5 , 14 ) ,
 							hr_version =
 							{
-								filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Machine , "遗迹组装机-管道上" ) ,
+								filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Machine , "RuinMachine-PipeUp" , "遗迹组装机-管道上" ) ,
 								priority = "extra-high" ,
 								width = 71 ,
 								height = 38 ,
@@ -4437,7 +4437,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Machine , "RuinMachine" , "遗迹�
 					layers =
 					{
 						{
-							filename = SIGen.MakePicturePath( SICommon.Types.Entities.Machine , "遗迹组装机-管道右" ) ,
+							filename = SIGen.MakePicturePath( SICommon.Types.Entities.Machine , "RuinMachine-PipeRight" , "遗迹组装机-管道右" ) ,
 							priority = "extra-high" ,
 							width = 20 ,
 							height = 38 ,
@@ -4445,7 +4445,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Machine , "RuinMachine" , "遗迹�
 							shift = SIUtils.by_pixel( -25 , 1 ) ,
 							hr_version =
 							{
-								filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Machine , "遗迹组装机-管道右" ) ,
+								filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Machine , "RuinMachine-PipeRight" , "遗迹组装机-管道右" ) ,
 								priority = "extra-high" ,
 								width = 42 ,
 								height = 76 ,
@@ -4460,7 +4460,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Machine , "RuinMachine" , "遗迹�
 					layers =
 					{
 						{
-							filename = SIGen.MakePicturePath( SICommon.Types.Entities.Machine , "遗迹组装机-管道下" ) ,
+							filename = SIGen.MakePicturePath( SICommon.Types.Entities.Machine , "RuinMachine-PipeDown" , "遗迹组装机-管道下" ) ,
 							priority = "extra-high" ,
 							width = 44 ,
 							height = 31 ,
@@ -4468,7 +4468,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Machine , "RuinMachine" , "遗迹�
 							shift = SIUtils.by_pixel( 0 , -31.5 ) ,
 							hr_version =
 							{
-								filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Machine , "遗迹组装机-管道下" ) ,
+								filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Machine , "RuinMachine-PipeDown" , "遗迹组装机-管道下" ) ,
 								priority = "extra-high" ,
 								width = 88 ,
 								height = 61 ,
@@ -4483,7 +4483,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Machine , "RuinMachine" , "遗迹�
 					layers =
 					{
 						{
-							filename = SIGen.MakePicturePath( SICommon.Types.Entities.Machine , "遗迹组装机-管道左" ) ,
+							filename = SIGen.MakePicturePath( SICommon.Types.Entities.Machine , "RuinMachine-PipeLeft" , "遗迹组装机-管道左" ) ,
 							priority = "extra-high" ,
 							width = 19 ,
 							height = 37 ,
@@ -4491,7 +4491,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Machine , "RuinMachine" , "遗迹�
 							shift = SIUtils.by_pixel( 25.5 , 1.5 ) ,
 							hr_version =
 							{
-								filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Machine , "遗迹组装机-管道左" ) ,
+								filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Machine , "RuinMachine-PipeLeft" , "遗迹组装机-管道左" ) ,
 								priority = "extra-high" ,
 								width = 39 ,
 								height = 73 ,
@@ -4509,14 +4509,14 @@ CreateRuinBuildings( SICommon.Types.Entities.Machine , "RuinMachine" , "遗迹�
 					layers =
 					{
 						{
-							filename = SIGen.MakePicturePath( SICommon.Types.Entities.Machine , "遗迹组装机-管道上盖" ) ,
+							filename = SIGen.MakePicturePath( SICommon.Types.Entities.Machine , "RuinMachine-PipeUpCover" , "遗迹组装机-管道上盖" ) ,
 							priority = "extra-high" ,
 							width = 64 ,
 							height = 64 ,
 							scale = 0.66 ,
 							hr_version =
 							{
-								filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Machine , "遗迹组装机-管道上盖" ) ,
+								filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Machine , "RuinMachine-PipeUpCover" , "遗迹组装机-管道上盖" ) ,
 								priority = "extra-high" ,
 								width = 128 ,
 								height = 128 ,
@@ -4524,7 +4524,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Machine , "RuinMachine" , "遗迹�
 							}
 						} ,
 						{
-							filename = SIGen.MakePicturePath( SICommon.Types.Entities.Machine , "遗迹组装机-管道上盖-影子" ) ,
+							filename = SIGen.MakePicturePath( SICommon.Types.Entities.Machine , "RuinMachine-PipeUpCover-Shadow" , "遗迹组装机-管道上盖-影子" ) ,
 							priority = "extra-high" ,
 							width = 64 ,
 							height = 64 ,
@@ -4532,7 +4532,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Machine , "RuinMachine" , "遗迹�
 							draw_as_shadow = true ,
 							hr_version =
 							{
-								filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Machine , "遗迹组装机-管道上盖-影子" ) ,
+								filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Machine , "RuinMachine-PipeUpCover-Shadow" , "遗迹组装机-管道上盖-影子" ) ,
 								priority = "extra-high" ,
 								width = 128 ,
 								height = 128 ,
@@ -4547,14 +4547,14 @@ CreateRuinBuildings( SICommon.Types.Entities.Machine , "RuinMachine" , "遗迹�
 					layers =
 					{
 						{
-							filename = SIGen.MakePicturePath( SICommon.Types.Entities.Machine , "遗迹组装机-管道右盖" ) ,
+							filename = SIGen.MakePicturePath( SICommon.Types.Entities.Machine , "RuinMachine-PipeRightCover" , "遗迹组装机-管道右盖" ) ,
 							priority = "extra-high" ,
 							width = 64 ,
 							height = 64 ,
 							scale = 0.66 ,
 							hr_version =
 							{
-								filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Machine , "遗迹组装机-管道右盖" ) ,
+								filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Machine , "RuinMachine-PipeRightCover" , "遗迹组装机-管道右盖" ) ,
 								priority = "extra-high" ,
 								width = 128 ,
 								height = 128 ,
@@ -4562,7 +4562,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Machine , "RuinMachine" , "遗迹�
 							}
 						} ,
 						{
-							filename = SIGen.MakePicturePath( SICommon.Types.Entities.Machine , "遗迹组装机-管道右盖-影子" ) ,
+							filename = SIGen.MakePicturePath( SICommon.Types.Entities.Machine , "RuinMachine-PipeRightCover-Shadow" , "遗迹组装机-管道右盖-影子" ) ,
 							priority = "extra-high" ,
 							width = 64 ,
 							height = 64 ,
@@ -4570,7 +4570,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Machine , "RuinMachine" , "遗迹�
 							draw_as_shadow = true ,
 							hr_version =
 							{
-								filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Machine , "遗迹组装机-管道右盖-影子" ) ,
+								filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Machine , "RuinMachine-PipeRightCover-Shadow" , "遗迹组装机-管道右盖-影子" ) ,
 								priority = "extra-high" ,
 								width = 128 ,
 								height = 128 ,
@@ -4585,14 +4585,14 @@ CreateRuinBuildings( SICommon.Types.Entities.Machine , "RuinMachine" , "遗迹�
 					layers =
 					{
 						{
-							filename = SIGen.MakePicturePath( SICommon.Types.Entities.Machine , "遗迹组装机-管道下盖" ) ,
+							filename = SIGen.MakePicturePath( SICommon.Types.Entities.Machine , "RuinMachine-PipeDownCover" , "遗迹组装机-管道下盖" ) ,
 							priority = "extra-high" ,
 							width = 64 ,
 							height = 64 ,
 							scale = 0.66 ,
 							hr_version =
 							{
-								filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Machine , "遗迹组装机-管道下盖" ) ,
+								filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Machine , "RuinMachine-PipeDownCover" , "遗迹组装机-管道下盖" ) ,
 								priority = "extra-high" ,
 								width = 128 ,
 								height = 128 ,
@@ -4600,7 +4600,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Machine , "RuinMachine" , "遗迹�
 							}
 						} ,
 						{
-							filename = SIGen.MakePicturePath( SICommon.Types.Entities.Machine , "遗迹组装机-管道下盖-影子" ) ,
+							filename = SIGen.MakePicturePath( SICommon.Types.Entities.Machine , "RuinMachine-PipeDownCover-Shadow" , "遗迹组装机-管道下盖-影子" ) ,
 							priority = "extra-high" ,
 							width = 64 ,
 							height = 64 ,
@@ -4608,7 +4608,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Machine , "RuinMachine" , "遗迹�
 							draw_as_shadow = true ,
 							hr_version =
 							{
-								filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Machine , "遗迹组装机-管道下盖-影子" ) ,
+								filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Machine , "RuinMachine-PipeDownCover-Shadow" , "遗迹组装机-管道下盖-影子" ) ,
 								priority = "extra-high" ,
 								width = 128 ,
 								height = 128 ,
@@ -4623,14 +4623,14 @@ CreateRuinBuildings( SICommon.Types.Entities.Machine , "RuinMachine" , "遗迹�
 					layers =
 					{
 						{
-							filename = SIGen.MakePicturePath( SICommon.Types.Entities.Machine , "遗迹组装机-管道左盖" ) ,
+							filename = SIGen.MakePicturePath( SICommon.Types.Entities.Machine , "RuinMachine-PipeLeftCover" , "遗迹组装机-管道左盖" ) ,
 							priority = "extra-high" ,
 							width = 64 ,
 							height = 64 ,
 							scale = 0.66 ,
 							hr_version =
 							{
-								filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Machine , "遗迹组装机-管道左盖" ) ,
+								filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Machine , "RuinMachine-PipeLeftCover" , "遗迹组装机-管道左盖" ) ,
 								priority = "extra-high" ,
 								width = 128 ,
 								height = 128 ,
@@ -4638,7 +4638,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Machine , "RuinMachine" , "遗迹�
 							}
 						} ,
 						{
-							filename = SIGen.MakePicturePath( SICommon.Types.Entities.Machine , "遗迹组装机-管道左盖-影子" ) ,
+							filename = SIGen.MakePicturePath( SICommon.Types.Entities.Machine , "RuinMachine-PipeLeftCover-Shadow" , "遗迹组装机-管道左盖-影子" ) ,
 							priority = "extra-high" ,
 							width = 64 ,
 							height = 64 ,
@@ -4646,7 +4646,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Machine , "RuinMachine" , "遗迹�
 							draw_as_shadow = true ,
 							hr_version =
 							{
-								filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Machine , "遗迹组装机-管道左盖-影子" ) ,
+								filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Machine , "RuinMachine-PipeLeftCover-Shadow" , "遗迹组装机-管道左盖-影子" ) ,
 								priority = "extra-high" ,
 								width = 128 ,
 								height = 128 ,
@@ -4677,7 +4677,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Machine , "RuinMachine" , "遗迹�
 		layers =
 		{
 			{
-				filename = SIGen.MakePicturePath( SICommon.Types.Entities.Machine , "遗迹组装机" ) ,
+				filename = SIGen.MakePicturePath( SICommon.Types.Entities.Machine , "RuinMachine" , "遗迹组装机" ) ,
 				priority = "high" ,
 				width = 108 ,
 				height = 119 ,
@@ -4687,7 +4687,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Machine , "RuinMachine" , "遗迹�
 				shift = SIUtils.by_pixel( 0 , -0.5 ) ,
 				hr_version =
 				{
-					filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Machine , "遗迹组装机" ) ,
+					filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Machine , "RuinMachine" , "遗迹组装机" ) ,
 					priority = "high" ,
 					width = 214 ,
 					height = 237 ,
@@ -4698,7 +4698,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Machine , "RuinMachine" , "遗迹�
 				}
 			} ,
 			{
-				filename = SIGen.MakePicturePath( SICommon.Types.Entities.Machine , "遗迹组装机-影子" ) ,
+				filename = SIGen.MakePicturePath( SICommon.Types.Entities.Machine , "RuinMachine-Shadow" , "遗迹组装机-影子" ) ,
 				priority = "high" ,
 				width = 130 ,
 				height = 82 ,
@@ -4709,7 +4709,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Machine , "RuinMachine" , "遗迹�
 				draw_as_shadow = true ,
 				hr_version =
 				{
-					filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Machine , "遗迹组装机-影子" ) ,
+					filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Machine , "RuinMachine-Shadow" , "遗迹组装机-影子" ) ,
 					priority = "high" ,
 					width = 260 ,
 					height = 162 ,
@@ -4759,7 +4759,7 @@ CreateRuinBuildings( SICommon.Types.Entities.Machine , "RuinMachine" , "遗迹�
 -- 遗迹爪子
 -- ======================================================================
 SIGen
-.New( SICommon.Types.Entities.Corpse , "RuinInserterRemnants" , "遗迹爪子-残骸" )
+.New( SICommon.Types.Entities.Corpse , "RuinInserter_Corpse" , "遗迹爪子-残骸" )
 .AutoIcon()
 .SetSizeScale( 1 , 1 , 0 )
 .Append
@@ -4774,7 +4774,7 @@ SIGen
 	animation = SIGraphics.MakeRemnantsAnimation( 4 ,
 	{
 		{
-			filename = SIGen.MakeSelfPicturePath( "遗迹爪子-残骸" ) ,
+			filename = SIGen.MakeSelfPicturePath( "RuinInserter-Corpse" , "遗迹爪子-残骸" ) ,
 			priority = "extra-high" ,
 			width = 68 ,
 			height = 48 ,
@@ -4787,7 +4787,7 @@ SIGen
 			axially_symmetrical = false ,
 			hr_version =
 			{
-				filename = SIGen.MakeSelfPicturePathHr( "遗迹爪子-残骸" ) ,
+				filename = SIGen.MakeSelfPicturePathHr( "RuinInserter-Corpse" , "遗迹爪子-残骸" ) ,
 				priority = "extra-high" ,
 				width = 134 ,
 				height = 94 ,
@@ -4814,7 +4814,7 @@ SIGen
 		results = {}
 	} ,
 	max_health = 270 ,
-	corpse = SIConstants_RuinSystem.raw.Entities.RuinInserterRemnants ,
+	corpse = SIConstants_RuinSystem.raw.Entities.RuinInserter_Corpse ,
 	dying_explosion = "inserter-explosion" ,
 	map_color = { r = 1.0 , g = 1.0 , b = 1.0 } ,
 	friendly_map_color = { r = 0.4 , g = 0.4 , b = 1.0 } ,
@@ -4868,7 +4868,7 @@ SIGen
 	{
 		sheet =
 		{
-			filename = SIGen.MakeSelfPicturePath( "遗迹爪子-底座" ) ,
+			filename = SIGen.MakeSelfPicturePath( "RuinInserter-Platform" , "遗迹爪子-底座" ) ,
 			priority = "extra-high" ,
 			width = 46 ,
 			height = 46 ,
@@ -4876,7 +4876,7 @@ SIGen
 			shift = { 0.09375 , 0 } ,
 			hr_version =
 			{
-				filename = SIGen.MakeSelfPicturePathHr( "遗迹爪子-底座" ) ,
+				filename = SIGen.MakeSelfPicturePathHr( "RuinInserter-Platform" , "遗迹爪子-底座" ) ,
 				priority = "extra-high" ,
 				width = 105 ,
 				height = 79 ,
@@ -4887,14 +4887,14 @@ SIGen
 	} ,
 	hand_base_picture =
 	{
-		filename = SIGen.MakeSelfPicturePath( "遗迹爪子-基础" ) ,
+		filename = SIGen.MakeSelfPicturePath( "RuinInserter-Base" , "遗迹爪子-基础" ) ,
 		priority = "extra-high" ,
 		width = 8 ,
 		height = 33 ,
 		scale = 1.0 ,
 		hr_version =
 		{
-			filename = SIGen.MakeSelfPicturePathHr( "遗迹爪子-基础" ) ,
+			filename = SIGen.MakeSelfPicturePathHr( "RuinInserter-Base" , "遗迹爪子-基础" ) ,
 			priority = "extra-high" ,
 			width = 32 ,
 			height = 136 ,
@@ -4903,14 +4903,14 @@ SIGen
 	} ,
 	hand_base_shadow =
 	{
-		filename = SIGen.MakeSelfPicturePath( "遗迹爪子-基础-影子" ) ,
+		filename = SIGen.MakeSelfPicturePath( "RuinInserter-Base-Shadow" , "遗迹爪子-基础-影子" ) ,
 		priority = "extra-high" ,
 		width = 8 ,
 		height = 33 ,
 		scale = 1.0 ,
 		hr_version =
 		{
-			filename = SIGen.MakeSelfPicturePathHr( "遗迹爪子-基础-影子" ) ,
+			filename = SIGen.MakeSelfPicturePathHr( "RuinInserter-Base-Shadow" , "遗迹爪子-基础-影子" ) ,
 			priority = "extra-high" ,
 			width = 32 ,
 			height = 132 ,
@@ -4919,14 +4919,14 @@ SIGen
 	} ,
 	hand_open_picture =
 	{
-		filename = SIGen.MakeSelfPicturePath( "遗迹爪子-打开" ) ,
+		filename = SIGen.MakeSelfPicturePath( "RuinInserter-Open" , "遗迹爪子-打开" ) ,
 		priority = "extra-high" ,
 		width = 18 ,
 		height = 41 ,
 		scale = 1.0 ,
 		hr_version =
 		{
-			filename = SIGen.MakeSelfPicturePathHr( "遗迹爪子-打开" ) ,
+			filename = SIGen.MakeSelfPicturePathHr( "RuinInserter-Open" , "遗迹爪子-打开" ) ,
 			priority = "extra-high" ,
 			width = 72 ,
 			height = 164 ,
@@ -4935,14 +4935,14 @@ SIGen
 	} ,
 	hand_open_shadow =
 	{
-		filename = SIGen.MakeSelfPicturePath( "遗迹爪子-打开-影子" ) ,
+		filename = SIGen.MakeSelfPicturePath( "RuinInserter-Open-Shadow" , "遗迹爪子-打开-影子" ) ,
 		priority = "extra-high" ,
 		width = 18 ,
 		height = 41 ,
 		scale = 1.0 ,
 		hr_version =
 		{
-			filename = SIGen.MakeSelfPicturePathHr( "遗迹爪子-打开-影子" ) ,
+			filename = SIGen.MakeSelfPicturePathHr( "RuinInserter-Open-Shadow" , "遗迹爪子-打开-影子" ) ,
 			priority = "extra-high" ,
 			width = 72 ,
 			height = 164 ,
@@ -4951,14 +4951,14 @@ SIGen
 	} ,
 	hand_closed_picture =
 	{
-		filename = SIGen.MakeSelfPicturePath( "遗迹爪子-关闭" ) ,
+		filename = SIGen.MakeSelfPicturePath( "RuinInserter-Close" , "遗迹爪子-关闭" ) ,
 		priority = "extra-high" ,
 		width = 18 ,
 		height = 41 ,
 		scale = 1.0 ,
 		hr_version =
 		{
-			filename = SIGen.MakeSelfPicturePathHr( "遗迹爪子-关闭" ) ,
+			filename = SIGen.MakeSelfPicturePathHr( "RuinInserter-Close" , "遗迹爪子-关闭" ) ,
 			priority = "extra-high" ,
 			width = 72 ,
 			height = 164 ,
@@ -4967,14 +4967,14 @@ SIGen
 	} ,
 	hand_closed_shadow =
 	{
-		filename = SIGen.MakeSelfPicturePath( "遗迹爪子-关闭-影子" ) ,
+		filename = SIGen.MakeSelfPicturePath( "RuinInserter-Close-Shadow" , "遗迹爪子-关闭-影子" ) ,
 		priority = "extra-high" ,
 		width = 18 ,
 		height = 41 ,
 		scale = 1.0 ,
 		hr_version =
 		{
-			filename = SIGen.MakeSelfPicturePathHr( "遗迹爪子-关闭-影子" ) ,
+			filename = SIGen.MakeSelfPicturePathHr( "RuinInserter-Close-Shadow" , "遗迹爪子-关闭-影子" ) ,
 			priority = "extra-high" ,
 			width = 72 ,
 			height = 164 ,
@@ -5027,11 +5027,21 @@ SIGen
 local DefaultTransitionGroupID = 0
 local WaterTransitionGroupID = 1
 local OutOfMapTransitionGroupID = 2
-local function MakeTileTransitionPicture( picture , srcX , srcY , cnt , lineLength , isTall )
+
+-- ======================================================================<br>
+---@param pictureID string
+---@param pictureName string
+---@param srcX integer
+---@param srcY integer
+---@param count integer
+---@param lineLength integer
+---@param isTall boolean|nil
+---@return table
+local function MakeTileTransitionPicture( pictureID , pictureName , srcX , srcY , count , lineLength , isTall )
 	return
 	{
-		picture = SIGen.MakeSelfPicturePath( picture ) ,
-		count = cnt ,
+		picture = SIGen.MakeSelfPicturePath( pictureID , pictureName ) ,
+		count = count ,
 		line_length = lineLength ,
 		x = srcX ,
 		y = srcY ,
@@ -5039,8 +5049,8 @@ local function MakeTileTransitionPicture( picture , srcX , srcY , cnt , lineLeng
 		scale = 1.0 ,
 		hr_version =
 		{
-			picture = SIGen.MakeSelfPicturePathHr( picture ) ,
-			count = cnt ,
+			picture = SIGen.MakeSelfPicturePathHr( pictureID , pictureName ) ,
+			count = count ,
 			line_length = lineLength ,
 			x = srcX * 2 ,
 			y = ( srcY or 0 ) * 2 ,
@@ -5049,6 +5059,10 @@ local function MakeTileTransitionPicture( picture , srcX , srcY , cnt , lineLeng
 		}
 	}
 end
+
+-- ======================================================================<br>
+---@param options table
+---@return table
 local function MakeTileTransition( options )
 	local data = options.base or {}
 	data.to_tiles = options.toTiles
@@ -5073,10 +5087,10 @@ local function MakeTileTransition( options )
 			if options[sizeCode .. "_Tall"] == false then
 				isTall = false
 			end
-			data[pictureCode] = MakeTileTransitionPicture( options.picture , 0 , pictureY , count , lineLength , isTall )
-			data[pictureCode .. "_mask"] = MakeTileTransitionPicture( options.picture , 1088 , pictureY , count , lineLength , nil )
+			data[pictureCode] = MakeTileTransitionPicture( options.pictureID , options.pictureName , 0 , pictureY , count , lineLength , isTall )
+			data[pictureCode .. "_mask"] = MakeTileTransitionPicture( options.pictureID , options.pictureName , 1088 , pictureY , count , lineLength , nil )
 			if options.background then
-				data[pictureCode .. "_background"] = MakeTileTransitionPicture( options.picture , 544 , pictureY , count , lineLength , isTall )
+				data[pictureCode .. "_background"] = MakeTileTransitionPicture( options.pictureID , options.pictureName , 544 , pictureY , count , lineLength , isTall )
 			end
 			if options.effectMap then
 				local effectDefaultCount = options.effectMap.count or 16
@@ -5087,7 +5101,7 @@ local function MakeTileTransition( options )
 					if options.effectMap[sizeCode .. "_Tall"] == false then
 						effectIsTall = false
 					end
-					data[pictureCode .. "_effect_map"] = MakeTileTransitionPicture( options.effectMap.filename , 0 , pictureY , effectCount , effectLineLength , effectIsTall )
+					data[pictureCode .. "_effect_map"] = MakeTileTransitionPicture( options.effectMap.fileID , options.effectMap.fileName , 0 , pictureY , effectCount , effectLineLength , effectIsTall )
 				end
 			end
 		end
@@ -5199,20 +5213,20 @@ SIGen
 		main =
 		{
 			{
-				picture = SIGen.MakeSelfPicturePath( "遗迹地板-形状" ) ,
+				picture = SIGen.MakeSelfPicturePath( "RuinFloor-Shape" , "遗迹地板-形状" ) ,
 				count = 1 ,
 				size = 1 ,
 				scale = 1.0
 			} ,
 			{
-				picture = SIGen.MakeSelfPicturePath( "遗迹地板-形状" ) ,
+				picture = SIGen.MakeSelfPicturePath( "RuinFloor-Shape" , "遗迹地板-形状" ) ,
 				count = 1 ,
 				size = 2 ,
 				probability = 0.39 ,
 				scale = 1.0
 			} ,
 			{
-				picture = SIGen.MakeSelfPicturePath( "遗迹地板-形状" ) ,
+				picture = SIGen.MakeSelfPicturePath( "RuinFloor-Shape" , "遗迹地板-形状" ) ,
 				count = 1 ,
 				size = 4 ,
 				probability = 1 ,
@@ -5221,132 +5235,132 @@ SIGen
 		} ,
 		inner_corner =
 		{
-			picture = SIGen.MakeSelfPicturePath( "遗迹地板-内角" ) ,
+			picture = SIGen.MakeSelfPicturePath( "RuinFloor-InnerCorner" , "遗迹地板-内角" ) ,
 			count = 16 ,
 			scale = 1.0 ,
 			hr_version =
 			{
-				picture = SIGen.MakeSelfPicturePathHr( "遗迹地板-内角" ) ,
+				picture = SIGen.MakeSelfPicturePathHr( "RuinFloor-InnerCorner" , "遗迹地板-内角" ) ,
 				count = 16 ,
 				scale = 0.5
 			}
 		} ,
 		inner_corner_mask =
 		{
-			picture = SIGen.MakeSelfPicturePath( "遗迹地板-内角-遮盖" ) ,
+			picture = SIGen.MakeSelfPicturePath( "RuinFloor-InnerCorner-Cover" , "遗迹地板-内角-遮盖" ) ,
 			count = 16 ,
 			scale = 1.0 ,
 			hr_version =
 			{
-				picture = SIGen.MakeSelfPicturePathHr( "遗迹地板-内角-遮盖" ) ,
+				picture = SIGen.MakeSelfPicturePathHr( "RuinFloor-InnerCorner-Cover" , "遗迹地板-内角-遮盖" ) ,
 				count = 16 ,
 				scale = 0.5
 			}
 		} ,
 		outer_corner =
 		{
-			picture = SIGen.MakeSelfPicturePath( "遗迹地板-外角" ) ,
+			picture = SIGen.MakeSelfPicturePath( "RuinFloor-OuterCorner" , "遗迹地板-外角" ) ,
 			count = 8 ,
 			scale = 1.0 ,
 			hr_version =
 			{
-				picture = SIGen.MakeSelfPicturePathHr( "遗迹地板-外角" ) ,
+				picture = SIGen.MakeSelfPicturePathHr( "RuinFloor-OuterCorner" , "遗迹地板-外角" ) ,
 				count = 8 ,
 				scale = 0.5
 			}
 		} ,
 		outer_corner_mask =
 		{
-			picture = SIGen.MakeSelfPicturePath( "遗迹地板-外角-遮盖" ) ,
+			picture = SIGen.MakeSelfPicturePath( "RuinFloor-OuterCorner-Cover" , "遗迹地板-外角-遮盖" ) ,
 			count = 8 ,
 			scale = 1.0 ,
 			hr_version =
 			{
-				picture = SIGen.MakeSelfPicturePathHr( "遗迹地板-外角-遮盖" ) ,
+				picture = SIGen.MakeSelfPicturePathHr( "RuinFloor-OuterCorner-Cover" , "遗迹地板-外角-遮盖" ) ,
 				count = 8 ,
 				scale = 0.5
 			}
 		} ,
 		side =
 		{
-			picture = SIGen.MakeSelfPicturePath( "遗迹地板-侧边" ) ,
+			picture = SIGen.MakeSelfPicturePath( "RuinFloor-Side" , "遗迹地板-侧边" ) ,
 			count = 16 ,
 			scale = 1.0 ,
 			hr_version =
 			{
-				picture = SIGen.MakeSelfPicturePathHr( "遗迹地板-侧边" ) ,
+				picture = SIGen.MakeSelfPicturePathHr( "RuinFloor-Side" , "遗迹地板-侧边" ) ,
 				count = 16 ,
 				scale = 0.5
 			}
 		} ,
 		side_mask =
 		{
-			picture = SIGen.MakeSelfPicturePath( "遗迹地板-侧边-遮盖" ) ,
+			picture = SIGen.MakeSelfPicturePath( "RuinFloor-Side-Cover" , "遗迹地板-侧边-遮盖" ) ,
 			count = 16 ,
 			scale = 1.0 ,
 			hr_version =
 			{
-				picture = SIGen.MakeSelfPicturePathHr( "遗迹地板-侧边-遮盖" ) ,
+				picture = SIGen.MakeSelfPicturePathHr( "RuinFloor-Side-Cover" , "遗迹地板-侧边-遮盖" ) ,
 				count = 16 ,
 				scale = 0.5
 			}
 		} ,
 		u_transition =
 		{
-			picture = SIGen.MakeSelfPicturePath( "遗迹地板-凹形" ) ,
+			picture = SIGen.MakeSelfPicturePath( "RuinFloor-UTransition" , "遗迹地板-凹形" ) ,
 			count = 8 ,
 			scale = 1.0 ,
 			hr_version =
 			{
-				picture = SIGen.MakeSelfPicturePathHr( "遗迹地板-凹形" ) ,
+				picture = SIGen.MakeSelfPicturePathHr( "RuinFloor-UTransition" , "遗迹地板-凹形" ) ,
 				count = 8 ,
 				scale = 0.5
 			}
 		} ,
 		u_transition_mask =
 		{
-			picture = SIGen.MakeSelfPicturePath( "遗迹地板-凹形-遮盖" ) ,
+			picture = SIGen.MakeSelfPicturePath( "RuinFloor-UTransition-Cover" , "遗迹地板-凹形-遮盖" ) ,
 			count = 8 ,
 			scale = 1.0 ,
 			hr_version =
 			{
-				picture = SIGen.MakeSelfPicturePathHr( "遗迹地板-凹形-遮盖" ) ,
+				picture = SIGen.MakeSelfPicturePathHr( "RuinFloor-UTransition-Cover" , "遗迹地板-凹形-遮盖" ) ,
 				count = 8 ,
 				scale = 0.5
 			}
 		} ,
 		o_transition =
 		{
-			picture = SIGen.MakeSelfPicturePath( "遗迹地板-圆形" ) ,
+			picture = SIGen.MakeSelfPicturePath( "RuinFloor-OTransition" , "遗迹地板-圆形" ) ,
 			count = 4 ,
 			scale = 1.0 ,
 			hr_version =
 			{
-				picture = SIGen.MakeSelfPicturePathHr( "遗迹地板-圆形" ) ,
+				picture = SIGen.MakeSelfPicturePathHr( "RuinFloor-OTransition" , "遗迹地板-圆形" ) ,
 				count = 4 ,
 				scale = 0.5
 			}
 		} ,
 		o_transition_mask =
 		{
-			picture = SIGen.MakeSelfPicturePath( "遗迹地板-圆形-遮盖" ) ,
+			picture = SIGen.MakeSelfPicturePath( "RuinFloor-OTransition-Cover" , "遗迹地板-圆形-遮盖" ) ,
 			count = 4 ,
 			scale = 1.0 ,
 			hr_version =
 			{
-				picture = SIGen.MakeSelfPicturePathHr( "遗迹地板-圆形-遮盖" ) ,
+				picture = SIGen.MakeSelfPicturePathHr( "RuinFloor-OTransition-Cover" , "遗迹地板-圆形-遮盖" ) ,
 				count = 4 ,
 				scale = 0.5
 			}
 		} ,
 		material_background =
 		{
-			picture = SIGen.MakeSelfPicturePath( "遗迹地板" ) ,
+			picture = SIGen.MakeSelfPicturePath( "RuinFloor-Background" , "遗迹地板" ) ,
 			count = 8 ,
 			scale = 1.0 ,
 			hr_version =
 			{
-				picture = SIGen.MakeSelfPicturePathHr( "遗迹地板" ) ,
+				picture = SIGen.MakeSelfPicturePathHr( "RuinFloor-Background" , "遗迹地板" ) ,
 				count = 8 ,
 				scale = 0.5
 			}
@@ -5357,10 +5371,12 @@ SIGen
 		---@diagnostic disable-next-line: newfield-call
 		MakeTileTransition
 		{
-			picture = "遗迹地板-过渡" ,
+			pictureID = "RuinFloor-Normal-Transition" ,
+			pictureName = "遗迹地板-普通-过渡" ,
 			effectMap =
 			{
-				filename = "遗迹地板-水面-岩石-遮盖" ,
+				fileID = "RuinFloor-Water-Stone-Cover" ,
+				fileName = "遗迹地板-水面-岩石-遮盖" ,
 				count = 1 ,
 				oTransition_Tall = false
 			} ,
@@ -5378,7 +5394,8 @@ SIGen
 		---@diagnostic disable-next-line: newfield-call
 		MakeTileTransition
 		{
-			picture = "遗迹地板-地图外-过渡" ,
+			pictureID = "RuinFloor-Outside-Transition" ,
+			pictureName = "遗迹地板-地图外-过渡" ,
 			toTiles = { "out-of-map" } ,
 			group1 = OutOfMapTransitionGroupID ,
 			group2 = nil ,
@@ -5402,10 +5419,12 @@ SIGen
 		---@diagnostic disable-next-line: newfield-call
 		MakeTileTransition
 		{
-			picture = "遗迹地板-过渡的过渡" ,
+			pictureID = "RuinFloor-Transition-Transition" ,
+			pictureName = "遗迹地板-过渡-过渡" ,
 			effectMap =
 			{
-				filename = "遗迹地板-水面-岩石-陆地-遮盖" ,
+				fileID = "RuinFloor-Water-Stone-Land-Cover" ,
+				fileName = "遗迹地板-水面-岩石-陆地-遮盖" ,
 				count = 3 ,
 				uTransition_Count = 1 ,
 				oTransition_Count = 0
@@ -5424,7 +5443,8 @@ SIGen
 		---@diagnostic disable-next-line: newfield-call
 		MakeTileTransition
 		{
-			picture = "遗迹地板-地图外-过渡2" ,
+			pictureID = "RuinFloor-Outside-Transition2" ,
+			pictureName = "遗迹地板-地图外-过渡2" ,
 			to_tiles = nil ,
 			group1 = DefaultTransitionGroupID ,
 			group2 = OutOfMapTransitionGroupID ,
@@ -5445,10 +5465,12 @@ SIGen
 		---@diagnostic disable-next-line: newfield-call
 		MakeTileTransition
 		{
-			picture = "遗迹地板-地图外岸边-过渡" ,
+			pictureID = "RuinFloor-OutsideLandbase-Transition2" ,
+			pictureName = "遗迹地板-地图外岸边-过渡" ,
 			effectMap =
 			{
-				filename = "遗迹地板-水面-岩石-地图外-遮盖" ,
+				fileID = "RuinFloor-Water-Stone-Outside-Cover" ,
+				fileName = "遗迹地板-水面-岩石-地图外-遮盖" ,
 				count = 3 ,
 				uTransition_Count = 0 ,
 				oTransition_Count = 0

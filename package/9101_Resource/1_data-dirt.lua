@@ -52,7 +52,7 @@ for dirtID , dirtAlias in pairs( dirtList ) do
 		Icons =
 		{
 			{
-				icon = SIGen.MakePicturePath( SICommon.Types.Items.Item , dirtAlias .. SICommon.ShowNameSuffix.ICON ) ,
+				icon = SIGen.MakePicturePath( SICommon.Types.Items.Item , dirtID .. SICommon.CodeNameSuffix.ICON , dirtAlias .. SICommon.ShowNameSuffix.ICON ) ,
 				icon_size = iconSettings.size ,
 				icon_mipmaps = iconSettings.mipmaps
 			}
@@ -94,7 +94,7 @@ for dirtID , dirtAlias in pairs( dirtList ) do
 				result.Alias = result.Alias .. "-" .. subDirtAlias .. "-" .. size
 				table.insert( result.Icons ,
 				{
-					icon = SIGen.MakePicturePath( SICommon.Types.Items.Item , subDirtAlias .. SICommon.ShowNameSuffix.ICON ) ,
+					icon = SIGen.MakePicturePath( SICommon.Types.Items.Item , subDirtID .. SICommon.CodeNameSuffix.ICON , subDirtAlias .. SICommon.ShowNameSuffix.ICON ) ,
 					icon_size = iconSettings.size ,
 					icon_mipmaps = iconSettings.mipmaps ,
 					scale = 12 / iconSettings.size ,

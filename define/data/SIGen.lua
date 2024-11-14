@@ -524,16 +524,20 @@ end
 -- ======================================================================<br>
 -- 使用 SIGen 完善最新创建的原型数据<br>
 -- 向此原型数据中添加图标代码<br>
--- icon                  = "[ PicturePath ][ 类型别名 ]-[ 别名或 ID ]-[ 类型别名 ICON 项 ].png"<br>
+-- icon = "[ PicturePath ][ 类型别名 ]-[ 别名或 ID ]-[ 类型别名 ICON 项 ].png"<br>
 -- ======================================================================<br>
----@param iconFileName string -- 图标文件名 , 文件位置是相对于 ConstantsData.PicturePath 的 , 不需要后缀
+---@param iconFileID string -- 图标文件 ID , 文件位置是相对于 ConstantsData.PicturePath 的 , 不需要后缀
+---@param iconFileName string|nil -- 图标文件名称 , 文件位置是相对于 ConstantsData.PicturePath 的 , 不需要后缀
 ---@param size table -- 图标的宽高像素数量
 ---@param mipmaps integer -- 图标分级 , 默认是 0 , 原版物品图标是 4 , 查看原版的图片文件就能知道它的含义了
 ---@return SIGen -- 自身
-function SIGen.AddIcon( iconFileName , size , mipmaps )
-	if not iconFileName then
-		return CodeE( SIGen , "完善原型数据属性时 , 图标文件名称不能为空" )
+function SIGen.AddIcon( iconFileID , iconFileName , size , mipmaps )
+	if not iconFileID then
+		return CodeE( SIGen , "完善原型数据属性时 , 图标文件 ID 不能为空" )
 	end
+--	if not iconFileName then
+--		return CodeE( SIGen , "完善原型数据属性时 , 图标文件名称不能为空" )
+--	end
 	if not SIGen.CurrentPrototypeData then
 		return CodeE( SIGen , "需要先创建新的原型数据 , 之后才可以完善它" )
 	end
@@ -555,7 +559,8 @@ function SIGen.AddIcon( iconFileName , size , mipmaps )
 	local iconSettings = SICommon.Numbers.IconSettings[SIGen.CurrentPrototypeData.type] or SICommon.Numbers.IconSettings.Default
 	local icon =
 	{
-		icon = constantsData.PicturePath .. SIGen.CurrentPrototypeData.SIGenData.ShowNamePrefix .. iconFileName .. SICommon.ShowNameSuffix.ICON .. ".png" ,
+		icon = constantsData.PicturePath .. SIGen.CurrentPrototypeData.SIGenData.CodeNamePrefix .. iconFileID .. SICommon.CodeNameSuffix.ICON .. ".png" ,
+--		icon = constantsData.PicturePath .. SIGen.CurrentPrototypeData.SIGenData.ShowNamePrefix .. iconFileName .. SICommon.ShowNameSuffix.ICON .. ".png" ,
 		icon_size = size or iconSettings.size ,
 		icon_mipmaps = mipmaps or iconSettings.mipmaps
 	}
@@ -573,17 +578,21 @@ end
 -- 使用 SIGen 完善最新创建的原型数据<br>
 -- 向此原型数据中添加图标代码<br>
 -- 根据给定的 [ type ] 值进行计算 , 而非使用原型数据自己的 [ type ] 值<br>
--- icon                  = "[ PicturePath ][ 类型别名 ]-[ 别名或 ID ]-[ 类型别名 ICON 项 ].png"<br>
+-- icon = "[ PicturePath ][ 类型别名 ]-[ 别名或 ID ]-[ 类型别名 ICON 项 ].png"<br>
 -- ======================================================================<br>
 ---@param typeCode string -- 原型数据的 [ type ] 值
----@param iconFileName string -- 图标文件名 , 文件位置是相对于 ConstantsData.PicturePath 的 , 不需要后缀
+---@param iconFileID string -- 图标文件 ID , 文件位置是相对于 ConstantsData.PicturePath 的 , 不需要后缀
+---@param iconFileName string|nil -- 图标文件名称 , 文件位置是相对于 ConstantsData.PicturePath 的 , 不需要后缀
 ---@param size integer|nil -- 图标的宽高像素数量
 ---@param mipmaps integer|nil -- 图标分级 , 默认是 0 , 原版物品图标是 4 , 查看原版的图片文件就能知道它的含义了
 ---@return SIGen -- 自身
-function SIGen.MakeIcon( typeCode , iconFileName , size , mipmaps )
-	if not iconFileName then
-		return CodeE( SIGen , "完善原型数据属性时 , 图标文件名称不能为空" )
+function SIGen.MakeIcon( typeCode , iconFileID , iconFileName , size , mipmaps )
+	if not iconFileID then
+		return CodeE( SIGen , "完善原型数据属性时 , 图标文件 ID 不能为空" )
 	end
+--	if not iconFileName then
+--		return CodeE( SIGen , "完善原型数据属性时 , 图标文件名称不能为空" )
+--	end
 	if not typeCode or not SICommon.ShowNamePrefix[typeCode] then
 		return CodeE( SIGen , "构造器无法创建不支持的类型的原型数据 , 当前类型 = " .. tostring( typeCode ) )
 	end
@@ -608,7 +617,8 @@ function SIGen.MakeIcon( typeCode , iconFileName , size , mipmaps )
 	local iconSettings = SICommon.Numbers.IconSettings[SIGen.CurrentPrototypeData.type] or SICommon.Numbers.IconSettings.Default
 	local icon =
 	{
-		icon = constantsData.PicturePath .. SICommon.ShowNamePrefix[typeCode] .. iconFileName .. SICommon.ShowNameSuffix.ICON .. ".png" ,
+		icon = constantsData.PicturePath .. SICommon.CodeNamePrefix[typeCode] .. iconFileID .. SICommon.CodeNameSuffix.ICON .. ".png" ,
+--		icon = constantsData.PicturePath .. SICommon.ShowNamePrefix[typeCode] .. iconFileName .. SICommon.ShowNameSuffix.ICON .. ".png" ,
 		icon_size = size or iconSettings.size ,
 		icon_mipmaps = mipmaps or iconSettings.mipmaps
 	}
@@ -1044,13 +1054,15 @@ end
 -- 此处的图片位置不会自动添加名称后缀 , 会自动添加文件扩展名 (.png)<br>
 -- 使用原型数据自己的 [ type ] 值进行计算<br>
 -- ======================================================================<br>
----@param pictureName string -- 图片名称 , 不需要添加扩展名
+---@param pictureID string -- 图片 ID , 不需要添加扩展名
+---@param pictureName string|nil -- 图片名称 , 不需要添加扩展名
 ---@return string|table -- 计算好的图片位置
-function SIGen.MakeSelfPicturePath( pictureName )
+function SIGen.MakeSelfPicturePath( pictureID , pictureName )
 	if not SIGen.CurrentPrototypeData then
 		return CodeE( SIGen , "需要先创建新的原型数据 , 之后才可以使用 SIGen.GetPicturePath 函数" )
 	end
-	return ( SIGen.TempConstantsData or SIInit.CurrentConstantsData ).PicturePath .. SIGen.CurrentPrototypeData.SIGenData.ShowNamePrefix .. pictureName .. ".png"
+	return ( SIGen.TempConstantsData or SIInit.CurrentConstantsData ).PicturePath .. SIGen.CurrentPrototypeData.SIGenData.CodeNamePrefix .. pictureID .. ".png"
+--	return ( SIGen.TempConstantsData or SIInit.CurrentConstantsData ).PicturePath .. SIGen.CurrentPrototypeData.SIGenData.ShowNamePrefix .. pictureName .. ".png"
 end
 
 -- ======================================================================<br>
@@ -1059,13 +1071,15 @@ end
 -- 根据给定的 [ type ] 值进行计算 , 而非使用原型数据自己的 [ type ] 值<br>
 -- ======================================================================<br>
 ---@param typeCode string -- 原型数据的 [ type ] 值
----@param pictureName string -- 图片名称 , 不需要添加扩展名
+---@param pictureID string -- 图片 ID , 不需要添加扩展名
+---@param pictureName string|nil -- 图片名称 , 不需要添加扩展名
 ---@return string|table -- 计算好的图片位置
-function SIGen.MakePicturePath( typeCode , pictureName )
+function SIGen.MakePicturePath( typeCode , pictureID , pictureName )
 	if not SICommon.ShowNamePrefix[typeCode] then
 		return CodeE( SIGen , "构造器无法操作不支持的类型的原型数据 , 当前类型 = " .. typeCode )
 	end
-	return ( SIGen.TempConstantsData or SIInit.CurrentConstantsData ).PicturePath .. SICommon.ShowNamePrefix[typeCode] .. pictureName .. ".png"
+	return ( SIGen.TempConstantsData or SIInit.CurrentConstantsData ).PicturePath .. SICommon.CodeNamePrefix[typeCode] .. pictureID .. ".png"
+--	return ( SIGen.TempConstantsData or SIInit.CurrentConstantsData ).PicturePath .. SICommon.ShowNamePrefix[typeCode] .. pictureName .. ".png"
 end
 
 -- ======================================================================<br>
@@ -1073,9 +1087,10 @@ end
 -- 此处的图片位置不会自动添加名称后缀 , 会自动添加文件扩展名 (.png)<br>
 -- 不使用 [ type ] 值进行计算<br>
 -- ======================================================================<br>
----@param pictureName string -- 图片名称 , 不需要添加扩展名
+---@param pictureID string -- 图片 ID , 不需要添加扩展名
+---@param pictureName string|nil -- 图片名称 , 不需要添加扩展名
 ---@return string -- 计算好的图片位置
-function SIGen.MakeRawPicturePath( pictureName )
+function SIGen.MakeRawPicturePath( pictureID , pictureName )
 	return ( SIGen.TempConstantsData or SIInit.CurrentConstantsData ).PicturePath .. pictureName .. ".png"
 end
 
@@ -1084,13 +1099,15 @@ end
 -- 此处的图片位置不会自动添加名称后缀 , 会自动添加文件扩展名 (.png)<br>
 -- 使用原型数据自己的 [ type ] 值进行计算<br>
 -- ======================================================================<br>
----@param pictureName string -- 图片名称 , 不需要添加扩展名
+---@param pictureID string -- 图片 ID , 不需要添加扩展名
+---@param pictureName string|nil -- 图片名称 , 不需要添加扩展名
 ---@return string|table -- 计算好的图片位置
-function SIGen.MakeSelfPicturePathHr( pictureName )
+function SIGen.MakeSelfPicturePathHr( pictureID , pictureName )
 	if not SIGen.CurrentPrototypeData then
 		return CodeE( SIGen , "需要先创建新的原型数据 , 之后才可以使用 SIGen.GetPicturePath 函数" )
 	end
-	return ( SIGen.TempConstantsData or SIInit.CurrentConstantsData ).PicturePath .. SICommon.ShowNamePrefix.HrVer .. SIGen.CurrentPrototypeData.SIGenData.ShowNamePrefix .. pictureName .. ".png"
+	return ( SIGen.TempConstantsData or SIInit.CurrentConstantsData ).PicturePath .. SICommon.CodeNamePrefix.HrVer .. SIGen.CurrentPrototypeData.SIGenData.CodeNamePrefix .. pictureID .. ".png"
+--	return ( SIGen.TempConstantsData or SIInit.CurrentConstantsData ).PicturePath .. SICommon.ShowNamePrefix.HrVer .. SIGen.CurrentPrototypeData.SIGenData.ShowNamePrefix .. pictureName .. ".png"
 end
 
 -- ======================================================================<br>
@@ -1099,13 +1116,15 @@ end
 -- 根据给定的 [ type ] 值进行计算 , 而非使用原型数据自己的 [ type ] 值<br>
 -- ======================================================================<br>
 ---@param typeCode string -- 原型数据的 [ type ] 值
----@param pictureName string -- 图片名称 , 不需要添加扩展名
+---@param pictureID string -- 图片 ID , 不需要添加扩展名
+---@param pictureName string|nil -- 图片名称 , 不需要添加扩展名
 ---@return string|table -- 计算好的图片位置
-function SIGen.MakePicturePathHr( typeCode , pictureName )
+function SIGen.MakePicturePathHr( typeCode , pictureID , pictureName )
 	if not SICommon.ShowNamePrefix[typeCode] then
 		return CodeE( SIGen , "构造器无法操作不支持的类型的原型数据 , 当前类型 = " .. typeCode )
 	end
-	return ( SIGen.TempConstantsData or SIInit.CurrentConstantsData ).PicturePath .. SICommon.ShowNamePrefix.HrVer .. SICommon.ShowNamePrefix[typeCode] .. pictureName .. ".png"
+	return ( SIGen.TempConstantsData or SIInit.CurrentConstantsData ).PicturePath .. SICommon.CodeNamePrefix.HrVer .. SICommon.CodeNamePrefix[typeCode] .. pictureID .. ".png"
+--	return ( SIGen.TempConstantsData or SIInit.CurrentConstantsData ).PicturePath .. SICommon.ShowNamePrefix.HrVer .. SICommon.ShowNamePrefix[typeCode] .. pictureName .. ".png"
 end
 
 -- ======================================================================<br>
@@ -1113,50 +1132,58 @@ end
 -- 此处的图片位置不会自动添加名称后缀 , 会自动添加文件扩展名 (.png)<br>
 -- 不使用 [ type ] 值进行计算<br>
 -- ======================================================================<br>
----@param pictureName string -- 图片名称 , 不需要添加扩展名
+---@param pictureID string -- 图片 ID , 不需要添加扩展名
+---@param pictureName string|nil -- 图片名称 , 不需要添加扩展名
 ---@return string -- 计算好的图片位置
-function SIGen.MakeRawPicturePathHr( pictureName )
-	return ( SIGen.TempConstantsData or SIInit.CurrentConstantsData ).PicturePath .. SICommon.ShowNamePrefix.HrVer .. pictureName .. ".png"
+function SIGen.MakeRawPicturePathHr( pictureID , pictureName )
+	return ( SIGen.TempConstantsData or SIInit.CurrentConstantsData ).PicturePath .. SICommon.CodeNamePrefix.HrVer .. pictureID .. ".png"
+--	return ( SIGen.TempConstantsData or SIInit.CurrentConstantsData ).PicturePath .. SICommon.ShowNamePrefix.HrVer .. pictureName .. ".png"
 end
 
 -- ======================================================================<br>
 -- 用于计算声音位置的函数<br>
--- 此处的声音位置不会自动添加名称后缀 , 会自动添加文件扩展名 (.png)<br>
+-- 此处的声音位置不会自动添加名称后缀 , 会自动添加文件扩展名 (.ogg)<br>
 -- 使用原型数据自己的 [ type ] 值进行计算<br>
 -- ======================================================================<br>
----@param soundName string -- 声音名称 , 不需要添加扩展名
+---@param soundID string -- 声音 ID , 不需要添加扩展名
+---@param soundName string|nil -- 声音名称 , 不需要添加扩展名
 ---@return string|table -- 计算好的声音位置
-function SIGen.MakeSelfSoundPath( soundName )
+function SIGen.MakeSelfSoundPath( soundID , soundName )
 	if not SIGen.CurrentPrototypeData then
 		return CodeE( SIGen , "需要先创建新的原型数据 , 之后才可以使用 SIGen.GetSoundPath 函数" )
 	end
-	return ( SIGen.TempConstantsData or SIInit.CurrentConstantsData ).SoundPath .. SIGen.CurrentPrototypeData.SIGenData.ShowNamePrefix .. soundName .. ".ogg"
+	return ( SIGen.TempConstantsData or SIInit.CurrentConstantsData ).SoundPath .. SIGen.CurrentPrototypeData.SIGenData.CodeNamePrefix .. soundID .. ".ogg"
+--	return ( SIGen.TempConstantsData or SIInit.CurrentConstantsData ).SoundPath .. SIGen.CurrentPrototypeData.SIGenData.ShowNamePrefix .. soundName .. ".ogg"
 end
 
 -- ======================================================================<br>
 -- 用于计算声音位置的函数<br>
--- 此处的声音位置不会自动添加名称后缀 , 会自动添加文件扩展名 (.png)<br>
+-- 此处的声音位置不会自动添加名称后缀 , 会自动添加文件扩展名 (.ogg)<br>
 -- 根据给定的 [ type ] 值进行计算 , 而非使用原型数据自己的 [ type ] 值<br>
 -- ======================================================================<br>
 ---@param typeCode string -- 原型数据的 [ type ] 值
----@param soundName string -- 声音名称 , 不需要添加扩展名
+---@param soundID string -- 声音 ID , 不需要添加扩展名
+---@param soundName string|nil -- 声音名称 , 不需要添加扩展名
 ---@return string|table -- 计算好的声音位置
-function SIGen.MakeSoundPath( typeCode , soundName )
+function SIGen.MakeSoundPath( typeCode , soundID , soundName )
 	if not SICommon.ShowNamePrefix[typeCode] then
 		return CodeE( SIGen , "构造器无法操作不支持的类型的原型数据 , 当前类型 = " .. typeCode )
 	end
-	return ( SIGen.TempConstantsData or SIInit.CurrentConstantsData ).SoundPath .. SICommon.ShowNamePrefix[typeCode] .. soundName .. ".ogg"
+	return ( SIGen.TempConstantsData or SIInit.CurrentConstantsData ).SoundPath .. SICommon.CodeNamePrefix[typeCode] .. soundID .. ".ogg"
+--	return ( SIGen.TempConstantsData or SIInit.CurrentConstantsData ).SoundPath .. SICommon.ShowNamePrefix[typeCode] .. soundName .. ".ogg"
 end
 
 -- ======================================================================<br>
 -- 用于计算声音位置的函数<br>
--- 此处的声音位置不会自动添加名称后缀 , 会自动添加文件扩展名 (.png)<br>
+-- 此处的声音位置不会自动添加名称后缀 , 会自动添加文件扩展名 (.ogg)<br>
 -- 不使用 [ type ] 值进行计算<br>
 -- ======================================================================<br>
----@param soundName string -- 声音名称 , 不需要添加扩展名
+---@param soundID string -- 声音 ID , 不需要添加扩展名
+---@param soundName string|nil -- 声音名称 , 不需要添加扩展名
 ---@return string -- 计算好的声音位置
-function SIGen.MakeRawSoundPath( soundName )
-	return ( SIGen.TempConstantsData or SIInit.CurrentConstantsData ).SoundPath .. soundName .. ".ogg"
+function SIGen.MakeRawSoundPath( soundID , soundName )
+	return ( SIGen.TempConstantsData or SIInit.CurrentConstantsData ).SoundPath .. soundID .. ".ogg"
+--	return ( SIGen.TempConstantsData or SIInit.CurrentConstantsData ).SoundPath .. soundName .. ".ogg"
 end
 
 -- ======================================================================<br>
@@ -1261,7 +1288,7 @@ function SIGen.AutoIconItem( iconItemDataList )
 					layers =
 					{
 						{
-							filename = SIGen.MakePicturePath( SICommon.Types.Items.Item , alias .. SICommon.ShowNameSuffix.ICON ) ,
+							filename = SIGen.MakePicturePath( SICommon.Types.Items.Item , itemID .. SICommon.CodeNameSuffix.ICON , alias .. SICommon.ShowNameSuffix.ICON ) ,
 							priority = "medium" ,
 							width = 64 ,
 							height = 64 ,
@@ -1292,7 +1319,7 @@ function SIGen.AutoIconItem( iconItemDataList )
 				SISound.Base( "machine-close" , 0.5 )
 			}
 		} )
-		.MakeIcon( SICommon.Types.Items.Item , alias , 64 , 4 )
+		.MakeIcon( SICommon.Types.Items.Item , itemID , alias , 64 , 4 )
 		.SetSize( 1 , 1 )
 		.AddFunction( function( prototypeName , prototypeData )
 			itemPrototypeData.place_result = prototypeData.name
@@ -1328,14 +1355,14 @@ function SIGen.AutoIconItem( iconItemDataList )
 			} ,
 			sprite =
 			{
-				filename = SIGen.MakePicturePath( SICommon.Types.Items.Item , alias .. SICommon.ShowNameSuffix.ICON ) ,
+				filename = SIGen.MakePicturePath( SICommon.Types.Items.Item , itemID .. SICommon.CodeNameSuffix.ICON , alias .. SICommon.ShowNameSuffix.ICON ) ,
 				priority = "medium" ,
 				width = 64 ,
 				height = 64 ,
 				scale = 0.5
 			}
 		} )
-		.MakeIcon( SICommon.Types.Items.Item , alias , 64 , 4 )
+		.MakeIcon( SICommon.Types.Items.Item , itemID , alias , 64 , 4 )
 		.AddFunction( function( prototypeName , prototypeData )
 			itemPrototypeData.placed_as_equipment_result = prototypeData.name
 		end )

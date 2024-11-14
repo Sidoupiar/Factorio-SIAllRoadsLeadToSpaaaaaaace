@@ -160,14 +160,14 @@ SIGen
 			layers =
 			{
 				{
-					filename = SIGen.MakeSelfPicturePath( "量产之酥皮夹心糖果" ) ,
+					filename = SIGen.MakeSelfPicturePath( "SuperCandy" , "量产之酥皮夹心糖果" ) ,
 					priority = "medium" ,
 					width = 32 ,
 					height = 32 ,
 					scale = 1.0
 				} ,
 				{
-					filename = SIGen.MakeSelfPicturePath( "量产之酥皮夹心糖果-影子" ) ,
+					filename = SIGen.MakeSelfPicturePath( "SuperCandy-Shadow" , "量产之酥皮夹心糖果-影子" ) ,
 					priority = "medium" ,
 					width = 53 ,
 					height = 36 ,
@@ -231,14 +231,14 @@ SIGen
 	} ,
 	sprite =
 	{
-		filename = SIGen.MakePicturePath( SICommon.Types.Items.Tool , "量产之酥皮夹心糖果" .. SICommon.ShowNameSuffix.ICON ) ,
+		filename = SIGen.MakePicturePath( SICommon.Types.Items.Tool , "SuperCandy" .. SICommon.CodeNameSuffix.ICON , "量产之酥皮夹心糖果" .. SICommon.ShowNameSuffix.ICON ) ,
 		priority = "medium" ,
 		width = 64 ,
 		height = 64 ,
 		scale = 1.0
 	}
 } )
-.MakeIcon( SICommon.Types.Items.Tool , "量产之酥皮夹心糖果" , 64 , 4 )
+.MakeIcon( SICommon.Types.Items.Tool , "SuperCandy" , "量产之酥皮夹心糖果" , 64 , 4 )
 .ReferenceEquipmentResult( SICommon.Types.Items.Tool , SIConstants_DebugItem.raw.Items.SuperCandy )
 
 -- ======================================================================
@@ -298,13 +298,13 @@ SIGen
 		layers =
 		{
 			{
-				filename = SIGen.MakeSelfPicturePath( "璀璨之闪耀能量罐头-图标" ) ,
+				filename = SIGen.MakeSelfPicturePath( "SuperBrightBar-icon" , "璀璨之闪耀能量罐头-图标" ) ,
 				size = 64 ,
 				mipmap_count = 4 ,
 				scale = 0.25
 			} ,
 			{
-				filename = SIGen.MakeSelfPicturePath( "璀璨之闪耀能量罐头-光效" ) ,
+				filename = SIGen.MakeSelfPicturePath( "SuperBrightBar-Light" , "璀璨之闪耀能量罐头-光效" ) ,
 				size = 64 ,
 				mipmap_count = 4 ,
 				scale = 0.25 ,
@@ -401,7 +401,7 @@ SIGen
 		layers =
 		{
 			{
-				filename = SIGen.MakeSelfPicturePath( "璀璨之闪耀能量罐头" ) ,
+				filename = SIGen.MakeSelfPicturePath( "SuperBrightBar" , "璀璨之闪耀能量罐头" ) ,
 				priority = "extra-high" ,
 				width = 160 ,
 				height = 160 ,
@@ -411,7 +411,7 @@ SIGen
 				scale = 1.0
 			} ,
 			{
-				filename = SIGen.MakeSelfPicturePath( "璀璨之闪耀能量罐头-影子" ) ,
+				filename = SIGen.MakeSelfPicturePath( "SuperBrightBar-Shadow" , "璀璨之闪耀能量罐头-影子" ) ,
 				priority = "extra-high" ,
 				width = 263 ,
 				height = 162 ,
@@ -493,14 +493,14 @@ SIGen
 	burner = nil ,
 	sprite =
 	{
-		filename = SIGen.MakePicturePath( SICommon.Types.Items.Item , "璀璨之闪耀能量罐头" .. SICommon.ShowNameSuffix.ICON ) ,
+		filename = SIGen.MakePicturePath( SICommon.Types.Items.Item , "SuperBrightBar" .. SICommon.CodeNameSuffix.ICON , "璀璨之闪耀能量罐头" .. SICommon.ShowNameSuffix.ICON ) ,
 		priority = "medium" ,
 		width = 64 ,
 		height = 64 ,
 		scale = 1.0
 	}
 } )
-.MakeIcon( SICommon.Types.Items.Item , "璀璨之闪耀能量罐头" , 64 , 4 )
+.MakeIcon( SICommon.Types.Items.Item , "SuperBrightBar" , "璀璨之闪耀能量罐头" , 64 , 4 )
 .ReferenceEquipmentResult( SICommon.Types.Items.Item , SIConstants_DebugItem.raw.Items.SuperBrightBar )
 
 -- ======================================================================
@@ -662,14 +662,14 @@ SIGen
 					layers =
 					{
 						{
-							filename = SIGen.MakeSelfPicturePath( "奇妙之双鱼螺旋插件" ) ,
+							filename = SIGen.MakeSelfPicturePath( "SuperFishModule" , "奇妙之双鱼螺旋插件" ) ,
 							priority = "medium" ,
 							width = 106 ,
 							height = 96 ,
 							shift = SIUtils.by_pixel( 0 , 1 )
 						} ,
 						{
-							filename = SIGen.MakeSelfPicturePath( "奇妙之双鱼螺旋插件-影子" ) ,
+							filename = SIGen.MakeSelfPicturePath( "SuperFishModule-Shadow" , "奇妙之双鱼螺旋插件-影子" ) ,
 							priority = "medium" ,
 							width = 122 ,
 							height = 90 ,
@@ -687,7 +687,7 @@ SIGen
 					layers =
 					{
 						{
-							filename = SIGen.MakeSelfPicturePath( "奇妙之双鱼螺旋插件-顶部" ) ,
+							filename = SIGen.MakeSelfPicturePath( "SuperFishModule-Top" , "奇妙之双鱼螺旋插件-顶部" ) ,
 							priority = "medium" ,
 							width = 48 ,
 							height = 70 ,
@@ -709,7 +709,7 @@ SIGen
 					layers =
 					{
 						{
-							filename = SIGen.MakeSelfPicturePath( "奇妙之双鱼螺旋插件-光效" ) ,
+							filename = SIGen.MakeSelfPicturePath( "SuperFishModule-Light" , "奇妙之双鱼螺旋插件-光效" ) ,
 							priority = "medium" ,
 							blend_mode = "additive" ,
 							width = 56 ,
@@ -742,7 +742,7 @@ SIGen
 									layers =
 									{
 										{
-											filename = SIGen.MakeSelfPicturePath( "奇妙之双鱼螺旋插件-插件-格子-1" ) ,
+											filename = SIGen.MakeSelfPicturePath( "SuperFishModule-Module-Block-1" , "奇妙之双鱼螺旋插件-插件-格子-1" ) ,
 											priority = "medium" ,
 											width = 26 ,
 											height = 34 ,
@@ -763,7 +763,7 @@ SIGen
 									layers =
 									{
 										{
-											filename = SIGen.MakeSelfPicturePath( "奇妙之双鱼螺旋插件-插件-盒子-1" ) ,
+											filename = SIGen.MakeSelfPicturePath( "SuperFishModule-Module-Box-1" , "奇妙之双鱼螺旋插件-插件-盒子-1" ) ,
 											priority = "medium" ,
 											width = 18 ,
 											height = 16 ,
@@ -784,7 +784,7 @@ SIGen
 									layers =
 									{
 										{
-											filename = SIGen.MakeSelfPicturePath( "奇妙之双鱼螺旋插件-插件-灯泡-1" ) ,
+											filename = SIGen.MakeSelfPicturePath( "SuperFishModule-Module-Lamp-1" , "奇妙之双鱼螺旋插件-插件-灯泡-1" ) ,
 											priority = "medium" ,
 											width = 14 ,
 											height = 6 ,
@@ -806,7 +806,7 @@ SIGen
 									layers =
 									{
 										{
-											filename = SIGen.MakeSelfPicturePath( "奇妙之双鱼螺旋插件-插件-光效-1" ) ,
+											filename = SIGen.MakeSelfPicturePath( "SuperFishModule-Module-Light-1" , "奇妙之双鱼螺旋插件-插件-光效-1" ) ,
 											priority = "medium" ,
 											width = 28 ,
 											height = 22 ,
@@ -830,7 +830,7 @@ SIGen
 									layers =
 									{
 										{
-											filename = SIGen.MakeSelfPicturePath( "奇妙之双鱼螺旋插件-插件-格子-2" ) ,
+											filename = SIGen.MakeSelfPicturePath( "SuperFishModule-Module-Block-2" , "奇妙之双鱼螺旋插件-插件-格子-2" ) ,
 											priority = "medium" ,
 											width = 24 ,
 											height = 22 ,
@@ -851,7 +851,7 @@ SIGen
 									layers =
 									{
 										{
-											filename = SIGen.MakeSelfPicturePath( "奇妙之双鱼螺旋插件-插件-盒子-2" ) ,
+											filename = SIGen.MakeSelfPicturePath( "SuperFishModule-Module-Box-2" , "奇妙之双鱼螺旋插件-插件-盒子-2" ) ,
 											priority = "medium" ,
 											width = 18 ,
 											height = 14 ,
@@ -872,7 +872,7 @@ SIGen
 									layers =
 									{
 										{
-											filename = SIGen.MakeSelfPicturePath( "奇妙之双鱼螺旋插件-插件-灯泡-2" ) ,
+											filename = SIGen.MakeSelfPicturePath( "SuperFishModule-Module-Lamp-2" , "奇妙之双鱼螺旋插件-插件-灯泡-2" ) ,
 											priority = "medium" ,
 											width = 12 ,
 											height = 8 ,
@@ -894,7 +894,7 @@ SIGen
 									layers =
 									{
 										{
-											filename = SIGen.MakeSelfPicturePath( "奇妙之双鱼螺旋插件-插件-光效-2" ) ,
+											filename = SIGen.MakeSelfPicturePath( "SuperFishModule-Module-Light-2" , "奇妙之双鱼螺旋插件-插件-光效-2" ) ,
 											priority = "medium" ,
 											width = 34 ,
 											height = 24 ,
@@ -913,7 +913,7 @@ SIGen
 	} ,
 	radius_visualisation_picture =
 	{
-		filename = SIGen.MakeSelfPicturePath( "奇妙之双鱼螺旋插件-范围" ) ,
+		filename = SIGen.MakeSelfPicturePath( "SuperFishModule-Range" , "奇妙之双鱼螺旋插件-范围" ) ,
 		priority = "extra-high-no-scale" ,
 		width = 10 ,
 		height = 10
@@ -924,7 +924,7 @@ SIGen
 		orientation_to_variation = false ,
 		pictures =
 		{
-			filename = SIGen.MakeSelfPicturePath( "奇妙之双鱼螺旋插件-反射" ) ,
+			filename = SIGen.MakeSelfPicturePath( "SuperFishModule-Reflect" , "奇妙之双鱼螺旋插件-反射" ) ,
 			priority = "extra-high" ,
 			width = 24 ,
 			height = 28 ,
@@ -998,14 +998,14 @@ SIGen
 	movement_bonus = 1.0 ,
 	sprite =
 	{
-		filename = SIGen.MakePicturePath( SICommon.Types.Items.Module , "奇妙之双鱼螺旋插件" .. SICommon.ShowNameSuffix.ICON ) ,
+		filename = SIGen.MakePicturePath( SICommon.Types.Items.Module , "SuperFishModule" .. SICommon.CodeNameSuffix.ICON , "奇妙之双鱼螺旋插件" .. SICommon.ShowNameSuffix.ICON ) ,
 		priority = "medium" ,
 		width = 64 ,
 		height = 64 ,
 		scale = 1.0
 	}
 } )
-.MakeIcon( SICommon.Types.Items.Module , "奇妙之双鱼螺旋插件" , 64 , 4 )
+.MakeIcon( SICommon.Types.Items.Module , "SuperFishModule" , "奇妙之双鱼螺旋插件" , 64 , 4 )
 .ReferenceEquipmentResult( SICommon.Types.Items.Module , SIConstants_DebugItem.raw.Items.SuperFishModule )
 
 -- ======================================================================
@@ -1118,7 +1118,7 @@ SIGen
 		layers =
 		{
 			{
-				filename = SIGen.MakeSelfPicturePath( "洞察之一览无余雷达" ) ,
+				filename = SIGen.MakeSelfPicturePath( "SuperLookRadar" , "洞察之一览无余雷达" ) ,
 				priority = "low" ,
 				width = 98 ,
 				height = 128 ,
@@ -1128,7 +1128,7 @@ SIGen
 				apply_projection = false
 			} ,
 			{
-				filename = SIGen.MakeSelfPicturePath( "洞察之一览无余雷达-影子" ) ,
+				filename = SIGen.MakeSelfPicturePath( "SuperLookRadar-Shadow" , "洞察之一览无余雷达-影子" ) ,
 				priority = "low" ,
 				width = 172 ,
 				height = 94 ,
@@ -1142,7 +1142,7 @@ SIGen
 	} ,
 	integration_patch =
 	{
-		filename = SIGen.MakeSelfPicturePath( "洞察之一览无余雷达-结合" ) ,
+		filename = SIGen.MakeSelfPicturePath( "SuperLookRadar-Connect" , "洞察之一览无余雷达-结合" ) ,
 		priority = "low" ,
 		width = 119 ,
 		height = 108 ,
@@ -1155,7 +1155,7 @@ SIGen
 		orientation_to_variation = false ,
 		pictures =
 		{
-			filename = SIGen.MakeSelfPicturePath( "洞察之一览无余雷达-反射" ) ,
+			filename = SIGen.MakeSelfPicturePath( "SuperLookRadar-Reflect" , "洞察之一览无余雷达-反射" ) ,
 			priority = "extra-high" ,
 			width = 28 ,
 			height = 32 ,
@@ -1230,12 +1230,12 @@ SIGen
 	{
 		{
 			1.0 ,
-			SIGen.MakeRawPicturePath( "世界光线-洞察之一览无余雷达" )
+			SIGen.MakeRawPicturePath( "WorldLight-SuperLookRadar" , "世界光线-洞察之一览无余雷达" )
 		}
 	} ,
 	sprite =
 	{
-		filename = SIGen.MakePicturePath( SICommon.Types.Items.Item , "洞察之一览无余雷达" .. SICommon.ShowNameSuffix.ICON ) ,
+		filename = SIGen.MakePicturePath( SICommon.Types.Items.Item , "SuperLookRadar" .. SICommon.CodeNameSuffix.ICON , "洞察之一览无余雷达" .. SICommon.ShowNameSuffix.ICON ) ,
 		priority = "medium" ,
 		width = 64 ,
 		height = 64 ,
@@ -1250,7 +1250,7 @@ SIGen
 		SISound.Base( "nightvision-off" , 0.6 )
 	}
 } )
-.MakeIcon( SICommon.Types.Items.Item , "洞察之一览无余雷达" , 64 , 4 )
+.MakeIcon( SICommon.Types.Items.Item , "SuperLookRadar" , "洞察之一览无余雷达" , 64 , 4 )
 .ReferenceEquipmentResult( SICommon.Types.Items.Item , SIConstants_DebugItem.raw.Items.SuperLookRadar )
 
 -- ======================================================================
@@ -1408,14 +1408,14 @@ SIGen
 		layers =
 		{
 			{
-				filename = SIGen.MakeSelfPicturePath( "集成之指点江山平台" ) ,
+				filename = SIGen.MakeSelfPicturePath( "SuperRoboport" , "集成之指点江山平台" ) ,
 				priority = "medium" ,
 				width = 143 ,
 				height = 135 ,
 				shift = { 0.5 , 0.25 }
 			} ,
 			{
-				filename = SIGen.MakeSelfPicturePath( "集成之指点江山平台-影子" ) ,
+				filename = SIGen.MakeSelfPicturePath( "SuperRoboport-Shadow" , "集成之指点江山平台-影子" ) ,
 				priority = "medium" ,
 				width = 147 ,
 				height = 101 ,
@@ -1429,7 +1429,7 @@ SIGen
 		layers =
 		{
 			{
-				filename = SIGen.MakeSelfPicturePath( "集成之指点江山平台-顶部" ) ,
+				filename = SIGen.MakeSelfPicturePath( "SuperRoboport-Top" , "集成之指点江山平台-顶部" ) ,
 				priority = "medium" ,
 				width = 69 ,
 				height = 50 ,
@@ -1443,7 +1443,7 @@ SIGen
 		layers =
 		{
 			{
-				filename = SIGen.MakeSelfPicturePath( "集成之指点江山平台-动画" ) ,
+				filename = SIGen.MakeSelfPicturePath( "SuperRoboport-Base" , "集成之指点江山平台-基础" ) ,
 				priority = "medium" ,
 				width = 42 ,
 				height = 31 ,
@@ -1458,7 +1458,7 @@ SIGen
 		layers =
 		{
 			{
-				filename = SIGen.MakeSelfPicturePath( "集成之指点江山平台-门-顶部" ) ,
+				filename = SIGen.MakeSelfPicturePath( "SuperRoboport-Door-Top" , "集成之指点江山平台-门-顶部" ) ,
 				priority = "medium" ,
 				width = 52 ,
 				height = 20 ,
@@ -1472,7 +1472,7 @@ SIGen
 		layers =
 		{
 			{
-				filename = SIGen.MakeSelfPicturePath( "集成之指点江山平台-门-底部" ) ,
+				filename = SIGen.MakeSelfPicturePath( "SuperRoboport-Door-Bottom" , "集成之指点江山平台-门-底部" ) ,
 				priority = "medium" ,
 				width = 52 ,
 				height = 22 ,
@@ -1486,7 +1486,7 @@ SIGen
 		layers =
 		{
 			{
-				filename = SIGen.MakeSelfPicturePath( "集成之指点江山平台-充电" ) ,
+				filename = SIGen.MakeSelfPicturePath( "SuperRoboport-Charge" , "集成之指点江山平台-充电" ) ,
 				priority = "high" ,
 				width = 37 ,
 				height = 35 ,
@@ -1509,7 +1509,7 @@ SIGen
 		orientation_to_variation = false ,
 		pictures =
 		{
-			filename = SIGen.MakeSelfPicturePath( "集成之指点江山平台-反射" ) ,
+			filename = SIGen.MakeSelfPicturePath( "SuperRoboport-Reflect" , "集成之指点江山平台-反射" ) ,
 			priority = "extra-high" ,
 			width = 28 ,
 			height = 28 ,
@@ -1599,7 +1599,7 @@ SIGen
 	draw_construction_radius_visualization = true ,
 	sprite =
 	{
-		filename = SIGen.MakePicturePath( SICommon.Types.Items.Item , "集成之指点江山平台" .. SICommon.ShowNameSuffix.ICON ) ,
+		filename = SIGen.MakePicturePath( SICommon.Types.Items.Item , "SuperRoboport" .. SICommon.CodeNameSuffix.ICON , "集成之指点江山平台" .. SICommon.ShowNameSuffix.ICON ) ,
 		priority = "medium" ,
 		width = 64 ,
 		height = 64 ,
@@ -1610,7 +1610,7 @@ SIGen
 		layers =
 		{
 			{
-				filename = SIGen.MakePicturePath( SICommon.Types.Entities.Roboport , "集成之指点江山平台-充电" ) ,
+				filename = SIGen.MakePicturePath( SICommon.Types.Entities.Roboport , "SuperRoboport-Charge" , "集成之指点江山平台-充电" ) ,
 				priority = "high" ,
 				width = 37 ,
 				height = 35 ,
@@ -1628,7 +1628,7 @@ SIGen
 		color = { r = 0.50 , g = 0.50 , b = 1.00 }
 	}
 } )
-.MakeIcon( SICommon.Types.Items.Item , "集成之指点江山平台" , 64 , 4 )
+.MakeIcon( SICommon.Types.Items.Item , "SuperRoboport" , "集成之指点江山平台" , 64 , 4 )
 .ReferenceEquipmentResult( SICommon.Types.Items.Item , SIConstants_DebugItem.raw.Items.SuperRoboport )
 
 -- ======================================================================
@@ -1778,7 +1778,7 @@ SIGen
 		layers =
 		{
 			{
-				filename = SIGen.MakeSelfPicturePath( "伟力之移山填海建设单元" ) ,
+				filename = SIGen.MakeSelfPicturePath( "SuperConstruction" , "伟力之移山填海建设单元" ) ,
 				priority = "high" ,
 				width = 32 ,
 				height = 36 ,
@@ -1794,7 +1794,7 @@ SIGen
 		layers =
 		{
 			{
-				filename = SIGen.MakeSelfPicturePath( "伟力之移山填海建设单元" ) ,
+				filename = SIGen.MakeSelfPicturePath( "SuperConstruction" , "伟力之移山填海建设单元" ) ,
 				priority = "high" ,
 				width = 32 ,
 				height = 36 ,
@@ -1810,7 +1810,7 @@ SIGen
 		layers =
 		{
 			{
-				filename = SIGen.MakeSelfPicturePath( "伟力之移山填海建设单元-影子" ) ,
+				filename = SIGen.MakeSelfPicturePath( "SuperConstruction-Shadow" , "伟力之移山填海建设单元-影子" ) ,
 				priority = "high" ,
 				width = 53 ,
 				height = 25 ,
@@ -1827,7 +1827,7 @@ SIGen
 		layers =
 		{
 			{
-				filename = SIGen.MakeSelfPicturePath( "伟力之移山填海建设单元-影子" ) ,
+				filename = SIGen.MakeSelfPicturePath( "SuperConstruction-Shadow" , "伟力之移山填海建设单元-影子" ) ,
 				priority = "high" ,
 				width = 53 ,
 				height = 25 ,
@@ -1844,7 +1844,7 @@ SIGen
 		layers =
 		{
 			{
-				filename = SIGen.MakeSelfPicturePath( "伟力之移山填海建设单元-工作" ) ,
+				filename = SIGen.MakeSelfPicturePath( "SuperConstruction-Working" , "伟力之移山填海建设单元-工作" ) ,
 				priority = "high" ,
 				width = 28 ,
 				height = 36 ,
@@ -1861,7 +1861,7 @@ SIGen
 		layers =
 		{
 			{
-				filename = SIGen.MakeSelfPicturePath( "伟力之移山填海建设单元-影子" ) ,
+				filename = SIGen.MakeSelfPicturePath( "SuperConstruction-Shadow" , "伟力之移山填海建设单元-影子" ) ,
 				priority = "high" ,
 				width = 53 ,
 				height = 25 ,
@@ -2000,7 +2000,7 @@ SIGen
 		orientation_to_variation = false ,
 		pictures =
 		{
-			filename = SIGen.MakeSelfPicturePath( "伟力之移山填海建设单元-反射" ) ,
+			filename = SIGen.MakeSelfPicturePath( "SuperConstruction-Reflect" , "伟力之移山填海建设单元-反射" ) ,
 			priority = "extra-high" ,
 			width = 12 ,
 			height = 12 ,
@@ -2077,14 +2077,14 @@ SIGen
 	max_shield_value = 10000 ,
 	sprite =
 	{
-		filename = SIGen.MakePicturePath( SICommon.Types.Items.Item , "伟力之移山填海建设单元" .. SICommon.ShowNameSuffix.ICON ) ,
+		filename = SIGen.MakePicturePath( SICommon.Types.Items.Item , "SuperConstruction" .. SICommon.CodeNameSuffix.ICON , "伟力之移山填海建设单元" .. SICommon.ShowNameSuffix.ICON ) ,
 		priority = "medium" ,
 		width = 64 ,
 		height = 64 ,
 		scale = 1.0
 	}
 } )
-.MakeIcon( SICommon.Types.Items.Item , "伟力之移山填海建设单元" , 64 , 4 )
+.MakeIcon( SICommon.Types.Items.Item , "SuperConstruction" , "伟力之移山填海建设单元" , 64 , 4 )
 .ReferenceEquipmentResult( SICommon.Types.Items.Item , SIConstants_DebugItem.raw.Items.SuperConstruction )
 
 -- ======================================================================
@@ -2233,7 +2233,7 @@ SIGen
 		layers =
 		{
 			{
-				filename = SIGen.MakeSelfPicturePath( "伟力之移山填海物流单元" ) ,
+				filename = SIGen.MakeSelfPicturePath( "SuperLogistic" , "伟力之移山填海物流单元" ) ,
 				priority = "high" ,
 				width = 41 ,
 				height = 42 ,
@@ -2250,7 +2250,7 @@ SIGen
 		layers =
 		{
 			{
-				filename = SIGen.MakeSelfPicturePath( "伟力之移山填海物流单元" ) ,
+				filename = SIGen.MakeSelfPicturePath( "SuperLogistic" , "伟力之移山填海物流单元" ) ,
 				priority = "high" ,
 				width = 41 ,
 				height = 42 ,
@@ -2267,7 +2267,7 @@ SIGen
 		layers =
 		{
 			{
-				filename = SIGen.MakeSelfPicturePath( "伟力之移山填海物流单元" ) ,
+				filename = SIGen.MakeSelfPicturePath( "SuperLogistic" , "伟力之移山填海物流单元" ) ,
 				priority = "high" ,
 				width = 41 ,
 				height = 42 ,
@@ -2284,7 +2284,7 @@ SIGen
 		layers =
 		{
 			{
-				filename = SIGen.MakeSelfPicturePath( "伟力之移山填海物流单元" ) ,
+				filename = SIGen.MakeSelfPicturePath( "SuperLogistic" , "伟力之移山填海物流单元" ) ,
 				priority = "high" ,
 				width = 41 ,
 				height = 42 ,
@@ -2301,7 +2301,7 @@ SIGen
 		layers =
 		{
 			{
-				filename = SIGen.MakeSelfPicturePath( "伟力之移山填海物流单元-影子" ) ,
+				filename = SIGen.MakeSelfPicturePath( "SuperLogistic-Shadow" , "伟力之移山填海物流单元-影子" ) ,
 				priority = "high" ,
 				width = 58 ,
 				height = 29 ,
@@ -2319,7 +2319,7 @@ SIGen
 		layers =
 		{
 			{
-				filename = SIGen.MakeSelfPicturePath( "伟力之移山填海物流单元-影子" ) ,
+				filename = SIGen.MakeSelfPicturePath( "SuperLogistic-Shadow" , "伟力之移山填海物流单元-影子" ) ,
 				priority = "high" ,
 				width = 58 ,
 				height = 29 ,
@@ -2337,7 +2337,7 @@ SIGen
 		layers =
 		{
 			{
-				filename = SIGen.MakeSelfPicturePath( "伟力之移山填海物流单元-影子" ) ,
+				filename = SIGen.MakeSelfPicturePath( "SuperLogistic-Shadow" , "伟力之移山填海物流单元-影子" ) ,
 				priority = "high" ,
 				width = 58 ,
 				height = 29 ,
@@ -2355,7 +2355,7 @@ SIGen
 		layers =
 		{
 			{
-				filename = SIGen.MakeSelfPicturePath( "伟力之移山填海物流单元-影子" ) ,
+				filename = SIGen.MakeSelfPicturePath( "SuperLogistic-Shadow" , "伟力之移山填海物流单元-影子" ) ,
 				priority = "high" ,
 				width = 58 ,
 				height = 29 ,
@@ -2374,7 +2374,7 @@ SIGen
 		orientation_to_variation = false ,
 		pictures =
 		{
-			filename = SIGen.MakeSelfPicturePath( "伟力之移山填海物流单元-反射" ) ,
+			filename = SIGen.MakeSelfPicturePath( "SuperLogistic-Reflect" , "伟力之移山填海物流单元-反射" ) ,
 			priority = "extra-high" ,
 			width = 12 ,
 			height = 12 ,
@@ -2450,14 +2450,14 @@ SIGen
 	energy_consumption = "1TW" ,
 	sprite =
 	{
-		filename = SIGen.MakePicturePath( SICommon.Types.Items.Item , "伟力之移山填海物流单元" .. SICommon.ShowNameSuffix.ICON ) ,
+		filename = SIGen.MakePicturePath( SICommon.Types.Items.Item , "SuperLogistic" .. SICommon.CodeNameSuffix.ICON , "伟力之移山填海物流单元" .. SICommon.ShowNameSuffix.ICON ) ,
 		priority = "medium" ,
 		width = 64 ,
 		height = 64 ,
 		scale = 1.0
 	}
 } )
-.MakeIcon( SICommon.Types.Items.Item , "伟力之移山填海物流单元" , 64 , 4 )
+.MakeIcon( SICommon.Types.Items.Item , "SuperLogistic" , "伟力之移山填海物流单元" , 64 , 4 )
 .ReferenceEquipmentResult( SICommon.Types.Items.Item , SIConstants_DebugItem.raw.Items.SuperLogistic )
 
 -- ======================================================================
@@ -2503,7 +2503,7 @@ SIGen
 				layers =
 				{
 					{
-						filename = SIGen.MakeSelfPicturePath( "终末之横扫千军光束-激光-身体" ) ,
+						filename = SIGen.MakeSelfPicturePath( "SuperLaser-Beam-Body" , "终末之横扫千军光束-激光-身体" ) ,
 						priority = "medium" ,
 						blend_mode = "additive" ,
 						flags = { "trilinear-filtering" } ,
@@ -2515,7 +2515,7 @@ SIGen
 						scale = laserSmallSize
 					} ,
 					{
-						filename = SIGen.MakeSelfPicturePath( "终末之横扫千军光束-激光-身体-光效" ) ,
+						filename = SIGen.MakeSelfPicturePath( "SuperLaser-Beam-Body-Light" , "终末之横扫千军光束-激光-身体-光效" ) ,
 						priority = "medium" ,
 						draw_as_light = true ,
 						flags = { "light" } ,
@@ -2533,7 +2533,7 @@ SIGen
 				layers =
 				{
 					{
-						filename = SIGen.MakeSelfPicturePath( "终末之横扫千军光束-激光-尾部" ) ,
+						filename = SIGen.MakeSelfPicturePath( "SuperLaser-Beam-Tail" , "终末之横扫千军光束-激光-尾部" ) ,
 						priority = "medium" ,
 						blend_mode = "additive" ,
 						flags = { "trilinear-filtering" } ,
@@ -2546,7 +2546,7 @@ SIGen
 						shift = SIUtils.by_pixel( 11.5 , 1 )
 					} ,
 					{
-						filename = SIGen.MakeSelfPicturePath( "终末之横扫千军光束-激光-尾部-光效" ) ,
+						filename = SIGen.MakeSelfPicturePath( "SuperLaser-Beam-Tail-Light" , "终末之横扫千军光束-激光-尾部-光效" ) ,
 						priority = "medium" ,
 						draw_as_light = true ,
 						flags = { "light" } ,
@@ -2566,7 +2566,7 @@ SIGen
 					layers =
 					{
 						{
-							filename = SIGen.MakeSelfPicturePath( "终末之横扫千军光束-激光-身体" ) ,
+							filename = SIGen.MakeSelfPicturePath( "SuperLaser-Beam-Body" , "终末之横扫千军光束-激光-身体" ) ,
 							priority = "medium" ,
 							blend_mode = "additive" ,
 							flags = { "trilinear-filtering" } ,
@@ -2578,7 +2578,7 @@ SIGen
 							scale = laserSmallSize
 						} ,
 						{
-							filename = SIGen.MakeSelfPicturePath( "终末之横扫千军光束-激光-身体-光效" ) ,
+							filename = SIGen.MakeSelfPicturePath( "SuperLaser-Beam-Body-Light" , "终末之横扫千军光束-激光-身体-光效" ) ,
 							priority = "medium" ,
 							draw_as_light = true ,
 							flags = { "light" } ,
@@ -2600,7 +2600,7 @@ SIGen
 				layers =
 				{
 					{
-						filename = SIGen.MakeSelfPicturePath( "终末之横扫千军光束-激光-地面-头部" ) ,
+						filename = SIGen.MakeSelfPicturePath( "SuperLaser-Beam-Ground-Head" , "终末之横扫千军光束-激光-地面-头部" ) ,
 						priority = "medium" ,
 						width = 256 ,
 						height = 256 ,
@@ -2619,7 +2619,7 @@ SIGen
 				layers =
 				{
 					{
-						filename = SIGen.MakeSelfPicturePath( "终末之横扫千军光束-激光-地面-尾部" ) ,
+						filename = SIGen.MakeSelfPicturePath( "SuperLaser-Beam-Ground-Tail" , "终末之横扫千军光束-激光-地面-尾部" ) ,
 						priority = "medium" ,
 						width = 256 ,
 						height = 256 ,
@@ -2639,7 +2639,7 @@ SIGen
 					layers =
 					{
 						{
-							filename = SIGen.MakeSelfPicturePath( "终末之横扫千军光束-激光-地面-身体" ) ,
+							filename = SIGen.MakeSelfPicturePath( "SuperLaser-Beam-Ground-Body" , "终末之横扫千军光束-激光-地面-身体" ) ,
 							priority = "medium" ,
 							width = 64 ,
 							height = 256 ,
@@ -2696,7 +2696,7 @@ SIGen
 				layers =
 				{
 					{
-						filename = SIGen.MakeSelfPicturePath( "终末之横扫千军光束-激光-身体" ) ,
+						filename = SIGen.MakeSelfPicturePath( "SuperLaser-Beam-Body" , "终末之横扫千军光束-激光-身体" ) ,
 						priority = "medium" ,
 						blend_mode = "additive" ,
 						flags = { "trilinear-filtering" } ,
@@ -2708,7 +2708,7 @@ SIGen
 						scale = laserMediumSize
 					} ,
 					{
-						filename = SIGen.MakeSelfPicturePath( "终末之横扫千军光束-激光-身体-光效" ) ,
+						filename = SIGen.MakeSelfPicturePath( "SuperLaser-Beam-Body-Light" , "终末之横扫千军光束-激光-身体-光效" ) ,
 						priority = "medium" ,
 						draw_as_light = true ,
 						flags = { "light" } ,
@@ -2726,7 +2726,7 @@ SIGen
 				layers =
 				{
 					{
-						filename = SIGen.MakeSelfPicturePath( "终末之横扫千军光束-激光-尾部" ) ,
+						filename = SIGen.MakeSelfPicturePath( "SuperLaser-Beam-Tail" , "终末之横扫千军光束-激光-尾部" ) ,
 						priority = "medium" ,
 						blend_mode = "additive" ,
 						flags = { "trilinear-filtering" } ,
@@ -2739,7 +2739,7 @@ SIGen
 						shift = SIUtils.by_pixel( 11.5 , 1 )
 					} ,
 					{
-						filename = SIGen.MakeSelfPicturePath( "终末之横扫千军光束-激光-尾部-光效" ) ,
+						filename = SIGen.MakeSelfPicturePath( "SuperLaser-Beam-Tail-Light" , "终末之横扫千军光束-激光-尾部-光效" ) ,
 						priority = "medium" ,
 						draw_as_light = true ,
 						flags = { "light" } ,
@@ -2759,7 +2759,7 @@ SIGen
 					layers =
 					{
 						{
-							filename = SIGen.MakeSelfPicturePath( "终末之横扫千军光束-激光-身体" ) ,
+							filename = SIGen.MakeSelfPicturePath( "SuperLaser-Beam-Body" , "终末之横扫千军光束-激光-身体" ) ,
 							priority = "medium" ,
 							blend_mode = "additive" ,
 							flags = { "trilinear-filtering" } ,
@@ -2771,7 +2771,7 @@ SIGen
 							scale = laserMediumSize
 						} ,
 						{
-							filename = SIGen.MakeSelfPicturePath( "终末之横扫千军光束-激光-身体-光效" ) ,
+							filename = SIGen.MakeSelfPicturePath( "SuperLaser-Beam-Body-Light" , "终末之横扫千军光束-激光-身体-光效" ) ,
 							priority = "medium" ,
 							draw_as_light = true ,
 							flags = { "light" } ,
@@ -2793,7 +2793,7 @@ SIGen
 				layers =
 				{
 					{
-						filename = SIGen.MakeSelfPicturePath( "终末之横扫千军光束-激光-地面-头部" ) ,
+						filename = SIGen.MakeSelfPicturePath( "SuperLaser-Beam-Ground-Head" , "终末之横扫千军光束-激光-地面-头部" ) ,
 						priority = "medium" ,
 						width = 256 ,
 						height = 256 ,
@@ -2812,7 +2812,7 @@ SIGen
 				layers =
 				{
 					{
-						filename = SIGen.MakeSelfPicturePath( "终末之横扫千军光束-激光-地面-尾部" ) ,
+						filename = SIGen.MakeSelfPicturePath( "SuperLaser-Beam-Ground-Tail" , "终末之横扫千军光束-激光-地面-尾部" ) ,
 						priority = "medium" ,
 						width = 256 ,
 						height = 256 ,
@@ -2832,7 +2832,7 @@ SIGen
 					layers =
 					{
 						{
-							filename = SIGen.MakeSelfPicturePath( "终末之横扫千军光束-激光-地面-身体" ) ,
+							filename = SIGen.MakeSelfPicturePath( "SuperLaser-Beam-Ground-Body" , "终末之横扫千军光束-激光-地面-身体" ) ,
 							priority = "medium" ,
 							width = 64 ,
 							height = 256 ,
@@ -2983,7 +2983,7 @@ SIGen
 				layers =
 				{
 					{
-						filename = SIGen.MakeSelfPicturePath( "终末之横扫千军光束-激光-身体" ) ,
+						filename = SIGen.MakeSelfPicturePath( "SuperLaser-Beam-Body" , "终末之横扫千军光束-激光-身体" ) ,
 						priority = "medium" ,
 						blend_mode = "additive" ,
 						flags = { "trilinear-filtering" } ,
@@ -2995,7 +2995,7 @@ SIGen
 						scale = laserLargeSize
 					} ,
 					{
-						filename = SIGen.MakeSelfPicturePath( "终末之横扫千军光束-激光-身体-光效" ) ,
+						filename = SIGen.MakeSelfPicturePath( "SuperLaser-Beam-Body-Light" , "终末之横扫千军光束-激光-身体-光效" ) ,
 						priority = "medium" ,
 						draw_as_light = true ,
 						flags = { "light" } ,
@@ -3013,7 +3013,7 @@ SIGen
 				layers =
 				{
 					{
-						filename = SIGen.MakeSelfPicturePath( "终末之横扫千军光束-激光-尾部" ) ,
+						filename = SIGen.MakeSelfPicturePath( "SuperLaser-Beam-Tail" , "终末之横扫千军光束-激光-尾部" ) ,
 						priority = "medium" ,
 						blend_mode = "additive" ,
 						flags = { "trilinear-filtering" } ,
@@ -3026,7 +3026,7 @@ SIGen
 						shift = SIUtils.by_pixel( 11.5 , 1 )
 					} ,
 					{
-						filename = SIGen.MakeSelfPicturePath( "终末之横扫千军光束-激光-尾部-光效" ) ,
+						filename = SIGen.MakeSelfPicturePath( "SuperLaser-Beam-Tail-Light" , "终末之横扫千军光束-激光-尾部-光效" ) ,
 						priority = "medium" ,
 						draw_as_light = true ,
 						flags = { "light" } ,
@@ -3046,7 +3046,7 @@ SIGen
 					layers =
 					{
 						{
-							filename = SIGen.MakeSelfPicturePath( "终末之横扫千军光束-激光-身体" ) ,
+							filename = SIGen.MakeSelfPicturePath( "SuperLaser-Beam-Body" , "终末之横扫千军光束-激光-身体" ) ,
 							priority = "medium" ,
 							blend_mode = "additive" ,
 							flags = { "trilinear-filtering" } ,
@@ -3058,7 +3058,7 @@ SIGen
 							scale = laserLargeSize
 						} ,
 						{
-							filename = SIGen.MakeSelfPicturePath( "终末之横扫千军光束-激光-身体-光效" ) ,
+							filename = SIGen.MakeSelfPicturePath( "SuperLaser-Beam-Body-Light" , "终末之横扫千军光束-激光-身体-光效" ) ,
 							priority = "medium" ,
 							draw_as_light = true ,
 							flags = { "light" } ,
@@ -3080,7 +3080,7 @@ SIGen
 				layers =
 				{
 					{
-						filename = SIGen.MakeSelfPicturePath( "终末之横扫千军光束-激光-地面-头部" ) ,
+						filename = SIGen.MakeSelfPicturePath( "SuperLaser-Beam-Ground-Head" , "终末之横扫千军光束-激光-地面-头部" ) ,
 						priority = "medium" ,
 						width = 256 ,
 						height = 256 ,
@@ -3099,7 +3099,7 @@ SIGen
 				layers =
 				{
 					{
-						filename = SIGen.MakeSelfPicturePath( "终末之横扫千军光束-激光-地面-尾部" ) ,
+						filename = SIGen.MakeSelfPicturePath( "SuperLaser-Beam-Ground-Tail" , "终末之横扫千军光束-激光-地面-尾部" ) ,
 						priority = "medium" ,
 						width = 256 ,
 						height = 256 ,
@@ -3119,7 +3119,7 @@ SIGen
 					layers =
 					{
 						{
-							filename = SIGen.MakeSelfPicturePath( "终末之横扫千军光束-激光-地面-身体" ) ,
+							filename = SIGen.MakeSelfPicturePath( "SuperLaser-Beam-Ground-Body" , "终末之横扫千军光束-激光-地面-身体" ) ,
 							priority = "medium" ,
 							width = 64 ,
 							height = 256 ,
@@ -3283,7 +3283,7 @@ SIGen
 				layers =
 				{
 					{
-						filename = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "终末之横扫千军光束" ) ,
+						filename = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "SuperLaser" , "终末之横扫千军光束" ) ,
 						priority = "high" ,
 						width = 70 ,
 						height = 52 ,
@@ -3293,7 +3293,7 @@ SIGen
 						shift = SIUtils.by_pixel( 0 , 2 )
 					} ,
 					{
-						filename = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "终末之横扫千军光束-影子" ) ,
+						filename = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "SuperLaser-Shadow" , "终末之横扫千军光束-影子" ) ,
 						priority = "medium" ,
 						width = 66 ,
 						height = 42 ,
@@ -3312,7 +3312,7 @@ SIGen
 		layers =
 		{
 			{
-				filename = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "终末之横扫千军光束-升起" ) ,
+				filename = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "SuperLaser-Raise" , "终末之横扫千军光束-升起" ) ,
 				priority = "medium" ,
 				run_mode = "forward" ,
 				width = 66 ,
@@ -3324,7 +3324,7 @@ SIGen
 				axially_symmetrical = false
 			} ,
 			{
-				filename = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "终末之横扫千军光束-升起-遮盖" ) ,
+				filename = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "SuperLaser-Raise-Cover" , "终末之横扫千军光束-升起-遮盖" ) ,
 				priority = "medium" ,
 				run_mode = "forward" ,
 				flags = { "mask" } ,
@@ -3338,7 +3338,7 @@ SIGen
 				apply_runtime_tint = true
 			} ,
 			{
-				filename = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "终末之横扫千军光束-升起-影子" ) ,
+				filename = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "SuperLaser-Raise-Shadow" , "终末之横扫千军光束-升起-影子" ) ,
 				priority = "medium" ,
 				run_mode = "forward" ,
 				width = 92 ,
@@ -3357,7 +3357,7 @@ SIGen
 		layers =
 		{
 			{
-				filename = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "终末之横扫千军光束-射击" ) ,
+				filename = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "SuperLaser-Shoot" , "终末之横扫千军光束-射击" ) ,
 				priority = "medium" ,
 				width = 64 ,
 				height = 60 ,
@@ -3367,7 +3367,7 @@ SIGen
 				shift = SIUtils.by_pixel( 0 , -35 )
 			} ,
 			{
-				filename = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "终末之横扫千军光束-射击-遮盖" ) ,
+				filename = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "SuperLaser-Shoot-Cover" , "终末之横扫千军光束-射击-遮盖" ) ,
 				priority = "medium" ,
 				flags = { "mask" } ,
 				width = 46 ,
@@ -3379,7 +3379,7 @@ SIGen
 				apply_runtime_tint = true
 			} ,
 			{
-				filename = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "终末之横扫千军光束-射击-影子" ) ,
+				filename = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "SuperLaser-Shoot-Shadow" , "终末之横扫千军光束-射击-影子" ) ,
 				priority = "medium" ,
 				width = 86 ,
 				height = 46 ,
@@ -3396,7 +3396,7 @@ SIGen
 		layers =
 		{
 			{
-				filename = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "终末之横扫千军光束-升起" ) ,
+				filename = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "SuperLaser-Raise" , "终末之横扫千军光束-升起" ) ,
 				priority = "medium" ,
 				run_mode = "backward" ,
 				width = 66 ,
@@ -3408,7 +3408,7 @@ SIGen
 				axially_symmetrical = false
 			} ,
 			{
-				filename = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "终末之横扫千军光束-升起-遮盖" ) ,
+				filename = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "SuperLaser-Raise-Cover" , "终末之横扫千军光束-升起-遮盖" ) ,
 				priority = "medium" ,
 				run_mode = "backward" ,
 				flags = { "mask" } ,
@@ -3422,7 +3422,7 @@ SIGen
 				apply_runtime_tint = true
 			} ,
 			{
-				filename = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "终末之横扫千军光束-升起-影子" ) ,
+				filename = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "SuperLaser-Raise-Shadow" , "终末之横扫千军光束-升起-影子" ) ,
 				priority = "medium" ,
 				run_mode = "backward" ,
 				width = 92 ,
@@ -3441,7 +3441,7 @@ SIGen
 		layers =
 		{
 			{
-				filename = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "终末之横扫千军光束-升起" ) ,
+				filename = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "SuperLaser-Raise" , "终末之横扫千军光束-升起" ) ,
 				priority = "medium" ,
 				run_mode = "forward" ,
 				width = 66 ,
@@ -3453,7 +3453,7 @@ SIGen
 				axially_symmetrical = false
 			} ,
 			{
-				filename = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "终末之横扫千军光束-升起-遮盖" ) ,
+				filename = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "SuperLaser-Raise-Cover" , "终末之横扫千军光束-升起-遮盖" ) ,
 				priority = "medium" ,
 				run_mode = "forward" ,
 				flags = { "mask" } ,
@@ -3467,7 +3467,7 @@ SIGen
 				apply_runtime_tint = true
 			} ,
 			{
-				filename = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "终末之横扫千军光束-升起-影子" ) ,
+				filename = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "SuperLaser-Raise-Shadow" , "终末之横扫千军光束-升起-影子" ) ,
 				priority = "medium" ,
 				run_mode = "forward" ,
 				width = 92 ,
@@ -3487,7 +3487,7 @@ SIGen
 		layers =
 		{
 			{
-				filename = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "终末之横扫千军光束-射击-光效" ) ,
+				filename = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "SuperLaser-Shoot-Light" , "终末之横扫千军光束-射击-光效" ) ,
 				priority = "medium" ,
 				blend_mode = "additive" ,
 				width = 62 ,
@@ -3505,7 +3505,7 @@ SIGen
 		orientation_to_variation = false ,
 		pictures =
 		{
-			filename = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "终末之横扫千军光束-反射" ) ,
+			filename = SIGen.MakePicturePath( SICommon.Types.Entities.Turret , "SuperLaser-Reflect" , "终末之横扫千军光束-反射" ) ,
 			priority = "extra-high" ,
 			width = 20 ,
 			height = 32 ,
@@ -3613,14 +3613,14 @@ SIGen
 	} ,
 	sprite =
 	{
-		filename = SIGen.MakePicturePath( SICommon.Types.Items.Item , "终末之横扫千军光束" .. SICommon.ShowNameSuffix.ICON ) ,
+		filename = SIGen.MakePicturePath( SICommon.Types.Items.Item , "SuperLaser" .. SICommon.CodeNameSuffix.ICON , "终末之横扫千军光束" .. SICommon.ShowNameSuffix.ICON ) ,
 		priority = "medium" ,
 		width = 64 ,
 		height = 64 ,
 		scale = 1.0
 	}
 } )
-.MakeIcon( SICommon.Types.Items.Item , "终末之横扫千军光束" , 64 , 4 )
+.MakeIcon( SICommon.Types.Items.Item , "SuperLaser" , "终末之横扫千军光束" , 64 , 4 )
 .ReferenceEquipmentResult( SICommon.Types.Items.Item , SIConstants_DebugItem.raw.Items.SuperLaser )
 
 -- ======================================================================
@@ -4350,7 +4350,7 @@ SIGen
 		layers =
 		{
 			{
-				filename = SIGen.MakeSelfPicturePath( "超越之安如磐石战车-光效" ) ,
+				filename = SIGen.MakeSelfPicturePath( "SuperTank-Light" , "超越之安如磐石战车-光效" ) ,
 				priority = "low" ,
 				blend_mode = "additive" ,
 				width = 260 ,
@@ -4373,22 +4373,22 @@ SIGen
 				stripes =
 				{
 					{
-						filename = SIGen.MakeSelfPicturePath( "超越之安如磐石战车-1" ) ,
+						filename = SIGen.MakeSelfPicturePath( "SuperTank-1" , "超越之安如磐石战车-1" ) ,
 						width_in_frames = 2 ,
 						height_in_frames = 16
 					} ,
 					{
-						filename = SIGen.MakeSelfPicturePath( "超越之安如磐石战车-2" ) ,
+						filename = SIGen.MakeSelfPicturePath( "SuperTank-2" , "超越之安如磐石战车-2" ) ,
 						width_in_frames = 2 ,
 						height_in_frames = 16
 					} ,
 					{
-						filename = SIGen.MakeSelfPicturePath( "超越之安如磐石战车-3" ) ,
+						filename = SIGen.MakeSelfPicturePath( "SuperTank-3" , "超越之安如磐石战车-3" ) ,
 						width_in_frames = 2 ,
 						height_in_frames = 16
 					} ,
 					{
-						filename = SIGen.MakeSelfPicturePath( "超越之安如磐石战车-4" ) ,
+						filename = SIGen.MakeSelfPicturePath( "SuperTank-4" , "超越之安如磐石战车-4" ) ,
 						width_in_frames = 2 ,
 						height_in_frames = 16
 					}
@@ -4407,17 +4407,17 @@ SIGen
 				stripes = SIUtils.multiplystripes( 2 ,
 				{
 					{
-						filename = SIGen.MakeSelfPicturePath( "超越之安如磐石战车-遮盖-1" ) ,
+						filename = SIGen.MakeSelfPicturePath( "SuperTank-Cover-1" , "超越之安如磐石战车-遮盖-1" ) ,
 						width_in_frames = 1 ,
 						height_in_frames = 22
 					} ,
 					{
-						filename = SIGen.MakeSelfPicturePath( "超越之安如磐石战车-遮盖-2" ) ,
+						filename = SIGen.MakeSelfPicturePath( "SuperTank-Cover-2" , "超越之安如磐石战车-遮盖-2" ) ,
 						width_in_frames = 1 ,
 						height_in_frames = 22
 					} ,
 					{
-						filename = SIGen.MakeSelfPicturePath( "超越之安如磐石战车-遮盖-3" ) ,
+						filename = SIGen.MakeSelfPicturePath( "SuperTank-Cover-3" , "超越之安如磐石战车-遮盖-3" ) ,
 						width_in_frames = 1 ,
 						height_in_frames = 20
 					}
@@ -4437,22 +4437,22 @@ SIGen
 				stripes = SIUtils.multiplystripes( 2 ,
 				{
 					{
-						filename = SIGen.MakeSelfPicturePath( "超越之安如磐石战车-影子-1" ) ,
+						filename = SIGen.MakeSelfPicturePath( "SuperTank-Shadow-1" , "超越之安如磐石战车-影子-1" ) ,
 						width_in_frames = 1 ,
 						height_in_frames = 16
 					} ,
 					{
-						filename = SIGen.MakeSelfPicturePath( "超越之安如磐石战车-影子-2" ) ,
+						filename = SIGen.MakeSelfPicturePath( "SuperTank-Shadow-2" , "超越之安如磐石战车-影子-2" ) ,
 						width_in_frames = 1 ,
 						height_in_frames = 16
 					} ,
 					{
-						filename = SIGen.MakeSelfPicturePath( "超越之安如磐石战车-影子-3" ) ,
+						filename = SIGen.MakeSelfPicturePath( "SuperTank-Shadow-3" , "超越之安如磐石战车-影子-3" ) ,
 						width_in_frames = 1 ,
 						height_in_frames = 16
 					} ,
 					{
-						filename = SIGen.MakeSelfPicturePath( "超越之安如磐石战车-影子-4" ) ,
+						filename = SIGen.MakeSelfPicturePath( "SuperTank-Shadow-4" , "超越之安如磐石战车-影子-4" ) ,
 						width_in_frames = 1 ,
 						height_in_frames = 16
 					}
@@ -4474,7 +4474,7 @@ SIGen
 		layers =
 		{
 			{
-				filename = SIGen.MakeSelfPicturePath( "超越之安如磐石战车-炮塔" ) ,
+				filename = SIGen.MakeSelfPicturePath( "SuperTank-Turret" , "超越之安如磐石战车-炮塔" ) ,
 				priority = "low" ,
 				width = 179 ,
 				height = 132 ,
@@ -4486,7 +4486,7 @@ SIGen
 				shift = SIUtils.by_pixel( 0.25 * tankSize , ( -40.5 + tankShiftY ) * tankSize )
 			} ,
 			{
-				filename = SIGen.MakeSelfPicturePath( "超越之安如磐石战车-炮塔-遮盖" ) ,
+				filename = SIGen.MakeSelfPicturePath( "SuperTank-Turret-Cover" , "超越之安如磐石战车-炮塔-遮盖" ) ,
 				priority = "low" ,
 				width = 72 ,
 				height = 66 ,
@@ -4498,7 +4498,7 @@ SIGen
 				apply_runtime_tint = true
 			} ,
 			{
-				filename = SIGen.MakeSelfPicturePath( "超越之安如磐石战车-炮塔-影子" ) ,
+				filename = SIGen.MakeSelfPicturePath( "SuperTank-Turret-Shadow" , "超越之安如磐石战车-炮塔-影子" ) ,
 				priority = "low" ,
 				width = 193 ,
 				height = 134 ,
@@ -4517,7 +4517,7 @@ SIGen
 		orientation_to_variation = false ,
 		pictures =
 		{
-			filename = SIGen.MakeSelfPicturePath( "超越之安如磐石战车-反射" ) ,
+			filename = SIGen.MakeSelfPicturePath( "SuperTank-Reflect" , "超越之安如磐石战车-反射" ) ,
 			priority = "extra-high" ,
 			width = 20 ,
 			height = 24 ,
@@ -4634,12 +4634,12 @@ SIGen
 	} ,
 	sprite =
 	{
-		filename = SIGen.MakePicturePath( SICommon.Types.Items.ItemEntity , "超越之安如磐石战车" .. SICommon.ShowNameSuffix.ICON ) ,
+		filename = SIGen.MakePicturePath( SICommon.Types.Items.ItemEntity , "SuperTank" .. SICommon.CodeNameSuffix.ICON , "超越之安如磐石战车" .. SICommon.ShowNameSuffix.ICON ) ,
 		priority = "medium" ,
 		width = 64 ,
 		height = 64 ,
 		scale = 1.0
 	}
 } )
-.MakeIcon( SICommon.Types.Items.ItemEntity , "超越之安如磐石战车" , 64 , 4 )
+.MakeIcon( SICommon.Types.Items.ItemEntity , "SuperTank" , "超越之安如磐石战车" , 64 , 4 )
 .ReferenceEquipmentResult( SICommon.Types.Items.ItemEntity , SIConstants_DebugItem.raw.Items.SuperTank )

@@ -2828,7 +2828,7 @@ SIRequestMap =
 	-- player_index  = 操作玩家的索引<br>
 	-- entity        = 被修改了插件的实体<br>
 	-- ======================================================================<br>
-	---@return integer|string -- 事件的 ID 值
+	---@return string -- 事件的 ID 值
 	GetModuleEventID = function()
 		return SIRequestMap.ModuleEventID
 	end

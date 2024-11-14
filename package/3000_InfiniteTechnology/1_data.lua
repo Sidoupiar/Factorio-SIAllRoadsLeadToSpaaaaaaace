@@ -364,14 +364,14 @@ SIGen
 -- ======================================================================
 -- 无尽研究球
 -- ======================================================================
-.New( SICommon.Types.Items.Item , "Lab" , "无尽研究球" ,
+.New( SICommon.Types.Items.Item , "InfinityLab" , "无尽研究球" ,
 {
 	stack_size = 100 ,
 	default_request_amount = 100 ,
 	place_result = nil
 } )
 .AutoIcon()
-.New( SICommon.Types.Recipe , "Lab" , "无尽研究球" ,
+.New( SICommon.Types.Recipe , "InfinityLab" , "无尽研究球" ,
 {
 	category = "crafting" ,
 	crafting_machine_tint =
@@ -418,12 +418,12 @@ SIGen
 	{
 		{
 			type = SICommon.Types.Items.Item ,
-			name = SIConstants_InfiniteTechnology.raw.Items.Lab ,
+			name = SIConstants_InfiniteTechnology.raw.Items.InfinityLab ,
 			amount = 1 ,
 			catalyst_amount = 1
 		}
 	} ,
-	main_product = SIConstants_InfiniteTechnology.raw.Items.Lab ,
+	main_product = SIConstants_InfiniteTechnology.raw.Items.InfinityLab ,
 	emissions_multiplier = 5.0 ,
 	requester_paste_multiplier = 10 ,
 	overload_multiplier = 5 ,
@@ -437,7 +437,7 @@ SIGen
 	unlock_results = true
 } )
 .AutoIcon()
-.New( SICommon.Types.Entities.Corpse , "LabRemnants" , "无尽研究球-残骸" )
+.New( SICommon.Types.Entities.Corpse , "InfinityLab_Corpse" , "无尽研究球-残骸" )
 .AutoIcon()
 .SetSizeScale( 3 , 3 , 0 )
 .Append
@@ -452,7 +452,7 @@ SIGen
 	animation = SIGraphics.MakeRemnantsAnimation( 2 ,
 	{
 		{
-			filename = SIGen.MakeSelfPicturePath( "无尽研究球-残骸" ) ,
+			filename = SIGen.MakeSelfPicturePath( "InfinityLab-Corpse" , "无尽研究球-残骸" ) ,
 			priority = "extra-high" ,
 			width = 134 ,
 			height = 100 ,
@@ -465,7 +465,7 @@ SIGen
 			axially_symmetrical = false ,
 			hr_version =
 			{
-				filename = SIGen.MakeSelfPicturePathHr( "无尽研究球-残骸" ) ,
+				filename = SIGen.MakeSelfPicturePathHr( "InfinityLab-Corpse" , "无尽研究球-残骸" ) ,
 				priority = "extra-high" ,
 				width = 266 ,
 				height = 196 ,
@@ -480,10 +480,10 @@ SIGen
 		}
 	} )
 }
-.New( SICommon.Types.Entities.Lab , "Lab" , "无尽研究球" )
+.New( SICommon.Types.Entities.Lab , "InfinityLab" , "无尽研究球" )
 .AutoIcon()
 .SetSize( 3 , 3 )
-.ReferencePlaceResult( SICommon.Types.Items.Item , SIConstants_InfiniteTechnology.raw.Items.Lab )
+.ReferencePlaceResult( SICommon.Types.Items.Item , SIConstants_InfiniteTechnology.raw.Items.InfinityLab )
 .Append
 {
 	flags = { SICommon.Flags.Entity.PlaceablePlayer , SICommon.Flags.Entity.PlayerCreation } ,
@@ -494,13 +494,13 @@ SIGen
 		{
 			{
 				type = SICommon.Types.Items.Item ,
-				name = SIConstants_InfiniteTechnology.raw.Items.Lab ,
+				name = SIConstants_InfiniteTechnology.raw.Items.InfinityLab ,
 				amount = 1
 			}
 		}
 	} ,
 	max_health = 185 ,
-	corpse = SIConstants_InfiniteTechnology.raw.Entities.LabRemnants ,
+	corpse = SIConstants_InfiniteTechnology.raw.Entities.InfinityLab_Corpse ,
 	dying_explosion = "lab-explosion" ,
 	map_color = { r = 1.00 , g = 1.00 , b = 1.00 } ,
 	friendly_map_color = { r = 0.40 , g = 0.40 , b = 1.00 } ,
@@ -564,7 +564,7 @@ SIGen
 		layers =
 		{
 			{
-				filename = SIGen.MakeSelfPicturePath( "无尽研究球" ) ,
+				filename = SIGen.MakeSelfPicturePath( "InfinityLab" , "无尽研究球" ) ,
 				priority = "extra-high" ,
 				width = 98 ,
 				height = 87 ,
@@ -575,7 +575,7 @@ SIGen
 				shift = SIUtils.by_pixel( 0 , 1.5 ) ,
 				hr_version =
 				{
-					filename = SIGen.MakeSelfPicturePathHr( "无尽研究球" ) ,
+					filename = SIGen.MakeSelfPicturePathHr( "InfinityLab" , "无尽研究球" ) ,
 					priority = "extra-high" ,
 					width = 194 ,
 					height = 174 ,
@@ -587,7 +587,7 @@ SIGen
 				}
 			} ,
 			{
-				filename = SIGen.MakeSelfPicturePath( "无尽研究球-交互" ) ,
+				filename = SIGen.MakeSelfPicturePath( "InfinityLab-interact" , "无尽研究球-交互" ) ,
 				priority = "extra-high" ,
 				width = 122 ,
 				height = 81 ,
@@ -599,7 +599,7 @@ SIGen
 				shift = SIUtils.by_pixel( 0 , 15.5 ) ,
 				hr_version =
 				{
-					filename = SIGen.MakeSelfPicturePathHr( "无尽研究球-交互" ) ,
+					filename = SIGen.MakeSelfPicturePathHr( "InfinityLab-interact" , "无尽研究球-交互" ) ,
 					priority = "extra-high" ,
 					width = 242 ,
 					height = 162 ,
@@ -612,7 +612,7 @@ SIGen
 				}
 			} ,
 			{
-				filename = SIGen.MakeSelfPicturePath( "无尽研究球-灯光" ) ,
+				filename = SIGen.MakeSelfPicturePath( "InfinityLab-Light" , "无尽研究球-灯光" ) ,
 				priority = "extra-high" ,
 				blend_mode = "additive" ,
 				width = 106 ,
@@ -625,7 +625,7 @@ SIGen
 				draw_as_light = true ,
 				hr_version =
 				{
-					filename = SIGen.MakeSelfPicturePathHr( "无尽研究球-灯光" ) ,
+					filename = SIGen.MakeSelfPicturePathHr( "InfinityLab-Light" , "无尽研究球-灯光" ) ,
 					priority = "extra-high" ,
 					blend_mode = "additive" ,
 					width = 216 ,
@@ -639,7 +639,7 @@ SIGen
 				}
 			} ,
 			{
-				filename = SIGen.MakeSelfPicturePath( "无尽研究球-影子" ) ,
+				filename = SIGen.MakeSelfPicturePath( "InfinityLab-Shadow" , "无尽研究球-影子" ) ,
 				priority = "extra-high" ,
 				width = 122 ,
 				height = 68 ,
@@ -652,7 +652,7 @@ SIGen
 				draw_as_shadow = true ,
 				hr_version =
 				{
-					filename = SIGen.MakeSelfPicturePathHr( "无尽研究球-影子" ) ,
+					filename = SIGen.MakeSelfPicturePathHr( "InfinityLab-Shadow" , "无尽研究球-影子" ) ,
 					priority = "extra-high" ,
 					width = 242 ,
 					height = 136 ,
@@ -672,7 +672,7 @@ SIGen
 		layers =
 		{
 			{
-				filename = SIGen.MakeSelfPicturePath( "无尽研究球" ) ,
+				filename = SIGen.MakeSelfPicturePath( "InfinityLab" , "无尽研究球" ) ,
 				priority = "extra-high" ,
 				width = 98 ,
 				height = 87 ,
@@ -683,7 +683,7 @@ SIGen
 				shift = SIUtils.by_pixel( 0 , 1.5 ) ,
 				hr_version =
 				{
-					filename = SIGen.MakeSelfPicturePathHr( "无尽研究球" ) ,
+					filename = SIGen.MakeSelfPicturePathHr( "InfinityLab" , "无尽研究球" ) ,
 					priority = "extra-high" ,
 					width = 194 ,
 					height = 174 ,
@@ -695,7 +695,7 @@ SIGen
 				}
 			} ,
 			{
-				filename = SIGen.MakeSelfPicturePath( "无尽研究球-交互" ) ,
+				filename = SIGen.MakeSelfPicturePath( "InfinityLab-interact" , "无尽研究球-交互" ) ,
 				priority = "extra-high" ,
 				width = 122 ,
 				height = 81 ,
@@ -707,7 +707,7 @@ SIGen
 				shift = SIUtils.by_pixel( 0 , 15.5 ) ,
 				hr_version =
 				{
-					filename = SIGen.MakeSelfPicturePathHr( "无尽研究球-交互" ) ,
+					filename = SIGen.MakeSelfPicturePathHr( "InfinityLab-interact" , "无尽研究球-交互" ) ,
 					priority = "extra-high" ,
 					width = 242 ,
 					height = 162 ,
@@ -720,7 +720,7 @@ SIGen
 				}
 			} ,
 			{
-				filename = SIGen.MakeSelfPicturePath( "无尽研究球-影子" ) ,
+				filename = SIGen.MakeSelfPicturePath( "InfinityLab-Shadow" , "无尽研究球-影子" ) ,
 				priority = "extra-high" ,
 				width = 122 ,
 				height = 68 ,
@@ -733,7 +733,7 @@ SIGen
 				draw_as_shadow = true ,
 				hr_version =
 				{
-					filename = SIGen.MakeSelfPicturePathHr( "无尽研究球-影子" ) ,
+					filename = SIGen.MakeSelfPicturePathHr( "InfinityLab-Shadow" , "无尽研究球-影子" ) ,
 					priority = "extra-high" ,
 					width = 242 ,
 					height = 136 ,
@@ -974,6 +974,21 @@ local function InfiniteTech( ID , alias , maxLevel , subIcon , effects )
 	local IDPrefix = "Infinite_" .. ID
 	local aliasPrefix = "无尽科技-" .. alias
 	local baseValue = math.max( math.floor( 110 / ( maxLevel * ( maxLevel + 1 ) ) ) , 1 ) * 100
+	local infinityTechnologyIconList =
+	{
+		{
+			icon = SIGen.MakeSelfPicturePath( "InfinityTechnology" .. SICommon.CodeNameSuffix.ICON , "无尽科技" .. SICommon.ShowNameSuffix.ICON ) ,
+			icon_size = 256 ,
+			icon_mipmaps = 4
+		} ,
+		{
+			icon = SIGen.MakeSelfPicturePath( IDPrefix .. SICommon.CodeNameSuffix.ICON , aliasPrefix .. SICommon.ShowNameSuffix.ICON ) ,
+			icon_size = 256 ,
+			icon_mipmaps = 4
+		} ,
+		subIcon
+	}
+
 	SIGen
 	-- ======================================================================
 	-- 无尽科技 - 第一产业
@@ -983,20 +998,7 @@ local function InfiniteTech( ID , alias , maxLevel , subIcon , effects )
 	{
 		localised_name = SIGen.MakeSelfLocalisedName( aliasPrefix ) ,
 		localised_description = SIGen.MakeSelfLocalisedDescription( aliasPrefix ) ,
-		icons =
-		{
-			{
-				icon = SIGen.MakeSelfPicturePath( "无尽科技" .. SICommon.ShowNameSuffix.ICON ) ,
-				icon_size = 256 ,
-				icon_mipmaps = 4
-			} ,
-			{
-				icon = SIGen.MakeSelfPicturePath( aliasPrefix .. SICommon.ShowNameSuffix.ICON ) ,
-				icon_size = 256 ,
-				icon_mipmaps = 4
-			} ,
-			subIcon
-		} ,
+		icons = infinityTechnologyIconList ,
 		icon_size = 256 ,
 		icon_mipmaps = 4 ,
 		enabled = true ,
@@ -1032,20 +1034,7 @@ local function InfiniteTech( ID , alias , maxLevel , subIcon , effects )
 	{
 		localised_name = SIGen.MakeSelfLocalisedName( aliasPrefix ) ,
 		localised_description = SIGen.MakeSelfLocalisedDescription( aliasPrefix ) ,
-		icons =
-		{
-			{
-				icon = SIGen.MakeSelfPicturePath( "无尽科技" .. SICommon.ShowNameSuffix.ICON ) ,
-				icon_size = 256 ,
-				icon_mipmaps = 4
-			} ,
-			{
-				icon = SIGen.MakeSelfPicturePath( aliasPrefix .. SICommon.ShowNameSuffix.ICON ) ,
-				icon_size = 256 ,
-				icon_mipmaps = 4
-			} ,
-			subIcon
-		} ,
+		icons = infinityTechnologyIconList ,
 		icon_size = 256 ,
 		icon_mipmaps = 4 ,
 		enabled = true ,
@@ -1082,20 +1071,7 @@ local function InfiniteTech( ID , alias , maxLevel , subIcon , effects )
 	{
 		localised_name = SIGen.MakeSelfLocalisedName( aliasPrefix ) ,
 		localised_description = SIGen.MakeSelfLocalisedDescription( aliasPrefix ) ,
-		icons =
-		{
-			{
-				icon = SIGen.MakeSelfPicturePath( "无尽科技" .. SICommon.ShowNameSuffix.ICON ) ,
-				icon_size = 256 ,
-				icon_mipmaps = 4
-			} ,
-			{
-				icon = SIGen.MakeSelfPicturePath( aliasPrefix .. SICommon.ShowNameSuffix.ICON ) ,
-				icon_size = 256 ,
-				icon_mipmaps = 4
-			} ,
-			subIcon
-		} ,
+		icons = infinityTechnologyIconList ,
 		icon_size = 256 ,
 		icon_mipmaps = 4 ,
 		enabled = true ,
@@ -1132,20 +1108,7 @@ local function InfiniteTech( ID , alias , maxLevel , subIcon , effects )
 	{
 		localised_name = SIGen.MakeSelfLocalisedName( aliasPrefix ) ,
 		localised_description = SIGen.MakeSelfLocalisedDescription( aliasPrefix ) ,
-		icons =
-		{
-			{
-				icon = SIGen.MakeSelfPicturePath( "无尽科技" .. SICommon.ShowNameSuffix.ICON ) ,
-				icon_size = 256 ,
-				icon_mipmaps = 4
-			} ,
-			{
-				icon = SIGen.MakeSelfPicturePath( aliasPrefix .. SICommon.ShowNameSuffix.ICON ) ,
-				icon_size = 256 ,
-				icon_mipmaps = 4
-			} ,
-			subIcon
-		} ,
+		icons = infinityTechnologyIconList ,
 		icon_size = 256 ,
 		icon_mipmaps = 4 ,
 		enabled = true ,
@@ -1182,20 +1145,7 @@ local function InfiniteTech( ID , alias , maxLevel , subIcon , effects )
 	{
 		localised_name = SIGen.MakeSelfLocalisedName( aliasPrefix ) ,
 		localised_description = SIGen.MakeSelfLocalisedDescription( aliasPrefix ) ,
-		icons =
-		{
-			{
-				icon = SIGen.MakeSelfPicturePath( "无尽科技" .. SICommon.ShowNameSuffix.ICON ) ,
-				icon_size = 256 ,
-				icon_mipmaps = 4
-			} ,
-			{
-				icon = SIGen.MakeSelfPicturePath( aliasPrefix .. SICommon.ShowNameSuffix.ICON ) ,
-				icon_size = 256 ,
-				icon_mipmaps = 4
-			} ,
-			subIcon
-		} ,
+		icons = infinityTechnologyIconList ,
 		icon_size = 256 ,
 		icon_mipmaps = 4 ,
 		enabled = true ,
@@ -1232,20 +1182,7 @@ local function InfiniteTech( ID , alias , maxLevel , subIcon , effects )
 	{
 		localised_name = SIGen.MakeSelfLocalisedName( aliasPrefix ) ,
 		localised_description = SIGen.MakeSelfLocalisedDescription( aliasPrefix ) ,
-		icons =
-		{
-			{
-				icon = SIGen.MakeSelfPicturePath( "无尽科技" .. SICommon.ShowNameSuffix.ICON ) ,
-				icon_size = 256 ,
-				icon_mipmaps = 4
-			} ,
-			{
-				icon = SIGen.MakeSelfPicturePath( aliasPrefix .. SICommon.ShowNameSuffix.ICON ) ,
-				icon_size = 256 ,
-				icon_mipmaps = 4
-			} ,
-			subIcon
-		} ,
+		icons = infinityTechnologyIconList ,
 		icon_size = 256 ,
 		icon_mipmaps = 4 ,
 		enabled = true ,

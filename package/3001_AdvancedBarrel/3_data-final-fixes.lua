@@ -55,7 +55,7 @@ local Barrel_2_EntityShadowShift_4 = SIUtils.by_pixel( 1.5 , 0 )
 
 local ignoreAutoBarrel = SIConfigs.SIAdvancedBarrel.IgnoreAutoBarrel ~= nil and SISettings.Startup.SIAdvancedBarrel.IgnoreAutoBarrel() or false
 local barrelSize = SIConfigs.SIAdvancedBarrel.BarrelSize ~= nil and SISettings.Startup.SIAdvancedBarrel.BarrelSize() or 100
-local barrelStackSize = SIConfigs.SIAdvancedBarrel.BarrelStackSize ~= nil and SISettings.SIAdvancedBarrel.BarrelStackSize() or 10
+local barrelStackSize = SIConfigs.SIAdvancedBarrel.BarrelStackSize ~= nil and SISettings.Startup.SIAdvancedBarrel.BarrelStackSize() or 10
 
 -- 流体装桶
 SIGen
@@ -107,12 +107,12 @@ SIGen
 				icons =
 				{
 					{
-						icon = SIGen.MakeSelfPicturePath( "木桶-身体" .. SICommon.ShowNameSuffix.ICON ) ,
+						icon = SIGen.MakeSelfPicturePath( "WoodenBarrel-Body" .. SICommon.CodeNameSuffix.ICON , "木桶-身体" .. SICommon.ShowNameSuffix.ICON ) ,
 						icon_size = 64 ,
 						icon_mipmaps = 4
 					} ,
 					{
-						icon = SIGen.MakeSelfPicturePath( "木桶-顶部" .. SICommon.ShowNameSuffix.ICON ) ,
+						icon = SIGen.MakeSelfPicturePath( "WoodenBarrel-Top" .. SICommon.CodeNameSuffix.ICON , "木桶-顶部" .. SICommon.ShowNameSuffix.ICON ) ,
 						icon_size = 64 ,
 						icon_mipmaps = 4 ,
 						tint = fluidColor
@@ -133,12 +133,12 @@ SIGen
 				icons =
 				{
 					{
-						icon = SIGen.MakeSelfPicturePath( "木桶-身体" .. SICommon.ShowNameSuffix.ICON ) ,
+						icon = SIGen.MakeSelfPicturePath( "WoodenBarrel-Body" .. SICommon.CodeNameSuffix.ICON , "木桶-身体" .. SICommon.ShowNameSuffix.ICON ) ,
 						icon_size = 64 ,
 						icon_mipmaps = 4
 					} ,
 					{
-						icon = SIGen.MakeSelfPicturePath( "木桶-顶部" .. SICommon.ShowNameSuffix.ICON ) ,
+						icon = SIGen.MakeSelfPicturePath( "WoodenBarrel-Top" .. SICommon.CodeNameSuffix.ICON , "木桶-顶部" .. SICommon.ShowNameSuffix.ICON ) ,
 						icon_size = 64 ,
 						icon_mipmaps = 4 ,
 						tint = fluidColor
@@ -211,12 +211,12 @@ SIGen
 				icons =
 				{
 					{
-						icon = SIGen.MakeSelfPicturePath( "木桶-身体" .. SICommon.ShowNameSuffix.ICON ) ,
+						icon = SIGen.MakeSelfPicturePath( "WoodenBarrel-Body" .. SICommon.CodeNameSuffix.ICON , "木桶-身体" .. SICommon.ShowNameSuffix.ICON ) ,
 						icon_size = 64 ,
 						icon_mipmaps = 4
 					} ,
 					{
-						icon = SIGen.MakeSelfPicturePath( "木桶-顶部" .. SICommon.ShowNameSuffix.ICON ) ,
+						icon = SIGen.MakeSelfPicturePath( "WoodenBarrel-Top" .. SICommon.CodeNameSuffix.ICON , "木桶-顶部" .. SICommon.ShowNameSuffix.ICON ) ,
 						icon_size = 64 ,
 						icon_mipmaps = 4 ,
 						tint = fluidColor
@@ -290,12 +290,12 @@ SIGen
 				icons =
 				{
 					{
-						icon = SIGen.MakeSelfPicturePath( "木桶-身体" .. SICommon.ShowNameSuffix.ICON ) ,
+						icon = SIGen.MakeSelfPicturePath( "WoodenBarrel-Body" .. SICommon.CodeNameSuffix.ICON , "木桶-身体" .. SICommon.ShowNameSuffix.ICON ) ,
 						icon_size = 64 ,
 						icon_mipmaps = 4
 					} ,
 					{
-						icon = SIGen.MakeSelfPicturePath( "木桶-顶部" .. SICommon.ShowNameSuffix.ICON ) ,
+						icon = SIGen.MakeSelfPicturePath( "WoodenBarrel-Top" .. SICommon.CodeNameSuffix.ICON , "木桶-顶部" .. SICommon.ShowNameSuffix.ICON ) ,
 						icon_size = 64 ,
 						icon_mipmaps = 4 ,
 						tint = fluidColor
@@ -368,12 +368,12 @@ SIGen
 				icons =
 				{
 					{
-						icon = SIGen.MakeSelfPicturePath( "木桶-身体" .. SICommon.ShowNameSuffix.ICON ) ,
+						icon = SIGen.MakeSelfPicturePath( "WoodenBarrel-Body" .. SICommon.CodeNameSuffix.ICON , "木桶-身体" .. SICommon.ShowNameSuffix.ICON ) ,
 						icon_size = 64 ,
 						icon_mipmaps = 4
 					} ,
 					{
-						icon = SIGen.MakeSelfPicturePath( "木桶-顶部" .. SICommon.ShowNameSuffix.ICON ) ,
+						icon = SIGen.MakeSelfPicturePath( "WoodenBarrel-Top" .. SICommon.CodeNameSuffix.ICON , "木桶-顶部" .. SICommon.ShowNameSuffix.ICON ) ,
 						icon_size = 64 ,
 						icon_mipmaps = 4 ,
 						tint = fluidColor
@@ -448,12 +448,12 @@ SIGen
 				icons =
 				{
 					{
-						icon = SIGen.MakeSelfPicturePath( "木桶-身体" .. SICommon.ShowNameSuffix.ICON ) ,
+						icon = SIGen.MakeSelfPicturePath( "WoodenBarrel-Body" .. SICommon.CodeNameSuffix.ICON , "木桶-身体" .. SICommon.ShowNameSuffix.ICON ) ,
 						icon_size = 64 ,
 						icon_mipmaps = 4
 					} ,
 					{
-						icon = SIGen.MakeSelfPicturePath( "木桶-顶部" .. SICommon.ShowNameSuffix.ICON ) ,
+						icon = SIGen.MakeSelfPicturePath( "WoodenBarrel-Top" .. SICommon.CodeNameSuffix.ICON , "木桶-顶部" .. SICommon.ShowNameSuffix.ICON ) ,
 						icon_size = 64 ,
 						icon_mipmaps = 4 ,
 						tint = fluidColor
@@ -494,7 +494,7 @@ SIGen
 						layers =
 						{
 							{
-								filename = SIGen.MakeSelfPicturePath( "木桶-身体" ) ,
+								filename = SIGen.MakeSelfPicturePath( "WoodenBarrel-Body" , "木桶-身体" ) ,
 								priority = "extra-high" ,
 								width = 32 ,
 								height = 47 ,
@@ -502,7 +502,7 @@ SIGen
 								shift = BarrelEntityShift ,
 							} ,
 							{
-								filename = SIGen.MakeSelfPicturePath( "木桶-顶部" ) ,
+								filename = SIGen.MakeSelfPicturePath( "WoodenBarrel-Top" , "木桶-顶部" ) ,
 								priority = "extra-high" ,
 								width = 32 ,
 								height = 47 ,
@@ -511,7 +511,7 @@ SIGen
 								tint = fluidColor
 							} ,
 							{
-								filename = SIGen.MakeSelfPicturePath( "木桶-影子" ) ,
+								filename = SIGen.MakeSelfPicturePath( "WoodenBarrel-Shadow" , "木桶-影子" ) ,
 								priority = "extra-high" ,
 								width = 65 ,
 								height = 32 ,
@@ -556,12 +556,12 @@ SIGen
 				icons =
 				{
 					{
-						icon = SIGen.MakeSelfPicturePath( "塑料胶囊-身体" .. SICommon.ShowNameSuffix.ICON ) ,
+						icon = SIGen.MakeSelfPicturePath( "PlasticCapable-Body" .. SICommon.CodeNameSuffix.ICON , "塑料胶囊-身体" .. SICommon.ShowNameSuffix.ICON ) ,
 						icon_size = 64 ,
 						icon_mipmaps = 4
 					} ,
 					{
-						icon = SIGen.MakeSelfPicturePath( "塑料胶囊-顶部" .. SICommon.ShowNameSuffix.ICON ) ,
+						icon = SIGen.MakeSelfPicturePath( "PlasticCapable-Top" .. SICommon.CodeNameSuffix.ICON , "塑料胶囊-顶部" .. SICommon.ShowNameSuffix.ICON ) ,
 						icon_size = 64 ,
 						icon_mipmaps = 4 ,
 						tint = fluidColor
@@ -582,12 +582,12 @@ SIGen
 				icons =
 				{
 					{
-						icon = SIGen.MakeSelfPicturePath( "塑料胶囊-身体" .. SICommon.ShowNameSuffix.ICON ) ,
+						icon = SIGen.MakeSelfPicturePath( "PlasticCapable-Body" .. SICommon.CodeNameSuffix.ICON , "塑料胶囊-身体" .. SICommon.ShowNameSuffix.ICON ) ,
 						icon_size = 64 ,
 						icon_mipmaps = 4
 					} ,
 					{
-						icon = SIGen.MakeSelfPicturePath( "塑料胶囊-顶部" .. SICommon.ShowNameSuffix.ICON ) ,
+						icon = SIGen.MakeSelfPicturePath( "PlasticCapable-Top" .. SICommon.CodeNameSuffix.ICON , "塑料胶囊-顶部" .. SICommon.ShowNameSuffix.ICON ) ,
 						icon_size = 64 ,
 						icon_mipmaps = 4 ,
 						tint = fluidColor
@@ -660,12 +660,12 @@ SIGen
 				icons =
 				{
 					{
-						icon = SIGen.MakeSelfPicturePath( "塑料胶囊-身体" .. SICommon.ShowNameSuffix.ICON ) ,
+						icon = SIGen.MakeSelfPicturePath( "PlasticCapable-Body" .. SICommon.CodeNameSuffix.ICON , "塑料胶囊-身体" .. SICommon.ShowNameSuffix.ICON ) ,
 						icon_size = 64 ,
 						icon_mipmaps = 4
 					} ,
 					{
-						icon = SIGen.MakeSelfPicturePath( "塑料胶囊-顶部" .. SICommon.ShowNameSuffix.ICON ) ,
+						icon = SIGen.MakeSelfPicturePath( "PlasticCapable-Top" .. SICommon.CodeNameSuffix.ICON , "塑料胶囊-顶部" .. SICommon.ShowNameSuffix.ICON ) ,
 						icon_size = 64 ,
 						icon_mipmaps = 4 ,
 						tint = fluidColor
@@ -733,12 +733,12 @@ SIGen
 				icons =
 				{
 					{
-						icon = SIGen.MakeSelfPicturePath( "塑料胶囊-身体" .. SICommon.ShowNameSuffix.ICON ) ,
+						icon = SIGen.MakeSelfPicturePath( "PlasticCapable-Body" .. SICommon.CodeNameSuffix.ICON , "塑料胶囊-身体" .. SICommon.ShowNameSuffix.ICON ) ,
 						icon_size = 64 ,
 						icon_mipmaps = 4
 					} ,
 					{
-						icon = SIGen.MakeSelfPicturePath( "塑料胶囊-顶部" .. SICommon.ShowNameSuffix.ICON ) ,
+						icon = SIGen.MakeSelfPicturePath( "PlasticCapable-Top" .. SICommon.CodeNameSuffix.ICON , "塑料胶囊-顶部" .. SICommon.ShowNameSuffix.ICON ) ,
 						icon_size = 64 ,
 						icon_mipmaps = 4 ,
 						tint = fluidColor
@@ -811,12 +811,12 @@ SIGen
 				icons =
 				{
 					{
-						icon = SIGen.MakeSelfPicturePath( "塑料胶囊-身体" .. SICommon.ShowNameSuffix.ICON ) ,
+						icon = SIGen.MakeSelfPicturePath( "PlasticCapable-Body" .. SICommon.CodeNameSuffix.ICON , "塑料胶囊-身体" .. SICommon.ShowNameSuffix.ICON ) ,
 						icon_size = 64 ,
 						icon_mipmaps = 4
 					} ,
 					{
-						icon = SIGen.MakeSelfPicturePath( "塑料胶囊-顶部" .. SICommon.ShowNameSuffix.ICON ) ,
+						icon = SIGen.MakeSelfPicturePath( "PlasticCapable-Top" .. SICommon.CodeNameSuffix.ICON , "塑料胶囊-顶部" .. SICommon.ShowNameSuffix.ICON ) ,
 						icon_size = 64 ,
 						icon_mipmaps = 4 ,
 						tint = fluidColor
@@ -885,12 +885,12 @@ SIGen
 				icons =
 				{
 					{
-						icon = SIGen.MakeSelfPicturePath( "塑料胶囊-身体" .. SICommon.ShowNameSuffix.ICON ) ,
+						icon = SIGen.MakeSelfPicturePath( "PlasticCapable-Body" .. SICommon.CodeNameSuffix.ICON , "塑料胶囊-身体" .. SICommon.ShowNameSuffix.ICON ) ,
 						icon_size = 64 ,
 						icon_mipmaps = 4
 					} ,
 					{
-						icon = SIGen.MakeSelfPicturePath( "塑料胶囊-顶部" .. SICommon.ShowNameSuffix.ICON ) ,
+						icon = SIGen.MakeSelfPicturePath( "PlasticCapable-Top" .. SICommon.CodeNameSuffix.ICON , "塑料胶囊-顶部" .. SICommon.ShowNameSuffix.ICON ) ,
 						icon_size = 64 ,
 						icon_mipmaps = 4 ,
 						tint = fluidColor
@@ -931,14 +931,14 @@ SIGen
 						layers =
 						{
 							{
-								filename = SIGen.MakeSelfPicturePath( "塑料胶囊-身体-1" ) ,
+								filename = SIGen.MakeSelfPicturePath( "PlasticCapable-Body-1" , "塑料胶囊-身体-1" ) ,
 								priority = "extra-high" ,
 								width = 32 ,
 								height = 32 ,
 								scale = 1.0
 							} ,
 							{
-								filename = SIGen.MakeSelfPicturePath( "塑料胶囊-顶部-1" ) ,
+								filename = SIGen.MakeSelfPicturePath( "PlasticCapable-Top-1" , "塑料胶囊-顶部-1" ) ,
 								priority = "extra-high" ,
 								width = 32 ,
 								height = 32 ,
@@ -946,7 +946,7 @@ SIGen
 								tint = fluidColor
 							} ,
 							{
-								filename = SIGen.MakeSelfPicturePath( "塑料胶囊-影子-1" ) ,
+								filename = SIGen.MakeSelfPicturePath( "PlasticCapable-Shadow-1" , "塑料胶囊-影子-1" ) ,
 								priority = "extra-high" ,
 								width = 48 ,
 								height = 32 ,
@@ -960,14 +960,14 @@ SIGen
 						layers =
 						{
 							{
-								filename = SIGen.MakeSelfPicturePath( "塑料胶囊-身体-2" ) ,
+								filename = SIGen.MakeSelfPicturePath( "PlasticCapable-Body-2" , "塑料胶囊-身体-2" ) ,
 								priority = "extra-high" ,
 								width = 32 ,
 								height = 32 ,
 								scale = 1.0
 							} ,
 							{
-								filename = SIGen.MakeSelfPicturePath( "塑料胶囊-顶部-2" ) ,
+								filename = SIGen.MakeSelfPicturePath( "PlasticCapable-Top-2" , "塑料胶囊-顶部-2" ) ,
 								priority = "extra-high" ,
 								width = 32 ,
 								height = 32 ,
@@ -975,7 +975,7 @@ SIGen
 								tint = fluidColor
 							} ,
 							{
-								filename = SIGen.MakeSelfPicturePath( "塑料胶囊-影子-2" ) ,
+								filename = SIGen.MakeSelfPicturePath( "PlasticCapable-Shadow-2" , "塑料胶囊-影子-2" ) ,
 								priority = "extra-high" ,
 								width = 40 ,
 								height = 32 ,
@@ -989,14 +989,14 @@ SIGen
 						layers =
 						{
 							{
-								filename = SIGen.MakeSelfPicturePath( "塑料胶囊-身体-3" ) ,
+								filename = SIGen.MakeSelfPicturePath( "PlasticCapable-Body-3" , "塑料胶囊-身体-3" ) ,
 								priority = "extra-high" ,
 								width = 32 ,
 								height = 32 ,
 								scale = 1.0
 							} ,
 							{
-								filename = SIGen.MakeSelfPicturePath( "塑料胶囊-顶部-3" ) ,
+								filename = SIGen.MakeSelfPicturePath( "PlasticCapable-Top-3" , "塑料胶囊-顶部-3" ) ,
 								priority = "extra-high" ,
 								width = 32 ,
 								height = 32 ,
@@ -1004,7 +1004,7 @@ SIGen
 								tint = fluidColor
 							} ,
 							{
-								filename = SIGen.MakeSelfPicturePath( "塑料胶囊-影子-3" ) ,
+								filename = SIGen.MakeSelfPicturePath( "PlasticCapable-Shadow-3" , "塑料胶囊-影子-3" ) ,
 								priority = "extra-high" ,
 								width = 40 ,
 								height = 32 ,
@@ -1018,14 +1018,14 @@ SIGen
 						layers =
 						{
 							{
-								filename = SIGen.MakeSelfPicturePath( "塑料胶囊-身体-4" ) ,
+								filename = SIGen.MakeSelfPicturePath( "PlasticCapable-Body-4" , "塑料胶囊-身体-4" ) ,
 								priority = "extra-high" ,
 								width = 32 ,
 								height = 32 ,
 								scale = 1.0
 							} ,
 							{
-								filename = SIGen.MakeSelfPicturePath( "塑料胶囊-顶部-4" ) ,
+								filename = SIGen.MakeSelfPicturePath( "PlasticCapable-Top-4" , "塑料胶囊-顶部-4" ) ,
 								priority = "extra-high" ,
 								width = 32 ,
 								height = 32 ,
@@ -1033,7 +1033,7 @@ SIGen
 								tint = fluidColor
 							} ,
 							{
-								filename = SIGen.MakeSelfPicturePath( "塑料胶囊-影子-4" ) ,
+								filename = SIGen.MakeSelfPicturePath( "PlasticCapable-Shadow-4" , "塑料胶囊-影子-4" ) ,
 								priority = "extra-high" ,
 								width = 35 ,
 								height = 32 ,
@@ -1078,7 +1078,7 @@ SIGen
 				icons =
 				{
 					{
-						icon = SIGen.MakeSelfPicturePath( "固化液体" .. SICommon.ShowNameSuffix.ICON ) ,
+						icon = SIGen.MakeSelfPicturePath( "SolidLiquid" .. SICommon.CodeNameSuffix.ICON , "固化液体" .. SICommon.ShowNameSuffix.ICON ) ,
 						icon_size = 64 ,
 						icon_mipmaps = 4 ,
 						tint = fluidColor
@@ -1106,7 +1106,7 @@ SIGen
 				icons =
 				{
 					{
-						icon = SIGen.MakeSelfPicturePath( "固化液体" .. SICommon.ShowNameSuffix.ICON ) ,
+						icon = SIGen.MakeSelfPicturePath( "SolidLiquid" .. SICommon.CodeNameSuffix.ICON , "固化液体" .. SICommon.ShowNameSuffix.ICON ) ,
 						icon_size = 64 ,
 						icon_mipmaps = 4 ,
 						tint = fluidColor
@@ -1174,7 +1174,7 @@ SIGen
 				icons =
 				{
 					{
-						icon = SIGen.MakeSelfPicturePath( "固化液体" .. SICommon.ShowNameSuffix.ICON ) ,
+						icon = SIGen.MakeSelfPicturePath( "SolidLiquid" .. SICommon.CodeNameSuffix.ICON , "固化液体" .. SICommon.ShowNameSuffix.ICON ) ,
 						icon_size = 64 ,
 						icon_mipmaps = 4 ,
 						tint = fluidColor
@@ -1242,7 +1242,7 @@ SIGen
 				icons =
 				{
 					{
-						icon = SIGen.MakeSelfPicturePath( "固化液体" .. SICommon.ShowNameSuffix.ICON ) ,
+						icon = SIGen.MakeSelfPicturePath( "SolidLiquid" .. SICommon.CodeNameSuffix.ICON , "固化液体" .. SICommon.ShowNameSuffix.ICON ) ,
 						icon_size = 64 ,
 						icon_mipmaps = 4 ,
 						tint = fluidColor

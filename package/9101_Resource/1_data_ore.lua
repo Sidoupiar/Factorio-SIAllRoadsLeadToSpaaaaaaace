@@ -41,8 +41,8 @@ SIGen.SetGroup( SIConstants_Resource.raw.Groups.Resource.Ore )
 for oreID , oreAlias in pairs( oreList ) do
 	local oreProjectile = {}
 	SIGen
-	.New( SICommon.Types.Entities.Projectile , oreID , "扔出去的" .. oreAlias )
-	.MakeIcon( SICommon.Types.Items.Capsule , oreAlias )
+	.New( SICommon.Types.Entities.Projectile , "Throwed" .. oreID , "扔出去的" .. oreAlias )
+	.MakeIcon( SICommon.Types.Items.Capsule , "Throwed" .. oreID , "扔出去的" .. oreAlias )
 	.SetSize( 0.4 , 0.4 )
 	.Append
 	{
@@ -58,7 +58,7 @@ for oreID , oreAlias in pairs( oreList ) do
 			layers =
 			{
 				{
-					filename = SIGen.MakeSelfPicturePath( "扔出去的" .. oreAlias ) ,
+					filename = SIGen.MakeSelfPicturePath( "Throwed" .. oreID , "扔出去的" .. oreAlias ) ,
 					priority = "high" ,
 					width = 32 ,
 					height = 32 ,
@@ -129,7 +129,7 @@ for oreID , oreAlias in pairs( oreList ) do
 				layers =
 				{
 					{
-						filename = SIGen.MakeSelfPicturePath( oreAlias .. "-1" ) ,
+						filename = SIGen.MakeSelfPicturePath( oreID .. "-1" , oreAlias .. "-1" ) ,
 						size = 64 ,
 						mipmap_count = 4 ,
 						scale = 0.25
@@ -140,7 +140,7 @@ for oreID , oreAlias in pairs( oreList ) do
 				layers =
 				{
 					{
-						filename = SIGen.MakeSelfPicturePath( oreAlias .. "-2" ) ,
+						filename = SIGen.MakeSelfPicturePath( oreID .. "-2" , oreAlias .. "-2" ) ,
 						size = 64 ,
 						mipmap_count = 4 ,
 						scale = 0.25
@@ -151,7 +151,7 @@ for oreID , oreAlias in pairs( oreList ) do
 				layers =
 				{
 					{
-						filename = SIGen.MakeSelfPicturePath( oreAlias .. "-3" ) ,
+						filename = SIGen.MakeSelfPicturePath( oreID .. "-3" , oreAlias .. "-3" ) ,
 						size = 64 ,
 						mipmap_count = 4 ,
 						scale = 0.25
@@ -162,7 +162,7 @@ for oreID , oreAlias in pairs( oreList ) do
 				layers =
 				{
 					{
-						filename = SIGen.MakeSelfPicturePath( oreAlias .. "-4" ) ,
+						filename = SIGen.MakeSelfPicturePath( oreID .. "-4" , oreAlias .. "-4" ) ,
 						size = 64 ,
 						mipmap_count = 4 ,
 						scale = 0.25
@@ -270,21 +270,22 @@ SIGen
 	mining_visualisation_tint = { r = 0.98 , g = 0.88 , b = 0.65 } ,
 	tree_removal_probability = 0.6 ,
 	tree_removal_max_distance = 1024 ,
-	autoplace = SIAutoPlace.Create
-	{
-		Name = "" ,
-		BaseDensity = 4 ,
-		RegularMultiplier = 1.0 ,
-		StartingMultiplier = 1.1 ,
-		HasStarting = false
-	} ,
+	autoplace = nil ,
+--	autoplace = SIAutoPlace.Create
+--	{
+--		Name = "" ,
+--		BaseDensity = 4 ,
+--		RegularMultiplier = 1.0 ,
+--		StartingMultiplier = 1.1 ,
+--		HasStarting = false
+--	} ,
 	stage_counts = { 100000 , 33333 , 10000 , 3333 , 1000 , 333 , 100 , 33 } ,
 	stages =
 	{
 		sheets =
 		{
 			{
-				filename = SIGen.MakeSelfPicturePath( "矿山岩" ) ,
+				filename = SIGen.MakeSelfPicturePath( "OreStone" , "矿山岩" ) ,
 				priority = "extra-high" ,
 				width = 64 ,
 				height = 64 ,
@@ -320,12 +321,3 @@ SIGen
 		SISound.Base( "walking/resources/ore-10" , 0.7 )
 	}
 }
-
-TableE( SIAutoPlace.Create
-{
-	Name = SIConstants_Resource.raw.Entities.OreBase ,
-	BaseDensity = 4 ,
-	RegularMultiplier = 1.0 ,
-	StartingMultiplier = 1.1 ,
-	HasStarting = false
-} )

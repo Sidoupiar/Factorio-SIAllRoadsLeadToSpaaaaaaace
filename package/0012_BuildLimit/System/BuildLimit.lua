@@ -58,7 +58,7 @@ SIBuildLimit =
 			local prototype = entity.prototype
 			local iconID = rendering.draw_sprite
 			{
-				sprite = SIConstants_BuildLimit.raw.Sprites.Beacon ,
+				sprite = SIConstants_BuildLimit.raw.Sprites.AlertBeacon ,
 				orientation = 0 ,
 				orientation_target = nil ,
 				orientation_target_offset = nil ,
@@ -91,7 +91,7 @@ SIBuildLimit =
 			local prototype = entity.prototype
 			local iconID = rendering.draw_sprite
 			{
-				sprite = SIConstants_BuildLimit.raw.Sprites.Module ,
+				sprite = SIConstants_BuildLimit.raw.Sprites.AlertModule ,
 				orientation = 0 ,
 				orientation_target = nil ,
 				orientation_target_offset = nil ,

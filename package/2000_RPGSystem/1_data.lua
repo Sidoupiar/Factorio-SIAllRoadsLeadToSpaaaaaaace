@@ -85,7 +85,7 @@ end
 -- ============================================================================================================================================
 
 SIGen
-.New( SICommon.Types.Entities.Corpse , "EXPChestRemnants" , "经验箱子-残骸" )
+.New( SICommon.Types.Entities.Corpse , "EXPChest_Corpse" , "经验箱子-残骸" )
 .AutoIcon()
 .SetSizeScale( 1 , 1 , 0 )
 .Append
@@ -103,7 +103,7 @@ SIGen
 			layers =
 			{
 				{
-					filename = SIGen.MakeSelfPicturePath( "经验箱子-残骸" ) ,
+					filename = SIGen.MakeSelfPicturePath( "EXPChest-Corpse" , "经验箱子-残骸" ) ,
 					priority = "extra-high" ,
 					width = 64 ,
 					height = 40 ,
@@ -115,7 +115,7 @@ SIGen
 					shift = SIUtils.by_pixel( 12 , 0 ) ,
 					hr_version =
 					{
-						filename = SIGen.MakeSelfPicturePathHr( "经验箱子-残骸" ) ,
+						filename = SIGen.MakeSelfPicturePathHr( "EXPChest-Corpse" , "经验箱子-残骸" ) ,
 						priority = "extra-high" ,
 						width = 126 ,
 						height = 78 ,
@@ -143,7 +143,7 @@ SIGen
 		results = {}
 	} ,
 	max_health = 32 ,
-	corpse = SIConstants_RPGSystem.raw.Entities.EXPChestRemnants ,
+	corpse = SIConstants_RPGSystem.raw.Entities.EXPChest_Corpse ,
 	dying_explosion = "iron-chest-explosion" ,
 	map_color = { r = 1.0 , g = 1.0 , b = 1.0 } ,
 	friendly_map_color = { r = 0.4 , g = 0.4 , b = 1.0 } ,
@@ -178,7 +178,7 @@ SIGen
 		layers =
 		{
 			{
-				filename = SIGen.MakePicturePath( SICommon.Types.Entities.Container , "经验箱子" ) ,
+				filename = SIGen.MakePicturePath( SICommon.Types.Entities.Container , "EXPChest" , "经验箱子" ) ,
 				priority = "extra-high" ,
 				width = 34 ,
 				height = 38 ,
@@ -186,7 +186,7 @@ SIGen
 				shift = SIUtils.by_pixel( 0 , -0.5 ) ,
 				hr_version =
 				{
-					filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Container , "经验箱子" ) ,
+					filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Container , "EXPChest" , "经验箱子" ) ,
 					priority = "extra-high" ,
 					width = 66 ,
 					height = 76 ,
@@ -195,7 +195,7 @@ SIGen
 				}
 			} ,
 			{
-				filename = SIGen.MakePicturePath( SICommon.Types.Entities.Container , "经验箱子-影子" ) ,
+				filename = SIGen.MakePicturePath( SICommon.Types.Entities.Container , "EXPChest-Shadow" , "经验箱子-影子" ) ,
 				priority = "extra-high" ,
 				width = 56 ,
 				height = 26 ,
@@ -204,7 +204,7 @@ SIGen
 				draw_as_shadow = true ,
 				hr_version =
 				{
-					filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Container , "经验箱子-影子" ) ,
+					filename = SIGen.MakePicturePathHr( SICommon.Types.Entities.Container , "EXPChest-Shadow" , "经验箱子-影子" ) ,
 					priority = "extra-high" ,
 					width = 110 ,
 					height = 50 ,

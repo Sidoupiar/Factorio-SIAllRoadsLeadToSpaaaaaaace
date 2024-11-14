@@ -49,7 +49,7 @@ SIGen
 		{
 			type = SICommon.Types.Items.Item ,
 			name = "wood" ,
-			amount = 3
+			amount = 4
 		} ,
 		{
 			type = SICommon.Types.Items.Item ,
@@ -119,7 +119,7 @@ SIGen
 			layers =
 			{
 				{
-					filename = SIGen.MakeSelfPicturePath( "木桶" ) ,
+					filename = SIGen.MakeSelfPicturePath( "WoodenBarrel" , "木桶" ) ,
 					priority = "extra-high" ,
 					width = 32 ,
 					height = 47 ,
@@ -127,7 +127,7 @@ SIGen
 					shift = SIUtils.by_pixel( 0 , -8.5 )
 				} ,
 				{
-					filename = SIGen.MakeSelfPicturePath( "木桶-影子" ) ,
+					filename = SIGen.MakeSelfPicturePath( "WoodenBarrel-Shadow" , "木桶-影子" ) ,
 					priority = "extra-high" ,
 					width = 65 ,
 					height = 32 ,
@@ -259,14 +259,14 @@ SIGen
 			layers =
 			{
 				{
-					filename = SIGen.MakeSelfPicturePath( "塑料胶囊-1" ) ,
+					filename = SIGen.MakeSelfPicturePath( "PlasticCapable-1" , "塑料胶囊-1" ) ,
 					priority = "extra-high" ,
 					width = 32 ,
 					height = 32 ,
 					scale = 1.0
 				} ,
 				{
-					filename = SIGen.MakeSelfPicturePath( "塑料胶囊-影子-1" ) ,
+					filename = SIGen.MakeSelfPicturePath( "PlasticCapable-Shadow-1" , "塑料胶囊-影子-1" ) ,
 					priority = "extra-high" ,
 					width = 48 ,
 					height = 32 ,
@@ -280,14 +280,14 @@ SIGen
 			layers =
 			{
 				{
-					filename = SIGen.MakeSelfPicturePath( "塑料胶囊-2" ) ,
+					filename = SIGen.MakeSelfPicturePath( "PlasticCapable-2" , "塑料胶囊-2" ) ,
 					priority = "extra-high" ,
 					width = 32 ,
 					height = 32 ,
 					scale = 1.0
 				} ,
 				{
-					filename = SIGen.MakeSelfPicturePath( "塑料胶囊-影子-2" ) ,
+					filename = SIGen.MakeSelfPicturePath( "PlasticCapable-Shadow-2" , "塑料胶囊-影子-2" ) ,
 					priority = "extra-high" ,
 					width = 40 ,
 					height = 32 ,
@@ -301,14 +301,14 @@ SIGen
 			layers =
 			{
 				{
-					filename = SIGen.MakeSelfPicturePath( "塑料胶囊-3" ) ,
+					filename = SIGen.MakeSelfPicturePath( "PlasticCapable-3" , "塑料胶囊-3" ) ,
 					priority = "extra-high" ,
 					width = 32 ,
 					height = 32 ,
 					scale = 1.0
 				} ,
 				{
-					filename = SIGen.MakeSelfPicturePath( "塑料胶囊-影子-3" ) ,
+					filename = SIGen.MakeSelfPicturePath( "PlasticCapable-Shadow-3" , "塑料胶囊-影子-3" ) ,
 					priority = "extra-high" ,
 					width = 40 ,
 					height = 32 ,
@@ -322,14 +322,14 @@ SIGen
 			layers =
 			{
 				{
-					filename = SIGen.MakeSelfPicturePath( "塑料胶囊-4" ) ,
+					filename = SIGen.MakeSelfPicturePath( "PlasticCapable-4" , "塑料胶囊-4" ) ,
 					priority = "extra-high" ,
 					width = 32 ,
 					height = 32 ,
 					scale = 1.0
 				} ,
 				{
-					filename = SIGen.MakeSelfPicturePath( "塑料胶囊-影子-4" ) ,
+					filename = SIGen.MakeSelfPicturePath( "PlasticCapable-Shadow-4" , "塑料胶囊-影子-4" ) ,
 					priority = "extra-high" ,
 					width = 35 ,
 					height = 32 ,
@@ -580,7 +580,7 @@ SIGen
 		layers =
 		{
 			{
-				filename = SIGen.MakeSelfPicturePath( "灌装设备" ) ,
+				filename = SIGen.MakeSelfPicturePath( "BarrelMaker" , "灌装设备" ) ,
 				priority = "extra-high" ,
 				width = 64 ,
 				height = 64 ,
@@ -591,7 +591,7 @@ SIGen
 				shift = animationShift
 			} ,
 			{
-				filename = SIGen.MakeSelfPicturePath( "灌装设备-影子" ) ,
+				filename = SIGen.MakeSelfPicturePath( "BarrelMaker-Shadow" , "灌装设备-影子" ) ,
 				priority = "extra-high" ,
 				width = 68 ,
 				height = 64 ,
@@ -613,7 +613,7 @@ SIGen
 			apply_recipe_tint = "primary" ,
 			animation = SIGraphics.MakeHrVersionData
 			{
-				filename = SIGen.MakeSelfPicturePath( "灌装设备-罐子" ) ,
+				filename = SIGen.MakeSelfPicturePath( "BarrelMaker-barrel" , "灌装设备-罐子" ) ,
 				priority = "high" ,
 				width = 64 ,
 				height = 64 ,
@@ -878,7 +878,7 @@ SIGen
 		layers =
 		{
 			{
-				filename = SIGen.MakeSelfPicturePath( "倾倒设备" ) ,
+				filename = SIGen.MakeSelfPicturePath( "BarrelDropper" , "倾倒设备" ) ,
 				priority = "extra-high" ,
 				width = 64 ,
 				height = 64 ,
@@ -889,7 +889,7 @@ SIGen
 				shift = animationShift
 			} ,
 			{
-				filename = SIGen.MakeSelfPicturePath( "倾倒设备-影子" ) ,
+				filename = SIGen.MakeSelfPicturePath( "BarrelDropper-Shadow" , "倾倒设备-影子" ) ,
 				priority = "extra-high" ,
 				width = 68 ,
 				height = 64 ,
@@ -911,7 +911,7 @@ SIGen
 			apply_recipe_tint = "primary" ,
 			animation = SIGraphics.MakeHrVersionData
 			{
-				filename = SIGen.MakeSelfPicturePath( "倾倒设备-罐子" ) ,
+				filename = SIGen.MakeSelfPicturePath( "BarrelDropper-barrel" , "倾倒设备-罐子" ) ,
 				priority = "high" ,
 				width = 64 ,
 				height = 64 ,

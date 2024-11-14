@@ -19,8 +19,8 @@ for rockID , rockData in pairs( rockDataList ) do
 	local pieceRockProjectile = {}
 	SIGen
 	.SetGroup( SIConstants_Resource.raw.Groups.Resource.Rock )
-	.New( SICommon.Types.Entities.Projectile , rockID , "扔出去的" .. rockAlias )
-	.MakeIcon( SICommon.Types.Items.Capsule , rockAlias )
+	.New( SICommon.Types.Entities.Projectile , "Throwed" .. rockID , "扔出去的" .. rockAlias )
+	.MakeIcon( SICommon.Types.Items.Capsule , "Throwed" .. rockID , "扔出去的" .. rockAlias )
 	.SetSize( 0.4 , 0.4 )
 	.Append
 	{
@@ -36,7 +36,7 @@ for rockID , rockData in pairs( rockDataList ) do
 			layers =
 			{
 				{
-					filename = SIGen.MakeSelfPicturePath( "扔出去的" .. rockAlias ) ,
+					filename = SIGen.MakeSelfPicturePath( "Throwed" .. rockID , "扔出去的" .. rockAlias ) ,
 					priority = "high" ,
 					width = 32 ,
 					height = 32 ,
@@ -107,7 +107,7 @@ for rockID , rockData in pairs( rockDataList ) do
 				layers =
 				{
 					{
-						filename = SIGen.MakeSelfPicturePath( rockAlias .. "-1" ) ,
+						filename = SIGen.MakeSelfPicturePath( rockID .. "-1" , rockAlias .. "-1" ) ,
 						size = 64 ,
 						mipmap_count = 4 ,
 						scale = 0.25
@@ -118,7 +118,7 @@ for rockID , rockData in pairs( rockDataList ) do
 				layers =
 				{
 					{
-						filename = SIGen.MakeSelfPicturePath( rockAlias .. "-2" ) ,
+						filename = SIGen.MakeSelfPicturePath( rockID .. "-2" , rockAlias .. "-2" ) ,
 						size = 64 ,
 						mipmap_count = 4 ,
 						scale = 0.25
@@ -129,7 +129,7 @@ for rockID , rockData in pairs( rockDataList ) do
 				layers =
 				{
 					{
-						filename = SIGen.MakeSelfPicturePath( rockAlias .. "-3" ) ,
+						filename = SIGen.MakeSelfPicturePath( rockID .. "-3" , rockAlias .. "-3" ) ,
 						size = 64 ,
 						mipmap_count = 4 ,
 						scale = 0.25
@@ -140,7 +140,7 @@ for rockID , rockData in pairs( rockDataList ) do
 				layers =
 				{
 					{
-						filename = SIGen.MakeSelfPicturePath( rockAlias .. "-4" ) ,
+						filename = SIGen.MakeSelfPicturePath( rockID .. "-4" , rockAlias .. "-4" ) ,
 						size = 64 ,
 						mipmap_count = 4 ,
 						scale = 0.25
@@ -197,8 +197,8 @@ for rockID , rockData in pairs( rockDataList ) do
 		}
 	}
 	.SetGroup( SIConstants_Resource.raw.Groups.Resource.PieceRock )
-	.New( SICommon.Types.Entities.Projectile , "Piece" .. rockID , "扔出去的碎裂的" .. rockAlias )
-	.MakeIcon( SICommon.Types.Items.Capsule , "碎裂的" .. rockAlias )
+	.New( SICommon.Types.Entities.Projectile , "ThrowedPiece" .. rockID , "扔出去的碎裂的" .. rockAlias )
+	.MakeIcon( SICommon.Types.Items.Capsule , "ThrowedPiece" .. rockID , "扔出去的碎裂的" .. rockAlias )
 	.Append
 	{
 		flags = { SICommon.Flags.Entity.NotOnMap } ,
@@ -213,7 +213,7 @@ for rockID , rockData in pairs( rockDataList ) do
 			layers =
 			{
 				{
-					filename = SIGen.MakeSelfPicturePath( "扔出去的碎裂的" .. rockAlias ) ,
+					filename = SIGen.MakeSelfPicturePath( "ThrowedPiece" .. rockID , "扔出去的碎裂的" .. rockAlias ) ,
 					priority = "high" ,
 					width = 32 ,
 					height = 32 ,
@@ -284,7 +284,7 @@ for rockID , rockData in pairs( rockDataList ) do
 				layers =
 				{
 					{
-						filename = SIGen.MakeSelfPicturePath( "碎裂的" .. rockAlias .. "-1" ) ,
+						filename = SIGen.MakeSelfPicturePath( "Piece" .. rockID .. "-1" , "碎裂的" .. rockAlias .. "-1" ) ,
 						size = 64 ,
 						mipmap_count = 4 ,
 						scale = 0.25
@@ -295,7 +295,7 @@ for rockID , rockData in pairs( rockDataList ) do
 				layers =
 				{
 					{
-						filename = SIGen.MakeSelfPicturePath( "碎裂的" .. rockAlias .. "-2" ) ,
+						filename = SIGen.MakeSelfPicturePath( "Piece" .. rockID .. "-2" , "碎裂的" .. rockAlias .. "-2" ) ,
 						size = 64 ,
 						mipmap_count = 4 ,
 						scale = 0.25
@@ -306,7 +306,7 @@ for rockID , rockData in pairs( rockDataList ) do
 				layers =
 				{
 					{
-						filename = SIGen.MakeSelfPicturePath( "碎裂的" .. rockAlias .. "-3" ) ,
+						filename = SIGen.MakeSelfPicturePath( "Piece" .. rockID .. "-3" , "碎裂的" .. rockAlias .. "-3" ) ,
 						size = 64 ,
 						mipmap_count = 4 ,
 						scale = 0.25
@@ -317,7 +317,7 @@ for rockID , rockData in pairs( rockDataList ) do
 				layers =
 				{
 					{
-						filename = SIGen.MakeSelfPicturePath( "碎裂的" .. rockAlias .. "-4" ) ,
+						filename = SIGen.MakeSelfPicturePath( "Piece" .. rockID .. "-4" , "碎裂的" .. rockAlias .. "-4" ) ,
 						size = 64 ,
 						mipmap_count = 4 ,
 						scale = 0.25
@@ -512,7 +512,7 @@ for stoneIndex , stoneData in pairs( stoneDataList ) do
 			layers =
 			{
 				{
-					filename = SIGen.MakePicturePath( SICommon.Types.Entities.SimpleOwner , "矿山磐石-" .. stoneIndex .. "-" .. index ) ,
+					filename = SIGen.MakePicturePath( SICommon.Types.Entities.SimpleOwner , "Stone-" .. stoneIndex .. "-" .. index , "矿山磐石-" .. stoneIndex .. "-" .. index ) ,
 					priority = "extra-high" ,
 					width = size[1] ,
 					height = size[2] ,
