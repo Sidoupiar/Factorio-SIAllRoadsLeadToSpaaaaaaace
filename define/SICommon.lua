@@ -117,255 +117,298 @@ SICommon =
 	{
 		Item =
 		{
-			NotStackable                  = "not-stackable" ,
-			DrawLogisticOverlay           = "draw-logistic-overlay" ,
-			AlwaysShow                    = "always-show" ,
-			HideFromBonusGUI              = "hide-from-bonus-gui" ,
-			HideFromFuelTooltip           = "hide-from-fuel-tooltip" ,
-			PrimaryPlaceResult            = "primary-place-result" ,
-			ModOpenable                   = "mod-openable" ,
-			OnlyInCursor                  = "only-in-cursor" ,
-			Spawnable                     = "spawnable" ,
-			ExcludedFromTrashUnrequested  = "excluded-from-trash-unrequested" ,
-			SpoilResult                   = "spoil-result" ,
-			IgnoreSpoilTimeModifier       = "ignore-spoil-time-modifier"
+			NotStackable                            = "not-stackable" ,
+			DrawLogisticOverlay                     = "draw-logistic-overlay" ,
+			AlwaysShow                              = "always-show" ,
+			HideFromBonusGUI                        = "hide-from-bonus-gui" ,
+			HideFromFuelTooltip                     = "hide-from-fuel-tooltip" ,
+			PrimaryPlaceResult                      = "primary-place-result" ,
+			ModOpenable                             = "mod-openable" ,
+			OnlyInCursor                            = "only-in-cursor" ,
+			Spawnable                               = "spawnable" ,
+			ExcludedFromTrashUnrequested            = "excluded-from-trash-unrequested" ,
+			SpoilResult                             = "spoil-result" ,
+			IgnoreSpoilTimeModifier                 = "ignore-spoil-time-modifier"
 		} ,
 		Entity =
 		{
-			NoCopyPaste                   = "no-copy-paste" ,
-			NoGapFill                     = "no-gap-fill-while-building" ,
-			NoAutomatedItemRemoval        = "no-automated-item-removal" ,
-			NoAutomatedItemInsertion      = "no-automated-item-insertion" ,
-			NotOnMap                      = "not-on-map" ,
-			NotInMadeIn                   = "not-in-made-in" ,
-			NotFlammable                  = "not-flammable" ,
-			NotRotatable                  = "not-rotatable" ,
-			NotRepairable                 = "not-repairable" ,
-			NotBlueprintable              = "not-blueprintable" ,
-			NotDeconstructable            = "not-deconstructable" ,
-			NotUpgradable                 = "not-upgradable" ,
-			NotSelectableInGame           = "not-selectable-in-game" ,
-			NotInKillStatistics           = "not-in-kill-statistics" ,
-			PlaceableEnemy                = "placeable-enemy" ,
-			PlaceablePlayer               = "placeable-player" ,
-			PlaceableNeutral              = "placeable-neutral" ,
-			PlaceableOffGrid              = "placeable-off-grid" ,
-			HideAltInfo                   = "hide-alt-info" ,
-			FastReplaceableBuild          = "fast-replaceable-no-build-while-moving" ,
-			FastReplaceableCross          = "fast-replaceable-no-cross-type-while-moving" ,
-			Building8Way                  = "building-direction-8-way" ,
-			BuildingDirection16Way        = "building-direction-16-way" ,
-			BreathsAir                    = "breaths-air" ,
-			PlayerCreation                = "player-creation" ,
-			FilterDirections              = "filter-directions" ,
-			GetByUnitNumber               = "get-by-unit-number" ,
-			SnapToRailSupportSpot         = "snap-to-rail-support-spot"
-		} ,
-		Direction =
-		{
-			North = "north" ,
-			East  = "east" ,
-			South = "south" ,
-			West  = "west"
+			NoCopyPaste                             = "no-copy-paste" ,
+			NoGapFill                               = "no-gap-fill-while-building" ,
+			NoAutomatedItemRemoval                  = "no-automated-item-removal" ,
+			NoAutomatedItemInsertion                = "no-automated-item-insertion" ,
+			NotOnMap                                = "not-on-map" ,
+			NotInMadeIn                             = "not-in-made-in" ,
+			NotFlammable                            = "not-flammable" ,
+			NotRotatable                            = "not-rotatable" ,
+			NotRepairable                           = "not-repairable" ,
+			NotBlueprintable                        = "not-blueprintable" ,
+			NotDeconstructable                      = "not-deconstructable" ,
+			NotUpgradable                           = "not-upgradable" ,
+			NotSelectableInGame                     = "not-selectable-in-game" ,
+			NotInKillStatistics                     = "not-in-kill-statistics" ,
+			PlaceableEnemy                          = "placeable-enemy" ,
+			PlaceablePlayer                         = "placeable-player" ,
+			PlaceableNeutral                        = "placeable-neutral" ,
+			PlaceableOffGrid                        = "placeable-off-grid" ,
+			HideAltInfo                             = "hide-alt-info" ,
+			FastReplaceableBuild                    = "fast-replaceable-no-build-while-moving" ,
+			FastReplaceableCross                    = "fast-replaceable-no-cross-type-while-moving" ,
+			Building8Way                            = "building-direction-8-way" ,
+			BuildingDirection16Way                  = "building-direction-16-way" ,
+			BreathsAir                              = "breaths-air" ,
+			PlayerCreation                          = "player-creation" ,
+			FilterDirections                        = "filter-directions" ,
+			GetByUnitNumber                         = "get-by-unit-number" ,
+			SnapToRailSupportSpot                   = "snap-to-rail-support-spot"
 		} ,
 		RenderLayer =
 		{
-			WaterTile                     = "water-tile" ,
-			GroundTile                    = "ground-tile" ,
-			TileTransition                = "tile-transition" ,
-			Decals                        = "decals" ,
-			LowerRadiusVisualization      = "lower-radius-visualization" ,
-			RadiusVisualization           = "radius-visualization" ,
-			TransportBeltIntegration      = "transport-belt-integration" ,
-			Resource                      = "resource" ,
-			BuildingSmoke                 = "building-smoke" ,
-			Decorative                    = "decorative" ,
-			GroundPatch                   = "ground-patch" ,
-			GroundPatchHigher             = "ground-patch-higher" ,
-			GroundPatchHigher2            = "ground-patch-higher2" ,
-			Remnants                      = "remnants" ,
-			Floor                         = "floor" ,
-			TransportBelt                 = "transport-belt" ,
-			TransportBeltEndings          = "transport-belt-endings" ,
-			FloorMechanicsUnderCorpse     = "floor-mechanics-under-corpse" ,
-			Corpse                        = "corpse" ,
-			FloorMechanics                = "floor-mechanics" ,
-			Item                          = "item" ,
-			LowerObject                   = "lower-object" ,
-			TransportBeltCircuitConnector = "transport-belt-circuit-connector" ,
-			LowerObjectAboveShadow        = "lower-object-above-shadow" ,
-			Object                        = "object" ,
-			HigherObjectUnder             = "higher-object-under" ,
-			HigherObjectAbove             = "higher-object-above" ,
-			ItemInInserterHand            = "item-in-inserter-hand" ,
-			Wires                         = "wires" ,
-			WiresAbove                    = "wires-above" ,
-			EntityInfoIcon                = "entity-info-icon" ,
-			EntityInfoIconAbove           = "entity-info-icon-above" ,
-			Explosion                     = "explosion" ,
-			Projectile                    = "projectile" ,
-			Smoke                         = "smoke" ,
-			AirObject                     = "air-object" ,
-			AirEntityInfoIcon             = "air-entity-info-icon" ,
-			LightEffect                   = "light-effect" ,
-			SelectionBox                  = "selection-box" ,
-			HigherSelectionBox            = "higher-selection-box" ,
-			CollisionSelectionBox         = "collision-selection-box" ,
-			Arrow                         = "arrow" ,
-			Cursor                        = "cursor"
-		} ,
-		TrackType =
-		{
-			EarlyGame = "early-game" , -- 载入游戏
-			MenuTrack = "menu-track" , -- 主菜单
-			MainTrack = "main-track" , -- 游戏阶段
-			Interlude = "interlude"    -- 插曲
-		} ,
-		SciencePack =
-		{
-			Key   = "description.science-pack-remaining-amount-key" ,
-			Value = "description.science-pack-remaining-amount-value"
-		} ,
-		ProductType =
-		{
-			Material = "material" ,
-			Resource = "resource" ,
-			Unit     = "unit"
-		} ,
-		Condition =
-		{
-			AND = "and" ,
-			OR  = "or" ,
-			NOT = "not"
-		} ,
-		LogisticMode =
-		{
-			None = "none" ,
-			Requester = "requester" ,
-			ActiveProvider = "active-provider" ,
-			PassiveProvider = "passive-provider" ,
-			Buffer = "buffer" ,
-			Storage = "storage"
-		} ,
-		FluidBoxProductionType =
-		{
-			None = "none" ,
-			Input = "input" ,
-			Output = "output" ,
-			InputOutput = "input-output"
-		} ,
-		FluidBoxConnectionType =
-		{
-			Input = "input" ,
-			Output = "output" ,
-			InputOutput = "input-output"
-		} ,
-		EquipmentShapeType =
-		{
-			Full = "full" ,
-			Manual = "manual"
-		} ,
-		EnergySourceType =
-		{
-			Electric = "electric" ,
-			Burner = "burner" ,
-			Heat = "heat" ,
-			Fluid = "fluid" ,
-			Void = "void"
-		} ,
-		ElectricUsagePriority =
-		{
-			InputPrimary = "primary-input" ,
-			InputSecondary = "secondary-input" ,
-			OutputPrimary = "primary-output" ,
-			OutputSecondary = "secondary-output" ,
-			Tertiary = "tertiary" ,
-			Solar = "solar" ,
-			Lamp = "lamp"
+			WaterTile                               = "water-tile" ,
+			GroundTile                              = "ground-tile" ,
+			TileTransition                          = "tile-transition" ,
+			Decals                                  = "decals" ,
+			LowerRadiusVisualization                = "lower-radius-visualization" ,
+			RadiusVisualization                     = "radius-visualization" ,
+			TransportBeltIntegration                = "transport-belt-integration" ,
+			Resource                                = "resource" ,
+			BuildingSmoke                           = "building-smoke" ,
+			Decorative                              = "decorative" ,
+			GroundPatch                             = "ground-patch" ,
+			GroundPatchHigher                       = "ground-patch-higher" ,
+			GroundPatchHigher2                      = "ground-patch-higher2" ,
+			Remnants                                = "remnants" ,
+			Floor                                   = "floor" ,
+			TransportBelt                           = "transport-belt" ,
+			TransportBeltEndings                    = "transport-belt-endings" ,
+			FloorMechanicsUnderCorpse               = "floor-mechanics-under-corpse" ,
+			Corpse                                  = "corpse" ,
+			FloorMechanics                          = "floor-mechanics" ,
+			Item                                    = "item" ,
+			LowerObject                             = "lower-object" ,
+			TransportBeltCircuitConnector           = "transport-belt-circuit-connector" ,
+			LowerObjectAboveShadow                  = "lower-object-above-shadow" ,
+			Object                                  = "object" ,
+			HigherObjectUnder                       = "higher-object-under" ,
+			HigherObjectAbove                       = "higher-object-above" ,
+			ItemInInserterHand                      = "item-in-inserter-hand" ,
+			Wires                                   = "wires" ,
+			WiresAbove                              = "wires-above" ,
+			EntityInfoIcon                          = "entity-info-icon" ,
+			EntityInfoIconAbove                     = "entity-info-icon-above" ,
+			Explosion                               = "explosion" ,
+			Projectile                              = "projectile" ,
+			Smoke                                   = "smoke" ,
+			AirObject                               = "air-object" ,
+			AirEntityInfoIcon                       = "air-entity-info-icon" ,
+			LightEffect                             = "light-effect" ,
+			SelectionBox                            = "selection-box" ,
+			HigherSelectionBox                      = "higher-selection-box" ,
+			CollisionSelectionBox                   = "collision-selection-box" ,
+			Arrow                                   = "arrow" ,
+			Cursor                                  = "cursor"
 		} ,
 		TechnologyModifier =
 		{
 			-- 通用效果
-			UnlockRecipe                            = "unlock-recipe" ,
-			AmmoDamage                              = "ammo-damage" ,
-			TurretAttack                            = "turret-attack" ,
-			GunSpeed                                = "gun-speed" ,
-			ArtilleryRange                          = "artillery-range" ,
-			GiveItem                                = "give-item" ,
-			Nothing                                 = "nothing" ,
+			Nothing                                 = "nothing" ,                           -- 无效果
+			GiveItem                                = "give-item" ,                         -- 获得物品
+			UnlockRecipe                            = "unlock-recipe" ,                     -- 解锁配方
+			UnlockSpaceLocation                     = "unlock-space-location" ,             -- 解锁太空地址 , 区域 , 星球等
+			SpacePlatforms                          = "unlock-space-platforms" ,            -- 解锁太空平台
+			UnlockQuality                           = "unlock-quality" ,                    -- 解锁品质
+			CircuitNetwork                          = "unlock-circuit-network" ,            -- 解锁信号网络
 			-- 全局加成
-			InserterStackSizeBonus                  = "inserter-stack-size-bonus" ,
-			StackInserterCapacityBonus              = "stack-inserter-capacity-bonus" ,
-			MiningDrillProductivityBonus            = "mining-drill-productivity-bonus" ,
-			TrainBrakingForceBonus                  = "train-braking-force-bonus" ,
-			LaboratorySpeed                         = "laboratory-speed" ,
-			LaboratoryProductivity                  = "laboratory-productivity" ,
+			ChangeRecipeProductivity                = "change-recipe-productivity" ,        -- 配方产能加成
+			InserterStackSizeBonus                  = "inserter-stack-size-bonus" ,         -- 爪子抓取数量
+			BulkInserterCapacityBonusModifier       = "bulk-inserter-capacity-bonus" ,      -- 堆叠爪子抓取数量
+			BeltStackSizeBonus                      = "belt-stack-size-bonus" ,             -- 传送带堆叠数量
+			MiningDrillProductivityBonus            = "mining-drill-productivity-bonus" ,   -- 矿机开采产能
+			TrainBrakingForceBonus                  = "train-braking-force-bonus" ,         -- 火车刹车力度
+			LaboratorySpeed                         = "laboratory-speed" ,                  -- 研究球速度
+			LaboratoryProductivity                  = "laboratory-productivity" ,           -- 研究球产能
+			AmmoDamage                              = "ammo-damage" ,                       -- 子弹攻击力
+			TurretAttack                            = "turret-attack" ,                     -- 炮塔攻击力
+			GunSpeed                                = "gun-speed" ,                         -- 武器攻击速度
+			ArtilleryRange                          = "artillery-range" ,                   -- 重炮射程
+			CargoLandingPadLimit                    = "cargo-landing-pad-count" ,           -- 物流接驳站数量限制
+--			StackInserterCapacityBonus              = "stack-inserter-capacity-bonus" ,
 			-- 机器人相关
-			MaximumFollowingRobotsCount             = "maximum-following-robots-count" ,
-			FollowerRobotLifetime                   = "follower-robot-lifetime" ,
-			WorkerRobotSpeed                        = "worker-robot-speed" ,
-			WorkerRobotStorage                      = "worker-robot-storage" ,
-			WorkerRobotBattery                      = "worker-robot-battery" ,
-			-- 建造虚像
-			GhostTimeToLive                         = "ghost-time-to-live" ,
-			DeconstructionTimeToLive                = "deconstruction-time-to-live" ,
+			MaximumFollowingRobotsCount             = "maximum-following-robots-count" ,    -- 机器人最大跟随数量
+			FollowerRobotLifetime                   = "follower-robot-lifetime" ,           -- 跟随中的机器人的存在时间
+			WorkerRobotSpeed                        = "worker-robot-speed" ,                -- 机器人飞行速度
+			WorkerRobotStorage                      = "worker-robot-storage" ,              -- 机器人搬运量
+			WorkerRobotBattery                      = "worker-robot-battery" ,              -- 机器人电池容量
+			-- 建设与拆除
+			VehicleLogistics                        = "vehicle-logistics" ,                 -- 载具物流请求许可
+			MiningWithFluid                         = "mining-with-fluid" ,                 -- 开采需要流体的矿物的许可
+			RailSupportOnDeepOilOcean               = "rail-support-on-deep-oil-ocean" ,    -- 在重油海上建设铁路的许可
+			RailPlannerAllowElevatedRails           = "rail-planner-allow-elevated-rails" , -- 建设高架铁路的许可
+			BeaconDistribution                      = "beacon-distribution" ,               -- 插件塔分配许可
+			CreateGhostOnEntityDeath                = "create-ghost-on-entity-death" ,      -- 实体死亡时在原地生成蓝图虚影许可
+			DeconstructionTimeToLive                = "deconstruction-time-to-live" ,       -- 红图标记存在时间
+			CliffDeconstructionEnabled              = "cliff-deconstruction-enabled" ,      -- 红图标记悬崖许可
+--			GhostTimeToLive                         = "ghost-time-to-live" ,
 			-- 玩家属性
-			CharacterHealthBonus                    = "character-health-bonus" ,
-			CharacterInventorySlotsBonus            = "character-inventory-slots-bonus" ,
-			CharacterCraftingSpeed                  = "character-crafting-speed" ,
-			CharacterMiningSpeed                    = "character-mining-speed" ,
-			CharacterRunningSpeed                   = "character-running-speed" ,
-			CharacterBuildDistance                  = "character-build-distance" ,
-			CharacterReachDistance                  = "character-reach-distance" ,
-			CharacterResourceReachDistance          = "character-resource-reach-distance" ,
-			CharacterItemDropDistance               = "character-item-drop-distance" ,
-			CharacterItemPickupDistance             = "character-item-pickup-distance" ,
-			CharacterLootPickupDistance             = "character-loot-pickup-distance" ,
-			CharacterLogisticTrashSlots             = "character-logistic-trash-slots" ,
-			CharacterLogisticRequests               = "character-logistic-requests" ,
-			CharacterAdditionalMiningCategories     = "character-additional-mining-categories" ,
-			-- 地图操作
-			ZoomToWorldEnabled                      = "zoom-to-world-enabled" ,
-			ZoomToWorldGhostBuildingEnabled         = "zoom-to-world-ghost-building-enabled" ,
-			ZoomToWorldBlueprintEnabled             = "zoom-to-world-blueprint-enabled" ,
-			ZoomToWorldDeconstructionPlannerEnabled = "zoom-to-world-deconstruction-planner-enabled" ,
-			ZoomToWorldUpgradePlannerEnabled        = "zoom-to-world-upgrade-planner-enabled" ,
-			ZoomToWorldSelectionToolEnabled         = "zoom-to-world-selection-tool-enabled" ,
-			-- 不知道
+			CharacterHealthBonus                    = "character-health-bonus" ,            -- 玩家生命值
+			CharacterInventorySlotsBonus            = "character-inventory-slots-bonus" ,   -- 玩家背包格子数量
+			CharacterCraftingSpeed                  = "character-crafting-speed" ,          -- 玩家手搓速度
+			CharacterMiningSpeed                    = "character-mining-speed" ,            -- 玩家挖掘速度
+			CharacterRunningSpeed                   = "character-running-speed" ,           -- 玩家移动速度
+			CharacterBuildDistance                  = "character-build-distance" ,          -- 玩家建造距离
+			CharacterReachDistance                  = "character-reach-distance" ,          -- 玩家操作设备距离
+			CharacterResourceReachDistance          = "character-resource-reach-distance" , -- 玩家操作资源距离
+			CharacterItemDropDistance               = "character-item-drop-distance" ,      -- 玩家丢弃物品距离
+			CharacterItemPickupDistance             = "character-item-pickup-distance" ,    -- 玩家拾取普通物品距离
+			CharacterLootPickupDistance             = "character-loot-pickup-distance" ,    -- 玩家拾取掉落物品距离
+			CharacterLogisticTrashSlots             = "character-logistic-trash-slots" ,    -- 玩家回收区域格子数量
+			CharacterLogisticRequests               = "character-logistic-requests" ,       -- 玩家物流请求许可
+--			CharacterAdditionalMiningCategories     = "character-additional-mining-categories" ,
+--			-- 地图操作
+--			ZoomToWorldEnabled                      = "zoom-to-world-enabled" ,
+--			ZoomToWorldGhostBuildingEnabled         = "zoom-to-world-ghost-building-enabled" ,
+--			ZoomToWorldBlueprintEnabled             = "zoom-to-world-blueprint-enabled" ,
+--			ZoomToWorldDeconstructionPlannerEnabled = "zoom-to-world-deconstruction-planner-enabled" ,
+--			ZoomToWorldUpgradePlannerEnabled        = "zoom-to-world-upgrade-planner-enabled" ,
+--			ZoomToWorldSelectionToolEnabled         = "zoom-to-world-selection-tool-enabled" ,
+			-- 未知效果
 			MaxFailedAttemptsPerTickPerConstructionQueue     = "max-failed-attempts-per-tick-per-construction-queue" ,
 			MaxSuccessfulAttemptsPerTickPerConstructionQueue = "max-successful-attempts-per-tick-per-construction-queue"
+		} ,
+		Direction =
+		{
+			North           = "north" ,
+			East            = "east" ,
+			South           = "south" ,
+			West            = "west"
+		} ,
+		TrackType =
+		{
+			EarlyGame       = "early-game" , -- 载入游戏
+			MenuTrack       = "menu-track" , -- 主菜单
+			MainTrack       = "main-track" , -- 游戏阶段
+			Interlude       = "interlude"    -- 插曲
+		} ,
+		SciencePack =
+		{
+			Key             = "description.science-pack-remaining-amount-key" ,
+			Value           = "description.science-pack-remaining-amount-value"
+		} ,
+		ProductType =
+		{
+			Material        = "material" ,
+			Resource        = "resource" ,
+			Unit            = "unit"
+		} ,
+		Condition =
+		{
+			AND             = "and" ,
+			OR              = "or" ,
+			NOT             = "not"
+		} ,
+		LogisticMode =
+		{
+			None            = "none" ,
+			Requester       = "requester" ,
+			ActiveProvider  = "active-provider" ,
+			PassiveProvider = "passive-provider" ,
+			Buffer          = "buffer" ,
+			Storage         = "storage"
+		} ,
+		FluidBox_ProductionType =
+		{
+			None            = "none" ,
+			Input           = "input" ,
+			Output          = "output" ,
+			InputOutput     = "input-output"
+		} ,
+		FluidBox_FlowDirection =
+		{
+			Input           = "input" ,
+			Output          = "output" ,
+			InputOutput     = "input-output"
+		} ,
+		FluidBox_PipeConnectionType =
+		{
+			Normal          = "normal" ,
+			Underground     = "underground" ,
+			Linked          = "linked"
+		} ,
+		FluidBox_Direction =
+		{
+			North           = defines.direction.north ,
+			NorthNorthEast  = defines.direction.northnortheast ,
+			NorthEast       = defines.direction.northeast ,
+			EastNorthEast   = defines.direction.eastnortheast ,
+			East            = defines.direction.east ,
+			EastSouthEast   = defines.direction.eastsoutheast ,
+			SouthEast       = defines.direction.southeast ,
+			SouthSouthEast  = defines.direction.southsoutheast ,
+			South           = defines.direction.south ,
+			SouthSouthWest  = defines.direction.southsouthwest ,
+			SouthWest       = defines.direction.southwest ,
+			WestSouthWest   = defines.direction.westsouthwest ,
+			West            = defines.direction.west ,
+			WestNorthWest   = defines.direction.westnorthwest ,
+			NorthWest       = defines.direction.northwest ,
+			NorthNorthWest  = defines.direction.northnorthwest
+		} ,
+		EquipmentShapeType =
+		{
+			Full            = "full" ,
+			Manual          = "manual"
+		} ,
+		EnergySourceType =
+		{
+			Electric        = "electric" ,
+			Burner          = "burner" ,
+			Heat            = "heat" ,
+			Fluid           = "fluid" ,
+			Void            = "void"
+		} ,
+		ElectricUsagePriority =
+		{
+			InputPrimary    = "primary-input" ,
+			InputSecondary  = "secondary-input" ,
+			OutputPrimary   = "primary-output" ,
+			OutputSecondary = "secondary-output" ,
+			Tertiary        = "tertiary" ,
+			Solar           = "solar" ,
+			Lamp            = "lamp"
 		}
 	} ,
 	Numbers =
 	{
-		IconPictureScale = 0.25 ,
+		IconPictureScale          = 0.25 ,
 		-- 堆叠数量
-		StackSizeMin = 1 ,
-		StackSizeMax = 1000000000 ,
-		StackSizeAdditionMin = -1000000000 ,
-		StackSizeAdditionMax = 1000000000 ,
+		StackSizeMin              = 1 ,
+		StackSizeMax              = 1000000000 ,
+		StackSizeAdditionMin      = -1000000000 ,
+		StackSizeAdditionMax      = 1000000000 ,
+		-- 火箭发射数量
+		RocketSizeMin             = 1 ,
+		RocketSizeMax             = 1000000000 ,
 		-- 数量数值
-		CountMin = 1 ,
-		CountMax = 100000000 ,
+		CountMin                  = 1 ,
+		CountMax                  = 100000000 ,
 		-- 倍率
-		MultiplierMin = 0 ,
-		MultiplierMax = 1000000000 ,
+		MultiplierMin             = 0 ,
+		MultiplierMax             = 1000000000 ,
 		-- 耐久
-		DurabilityMin = 0.00001 ,
-		DurabilityMax = 1000000000.0 ,
+		DurabilityMin             = 0.00001 ,
+		DurabilityMax             = 1000000000.0 ,
 		-- 持续时间
-		DurationMin = 1 ,
-		DurationMax = 100000 ,
+		DurationMin               = 1 ,
+		DurationMax               = 100000 ,
 		-- 速度
-		SpeedMin = 0.00001 ,
-		SpeedMax = 1000000000.0 ,
+		SpeedMin                  = 0.00001 ,
+		SpeedMax                  = 1000000000.0 ,
 		-- 距离
-		DistanceMin = 1 ,
-		DistanceMax = 1000000000 ,
+		DistanceMin               = 1 ,
+		DistanceMax               = 1000000000 ,
 		-- 一些原版的限制值
-		PlayerQuickBarSlotCount = 100 ,
+		PlayerQuickBarSlotCount   = 100 ,
 		PlayerRequestBarSlotCount = 100 ,
-		UpgradeMapSlotCount = 24
+		UpgradeMapSlotCount       = 24
 	} ,
 	Types =
 	{
@@ -380,6 +423,7 @@ SICommon =
 		DamageType              = "damage-type" ,
 		EquipmentGrid           = "equipment-grid" ,
 		Decorative              = "optimized-decorative" ,
+		Impact                  = "impact-category" , -- 这个原型只有 type 和 name
 		Input                   = "custom-input" ,
 		AmbientSound            = "ambient-sound" ,
 		Font                    = "font" ,
@@ -391,6 +435,7 @@ SICommon =
 		Categories =
 		{
 			Ammo                = "ammo-category" ,
+			Deliver             = "deliver-category" ,
 			Equipment           = "equipment-category" ,
 			Fuel                = "fuel-category" ,
 			Module              = "module-category" ,
@@ -743,10 +788,10 @@ SICommon =
 	{
 		Train = 51
 	} ,
-	CodeName = {} ,
+	CodeName       = {} ,
 	CodeNamePrefix = {} ,
 	CodeNameSuffix = {} ,
-	ShowName = {} ,
+	ShowName       = {} ,
 	ShowNamePrefix = {} ,
 	ShowNameSuffix = {}
 }

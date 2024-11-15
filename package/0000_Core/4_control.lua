@@ -483,7 +483,7 @@ end )
 			return
 		end
 		if name:StartsWith( SIMainbarNote.Names.NotePrefix ) then
-			SIMainbarNote.ShowEditFrame( playerIndex , name )
+			SIMainbarNote.ShowEditView( playerIndex , name )
 			return
 		end
 		if name:StartsWith( SIMainbarNote.Names.DeletePrefix ) then

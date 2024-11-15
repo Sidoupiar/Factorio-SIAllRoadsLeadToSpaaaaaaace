@@ -1218,8 +1218,10 @@ function SIInit.AutoLoad( ModName , CustomPackageConfig , ConstantsDataPrefix , 
 										{
 											type = SICommon.Types.Group ,
 											name = groupRealName ,
+											hidden = false ,
 											localised_name = { constantsData.CodeName .. "Name." .. groupShowName } ,
 											localised_description = { constantsData.CodeName .. "Description." .. groupShowName } ,
+											factoriopedia_description = { constantsData.CodeName .. "WikiDescription." .. groupShowName } ,
 											icon = constantsData.PicturePath .. groupShowName .. SICommon.ShowNameSuffix.ICON .. ".png" ,
 											icon_size = 64 ,
 											icon_mipmaps = 0 ,
@@ -1238,8 +1240,10 @@ function SIInit.AutoLoad( ModName , CustomPackageConfig , ConstantsDataPrefix , 
 												{
 													type = SICommon.Types.Subgroup ,
 													name = subgroupRealName ,
+													hidden = false ,
 													localised_name = { constantsData.CodeName .. "Name." .. subgroupShowName } ,
 													localised_description = { constantsData.CodeName .. "Description." .. subgroupShowName } ,
+													factoriopedia_description = { constantsData.CodeName .. "WikiDescription." .. subgroupShowName } ,
 													group = groupRealName ,
 													order = "zSIOrder[" .. groupData.Order .. constantsData.CodeName .. "]-[" .. subOrder .. "]-" .. constantsData.GetNextOrderCode() .. "-"
 												}
@@ -1286,8 +1290,10 @@ function SIInit.AutoLoad( ModName , CustomPackageConfig , ConstantsDataPrefix , 
 											{
 												type = SICommon.Types.Subgroup ,
 												name = subgroupRealName ,
+												hidden = false ,
 												localised_name = { constantsData.CodeName .. "Name." .. subgroupShowName } ,
 												localised_description = { constantsData.CodeName .. "Description." .. subgroupShowName } ,
+												factoriopedia_description = { constantsData.CodeName .. "WikiDescription." .. subgroupShowName } ,
 												group = aimGroupData.RealName ,
 												order = "zSIOrder[" .. aimGroupData.Order .. ConstantsDataCodeName .. "]-[" .. subOrder .. "]-" .. APIData.GetNextOrderCode() .. "-"
 											}
@@ -1307,10 +1313,11 @@ function SIInit.AutoLoad( ModName , CustomPackageConfig , ConstantsDataPrefix , 
 										{
 											type = SICommon.Types.DamageType ,
 											name = realName ,
+											hidden = false ,
 											localised_name = { constantsData.CodeName .. "Name." .. showName } ,
 											localised_description = { constantsData.CodeName .. "Description." .. showName } ,
-											order = constantsData.GetOrderString() ,
-											hidden = false
+											factoriopedia_description = { constantsData.CodeName .. "WikiDescription." .. showName } ,
+											order = constantsData.GetOrderString()
 										}
 										table.insert( prototypes , damageType )
 										constantsData.raw.DamageTypes[damageTypeID] = realName
@@ -1334,8 +1341,10 @@ function SIInit.AutoLoad( ModName , CustomPackageConfig , ConstantsDataPrefix , 
 											{
 												type = typeCode ,
 												name = realName ,
+												hidden = false ,
 												localised_name = { constantsData.CodeName .. "Name." .. showName } ,
 												localised_description = { constantsData.CodeName .. "Description." .. showName } ,
+												factoriopedia_description = { constantsData.CodeName .. "WikiDescription." .. showName } ,
 												order = constantsData.GetOrderString()
 											}
 											table.insert( prototypes , category )

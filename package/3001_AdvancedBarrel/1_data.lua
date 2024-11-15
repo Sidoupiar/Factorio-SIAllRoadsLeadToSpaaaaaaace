@@ -1,6 +1,6 @@
 -- ============================================================================================================================================
 -- ============================================================================================================================================
--- ========== 装桶 ============================================================================================================================
+-- ========== 桶物品 ==========================================================================================================================
 -- ============================================================================================================================================
 -- ============================================================================================================================================
 
@@ -8,17 +8,21 @@ local pipeDistance = 6
 local animationShift = SIUtils.by_pixel( 0 , 0 )
 local animationShadowShift = SIUtils.by_pixel( 2 , 0 )
 local moduleSlot = 6
+local stackSize = 100
+local weight = 10 -- 1 火箭可以射 100 个
+local barrelSize = SIConfigs.SIAdvancedBarrel.BarrelSize ~= nil and SISettings.Startup.SIAdvancedBarrel.BarrelSize() or 100
 
 SIGen
 .SetGroup( SIConstants_AdvancedBarrel.raw.Groups.Expand.MakeBarrel )
 
 -- ======================================================================
--- 桶物品
+-- 木桶
 -- ======================================================================
 .New( SICommon.Types.Items.Item , "WoodenBarrel" , "木桶" ,
 {
-	stack_size = 100 ,
-	default_request_amount = 100 ,
+	weight = weight ,
+	stack_size = stackSize ,
+	default_request_amount = stackSize ,
 	fuel_category = "chemical" ,
 	fuel_value = "4.2MJ" ,
 	fuel_acceleration_multiplier = 1.0 ,
@@ -49,12 +53,12 @@ SIGen
 		{
 			type = SICommon.Types.Items.Item ,
 			name = "wood" ,
-			amount = 4
+			amount = 8
 		} ,
 		{
 			type = SICommon.Types.Items.Item ,
 			name = "iron-plate" ,
-			amount = 1
+			amount = 3
 		}
 	} ,
 	results =
@@ -62,8 +66,8 @@ SIGen
 		{
 			type = SICommon.Types.Items.Item ,
 			name = SIConstants_AdvancedBarrel.raw.Items.WoodenBarrel ,
-			amount = 2 ,
-			catalyst_amount = 2
+			amount = 4 ,
+			catalyst_amount = 4
 		}
 	} ,
 	main_product = SIConstants_AdvancedBarrel.raw.Items.WoodenBarrel ,
@@ -80,13 +84,13 @@ SIGen
 	unlock_results = true
 } )
 .AutoIcon()
-.New( SICommon.Types.Entities.SimpleOwner , "WoodenBarrel" , "木桶" )
+.New( SICommon.Types.Entities.ContainerFluid , "WoodenBarrel" , "木桶" )
 .AutoIcon()
 .SetSize( 1 , 1 )
 .ReferencePlaceResult( SICommon.Types.Items.Item , SIConstants_AdvancedBarrel.raw.Items.WoodenBarrel )
 .Append
 {
-	flags = { SICommon.Flags.Entity.PlaceablePlayer , SICommon.Flags.Entity.PlayerCreation , SICommon.Flags.Entity.HideAltInfo } ,
+	flags = { SICommon.Flags.Entity.PlaceablePlayer , SICommon.Flags.Entity.PlayerCreation } ,
 	minable =
 	{
 		mining_time = 0.3 ,
@@ -109,10 +113,45 @@ SIGen
 	allow_run_time_change_of_is_military_target = true ,
 	alert_when_damaged = true ,
 	create_ghost_on_death = true ,
+	circuit_wire_max_distance = 20 ,
 	hide_resistances = true ,
 	resistances = nil ,
+	fluid_box =
+	{
+		volume = barrelSize ,
+		draw_only_when_connected = true ,
+		hide_connection_info = true ,
+		pipe_connections =
+		{
+			{
+				flow_direction = SICommon.Flags.FluidBox_FlowDirection.InputOutput ,
+				connection_type = SICommon.Flags.FluidBox_PipeConnectionType.Normal ,
+				position = { 1 , 0 }
+			} ,
+			{
+				flow_direction = SICommon.Flags.FluidBox_FlowDirection.InputOutput ,
+				connection_type = SICommon.Flags.FluidBox_PipeConnectionType.Normal ,
+				position = { 0 , 1 }
+			} ,
+			{
+				flow_direction = SICommon.Flags.FluidBox_FlowDirection.InputOutput ,
+				connection_type = SICommon.Flags.FluidBox_PipeConnectionType.Normal ,
+				position = { -1 , 0 }
+			} ,
+			{
+				flow_direction = SICommon.Flags.FluidBox_FlowDirection.InputOutput ,
+				connection_type = SICommon.Flags.FluidBox_PipeConnectionType.Normal ,
+				position = { 0 , -1 }
+			}
+		}
+	} ,
+	window_bounding_box = { { -0.4 , -0.4 } , { 0.4 , 0.4 } } ,
 	render_layer = SICommon.Flags.RenderLayer.Object ,
 	alert_icon_shift = { 0 , 0 } ,
+	flow_length_in_ticks = 1 ,
+	show_fluid_icon = true ,
+	draw_copper_wires = true ,
+	draw_circuit_wires = true ,
 	pictures = SIGraphics.MakeHrVersionData
 	{
 		{
@@ -138,6 +177,7 @@ SIGen
 			}
 		}
 	} ,
+	circuit_connector = nil ,
 	mined_sound =
 	{
 		SISound.Core( "deconstruct-small" , 1 )
@@ -160,15 +200,20 @@ SIGen
 		SISound.Base( "machine-close" , 0.5 )
 	}
 }
+
+-- ======================================================================
+-- 塑料胶囊
+-- ======================================================================
 .New( SICommon.Types.Items.Item , "PlasticCapable" , "塑料胶囊" ,
 {
-	stack_size = 1000 ,
-	default_request_amount = 1000 ,
+	weight = weight ,
+	stack_size = stackSize * 4 ,
+	default_request_amount = stackSize * 4 ,
 	fuel_category = "chemical" ,
-	fuel_value = "120KJ" ,
+	fuel_value = "0.12MJ" ,
 	fuel_acceleration_multiplier = 0.8 ,
 	fuel_top_speed_multiplier = 0.8 ,
-	fuel_emissions_multiplier = 0.8 ,
+	fuel_emissions_multiplier = 9.2 ,
 	fuel_glow_color = nil ,
 	burnt_result = nil ,
 	place_result = nil
@@ -188,13 +233,13 @@ SIGen
 	hidden = false ,
 	hide_from_stats = false ,
 	hide_from_player_crafting = false ,
-	energy_required = 16.0 ,
+	energy_required = 20.0 ,
 	ingredients =
 	{
 		{
 			type = SICommon.Types.Items.Item ,
 			name = "plastic-bar" ,
-			amount = 1
+			amount = 3
 		}
 	} ,
 	results =
@@ -202,8 +247,8 @@ SIGen
 		{
 			type = SICommon.Types.Items.Item ,
 			name = SIConstants_AdvancedBarrel.raw.Items.PlasticCapable ,
-			amount = 8 ,
-			catalyst_amount = 8
+			amount = 20 ,
+			catalyst_amount = 20
 		}
 	} ,
 	main_product = SIConstants_AdvancedBarrel.raw.Items.PlasticCapable ,
@@ -220,16 +265,16 @@ SIGen
 	unlock_results = true
 } )
 .AutoIcon()
-.New( SICommon.Types.Entities.SimpleOwner , "PlasticCapable" , "塑料胶囊" )
+.New( SICommon.Types.Entities.ContainerFluid , "PlasticCapable" , "塑料胶囊" )
 .AutoIcon()
-.SetSizeSize( 1 , 1 , 0.5 )
+.SetSize( 1 , 1 )
 .ReferencePlaceResult( SICommon.Types.Items.Item , SIConstants_AdvancedBarrel.raw.Items.PlasticCapable )
 .Append
 {
-	flags = { SICommon.Flags.Entity.PlaceablePlayer , SICommon.Flags.Entity.PlayerCreation , SICommon.Flags.Entity.HideAltInfo } ,
+	flags = { SICommon.Flags.Entity.PlaceablePlayer , SICommon.Flags.Entity.PlayerCreation } ,
 	minable =
 	{
-		mining_time = 0.2 ,
+		mining_time = 0.3 ,
 		results =
 		{
 			{
@@ -249,10 +294,35 @@ SIGen
 	allow_run_time_change_of_is_military_target = true ,
 	alert_when_damaged = true ,
 	create_ghost_on_death = true ,
+	circuit_wire_max_distance = 20 ,
 	hide_resistances = true ,
 	resistances = nil ,
+	fluid_box =
+	{
+		volume = barrelSize ,
+		draw_only_when_connected = true ,
+		hide_connection_info = false ,
+		pipe_connections =
+		{
+			{
+				flow_direction = SICommon.Flags.FluidBox_FlowDirection.InputOutput ,
+				connection_type = SICommon.Flags.FluidBox_PipeConnectionType.Normal ,
+				direction = SICommon.Flags.FluidBox_Direction.North
+			} ,
+			{
+				flow_direction = SICommon.Flags.FluidBox_FlowDirection.InputOutput ,
+				connection_type = SICommon.Flags.FluidBox_PipeConnectionType.Normal ,
+				direction = SICommon.Flags.FluidBox_Direction.South
+			}
+		}
+	} ,
+	window_bounding_box = { { -0.4 , -0.4 } , { 0.4 , 0.4 } } ,
 	render_layer = SICommon.Flags.RenderLayer.Object ,
 	alert_icon_shift = { 0 , 0 } ,
+	flow_length_in_ticks = 1 ,
+	show_fluid_icon = true ,
+	draw_copper_wires = true ,
+	draw_circuit_wires = true ,
 	pictures = SIGraphics.MakeHrVersionData
 	{
 		{
@@ -340,6 +410,7 @@ SIGen
 			}
 		}
 	} ,
+	circuit_connector = nil ,
 	mined_sound =
 	{
 		SISound.Core( "deconstruct-small" , 1 )
@@ -364,10 +435,181 @@ SIGen
 }
 
 -- ======================================================================
--- 灌装和倾倒设备
+-- 固化液体外壳
+-- ======================================================================
+.New( SICommon.Types.Items.Item , "SolidFluidShell" , "固化液体外壳" ,
+{
+	weight = weight ,
+	stack_size = stackSize * 10 ,
+	default_request_amount = stackSize * 10 ,
+	fuel_category = "chemical" ,
+	fuel_value = "55J" ,
+	fuel_acceleration_multiplier = 0.1 ,
+	fuel_top_speed_multiplier = 0.1 ,
+	fuel_emissions_multiplier = 80.0 ,
+	fuel_glow_color = nil ,
+	burnt_result = nil ,
+	place_result = nil
+} )
+.AutoIcon()
+.New( SICommon.Types.Recipe , "SolidFluidShell" , "固化液体外壳" ,
+{
+	category = "crafting" ,
+	crafting_machine_tint =
+	{
+		primary = { r = 1.00 , g = 1.00 , b = 1.00 } ,
+		secondary = { r = 1.00 , g = 1.00 , b = 1.00 } ,
+		tertiary = { r = 1.00 , g = 1.00 , b = 1.00 } ,
+		quaternary = { r = 1.00 , g = 1.00 , b = 1.00 }
+	} ,
+	enabled = false ,
+	hidden = false ,
+	hide_from_stats = false ,
+	hide_from_player_crafting = false ,
+	energy_required = 30.0 ,
+	ingredients = {} ,
+	results =
+	{
+		{
+			type = SICommon.Types.Items.Item ,
+			name = SIConstants_AdvancedBarrel.raw.Items.SolidFluidShell ,
+			amount = 50 ,
+			catalyst_amount = 50
+		}
+	} ,
+	main_product = SIConstants_AdvancedBarrel.raw.Items.SolidFluidShell ,
+	emissions_multiplier = 0.6 ,
+	requester_paste_multiplier = 10 ,
+	overload_multiplier = 5 ,
+	allow_inserter_overload = true ,
+	allow_decomposition = true ,
+	allow_intermediates = true ,
+	allow_as_intermediate = true ,
+	always_show_products = true ,
+	always_show_made_in = true ,
+	show_amount_in_title = false ,
+	unlock_results = true
+} )
+.AutoIcon()
+.New( SICommon.Types.Entities.ContainerFluid , "SolidFluidShell" , "固化液体外壳" )
+.AutoIcon()
+.SetSize( 1 , 1 )
+.ReferencePlaceResult( SICommon.Types.Items.Item , SIConstants_AdvancedBarrel.raw.Items.SolidFluidShell )
+.Append
+{
+	flags = { SICommon.Flags.Entity.PlaceablePlayer , SICommon.Flags.Entity.PlayerCreation } ,
+	minable =
+	{
+		mining_time = 0.3 ,
+		results =
+		{
+			{
+				type = SICommon.Types.Items.Item ,
+				name = SIConstants_AdvancedBarrel.raw.Items.SolidFluidShell ,
+				amount = 1
+			}
+		}
+	} ,
+	max_health = 35 ,
+	corpse = "small-remnants" ,
+	dying_explosion = "wall-explosion" ,
+	map_color = { r = 0.70 , g = 0.70 , b = 0.70 } ,
+	friendly_map_color = { r = 0.70 , g = 0.70 , b = 0.70 } ,
+	enemy_map_color = { r = 0.70 , g = 0.70 , b = 0.70 } ,
+	is_military_target = false ,
+	allow_run_time_change_of_is_military_target = true ,
+	alert_when_damaged = true ,
+	create_ghost_on_death = true ,
+	circuit_wire_max_distance = 20 ,
+	hide_resistances = true ,
+	resistances = nil ,
+	fluid_box =
+	{
+		volume = barrelSize ,
+		draw_only_when_connected = true ,
+		hide_connection_info = false ,
+		pipe_connections =
+		{
+			{
+				flow_direction = SICommon.Flags.FluidBox_FlowDirection.InputOutput ,
+				connection_type = SICommon.Flags.FluidBox_PipeConnectionType.Normal ,
+				direction = SICommon.Flags.FluidBox_Direction.North
+			} ,
+			{
+				flow_direction = SICommon.Flags.FluidBox_FlowDirection.InputOutput ,
+				connection_type = SICommon.Flags.FluidBox_PipeConnectionType.Normal ,
+				direction = SICommon.Flags.FluidBox_Direction.East
+			}
+		}
+	} ,
+	window_bounding_box = { { -0.4 , -0.4 } , { 0.4 , 0.4 } } ,
+	render_layer = SICommon.Flags.RenderLayer.Object ,
+	alert_icon_shift = { 0 , 0 } ,
+	flow_length_in_ticks = 1 ,
+	show_fluid_icon = true ,
+	draw_copper_wires = true ,
+	draw_circuit_wires = true ,
+	pictures = SIGraphics.MakeHrVersionData
+	{
+		{
+			layers =
+			{
+				{
+					filename = SIGen.MakeSelfPicturePath( "SolidFluidShell" , "固化液体外壳" ) ,
+					priority = "extra-high" ,
+					width = 32 ,
+					height = 47 ,
+					scale = 1.0 ,
+					shift = SIUtils.by_pixel( 0 , -8.5 )
+				} ,
+				{
+					filename = SIGen.MakeSelfPicturePath( "SolidFluidShell-Shadow" , "固化液体外壳-影子" ) ,
+					priority = "extra-high" ,
+					width = 65 ,
+					height = 32 ,
+					scale = 1.0 ,
+					shift = SIUtils.by_pixel( 16.5 , 0 ) ,
+					draw_as_shadow = true
+				}
+			}
+		}
+	} ,
+	circuit_connector = nil ,
+	mined_sound =
+	{
+		SISound.Core( "deconstruct-small" , 1 )
+	} ,
+	vehicle_impact_sound =
+	{
+		SISound.Base( "car-metal-impact" , 1 )
+	} ,
+	repair_sound =
+	{
+		SISound.Core( "manual-repair-advanced-1" , 0.5 ) ,
+		SISound.Core( "manual-repair-advanced-2" , 0.5 )
+	} ,
+	open_sound =
+	{
+		SISound.Base( "machine-open" , 0.5 )
+	} ,
+	close_sound =
+	{
+		SISound.Base( "machine-close" , 0.5 )
+	}
+}
+
+-- ============================================================================================================================================
+-- ============================================================================================================================================
+-- ========== 罐装设备和倾倒设备 ==============================================================================================================
+-- ============================================================================================================================================
+-- ============================================================================================================================================
+
+-- ======================================================================
+-- 灌装设备
 -- ======================================================================
 .New( SICommon.Types.Items.Item , "BarrelMaker" , "灌装设备" ,
 {
+	weight = 10 ,
 	stack_size = 100 ,
 	default_request_amount = 100 ,
 	place_result = nil
@@ -387,7 +629,7 @@ SIGen
 	hidden = false ,
 	hide_from_stats = false ,
 	hide_from_player_crafting = false ,
-	energy_required = 5.0 ,
+	energy_required = 6.0 ,
 	ingredients =
 	{
 		{
@@ -517,7 +759,7 @@ SIGen
 	{
 		off_when_no_fluid_recipe = false ,
 		{
-			production_type = SICommon.Flags.FluidBoxProductionType.Input ,
+			production_type = SICommon.Flags.FluidBox_ProductionType.Input ,
 			base_area = 35 ,
 			height = 1 ,
 			base_level = 0 ,
@@ -528,42 +770,42 @@ SIGen
 			pipe_connections =
 			{
 				{
-					type = SICommon.Flags.FluidBoxConnectionType.InputOutput ,
+					type = SICommon.Flags.FluidBox_FlowDirection.InputOutput ,
 					max_underground_distance = pipeDistance ,
 					position = { -0.5 , 1.5 }
 				} ,
 				{
-					type = SICommon.Flags.FluidBoxConnectionType.InputOutput ,
+					type = SICommon.Flags.FluidBox_FlowDirection.InputOutput ,
 					max_underground_distance = pipeDistance ,
 					position = { 0.5 , 1.5 }
 				} ,
 				{
-					type = SICommon.Flags.FluidBoxConnectionType.InputOutput ,
+					type = SICommon.Flags.FluidBox_FlowDirection.InputOutput ,
 					max_underground_distance = pipeDistance ,
 					position = { 1.5 , -0.5 }
 				} ,
 				{
-					type = SICommon.Flags.FluidBoxConnectionType.InputOutput ,
+					type = SICommon.Flags.FluidBox_FlowDirection.InputOutput ,
 					max_underground_distance = pipeDistance ,
 					position = { 1.5 , 0.5 }
 				} ,
 				{
-					type = SICommon.Flags.FluidBoxConnectionType.InputOutput ,
+					type = SICommon.Flags.FluidBox_FlowDirection.InputOutput ,
 					max_underground_distance = pipeDistance ,
 					position = { -1.5 , -0.5 }
 				} ,
 				{
-					type = SICommon.Flags.FluidBoxConnectionType.InputOutput ,
+					type = SICommon.Flags.FluidBox_FlowDirection.InputOutput ,
 					max_underground_distance = pipeDistance ,
 					position = { -1.5 , 0.5 }
 				} ,
 				{
-					type = SICommon.Flags.FluidBoxConnectionType.InputOutput ,
+					type = SICommon.Flags.FluidBox_FlowDirection.InputOutput ,
 					max_underground_distance = pipeDistance ,
 					position = { -0.5 , -1.5 }
 				} ,
 				{
-					type = SICommon.Flags.FluidBoxConnectionType.InputOutput ,
+					type = SICommon.Flags.FluidBox_FlowDirection.InputOutput ,
 					max_underground_distance = pipeDistance ,
 					position = { 0.5 , -1.5 }
 				}
@@ -664,8 +906,13 @@ SIGen
 		fade_out_ticks = 20
 	}
 }
+
+-- ======================================================================
+-- 倾倒设备
+-- ======================================================================
 .New( SICommon.Types.Items.Item , "BarrelDropper" , "倾倒设备" ,
 {
+	weight = 10 ,
 	stack_size = 100 ,
 	default_request_amount = 100 ,
 	place_result = nil
@@ -685,7 +932,7 @@ SIGen
 	hidden = false ,
 	hide_from_stats = false ,
 	hide_from_player_crafting = false ,
-	energy_required = 5.0 ,
+	energy_required = 6.0 ,
 	ingredients =
 	{
 		{
@@ -815,7 +1062,7 @@ SIGen
 	{
 		off_when_no_fluid_recipe = false ,
 		{
-			production_type = SICommon.Flags.FluidBoxProductionType.Output ,
+			production_type = SICommon.Flags.FluidBox_ProductionType.Output ,
 			base_area = 35 ,
 			height = 1 ,
 			base_level = 0 ,
@@ -826,42 +1073,42 @@ SIGen
 			pipe_connections =
 			{
 				{
-					type = SICommon.Flags.FluidBoxConnectionType.InputOutput ,
+					type = SICommon.Flags.FluidBox_FlowDirection.InputOutput ,
 					max_underground_distance = pipeDistance ,
 					position = { -0.5 , 1.5 }
 				} ,
 				{
-					type = SICommon.Flags.FluidBoxConnectionType.InputOutput ,
+					type = SICommon.Flags.FluidBox_FlowDirection.InputOutput ,
 					max_underground_distance = pipeDistance ,
 					position = { 0.5 , 1.5 }
 				} ,
 				{
-					type = SICommon.Flags.FluidBoxConnectionType.InputOutput ,
+					type = SICommon.Flags.FluidBox_FlowDirection.InputOutput ,
 					max_underground_distance = pipeDistance ,
 					position = { 1.5 , -0.5 }
 				} ,
 				{
-					type = SICommon.Flags.FluidBoxConnectionType.InputOutput ,
+					type = SICommon.Flags.FluidBox_FlowDirection.InputOutput ,
 					max_underground_distance = pipeDistance ,
 					position = { 1.5 , 0.5 }
 				} ,
 				{
-					type = SICommon.Flags.FluidBoxConnectionType.InputOutput ,
+					type = SICommon.Flags.FluidBox_FlowDirection.InputOutput ,
 					max_underground_distance = pipeDistance ,
 					position = { -1.5 , -0.5 }
 				} ,
 				{
-					type = SICommon.Flags.FluidBoxConnectionType.InputOutput ,
+					type = SICommon.Flags.FluidBox_FlowDirection.InputOutput ,
 					max_underground_distance = pipeDistance ,
 					position = { -1.5 , 0.5 }
 				} ,
 				{
-					type = SICommon.Flags.FluidBoxConnectionType.InputOutput ,
+					type = SICommon.Flags.FluidBox_FlowDirection.InputOutput ,
 					max_underground_distance = pipeDistance ,
 					position = { -0.5 , -1.5 }
 				} ,
 				{
-					type = SICommon.Flags.FluidBoxConnectionType.InputOutput ,
+					type = SICommon.Flags.FluidBox_FlowDirection.InputOutput ,
 					max_underground_distance = pipeDistance ,
 					position = { 0.5 , -1.5 }
 				}
@@ -963,9 +1210,12 @@ SIGen
 	}
 }
 
--- ======================================================================
--- 灌装科技
--- ======================================================================
+-- ============================================================================================================================================
+-- ============================================================================================================================================
+-- ========== 罐装科技 ========================================================================================================================
+-- ============================================================================================================================================
+-- ============================================================================================================================================
+
 .New( SICommon.Types.Technology , "Barrel_1" , "灌装技术-1" ,
 {
 	enabled = true ,
@@ -975,7 +1225,6 @@ SIGen
 	upgrade = true ,
 	prerequisites =
 	{
-		"steel-processing" ,
 		"logistic-science-pack"
 	} ,
 	unit =
@@ -1022,7 +1271,6 @@ SIGen
 	upgrade = true ,
 	prerequisites =
 	{
-		"military-science-pack" ,
 		"plastics" ,
 		SIConstants_AdvancedBarrel.raw.Technologies.Barrel_1
 	} ,
@@ -1040,11 +1288,6 @@ SIGen
 			{
 				type = SICommon.Types.Items.Item ,
 				name = "logistic-science-pack" ,
-				amount = 2
-			} ,
-			{
-				type = SICommon.Types.Items.Item ,
-				name = "chemical-science-pack" ,
 				amount = 2
 			}
 		}
@@ -1067,7 +1310,7 @@ SIGen
 	upgrade = true ,
 	prerequisites =
 	{
-		"production-science-pack" ,
+		"chemical-science-pack" ,
 		SIConstants_AdvancedBarrel.raw.Technologies.Barrel_2
 	} ,
 	unit =
@@ -1090,11 +1333,6 @@ SIGen
 				type = SICommon.Types.Items.Item ,
 				name = "chemical-science-pack" ,
 				amount = 2
-			} ,
-			{
-				type = SICommon.Types.Items.Item ,
-				name = "production-science-pack" ,
-				amount = 4
 			}
 		}
 	} ,

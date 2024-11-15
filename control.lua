@@ -36,8 +36,15 @@ end
 -- 在这个函数中 , 默认使用 SIInit.CurrentConstantsData , 不建议在同一个功能模块内多次使用 SIControl.Init 函数并混用多个 ConstantsData<br>
 -- 如果原型数据没有别名 , 则都写成原型数据的 ID 即可<br>
 -- ======================================================================<br>
+---@class SIControl : SIBaseClass
 SIControl =
 {
+	ID = "SIControl" ,
+	Code = "SIControl" ,
+	Show = "运行时" ,
+	-- ======================================================================<br>
+	-- 初始化基础数据<br>
+	-- 创建的结构和 data 模块一致 , 都是 [ConstantsData].raw.[rawCode].[prototypeID]<br>
 	-- ======================================================================<br>
 	---@param nameList table
 	Init = function( nameList )
@@ -71,6 +78,95 @@ SIControl =
 					end
 				end
 			end
+		end
+	end ,
+	-- ======================================================================<br>
+	-- 检测科技状态 , 如果科技状态不符合给定的要求 , 则立刻解锁科技<br>
+	-- 单项版本<br>
+	-- ======================================================================<br>
+	-- technologyData 的格式 :<br>
+	-- {<br>
+	--     Name = "科技ID" , -- 科技的 name 值<br>
+	--     NeedEnabled = true/false , -- 是否要求这个科技是可研究的状态<br>
+	--     ResearchUnitCount = 1 , -- 需求的瓶子数量最大值<br>
+	--     ResearchUnitEnergy = 1 , -- 每组瓶子研究的时间最大值<br>
+	--     ResearchUnitIngredients = -- 瓶子种类限制 , 字典<br>
+	--     {<br>
+	--         瓶子ID1 = 数量限制1 ,<br>
+	--         瓶子ID2 = 数量限制2 ,<br>
+	--         ...<br>
+	--     } ,<br>
+	--     Prerequisites = -- 前置科技限制 , 这个科技只能有这些前置科技 , 数组<br>
+	--     {<br>
+	--         前置科技ID1 ,<br>
+	--         前置科技ID2 ,<br>
+	--         ...<br>
+	--     }<br>
+	-- }<br>
+	-- ======================================================================<br>
+	---@param force table
+	---@param technologyData table
+	ForceUnlockTechnology = function( force , technologyData )
+		if not technologyData then
+			return
+		end
+		local technology = force.technologies[technologyData.Name]
+		if not technology or technology.researched then
+			return
+		end
+		local technologyPrototype = technology.prototype
+		if not technologyPrototype then
+			return
+		end
+		if not technology.enabled and technologyData.NeedEnabled then
+			technology.enabled = true
+		end
+		if technologyPrototype.research_unit_count > technologyData.ResearchUnitCount then
+			technology.researched = true
+			return
+		end
+		if technologyPrototype.research_unit_energy > technologyData.ResearchUnitEnergy then
+			technology.researched = true
+			return
+		end
+		if technologyPrototype.research_unit_ingredients and technologyData.ResearchUnitIngredients then
+			for index , ingredientData in pairs( technologyPrototype.research_unit_ingredients ) do
+				local unitAmount = technologyData.ResearchUnitIngredients[ingredientData.name]
+				if not unitAmount or ingredientData.amount > unitAmount then
+					technology.researched = true
+					return
+				end
+			end
+		end
+		if technologyPrototype.prerequisites and technologyData.Prerequisites then
+			for prerequisiteTechnologyName , prerequisiteTechnologyPrototype in pairs( technologyPrototype.prerequisites ) do
+				if not SITable.Has( technologyData.Prerequisites , prerequisiteTechnologyName ) then
+					technology.researched = true
+					return
+				end
+			end
+		end
+	end ,
+	-- ======================================================================<br>
+	-- 检测科技状态 , 如果科技状态不符合给定的要求 , 则立刻解锁科技<br>
+	-- 列表版本<br>
+	-- ======================================================================<br>
+	-- technologyList 的格式 :<br>
+	-- {<br>
+	--     technologyData1 ,<br>
+	--     technologyData2 ,<br>
+	--     ...<br>
+	-- }<br>
+	-- technologyData 的格式见上方 SIControl.ForceUnlockTechnology 函数的注释<br>
+	-- ======================================================================<br>
+	---@param force table
+	---@param technologyList table
+	ForceUnlockTechnologyList = function( force , technologyList )
+		if not technologyList then
+			return
+		end
+		for index , technologyData in pairs( technologyList ) do
+			SIControl.ForceUnlockTechnology( force , technologyData )
 		end
 	end
 }

@@ -375,10 +375,11 @@ end
 -- 使用 SIGen 创建一个新的原型数据 , 并使用 prototypeDataToCopy 来作为数据的基础<br>
 -- 不设置 prototypeDataToCopy 则是一个空的原型数据<br>
 -- SIGen 会自动将新的原型数据进行注册 , 并自动生成一些属性<br>
--- localised_name        = { "[ CodeName ]Name.[ 类型别名 ]-[ 别名或 ID ]" } , 子分组就时子分组的别名和 ID<br>
--- localised_description = { "[ CodeName ]Description.[ 类型别名 ]-[ 别名或 ID ]" } , 子分组就时子分组的别名和 ID<br>
+-- localised_name            = { "[ CodeName ]Name.[ 类型别名 ]-[ 别名或 ID ]" } , 子分组就时子分组的别名和 ID<br>
+-- localised_description     = { "[ CodeName ]Description.[ 类型别名 ]-[ 别名或 ID ]" } , 子分组就时子分组的别名和 ID<br>
+-- factoriopedia_description = { "[ CodeName ]Wiki.[ 类型别名 ]-[ 别名或 ID ]" } , 子分组就时子分组的别名和 ID<br>
 -- group , subgroup 和 order 会被自动补充<br>
--- 当用来复制数据的原型数据中存在 localised_name 和 localised_description 时 , 对应的属性不会再自动创建<br>
+-- 当用来复制数据的原型数据中存在 localised_name 和 localised_description 和 factoriopedia_description 时 , 对应的属性不会再自动创建<br>
 -- ======================================================================<br>
 -- prototypeDataToCopy 中的特殊属性 :<br>
 -- OrderOffset           = 排序偏移 , 自动生成排序时 , 最终的排序会向后这么多位<br>
@@ -435,6 +436,9 @@ function SIGen.New( typeCode , prototypeID , aliasName , prototypeDataToCopy )
 	end
 	if not prototypeData.localised_description then
 		prototypeData.localised_description = { constantsData.CodeName .. "Description." .. showName }
+	end
+	if not prototypeData.factoriopedia_description then
+		prototypeData.factoriopedia_description = { constantsData.CodeName .. "WikiDescription." .. showName }
 	end
 	prototypeData.group = SIGen.CurrentGroup
 	prototypeData.subgroup = SIGen.CurrentSubgroup
@@ -1043,6 +1047,45 @@ function SIGen.MakeLocalisedDescription( typeCode , name , ... )
 	end
 	local constantsData = SIGen.TempConstantsData or SIInit.CurrentConstantsData
 	local localisedString = { constantsData.CodeName .. "Description." .. SICommon.ShowNamePrefix[typeCode] .. name }
+	for index , parameter in pairs{ ... } do
+		table.insert( localisedString , parameter )
+	end
+	return localisedString
+end
+
+-- ======================================================================<br>
+-- 用于计算作为原型数据显示 Wiki 的本地化字符串<br>
+-- 使用原型数据自己的 [ type ] 值进行计算<br>
+-- ======================================================================<br>
+---@param name string -- 本地化字符串的键后半部分的值
+---@param ... string|table -- 本地化字符串的追加参数 , 不定长
+---@return table -- 计算好的本地化字符串
+function SIGen.MakeSelfLocalisedWikiDescription( name , ... )
+	if not SIGen.CurrentPrototypeData then
+		return CodeE( SIGen , "需要先创建新的原型数据 , 之后才可以使用 SIGen.MakeSelfLocalisedWikiDescription 函数" )
+	end
+	local constantsData = SIGen.TempConstantsData or SIInit.CurrentConstantsData
+	local localisedString = { constantsData.CodeName .. "WikiDescription." .. SIGen.CurrentPrototypeData.SIGenData.ShowNamePrefix .. name }
+	for index , parameter in pairs{ ... } do
+		table.insert( localisedString , parameter )
+	end
+	return localisedString
+end
+
+-- ======================================================================<br>
+-- 用于计算作为原型数据显示 Wiki 的本地化字符串<br>
+-- 根据给定的 [ type ] 值进行计算 , 而非使用原型数据自己的 [ type ] 值<br>
+-- ======================================================================<br>
+---@param typeCode string -- 原型数据的 [ type ] 值
+---@param name string -- 本地化字符串的键后半部分的值
+---@param ... string|table -- 本地化字符串的追加参数 , 不定长
+---@return table -- 计算好的本地化字符串
+function SIGen.MakeLocalisedWikiDescription( typeCode , name , ... )
+	if not SICommon.ShowNamePrefix[typeCode] then
+		return CodeE( SIGen , "构造器无法操作不支持的类型的原型数据 , 当前类型 = " .. typeCode )
+	end
+	local constantsData = SIGen.TempConstantsData or SIInit.CurrentConstantsData
+	local localisedString = { constantsData.CodeName .. "WikiDescription." .. SICommon.ShowNamePrefix[typeCode] .. name }
 	for index , parameter in pairs{ ... } do
 		table.insert( localisedString , parameter )
 	end

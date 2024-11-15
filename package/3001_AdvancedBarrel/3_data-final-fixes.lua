@@ -56,8 +56,8 @@ local Barrel_2_EntityShadowShift_4 = SIUtils.by_pixel( 1.5 , 0 )
 local ignoreAutoBarrel = SIConfigs.SIAdvancedBarrel.IgnoreAutoBarrel ~= nil and SISettings.Startup.SIAdvancedBarrel.IgnoreAutoBarrel() or false
 local barrelSize = SIConfigs.SIAdvancedBarrel.BarrelSize ~= nil and SISettings.Startup.SIAdvancedBarrel.BarrelSize() or 100
 local barrelStackSize = SIConfigs.SIAdvancedBarrel.BarrelStackSize ~= nil and SISettings.Startup.SIAdvancedBarrel.BarrelStackSize() or 10
+local barrelRocketSize = SIConfigs.SIAdvancedBarrel.BarrelRocketSize ~= nil and SISettings.Startup.SIAdvancedBarrel.BarrelRocketSize() or 10
 
--- 流体装桶
 SIGen
 .SetGroup( SIConstants_AdvancedBarrel.raw.Groups.Expand.MakeBarrel )
 .ForEach( SICommon.Types.Fluid , function( fluidPrototypeName , fluidPrototypeData )
@@ -97,7 +97,7 @@ SIGen
 			SIGen
 
 			-- ======================================================================
-			-- 灌装科技 1
+			-- 灌装科技 1 - 木桶
 			-- ======================================================================
 			.New( SICommon.Types.Items.Item , BarrelItemIDPrefix_1 .. fluidID , BarrelItemAliasPrefix_1 .. fluidName )
 			.Append
@@ -546,7 +546,7 @@ SIGen
 			}
 
 			-- ======================================================================
-			-- 灌装科技 2
+			-- 灌装科技 2 - 塑料胶囊
 			-- ======================================================================
 			.New( SICommon.Types.Items.Item , BarrelItemIDPrefix_2 .. fluidID , BarrelItemAliasPrefix_2 .. fluidName )
 			.Append
@@ -1068,7 +1068,7 @@ SIGen
 			}
 
 			-- ======================================================================
-			-- 灌装科技 3
+			-- 灌装科技 3 - 固化液体
 			-- ======================================================================
 			.New( SICommon.Types.Items.Item , BarrelItemIDPrefix_3 .. fluidID , BarrelItemAliasPrefix_3 .. fluidName )
 			.Append

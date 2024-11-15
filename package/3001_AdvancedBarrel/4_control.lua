@@ -18,6 +18,58 @@ SIControl.Init
 	}
 }
 
+SIAdvancedBarrel_TechnologyCheckList =
+{
+	{
+		Name = SIConstants_AdvancedBarrel.raw.Technologies.Barrel_1 ,
+		NeedEnabled = true ,
+		ResearchUnitCount = 100 ,
+		ResearchUnitEnergy = 20 ,
+		ResearchUnitIngredients =
+		{
+			["automation-science-pack"] = 2 ,
+			["logistic-science-pack"] = 2
+		} ,
+		Prerequisites =
+		{
+			"logistic-science-pack"
+		}
+	} ,
+	{
+		Name = SIConstants_AdvancedBarrel.raw.Technologies.Barrel_2 ,
+		NeedEnabled = true ,
+		ResearchUnitCount = 200 ,
+		ResearchUnitEnergy = 40 ,
+		ResearchUnitIngredients =
+		{
+			["automation-science-pack"] = 2 ,
+			["logistic-science-pack"] = 2
+		} ,
+		Prerequisites =
+		{
+			"plastics" ,
+			SIConstants_AdvancedBarrel.raw.Technologies.Barrel_1
+		}
+	} ,
+	{
+		Name = SIConstants_AdvancedBarrel.raw.Technologies.Barrel_3 ,
+		NeedEnabled = true ,
+		ResearchUnitCount = 400 ,
+		ResearchUnitEnergy = 80 ,
+		ResearchUnitIngredients =
+		{
+			["automation-science-pack"] = 2 ,
+			["logistic-science-pack"] = 2 ,
+			["chemical-science-pack"] = 2
+		} ,
+		Prerequisites =
+		{
+			"chemical-science-pack" ,
+			SIConstants_AdvancedBarrel.raw.Technologies.Barrel_2
+		}
+	}
+}
+
 -- ============================================================================================================================================
 -- ============================================================================================================================================
 -- ========== 基础数据 ========================================================================================================================
@@ -42,162 +94,19 @@ SIControl.Init
 -- 事件
 -- ======================================================================
 SIEventBus
-.ConfigurationChange( function( functionID )
-	for forceIndex , force in pairs( game.forces ) do
-		local recipeList = {}
-		local technology_1 = force.technologies[SIConstants_AdvancedBarrel.raw.Technologies.Barrel_1]
-		if technology_1 and technology_1.researched then
-			for effectIndex , effect in pairs( technology_1.effects ) do
-				if effect.type == SICommon.Flags.TechnologyModifier.UnlockRecipe then
-					local recipe = force.recipes[effect.recipe]
-					if recipe then
-						if recipe.name:StartsWith( SIConstants_AdvancedBarrel.raw.Recipes.BarrelFullPrefix ) then
-							table.insert( recipeList, recipe )
-						end
-						if not recipe.enabled then
-							recipe.enabled = true
-						end
-					end
-				end
-			end
-		end
-		local technology_2 = force.technologies[SIConstants_AdvancedBarrel.raw.Technologies.Barrel_2]
-		if technology_2 and technology_2.researched then
-			for recipeIndex , recipe in pairs( recipeList ) do
-				recipe.enabled = false
-			end
-			recipeList = {}
-			for effectIndex , effect in pairs( technology_2.effects ) do
-				if effect.type == SICommon.Flags.TechnologyModifier.UnlockRecipe then
-					local recipe = force.recipes[effect.recipe]
-					if recipe then
-						if recipe.name:StartsWith( SIConstants_AdvancedBarrel.raw.Recipes.BarrelFullPrefix ) then
-							table.insert( recipeList , recipe )
-						end
-						if not recipe.enabled then
-							recipe.enabled = true
-						end
-					end
-				end
-			end
-		end
-		local technology_3 = force.technologies[SIConstants_AdvancedBarrel.raw.Technologies.Barrel_3]
-		if technology_3 and technology_3.researched then
-			for recipeIndex , recipe in pairs( recipeList ) do
-				recipe.enabled = false
-			end
-			for effectIndex , effect in pairs( technology_3.effects ) do
-				if effect.type == SICommon.Flags.TechnologyModifier.UnlockRecipe then
-					local recipe = force.recipes[effect.recipe]
-					if recipe then
-						if not recipe.enabled then
-							recipe.enabled = true
-						end
-					end
-				end
-			end
-		end
-	end
-end )
 .Add( SIEvents.on_research_finished , function( event , functionID )
 	local technology = event.research
 	if not technology or not technology.valid then
 		return
 	end
-	local name = technology.name
-	local force = technology.force
-	if name == SIConstants_AdvancedBarrel.raw.Technologies.Barrel_2 then
-		-- 移除上一级科技的配方
-		local technology_1 = force.technologies[SIConstants_AdvancedBarrel.raw.Technologies.Barrel_1]
-		if technology_1 and technology_1.researched then
-			for effectIndex , effect in pairs( technology_1.effects ) do
-				if effect.type == SICommon.Flags.TechnologyModifier.UnlockRecipe then
-					local recipe = force.recipes[effect.recipe]
-					if recipe and recipe.name:StartsWith( SIConstants_AdvancedBarrel.raw.Recipes.BarrelFullPrefix ) then
-						recipe.enabled = false
-					end
-				end
-			end
-		end
-		return
-	end
-	if name == SIConstants_AdvancedBarrel.raw.Technologies.Barrel_3 then
-		-- 移除上一级科技的配方
-		local technology_1 = force.technologies[SIConstants_AdvancedBarrel.raw.Technologies.Barrel_1]
-		if technology_1 and technology_1.researched then
-			for effectIndex , effect in pairs( technology_1.effects ) do
-				if effect.type == SICommon.Flags.TechnologyModifier.UnlockRecipe then
-					local recipe = force.recipes[effect.recipe]
-					if recipe and recipe.name:StartsWith( SIConstants_AdvancedBarrel.raw.Recipes.BarrelFullPrefix ) then
-						recipe.enabled = false
-					end
-				end
-			end
-		end
-		local technology_2 = force.technologies[SIConstants_AdvancedBarrel.raw.Technologies.Barrel_2]
-		if technology_2 and technology_2.researched then
-			for effectIndex , effect in pairs( technology_2.effects ) do
-				if effect.type == SICommon.Flags.TechnologyModifier.UnlockRecipe then
-					local recipe = force.recipes[effect.recipe]
-					if recipe and recipe.name:StartsWith( SIConstants_AdvancedBarrel.raw.Recipes.BarrelFullPrefix ) then
-						recipe.enabled = false
-					end
-				end
-			end
-		end
-		return
-	end
+	SIControl.ForceUnlockTechnologyList( technology.force , SIAdvancedBarrel_TechnologyCheckList )
 end )
 .Add( SIEvents.on_research_reversed , function( event , functionID )
 	local technology = event.research
 	if not technology or not technology.valid then
 		return
 	end
-	local name = technology.name
-	local force = technology.force
-	if name == SIConstants_AdvancedBarrel.raw.Technologies.Barrel_2 then
-		-- 恢复上一级科技的配方
-		local technology_1 = force.technologies[SIConstants_AdvancedBarrel.raw.Technologies.Barrel_1]
-		if technology_1 and technology_1.researched then
-			for effectIndex , effect in pairs( technology_1.effects ) do
-				if effect.type == SICommon.Flags.TechnologyModifier.UnlockRecipe then
-					local recipe = force.recipes[effect.recipe]
-					if recipe and recipe.name:StartsWith( SIConstants_AdvancedBarrel.raw.Recipes.BarrelFullPrefix ) then
-						recipe.enabled = true
-					end
-				end
-			end
-		end
-		return
-	end
-	if name == SIConstants_AdvancedBarrel.raw.Technologies.Barrel_3 then
-		-- 恢复上一级科技的配方
-		local technology_2 = force.technologies[SIConstants_AdvancedBarrel.raw.Technologies.Barrel_2]
-		if technology_2 and technology_2.researched then
-			for effectIndex , effect in pairs( technology_2.effects ) do
-				if effect.type == SICommon.Flags.TechnologyModifier.UnlockRecipe then
-					local recipe = force.recipes[effect.recipe]
-					if recipe and recipe.name:StartsWith( SIConstants_AdvancedBarrel.raw.Recipes.BarrelFullPrefix ) then
-						recipe.enabled = true
-					end
-				end
-			end
-			return
-		end
-		local technology_1 = force.technologies[SIConstants_AdvancedBarrel.raw.Technologies.Barrel_1]
-		if technology_1 and technology_1.researched then
-			for effectIndex , effect in pairs( technology_1.effects ) do
-				if effect.type == SICommon.Flags.TechnologyModifier.UnlockRecipe then
-					local recipe = force.recipes[effect.recipe]
-					if recipe and recipe.name:StartsWith( SIConstants_AdvancedBarrel.raw.Recipes.BarrelFullPrefix ) then
-						recipe.enabled = true
-					end
-				end
-			end
-			return
-		end
-		return
-	end
+	SIControl.ForceUnlockTechnologyList( technology.force , SIAdvancedBarrel_TechnologyCheckList )
 end )
 
 -- ============================================================================================================================================
