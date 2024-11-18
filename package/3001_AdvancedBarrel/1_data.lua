@@ -4,7 +4,7 @@
 -- ============================================================================================================================================
 -- ============================================================================================================================================
 
-local pipeDistance = 6
+local pipeDistance = 8
 local animationShift = SIUtils.by_pixel( 0 , 0 )
 local animationShadowShift = SIUtils.by_pixel( 2 , 0 )
 local moduleSlot = 6
@@ -639,23 +639,18 @@ SIGen
 		} ,
 		{
 			type = SICommon.Types.Items.Item ,
-			name = "iron-stick" ,
-			amount = 4
+			name = "steel-plate" ,
+			amount = 5
 		} ,
 		{
 			type = SICommon.Types.Items.Item ,
 			name = "iron-gear-wheel" ,
-			amount = 4
-		} ,
-		{
-			type = SICommon.Types.Items.Item ,
-			name = "copper-cable" ,
-			amount = 9
+			amount = 10
 		} ,
 		{
 			type = SICommon.Types.Items.Item ,
 			name = "electronic-circuit" ,
-			amount = 3
+			amount = 10
 		}
 	} ,
 	results =
@@ -732,12 +727,12 @@ SIGen
 		render_no_power_icon = true ,
 		render_no_network_icon = true ,
 		usage_priority = SICommon.Flags.ElectricUsagePriority.InputSecondary ,
-		buffer_capacity = "1MJ" ,
-		input_flow_limit = "50KW" ,
-		output_flow_limit = "50KW" ,
+		buffer_capacity = "0.8MJ" ,
+		input_flow_limit = "40000W" ,
+		output_flow_limit = "40000W" ,
 		drain = "50J"
 	} ,
-	energy_usage = "22KW" ,
+	energy_usage = "20000W" ,
 	allowed_effects =
 	{
 		"speed" ,
@@ -942,23 +937,18 @@ SIGen
 		} ,
 		{
 			type = SICommon.Types.Items.Item ,
-			name = "iron-stick" ,
-			amount = 4
+			name = "steel-plate" ,
+			amount = 5
 		} ,
 		{
 			type = SICommon.Types.Items.Item ,
 			name = "iron-gear-wheel" ,
-			amount = 4
-		} ,
-		{
-			type = SICommon.Types.Items.Item ,
-			name = "copper-cable" ,
-			amount = 9
+			amount = 10
 		} ,
 		{
 			type = SICommon.Types.Items.Item ,
 			name = "electronic-circuit" ,
-			amount = 3
+			amount = 10
 		}
 	} ,
 	results =
@@ -1035,12 +1025,12 @@ SIGen
 		render_no_power_icon = true ,
 		render_no_network_icon = true ,
 		usage_priority = SICommon.Flags.ElectricUsagePriority.InputSecondary ,
-		buffer_capacity = "1MJ" ,
-		input_flow_limit = "50KW" ,
-		output_flow_limit = "50KW" ,
+		buffer_capacity = "0.8MJ" ,
+		input_flow_limit = "40000W" ,
+		output_flow_limit = "40000W" ,
 		drain = "50J"
 	} ,
-	energy_usage = "22KW" ,
+	energy_usage = "20000W" ,
 	allowed_effects =
 	{
 		"speed" ,
