@@ -664,7 +664,8 @@ function SIGen.AutoIcon()
 	local iconSettings = SICommon.Numbers.IconSettings[SIGen.CurrentPrototypeData.type] or SICommon.Numbers.IconSettings.Default
 	local icon =
 	{
-		icon = constantsData.PicturePath .. SIGen.CurrentPrototypeData.SIGenData.ShowName .. SICommon.ShowNameSuffix.ICON .. ".png" ,
+		icon = constantsData.PicturePath .. SIGen.CurrentPrototypeData.SIGenData.CodeName .. SICommon.CodeNameSuffix.ICON .. ".png" ,
+--		icon = constantsData.PicturePath .. SIGen.CurrentPrototypeData.SIGenData.ShowName .. SICommon.ShowNameSuffix.ICON .. ".png" ,
 		icon_size = iconSettings.size ,
 		icon_mipmaps = iconSettings.mipmaps
 	}
@@ -1134,7 +1135,8 @@ end
 ---@param pictureName string|nil -- 图片名称 , 不需要添加扩展名
 ---@return string -- 计算好的图片位置
 function SIGen.MakeRawPicturePath( pictureID , pictureName )
-	return ( SIGen.TempConstantsData or SIInit.CurrentConstantsData ).PicturePath .. pictureName .. ".png"
+	return ( SIGen.TempConstantsData or SIInit.CurrentConstantsData ).PicturePath .. pictureID .. ".png"
+--	return ( SIGen.TempConstantsData or SIInit.CurrentConstantsData ).PicturePath .. pictureName .. ".png"
 end
 
 -- ======================================================================<br>

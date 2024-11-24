@@ -138,7 +138,7 @@ SIGen
 	} ,
 	sprite =
 	{
-		filename = SIGen.MakePicturePath( SICommon.Types.Items.SelectionTool , "DeleteMap" .. SICommon.ShowNameSuffix.ICON , "粉图" .. SICommon.ShowNameSuffix.ICON ) ,
+		filename = SIGen.MakePicturePath( SICommon.Types.Items.SelectionTool , "DeleteMap" .. SICommon.CodeNameSuffix.ICON , "粉图" .. SICommon.ShowNameSuffix.ICON ) ,
 		priority = "medium" ,
 		width = 64 ,
 		height = 64 ,
@@ -279,7 +279,7 @@ SIGen
 	} ,
 	sprite =
 	{
-		filename = SIGen.MakePicturePath( SICommon.Types.Items.SelectionTool , "OreMap" .. SICommon.ShowNameSuffix.ICON , "黄图" .. SICommon.ShowNameSuffix.ICON ) ,
+		filename = SIGen.MakePicturePath( SICommon.Types.Items.SelectionTool , "OreMap" .. SICommon.CodeNameSuffix.ICON , "黄图" .. SICommon.ShowNameSuffix.ICON ) ,
 		priority = "medium" ,
 		width = 64 ,
 		height = 64 ,

@@ -24,7 +24,7 @@ SIGraphics =
 function SIGraphics.ItemIcon_SI()
 	return
 	{
-		icon = GetCorePath() .. "/define/data/graphic/item/图标-SI.png" ,
+		icon = GetCorePath() .. "/define/data/graphic/item/Icon-SI.png" ,
 		icon_size = 64 ,
 		icon_mipmaps = 4 ,
 		shift = { 0 , 0 }
