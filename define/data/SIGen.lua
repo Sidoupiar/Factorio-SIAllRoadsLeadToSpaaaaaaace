@@ -11,7 +11,7 @@ SIGen =
 	ID = "SIGen" ,
 	Code = "SIGen" ,
 	Show = "构造器" ,
-	StylePath = GetCorePath() .. "/define/data/graphic/控件贴图.png" ,
+	StylePath = GetCorePath() .. "/define/data/graphic/UI.png" ,
 	-- 动态属性
 	CurrentPrototypeData = nil ,
 	CurrentStyleData = nil ,

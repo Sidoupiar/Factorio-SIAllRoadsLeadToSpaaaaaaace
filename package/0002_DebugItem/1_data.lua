@@ -298,7 +298,7 @@ SIGen
 		layers =
 		{
 			{
-				filename = SIGen.MakeSelfPicturePath( "SuperBrightBar-icon" , "璀璨之闪耀能量罐头-图标" ) ,
+				filename = SIGen.MakeSelfPicturePath( "SuperBrightBar-Icon" , "璀璨之闪耀能量罐头-图标" ) ,
 				size = 64 ,
 				mipmap_count = 4 ,
 				scale = 0.25
